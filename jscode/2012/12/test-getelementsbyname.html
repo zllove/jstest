@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-getelementsbyname</title>
+</head>
+<body>
+	<h2><a href="http://www.w3help.org/zh-cn/causes/SD9006">ie6 bug</a></h2>
+<input type="button" value="click me" id="btn">	 <br>
+<button id="button1" name="myElement">myElement</button>
+<a id="myElement" name="aLink" href="http://www.baidu.com">baidu</a>
+	<div id="cont"><input type="text" name="" id="psw"></div>
+		<textarea name="" id="ta" cols="30" rows="10"></textarea>
+<script type="text/javascript">
+	function id(){
+		return document.getElementById(arguments[0]);
+	}
+
+	function addEvent (node, handler) {
+		if (node.addEventListener) {
+			node.addEventListener('input', handler, false);
+		} else if(node.attachEvent) {
+			node.attachEvent('onpropertychange', handler)
+		}
+	}
+	(function(){
+		var btn = document.getElementById('btn');
+		btn.onclick = function () {
+			var ele = document.getElementsByName('myElement');
+			alert(ele.length);
+		}
+
+		var cont = id('cont'),
+			ta = id('ta'), 
+			psw = id('psw'),
+			txt = '';
+
+		var inputing = function () {
+			txt = cont.innerHTML + '\n psw.value: ' + psw.value + '\n psw.getAttribute(value): ' + psw.getAttribute("value");
+			ta.value = txt;
+		}
+
+		addEvent(psw, inputing);
+		inputing();
+
+	}());
+</script>
+</body>
+</html>
