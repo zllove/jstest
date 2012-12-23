@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test-csdn-arr.html</title>
+</head>
+<body>
+<script type="text/javascript">
+    var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    var temp = [];
+    for (var i = 0; i < arr.length; i++) {
+        temp = arr.slice(i, i + 3);
+        arr.splice(i, 3, temp);
+    }
+    console.log(arr);
+</script>
+
+</body>
+</html>

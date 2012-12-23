@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    (function(){
+        var ad_arr=["http://www.1.com|/img/1.gif","http://www.2.com|/img/2.gif","http://www.3.com|/img/3.gif","http://www.4.com|/img/4.gif","http://www.5.com|/img/5.gif","http://www.6.com|/img/6.gif"];
+        var temp_arr,header="";
+
+        header+='<div class="adTop">';
+        for(var i=0;i<ad_arr.length;i++){
+            temp_arr=ad_arr[i].split("|");
+            header+=' <a href="'+temp_arr[0]+'" target="_blank"><img border="0" src="'+temp_arr[1]+'" width="960" height="60"></a>';
+        }
+        header+='</div>';
+    });
+</script>
+</body>
+</html>

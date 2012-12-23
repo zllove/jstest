@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-fn</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+	try {
+		{'x': 5}
+	} catch (err){
+
+	}
+	Object.prototype.x = 'outer';
+	(function(){
+		var x = 'inner';
+		(function(){
+			// alert(x);
+		})();
+	})();
+	*/
+
+
+	(function(){
+		var constructor = function(){ return 1; };
+		(function(){
+			constructor();
+			alert(constructor === Object.prototype.constructor);
+			alert(toString === Object.prototype.toString);
+		})();
+	})();
+	
+</script>	
+</body>
+</html>

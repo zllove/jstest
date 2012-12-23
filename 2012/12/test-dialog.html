@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+	/*弹出层*/
+	.boxdom{background:#fff; border:6px solid #666; moz-border-radius: 5px; -khtml-border-radius: 5px; -webkit-border-radius: 5px; border-radius:5px; box-shadow: 0 0 0px rgba(0, 0, 0, 0.2); -webkit-box-shadow: 0 0 0px rgba(0, 0, 0, 0.2); -moz-box-shadow: 0 0 0px rgba(0, 0, 0, 0.2); }
+	.boxdom_abg{}
+	.box_wrap{ padding:10px;}
+	.box_title_bar{ height:29px; border-bottom: solid 1px #c3c3c3; margin-bottom:8px;}
+	.box_title{ font: bold 14px/24px '宋体'; color:#666; float:left; background:url(../images/d_ico.png) 0px 4px no-repeat; padding-left:20px;}
+	.box_content{ padding:0px 0; }
+	a.box_close{ width:20px; height:20px;text-decoration:none;  overflow:hidden;float:right; display:block; background:url(../images/box_close.gif) no-repeat;}
+
+	.form_e{ background:url(../images/input_bg.png) top left no-repeat;  padding:2px 5px; 
+	border-color: #BFBFBF #D6D6D6 #D6D6D6 #BFBFBF;border-style: solid; border-width: 1px;
+	} 
+
+	.tjz_xinxi input.form_e,.box_logined input.form_e,.box_edit input.form_e{  width:176px; height:20px; line-height:20px; color:#999999; font-family:"宋体"}
+	/*意见反馈 弹层元素*/
+	.box_content textarea.form_e{ width:406px; height:85px; font-size:12px; overflow-y:auto; color:#999999; resize:none;/*css3 屏蔽调整大小*/}
+	.tjz_xinxi{  padding:24px 0; }
+	.tjz_xinxi input.form_e{ margin-right:20px;}
+	.form_e_btn{ width:82px; height:32px; text-align:center; color:#fff; font-size:14px; font-weight:bold; border:0 none; line-height:32px; background:url(../images/btn_.gif) no-repeat; cursor:pointer; float:left;}
+	.tjz_xinxi_area .tips{ float:right; line-height:32px; padding-right:20px; color:#999999; }
+	/*会员登陆 弹层元素*/
+	.box_logined{ padding-left:10px;}
+	.box_logined .form_e_btn{ margin-left:50px;}
+	.box_logined dl{ zoom:1;}
+	.box_logined dl dd{ padding:4px 0;   }
+	.box_logined label,.box_logined input{ float:left; display:inline}
+	.box_logined label { width:50px; height:22px; line-height:22px; color:#333;}
+	.box_logined  .error_tips{ color:red; padding-left:50px; display:none}
+	/* 设置相册 弹层*/
+	.box_select_pic{ }
+	.box_select_pic .list_box{ width:115px;  height:145px; margin:0px 3px 0px 15px; float:left; display:inline; text-align:center; overflow:hidden}
+	.box_select_pic .list_box img{ display:block; }
+	.box_select_pic .list_box .radio_box{ float:left; padding:2px 0 0 33px;}
+	.box_select_pic .list_box input{ font-family:Tahoma,Helvetica,Arial,sans-serif; display:inline-block; vertical-align:middle;}
+	.box_select_pic .list_box label{font-family:Tahoma,Helvetica,Arial,sans-serif; display:inline-block; vertical-align:middle; cursor:pointer}
+	/* 编辑模式 弹层*/
+	.box_edit input.form_e{ width:140px; color:#333}
+	.box_edit .box_edit_btn{width:68px; height:26px; line-height:26px;  text-align:center; color:#fff; font-size:14px; margin-left:5px;  border:0 none; background:url(../images/build_but.gif) no-repeat; cursor:pointer;}
+	.box_tips{ font-size:14px; font-weight:bold; color:#555;}
+	.box_ask_box{ text-align:center}
+	.box_ask_box .box_en,.box_ask_box .box_cl{width:68px; height:26px; line-height:26px;  text-align:center; color:#333; margin:2px auto; font-size:12px; border:0 none; background:url(../images/btn_e.png) no-repeat; cursor:pointer;}
+	.box_ask{   }
+	.box_content a.wjmm{float:right; line-height:32px; padding-right:20px;  }
+	.box_content a,.box_content a:link{color:#146CAC}
+	.box_content a:hover{ text-decoration:underline}
+	/*feedback*/
+	#feedback{ background:url(../images/feedback_t.png) 0 -113px no-repeat; _background:url(../images/feedback_t_.png) 0 -113px no-repeat; color:#555; }
+	#feedback:hover{ color:#ff6600; background-position:0 0px;}
+	#gototop{ background:url(../images/goto_top.png) no-repeat; margin-left:1px; }
+    </style>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+	var dialog = function(options){
+		var _this = this;
+
+		this.defaults = {
+			title    : '标题',
+			width    : 440,
+			height   : 'auto',
+			endTime  : '',
+			content  : '',
+			button   : '',
+			id: 'box',
+			fnButton : function(){
+				
+			}
+		}
+
+		$.extend(this.defaults, options);
+
+		this.handler = {
+			
+		}
+
+		this.method = {
+			create: function(){
+				var defaults = _this.defaults,
+					handler  = _this.handler,
+					shade    = null,
+					box      = null;
+
+				if ($('#dialog_shade').length == 0) {
+					shade = "<div id=\"dialog_shade\" style=\"height:" + $(document).height() + "px;filter:alpha(opacity=0);opacity:0; position:absolute; background:#000; width:100%; top:0px; left:0px; z-index:900;\"></div>";
+					$(shade).appendTo('body').animate({ opacity: 0.2}, 200);
+				}
+				box = "<div  class=\"boxdom\" id=" + defaults.id + "_D" + " style=\"position:absolute;width:" + defaults.width + "px;height:" + defaults.height + "px;min-height:" + defaults.height + "px;overflow:hidden; z-index:902;  \" ><div class=\"box_wrap\">";
+	            box += "<div class=\"box_title_bar\"><div class=\"box_title\">" + defaults.title + "</div><a href=\"javascript:void(0)\" class=\"box_close\">X</a><div class=\"clear\"></div></div><div class=\"box_content\">"
+	            box += "</div><div class=\"clear\"></div></div>";				
+	            $(box).appendTo('body');
+
+	            return this;
+			},
+			close: function(){
+				var defaults = _this.defaults,
+					handler  = _this.handler,
+					box = $('#' + defaults.id + '_D');
+
+				box.animate({ opacity: 0}, 'slow', function(){
+					$(this).remove();
+				});
+
+				return this;
+			}
+		}
+	}
+	$.extend(dialog.prototype, {
+		render: function(){
+			// var _this = this;
+			this.method.create();
+			this.close();
+		},
+		close: function(){
+			var _this = this;
+			$('.box_close').live('click', function () {
+				console.log(_this.method);
+				_this.method.close();
+			});
+		}
+	});
+
+	var d = new dialog();
+	d.render();
+</script>
+</body>
+</html>
