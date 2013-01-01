@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-jquery-queue</title>
+	<script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		body{font:12px/2 arial;background:#fff;}
+		.test01{width:100px;height:100px;background:#f00;}
+		.test02{width:100px;height:100px;background:#500;}
+	</style>
+</head>
+<body>
+<h3><a target="_blank" href="http://www.ruanyifeng.com/blog/2011/08/a_detailed_explanation_of_jquery_deferred_object.html">deferred</a></h3>
+<div class="test01"></div>
+<div class="test02"></div>
+<script type="text/javascript">
+$(document).ready(function($) {
+	function wait0(){
+		setTimeout(function(){
+			console.log(1);
+		}, 2000);
+	}
+
+	function wait1(){
+		$('.test01').toggle(2000);
+	}
+
+	function wait2(){
+		$('.test02').toggle(2000);
+	}
+
+	$.when(wait0())
+	.then(wait1)
+	.then(wait2);
+});
+	
+</script>
+</body>
+</html>

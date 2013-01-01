@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-jquery-queue</title>
+	<script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		body{font:12px/2 arial;background:#fff;}
+		.test01{position:relative;width:500px;height:100px;}
+		.sub01{position:absolute;bottom:0;width:50px;height:50px;background:#000;}
+	</style>
+</head>
+<body>
+	<h3><a href="http://www.cnblogs.com/hh54188/archive/2011/04/09/1996469.html">cnblogs-queue</a></h3>
+<div class="test01">
+	<div id="mod01" class="sub01"></div>
+</div>
+    sdfsf
+<script type="text/javascript">
+	function setAni () {
+		$('#mod01').slideToggle('3000').slideToggle('3000').hide('3000').show('3000').animate({left: '+=200'}, 2000)
+		.hide('3000').show('3000').animate({left: '-=200'}, 2000, setAni);
+	}
+	setAni();
+</script>
+</body>
+</html>

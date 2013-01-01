@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title> New Document </title>
+    <meta name="Generator" content="EditPlus">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+</head>
+
+<body>
+<div id="content_left">
+    <table>
+        <tbody>
+        <tr>
+            <td>
+                <a href="www.baidu.com">baidu</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="www.google.com">google</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<pre id="test">
+    var a = 1;
+    var b = 2;
+    var c = 3;
+</pre>
+<script type="text/javascript">
+    var str=document.getElementById("test").innerHTML;
+    var arr=str.split(/\n/);
+    for(var i=0;i<arr.length-1;i++){
+        console.log(arr[i]);
+    }
+</script>
+</body>
+</html>
+
+<script type="text/javascript">
+    var nav_div = document.getElementById('content_left');
+    var s = '';
+    var nav_table = nav_div.getElementsByTagName('table');
+    for (var i = 0; i < nav_table.length; i++) {
+        var nav_cells = nav_table[i].rows[0].cells;
+        console.log(nav_cells[0]);
+        var nav_a = nav_cells[0].getElementsByTagName('a');
+        s = s + nav_a[0].href;
+    }
+//    alert(s);
+</script>

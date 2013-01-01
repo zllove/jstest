@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-jquery-queue</title>
+	<script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		body{font:12px/2 arial;background:#fff;}
+		.block{float:left;width:150px;height:150px;background:#ff0;}
+		.object{width:80px;height:80px;background:#000;}
+		.btn{float:left;width:100px;height:30px;}
+		.testdiv{background:#f00;width:100px;height:100px;}
+		.testdiv2{background:#f00;width:100px;height:100px;position:absolute;bottom:0;left:300px;}
+		.obj{position:relative;margin-top:130px;width:400px;height:450px;border:1px solid #ccc;}
+		.testdiv3{left:100px;}
+		input[type="button"]{padding:5px 8px;}
+	</style>
+</head>
+<body>
+	<h3><a href="http://www.cnblogs.com/hh54188/archive/2011/04/09/1996469.html">cnblogs-queue</a></h3>
+	<div class="block" id="origin">
+		<div class="object"></div>
+	</div>
+	<input type="submit" class="btn" id="btn" value="clickMe">
+	<span class="block" id="goal"></span>
+<script type="text/javascript">
+	/*
+	$('#btn').toggle(function(){
+		$('.object').hide('slow').appendTo('#goal').show('slow');
+	}, function(){
+		$('.object').hide('slow').appendTo('#origin').show('slow');
+	});
+*/
+	$('#btn').toggle(function(){
+		$('.object').hide('slow').queue(function(next){
+			$(this).appendTo('#goal');
+			next();
+		}).show('slow');
+	}, function(){
+		$('.object').hide('slow').queue(function(next){
+			$(this).appendTo('#origin');
+			next();
+		}).show('slow');
+	});
+
+</script>	
+<span id="testdiv" class="testdiv"></span>
+<script type="text/javascript">
+	/*
+	$('#testdiv').slideUp('slow').slideDown('slow', function(){
+		$('#testdiv').css({'background': 'red'});
+	})
+*/
+	// $('#testdiv').slideUp('slow').slideDown('slow').animate({width: '200px'}, {duration: 1000, queue: false});
+</script>	
+<br>
+<div class="obj">
+	<input type="button" value="clickMe" id="btn02">
+	<div class="testdiv2" id="test02"></div>
+	<div class="testdiv2 testdiv3" id="test03"></div>
+</div>
+
+<script type="text/javascript">
+	$('#btn02').click(function(){
+		$('#test02, #test03').css({opacity: 1, bottom: 0});
+
+		$('#test02').delay('del').queue('del', function(next){
+			$(this).animate({opacity: 0}, {duration: 1000, queue: false});
+			next();
+		}).dequeue('del').animate({bottom: '290'}, {duration: 2000});
+
+		$('#test03').animate({opacity: 0, bottom: '290'}, {duration: 2000});
+		console.log($('#test02').queue('fx').length);
+		console.log($('#test03').queue('fx').length);
+	});
+	
+</script>
+</body>
+</html>
