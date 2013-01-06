@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    var ARR = {
+        slice : function(o, i){
+            return Array.prototype.slice.call(o, i || 0);
+        },
+        each  : function (arr, f) {
+            var i = 0,
+                    len = arr.length;
+            for (; i < len; i++) {
+                if (!!f(arr[i], i, arr)) break;
+            }
+        }
+    }
+
+    /* Ready */
+    function Ready(f, delay){
+        var queue = [], handle = null;
+        return function(){
+            var args = ARR.slice(arguments),
+                    foo = args.shift(),
+                    ctx = args.shift() || null;
+
+            if(!!queue){
+                queue.push(function(){ foo.apply(ctx, args); });
+                if(!handle){
+                    handle = setInterval(function(){
+                        if(!f()) return;
+                        while(queue.length > 0) queue.shift()();
+                        clearInterval(handle);
+                        handle = queue = null;
+                    }, delay || 13);
+                }
+            } else {
+                foo.apply(ctx, args);
+            }
+        }
+    }
+    /* document.body ready */
+    var ready = Ready(function(){ return !!document.body; }, 13);
+</script>
+</body>
+</html>

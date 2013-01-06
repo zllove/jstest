@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{font:12px/1.5 arial;background:#fff;}
+        .header{ width:960px; height:150px;margin:0 auto;}
+        .gb-qatitle-wrap{ width:500px; height:300px;background:#f1f1f1; border:1px solid #ccc;}
+        .nomenu{ position:fixed; top:20px;}
+        .cont{ height:2000px;}
+    </style>
+</head>
+<body>
+<div class="header"></div>
+<div class="gb-qatitle-wrap"></div>
+<div class="cont"></div>
+<script type="text/javascript">
+(function(){
+    var pos = 0,
+        qaTitle = $('.gb-qatitle-wrap');
+
+    $(window).scroll(function () {
+        pos = $(document).scrollTop();
+        if (pos > 150) {
+            qaTitle.addClass('nomenu');
+            if(!window.XMLHttpRequest){
+                qaTitle.css({position: 'absolute',top: pos + 20});
+            }
+        } else {
+            qaTitle.removeClass('nomenu');
+            if(!window.XMLHttpRequest){
+                qaTitle.css({position: 'static',top: 'auto'});
+            }
+        }
+    });
+}());
+</script>
+
+
+<script type="text/javascript">
+    function bindArguments(f){
+        var boundArgs = arguments;
+        return function(){
+            var args = [];
+            for( var i = 1; i < boundArgs.length; i++) args.push(boundArgs[i]);
+            for( var j = 0; j < arguments.length; j++) args.push(arguments[j]);
+            console.log(1);
+            console.log(this);
+            return f.apply(this, args);
+
+        };
+    }
+    function foo(){}
+    bindArguments(foo, 1,2)();
+
+</script>
+</body>
+</html>
