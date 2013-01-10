@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<div style="width:200px;height:200px;background:#ff0000;position:relative" id="dvEvent">
+    <div style="width:200px;height:200px;background:#000000;position:absolute;left:50px;top:50px;"></div>
+</div>
+<script type="text/javascript">
+    window.onload = function () {
+        var dv = document.getElementById('dvEvent');
+        var p = {
+            x  : dv.offsetLeft,
+            rx : dv.offsetWidth,
+            y  : dv.offsetTop,
+            by : dv.offsetHeight
+        };
+        while (dv = dv.offsetParent) {
+            p.x += dv.offsetLeft;
+            p.y += dv.offsetTop;
+        }
+        p.rx += p.x;
+        p.by += p.y;
+
+        document.getElementById('dvEvent').onclick = function (e) {
+            e = e || window.event;
+            var x = e.clientX,
+                y = e.clientY;
+
+            document.title = p.x + '|' + x + '|' + p.rx + '-' + p.y + '|' + y + '|' + p.by;
+            if ((x >= p.x && x <= p.rx) && (y >= p.y && y <= p.by)){
+                alert('点击在范围内，触发事件！');
+            }
+        }
+    }
+</script>
+</body>
+</html>
