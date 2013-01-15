@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<img id='locationA' src='ImageA.jpg'>
+<img id='locationB' src='ImageB.jpg'>
+<script type="text/javascript">
+    (function(){
+        var num = true;
+        var locA = $('#locationA'),
+            locB = $('#locationB');
+
+        if(num === true){
+            locA.attr('src', 'ImageB.jpg');
+            locB.attr('src', 'ImageA.jpg');
+            num = false;
+            console.log(1, num);
+        } else {
+            locA.attr('src', 'ImageA.jpg');
+            locB.attr('src', 'ImageB.jpg');
+            num = true;
+            console.log(2, num);
+        }
+    }());
+</script>
+</body>
+</html>
