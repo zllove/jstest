@@ -7,10 +7,27 @@
         body{font:12px/1.5 arial;background:#fff;}
         .test{background-color: white; border-style: outset; margin: 115px 0px 0px -40px;}
     </style>
+    <script type="text/javascript" src="/load.js"></script>
 </head>
 <body>
 <div class="test"></div>
 <script src='http://runjs.cn/gist/gew5wreh/all/rdark'></script>
+<script type="text/javascript">
+    (function(){
+        var num = 1;
+        var locA = $('#locationA'),
+            locB = $('#locationB');
 
+        if(num){
+            locA.attr('src', 'ImageA.jpg');
+            locB.attr('src', 'ImageB.jpg');
+            num = 0;
+        } else {
+            locA.attr('src', 'ImageA.jpg');
+            locB.attr('src', 'ImageB.jpg');
+            num = 1;
+        }
+    }());
+</script>
 </body>
 </html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{font:12px/1.5 arial;background:#fff;}
+        a{color:#2d374b;text-decoration:none}
+        a:hover{color:#cd0200;text-decoration:underline}
+        .demo{ width:500px;margin:0 auto;}
+        .wrap{ border:1px solid #ccc;}
+        .input{ height:26px; border:none;background:#fff;}
+        #father{ height:28px; padding:5px;}
+        #son{ padding:10px 0;}
+        .sub{ width:500px;}
+        .sub span{ padding:2px 4px; margin-right:5px;cursor:pointer; display:inline-block;background:#f1f1f1; border:1px solid #ccc;}
+        .sub i{ margin-left:5px;}
+    </style>
+    <script type="text/javascript" src="../../2012/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<div class="demo">
+    <div id="father" class="wrap sub">
+        <input class="input" type="">
+    </div>
+    <div id="son" class="sub">
+        <span><a href="#">web01</a><i>X</i></span>
+        <span><a href="#">web02</a><i>X</i></span>
+        <span><a href="#">web03</a><i>X</i></span>
+        <span><a href="#">web04</a><i>X</i></span>
+        <span><a href="#">web05</a><i>X</i></span>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#son span').click(function(){
+        $('#father').prepend($(this));
+    });
+    $('#father').delegate('span', 'click', function(){
+        $('#son').append($(this));
+    })
+</script>
+</body>
+</html>
