@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<input type="text" name="bestresult" id="bestresult" class="total" value=""><br>
+<input type="text" name="resultat[100][total]" class="total" value=""><br>
+<input type="text" name="resultat[121][total]" class="total" value=""><br>
+<input type="text" name="resultat[130][total]" class="total" value="">
+<script type="text/javascript">
+    $('input.total[id!=bestresult]').change(function(){
+        var max = Math.max.apply(null, $('.total[id!=bestresult]').map(function(){
+            return parseFloat(this.value)}).slice().filter(function(i, v){return v==v})
+        );
+        $('#bestresult').attr("value", max);
+    });
+</script>
+</body>
+</html>
