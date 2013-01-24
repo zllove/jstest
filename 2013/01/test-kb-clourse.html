@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<a href="http://kb.cnblogs.com/page/110782/" target="_blank">http://kb.cnblogs.com/page/110782/</a>
+<script type="text/javascript">
+    function foo(x){
+        var tmp = 3;
+        return function(y){
+            console.log(x + y + tmp);
+            x.memb = x.memb ? x.memb + 1 : 1;
+            console.log(x.memb);
+        }
+    }
+    var age = new Number(2);
+    var bar = foo(age);
+    bar(10);
+    bar(10);
+
+    var db = (function(){
+        var data = {};
+        return function(key, val){
+            if(val === undefined){
+                data[key] = val;
+            } else {
+                return data[key];
+            }
+        }
+    }());
+
+    console.log(db['x']);
+    db['x'] = 22;
+    console.log(db['x']);
+</script>
+</body>
+</html>

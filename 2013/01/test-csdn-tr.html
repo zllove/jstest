@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.min.js"></script>
+    <!--<script type="text/javascript" src="../jquery-1.8.3.min.js"></script>-->
+    <style type="text/css">
+        .red{background:red;}
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td>11</td>
+        <td>22</td>
+    </tr>
+    <tr data-name="2332">
+        <td>11</td>
+        <td>222</td>
+    </tr>
+    <tr data-name="222">
+        <td>11</td>
+        <td>333</td>
+    </tr>
+    <tr data-name="2332">
+        <td>11</td>
+        <td>333</td>
+    </tr>
+    <tr data-name="2332">
+        <td>11</td>
+        <td>333</td>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td>333</td>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td>333</td>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td>333</td>
+    </tr>
+</table>
+<script type="text/javascript">
+    console.time('1');
+    $('td:contains(222)').parent().addClass('red');
+    console.timeEnd('1');
+
+    console.time('2');
+    $('table tr').each(function(){
+        if(this.getAttribute('data-name') == '222'){
+//        if($(this).data('name') == '222'){
+            $(this).addClass('red');
+        }
+
+    });
+    console.timeEnd('2');
+</script>
+</body>
+</html>
