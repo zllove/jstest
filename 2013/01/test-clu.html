@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    var person = {};
+    person.GisPerson = {};
+    var e = person.GisPerson;
+    e = null;
+//    alert(person.GisPerson);
+    /*
+    (function(){
+        alert(person.GisPerson);
+        var p = person.GisPerson;
+        p = null;
+        alert(person.GisPerson);
+    })();
+    */
+    var obj1 = {};
+    var obj2 = obj1;
+    obj2 = null;
+    console.log(obj1);
+
+</script>
+</body>
+</html>
