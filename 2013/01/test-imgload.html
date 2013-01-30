@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{font:12px/1.5 arial;background:#fff;}
+        .demo{ position:relative; width:635px; height:342px;background:#e1e1e1; overflow:hidden;}
+        .load{position:absolute;display:block;width:100%;height:100%;filter:alpha(opacity=50); opacity:0.5;background:url(http://www.ggg.cn/images/common/loading.gif) #000 50% 50% no-repeat;}
+    </style>
+</head>
+<body>
+<div class="demo">
+    <i class="load"></i>
+    <img src="http://static.ggg.cn/market/recommendation/screens/003/184/3184/20130121141709/1.jpg" alt="">
+</div>
+<div class="demo">
+    <i class="load"></i>
+    <img src="http://static.ggg.cn/market/recommendation/screens/000/186/186/20130123145044/11.jpg" alt="">
+</div>
+<div class="demo">
+    <i class="load"></i>
+    <img src="http://static.ggg.cn/market/recommendation/screens/000/187/187/20130123142713/1.jpg" alt="">
+</div>
+<div class="demo">
+    <i class="load"></i>
+    <img src="http://static.ggg.cn/market/recommendation/screens/000/184/184/20130123145617/1.jpg" alt="">
+</div>
+<div class="demo">
+    <i class="load"></i>
+    <img src="http://static.ggg.cn/market/recommendation/screens/002/242/2242/20130123144013/1.jpg" alt="">
+</div>
+<div class="demo">
+    <i class="load"></i>
+    <img src="http://static.ggg.cn/market/recommendation/screens/003/184/3184/20130121141709/1.jpg" alt="">
+</div>
+<script type="text/javascript">
+//    var img = new Image();
+    var img = $('.demo img');
+    var load = $('.load');
+
+    $(img).load(function(){
+        $(this).prev('i').delay(300).fadeOut();
+    });
+
+
+</script>
+</body>
+</html>
