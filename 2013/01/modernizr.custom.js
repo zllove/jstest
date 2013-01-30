@@ -103,15 +103,13 @@
 
     if (!Function.prototype.bind) {
         Function.prototype.bind = function bind(that) {
-
             var target = this;
             if (typeof target != "function") {
                 throw new TypeError();
             }
-            var args = slice.call(arguments, 1), bound = function () {
-
+            var args = slice.call(arguments, 1),
+                bound = function () {
                     if (this instanceof bound) {
-
                         var F = function () {
                         };
                         F.prototype = target.prototype;

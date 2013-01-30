@@ -8,13 +8,14 @@
  */
 (function (doc) {
 
-    var html = doc.documentElement, conf = {
+    var html = doc.documentElement,
+        conf = {
             screens: [320, 480, 640, 768, 1024, 1280, 1440, 1680, 1920],
             section: "-section",
             page   : "-page",
             head   : "head"
-        }, klass = [];
-
+        },
+        klass = [];
 
     if (window.head_conf) {
         for (var key in head_conf) {
@@ -606,11 +607,9 @@
                 }
             })();
         }
-
         // fallback
         window.attachEvent("onload", fireReady);
     }
-
 
     // enable document.readyState for Firefox <= 3.5
     if (!doc.readyState && doc.addEventListener) {
