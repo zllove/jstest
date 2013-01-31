@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="core.js"></script>
+    <script type="text/javascript" src="css3.js"></script>
+    <script type="text/javascript" src="load.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    head.js('http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.min.js');
+   (function(win){
+       var conf = {
+           screens   : [240, 320, 480, 640, 768, 800, 1024, 1280, 1440, 1680, 1920],
+           screensCss: { "gt": true, "gte": false, "lt": true, "lte": false, "eq": false },
+           browsers  : [
+               { ie: { min: 6, max: 10 } }
+               //,{ chrome : { min: 8, max: 24 } }
+               //,{ ff : { min: 3, max: 19 } }
+               //,{ ios : { min: 3, max: 6 } }
+               //,{ android: { min: 2, max: 4 } }
+               //,{ webkit : { min: 9, max: 12 } }
+               //,{ opera : { min: 9, max: 12 } }
+           ],
+           browserCss: { "gt": true, "gte": false, "lt": true, "lte": false, "eq": true },
+           section   : "-section",
+           page      : "-page",
+           head      : "head"
+       };
+
+       if(!win.head_conf){
+           for(var item in win.head_conf){
+               if(win.head_conf[item] != undefined){
+                   conf[item] = win.head_conf[item];
+               }
+           }
+       }
+
+       function each(arr, fn) {
+           for (var i = 0, l = arr.length; i < l; i++) {
+               fn.call(arr, arr[i], i);
+           }
+       }
+
+       var arr = ['a', 'b', 'c'];
+       each('abbr|article|aside|audio'.split('|'), function(el, i){
+           console.log(this[i + 1]);
+           document.createElement(el);
+       });
+   }(window));
+
+</script>
+</body>
+</html>

@@ -17,7 +17,8 @@
 ;
 (function (win, undefined) {
     "use strict";
-    var doc = win.document, /*
+    var doc = win.document,
+    /*
      To add a new test:
 
      head.feature("video", function() {
@@ -29,10 +30,13 @@
      https://github.com/Modernizr/Modernizr/blob/master/modernizr.js
      */
 
-    /* CSS modernizer */
-    el = doc.createElement("i"), style = el.style, prefs = ' -o- -moz- -ms- -webkit- -khtml- '.split(' '), domPrefs = 'Webkit Moz O ms Khtml'.split(' '),
-
-    headVar = win.head_conf && win.head_conf.head || "head", api = win[headVar];
+        /* CSS modernizer */
+        el = doc.createElement("i"),
+        style = el.style,
+        prefs = ' -o- -moz- -ms- -webkit- -khtml- '.split(' '),
+        domPrefs = 'Webkit Moz O ms Khtml'.split(' '),
+        headVar = win.head_conf && win.head_conf.head || "head",
+        api = win[headVar];
 
     // Thanks Paul Irish!
     function testProps(props) {
@@ -46,57 +50,50 @@
 
 
     function testAll(prop) {
-        var camel = prop.charAt(0).toUpperCase() + prop.substr(1), props = (prop + ' ' + domPrefs.join(camel + ' ') + camel).split(' ');
+        var camel = prop.charAt(0).toUpperCase() + prop.substr(1),
+            props = (prop + ' ' + domPrefs.join(camel + ' ') + camel).split(' ');
 
         return !!testProps(props);
     }
 
     var tests = {
         gradient: function () {
-            var s1 = 'background-image:', s2 = 'gradient(linear,left top,right bottom,from(#9f9),to(#fff));', s3 = 'linear-gradient(left top,#eee,#fff);';
+            var s1 = 'background-image:',
+                s2 = 'gradient(linear,left top,right bottom,from(#9f9),to(#fff));',
+                s3 = 'linear-gradient(left top,#eee,#fff);';
 
             style.cssText = (s1 + prefs.join(s2 + s1) + prefs.join(s3 + s1)).slice(0, -s1.length);
             return !!style.backgroundImage;
         },
-
         rgba: function () {
             style.cssText = "background-color:rgba(0,0,0,0.5)";
             return !!style.backgroundColor;
         },
-
         opacity: function () {
             return el.style.opacity === "";
         },
-
         textshadow: function () {
             return style.textShadow === '';
         },
-
         multiplebgs: function () {
             style.cssText = "background:url(//:),url(//:),red url(//:)";
             return new RegExp("(url\\s*\\(.*?){3}").test(style.background);
         },
-
         boxshadow: function () {
             return testAll("boxShadow");
         },
-
         borderimage: function () {
             return testAll("borderImage");
         },
-
         borderradius: function () {
             return testAll("borderRadius");
         },
-
         cssreflections: function () {
             return testAll("boxReflect");
         },
-
         csstransforms: function () {
             return testAll("transform");
         },
-
         csstransitions: function () {
             return testAll("transition");
         },
@@ -106,7 +103,6 @@
         retina        : function () {
             return (win.devicePixelRatio > 1);
         },
-
         /*
          font-face support. Uses browser sniffing but is synchronous.
          http://paulirish.com/2009/font-face-feature-detection/
@@ -118,25 +114,18 @@
             switch (browser) {
                 case "ie":
                     return version >= 9;
-
                 case "chrome":
                     return version >= 13;
-
                 case "ff":
                     return version >= 6;
-
                 case "ios":
                     return version >= 5;
-
                 case "android":
                     return false;
-
                 case "webkit":
                     return version >= 5.1;
-
                 case "opera":
                     return version >= 10;
-
                 default:
                     return false;
             }

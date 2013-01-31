@@ -21,7 +21,12 @@
     // gt, gte, lt, lte, eq breakpoints would have been more simple to write as ['gt','gte','lt','lte','eq']
     // but then we would have had to loop over the collection on each resize() event,
     // a simple object with a direct access to true/false is therefore much more efficient
-    var doc = win.document, nav = win.navigator, loc = win.location, html = doc.documentElement, klass = [], conf = {
+    var doc = win.document,
+        nav = win.navigator,
+        loc = win.location,
+        html = doc.documentElement,
+        klass = [],
+        conf = {
             screens   : [240, 320, 480, 640, 768, 800, 1024, 1280, 1440, 1680, 1920],
             screensCss: { "gt": true, "gte": false, "lt": true, "lte": false, "eq": false },
             browsers  : [
@@ -68,14 +73,12 @@
     };
 
     api.feature = function (key, enabled, queue) {
-
         // internal: apply all classes
         if (!key) {
             html.className += ' ' + klass.join(' ');
             klass = [];
             return api;
         }
-
         if (Object.prototype.toString.call(enabled) === '[object Function]') {
             enabled = enabled.call();
         }
@@ -97,7 +100,8 @@
     api.feature("js", true);
 
     // browser type & version
-    var ua = nav.userAgent.toLowerCase(), mobile = /mobile|midp/.test(ua);
+    var ua = nav.userAgent.toLowerCase(),
+        mobile = /mobile|midp/.test(ua);
 
     // useful for enabling/disabling feature (we can consider a desktop navigator to have more cpu/gpu power)
     api.feature("mobile", mobile, true);
@@ -111,7 +115,6 @@
         /(webkit|opera)(?:.*version)?[ \/]([\w.]+)/.exec(ua) || // Safari & Opera
         /(msie) ([\w.]+)/.exec(ua) || [];
 
-
     var browser = ua[1], version = parseFloat(ua[2]);
 
     switch (browser) {
@@ -119,22 +122,18 @@
             browser = 'ie';
             version = doc.documentMode || version;
             break;
-
         case 'firefox':
             browser = 'ff';
             break;
-
         case 'ipod':
         case 'ipad':
         case 'iphone':
             browser = 'ios';
             break;
-
         case 'webkit':
             browser = 'safari';
             break;
     }
-
 
     // Browser vendor and version
     api.browser = {
@@ -142,39 +141,28 @@
         version: version
     };
     api.browser[browser] = true;
-
     for (var i = 0, l = conf.browsers.length; i < l; i++) {
         for (var key in conf.browsers[i]) {
             if (browser === key) {
                 pushClass(key);
-
                 var min = conf.browsers[i][key].min;
                 var max = conf.browsers[i][key].max;
-
                 for (var v = min; v <= max; v++) {
                     if (version > v) {
                         if (conf.browserCss["gt"])
                             pushClass("gt-" + key + v);
-
                         if (conf.browserCss["gte"])
                             pushClass("gte-" + key + v);
-                    }
-
-                    else if (version < v) {
+                    } else if (version < v) {
                         if (conf.browserCss["lt"])
                             pushClass("lt-" + key + v);
-
                         if (conf.browserCss["lte"])
                             pushClass("lte-" + key + v);
-                    }
-
-                    else if (version === v) {
+                    } else if (version === v) {
                         if (conf.browserCss["lte"])
                             pushClass("lte-" + key + v);
-
                         if (conf.browserCss["eq"])
                             pushClass("eq-" + key + v);
-
                         if (conf.browserCss["gte"])
                             pushClass("gte-" + key + v);
                     }
@@ -185,7 +173,6 @@
         }
     }
 
-
     // IE lt9 specific
     if (browser === "ie" && version < 9) {
         // HTML5 support : you still need to add html5 css initialization styles to your site
@@ -194,7 +181,6 @@
             doc.createElement(el);
         });
     }
-
 
     // CSS "router"
     each(loc.pathname.split("/"), function (el, i) {
@@ -218,7 +204,6 @@
         }
     });
 
-
     // basic screen info
     api.screen = {
         height: win.screen.height,
@@ -231,7 +216,8 @@
         html.className = html.className.replace(/ (w-|eq-|gt-|gte-|lt-|lte-|portrait|no-portrait|landscape|no-landscape)\d+/g, "");
 
         // Viewport width
-        var iw = win.innerWidth || html.clientWidth, ow = win.outerWidth || win.screen.width;
+        var iw = win.innerWidth || html.clientWidth,
+            ow = win.outerWidth || win.screen.width;
 
         api.screen['innerWidth'] = iw;
         api.screen['outerWidth'] = ow;
@@ -246,17 +232,13 @@
 
                 if (conf.screensCss["gte"])
                     pushClass("gte-" + width);
-            }
-
-            else if (iw < width) {
+            } else if (iw < width) {
                 if (conf.screensCss["lt"])
                     pushClass("lt-" + width);
 
                 if (conf.screensCss["lte"])
                     pushClass("lte-" + width);
-            }
-
-            else if (iw === width) {
+            } else if (iw === width) {
                 if (conf.screensCss["lte"])
                     pushClass("lte-" + width);
 
@@ -268,9 +250,9 @@
             }
         });
 
-
         // Viewport height
-        var ih = win.innerHeight || html.clientHeight, oh = win.outerHeight || win.screen.height;
+        var ih = win.innerHeight || html.clientHeight,
+            oh = win.outerHeight || win.screen.height;
 
         api.screen['innerHeight'] = ih;
         api.screen['outerHeight'] = oh;

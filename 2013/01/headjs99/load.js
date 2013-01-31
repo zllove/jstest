@@ -16,17 +16,20 @@
 (function (win, undefined) {
     "use strict";
 
-    var doc = win.document, domWaiters = [], queue = [], // waiters for the "head ready" event
+    var doc = win.document,
+        domWaiters = [],
+        queue = [], // waiters for the "head ready" event
         handlers = {}, // user functions waiting for events
         assets = {}, // loadable items in various states
-        isAsync = "async" in doc.createElement("script") || "MozAppearance" in doc.documentElement.style || win.opera, isHeadReady, isDomReady,
-
+        isAsync = "async" in doc.createElement("script") || "MozAppearance" in doc.documentElement.style || win.opera,
+        isHeadReady,
+        isDomReady,
         /*** public API ***/
-            headVar = win.head_conf && win.head_conf.head || "head", api = win[headVar] = (win[headVar] || function () {
+        headVar = win.head_conf && win.head_conf.head || "head",
+        api = win[headVar] = (win[headVar] || function () {
             api.ready.apply(null, arguments);
         }),
-
-    // states
+        // states
         PRELOADING = 1, PRELOADED = 2, LOADING = 3, LOADED = 4;
 
     // Method 1: simply load and let browser take care of ordering
@@ -37,7 +40,9 @@
             /// head.load("http://domain.com/file.js","http://domain.com/file.js", callBack)
             /// head.load({ label1: "http://domain.com/file.js" }, { label2: "http://domain.com/file.js" }, callBack)
             ///</summary>
-            var args = arguments, callback = args[args.length - 1], items = {};
+            var args = arguments,
+                callback = args[args.length - 1],
+                items = {};
 
             if (!isFunction(callback)) {
                 callback = null;
@@ -52,29 +57,25 @@
                         if (allLoaded(items)) {
                             one(callback);
                         }
-
                     } : null);
                 }
             });
-
             return api;
         };
-
-
         // Method 2: preload with text/cache hack
     } else {
         api.load = function () {
-            var args = arguments, rest = [].slice.call(args, 1), next = rest[0];
+            var args = arguments,
+                rest = [].slice.call(args, 1),
+                next = rest[0];
 
             // wait for a while. immediate execution causes some browsers to ignore caching
             if (!isHeadReady) {
                 queue.push(function () {
                     api.load.apply(null, args);
                 });
-
                 return api;
             }
-
             // multiple arguments
             if (!!next) {
                 /* Preload with text/cache hack (not good!)
@@ -96,14 +97,12 @@
                 // single item
                 load(getAsset(args[0]));
             }
-
             return api;
         };
     }
 
     // INFO: for retro compatibility
     api.js = api.load;
-
     api.test = function (test, success, failure, callback) {
         ///<summary>
         /// INFO: use cases:
@@ -133,20 +132,16 @@
 
         // Test Passed ?
         var passed = !!obj.test;
-
         // Do we have a success case
         if (passed && !!obj.success) {
             obj.success.push(obj.callback);
             api.load.apply(null, obj.success);
-        }
-        // Do we have a fail case
-        else if (!passed && !!obj.failure) {
+        } else if (!passed && !!obj.failure) { // Do we have a fail case
             obj.failure.push(obj.callback);
             api.load.apply(null, obj.failure);
         } else {
             callback();
         }
-
         return api;
     };
 
@@ -166,7 +161,6 @@
             } else {
                 domWaiters.push(callback);
             }
-
             return api;
         }
 
@@ -196,25 +190,21 @@
         } else {
             arr.push(callback);
         }
-
         return api;
     };
 
 
     // perform this when DOM is ready
     api.ready(doc, function () {
-
         if (allLoaded()) {
             each(handlers.ALL, function (callback) {
                 one(callback);
             });
         }
-
         if (api.feature) {
             api.feature("domloaded", true);
         }
     });
-
 
     /* private functions
      *********************/
@@ -226,12 +216,10 @@
         if (!arr) {
             return;
         }
-
         // arguments special type
         if (typeof arr === 'object') {
             arr = [].slice.call(arr);
         }
-
         // do the job
         for (var i = 0, l = arr.length; i < l; i++) {
             callback.call(arr, arr[i], i);
@@ -255,8 +243,9 @@
 
     function toLabel(url) {
         ///<summary>Converts a url to a file label</summary>
-        var items = url.split("/"), name = items[items.length - 1], i = name.indexOf("?");
-
+        var items = url.split("/"),
+            name = items[items.length - 1],
+            i = name.indexOf("?");
         return i !== -1 ? name.substring(0, i) : name;
     }
 
@@ -265,11 +254,9 @@
     function one(callback) {
         ///<summary>Execute a callback only once</summary>
         callback = callback || noop;
-
         if (callback._done) {
             return;
         }
-
         callback();
         callback._done = 1;
     }
@@ -306,27 +293,23 @@
         if (existing && existing.url === asset.url) {
             return existing;
         }
-
         assets[asset.name] = asset;
         return asset;
     }
 
     function allLoaded(items) {
         items = items || assets;
-
         for (var name in items) {
             if (items.hasOwnProperty(name) && items[name].state !== LOADED) {
                 return false;
             }
         }
-
         return true;
     }
 
 
     function onPreload(asset) {
         asset.state = PRELOADED;
-
         each(asset.onpreload, function (afterPreload) {
             afterPreload.call();
         });
@@ -334,10 +317,8 @@
 
     function preLoad(asset, callback) {
         if (asset.state === undefined) {
-
             asset.state = PRELOADING;
             asset.onpreload = [];
-
             loadAsset({ url: asset.url, type: 'cache' }, function () {
                 onPreload(asset);
             });
