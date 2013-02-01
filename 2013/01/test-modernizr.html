@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="modernizr.custom.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    /*
+    window.m = (function(window, document, undefined){
+        console.log(window);
+    })(this, this.document);
+    console.log(this.document);
+//    m();
+    var attrs = {};
+//    attrs.list = !!(document.createElement('datalist') && window.HTMLDataListElement);
+    attrs.list = !!window.HTMLDataListElement;
+//    alert(attrs.list);
+
+    var inputElem = document.createElement('input');
+    var res = 'autocomplete' in inputElem;
+    console.log(res);
+     */
+
+    var Modernizr = {};
+    Modernizr['inputtypes'] = (function(props){
+        var rest = [];
+        for(var i = 0; i < props.length; i++){
+            rest.push(props[i]);
+        }
+        return rest;
+    })('search tel url email datetime date month week time datetime-local number range color'.split(' '));
+
+    console.log(Modernizr.inputtypes);
+
+
+
+</script>
+</body>
+</html>

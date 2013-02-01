@@ -6,8 +6,10 @@
         Modernizr = {},
         enableClasses = true,
         docElement = document.documentElement,
-        mod = 'modernizr', modElem = document.createElement(mod), mStyle = modElem.style,
-        inputElem = document.createElement('input')  ,
+        mod = 'modernizr',
+        modElem = document.createElement(mod),
+        mStyle = modElem.style,
+        inputElem = document.createElement('input'),
         smile = ':)',
         toString = {}.toString,
         prefixes = ' -webkit- -moz- -o- -ms- '.split(' '),
@@ -15,14 +17,21 @@
         cssomPrefixes = omPrefixes.split(' '),
         domPrefixes = omPrefixes.toLowerCase().split(' '),
         ns = {'svg': 'http://www.w3.org/2000/svg'},
-        tests = {}, inputs = {}, attrs = {},
+        tests = {},
+        inputs = {},
+        attrs = {},
         classes = [],
         slice = classes.slice,
         featureName,
-
-
         injectElementWithStyles = function (rule, callback, nodes, testnames) {
-            var style, ret, node, docOverflow, div = document.createElement('div'), body = document.body, fakeBody = body || document.createElement('body');
+            var style,
+                ret,
+                node,
+                docOverflow,
+                div = document.createElement('div'),
+                body = document.body,
+                fakeBody = body || document.createElement('body');
+
             if (parseInt(nodes, 10)) {
                 while (nodes--) {
                     node = document.createElement('div');
@@ -51,15 +60,16 @@
                 div.parentNode.removeChild(div);
             }
             return !!ret;
-
         },
-
-
         isEventSupported = (function () {
             var TAGNAMES = {
-                'select': 'input', 'change': 'input',
-                'submit': 'form', 'reset': 'form',
-                'error' : 'img', 'load': 'img', 'abort': 'img'
+                'select' : 'input',
+                'change' : 'input',
+                'submit' : 'form',
+                'reset'  : 'form',
+                'error'  : 'img',
+                'load'   : 'img',
+                'abort'  : 'img'
             };
             function isEventSupported(eventName, element) {
                 element = element || document.createElement(TAGNAMES[eventName] || 'div');
@@ -73,22 +83,19 @@
                     if (element.setAttribute && element.removeAttribute) {
                         element.setAttribute(eventName, '');
                         isSupported = is(element[eventName], 'function');
-
                         if (!is(element[eventName], 'undefined')) {
                             element[eventName] = undefined;
                         }
                         element.removeAttribute(eventName);
                     }
                 }
-
                 element = null;
                 return isSupported;
             }
-
             return isEventSupported;
         })(),
-
-        _hasOwnProperty = ({}).hasOwnProperty, hasOwnProp;
+        _hasOwnProperty = ({}).hasOwnProperty,
+        hasOwnProp;
 
     if (!is(_hasOwnProperty, 'undefined') && !is(_hasOwnProperty.call, 'undefined')) {
         hasOwnProp = function (object, property) {
@@ -100,7 +107,6 @@
         };
     }
 
-
     if (!Function.prototype.bind) {
         Function.prototype.bind = function bind(that) {
             var target = this;
@@ -110,8 +116,7 @@
             var args = slice.call(arguments, 1),
                 bound = function () {
                     if (this instanceof bound) {
-                        var F = function () {
-                        };
+                        var F = function () { };
                         F.prototype = target.prototype;
                         var self = new F();
 
@@ -120,10 +125,8 @@
                             return result;
                         }
                         return self;
-
                     } else {
                         return target.apply(that, args.concat(slice.call(arguments)));
-
                     }
                 };
             return bound;
@@ -160,9 +163,7 @@
         for (var i in props) {
             var item = obj[props[i]];
             if (item !== undefined) {
-
                 if (elem === false) return props[i];
-
                 if (is(item, 'function')) {
                     return item.bind(elem || obj);
                 }
@@ -173,10 +174,11 @@
     }
 
     function testPropsAll(prop, prefixed, elem) {
-        var ucProp = prop.charAt(0).toUpperCase() + prop.slice(1), props = (prop + ' ' + cssomPrefixes.join(ucProp + ' ') + ucProp).split(' ');
+        var ucProp = prop.charAt(0).toUpperCase() + prop.slice(1),
+            props = (prop + ' ' + cssomPrefixes.join(ucProp + ' ') + ucProp).split(' ');
+
         if (is(prefixed, "string") || is(prefixed, "undefined")) {
             return testProps(props, prefixed);
-
         } else {
             props = (prop + ' ' + (domPrefixes).join(ucProp + ' ') + ucProp).split(' ');
             return testDOMProps(props, prefixed, elem);
@@ -281,9 +283,7 @@
     };
 
     tests['opacity'] = function () {
-
         setCssAll('opacity:.55');
-
         return (/^0.55$/).test(mStyle.opacity);
     };
 
@@ -343,7 +343,6 @@
         });
         return bool;
     };
-
 
     tests['video'] = function () {
         var elem = document.createElement('video'), bool = false;
@@ -448,12 +447,9 @@
                         defaultView = document.defaultView;
                         bool = defaultView.getComputedStyle && defaultView.getComputedStyle(inputElem, null).WebkitAppearance !== 'textfield' && (inputElem.offsetHeight !== 0);
                         docElement.removeChild(inputElem);
-
                     } else if (/^(search|tel)$/.test(inputElemType)) {
-
                     } else if (/^(url|email)$/.test(inputElemType)) {
                         bool = inputElem.checkValidity && inputElem.checkValidity() === false;
-
                     } else {
                         bool = inputElem.value != smile;
                     }
@@ -520,7 +516,7 @@
                     var frag = document.createDocumentFragment();
                     return (
                         typeof frag.cloneNode == 'undefined' || typeof frag.createDocumentFragment == 'undefined' || typeof frag.createElement == 'undefined'
-                        );
+                    );
                 }());
             } catch (e) {
                 supportsHtml5Styles = true;
@@ -528,7 +524,6 @@
             }
 
         }());
-
 
         function addStyleSheet(ownerDocument, cssText) {
             var p = ownerDocument.createElement('p'), parent = ownerDocument.getElementsByTagName('head')[0] || ownerDocument.documentElement;
@@ -612,7 +607,6 @@
             }) + ');return n}')(html5, data.frag);
         }
 
-
         function shivDocument(ownerDocument) {
             if (!ownerDocument) {
                 ownerDocument = document;
@@ -627,7 +621,6 @@
             }
             return ownerDocument;
         }
-
 
         var html5 = {
             'elements': options.elements || 'abbr article aside audio bdi canvas data datalist details figcaption figure footer header hgroup mark meter nav output progress section summary time video',
@@ -656,9 +649,7 @@
     };
 
     Modernizr.testAllProps = testPropsAll;
-
     Modernizr.testStyles = injectElementWithStyles;
-
     Modernizr.prefixed = function (prop, obj, elem) {
         if (!obj) {
             return testPropsAll(prop, 'pfx');
