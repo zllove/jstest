@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+<script type="text/javascript">
+	var iframe = document.createElement('iframe');
+	iframe.src = 'http://www.planabc.net';
+
+	if (iframe.attachEvent) {
+		iframe.attachEvent('onload', function() {
+			alert('Local iframe is now loaded.');
+		})
+	} else{
+		iframe.onload = function() {
+			alert('Local iframe is now loaded.');
+		};
+	};	
+	document.body.appendChild(iframe);
+	
+</script>	
+</body>
+</html>

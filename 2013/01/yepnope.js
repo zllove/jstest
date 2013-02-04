@@ -74,7 +74,10 @@
     // Takes a preloaded js obj (changes in different browsers) and injects it into the head
     // in the appropriate order
     function injectJs(src, cb, attrs, timeout, /* internal use */ err, internal) {
-        var script = doc.createElement("script"), done, i;
+        var script = doc.createElement("script"),
+            done,
+            i;
+
         timeout = timeout || yepnope['errorTimeout'];
         script.src = src;
         // Add our extra attributes to the script element
@@ -113,7 +116,10 @@
     // Takes a preloaded css obj (changes in different browsers) and injects it into the head
     function injectCss(href, cb, attrs, timeout, /* Internal use */ err, internal) {
         // Create stylesheet link
-        var link = doc.createElement("link"), done, i;
+        var link = doc.createElement("link"),
+            done,
+            i;
+
         timeout = timeout || yepnope['errorTimeout'];
         cb = internal ? executeStack : ( cb || noop );
 
@@ -162,7 +168,10 @@
     function preloadFile(elem, url, type, splicePoint, dontExec, attrObj, timeout) {
         timeout = timeout || yepnope['errorTimeout'];
         // Create appropriate element for browser and type
-        var preloadElem = doc.createElement(elem), done = 0, firstFlag = 0, stackObject = {
+        var preloadElem = doc.createElement(elem),
+            done = 0,
+            firstFlag = 0,
+            stackObject = {
                 "t": type,     // type
                 "s": url,      // src
                 //r: 0,        // ready
@@ -283,12 +292,19 @@
 
         function satisfyPrefixes(url) {
             // split all prefixes out
-            var parts = url.split("!"), gLen = globalFilters.length, origUrl = parts.pop(), pLen = parts.length, res = {
+            var parts = url.split("!"),
+                gLen = globalFilters.length,
+                origUrl = parts.pop(),
+                pLen = parts.length,
+                res = {
                     "url"     : origUrl,
                     // keep this one static for callback variable consistency
                     "origUrl" : origUrl,
                     "prefixes": parts
-                }, mFunc, j, prefix_parts;
+                },
+                mFunc,
+                j,
+                prefix_parts;
 
             // loop through prefixes
             // if there are none, this automatically gets skipped
@@ -318,7 +334,9 @@
 
         function loadScriptOrStyle(input, callback, chain, index, testResult) {
             // run through our set of prefixes
-            var resource = satisfyPrefixes(input), autoCallback = resource['autoCallback'], extension = getExtension(resource['url']);
+            var resource = satisfyPrefixes(input),
+                autoCallback = resource['autoCallback'],
+                extension = getExtension(resource['url']);
 
             // if no object is returned or the url is empty/0 just exit the load
             if (resource['bypass']) {
@@ -363,7 +381,14 @@
         }
 
         function loadFromTestObject(testObject, chain) {
-            var testResult = !!testObject['test'], group = testResult ? testObject['yep'] : testObject['nope'], always = testObject['load'] || testObject['both'], callback = testObject['callback'] || noop, cbRef = callback, complete = testObject['complete'] || noop, needGroupSize, callbackKey;
+            var testResult = !!testObject['test'],
+                group = testResult ? testObject['yep'] : testObject['nope'],
+                always = testObject['load'] || testObject['both'],
+                callback = testObject['callback'] || noop,
+                cbRef = callback,
+                complete = testObject['complete'] || noop,
+                needGroupSize,
+                callbackKey;
 
             // Reusable function for dealing with the different input types
             // NOTE:: relies on closures to keep 'chain' up to date, a bit confusing, but
