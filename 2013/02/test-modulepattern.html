@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<a href="http://www.oschina.net/translate/javascript-module-pattern-in-depth" title="" target="_blank">深入理解JavaScript 模块模式</a>
+<script type="text/javascript">
+    var Module = (function(){
+        var module = {};
+
+        function privteMethod(){
+        }
+
+        module.property = 1;
+        module.publicMethod = function(){
+            return module.property;
+        }
+
+        return module;
+    }());
+
+//    console.log(Module.publicMethod());
+
+    var Module02 = (function(my){
+        my.anotherMethod = function(){
+            return 'another method';
+        }
+
+        return my;
+    }(Module02 || {}));
+
+//    console.log(Module02.anotherMethod());
+
+    var Module_two = (function(old){
+        var my = {},
+            key;
+        
+        for(key in old){
+            if(old.hasOwnProperty(key)){
+                my[key] = old[key];
+            }
+        }
+        
+        var super.moduleMethod = old.moduleMethod;
+        
+        my.moduleMethod = function(){
+            
+        }
+
+        return my;
+    }(Module_two))
+
+    var Module_three = (function(my){
+        var _private = my._private = my._private || {},
+            _seal = my._seal = my._seal || function(){
+                delete my._private;
+                delete my._seal;
+                delete my._unseal;
+            },
+            _unseal = my._unseal = my._unseal || function(){
+                my._private = _private;
+                my._seal = _seal;
+                my._unseal = _unseal;
+            }
+
+        return my;
+
+    }(Module_three || {}));
+
+</script>
+</body>
+</html>
