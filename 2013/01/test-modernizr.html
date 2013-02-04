@@ -22,7 +22,6 @@
     var inputElem = document.createElement('input');
     var res = 'autocomplete' in inputElem;
     console.log(res);
-     */
 
     var Modernizr = {};
     Modernizr['inputtypes'] = (function(props){
@@ -35,6 +34,66 @@
 
     console.log(Modernizr.inputtypes);
 
+    function contains(str, substr) {
+        return !!~('' + str).indexOf(substr);
+    }
+
+    var pos = contains('cdda', 'a');
+    console.log(pos);
+    console.log(!!~-1);
+
+
+    var bool = false;
+    bool = new Boolean(bool);
+    console.log(bool);
+    bool.egg = false;
+    bool.h264 = true;
+    console.log(bool);
+     */
+
+    var Modernizr = {},
+        tests = {},
+        _hasOwnProperty = ({}).hasOwnProperty,
+        hasOwnProp,
+        classes = [],
+        featureName;
+
+    tests['flexbox'] = function(){
+        return true;
+    }
+    tests['svg'] = function(){
+        return false;
+    }
+
+    function is(obj, type){
+        return typeof obj === type;
+    }
+    
+    if(!is(_hasOwnProperty, 'undefined') && !is(_hasOwnProperty.call, 'undefined')){
+        hasOwnProp = function(object, property){
+            return _hasOwnProperty.call(object, property);
+        };
+    } else {
+        hasOwnProp = function(object, property){
+            return ((property in object) && is(object.constructor.prototype[property], 'undefined'));
+        }
+    }
+
+    for(var feature in tests){
+        if(hasOwnProp(tests, feature)){
+            featureName = feature.toLowerCase();
+            Modernizr[featureName] = tests[feature]();
+            classes.push((Modernizr[featureName] ? '' : 'no-') + feature);
+        }
+    }
+
+    console.log(classes);
+
+
+    var div = document.createElement('div');
+    div.innerHTML = 'div content';
+    console.log(document.getElementsByTagName('script')[0]);
+    document.body.insertBefore(div, document.getElementsByTagName('script')[1]);
 
 
 </script>

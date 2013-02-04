@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="modernizr.custom.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+    var isGecko = ('MozAppearance' in document.documentElement.style);
+    var isIE = !!document.attachEvent;
+    /*
+    console.log(isGecko);
+    console.log(isIE);
+    */
+
+    var toString = {}.toString();
+    var isFunction = function(fn){
+        return toString.call(fn) == '[Object Function]';
+    }
+
+    var arr = ['a','b','c','d','e','f','g'];
+    var ar2 = ['a1','a2','a3','a4','a5','a6','a7'];
+    for(var i = 0, len = arr.length; i < len; i++){
+        arr.splice(i, 0, ar2[i]);
+    }
+    console.log(arr);
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<style>
+        /*file容器样式*/
+    a.files {
+        width:90px;
+        height:30px;
+        overflow:hidden;
+        display:block;
+        border:1px solid #BEBEBE;
+        text-decoration:none;
+        position:relative;
+    }
+    a.files:hover {
+        background-color:#FFFFEE;
+        background-position:0 -30px;
+    }
+        /*file设为透明，并覆盖整个触发面*/
+    a.files input {
+        position:absolute;top:0;left:0;
+        margin-left:-350px;
+        font-size:30px;
+        cursor:pointer;
+        filter:alpha(opacity=0);
+        opacity:0;
+    }
+</style>
+<a href="javascript:void(0);" class="files">选择文件...<input type="file"/></a>
+</body>
+</html>
