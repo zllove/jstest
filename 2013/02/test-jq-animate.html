@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+    <!--<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.4.4.min.js"></script>-->
+    <style type="text/css">
+        #pictureNavContainer{background-color:#262626; width:1000px; height:220px; overflow:hidden;}
+        .pictureSectionOne{float:left; background:yellow; height:220px; width:77px;}
+        .pictureSectionTwo{float:left; background:red; height:220px; width:177px;}
+        .pictureSectionThree{float:left; background:blue; height:220px; width:400px;}
+    </style>
+</head>
+<body>
+<div id="pictureNavContainer">
+    <div class="section pictureSectionOne" id="1"></div>
+    <div class="section pictureSectionTwo" id="2"></div>
+    <div class="section pictureSectionThree" id="3"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        // Your code here
+        $('.section').click(function() {
+//            $('.section').not(this).animate({width:"77px"},400);
+            $('.section').not(this).animate({width:"77px"}, {duration: 400, queue: false});
+            //alert('clicked!');
+            $(this).animate({width:"400px"},400);
+        });
+    });
+</script>
+</body>
+</html>
