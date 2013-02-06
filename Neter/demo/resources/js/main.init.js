@@ -1,6 +1,25 @@
 /**
- * @author: zyh
- * @see: <a href="mailto:jikeytang@gmail.com">zyh</a>
- * @time: 2013-2-6 上午10:16
- * @info:
+ * mail home
+ * @deprecated  2013/02
  */
+Modernizr.load([
+    {
+        load: ['../jquery.js', '../core.js', '../skin.js', '../tips.js'],
+        complete: function(){
+        	Neter.path('../');
+
+        	skinInit();        	
+        }
+    },
+    {
+    	load: [''],
+    	complete: function(){
+
+    	}
+    }
+]);
+
+// loading skin
+function skinInit(){
+    new Neter.Skin().applying();
+}
