@@ -26,13 +26,13 @@
 		_super = $.extend({}, method);
 
 	$.extend(method, {
-
+		
 	});	
 
 
 };
 
 ;$.extend(Neter.Window.prototype, Neter.Box.prototype, {
-
+	
 });
 

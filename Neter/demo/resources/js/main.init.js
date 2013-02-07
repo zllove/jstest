@@ -12,14 +12,25 @@ Modernizr.load([
         }
     },
     {
-    	load: [''],
+    	load: ['../box.js', '../window.js'],
     	complete: function(){
-
+    		windowInit();
     	}
     }
-]);
+]);	
 
 // loading skin
 function skinInit(){
     new Neter.Skin().applying();
+}
+
+// loading window
+function windowInit(){
+	var win = null;
+	$('.user').click(function(){
+		win = new Neter.Window({
+			title : '个人资料',
+			content : 'Window...'
+		}).render();
+	});
 }
