@@ -32,7 +32,7 @@
 				'class': 'neter-tips',
 				text: defaults.msg
 			}).appendTo(defaults.container);
-*/
+			*/
 			handler.tips = $('<div>').addClass('neter-tips').html(defaults.msg).appendTo(defaults.container);
 
 			return this;
