@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .active{ color:red; font-size:16px; border:1px solid #c00;}
+        .blur{ color:blue; border:1px solid #ccc;}
+    </style>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<div id="ib-container">
+    <article>111</article>
+    <article>1112</article>
+    <article>1113</article>
+    <article>1114</article>
+</div>
+<script type="text/javascript">
+    // 总加载
+    $(function () {
+        //得到section
+        // 以下得到三个变量，为了不出现多次 var ，每个变量中间用逗号分隔
+        var $container = $('#ib-container'), // 这是外部容器
+            $articles = $container.children('article'),// 这是容器里边所有的 article 儿子，不包括 aritcle 孙子，要是包括孙子，那就是 find,而不是 children
+            timeout; // 这是一个计时器
+
+        $articles.on('mouseenter', function (event) { // 当鼠标进入这个区域的时候
+            var $article = $(this); // 缓存 $(this), 以便下次引用的时候更快的访问
+            clearTimeout(timeout); // 清除 timeout
+            timeout = setTimeout(function () {
+                if ($article.hasClass('active')) { // 在 包含有 active 这个class的artilce上返回，就是效果不生效
+                    return false;
+                }
+                $articles.not($article.removeClass('blur').addClass('active')).removeClass('active').addClass('blur');
+                // 这里可以分成两部分：
+                // $article.removeClass('blur').addClass('active') : 针对 article 操作移除 blur, 添加 active class，
+                // not($article.removeClass('blur').addClass('active')) : 然后把含有 active class 的 article 排除在外
+                // 排除之后，移除 active，添加 alur class
+            }, 65);
+
+        });
+
+        $container.on('mouseleave', function (event) { // 如果鼠标离开这个区域
+            clearTimeout(timeout); // 清除计时器
+            $articles.removeClass('active blur'); // 移除 active, blur 两个样式
+        });
+    });
+</script>
+</body>
+</html>

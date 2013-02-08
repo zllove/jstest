@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<div id="oDiv1">元素1</div>
+<div id="oDiv2">元素2</div>
+<div id="oDiv4">元素3</div>
+</body>
+<script type="text/javascript">
+    for(var i = 0; i < document.body.children.length; i++){
+        var nodes = document.body.children[i];
+        console.log(nodes);
+    }
+</script>
+</html>

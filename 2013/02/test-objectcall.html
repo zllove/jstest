@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    function sup(name){
+        this.colors = ['red', 'blue'];
+        this.name = name;
+        this.sayName = function(){
+            console.log(this.name);
+        }
+    }
+    
+    sup.prototype.sayName = function(){
+        this.sayName();
+    }
+    
+    function sub(age){
+        sup.call(this);
+        console.log(this);
+        this.age = age;
+    }
+    
+//    sub.prototype = new sup();
+    
+    var s = new sub('jikey');
+    s.colors.push('green');
+
+</script>
+</body>
+</html>
