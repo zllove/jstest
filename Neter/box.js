@@ -8,11 +8,12 @@
 	var _this = this;
 
 	this.defaults = {
-		container: document.body,
-		content: '',
-		closeButton: true,
-		left: 'center',
-		top: 'center'
+		container   : document.body,
+		content     : '',
+		closeButton : true,
+		left        : 'center',
+		top         : 'center',
+		slideHeight : 10
 	};
 
 	$.extend(this.defaults, options, {
@@ -48,8 +49,10 @@
 		initLayout : function() {
 			var defaults = _this.defaults,
 				handler  = _this.handler,
-				width = '',
-				height = '';
+				width    = '',
+				height   = '';
+
+			handler.box.css({width : defaults.width, height : defaults.height});	
 
 			defaults.closeButton && handler.closeButton.show();
 			
@@ -68,11 +71,29 @@
 		},
 		show : function(left, top) {
 			var defaults = _this.defaults,
-				handler  = _this.handler;
+				handler  = _this.handler,
+				start    = null;
 
-			handler.box.show();
+			left  = left == 'center' ? (handler.container.width() / 2 + handler.container.scrollLeft() - handler.box.outerWidth() / 2) : left;	
+			top   = top == 'center' ? (handler.container.height() / 2 + handler.container.scrollTop() - handler.box.outerHeight() / 2) : top;	
+			start = { left : left, top : top - defaults.slideHeight };
+			handler.box.css({left : start.left, top : start.top, opacity : 0}).show().animate({left : left, top : top, opacity : 1});
 
 			return this;
+		},
+		hide : function(){
+			var defaults = _this.defaults,
+				handler  = _this.handler;
+
+			handler.box.fadeOut('fast');
+			return this;
+		},
+		remove : function(event){
+			var defaults = _this.defaults,
+				handler  = _this.handler;
+
+			handler.box.remove();
+			for(var p in handler){ handler[p] = null; }
 
 		}
 	}
@@ -84,5 +105,12 @@
 
 		this.method.create().initLayout().bindEvents();
 		show !== false && this.method.show(defaults.left, defaults.top);
+	},
+	hide : function(){
+		thie.method.hide();
+		return this;
+	},
+	remove : function(event){
+		this.method.remove(event);
 	}
 });
