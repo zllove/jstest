@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        li{ border:1px dotted #ccc; margin-bottom:20px;}
+    </style>
+</head>
+<body>
+<div id="navParent">
+    <ul>
+        <li>111</li>
+        <li>222</li>
+        <li>2223</li>
+        <li>2224</li>
+    </ul>
+</div>
+<script type="text/javascript">
+    var getElm = document.getElementById("navParent").getElementsByTagName("LI");
+    getElm[getElm.length - 1].style.borderRight = "none";
+</script>
+</body>
+</html>

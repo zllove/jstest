@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    console.time('倒序');
+    var sum = 0;
+    var sum2 = 0;
+    for (var k = 40000000; k > 0; k--) {
+        sum += k;
+    }
+    console.log(sum);
+    console.timeEnd('倒序');
+
+    console.time('顺序1');
+    for(var i = 0; i < 40000000; i++){
+        sum2 += i;
+    }
+    console.log(sum2);
+    console.timeEnd('顺序1');
+</script>
+</body>
+</html>
