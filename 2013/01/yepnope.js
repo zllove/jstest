@@ -545,7 +545,7 @@
         }, 0);
     }
 
-    // Attach loader &
+        // Attach loader &
     // Leak it
     window['yepnope'] = getYepnope();
 
