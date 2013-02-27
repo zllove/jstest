@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    var KUI = {};
+    KUI.Animation = {
+        fadeIn : function (id) {
+            this.fade(id, true);
+        },
+        fadeOut: function (id) {
+            this.fade(id, false);
+        },
+        fade   : function (id, flag) {
+//            var target = KUI.get(id);
+            target.alpha = flag ? 1 : 100;
+            target.style.opacity = (target.alpha / 100);
+            target.style.filter = 'alpha(opacity=' + target.alpha + ')';
+            var value = target.alpha;
+            (function () {
+                target.style.opacity = (value / 100);
+                target.style.filter = 'alpha(opacity=' + value + ')';
+                if (flag) {
+                    value++;
+                    if (value <= 100) {
+                        setTimeout(arguments.callee, 15);//继续调用本身
+                    }
+                } else {
+                    value--;
+                    if (value >= 0) {
+                        setTimeout(arguments.callee, 15);//继续调用本身
+                    }
+                }
+            })();
+        }
+    }
+
+</script>
+<ul id="nav">
+    <li>11</li>
+    <li>22</li>
+    <li>33</li>
+</ul>
+<script type="text/javascript">
+    var nav = document.getElementById('nav');
+    var lis = nav.getElementsByTagName('li');
+    for(var i = 0; i < lis.length; i++){
+        lis[i].onclick = function(){
+            console.log(this);
+            if(i == 0){
+                return false;
+            } else {
+//                console.log(11);
+            }
+        }
+    }
+</script>
+</body>
+</html>
