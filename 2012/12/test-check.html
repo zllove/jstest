@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<input type="radio"  name="radio" id="radio" value="同意" checked> 同意
+<input type="radio"  name="radio" id="radio" value="不同意" >不同意
+<input type="submit" name="sub" value="确认提交" onClick="return check()" >
+<input type="reset" name="b2" value="清空重写">
+<script type="text/javascript">
+    function check(){
+        var radios = document.getElementsByName('radio');
+        for(var i = 0 ; i < radios.length ; ++i){
+            if(radios[i].checked&&radios[i].value!='同意'){
+                return false;
+            }
+        }
+        return true;
+    }
+</script>
+</body>
+</html>

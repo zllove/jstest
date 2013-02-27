@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style type="text/css">
+        .suckerdiv { }
+        .suckerdiv ul { width: 120px; position: relative; }
+        .suckerdiv ul li ul { left: 120px; /* Parent menu width - 1*/ position: absolute; width: 140px; /*sub menu width*/ top: 0; display: none; }
+            /*All subsequent sub menu levels offset */
+        .suckerdiv ul li ul li ul { left: 159px; /* Parent menu width - 1*/ }
+            /* menu links style */
+        .suckerdiv ul li a { display: block; color: #353302; text-decoration: none; font:12px 宋体; background: #eee; line-height:24px; padding: 0px 10px; border: 1px solid #fff; border-bottom: 0; }
+        .suckerdiv ul li a:visited { color: black; }
+        .suckerdiv ul li a:hover{ color: white; background-color: #97c839; }
+        .suckerdiv .subfolderstyle { }
+        .suckerdiv a.subfolderstyle:hover { background: #97c839 url(../images/arrow-list.gif) no-repeat center right; }
+    </style>
+</head>
+
+<body>
+<script type="text/javascript">
+    var menuids = ["suckertree1"]
+    function buildsubmenus() {
+        for (var i = 0; i < menuids.length; i++) {
+            var ultags = document.getElementById(menuids[i]).getElementsByTagName("ul")
+            for (var t = 0; t < ultags.length; t++) {
+                ultags[t].parentNode.getElementsByTagName("a")[0].className = "subfolderstyle"
+                ultags[t].parentNode.onmouseover = function () {
+                    this.getElementsByTagName("ul")[0].style.display = "block";
+                    this.firstChild.style.backgroundColor = 'green';
+                }
+                ultags[t].parentNode.onmouseout = function () {
+                    this.getElementsByTagName("ul")[0].style.display = "none"
+                    this.firstChild.style.backgroundColor = '';
+                }
+            }
+        }
+    }
+
+    if (window.addEventListener)
+        window.addEventListener("load", buildsubmenus, false)
+    else if (window.attachEvent)
+        window.attachEvent("onload", buildsubmenus)
+</script>
+<div class="suckerdiv">
+    <ul id="suckertree1">
+        <li><a href="#">一级菜单</a></li>
+        <li><a href="#">一级菜单</a></li>
+        <li><a href="#">一级菜单</a></li>
+        <li><a href="#">一级菜单</a>
+            <ul>
+                <li><a href="#">二级菜单</a></li>
+                <li><a href="#">二级菜单</a></li>
+                <li><a href="#">二级菜单</a></li>
+                <li><a href="#">二级菜单</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
