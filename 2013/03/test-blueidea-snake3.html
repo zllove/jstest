@@ -1,0 +1,352 @@
+<HTML>
+<HEAD>
+    <TITLE></TITLE>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <STYLE>
+        .btnup{
+            border-left:solid #ffffff 1px;
+            border-top:solid #ffffff 1px;
+            border-right:solid #828486 1px;
+            border-bottom:solid #828486 1px;
+            font-size: 9pt;
+            cursor:default
+        }
+        tr{
+            font-family:"宋体";
+            font-size: 9pt;
+            cursor: default
+        }
+    </STYLE>
+</HEAD>
+<SCRIPT LANGUAGE="JavaScript">
+    <!--
+    var row = 25, col = 25, size = 16;
+    var delay = 300;
+    // 移动延迟
+    var paused = false;
+    var end = false
+    var TimerID;
+    var s = new snake();
+    var n = new nut();
+    var nutad = new Array();
+    nutad[0] = - 1;
+    nutad[1] = - 1;
+    var Color = new Array(5);
+    Color[0] = "#d0d0d0";
+    Color[1] = "red";
+    Color[2] = "green"
+    Color[3] = "blue";
+    Color[4] = "yellow";
+    var move_direction = new Array();
+    var curr_direction = new Array();
+    move_direction[0] = 1;
+    move_direction[1] = 0;
+    //========================================
+    // 定义果实
+    function nut()
+    {
+        this.x = - 1;
+        this.y = - 1;
+    }
+    function nut_show()
+    {
+        if (this.x < 0 || this.y < 0 )
+            return;
+        obj = document.all("Main" + this.x + "#" + this.y);
+        obj.style.background = Color[2];
+    }
+    function nut_create()
+    {
+        var inx = - 1;
+        var iny = - 1;
+        for(; ; )
+        {
+            var cur = true;
+            inx = Math.round(Math.random() * (row - 1));
+            iny = Math.round(Math.random() * (col - 1));
+            for (var i = 0; i < s.items.length ; i ++ )
+            {
+                if (s.items[i].x == inx && s.items[i].y == iny)
+                {
+                    cur = false;
+                    break;
+                }
+            }
+            if (cur)
+            {
+                break;
+            }
+        }
+        this.x = inx;
+        this.y = iny;
+        nutad[0] = inx;
+        nutad[1] = iny;
+        this.show();
+    }
+    function nut_eated()
+    {
+        if (this.x < 0 || this.y < 0)
+            return;
+        obj = document.all("Main" + this.x + "#" + this.y);
+        obj.style.background = Color[0];
+    }
+    nut.prototype.create = nut_create;
+    nut.prototype.show = nut_show;
+    nut.prototype.eated = nut_eated;
+    //========================================
+    // 定义蛇体
+    function snake()
+    {
+        this.items = new Array();
+    }
+    function snake_eat(nt)
+    {
+        var s_length = this.items.length;
+        this.items[s_length] = nt;
+    }
+    function snake_move(dir)
+    {
+        this.destroy();
+        var y = this.items[0].y;
+        var x = this.items[0].x;
+        var nx = x + dir[1];
+        var ny = y + dir[0];
+        if (nx < 0 || nx >= row || ny < 0 || ny >= col || crossed(nx, ny))
+        {
+            end = true;
+            return;
+        }
+        caneat(nx, ny);
+        for (var i = this.items.length - 1 ; i >= 0 ;
+             i -- )
+        {
+            if (i != 0)
+            {
+                this.items[i].move(this.items[i - 1].x, this.items[i - 1].y);
+            }
+            else
+            {
+                this.items[i].move(nx, ny);
+            }
+        }
+        this.reload();
+    }
+    function caneat(nx, ny)
+    {
+        if (nx == nutad[0] && ny == nutad[1])
+        {
+            var lst = s.items[s.items.length - 1];
+            var nd = new snakeNode(lst.x, lst.y);
+            s.eat(nd);
+            n.eated();
+            n.create();
+        }
+    }
+    // 禁止穿越自身节点
+    function crossed( nx,  ny )
+    {
+        for (var i = 0; i < s.items.length; i ++ )
+        {
+            if (s.items[i].x == nx && s.items[i].y == ny)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    function snake_reload()
+    {
+        for (var i = 0 ; i < this.items.length ; i ++ )
+        {
+            var curNode = this.items[i];
+            obj = document.all("Main" + curNode.x + "#" + curNode.y);
+            obj.style.background = Color[1];
+        }
+    }
+    function snake_destroy()
+    {
+        for (var i = 0 ; i < this.items.length ; i ++ )
+        {
+            var curNode = this.items[i];
+            obj = document.all("Main" + curNode.x + "#" + curNode.y);
+            obj.style.background = Color[0];
+        }
+    }
+    function snake_clear()
+    {
+        this.destroy();
+        this.items = new Array();
+    }
+    snake.prototype.eat = snake_eat;
+    snake.prototype.move = snake_move;
+    snake.prototype.reload = snake_reload;
+    snake.prototype.destroy = snake_destroy;
+    snake.prototype.clear = snake_clear;
+    // 蛇体节点
+    function snakeNode(x, y)
+    {
+        this.id = 0;
+        // 编号
+        this.x = x;
+        // 坐标X
+        this.y = y;
+        // 坐标Y
+        this.color = "#000000";
+    }
+    function snakeNode_setC(d_color)
+    {
+        this.color = d_color;
+    }
+    function snakeNode_move(dx, dy)
+    {
+        this.x = dx;
+        this.y = dy;
+    }
+    snakeNode.prototype.setColor = snakeNode_setC ;
+    snakeNode.prototype.move = snakeNode_move ;
+    //========================================
+    // 程序界面
+    // 初始化主控制区
+    function DrawArea(row, col, name)
+    {
+        var s = "<TABLE BORDER=1 cellspacing=0 cellpadding=1 bgcolor=" + Color[0] + ">";
+        for(var i = 0; i < row; i ++ )
+        {
+            s = s + "<TR Height=" + size + ">";
+            for(var j = 0; j < col; j ++ )
+            {
+                var id = name + i + "#" + j;
+                s = s + "<TD Width=" + size + " class=btnup id=" + id;
+                s = s + " style=\"background : " + Color[0] + "\">&nbsp;</TD>"
+            }
+            s = s + "</TR>";
+        }
+        s = s + "</TABLE>";
+        return s;
+    }
+    // 初始化
+    function Init()
+    {
+        MainArea.innerHTML = DrawArea(row, col, 'Main');
+    }
+    //==================================
+    // 程序控制区，用来接收输入、定义控制方法
+    // 控制输入
+    function keyDown(event)
+    {
+        var event = event || window.event;
+        switch(event.keyCode)
+        {
+            case 37 :
+                if (curr_direction[0] != - 1)
+                {
+                    move_direction[0] = - 1;
+                    move_direction[1] = 0;
+                }
+                break;
+            case 38 :
+                if (curr_direction[1] != - 1)
+                {
+                    move_direction[0] = 0;
+                    move_direction[1] = - 1;
+                }
+                break;
+            case 39 :
+                if (curr_direction[0] != 1)
+                {
+                    move_direction[0] = 1;
+                    move_direction[1] = 0;
+                }
+                break;
+            case 40 :
+                if (curr_direction[1] != 1)
+                {
+                    move_direction[0] = 0;
+                    move_direction[1] = 1;
+                }
+                break;
+        }
+    }
+    function Begin()
+    {
+        end = false;
+        paused = false;
+        s.clear();
+        for (var i = 8; i >= 0 ; i -- )
+        {
+            sn = new snakeNode(0, i);
+            s.eat(sn);
+        }
+        n.eated();
+        n.create();
+        move_direction[0] = 1;
+        move_direction[1] = 0;
+        curr_direction[1] = s.items[1].x - s.items[0].x;
+        curr_direction[0] = s.items[1].y - s.items[0].y;
+        Start();
+    }
+    // 启动开关
+    function Start()
+    {
+        if (end)
+        {
+            s.reload();
+            alert("哎呀！");
+            return;
+        }
+        window.clearInterval(TimerID);
+        TimerID = window.setInterval("Run()", delay);
+    }
+    // 运行主体
+    var d = true;
+    function Run()
+    {
+        if(paused) return;
+        if(true)
+        {
+            window.clearInterval(TimerID);
+            s.move(move_direction);
+            curr_direction[1] = s.items[1].x - s.items[0].x;
+            curr_direction[0] = s.items[1].y - s.items[0].y;
+            Start();
+        }
+    }
+    // 暂停开关
+    function Pause()
+    {
+        if (paused)
+        {
+            paused = false;
+            if ( ! end)
+            {
+                Run();
+            }
+        }
+        else
+        {
+            paused = true;
+        }
+    }
+    // 结束
+    function Over()
+    {
+        end = true;
+    }
+    window.onload = function()
+    {
+        Init();
+    }
+    document.onkeydown = function(event)
+    {
+        keyDown(event);
+    }
+    // -->
+</SCRIPT>
+<BODY >
+<!-- from: http://bbs.blueidea.com/forum.php?mod=viewthread&tid=2917442 -->
+<BUTTON ID="start" onclick="Begin()">开始</BUTTON>
+<BUTTON ID="pause" onclick="Pause()">暂停</BUTTON>
+<BUTTON ID="over" onclick="Over()">结束</BUTTON><br>
+<SPAN ID="MainArea"></SPAN>
+</BODY>
+</HTML>
