@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<a href="http://bbs.csdn.net/topics/390380897" target="_blank">http://bbs.csdn.net/topics/390380897</a>
+<script type="text/javascript">
+    /*
+    var a = 10;
+    function test(){
+        a = 100;
+        console.log(a + '.1'); // 100.1
+        console.log(this.a + '.2'); // 10.2
+        var a;
+        console.log(a + '.3'); // 100.3
+    }
+    test();
+    */
+    var tt = 'aa';
+    function test(){
+        console.log(tt); // dd.4
+        var tt = 'dd';
+        console.log(tt + '.5'); // dd.5
+    }
+    test();
+
+
+</script>
+</body>
+</html>
