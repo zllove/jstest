@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        td{ border:1px solid #ccc; width:15px; height:15px;}
+        #tab td{ border:1px solid red;}
+        #tab2 td{ border:1px solid blue;}
+    </style>
+</head>
+<body>
+<table id="map"></table>
+<div id="tab"></div>
+<div id="tab2"></div>
+<script type="text/javascript">
+    console.time('1');
+    /*
+    var map = document.getElementById('map');
+    for(var i = 0; i < 20; i++){
+        var tr = map.insertRow(0);
+        for(var j = 0; j < 20; j++){
+            tr.insertCell(0);
+        }
+    }
+    */
+    console.timeEnd('1');
+    console.time('2');
+    var tab = document.getElementById('tab');
+    var tablast = '';
+    var tr = '';
+    var td = '';
+    for(var j = 0; j < 200; j++){
+        td += '<td></td>';
+    }
+    for(var i = 0; i < 200; i++){
+        tr += '<tr>' + td + '</tr>';
+    }
+
+    tablast = '<table>' + tr + '</table>';
+//    tab.innerHTML = tablast;
+    console.timeEnd('2');
+    console.time('3');
+    var tab2 = document.getElementById('tab2');
+    var arr = [];
+    var tr2 = [];
+    var td2 = [];
+    arr.push('<table>');
+    for(var n = 0; n < 8; n++){
+        td2.push('<td>' + (n + 1) + '</td>');
+    }
+//    console.log(td2);
+    for(var m = 0; m < 8; m++){
+        tr2.push('<tr>');
+        tr2.push(td2.join(''));
+        tr2.push('</tr>');
+    }
+    arr.push(tr2.join(''));
+    arr.push('</table>');
+    tab2.innerHTML = arr.join('');
+//    alert(arr.join(''));
+    console.timeEnd('3');
+
+//    console.log(Math.round(Math.random() * (5 - 1))); // 0.1.2.3.4
+
+    var gol = '';
+    function Snake(){
+        this.sid = "snakeObj" + parseInt(Math.random() * 100000);
+        gol = this.sid;
+        console.log(this.sid + "=this");
+        eval(this.sid + "=this");
+        eval('snakeObj57687=this');
+    }
+
+    var s = new Snake();
+    console.log(s == s.sid);
+
+</script>
+</body>
+</html>
