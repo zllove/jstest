@@ -193,21 +193,24 @@
 
         for(var i = 0; i < liEle.length; i++){
             curLi = liEle[i];
-            curLi.index = i;
             curLi.onclick = function(event){
                 event = event || window.event;
                 eveTarget = event.target || event.srcElement;
 
-                if(eveTarget.tagName.toLowerCase() == 'a' && eveTarget.className == 'set-stick' && prev(this) != null){
-                    wbList.insertBefore(this, wbList.firstChild);
-                    fadeIn(this);
-                } else {
-                    alert('已置顶，请换一个试试！');
-                    return false;
+                // for click a
+                if(eveTarget.tagName.toLowerCase() == 'a' && eveTarget.className == 'set-stick'){
+                    // for first list
+                    if(prev(this) != null){
+                        wbList.insertBefore(this, wbList.firstChild);
+                        fadeIn(this);
+                    } else {
+                        alert('已置顶，请换一个试试！');
+                    }
                 }
             }
         }
 
+        // fadein method
         function fadeIn(ele){
             var aVal = 1;
             (function(){
@@ -220,6 +223,7 @@
             })();
         }
 
+        // prev elem
         function prev(elem){
             do{
                 elem = elem.previousSibling;

@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<span id="loading"></span><span id="loading2"></span>
+<script type="text/javascript">
+    var bar = 0, line = "|", amount = "";
+    function count() {
+        if (bar < 99) {
+            bar++;
+            amount += line;
+            document.getElementById('loading').innerHTML = amount;
+            document.getElementById('loading').innerHTML += bar + "%";
+            setTimeout(count, 100);
+        } else {
+            location.href = 'http://www.sohu.com';
+        }
+    }
+
+    window.onload = function () {
+        count();
+    }
+</script>
+</body>
+</html>
