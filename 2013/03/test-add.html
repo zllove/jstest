@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>test-del</title>
+    <style>
+        p{ width:400px; margin:0 auto; }
+        ins{ cursor:pointer; text-decoration:none; padding-left:20px; }
+    </style>
+</head>
+
+<body>
+<div>
+<div id="list">
+    <p><span>1</span>
+        <ins>delete</ins>
+    </p>
+    <p><span>2</span>
+        <ins>delete</ins>
+    </p>
+    <p><span>3</span>
+        <ins>delete</ins>
+    </p>
+    <p><span>4</span>
+        <ins>delete</ins>
+    </p>
+    <p><span>5</span>
+        <ins>delete</ins>
+    </p>
+    <p><span>6</span>
+        <ins>delete</ins>
+    </p>
+</div>
+</div>
+<p><a id="add" href="javascript:void(0);">Add</a></p>
+</body>
+</html>
+<script type="text/javascript">
+    // get elem
+    function id(){
+        return document.getElementById(arguments[0]);
+    }
+
+    (function(){
+        var add = id('add'),
+            list = id('list'),
+            p = list.getElementsByTagName('p'),
+            pLen = p.length,
+            newLen = 0,
+            newP = null,
+            span;
+        
+        add.onclick = function(){
+            newLen = list.getElementsByTagName('p').length + 1;
+            span = '<span>' + newLen + '</span><ins>delete</ins>';
+            newP = document.createElement('p');
+            newP.innerHTML = span;
+            newP.onclick = function(e){
+                del(this, e);
+            }
+            list.appendChild(newP);
+        }
+
+        // del
+        function del(node, e){
+            e = e || window.event;
+            var target = e.target || e.currentTarget,
+                span = list.getElementsByTagName('span');
+
+            if(target.tagName.toLowerCase() == 'ins'){
+                node.parentNode.removeChild(node);
+                // reset span number
+                for(var i = 0; i < list.getElementsByTagName('p').length; i++){
+                    span[i].innerHTML = i + 1;
+                }
+            }
+        }
+
+        // old del
+        for(var i = 0; i < pLen; i++){
+            p[i].onclick = function(e){
+                del(this, e);
+            }
+        }
+    }())
+</script>
