@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Untitled Document</title>
+    <style>
+        body{
+            margin:0px;
+            padding:0px;
+            font-size:14px;}
+        .container{
+            position:absolute;}
+        .menutitle{
+            width:220px;
+            height:30px;
+            line-height:30px;
+            font-size:14px;
+            color:#FFF;
+            background:#950000;
+            border:1px solid #7B0000;
+            text-align:center;
+            font-weight:900;}
+        .menubody{
+            width:218px;
+            border:2px solid #7B0000;
+            background:#FFEFE8;
+        }
+        .menubody ul{
+            width:218px;
+            margin:0px;
+            padding:0px;}
+        .menubody ul li{
+            position:relative; height:35px;
+        }
+        .menubody ul li span{
+            position:absolute; z-index:13; width:198px;
+            margin:2px 12px 2px 0px;
+            text-align:left;
+            height:20px;
+            display:block;
+            border-bottom:1px solid #FFF;
+            padding:5px 10px;
+            background: url(images/002.gif) 190px no-repeat;}
+        .menubody ul li span:hover,.menubody ul li span.hover{
+            text-align:left;
+            height:20px;
+            border-bottom:1px solid #7B0000;
+            border-top:1px solid #7B0000;
+            padding:5px 10px;
+            background:#FFF;
+            color:#000;}
+        .menuchild{
+            position: absolute;
+            top:0px;
+            left:217px;
+            background:#FFF;
+            border:1px solid #7B0000;
+            width:400px; z-index:12;
+
+        }
+        .menuchild dt,.menuchild dd{
+            display:inline;
+            margin:4px 2px;
+            padding:0 5px;}
+    </style>
+
+    <script>
+        window.onload = function () {
+            var span1 = document.getElementById('span1');
+            var abc = document.getElementById('abc');
+            span1.onmouseover = function () {
+                abc.style.display = 'block';
+            }
+            span1.onmouseout = function () {
+                abc.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+
+<body>
+<div class="container">
+    <div class="menutitle">全部商品菜单</div>
+    <div class="menubody">
+        <ul>
+            <li>
+                    <span id="span1">电子产品</span>
+                    <div class="menuchild" id="abc" style="display:none;">
+                        <dl>
+                            <dt></dt>
+                            <dd>笔记本超</dd>
+                            <dd>极本</dd>
+                            <dd>上网本</dd>
+                            <dd>配件台式机</dd>
+                        </dl>
+                        <dl>
+                            <dt></dt>
+                            <dd>笔记本超</dd>
+                            <dd>极本</dd>
+                            <dd>上网本</dd>
+                            <dd>配件台式机</dd>
+                        </dl>
+                        <dl>
+                            <dt></dt>
+                            <dd>笔记本超</dd>
+                            <dd>极本</dd>
+                            <dd>上网本</dd>
+                            <dd>配件台式机</dd>
+                        </dl>
+                        <dl>
+                            <dt></dt>
+                            <dd>笔记本超</dd>
+                            <dd>极本</dd>
+                            <dd>上网本</dd>
+                            <dd>配件台式机</dd>
+                        </dl>
+                    </div>
+            </li>
+            <li><span>服装、女装、男装</span></li>
+            <li><span>化妆品、美肤品</span></li>
+            <li><span>运动器材</span></li>
+            <li><span>美食团购</span></li>
+            <li><span>租房专区</span></li>
+        </ul>
+
+    </div>
+</div>
+</body>
+</html>
