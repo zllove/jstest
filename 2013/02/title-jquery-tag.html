@@ -86,7 +86,6 @@
                 subName = $(this).find(opts.subName),
                 tagInput = $(this).find(opts.tagInput),
                 one = opts.one,
-                items = $('<div></div>'),
                 tagName  = '',
                 inputVal = null,
                 selectVal = '',
@@ -94,7 +93,7 @@
                 that = $(this);
 
             return this.each(function(){
-                for(var k in tagList){
+                for(var k in tagList){ // join items
                     var t = '<p><strong>', v = tagList[k];
                     t += k + '</strong>';
                     v = v.join('</a><a href="javascript:void(0)">');
@@ -103,7 +102,7 @@
 
                 subName.append(html);
 
-                that.hover(function(){
+                that.hover(function(){ // show menu
                     tagInput.focus();
                     subName.slideDown();
                 }, function(){
@@ -122,7 +121,7 @@
                         info.html('');
                     }
 
-                    if(one){
+                    if(one){ // if only change
                         tagName = $(this).html();
                     } else {
                         tagName += tagName != '' ? ',' + $(this).html() : $(this).html();
@@ -137,7 +136,6 @@
                 });
 
             });
-
         };
     }(jQuery));
 
@@ -146,11 +144,12 @@
         '您使用过的标签：' : ['许巍', 'Sophie Zelmani', '王菲', '小娟&山谷里的居民']
     };
 
-
+    // more selected
     $('#tag01').tagSuggest({
         tagItems : data
     });
 
+    // one selected
     $('#tag02').tagSuggest({
         tagItems : data,
         tagInput : '#tagInput2',

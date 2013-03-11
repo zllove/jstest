@@ -28,20 +28,18 @@
         .input{width:543px; height:30px; line-height:30px; padding:3px 0 3px 5px; border:1px solid #ccc;background:#fff;}
         .demo .hover{ display:block;}
         .list{ border:1px solid #817f82;background:#fff; display:none;}
-        .list li{width:548px; text-indent:1em;}
-        .list li.cur a{background:#ebebeb; text-decoration:none;}
-        .list a{ display:block; height:28px; line-height:28px;}
-        /*.list a:hover,.list a.cur{background:#ebebeb; text-decoration:none;}*/
+        .list li{width:548px; text-indent:1em;display:block; height:28px; line-height:28px;}
+        .list li.cur{background:#ebebeb; text-decoration:none;}
     </style>
 </head>
 <body>
 <div class="demo">
     <input class="input" type="text" name="" id="input">
     <ul id="list" class="list">
-        <li><a href="#">sina</a></li>
-        <li><a href="#">sohu</a></li>
-        <li><a href="#">邮箱</a></li>
-        <li><a href="#">微博</a></li>
+        <li>sina</li>
+        <li>sohu</li>
+        <li>邮箱</li>
+        <li>微博</li>
     </ul>
 </div>
 <script type="text/javascript">
@@ -52,6 +50,7 @@
         var input = id('input'),
             list = id('list'),
             oA = list.getElementsByTagName('li'),
+            temp = oA[0],
             timer = 0;
 
         input.onclick = function(){
@@ -59,14 +58,18 @@
         }
 
         for(var i = 0; i < oA.length; i++){
-            oA[i].className = '';
-            oA[i].onmouseover = function(){
-                this.className = 'cur';
+
+            temp.className = '';
+
+            oA[i].onclick = function(){
+                list.className = 'list';
+                input.value = this.innerHTML;
             }
-            oA[i].onmouseout = function(){
-                this.className = '';
+            oA[i].onmouseover = oA[i].onmouseout = function(){
+                this.className = this.className == 'cur' ? '' : 'cur';
             }
         }
+        input.value = oA[0].innerHTML;
 
         document.documentElement.onclick = function(e){
             e = e ? e.target : window.event.srcElement;
@@ -79,62 +82,48 @@
             e = e || window.event;
             var target = e.target || e.srcElement,
                 kcode = 0,
-                index = getItems();
+                index = getItems() || 0;
 
-            console.log(index);
-            if(target.tagName == 'INPUT'){
+            if(target.tagName == 'INPUT' && list.className == 'list hover'){
                 kcode = e.keyCode;
                 switch(kcode){
-                    case 13 :
+                    case 13 : // enter
+                        list.className = 'list';
                         break;
                     case 38 : // up
-                        if(index > 0){
-
-                            // setItems(index, 0);
+                        if(index > 0){ // if min
+                            hover(oA[index - 1]);
+                        } else {
+                            hover(oA[oA.length - 1]);
                         }
-                        //selectItems(0);
-//                        console.log(111);
                         break;
                     case 40 : // down
-                        if(index <= oA.length){
-
-                            // setItems(index, 1);
+                        if(index < oA.length - 1){ // if max
+                            hover(oA[index + 1]);
+                        } else {
+                            hover(oA[0]);
                         }
-                        //selectItems(1);
                         break;
                 }
-                hover(oA[index + 1]);
             }
         }
 
         function getItems(){
+            var res = 0,
+                cur = null;
             for(var i = 0; i < oA.length; i++){
                 if(oA[i].className == 'cur'){
-                    console.log(oA[i]);
                     return i;
-                } else {
-                    console.log('zero');
-                    return 0;
                 }
-            }
-        }
-
-        function setItems(pos, direction){
-            if(direction == 0){
-                oA[pos].className = 'cur';
-            } else {
-                oA[pos].className = 'cur';
             }
         }
 
         function hover(obj){
             for(var i = 0; i < oA.length; i++){
-                var items = oA[i];
-                if(items.className == 'cur'){
-                    items.className = '';
-                }
+                oA[i].className = '';
             }
             obj.className = 'cur';
+            input.value = obj.innerHTML;
         }
 
     }(window));
