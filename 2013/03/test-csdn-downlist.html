@@ -38,8 +38,8 @@
     <ul id="list" class="list">
         <li>sina</li>
         <li>sohu</li>
-        <li>邮箱</li>
-        <li>微博</li>
+        <li>网易邮箱</li>
+        <li>新浪微博</li>
     </ul>
 </div>
 <script type="text/javascript">
@@ -56,15 +56,12 @@
         // show list
         input.onclick = function(){
             list.className = 'list hover';
-        }
-
-        for(var i = 0; i < oA.length; i++){
-            oA[i].onclick = function(){
-                list.className = 'list';
-                input.value = this.innerHTML;
-            }
-            oA[i].onmouseover = oA[i].onmouseout = function(){
-                this.className = this.className == '' ? 'cur' : '';
+            for(var i = 0; i < oA.length; i++){
+                var items = oA[i];
+                oA[i].className = '';
+                if(input.value && items.innerHTML == input.value){
+                    items.className = 'cur';
+                }
             }
         }
         input.value = oA[0].innerHTML;
@@ -74,6 +71,22 @@
             e = e ? e.target : window.event.srcElement;
             if(e.tagName == 'BODY' || e.tagName == 'HTML'){
                 list.className = 'list';
+            }
+        }
+
+        for(var i = 0; i < oA.length; i++){
+            oA[i].onclick = function(){
+                list.className = 'list';
+                input.value = this.innerHTML;
+            }
+            oA[i].onmouseover = function(){
+                for(var j = 0; j < oA.length; j++){
+                    oA[j].className = '';
+                }
+                this.className = 'cur';
+            }
+            oA[i].onmouseout = function(){
+                this.className = '';
             }
         }
 
