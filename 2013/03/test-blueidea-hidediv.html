@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>鼠标点击某层之外的区域隐藏该层</title>
+    <style type="text/css">
+        .div{ width:200px; height:200px; padding:10px; line-height:2; font-size:12px; color:#fff; }
+    </style>
+    <!--<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>-->
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        /*
+        $(function () {
+            $(document).bind('click', function (e) {
+                var target = $(e.target), //传入事件源
+                    closest = target.closest('.div');
+
+                console.log(target);
+                if (closest.length == 0) {
+                    $('.div').hide();
+                } else {
+                    $('.div').not(closest).hide();
+                }
+            });
+        });
+        */
+    </script>
+</head>
+
+<body>
+<div id="test" class="div" style="background-color:#39f;;">
+    点击我之外的区域隐藏我（我是第一个）
+</div>
+<script type="text/javascript">
+    var test = document.getElementById('test');
+    document.documentElement.onclick = function(e){
+        e = e ? e.target : window.event.srcElement;
+        if(e.tagName.toLowerCase() == 'body' || e.tagName.toLowerCase() == 'html'){
+            test.style.display = 'none';
+        }
+    }
+</script>
+</body>
+</html>
