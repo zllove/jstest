@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css"></style>
+</head>
+<body>
+<ul id="myTab3">
+    <li onclick="changeBody('iDBody0', 0)">11</li>
+    <li onclick="changeBody('iDBody1', 1)">11</li>
+    <li onclick="changeBody('iDBody2', 2)">11</li>
+</ul>
+<div id="iDBody0">aaa</div>
+<div id="iDBody1" style="display:none;">bbb</div>
+<div id="iDBody2" style="display:none;">ccc</div>
+<script type="text/javascript">
+    function changeBody(thisObj, Num) {
+        thisObj = document.getElementById(thisObj);
+        var tabList = document.getElementById("myTab3").getElementsByTagName("li");
+
+        for (var i = 0; i < tabList.length; i++) {//点击之后，其他tab变成灰色，内容隐藏，只有点击的tab和内容有属性
+            var dbody = document.getElementById("iDBody" + i);
+            if (i == Num) {
+                thisObj.className = "on";
+                dbody.style.display = "block";
+            } else {
+                dbody.style.display = "none";
+                dbody.className = 'out';
+            }
+        }
+    }
+</script>
+</body>
+</html>
