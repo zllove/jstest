@@ -34,26 +34,27 @@
         // global
         // const
         var WIDTH = 20, //网格宽度
-                HEIGHT = 20, //网格高度
-                SAY = ["相当不错，虽然说和CNwander还不是一个级别的", "可以啊，再加点油都可以和CNwander媲美了！", "一个字，牛，连CNwander都甘拜下风了", "差不多行了，别把游戏玩爆了"];
+            HEIGHT = 20, //网格高度
+            SAY = ["相当不错，虽然说和CNwander还不是一个级别的", "可以啊，再加点油都可以和CNwander媲美了！", "一个字，牛，连CNwander都甘拜下风了", "差不多行了，别把游戏玩爆了"];
+
         var len = 3, //蛇的长度
-                speed, //爬行速度
-                gridElems = multiArray(WIDTH, HEIGHT), //单元格对象
-                carrier, //承载对象(食物，障碍，滑板，刹车)
-                snake, //蛇每节的坐标点
-                info, //交互对话
-                btnStart, //开始按钮
-                topScore = len, snakeTimer, //蛇行走计时器
-                brakeTimers = [], //随机刹车
-                skateTimers = [], //随机滑板
-                directkey, // 方向键值 37-40 左上右下
-                allowPress = true;
+            speed, //爬行速度
+            gridElems = multiArray(WIDTH, HEIGHT), //单元格对象
+            carrier, //承载对象(食物，障碍，滑板，刹车)
+            snake, //蛇每节的坐标点
+            info, //交互对话
+            btnStart, //开始按钮
+            topScore = len, snakeTimer, //蛇行走计时器
+            brakeTimers = [], //随机刹车
+            skateTimers = [], //随机滑板
+            directkey, // 方向键值 37-40 左上右下
+            allowPress = true;
 
         window.onload = function () {
             info = $("say");
             btnStart = $("btnStart");
             initGrid(); //网格初始化
-            document.onkeydown = attachEvents; //绑定方向事件
+            document.documentElement.onkeydown = attachEvents; //绑定方向事件
             btnStart.onclick = function (e) {
                 btnStart.blur(); //firefox中必须释放焦点
                 start(); //游戏开始
@@ -78,8 +79,10 @@
 
         //创建网格
         function initGrid() {
-            var body = $tag("body")[0];
-            var table = document.createElement("table"), tbody = document.createElement("tbody")
+            var body = $tag("body")[0],
+                table = document.createElement("table"),
+                tbody = document.createElement("tbody");
+
             for (var j = 0; j < HEIGHT; j++) {
                 var col = document.createElement("tr");
                 for (var i = 0; i < WIDTH; i++) {
@@ -96,7 +99,8 @@
         function initSnake() {
             var pointer = randomPointer(len - 1, len - 1, WIDTH / 2);
             for (var i = 0; i < len; i++) {
-                var x = pointer[0] - i, y = pointer[1];
+                var x = pointer[0] - i,
+                    y = pointer[1];
                 snake.push([x, y]);
                 carrier[x][y] = "cover";
             }
@@ -245,7 +249,9 @@
             startY = startY || 0;
             endX = endX || WIDTH;
             endY = endY || HEIGHT;
-            var p = [], x = Math.floor(Math.random() * (endX - startX)) + startX, y = Math.floor(Math.random() * (endY - startY)) + startY;
+            var p = [],
+                x = Math.floor(Math.random() * (endX - startX)) + startX,
+                y = Math.floor(Math.random() * (endY - startY)) + startY;
             if (carrier[x][y]) return randomPointer(startX, startY, endX, endY);
             p[0] = x;
             p[1] = y;

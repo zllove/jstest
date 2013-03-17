@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
@@ -25,14 +24,19 @@
         .clearfix{display:block;}
         .clear{clear:both;height:0;font:0/0 Arial;visibility:hidden;}
         .none{display:none}
-        .demo{ width:800px; height:800px;margin:0 auto; padding-top:50px;}
-        .tab{border-collapse:collapse; border:1px solid #ccc;}
+        /* demo */
+        .demo{ width:800px; height:800px;margin:0 auto; padding-top:30px;}
+        .tab{border-collapse:collapse; border:1px solid #ccc;margin:0 auto;}
+        .tab caption{ font-size:14px; line-height:50px;}
         .tab td{ width:15px; height:15px; border:1px solid #ccc;}
+        .snake{background:#39c;}
+        .food{background:#093;}
     </style>
 </head>
 <body>
 <div class="demo">
     <table id="tab" class="tab">
+        <caption id="info">我是信息提示区</caption>
     </table>
 </div>
 <script type="text/javascript">
@@ -46,25 +50,90 @@
         }
         Snake.prototype = {
             init : function(){
-                var oTab = id('tab');
+                var oTab = id('tab'),
+                    that = this;
+
                 this.tab = oTab;
+                this.row = 30;
+                this.snake = [];
+                this.currKey = 0;
+                this.isPause = 0;
                 this.createTr();
+                this.createSnake();
+                this.move();
+
+                document.documentElement.onkeydown = function(e){
+                    that.trigger(e);
+                }
             },
             createTr : function(){
                 var tr = '',
-                    rows = 20;
-                    tdArr = new Array(rows);
-                tdArr = tdArr.join('<td></td>');
+                    row = this.row,
+                    tdArr = new Array(row);
 
-                for(var i = 0; i < rows; i++){
+                tdArr = tdArr.join('<td></td>'); // create td
+                for(var i = 0; i < row; i++){
                     tr += '<tr>' + tdArr + '</tr>';
                 }
 
-                this.tab.innerHTML = tr;
+                this.tab.innerHTML += tr;
+            },
+            createSnake : function(){
+                var pointer = this.getRandomPointer(2, 2, this.row / 2, this.row / 2),
+                    snake = this.snake;
+
+                for(var i = 0; i < 3; i++){
+                    this.tab.rows[pointer[1]].cells[pointer[0] - i].className = 'snake';
+                    snake.push([pointer[0] - i, pointer[1]]);
+                }
+            },
+            trigger: function(e){
+                e = e || window.event;
+                var kcode = e.keyCode;
+                console.log(kcode);
+                if(kcode >= 37 && kcode <= 40){
+                    this.currKey = kcode;
+                } else if(kcode == 13){ // if return
+                    this.currKey = 39;
+                }
+            },
+            move: function(){
+                var that = this;
+                switch(this.currKey){
+                    case 37 : // left
+                        break;
+                }
+                setInterval(function(){
+                    that.step();
+                }, 300);
+            },
+            step: function(){
+                var snake = this.snake,
+                    headX = snake[0][0],
+                    headY = snake[0][1];
+
+            },
+            /**
+             * get pointer [x, y]
+             * @param minX
+             * @param minY
+             * @param maxX
+             * @param maxY
+             * @return {Array}
+             */
+            getRandomPointer : function(minX, minY, maxX, maxY){
+                return [Math.floor(Math.random() * (maxX - minX) + minX), Math.floor(Math.random() * (maxY - minY) + minY)];
+            },
+            getRandomNum : function(min, max){
+                return Math.floor(Math.random() * (max - min) + min);
             }
         }
         new Snake();
+
+
     }(window));
+
+
 </script>
 </body>
 </html>

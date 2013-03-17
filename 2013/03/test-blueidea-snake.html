@@ -137,7 +137,7 @@
         window.onload = function () {
             var orz = new Snake();
             orz.init();
-            document.onkeydown = function (e) {
+            document.documentElement.onkeydown = function (e) {
                 orz.trigger(e);
             };//firefox需要参数e
             document.getElementById("setSpeed").onchange = function () {
