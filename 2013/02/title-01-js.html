@@ -197,9 +197,9 @@
                 event = event || window.event;
                 eveTarget = event.target || event.srcElement;
 
-                // for click a
+                // click a
                 if(eveTarget.tagName.toLowerCase() == 'a' && eveTarget.className == 'set-stick'){
-                    // for first list
+                    // first list
                     if(prev(this) != null){
                         wbList.insertBefore(this, wbList.firstChild);
                         fadeIn(this);
@@ -213,6 +213,7 @@
         // fadein method
         function fadeIn(ele){
             var aVal = 1;
+            /*
             (function(){
                 ele.style.opacity = (aVal / 100);
                 ele.style.filter = 'alpha(opacity=' + aVal + ')';
@@ -221,6 +222,17 @@
                     setTimeout(arguments.callee, 15);
                 }
             })();
+            */
+
+            function step(){
+                ele.style.opacity = (aVal / 100);
+                ele.style.filter = 'alpha(opacity=' + aVal + ')';
+                aVal ++;
+                if(aVal <= 100){
+                    setTimeout(step, 15);
+                }
+            }
+            step();
         }
 
         // prev elem
