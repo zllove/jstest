@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>贪吃蛇</title>
+    <script>
+        window.onload = function () {
+            var canvasMap = document.getElementById("gameMap"), canvas, snakes=[], foods=[], timer=null;
+            if (canvasMap.getContext) {
+                canvas = canvasMap.getContext("2d");
+            } else {
+                alert("浏览器不支持");
+            }
+
+            function GameMap() {
+                this.drawMap = function () {
+                    for (var i = 0; i <= 24; i++) {
+                        for (var j = 0; j <= 16; j++) {
+                            canvas.lineWidth = 1;
+                            canvas.strokeStyle = "#999";
+                            canvas.strokeRect(i * 20, j * 20, 20, 20);
+                        }
+                    }
+                }
+            }
+            var gameMap = new GameMap();
+
+            function Snake(x,y,direction,color){
+                this.x = x;
+                this.y = y;
+                this.directionX = x;
+                this.directionY = y;
+                this.direction = direction;
+                this.color = color;
+                this.drawSnake = function () {
+                    canvas.lineWidth = 1;
+                    canvas.fillStyle = color;
+                    canvas.fillRect(this.x, this.y, 20, 20);
+
+                };
+                this.move = function () {
+                    switch (this.direction) {
+                        case "up":
+                            this.y -= 20;
+                            break;
+                        case "down":
+                            this.y += 20;
+                            break;
+                        case "left":
+                            this.x -= 20;
+                            break;
+                        case "right":
+                            this.x += 20;
+                            break;
+                    }
+                };
+                this.isSnakeEatGround = function () {
+                    if (this.x < 0 || this.y < 0 || this.x > 480 || this.y > 320) {
+                        clearTimeout(timer);
+                    }
+                }
+            }
+            var snake = new Snake(220, 300, "up", "#000");
+            snakes.push(snake);
+            function createSnakeBody() {
+                var snakeEnd = snakes[snakes.length - 1], snakeBody;
+                switch (snakeEnd.direction) {
+                    case "up":
+                        snakeBody = new Snake(snakeEnd.x, snakeEnd.y + 20, snakeEnd.direction, "#f00");
+                        break;
+                    case "down":
+                        snakeBody = new Snake(snakeEnd.x, snakeEnd.y - 20, snakeEnd.direction, "#f00");
+                        break;
+                    case "left":
+                        snakeBody = new Snake(snakeEnd.x + 20, snakeEnd.y, snakeEnd.direction, "#f00");
+                        break;
+                    case "right":
+                        snakeBody = new Snake(snakeEnd.x - 20, snakeEnd.y, snakeEnd.direction, "#f00");
+                        break;
+                }
+                snakes.push(snakeBody);
+            }
+            createSnakeBody();
+
+            function Food(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.isLive = true;
+                this.drawFood = function () {
+                    canvas.lineWidth = 1;
+                    canvas.fillStyle = color;
+                    canvas.fillRect(this.x, this.y, 20, 20);
+                };
+                this.isSnakeEatFood = function (snake) {
+                    if (snake.x == this.x && snake.y == this.y) {
+                        this.isLive = false;
+                        foods.splice(0, 1);
+                        createSnakeBody();
+                    }
+                }
+            }
+            function createFood() {
+                if (foods.length < 1) {
+                    var x = Math.round(Math.random() * 23) * 20;
+                    var y = Math.round(Math.random() * 15) * 20;
+                    var food = new Food(x, y, "#f00");
+                    foods.push(food);
+                }
+            }
+
+
+            function refreshMap() {
+                gameMap.drawMap();
+                for (var i = 0; i < snakes.length; i++) {
+                    snakes[i].drawSnake();
+                    snakes[i].move();
+                    for (var j = 0; j < foods.length; j++) {
+                        if (foods[j].isLive) {
+                            foods[j].drawFood();
+                            foods[j].isSnakeEatFood(snakes[i]);
+                        }
+                    }
+                    if (timer) {
+                        snakes[0].isSnakeEatGround();
+                    }
+                    if (i > 0) {
+                        if (snakes[i].x == snake.directionX && snakes[i].y == snake.directionY) {
+                            snakes[i].direction = snakes[i-1].direction;
+                        }
+                    }
+                }
+                createFood();
+                timer = setTimeout(function () {
+                    canvas.clearRect(0, 0, 480, 320);
+                    refreshMap();
+                }, 100);
+            }
+            refreshMap();
+
+            document.body.onkeydown = function () {
+                var event = window.event || event;
+                switch (event.keyCode) {
+                    case 87:
+                        snake.direction = "up";
+                        snake.directionX = snake.x;
+                        snake.directionY = snake.y;
+                        break;
+                    case 83:
+                        snake.direction = "down";
+                        snake.directionX = snake.x;
+                        snake.directionY = snake.y;
+                        break;
+                    case 65:
+                        snake.direction = "left";
+                        snake.directionX = snake.x;
+                        snake.directionY = snake.y;
+                        break;
+                    case 68:
+                        snake.direction = "right";
+                        snake.directionX = snake.x;
+                        snake.directionY = snake.y;
+                        break;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div style="width:480px; margin:0 auto">
+    <h3>贪吃蛇游戏</h3>
+    <h5>控制键：W:向上，S:向下，A:向左，D:向右</h5>
+</div>
+<div style="width:480px; height:320px; margin:0 auto; border:20px solid #000; text-align:center">
+    <canvas id="gameMap" width="480" height="320" style="border:1px solid #fff"></canvas>
+</div>
+</body>
+</html>

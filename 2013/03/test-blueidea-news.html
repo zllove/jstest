@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>demo</title>
+    <style type="text/css">
+        body { font-size:12px; }
+        ul, h2, p { margin:0; padding:0; }
+        .list { list-style:none; width:400px; position:relative; vertical-align:middle; }
+        .list li { border-bottom:solid 1px #eee; cursor:default; position:relative; width:100%; }
+        .list h2 { font-size:100%; font-weight:normal; padding:.5em;}
+        .list span { position:absolute; right:1em; top:.5em; font-family:Verdana; font-size:90%;}
+        .list div { display:none; position:relative; height:70px; }
+        .list div img { float:left; margin:.8em 1em; background:#6FF; }
+        .list div p { padding:.8em; }
+        .list div p strong { display:block; margin-bottom:.5em; }
+        .list li:hover, .list li.hover { height:auto; }
+        .list li:hover div, .list li.hover div { display:block; }
+        .list li:hover h2, .list li.hover h2, .list li:hover span, .list li.hover span { background:#5B86BB; color:#fff; }
+    </style>
+</head>
+<body>
+from: http://bbs.blueidea.com/thread-3090555-1-1.html
+<ul class="list" id="demo">
+    <li>
+        <h2>蓝色理想之经典论坛</h2>
+        <span>2010-04-19</span>
+        <div> <img src="http://bbs.blueidea.com/images/default/logo.gif" alt="" width="100" height="50" />
+            <p><strong>蓝色理想之经典论坛</strong>大家都来经典论坛积极交流吧！</p>
+        </div>
+    </li>
+    <li>
+        <h2>蓝色理想之经典论坛</h2>
+        <span>2010-04-19</span>
+        <div> <img src="http://bbs.blueidea.com/images/default/logo.gif" alt="" width="100" height="50" />
+            <p><strong>蓝色理想之经典论坛</strong>大家都来经典论坛积极交流吧！</p>
+        </div>
+    </li>
+    <li>
+        <h2>蓝色理想之经典论坛</h2>
+        <span>2010-04-19</span>
+        <div> <img src="http://bbs.blueidea.com/images/default/logo.gif" alt="" width="100" height="50" />
+            <p><strong>蓝色理想之经典论坛</strong>大家都来经典论坛积极交流吧！</p>
+        </div>
+    </li>
+    <li>
+        <h2>蓝色理想之经典论坛</h2>
+        <span>2010-04-19</span>
+        <div> <img src="http://bbs.blueidea.com/images/default/logo.gif" alt="" width="100" height="50" />
+            <p><strong>蓝色理想之经典论坛</strong>大家都来经典论坛积极交流吧！</p>
+        </div>
+    </li>
+    <li>
+        <h2>蓝色理想之经典论坛</h2>
+        <span>2010-04-19</span>
+        <div> <img src="http://bbs.blueidea.com/images/default/logo.gif" alt="" width="100" height="50" />
+            <p><strong>蓝色理想之经典论坛</strong>大家都来经典论坛积极交流吧！</p>
+        </div>
+    </li>
+    <li>
+        <h2>蓝色理想之经典论坛</h2>
+        <span>2010-04-19</span>
+        <div> <img src="http://bbs.blueidea.com/images/default/logo.gif" alt="" width="100" height="50" />
+            <p><strong>蓝色理想之经典论坛</strong>大家都来经典论坛积极交流吧！</p>
+        </div>
+    </li>
+    <li>
+        <h2>蓝色理想之经典论坛</h2>
+        <span>2010-04-19</span>
+        <div> <img src="http://bbs.blueidea.com/images/default/logo.gif" alt="" width="100" height="50" />
+            <p><strong>蓝色理想之经典论坛</strong>大家都来经典论坛积极交流吧！</p>
+        </div>
+    </li>
+</ul>
+</body>
+</html>
+<script type="text/javascript">
+    (function(){
+        var obj=document.getElementById("demo");
+        var liObj=obj.getElementsByTagName("li");
+        var length=liObj.length;
+        liObj[0].className+=" hover";
+        for(var i=0;i<length;i++){
+            liObj[i].onmouseover=function(){
+                for(var j=0; j<length; j++){
+                    liObj[j].className=liObj[j].className.replace("hover", " ");
+                }
+                this.className+=" hover";
+            }
+
+        }
+    })();
+</script>
