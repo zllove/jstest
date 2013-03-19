@@ -89,12 +89,16 @@
             },
             trigger: function(e){
                 e = e || window.event;
-                var kcode = e.keyCode;
+                var kcode = e.keyCode,
+                    that = this;
                 console.log(kcode);
                 if(kcode >= 37 && kcode <= 40){
                     this.currKey = kcode;
                 } else if(kcode == 13){ // if return
                     this.currKey = 39;
+                    setInterval(function(){
+                        that.move();
+                    }, 200);
                 }
             },
             move: function(){
