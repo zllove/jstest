@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<div id="sourceText">Hello world</div>
+<div id="translation"></div>
+<script>
+    function translateText(response) {
+        document.getElementById("translation").innerHTML += "<br>" + response.data.translations[0].translatedText;
+    }
+
+    var newScript = document.createElement('script');
+    newScript.type = 'text/javascript';
+    var sourceText = escape(document.getElementById("sourceText").innerHTML);
+    var source = 'https://www.googleapis.com/language/translate/v2?key=inset-your-key&source=en&target=de&callback=translateText&q=' + sourceText;
+    newScript.src = source;               // When we add this script to the head, the request is sent off.
+    document.getElementsByTagName('head')[0].appendChild(newScript);
+
+</script>
+
+</body>
+</html>

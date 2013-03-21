@@ -1,0 +1,27 @@
+<!doctype html>
+<html><head>
+    <!-- disable default zoom behavior -->
+    <meta name="viewport" content="width=device-width,user-scalable=no" />
+
+    <style type="text/css">#foo{background-color:red;height:100px;width:100px;}</style>
+</head><body>
+
+<div id="foo"></div>
+<script type="text/javascript" src="doubleTap.js"></script>
+<script type="text/javascript">
+
+    // reference your element
+    var myElement = document.getElementById('foo');
+
+    // enable double tapping (optionally specifying max speed & distance)
+    doubleTap(myElement);
+
+    // use the same as dblclick on desktop
+    myElement.addEventListener('dblclick', function(e) {
+        alert('double clicked');
+    }, false);
+
+</script>
+
+</body>
+</html>

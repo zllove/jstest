@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<input id="btn" type="submit" value="test-submit">
+<script type="text/javascript">
+    var addEvent = function (obj, type, fn) {
+        if (obj.addEventListener)
+            obj.addEventListener(type, fn, false);
+        else if (obj.attachEvent) {
+            obj["e" + type + fn] = fn;
+//            alert(obj["e" + type + fn]); // eclickfunction{//code}
+//            alert("e" + type + fn);
+            obj.attachEvent( "on"+type, function() {
+                obj["e"+type+fn]();
+            } );
+        }
+    };
+    function removeEvent( obj, type, fn ) {
+        if ( obj.detachEvent ) {
+            alert('on'+type);
+            alert(typeof obj[type+fn]);
+            obj.detachEvent('on'+type, obj["e"+type+fn]);
+            obj["e"+type+fn] = null;
+        } else
+            obj.removeEventListener( type, fn, false );
+    }
+    var btn = document.getElementById('btn');
+    addEvent(btn, 'click', function(){
+        console.log(1);
+    });
+    removeEvent(btn, 'click', function(){
+        console.log(1);
+    });
+</script>
+</body>
+</html>
