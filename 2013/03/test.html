@@ -4,24 +4,48 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
 </head>
 <body>
-<table id="tab"></table>
+<div class="inc_top" style="clear:both;overflow:hidden;">
+    <h1 style="float:left;">服装,内衣,配件</h1>
+    <div class="f_r more">
+        <div class="recommend_cate_brand">
+            <a title="达芙妮" href="/brand/id-7">达芙妮</a>&nbsp;&nbsp; <a title="南极人" href="/brand/id-9">南极人</a>&nbsp;&nbsp;
+            <a title="茵佳妮" href="/brand/id-10">茵佳妮</a>&nbsp;&nbsp; <a title="歌莉娅" href="/brand/id-11">歌莉娅</a>&nbsp;&nbsp;
+            <a title="七匹狼" href="/brand/id-12">七匹狼</a>&nbsp;&nbsp;
+        </div>
+        <a title="更多" href="/cate/id-cloth">更多</a>
+    </div>
+</div>
+<ul>
+    <li>11</li>
+</ul>
+<ul id="S_Coutent">
+    <li></li>
+</ul>
+<div id="parent">
+    <div class="one">
+        <div class="one"></div>
+    </div>
+    <div class="one"></div>
+</div>
 <script type="text/javascript">
-    var a = 4;
-    if(a){
-        console.log(1);
-    } else if(a > 2){
-        console.log(2);
+    var arr = [1, 2, 3];
+    var end = arr.unshift('a');
+    console.log(arr);
+    console.log(end);
+</script>
+<script type="text/javascript">
+    function setSlideWidth() {
+        var viewWidth = $(window).width();
+        if (viewWidth <= 1024) {
+            $('#S_Coutent li').css({width:viewWidth});
+        }
     }
-    var b = 4;
-    if(b){
-        console.log('b1');
-    }
-    if(b > 2){
-        console.log('b2');
-    }
-
+    $(window).resize(function () {
+        setSlideWidth();
+    });
 </script>
 </body>
 </html>

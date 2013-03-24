@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .submit{ position:fixed;right:0;bottom:0;}
+    </style>
+</head>
+<body>
+<div id="write1"></div>
+<input id="btn1" class="submit" type="submit" value="回到顶部">
+<script>
+    function id(node){
+        return typeof node == 'string' ? document.getElementById(node) : node;
+    }
+    var str = '';
+    for(var i = 0; i < 300; i++){
+        str += i + '<br>';
+    }
+    id('write1').innerHTML = str;
+
+    var oBtn = document.getElementById('btn1');
+    var timer = null;
+    var bSys = true;
+
+    window.onscroll = function(){
+        if(!bSys){
+            clearInterval(timer);
+        }
+        bSys = false;
+    }
+
+    oBtn.onclick = function(){
+        timer = setInterval(function(){
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            var iSpeed = Math.floor(-scrollTop / 8);
+            if(scrollTop == 0){
+                clearInterval(timer);
+            }
+            document.documentElement.scrollTop = document.body.scrollTop = scrollTop + iSpeed;
+            bSys = true; // 如果是系统滚动
+        }, 30);
+    }
+
+</script>
+</body>
+</html>

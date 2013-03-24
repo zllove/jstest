@@ -29,7 +29,8 @@
         .tab{border-collapse:collapse; border:1px solid #ccc;margin:0 auto;}
         .tab caption{ font-size:14px; line-height:50px;}
         .tab td{ width:15px; height:15px; border:1px solid #ccc;}
-        .snake{background:#39c;}
+        .body{background:#39c;}
+        .head{background:#f60;border-radius:0 25px 25px 0;}
         .food{background:#093;}
     </style>
 </head>
@@ -55,14 +56,13 @@
 
                 this.tab = oTab;
                 this.row = 30;
-                this.snake = [];
+                this.snake = []; // snake obj
                 this.currKey = 0;
-                this.isPause = 0;
+                this.isPause = 0; // pause
                 this.createTr();
                 this.createSnake();
-                this.move();
 
-                document.documentElement.onkeydown = function(e){
+                document.documentElement.onkeyup = function(e){
                     that.trigger(e);
                 }
             },
@@ -79,26 +79,30 @@
                 this.tab.innerHTML += tr;
             },
             createSnake : function(){
-                var pointer = this.getRandomPointer(2, 2, this.row / 2, this.row / 2),
+                var pointer = this.getRandomPointer(2, 2, this.row / 2, this.row / 2), // [2,3]
                     snake = this.snake;
 
                 for(var i = 0; i < 3; i++){
-                    this.tab.rows[pointer[1]].cells[pointer[0] - i].className = 'snake';
+                    this.setSnake(pointer[1], pointer[0] - i, 'body');
                     snake.push([pointer[0] - i, pointer[1]]);
                 }
+                this.setSnake(pointer[1], pointer[0], 'head');
             },
             trigger: function(e){
                 e = e || window.event;
                 var kcode = e.keyCode,
                     that = this;
-                console.log(kcode);
-                if(kcode >= 37 && kcode <= 40){
+
+                if(kcode >= 37 && kcode <= 40){ // [37,38,39,40]
                     this.currKey = kcode;
                 } else if(kcode == 13){ // if return
                     this.currKey = 39;
-                    setInterval(function(){
-                        that.move();
-                    }, 200);
+                    if((this.isPause = -1) == -1){
+                    console.log(this.isPause == -1);
+                        setInterval(function(){
+                            that.move();
+                        }, 200);
+                    }
                 }
             },
             move: function(){
@@ -106,16 +110,24 @@
                 switch(this.currKey){
                     case 37 : // left
                         break;
+                    case 39 :
+                        this.step();
+                        break;
                 }
-                setInterval(function(){
-                    that.step();
-                }, 300);
             },
             step: function(){
-                var snake = this.snake,
+                var snake = this.snake, // [[9, 4], [8, 4], [7, 4]];
                     headX = snake[0][0],
                     headY = snake[0][1];
 
+                snake.unshift([headX + 1, headY]);
+                this.setSnake(snake[snake.length - 1][1], snake[snake.length - 1][0], ''); // clear tail
+                snake.pop();
+                this.setSnake(snake[0][1], snake[0][0], 'head');
+                this.setSnake(snake[1][1], snake[1][0], 'body');
+            },
+            setSnake : function(posX, posY, cls){
+                this.tab.rows[posX].cells[posY].className = cls;
             },
             /**
              * get pointer [x, y]
