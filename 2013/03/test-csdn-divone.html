@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style type="text/css">
+        div, span, p{width:140px; height:140px; margin:5px; background:#aaa; border:1px solid #000; float:left; font-size:17px; font-family:Verdana, Geneva, sans-serif}
+
+        div.mini{width:55px; height:55px; background:#aaa; font-size:12px}
+            /*div.hide{display:block}*/
+    </style>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $('.one:only-child')/*.show(1000)*/.css('background', '#bbffaa');
+//            $('div:only-child')/*.show(1000)*/.css('background', '#bbffaa');
+        });
+    </script>
+</head>
+
+<body>
+<div class="zero">
+    <div class="one">
+        <div class="one">one1</div>
+    </div>
+    <div class="one">one2</div>
+    <div class="one">
+        <div class="one">one3</div>
+        <div class="one">one4</div>
+    </div>
+</div>
+1111
+<!--
+<div class="one" id="one">
+    id为one, class为one的div
+    <div class="mini">class为mini</div>
+</div>
+<div class="one" id="two" title="test">
+    id为two, class为one, title为test的div.
+    <div class="mini" title="other">class为mini, title为other</div>
+    <div class="mini" title="test">class为mini, title为test</div>
+</div>
+<div class="one">
+    <div class="mini">class为mini</div>
+    <div class="mini">class为mini</div>
+    <div class="mini">class为mini</div>
+    <div class="mini"></div>
+</div>
+<div class="one">
+    <div class="mini">class为mini</div>
+    <div class="mini">class为mini</div>
+    <div class="mini">class为mini</div>
+    <div class="mini" title="tesst">class为mini, title为tesst</div>
+</div>
+<div class="one">style的display为"none"的div</div>
+<div class="saf">class为"hide"的div</div>
+<div class="one" style="display:none">
+    包含input的type为"hidden"的div<input type="hidden" size="8" />
+</div>
+<span id="mover">正在执行动画的span元素.</span>
+-->
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>js写一个拖动并创建一个新对象</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+    <style type="text/css">
+        #left_div, #right_div{
+            border:1px solid red;
+            width:500px; height:600px;
+            float:left;
+        }
+        #right_div{ position:relative; }
+        #move_b, .scs{
+            position:absolute;
+            width:100px; height:25px;
+        }
+        #move_b{ z-index:2 }
+        p{ font-size:12px }
+    </style>
+</head>
+<body>
+<div id="left_div">
+    <button type="button" id="move_b">移动按钮</button>
+    <p style="margin-top:30px">按钮必须完全拖入右边DIV，才生成一个按钮。</p>
+    <p>单独点击左按钮，随机在右边生成按钮。</p>
+    <p style="color:red">窗口变化造成右边DIV掉下，仍保留功能！</p>
+</div>
+<div id="right_div"></div>
+<script type="text/javascript">
+    $(function () {
+        var i = 0;//生成按钮的编号
+        var b_offset = $("#move_b").offset();//拖动按钮原位置
+        $("#move_b").mousedown(function (e) {
+            var oe = e || window.event;
+            var $this = document.getElementById($(this).attr("id"));
+            var startX = oe.clientX - $this.offsetLeft;
+            var startY = oe.clientY - $this.offsetTop;
+            var move = false;
+            document.onmousemove = function (e) {
+                var oe = e || window.event;
+                $this.style.left = oe.clientX - startX + "px";
+                $this.style.top = oe.clientY - startY + "px";
+                move = true;
+            };
+            document.onmouseup = function () {
+                document.onmousemove = document.onmouseup = null;
+                if (!move) {
+                    create("");
+                } else {
+                    create($($this).offset());
+                    $($this).animate(b_offset, "fast");
+                }
+                if ($this.releaseCapture)$this.releaseCapture();
+            };
+            if ($this.setCapture)$this.setCapture();
+            return false;
+        });
+        function create(offset) {
+            var r_div = $("#right_div");
+            //分别获取按钮可生成时的最大最小坐标
+            var min_l = r_div.offset().left;
+            var min_t = r_div.offset().top;
+            var max_l = min_l + 500 - 100;
+            var max_t = min_t + 600 - 25;
+            if ("" == offset) {
+                //在指定DIV范围内随机生成按钮
+                $('<button type="button" style="top:' + Math.floor(Math.random() * 575) + 'px;left:' + Math.floor(Math.random() * 400) + 'px" class="scs">按钮' + i + '</button>').appendTo(r_div);
+                i++;
+            } else {
+                //拖动后必须在指定范围内生成按钮
+                if (offset.left > min_l && offset.left < max_l && offset.top > min_t && offset.top < max_t) {
+                    min_t = offset.top - min_t;
+                    min_l = offset.left - min_l;
+                    $('<button type="button" style="top:' + min_t + 'px;left:' + min_l + 'px" class="scs">按钮' + i + '</button>').appendTo(r_div);
+                    i++;
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
