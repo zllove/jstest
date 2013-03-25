@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css" id="theme">
+        .skin{ width:60px;color:#ff0000; }
+        .skin2{ width:80px;color:#008000; }
+        .layout{ width:260;height:40px;color:#fff; }
+    </style>
+</head>
+<body>
+<div id="test" class="skin">test skin</div>
+<script type="text/javascript">
+    var test = document.getElementById('test');
+    test.className = 'skin2';
+    test.style.cssText = 'width:50px;color:green';
+</script>
+</body>
+</html>

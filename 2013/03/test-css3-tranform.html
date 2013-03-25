@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .matrix{ width:100px; height:50px; background:#f00; -webkit-transition:all .5s ease; color:#fff; border-radius:5px 5px; padding:5px; }
+        .matrix:hover{ -webkit-transform:translate3d(200px, 200px, 100px); -moz-transform:matrix(1, -0.2, 0, 1, 0, 0); -o-transform:matrix(1, -0.2, 0, 1, 0, 0); }
+        .scale{ width:100px; height:50px; background:#f00; -webkit-transition:all .5s ease; color:#fff; border-radius:5px 5px; padding:5px; }
+        .scale:hover{ -webkit-transform:scale(1.5); -moz-transform:scale(1.5); -o-transform:scale(1.5); }
+    </style>
+</head>
+<body>
+<div class="scale"></div>
+<div class="matrix"></div>
+<script type="text/javascript">
+    var menu;
+    function loaded() {
+        menu = new followAlong('header');
+        // Free mem
+        document.removeEventListener('DOMContentLoaded', loaded, false);
+    }
+    document.addEventListener('DOMContentLoaded', loaded, false);
+</script>
+</body>
+</html>
