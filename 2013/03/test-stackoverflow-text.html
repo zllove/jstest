@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<div class="metadata"> 
+    <span class="meta"> 
+        <span>    
+        </span>     
+    </span>
+    <a class="sourceTitle" href="#">Link to site</a>
+    11d
+
+    &nbsp;//&nbsp;
+    <span class="action">preview</span>
+</div>
+<div id="test"></div>
+<script type="text/javascript">
+    var text = $(".metadata").contents().filter(function () {
+        return this.nodeType === 3; //Node.TEXT_NODE
+    }).wrap("<span class='textNode'>");
+
+    var target = $("span.textNode:contains('11d')");
+    target.text(target.text().replace(/11d/, "March 13th"));
+</script>
+</body>
+</html>

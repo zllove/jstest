@@ -9,12 +9,16 @@
         .matrix:hover{ -webkit-transform:translate3d(200px, 200px, 100px); -moz-transform:matrix(1, -0.2, 0, 1, 0, 0); -o-transform:matrix(1, -0.2, 0, 1, 0, 0); }
         .scale{ width:100px; height:50px; background:#f00; -webkit-transition:all .5s ease; color:#fff; border-radius:5px 5px; padding:5px; }
         .scale:hover{ -webkit-transform:scale(1.5); -moz-transform:scale(1.5); -o-transform:scale(1.5); }
+        .translate{width:100px;height:50px;background:#f00;-webkit-transition:all .5s ease;color:#fff;border-radius:5px 5px;padding:5px;}
+        .translate:hover{-webkit-transform:translate(10px,-10px);-moz-transform:translate(10px,-10px);-o-transform:translate(10px,-10px);}
     </style>
 </head>
 <body>
 <div class="scale"></div>
 <div class="matrix"></div>
+<div id="trans" class="translate"></div>
 <script type="text/javascript">
+    /*
     var menu;
     function loaded() {
         menu = new followAlong('header');
@@ -22,6 +26,9 @@
         document.removeEventListener('DOMContentLoaded', loaded, false);
     }
     document.addEventListener('DOMContentLoaded', loaded, false);
+    */
+    document.getElementById('trans').style.oTransform = 'translate(0px, 458px)';
+
 </script>
 </body>
 </html>
