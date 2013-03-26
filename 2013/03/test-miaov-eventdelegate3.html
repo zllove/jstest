@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<input id="btn1" type="submit" value="添加">
+<ul id="list">
+    <li>111</li>
+    <li>222</li>
+    <li>333</li>
+    <li>444</li>
+</ul>
+<script type="text/javascript">
+    var oList = document.getElementById('list'),
+        oLi = oList.getElementsByTagName('li'),
+        oInput = document.getElementById('btn1'),
+        iNum = 4;
+
+    /*
+    for(var i = 0, len = oLi.length; i < len; i++){
+        oLi[i].onmouseover = function(){
+            this.style.background = 'red';
+        }
+        oLi[i].onmouseout = function(){
+            this.style.background = '';
+        }
+    }
+    */
+
+    oList.onmouseover = function(e){
+        var target = getTarget(e);
+
+        if(target.tagName.toLowerCase() == 'li'){
+            target.style.background = 'red';
+        }
+    }
+
+    oList.onmouseout = function(e){
+        var target = getTarget(e);
+
+        if(target.tagName.toLowerCase() == 'li'){
+            target.style.background = '';
+        }
+    }
+
+    oInput.onclick = function(){
+        iNum++;
+        var oLis = document.createElement('li');
+        oLis.innerHTML = iNum * 1111;
+        oList.appendChild(oLis);
+    }
+
+    function getTarget(e){
+        e = e || window.event;
+        return e.target || e.srcElement;
+    }
+
+</script>
+</body>
+</html>
