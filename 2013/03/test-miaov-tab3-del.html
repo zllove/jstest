@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<input type="text" name="" id="txt1"> <input id="btn1" type="submit" value="添加">
+<table id="tab1" width="600" border="1">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>11</td>
+        <td>强11</td>
+        <td>强</td>
+    </tr>
+    <tr>
+        <td>22</td>
+        <td>强2</td>
+        <td>强</td>
+    </tr>
+    <tr>
+        <td>33</td>
+        <td>强3</td>
+        <td>强</td>
+    </tr>
+    <tr>
+        <td>44</td>
+        <td>强4</td>
+        <td>强</td>
+    </tr>
+    </tbody>
+</table>
+<script type="text/javascript">
+    var oTab = document.getElementById('tab1');
+    var oBtn = document.getElementById('btn1');
+    var oTxt = document.getElementById('txt1');
+
+    oBtn.onclick = function(){
+        var oTr = document.createElement('tr');
+        var oTd = null;
+
+        oTd = document.createElement('td');
+        oTd.innerHTML = oTab.tBodies[0].rows.length + 1;
+        oTr.appendChild(oTd);
+
+        oTd = document.createElement('td');
+        oTd.innerHTML = oTxt.value;
+        oTr.appendChild(oTd);
+
+        oTd = document.createElement('td');
+        oTd.innerHTML = '<a href="javascript:;">删除</a>';
+        oTr.appendChild(oTd);
+        oTab.tBodies[0].appendChild(oTr);
+
+        oTd.getElementsByTagName('a')[0].onclick = function(){
+            oTab.tBodies[0].removeChild(this.parentNode.parentNode);
+        }
+
+    }
+
+
+</script>
+</body>
+</html>

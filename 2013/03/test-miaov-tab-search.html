@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<input type="text" name="" id="txt1"> <input id="btn1" type="submit" value="搜索">
+<table id="tab1" width="600" border="1">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>11</td>
+        <td>blue</td>
+        <td>强</td>
+    </tr>
+    <tr>
+        <td>22</td>
+        <td>leo</td>
+        <td>强</td>
+    </tr>
+    <tr>
+        <td>33</td>
+        <td>bbb</td>
+        <td>强</td>
+    </tr>
+    <tr>
+        <td>44</td>
+        <td>强4</td>
+        <td>强</td>
+    </tr>
+    </tbody>
+</table>
+<script type="text/javascript">
+    var oTab = document.getElementById('tab1');
+    var oBtn = document.getElementById('btn1');
+    var oTxt = document.getElementById('txt1');
+
+    oBtn.onclick = function(){
+        for(var i = 0; i < oTab.tBodies[0].rows.length; i++){
+            var sValueInTab = oTab.tBodies[0].rows[i].cells[1].innerHTML.toLowerCase();
+            var sValueInTxt = oTxt.value.toLowerCase();
+            var arr = sValueInTxt.split(' ');
+            var bFound = false;
+
+            for(var j = 0; j < arr.length; j++){
+                if(sValueInTab.search(arr[j]) != -1){
+                    bFound = true;
+                    break;
+                }
+            }
+
+            if(bFound){
+                oTab.tBodies[0].rows[i].style.background = 'yellow';
+            } else {
+                oTab.tBodies[0].rows[i].style.background = '';
+            }
+        }
+    }
+
+
+</script>
+</body>
+</html>

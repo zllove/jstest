@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<table id="tab1" width="600" border="1">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>11</td>
+        <td>强11</td>
+        <td>强</td>
+    </tr>
+    <tr>
+        <td>22</td>
+        <td>强2</td>
+        <td>强</td>
+    </tr>
+    <tr>
+        <td>33</td>
+        <td>强3</td>
+        <td>强</td>
+    </tr>
+    <tr>
+        <td>44</td>
+        <td>强4</td>
+        <td>强</td>
+    </tr>
+    </tbody>
+</table>
+<script type="text/javascript">
+    var oTab = document.getElementById('tab1');
+    var oldBg = '';
+    for(var i = 0; i < oTab.tBodies[0].rows.length; i++){
+        oTab.tBodies[0].rows[i].style.background = i % 2 ? '#ccc' : '';
+        oTab.tBodies[0].rows[i].onmouseover = function(){
+            oldBg = this.style.background;
+            this.style.background = 'yellow';
+        }
+        oTab.tBodies[0].rows[i].onmouseout = function(){
+            this.style.background = oldBg;
+        }
+    }
+</script>
+</body>
+</html>
