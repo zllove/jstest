@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{ font-size:12px;}
+        #content{ width:500px;margin:0 auto; line-height:30px;}
+        #content textarea{ width:500px;}
+        #content p{text-align:right;}
+        #btn{ float:right; padding:3px 5px; margin-top:5px;}
+        .dis{background:#cccc; border:1px solid #ccc;}
+    </style>
+</head>
+<body>
+<div id="content">
+    <p>央视记者采访视频走红，中国式英语雷翻网友　热门微博</p>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <input id="btn" class="" type="submit" value="发布">
+</div>
+<script type="text/javascript">
+    var oContent = document.getElementById('content');
+    var oText = oContent.getElementsByTagName('textarea')[0];
+    var oP = oContent.getElementsByTagName('p')[0];
+    var oBtn = document.getElementById('btn');
+    var bWrite = true;
+
+    oText.onfocus = function(){
+        if(bWrite){
+            oP.innerHTML = '发言请遵守社区公约，还可以输入138字';
+            bWrite = false;
+        }
+    }
+
+    oText.onblur = function(){
+        if(oText.value == ''){
+            oP.innerHTML = '央视记者采访视频走红，中国式英语雷翻网友　热门微博';
+            bWrite = true;
+        }
+    }
+
+
+
+</script>
+</body>
+</html>
