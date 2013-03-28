@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    jQuery.fn.extend({
+        FCSlide:function (options) {
+            vars = {
+                looper:3500,
+                nms:false,
+                crn:"crn"
+            };
+            $.extend(vars, options);
+            var indx = 1;
+            var myTimer;
+            var looper = vars.looper;
+            var crn = vars.crn;
+            var nms = vars.nms;
+
+            function showFImg(il, nl, cs) {
+                if ($(il).length > 1) {
+                    crobj = $(il).eq(indx);
+                    $(il).not(crobj).hide();
+                    $(nl).removeClass(cs)
+                    $(nl).eq(indx).addClass(cs);
+                    crobj.stop(true, true).fadeIn('slow');
+                    indx = (++indx) % ($(il).length);
+                }
+            }
+
+            if ($(this).has('li').length > 0) {
+                obj = $(this).attr("id");
+                objn = obj + "_num"
+                $(this).after($('<div></div><ul id="' + objn + '"></ul>'));
+                for (i = 1; i <= $(this).children("li").length; i++) {
+                    if (nms) p = i; else p = " ";
+                    if (i == 1) $("#" + objn).append($("<li class=\"" + crn + "\">" + p + "</li>"));
+                    else $("#" + objn).append($("<li>" + p + "</li>"));
+                }
+
+                $("#" + objn + " li").click(function () {
+                    indx = $("#" + objn + " li").index(this);
+                    showFImg("#" + obj + " li", "#" + objn + " li", crn);
+                    try {
+                        clearInterval(myTimer);
+                        myTimer = setInterval(function () {
+                            showFImg("#" + obj + " li", "#" + objn + " li", crn)
+                        }, looper);
+                    } catch (e) {
+                    }
+                    return false;
+                });
+
+                $("#fcimg").hover(function () {
+                    if (myTimer) {
+                        clearInterval(myTimer);
+                    }
+                }, function () {
+                    myTimer = setInterval(function () {
+                        showFImg("#" + obj + " li", "#" + objn + " li", crn)
+                    }, looper);
+                });
+
+                myTimer = setInterval(function () {
+                    showFImg("#" + obj + " li", "#" + objn + " li", crn)
+                }, looper);
+            }
+        }
+    });
+
+</script>
+</body>
+</html>
