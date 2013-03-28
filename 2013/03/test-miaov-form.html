@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+<form id="form1" action="http://www.sohu.com" method="get">
+    用户名： <input type="text" name="user" id="">
+    密码: <input type="password" name="pwd" id="">
+    <input id="btn1" type="submit" value="提交">
+    <input id="btn2" type="reset" value="重置">
+</form>
+<script type="text/javascript">
+    var oBtn = document.getElementById('btn1');
+    var oForm = document.getElementById('form1');
+    var user = document.getElementsByName('user')[0];
+    var pwd = document.getElementsByName('pwd')[0];
+
+    oForm.onsubmit = function(){
+        if(user.value == '' || pwd.value == ''){
+            alert('please sure you character');
+            return false;
+        }
+    }
+
+    oForm.onreset = function(){
+        /*
+        if(confirm('确认清除吗？')){
+            return true;
+        } else {
+            return false;
+        }
+        */
+        return confirm('确认清除吗?');
+    }
+</script>
+</body>
+</html>
