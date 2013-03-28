@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+    <style>
+        div{ margin:0; padding:0; }
+    </style>
+</head>
+<body>
+<div id="J_darg" style="border:1px solid red;width:300px;height:300px;position:absolute;">
+    <div id="J_c1" style="background:#ccc;height:50px;"> 点击子层触发事件</div>
+    <div id="J_c2" style="background:#000;height:50px;color:#fff;">移入子层触发事件</div>
+</div>
+<script>
+    var D = document, c1 = D.getElementById("J_c1"), c2 = D.getElementById("J_c2");
+
+    //modeOne
+    var addHandle = {
+        add   : function (oElement, sType, fn) {
+            oElement.attachEvent ? oElement.attachEvent("on" + sType, function () {
+                return fn.call(oElement, window.event)
+            }) : oElement.addEventListener(sType, fn, false);
+            //createElementEventSource
+            if (!oElement.evenType) {
+                //addEventInformation
+                oElement.evenType = sType;
+                oElement.evenFn = fn;
+                //cancelElementEvent
+                oElement.cancel = function () {
+                    addHandle.remove(oElement, oElement.evenType, oElement.evenFn)
+                };
+                //cancelElementEvent
+                oElement.init = function () {
+                    addHandle.add(oElement, oElement.evenType, oElement.evenFn)
+                };
+            }
+        },
+        remove: function (oElement, sType, fn) {
+            oElement.attachEvent ? oElement.detachEvent("on" + sType, function () {
+                return fn.call(oElement, window.event)
+            }) : oElement.removeEventListener(sType, fn, false);
+        }
+    };
+
+    addHandle.add(c1, "click", function (e) {
+        alert(this.evenType)
+    });
+
+    addHandle.add(c2, "mouseover", function (e) {
+        alert(this.evenType);
+    });
+
+    var Darg = function (obj) {
+        if (!(this instanceof Darg)) return new Darg(obj);
+        this.D = document;
+        this.init(obj);
+    }
+
+
+    Darg.prototype = {
+        init : function (obj) {
+            this.length = 1;
+            this[0] = this.D.getElementById(obj);
+            this.start();
+            return this;
+        },
+        start: function () {
+            var _this = this;
+            /*
+             this[0].onmouseover = function(ev){
+             var oEven = ev || event, posX, posY, self = this, evenSrc;
+             evenSrc = oEven.target || oEven.srcElement;
+             evenSrc.evenType&&evenSrc.cancel();
+             }
+             */
+            this[0].onmousedown = function (ev) {
+                var oEven = ev || event, posX, posY, self = this;
+                posX = oEven.clientX - this.offsetLeft;
+                posY = oEven.clientY - this.offsetTop;
+                _this.D.onmousemove = function (ev) {
+                    var oEven = ev || event, l, r;
+                    l = oEven.clientX - posX;
+                    r = oEven.clientY - posY;
+                    self.style.left = l + "px";
+                    self.style.top = r + "px";
+                    return false;
+                }
+                _this.D.onmouseup = function (evn) {
+                    var oEvnet = evn || event, evenType, evenSrc;
+                    evenSrc = oEven.target || oEven.srcElement;
+                    _this.D.onmousemove = null;
+                    _this.D.onmouseup = null;
+                    //evenSrc.evenType&&evenSrc.init();
+                }
+                return false;
+
+            };
+        }
+    }
+
+    Darg("J_darg");
+
+    function stopPropagation(event) {
+        if (event.stopPropagation) {
+            event.stopPropagation();
+        } else {
+            event.cancelBubble = false;
+        }
+    }
+</script>
+</body>
+</html>
+

@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<input type="text" name="" id="txt1"> <input id="btn1" type="submit" value="添加"><input id="btn2" type="submit" value="搜索">
+<table id="tab1" width="500" border="1">
+    <thead>
+    <tr>
+        <td>id</td>
+        <td>name</td>
+        <td>操作</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>blue</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>leo</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>jikey</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>豪情</td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+<script type="text/javascript">
+    var oTxt = document.getElementById('txt1');
+    var oBtn1 = document.getElementById('btn1');
+    var oBtn2 = document.getElementById('btn2');
+    var oTab1 = document.getElementById('tab1');
+
+    oBtn1.onclick = function(){
+        var oTr = document.createElement('tr');
+        var oTd = null;
+
+        oTd = document.createElement('td');
+        oTd.innerHTML = oTab1.tBodies[0].rows.length + 1;
+        oTr.appendChild(oTd);
+
+        oTd = document.createElement('td');
+        oTd.innerHTML = 'aaa';
+        oTr.appendChild(oTd);
+
+        oTd = document.createElement('td');
+        oTd.innerHTML = '<a href="javascript:;">删除</a>'
+        oTr.appendChild(oTd);
+
+        oTab1.tBodies[0].appendChild(oTr);
+        
+        oTd.getElementsByTagName('a')[0].onclick = function(){
+            oTab1.tBodies[0].removeChild(this.parentNode.parentNode);
+        }
+    }
+
+    oBtn2.onclick = function(){
+        var sValueInTxt = oTxt.value.toLowerCase();
+        var arr = sValueInTxt.split(' ');
+
+        for(var i = 0; i < oTab1.tBodies[0].rows.length; i++){
+            var sValueInTab = oTab1.tBodies[0].rows[i].cells[1].innerHTML.toLowerCase();
+                console.log(sValueInTab);
+            var bFound = false;
+
+            for(var j = 0; j < arr.length; j++){
+                if(sValueInTab.search(arr[j]) != -1){
+                    bFound = true;
+                    break;
+                }
+            }
+            
+            if(bFound){
+                oTab1.tBodies[0].rows[i].style.background = 'yellow';
+            } else {
+                oTab1.tBodies[0].rows[i].style.background = '';
+            }
+
+        }
+    }
+</script>
+</body>
+</html>
