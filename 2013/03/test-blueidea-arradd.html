@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+var a = [1, 2];
+a['add'] = 3;
+console.log(a.length);
+console.log(a.hasOwnProperty('add'));
+console.log(Object.prototype.toString.call(a) === '[object Array]');
+console.log(a.add);
+
+var arr = [1,2,3];
+arr.push('豪情');
+arr.unshift('Jikey');
+console.log(arr.length);
+</script>
+</body>
+</html>

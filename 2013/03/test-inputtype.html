@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<input type="text" name="" id="txt1" value="1/3"> <input type="hidden" name="" value="/32" id="totalPage">
+<input id="btn1" type="submit" value="测试input类型">
+<script type="text/javascript">
+    var oTxt = document.querySelector('#txt1'),
+        oTotal = document.querySelector('#totalPage');
+        oBtn = document.querySelector('#btn1');
+
+    oTxt.addEventListener('focus', function(){
+        this.type = 'number';
+    }, false);
+
+    oTxt.addEventListener('blur', function(){
+        this.type = 'text';
+        this.value += oTotal.value;
+    }, false);
+
+</script>
+</body>
+</html>
