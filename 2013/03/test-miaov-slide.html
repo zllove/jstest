@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        *{padding:0;margin:0;}
+        li{list-style:none;}
+        img{border:0;}
+        .roll{width:698px;height:108px;margin:50px auto 0;position:relative;}
+        .btn_left,.btn_right{background:#f1f1f1; border:1px solid #ccc;border-radius:50px;}
+        .btn_left{display:block;width:68px;height:68px;position:absolute;top:20px;left:1px;z-index:1;}
+        .btn_left:hover{background:#afafaf;}
+        .btn_right{display:block;width:68px;height:68px;position:absolute;top:20px;right:0;z-index:1;}
+        .btn_right:hover{background:#afafaf;}
+        .roll .wrap{width:546px;height:108px;margin:0 auto;position:relative;overflow:hidden;}
+        .roll ul{position:absolute;top:0;left:0;}
+        .roll li{float:left;width:182px;height:108px;text-align:center; padding-right:10px;overflow:hidden;}
+        .roll li img{ width:182px; height:106px; border:1px solid #ccc;}
+        .roll li a:hover{position:relative;top:2px;}
+        .control{border-bottom:1px solid #ccc;background:#eee;text-align:center;padding:20px 0;display:none;}
+    </style>
+</head>
+<body>
+<div class="roll" id="roll">
+    <a href="javascript:void(0);" class="btn_left"></a>
+    <a href="javascript:void(0);" class="btn_right"></a>
+    <div class="wrap">
+        <ul>
+            <li><a href="http://www.miaov.com/"><img src="http://i1.vanclimg.com/users/18/20130329/hot1_n_1303294.jpg" /></a></li>
+            <li><a href="http://www.miaov.com/"><img src="http://i5.vanclimg.com/users/18/20130327/hot2_n_130329.jpg" /></a></li>
+            <li><a href="http://www.miaov.com/"><img src="http://i2.vanclimg.com/users/18/20130327/advstar_lb_130329.jpg" /></a></li>
+            <li><a href="http://www.miaov.com/"><img src="http://i5.vanclimg.com/users/18/20130325/f6_130329.jpg" /></a></li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var oRoll = document.getElementById('roll');
+    var oUl = oRoll.getElementsByTagName('ul')[0];
+    var oLi = oUl.getElementsByTagName('li');
+    var aBtn = oRoll.getElementsByTagName('a');
+    var iSpeed = -3;
+    var timer = null;
+
+    oUl.innerHTML += oUl.innerHTML;
+    oUl.style.width = oLi[0].offsetWidth * oLi.length + 'px';
+
+    timer = setInterval(function(){
+        oUl.style.left = oUl.offsetLeft + iSpeed + 'px';
+
+        if(oUl.offsetLeft < -oUl.offsetWidth / 2){
+            oUl.style.left = 0;
+        } else if(oUl.offsetLeft > 0){
+            oUl.style.left = -oUl.offsetWidth / 2 + 'px';
+        }
+    }, 30);
+
+    aBtn[0].onmouseover = function(){
+        iSpeed = -5;
+    }
+
+    aBtn[1].onmouseover = function(){
+        iSpeed = 5;
+    }
+    
+    oUl.onmouseover = function(){
+        clearInterval(timer);
+    }
+    
+    oUl.onmouseout = function(){
+        timer = setInterval(function(){
+            oUl.style.left = oUl.offsetLeft + iSpeed + 'px';
+
+            if(oUl.offsetLeft < -oUl.offsetWidth / 2){
+                oUl.style.left = 0;
+            } else if(oUl.offsetLeft > 0){
+                oUl.style.left = -oUl.offsetWidth / 2 + 'px';
+            }
+        }, 30);
+    }
+
+</script>
+</body>
+</html>

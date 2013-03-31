@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .div1{ position:absolute; left:0px; background:#ccc; width:150px; height:150px;}
+    </style>
+</head>
+<body>
+<input id="btn1" type="submit" value="开始运动"/> <input id="btn2" type="submit" value="停止运动"/>
+<div id="div1" class="div1"></div>
+<script type="text/javascript">
+    var oBtn1 = document.getElementById('btn1');
+    var oBtn2 = document.getElementById('btn2');
+    var oDiv = document.getElementById('div1');
+    var timer = null;
+
+    oBtn1.onclick = function(){
+        timer = setInterval(function(){
+           oDiv.style.left = oDiv.offsetLeft + 5 + 'px';
+        }, 30);
+    }
+    oBtn2.onclick = function(){
+        clearInterval(timer);
+    }
+    
+    
+</script>
+</body>
+</html>

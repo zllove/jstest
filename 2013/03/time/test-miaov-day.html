@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<div id="day"></div>
+<script type="text/javascript">
+    var oDay = document.getElementById('day');
+    var oDate = new Date();
+    var out = '今天是：' + oDate.getFullYear() + '年' + (oDate.getMonth() + 1) + '月' + oDate.getDate() + '日星期' + '日一二三四五六'.charAt(oDate.getDay()) ;
+    day.innerHTML = out;
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        body{ font-size:50px;background:#000;color:#f00;}
+        img{}
+    </style>
+</head>
+<body>
+<input id="btn1" type="submit" value="更新"/>
+<img src="img/0.png" alt="">
+<img src="img/1.png" alt="">点
+<img src="img/0.png" alt="">
+<img src="img/0.png" alt="">分
+<img src="img/0.png" alt="">
+<img src="img/0.png" alt="">秒
+<script type="text/javascript">
+    function toPad(num){
+        /*
+        if(num < 10){
+            return '0' + num;
+        } else {
+            return '' + num;
+        }
+        */
+        return (num < 10 ? '0' : '') + num;
+    }
+
+    var aImg = document.getElementsByTagName('img');
+    var oBtn = document.getElementById('btn1');
+    function show(){
+        var date = new Date();
+        var str = toPad(date.getHours()) + toPad(date.getMinutes()) + toPad(date.getSeconds());
+        for(var i = 0; i < aImg.length; i++){
+            aImg[i].src = 'img/' + str.charAt(i) + '.png';
+        }
+    }
+    setInterval(show, 1000);
+    show();
+
+</script>
+</body>
+</html>
