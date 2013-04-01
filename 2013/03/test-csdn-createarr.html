@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<!--from: http://bbs.csdn.net/topics/390408843-->
+<script type="text/javascript">
+    var arr = [0, 1, 2, 3, 4];
+    var newArr = [];
+    var i = 0;
+    newArr = arr.slice((2 + i) % arr.length).concat(arr).slice(0, arr.length);
+    console.log(newArr);
+
+</script>
+</body>
+</html>

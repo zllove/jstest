@@ -10,8 +10,8 @@
         #content{ width:500px;margin:0 auto; line-height:30px;}
         #content textarea{ width:500px;}
         #content p{text-align:right;}
-        #btn{ float:right; padding:3px 5px; margin-top:5px;}
-        .dis{background:#cccc; border:1px solid #ccc;}
+        #btn{ float:right; padding:3px 5px; margin-top:5px; }
+        .dis{background:#008000; border:1px solid #ccc;}
     </style>
 </head>
 <body>
@@ -23,13 +23,16 @@
 <script type="text/javascript">
     var oContent = document.getElementById('content');
     var oBtn = document.getElementById('btn');
-    var oText = document.getElementsByTagName('textarea')[0];
-    var oP = document.getElementsByTagName('p')[0];
+    var oText = oContent.getElementsByTagName('textarea')[0];
+    var oP = oContent.getElementsByTagName('p')[0];
     var bWrite = true;
+    var ie = !-[1,];
+    var timer = null;
+    var iNum = 0;
 
     oText.onfocus = function(){
         if(bWrite){
-            oP.innerHTML = '热门微博';
+            oP.innerHTML = '发言请遵守社区公约，还可以输入<span>138</span>字';
             bWrite = false;
         }
     }
@@ -40,6 +43,54 @@
             bWrite = true;
         }
     }
+
+    if(ie){
+        oText.onpropertychange = toChange;
+    } else {
+        oText.oninput = toChange;
+    }
+
+    function toChange(){
+        var num = Math.ceil(getLength(oText.value) / 2);
+        var oSpan = oP.getElementsByTagName('span')[0];
+
+        if(num <= 140){
+            oSpan.innerHTML = 140 - num;
+        } else {
+            oSpan.innerHTML = num - 140;
+        }
+
+        if(oText.value == '' || num > 140){
+            oBtn.className = 'dis';
+        } else {
+            oBtn.className = '';
+        }
+    }
+
+    oBtn.onclick = function(){
+        if(this.className == 'dis' || oText.value == ''){
+            clearInterval(timer);
+            timer = setInterval(function(){
+                if(iNum == 5){
+                    clearInterval(timer);
+                    iNum = 0;
+                } else {
+                    iNum++;
+                }
+
+                if(iNum % 2){
+                    oText.style.background = 'red';
+                } else {
+                    oText.style.background = '';
+                }
+            }, 100);
+        }
+    }
+
+    function getLength(str){
+        return String(str).replace('^\x00-\xff', 'aa').length;
+    }
+
 
 
 </script>
