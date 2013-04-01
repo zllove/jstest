@@ -36,6 +36,7 @@
     console.log(arr);
     console.log(end);
 </script>
+<button id="b01" type="button">Change Content</button>
 <script type="text/javascript">
     function setSlideWidth() {
         var viewWidth = $(window).width();
@@ -43,8 +44,8 @@
             $('#S_Coutent li').css({width:viewWidth});
         }
     }
-    $(window).resize(function () {
-        setSlideWidth();
+    $("#b01").click(function(){
+        alert("2");
     });
 </script>
 </body>

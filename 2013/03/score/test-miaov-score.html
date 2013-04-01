@@ -19,28 +19,35 @@
         .clearfix{display:inline-block;}
         .clearfix{display:block;}
         .none{display:none}
-        .demo{ width:300px;margin:0 auto; padding-top:120px;}
+        .demo{ position:relative; width:300px;margin:0 auto; padding-top:120px;}
         .list li{ float:left; width:16px; height:16px; margin-right:3px;cursor:pointer; display:inline; overflow:hidden; background:url(starticons.png) 0 -16px no-repeat;}
         .list li.cur{ background-position:0 0;}
+        .score{ font-size:14px; color:#f60; padding:0 5px;}
+        .text{ position:absolute; padding:3px 5px; left:135px;top:120px; border:1px solid #ccc;}
     </style>
 </head>
 <body>
 <div id="demo" class="demo">
     <ul class="list">
-        <li class="cur"></li>
+        <li></li>
+        <li></li>
         <li></li>
         <li></li>
         <li></li>
     </ul>
-    <p class="none">力荐</p>
+    <p class="score"></p>
+    <p class="text none">力荐</p>
 </div>
 <script type="text/javascript">
     var oDemo = document.getElementById('demo');
     var oUl = oDemo.getElementsByTagName('ul')[0];
-    var oP = oDemo.getElementsByTagName('p')[0];
+    var oScore = oDemo.getElementsByTagName('p')[0];
+    var oP = oDemo.getElementsByTagName('p')[1];
     var aLi = oUl.getElementsByTagName('li');
     var oLi = null;
-    var aData = ['较差', '一般', '好看', '力荐'];
+    var aData = ['较差', '一般', '好看', '推荐', '力荐'];
+    var bCheck = false;
+    var first = null;
 
     for(var i = 0; i < aLi.length; i++){
         aLi[i].index = i;
@@ -53,16 +60,21 @@
                 aLi[j].className = 'cur';
             }
             oP.style.display = 'block';
+            oScore.innerHTML = (this.index + 1) * 20 + '分';
             oP.innerHTML = aData[this.index];
         }
-        /*
-        oLi.onmouseout = function(){
-            for(var j = 0; j <= this.index; j++){
-                aLi[j].className = '';
+        oLi.onclick = function(){
+            if(!bCheck){
+                first = this.index;
+                bCheck = true;
+                alert('你评分成功!');
+            } else {
+                for(var j = 0; j <= first; j++){
+                    aLi[j].className = 'cur';
+                }
+                alert('你已评过分!');
             }
         }
-        */
-
     }
 </script>
 </body>
