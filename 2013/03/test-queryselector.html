@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<div>
+    <img class="demo" src="http://ww1.sinaimg.cn/bmiddle/8c81192fjw1e3a4dnghezj.jpg" alt="">
+    <img class="demo" src="http://ww4.sinaimg.cn/bmiddle/bf896729gw1e38ngto1ngj.jpg" alt="">
+</div>
+<script type="text/javascript">
+    var img = document.getElementsByClassName('demo');
+    for(var i = 0; i < img.length; i++){
+        img[i].style.width = Math.ceil(img[i].width * 0.3) + 'px';
+    }
+    console.log(img.length);
+</script>
+</body>
+</html>
