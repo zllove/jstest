@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        #line{ height:500px; border:1px solid #ccc;background:#f1f1f1;}
+    </style>
+</head>
+<body>
+<div id='log'>
+    <!—-  整个log元素需要可以拖动  -->
+    <div id='line'>
+        <img class='type' src=''/>
+        <span class='duration'>...</span>
+        <span class='date'>...</span>
+    </div>
+    <div id='line'>
+        <img class='type' src=''/>
+        <span class='duration'>...</span>
+        <span class='date'>...</span>
+    </div>
+    <!—-  很多个id是line的div，每个都可以点击  -->
+</div>
+<script type="text/javascript">
+    document.getElementById('log').addEventListener('touchstart', function(e){
+        console.log(111);
+        Scroll.moved = false;
+        e.preventDefault();
+        clearTimeout(Scroll.handler);
+        // showScrollBar();
+        Scroll.down = true;
+        Scroll.y = e.touches[0].clientY;
+    }, false);
+
+    document.getElementById('log').addEventListener('touchmove', function(e){
+        if(!Scroll.moved) {//没有滚动的时候，不执行move操作
+            var rx = Scroll.ix - e.touches[0].clientX;
+            var ry = Scroll.iy - e.touches[0].clientY;
+            if(rx>-10 && rx <10 && ry>-10 && ry<10) return;//移动范围小于10*10，则认为没有滚动
+            Scroll.moved = true;//否则，认为滚动了
+        }
+        e.preventDefault();
+        var dy = e.touches[0].clientY - Scroll.y;
+        document.getElementById('log').scrollTop += -dy;
+        Scroll.y = e.touches[0].clientY;
+    }, false);
+
+    document.getElementById('log').addEventListener('touchend', function(e){
+        e.preventDefault();
+        Scroll.moved = false;
+        Scroll.handler = setTimeout(hideScrollBar, 1000);
+    }, false);
+
+    // 子节点添加点击：
+    document.getElementById('line').addEventListener('touchstart', function(e){
+        e.preventDefault();
+    }, false);
+
+    /*
+    child.addEventListener('touchend', function(e){
+        e.preventDefault();
+        if(Scroll.moved) return;//页面滚动了，不执行任何操作
+        //否则，在此触发点击事件，执行一些操作
+    }, false);
+    */
+
+    //用于存储滚动的状态
+    Scroll = {
+        moved:false,
+        handler:null,
+        down:false,
+        y:0,
+        ix:0,
+        iy:0,
+        dy:0
+    }
+</script>
+
+</body>
+</html>

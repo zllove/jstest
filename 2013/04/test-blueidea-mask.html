@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    window.onload = function () {
+        var trList = document.getElementById("data").getElementsByTagName("tr");
+        for (var i = 1, j = trList.length; i < j; i++) {
+            trList[i].style.backgroundColor = i % 2 == 0 ? "#f3f3f3" : "#fff";
+            trList[i].onmouseover = function () {
+                this.oldColor = this.style.backgroundColor;
+                this.style.backgroundColor = "#fff5c8";
+            }
+            trList[i].onmouseout = function () {
+                this.style.backgroundColor = this.oldColor;
+            }
+        }
+    }
+</script>
+<style type="text/css">
+
+    .pop{ position:absolute; top:40%; left:40%;
+        margin:-150px 0 0 -200px; width:450px; height:320px; background:#fff; border:5px solid #b4bbc3; z-index:333; }
+    .pop_head{ position:relative; height:28px; background:#dbeef7; padding-left:8px; line-height:28px; color:#0871a3 }
+    .pop_head a{ position:absolute; right:2px; line-height:28px; color:#000; text-decoration:none; top:6px }
+    .pop_head a:hover{ color:#000; text-decoration:none }
+    .pop_body{ padding:12px 15px 10px 15px; line-height:21px; color:#333; font-size:12px; }
+    .pop_body1{ padding:0 15px 10px 15px; line-height:21px; color:#333; font-size:12px; }
+    .btn2{ background:url(../images/btn-cheng.png) no-repeat; COLOR:#fff; line-height:28px; height:29px; BORDER:0; font-size:14px; margin-right:10px; width:110px; font-weight:bold }
+    .mask{position:absolute;left:0;top:0;z-index:2;background:#000;filter:alpha(opacity=50);opacity: 0.5;}
+</style>
+<body>
+<div id="pop" class="pop" style="display:none">
+    <div class="pop_head">人工充值提交单<a href="javascript:void(0);" onclick="hide('pop')"><img src="images/close.png" border="0"/></a>
+    </div>
+    <table width="101%" border="0" cellpadding="0" cellspacing="0" class="tab3">
+        <tr>
+            <td width="14%" class="shu">代充机构：</td>
+            <td width="37%"><label> <input type="text" name="textfield2" style="width:80%"/> </label></td>
+        </tr>
+        <tr>
+            <td class="shu">代充订单号：</td>
+            <td><input type="text" name="textfield57" style="width:80%"/></td>
+        </tr>
+        <tr>
+            <td class="shu">代充订单金额：</td>
+            <td><input type="text" name="textfield82" style="width:80%"/></td>
+        </tr>
+        <tr>
+            <td class="shu">代充人：<br/></td>
+            <td><input type="text" name="textfield552" style="width:80%"/></td>
+        </tr>
+        <tr>
+            <td class="shu">备注：<br/></td>
+            <td><textarea name="textfield552" rows="2" style="width:80%"></textarea></td>
+        </tr>
+        <tr>
+            <td class="shu"><br/></td>
+            <td>
+                <input type="button" name="Submit33" value="提 交" class="btn" onclick="location.href= '#';return false;"/>
+            </td>
+        </tr>
+    </table>
+</div>
+<a href="javascript:void(0);" onclick="show('pop')">点击弹出层</a>
+<input name="Business_Id2" type="text" size="18" maxlength="18"/>
+<div id="mask" class="mask"></div>
+<script type="text/javascript">
+    var url = '#';
+    var mask = null;
+    var body = document.documentElement || document.body;
+    function show(o) {
+        var o = document.getElementById(o);
+        mask = document.getElementById('mask');
+        mask.style.cssText = 'width:' + body.clientWidth + 'px;height:' + body.clientHeight + 'px;';
+        o.style.display = "";
+        mask.style.display = '';
+    }
+    function hide(o) {
+        var o = document.getElementById(o);
+        o.style.display = "none";
+        mask.style.display = 'none';
+        window.location = url;
+    }
+</script>
+</body>
+</html>
