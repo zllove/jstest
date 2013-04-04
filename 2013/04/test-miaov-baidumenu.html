@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .div1{ width:200px; height:200px; background:#ccc; display:none; }
+    </style>
+</head>
+<body style="height: 3000px;">
+<input id="btn1" type="submit" value="展开"/>
+<div id="div1" class="div1"></div>
+<script type="text/javascript">
+    var oBtn = document.getElementById('btn1');
+    var oDiv = document.getElementById('div1');
+
+    oBtn.onclick = function(e){
+        e = e || event;
+        oDiv.style.display = 'block';
+        e.cancelBubble = true;
+    }
+
+    document.onclick = function(){
+        oDiv.style.display = 'none';
+    }
+</script>
+</body>
+</html>

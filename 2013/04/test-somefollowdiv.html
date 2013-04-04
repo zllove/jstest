@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .div1{position: absolute;width: 5px;height: 5px;background: #f00;}
+    </style>
+</head>
+<body>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<div class="div1"></div>
+<script type="text/javascript">
+    var oDiv = document.getElementsByTagName('div');
+    var i = 0;
+
+    document.onmousemove = function(e){
+        e = e || event;
+        for(i = oDiv.length - 1; i > 0; i--){
+            oDiv[i].style.left = oDiv[i - 1].style.left;
+            oDiv[i].style.top = oDiv[i - 1].style.top;
+        }
+        oDiv[0].style.left = e.clientX + 'px';
+        oDiv[0].style.top = e.clientY + 'px';
+    }
+
+</script>
+</body>
+</html>
