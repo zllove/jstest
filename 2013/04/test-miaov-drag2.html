@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        #div1{position: absolute;width:130px;height: 100px;background: #f60;z-index: 2;}
+        .newDiv{position: absolute;width:130px;height: 100px;border: 1px dashed #ccc;background-color:rgba(0,255,0,0.1);display: none;z-index: 1;}
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<script type="text/javascript">
+    var oDiv = document.getElementById('div1');
+    var disX = 0;
+    var disY = 0;
+    var oNewDiv = document.createElement('div');
+    oNewDiv.className = 'newDiv';
+    document.body.appendChild(oNewDiv);
+
+    oDiv.onmousedown = function(e){
+        e = e || event;
+        disX = e.clientX - this.offsetLeft;
+        disY = e.clientY - this.offsetTop;
+        var l = 0,
+            t = 0;
+
+        document.onmousemove = function(e){
+            e = e || event;
+            l = e.clientX - disX;
+            t = e.clientY - disY;
+
+            oNewDiv.style.display = 'block';
+            oDiv.style.opacity = 0.5;
+
+            if(l < 50){
+                l = 0;
+            } else if(l > document.documentElement.clientWidth - oDiv.offsetWidth - 50){
+                l = document.documentElement.clientWidth - oDiv.offsetWidth;
+            }
+
+            if(t < 50){
+                t = 0;
+            } else if(t > document.documentElement.clientHeight - oDiv.offsetHeight - 50){
+                t = document.documentElement.clientHeight - oDiv.offsetHeight;
+            }
+
+            oNewDiv.style.left = l + 'px';
+            oNewDiv.style.top = t + 'px';
+        }
+
+        document.onmouseup = function(){
+            oNewDiv.style.display = 'none';
+            oDiv.style.left = l + 'px';
+            oDiv.style.top = t + 'px';
+            oDiv.style.opacity = 1;
+
+            document.onmousemove = null;
+            document.onmouseup = null;
+        }
+    }
+    
+
+
+
+
+</script>
+</body>
+</html>
