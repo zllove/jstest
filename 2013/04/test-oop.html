@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    function print(text){
+        document.write(this.value + ' - ' + text + '<br/>');
+    }
+    var a = {
+        value : 10,
+        print : print
+    }
+    var b = {value: 20, print : print};
+
+    /*
+    print('hello');
+    a.print('world');
+    */
+
+    var p = print.bind(a);
+    p('a');
+    p.call(b, 'b');
+
+
+
+</script>
+</body>
+</html>
