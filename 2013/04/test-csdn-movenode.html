@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <!--<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.min.js"></script>-->
+</head>
+<body>
+<ul id="hotQuery">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+</ul>
+<script type="text/javascript">
+    /*
+    if($('#hotQuery li').length > 5){
+        $('<ul></ul>').insertAfter('#hotQuery').append($('#hotQuery li:gt(4)'));
+    }
+    */
+
+    var oUl = document.getElementById('hotQuery');
+    var aLi = oUl.getElementsByTagName('li');
+    var len = aLi.length;
+
+    if(aLi.length > 5){
+        var oNewUl = document.createElement('ul');
+        oUl.parentNode.insertBefore(oNewUl, oUl.nextSibling);
+
+        for(var i = len - 1; i > 4; i--){
+            oNewUl.insertBefore(aLi[i], oNewUl.firstChild);
+        }
+    }
+
+
+</script>
+
+
+</body>
+</html>
