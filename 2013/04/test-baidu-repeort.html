@@ -247,8 +247,8 @@
 //    var aDt = oDl.getElementsByTagName('dt');
     var aDt = getByClass(oDl, 'report-part');
     var dd = document.documentElement || document.body;
-    var viewHeight = 0;
-    var bCur = true;
+    var viewHeight = dd.clientHeight;
+    var bCur;
     var top = 0;
 
     for(var i = 0; i < aLi.length; i++){
@@ -258,16 +258,22 @@
         }
     }
 
-    window.onscroll = function(){
-        viewHeight = dd.clientHeight;
+    function isViewed(elem){
+        return elem.offsetTop - dd.scrollTop < (viewHeight / 2);
+    }
 
-        for(var j = 0; j < aDt.length; j++){
-            aLi[j].className = '';
-                console.log(j, aDt[j].scrollTop);
-            if(aDt[j].offsetTop - dd.scrollTop < (viewHeight / 2) && aDt[j].scrollTop < 0){
-                aLi[j].className = 'on';
+    window.onscroll = function(){
+        var i = aDt.length;
+        while(i--){
+            if(isViewed(aDt[i])){
+                break;
             }
         }
+        if(bCur != i){
+            aLi[i].className = 'on';
+            bCur = i;
+        }
+//        console.log(i);
     }
 
     function getByClass(oParent, cls){
