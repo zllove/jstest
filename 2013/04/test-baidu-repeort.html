@@ -40,6 +40,7 @@
 </head>
 <body>
 <!--http://zhanzhang.baidu.com/report/#zzReportPart4-->
+<!--<div id="test" style="position: fixed;left: 10px;top: 10px;width: 80px;height: 200px;overflow-y:scroll;border: 1px solid #ccc;"></div>-->
 <section class="content clearfix">
     <aside class="sidebar">
         <ul id="ul" class="list">
@@ -239,13 +240,11 @@
         </dl>
     </article>
 </section>
-<script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
 <script type="text/javascript">
 (function(window){
     var oUl = document.getElementById('ul');
     var aLi = oUl.getElementsByTagName('li');
     var oDl = document.getElementById('dllist');
-//    var aDt = oDl.getElementsByTagName('dt');
     var aDt = getByClass(oDl, 'report-part');
     var dd = document.documentElement || document.body;
     var viewHeight = dd.clientHeight;
@@ -259,30 +258,17 @@
         }
     }
 
-    function isViewed(elem){
-        return elem.offsetTop - dd.scrollTop < (viewHeight / 2);
-    }
-
-    var arr = [];
     var cur;
     window.onscroll = function(){
-//        console.log('d1t', aDt.length);
-//        for(var i = aDt.length - 1; i > 0; i--){
-        for(var i = 0; i < aDt.length; i++){
-            aLi[i].className = '';
+        for(var i = aDt.length - 1; i; i--){
             if(isView(aDt[i])){
-                console.log(aDt[i].innerHTML);
-                bCur = true;
-                continue;
+                break;
             }
-
         }
-//        console.log('s', bCur);
-        if(bCur){ // 0
-//            console.log(aLi[i].innerHTML);
+        if(cur != i){
+            !cur ? (aLi[0].className = '') : (aLi[cur].className = '');
             aLi[i].className = 'on';
-            bCur = false;
-//            console.log('e', bCur);
+            cur = i;
         }
     }
 
