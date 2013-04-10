@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>百度发展趋势报告 - 豪情</title>
+    <title>滚动菜单标记 - 豪情</title>
     <style type="text/css">
         *{ margin:0; padding:0;}
         body{font:12px/1.5 arial;background: #fff;}
@@ -246,10 +246,7 @@
     var aLi = oUl.getElementsByTagName('li');
     var oDl = document.getElementById('dllist');
     var aDt = getByClass(oDl, 'report-part');
-    var dd = document.documentElement || document.body;
-    var viewHeight = dd.clientHeight;
-    var bCur = false;
-    var iNum = 0;
+    var viewHeight = document.documentElement.clientHeight || document.body.clientHeight;
 
     for(var i = 0; i < aLi.length; i++){
         aLi[i].index = i;
@@ -260,7 +257,7 @@
 
     var cur;
     window.onscroll = function(){
-        for(var i = aDt.length - 1; i; i--){
+        for(var i = aDt.length - 1; i > 0; i--){
             if(isView(aDt[i])){
                 break;
             }
@@ -273,7 +270,7 @@
     }
 
     function isView(elem){
-        return elem.offsetTop - dd.scrollTop < (viewHeight / 2);
+        return elem.offsetTop - (document.documentElement.scrollTop || document.body.scrollTop) < (viewHeight / 2);
     }
 
     function getByClass(oParent, cls){
