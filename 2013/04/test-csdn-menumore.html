@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        body{background: #000;}
+        ul,li{list-style: none;}
+        .header{background:url(../img/menu.jpg) center top no-repeat;height:89px;}
+        .nav{width:928px;margin:0 auto;padding:34px 0 27px 40px;}
+        .menu{float:left;}
+        .menu li{float:left;position:relative;z-index:10;height:27px;font:bold 14px/27px "宋体";cursor:pointer;margin-right:3px;}
+        .menu #mr{margin-right:156px;}
+        .menu .on,.menu li p a:hover{background-color:#3d7c4a;}
+        .menu li p a:hover,.menu li dl dd a:hover{text-decoration:none;}
+        .menu li p a{display:block;padding:0 5px;text-decoration:none;color:#fdfefd;}
+        .menu li span{position:absolute;top:27px;left:0;background:url(../img/span_bg.png) 0 bottom no-repeat;padding-bottom:3px;overflow:hidden;display:none;}
+        .menu li span a{display:block;font-weight:normal;font-size:12px;height:21px;margin-top:-1px;background-color:#79af83;line-height:21px;text-align:center;border-top:1px solid #97bd9e;color:#fff;}
+        .menu li span a:hover{background-color:#42824e;text-decoration:none;}
+        .menu li .show{display:block;}
+        .menu li .span-bg1{background:url(../img/span_bg1.png) 0 bottom no-repeat;}
+        .menu li .span-bg2{background:url(../img/span_bg2.png) 0 bottom no-repeat;}
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="nav clr">
+        <ul class="menu" id="menu">
+            <li>
+                <p><a href="#" title="">首页</a></p>
+            </li>
+            <li class="mest">
+                <p><a href="#" title="">走进益鑫泰</a></p><!--只要是有下拉菜单的在li都要有class名为mest-->
+                <span >
+                    <a href="#" title="">服务简介</a>
+                    <a href="#" title="">投诉与建议</a>
+                    <a href="#" title="">质保体系</a>
+                    <a href="#" title="">服务团队</a>
+                </span>
+            </li>
+            <li>
+                <p><a href="#" title="">品牌形象</a></p>
+            </li>
+            <li>
+                <p><a href="#" title="">新闻动态</a></p>
+            </li>
+            <li id="mr" class="mest">
+                <p><a href="#" title="">产品展示</a></p>
+                <span>
+                    <a href="#" title="">服务简介</a>
+                    <a href="#" title="">投诉与建议</a>
+                    <a href="#" title="">质保体系</a>
+                    <a href="#" title="">服务团队</a>
+                </span>
+            </li>
+            <li>
+                <p><a href="#" title="">招商加盟</a></p>
+            </li>
+            <li>
+                <p><a href="#" title="">人才招聘</a></p>
+            </li>
+            <li class="mest">
+                <p><a href="#" title="">客户服务</a></p>
+                <span>
+                    <a href="#" title="">服务简介</a>
+                    <a href="#" title="">投诉与建议</a>
+                    <a href="#" title="">质保体系</a>
+                    <a href="#" title="">服务团队</a>
+                </span>
+            </li>
+            <li class="mest">
+                <p><a href="#" title="">联系我们</a></p>
+                <span>
+                    <a href="#" title="">服务简介</a>
+                    <a href="#" title="">投诉与建议</a>
+                    <a href="#" title="">质保体系</a>
+                    <a href="#" title="">服务团队</a>
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+/**
+ * 个人看法：这是一个二级菜单，通过对li的onmouseover,onmouseout事件的绑定来显示隐藏span下面包括的a元素
+ * 个人感觉getClass方法多余，可以直接 getElementsByTagName('li')获取li，或许性能好一点
+ */
+var menuList = function () { }; // 以匿名函数的形式创建一个js对象，创建对象的目的在于能够多次复用，但是在当前页面也没有看出复用带来的优势
+
+function getClass(oClass) { // 通过 class name 获得dom元素，返回的是一个数组
+    var oEle = document.getElementsByTagName("*");
+    var arr = [];
+    for (var i = 0; i < oEle.length; i++) {
+        if (oEle[i].className == oClass) {
+            arr.push(oEle[i]);
+        }
+    }
+    return arr;
+}
+menuList.prototype = { // 公共方法
+    init: function () {
+        var t = this; // 缓存this,防止在onmousever匿名函数的绑定中this指向错误
+        this.aLi = getClass("mest");
+        this.aSpan = document.getElementById("menu").getElementsByTagName("span");
+        this.iNow = 0;
+        for (var i = 0; i < t.aLi.length; i++) { // 循环所有mest的li
+            t.aLi[i].index = i; // 缓存i的值，防止在onmosueover匿名函数中访问错误
+            t.aLi[i].onmouseover = function () { // 当鼠标经过某一li的时候
+                t.iNow = this.index;
+                for (var i = 0; i < t.aLi.length; i++) { // 先清空所有li的class样式
+                    t.aLi[i].className = "";
+                    t.aSpan[i].className = "";
+                }
+                this.className = "mest on"; // 鼠标经过的这个样式为on,mest
+                t.aSpan[t.iNow].className = "show"; // 鼠标经过的这个span为show样式
+                if (t.aLi[t.iNow].getElementsByTagName("a")[0].innerHTML.length == 5) { // 特殊判断当鼠标经过的li下面的a元素是5的时候，设置下面的样式
+                    t.aSpan[t.iNow].className = "show span-bg1";
+                } else if (t.aLi[t.iNow].getElementsByTagName("a")[0].innerHTML.length == 6) {
+                    t.aSpan[t.iNow].className = "show span-bg2";
+                }
+            }
+            t.aLi[i].onmouseout = function () { // 当鼠标出去的时候
+                this.className = "mest";
+                t.aSpan[t.iNow].className = "";
+            }
+            t.aSpan[i].style.width = t.aLi[i].offsetWidth + "px"; // 设置所有span的宽度为li的宽度
+
+
+        }
+    }
+}
+new menuList().init(); // 初始化调用
+</script>
+</body>
+</html>

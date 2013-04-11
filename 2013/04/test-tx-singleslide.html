@@ -69,19 +69,24 @@
 
     SingleSlide.prototype = {
         init : function(){
-            this.oUl = this.container.getElementsByTagName('ul')[0];
-            this.oUl.innerHTML += this.oUl.innerHTML;
-            this.aLi = this.oUl.getElementsByTagName('li');
-            this.oUl.style.width = this.aLi[0].offsetWidth * this.aLi.length + 'px';
+            var oUl = this.oUl = this.container.getElementsByTagName('ul')[0];
+            oUl.innerHTML += this.oUl.innerHTML;
+            this.aLi = oUl.getElementsByTagName('li');
+            oUl.style.width = this.aLi[0].offsetWidth * this.aLi.length + 'px';
 
             this.auto();
         },
         auto : function(){
             var timer = null,
-                that = this;
+                that = this,
+                iSpeed = 9;
 
+            console.log(that.oUl.offsetLeft);
             timer = setInterval(function(){
-                that.oUl.style.left = (-that.aLi[0].offsetWidth + that.oUl.offsetLeft) / 2 + 'px'
+                setTimeout(function(){
+                    that.oUl.style.left = -180 + 'px'
+                }, 1000);
+                that.oUl.style.left = (180 - that.oUl.offsetLeft) / 8 + 'px';
             }, 30);
         },
         next : function(){
