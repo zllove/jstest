@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        div{position: absolute;width: 100px;height: 100px;}
+        .red{background: #f00;top: 50px;left: 30px;z-index: 2;}
+        .yellow{background: #ff0;top: 130px;left: 230px;}
+    </style>
+</head>
+<body>
+<div id="div1" class="red"></div>
+<div id="div2" class="yellow"></div>
+<script type="text/javascript">
+
+    var node = document.getElementById('div1'),
+        oDiv2 = document.getElementById('div2'),
+        disX = 0,
+        disY = 0;
+
+    node.onmousedown = function(e){
+        e = e || event;
+        disX = e.clientX - this.offsetLeft;
+        disY = e.clientY - this.offsetTop;
+
+        document.onmousemove = function(e){
+            e = e || event;
+            var l = e.clientX - disX;
+            var t = e.clientY - disY;
+
+            if(l < 0){
+                l = 0;
+            } else if(l > document.documentElement.clientWidth - node.offsetWidth){
+                l = document.documentElement.clientWidth - node.offsetWidth;
+            }
+
+            if(t < 0){
+                t = 0;
+            } else if(t > document.documentElement.clientHeight - node.offsetHeight){
+                t = document.documentElement.clientHeight - node.offsetHeight;
+            }
+
+            var l1 = node.offsetLeft;
+            var r1 = node.offsetLeft + node.offsetWidth;
+            var t1 = node.offsetTop;
+            var b1 = node.offsetTop + node.offsetHeight;
+
+            var l2 = oDiv2.offsetLeft;
+            var r2 = oDiv2.offsetLeft + oDiv2.offsetWidth;
+            var t2 = oDiv2.offsetTop;
+            var b2 = oDiv2.offsetTop + oDiv2.offsetHeight;
+
+            if(r1 < l2 || l1 > r2 || b1 < t2 || t1 > b2){
+                oDiv2.style.background = 'yellow';
+            } else {
+                oDiv2.style.background = 'green';
+            }
+
+            node.style.left = l + 'px';
+            node.style.top = t + 'px';
+        }
+        document.onmouseup = function(){
+            document.onmousemove = null;
+            document.onmouseup = null;
+        }
+    }
+</script>
+</body>
+</html>

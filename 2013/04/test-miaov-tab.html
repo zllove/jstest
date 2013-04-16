@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .tab input{background: #ccc;}
+        .tab .active{background:#ff0;}
+        .tab div{width: 200px;height: 200px;background: #ccc;display: none;}
+    </style>
+</head>
+<body>
+<div id="tab1" class="tab">
+    <input class="active" type="submit" value="教育" />
+    <input type="submit" value="财经" />
+    <input type="submit" value="技术" />
+    <div style="display: block;">1111</div>
+    <div>2222</div>
+    <div>3333</div>
+</div>
+<div id="tab2" class="tab">
+    <input class="active" type="submit" value="教育" />
+    <input type="submit" value="财经" />
+    <input type="submit" value="技术" />
+    <div style="display: block;">1111</div>
+    <div>2222</div>
+    <div>3333</div>
+</div>
+
+<script type="text/javascript">
+    function tab(id){
+        var oDiv = document.getElementById(id),
+            aInput = oDiv.getElementsByTagName('input'),
+            aDiv = oDiv.getElementsByTagName('div');
+
+        for(var i = 0; i < aInput.length; i++){
+            aInput[i].index = i;
+            aInput[i].onclick = function(){
+                for(var j = 0; j < aInput.length; j++){
+                    aInput[j].className = '';
+                    aDiv[j].style.display = 'none';
+                }
+                aInput[this.index].className = 'active';
+                aDiv[this.index].style.display = 'block';
+            }
+        }
+    }
+
+    tab('tab1');
+    tab('tab2');
+</script>
+</body>
+</html>
