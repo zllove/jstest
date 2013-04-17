@@ -8,7 +8,7 @@
         body{font-size: 12px;line-height: 23px;}
         #div2{position: absolute;width:10px;height: 20px;top: 0;left: 0;background: #f60;z-index: 2;}
         .newDiv{position: relative;width:500px;height: 20px;margin: 60px auto 0;background-color:#ccc;z-index: 1;}
-        #div3{width: 250px;height: 300px;overflow: -hidden;border: 1px solid #ccc;}
+        #div3{width: 250px;height: 300px;overflow:hidden;filter:alpha(opacity:0);opacity:0;background: #f00;border: 1px solid #ccc;}
     </style>
 </head>
 <body>
@@ -44,8 +44,8 @@
 
             oDiv2.style.left = l + 'px';
             var scale = l / (oDiv.offsetWidth - oDiv2.offsetWidth);
-            oDiv3.style.width = scale * 300 + 'px';
-            oDiv3.style.height = scale * 200 + 'px';
+            oDiv3.style.filter = 'alpha(' + scale * 100 + ')';
+            oDiv3.style.opacity = scale;
 
             document.title = l / (oDiv.offsetWidth - oDiv2.offsetWidth);
         }
