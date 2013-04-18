@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>拖动</title>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{font:12px/1.125 Arial,Helvetica,sans-serif;background:#333;}
+        table{border-collapse:collapse;border-spacing:0;}
+        li{list-style:none;}
+        fieldset,img{border:0;}
+        article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
+        q:before,q:after{content:'';}
+        a:focus,input,textarea{outline-style:none;}
+        textarea{resize:none}
+        a{color:#0a8cd2;text-decoration:none;}
+        a:hover{ color:#ff0;text-decoration:underline;}
+        .clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+        .clearfix{display:inline-block;}
+        .clearfix{display:block;}
+        .clear{clear:both;height:0;font:0/0 Arial;visibility:hidden;}
+        .none{display:none}
+        .demo{ width:660px;margin: 0 auto; padding-top:80px; line-height:16px; text-align:center;}
+        .list li{ float:left; width:100px; padding:0 30px 20px;}
+    </style>
+</head>
+<body>
+<div class="demo">
+    <ul id="list" class="list">
+        <li>
+            <a href="#"><img src="http://img11.360buyimg.com/N4/9837/20fc283f-d7e8-49ed-b27d-1eecce208cd8.jpg" alt=""/></a><br>
+            <p><a href="#">名媛坊 甜美修身蕾丝打底衫</a></p>
+        </li>
+        <li>
+            <a href="#"><img src="http://img13.360buyimg.com/N4/g8/M03/04/1F/rBEHaFBBeu0IAAAAAADN1gIcF30AAA-UgPIld8AAM3u316.jpg" alt=""/></a><br>
+            <p><a href="#">名媛坊  甜美修身蕾丝打底衫</a></p>
+        </li>
+        <li>
+            <a href="#"><img src="http://img13.360buyimg.com/N4/g10/M00/15/14/rBEQWFFs_4EIAAAAAALWY7D2vSQAAEOggAPj-cAAtZ7196.jpg" alt=""/></a><br>
+            <p><a href="#">名媛坊 甜美修身蕾丝打底衫</a></p>
+        </li>
+        <li>
+            <a href="#"><img src="http://img10.360buyimg.com/N4/g10/M00/15/14/rBEQWFFs_MEIAAAAAAG-lZ8Bc6kAAEOZgNFsgUAAb6t267.jpg" alt=""/></a><br>
+            <p><a href="#">名媛坊  甜美修身蕾丝打底衫</a></p>
+        </li>
+        <li>
+            <a href="#"><img src="http://img12.360buyimg.com/N4/g10/M00/0B/1D/rBEQWFFG1G8IAAAAAANZvgLDx6wAACU5wHYtgcAA1nW589.jpg" alt=""/></a><br>
+            <p><a href="#">名媛坊 甜美修身蕾丝打底衫</a></p>
+        </li>
+        <li>
+            <a href="#"><img src="http://img10.360buyimg.com/N4/g10/M00/15/13/rBEQWFFs9xEIAAAAAAN48KfEmooAAEOLgJVQskAA3kI245.jpg" alt=""/></a><br>
+            <p><a href="#">名媛坊  甜美修身蕾丝打底衫</a></p>
+        </li>
+        <li>
+            <a href="#"><img src="http://img10.360buyimg.com/N4/g10/M00/0D/0A/rBEQWFFLzMkIAAAAAANO48xCH7MAACmugI1noYAA077748.jpg" alt=""/></a><br>
+            <p><a href="#">名媛坊 甜美修身蕾丝打底衫</a></p>
+        </li>
+        <li>
+            <a href="#"><img src="http://img13.360buyimg.com/N4/g10/M00/15/15/rBEQWFFtCP4IAAAAAANClpu57IEAAEO3AB4JB0AA0Ku742.jpg" alt=""/></a><br>
+            <p><a href="#">名媛坊  甜美修身蕾丝打底衫</a></p>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+(function(window){
+    var oList = document.getElementById('list');
+
+    function drag(id){
+        var oElem = document.getElementById(id),
+            disX = 0,
+            disY = 0;
+
+        oElem.onmousedown = function(e){
+            e = e || event;
+            disX = e.clientX - this.offsetLeft;
+            disY = e.clientY - this.offsetTop;
+
+            document.onmousemove = function(e){
+                e = e || event;
+                var l = e.clientX - disX;
+                var t = e.clientY - disY;
+
+                if(l < 0){
+                    l = 0
+                } else if(l > document.documentElement.clientWidth - oElem.offsetWidth){
+                    l = document.documentElement.clientWidth - oElem.offsetWidth;
+                }
+
+                if(t < 0){
+                    t = 0
+                } else if(t > document.documentElement.clientHeight - oElem.offsetHeight){
+                    t = document.documentElement.clientHeight - oElem.offsetHeight;
+                }
+
+                oElem.style.top = t + 'px';
+                oElem.style.left = l + 'px';
+            }
+
+            document.onmouseup = function(){
+                document.onmousemove = null;
+                document.onmouseup = null;
+            }
+
+            return false;
+        }
+    }
+
+
+}(window));
+</script>
+</body>
+</html>
