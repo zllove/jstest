@@ -8,23 +8,27 @@
         body{font-size: 12px;line-height: 23px;}
         #div2{position: absolute;width:10px;height: 20px;top: 0;left: 0;background: #f60;z-index: 2;}
         .newDiv{position: relative;width:500px;height: 20px;margin: 60px auto 0;background-color:#ccc;z-index: 1;}
-        #div3{width: 250px;height: 300px;overflow:hidden;filter:alpha(opacity:0);opacity:0;background: #f00;border: 1px solid #ccc;}
+        #div3{position: relative;width: 250px;height: 300px;overflow:hidden;border: 1px solid #ccc;}
+        #div4{position: absolute;top: 0;left: 0;}
     </style>
 </head>
 <body>
 <div class="newDiv" id="div1">
     <div id="div2"></div>
 </div>
-<div id="div3"></div>
-<div id="div33">
-    <p>虽然WordPress非常好用，但也会给服务器带来不小的开销，许多WordPress架设的博客访问量稍微大一点就会坍塌。但你现在看到的这个WordPress不一样，它是架设在新浪云上的。和成百上千个用户共享一台古老服务器的虚拟空间不同，它运行在一个由数百数千台服务器组成的集群之上，请求被分摊到N台机器，一旦其中一台机器出现问题，本该发往这台机器的请求将自动被引导至其他机器。换句话说，你再也不用因为担心太受欢迎而不敢写出好文章了，所以放心写吧 ：） </p>
-    <p>这还不算，在WordPress上更换主题是一件超级简单的事情，只需要点几下鼠标就可以完成主题的选择-预览-安装整个全流程，这一切只需要2分钟。 以至于每当我无聊的时候，我就会在WordPress后台一个个换主题玩。 从3.4版本开始，WordPress还可以实时预览和调整主题配色，这样一来，即使你和别人选用了同样的主题，看起来也会非常不一样。 </p>
-    <p>虽然WordPress非常好用，但也会给服务器带来不小的开销，许多WordPress架设的博客访问量稍微大一点就会坍塌。但你现在看到的这个WordPress不一样，它是架设在新浪云上的。和成百上千个用户共享一台古老服务器的虚拟空间不同，它运行在一个由数百数千台服务器组成的集群之上，请求被分摊到N台机器，一旦其中一台机器出现问题，本该发往这台机器的请求将自动被引导至其他机器。换句话说，你再也不用因为担心太受欢迎而不敢写出好文章了，所以放心写吧 ：） </p>
+<div id="div3">
+    <div id="div4">
+        <p>虽然WordPress非常好用，但也会给服务器带来不小的开销，许多WordPress架设的博客访问量稍微大一点就会坍塌。但你现在看到的这个WordPress不一样，它是架设在新浪云上的。和成百上千个用户共享一台古老服务器的虚拟空间不同，它运行在一个由数百数千台服务器组成的集群之上，请求被分摊到N台机器，一旦其中一台机器出现问题，本该发往这台机器的请求将自动被引导至其他机器。换句话说，你再也不用因为担心太受欢迎而不敢写出好文章了，所以放心写吧 ：） </p>
+        <p>这还不算，在WordPress上更换主题是一件超级简单的事情，只需要点几下鼠标就可以完成主题的选择-预览-安装整个全流程，这一切只需要2分钟。 以至于每当我无聊的时候，我就会在WordPress后台一个个换主题玩。 从3.4版本开始，WordPress还可以实时预览和调整主题配色，这样一来，即使你和别人选用了同样的主题，看起来也会非常不一样。 </p>
+        <p>虽然WordPress非常好用，但也会给服务器带来不小的开销，许多WordPress架设的博客访问量稍微大一点就会坍塌。但你现在看到的这个WordPress不一样，它是架设在新浪云上的。和成百上千个用户共享一台古老服务器的虚拟空间不同，它运行在一个由数百数千台服务器组成的集群之上，请求被分摊到N台机器，一旦其中一台机器出现问题，本该发往这台机器的请求将自动被引导至其他机器。换句话说，你再也不用因为担心太受欢迎而不敢写出好文章了，所以放心写吧 ：） </p>
+    </div>
 </div>
+
 <script type="text/javascript">
     var oDiv = document.getElementById('div1');
     var oDiv2 = document.getElementById('div2');
     var oDiv3 = document.getElementById('div3');
+    var oDiv4 = document.getElementById('div4');
     var disX = 0;
 
     oDiv2.onmousedown = function(e){
@@ -44,8 +48,7 @@
 
             oDiv2.style.left = l + 'px';
             var scale = l / (oDiv.offsetWidth - oDiv2.offsetWidth);
-            oDiv3.style.filter = 'alpha(' + scale * 100 + ')';
-            oDiv3.style.opacity = scale;
+            oDiv4.style.top = - (oDiv4.offsetHeight - oDiv3.offsetHeight) * scale + 'px';
 
             document.title = l / (oDiv.offsetWidth - oDiv2.offsetWidth);
         }
