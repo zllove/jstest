@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<div id="userList" class="userList">
+    <div class="userBox">张二</div>
+    <div class="userBox">李三</div>
+    <div class="userBox">马六</div>
+</div>
+<script type="text/javascript">
+    $().outerHTML();
+    function outerHTML(el, doc) {
+        var temp = document.createElement('div');
+        el = doc.getElementById(el);
+        console.dir(el);
+        if ('outerHTML' in el) {
+            return el.outerHTML;
+        } else {
+            temp.innerHTML = '';
+            var dtemp = (doc && doc.createElement('div')) || temp;
+            dtemp.appendChild(el.cloneNode(true));
+            return dtemp.innerHTML;
+        }
+    };
+
+    console.log(outerHTML('userList', document));
+
+    var qwarp = {
+        outerHTML: (function() {
+            var temp = document.createElement('div');
+            return function(el, doc) {
+                el = g(el);
+                if ('outerHTML' in el) {
+                    return el.outerHTML;
+                } else {
+                    temp.innerHTML = '';
+                    var dtemp = (doc && doc.createElement('div')) || temp;
+                    dtemp.appendChild(el.cloneNode(true));
+                    return dtemp.innerHTML;
+                }
+            };
+        }());
+    }
+</script>
+</body>
+</html>

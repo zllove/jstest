@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .cont-img{ position:relative;width:350px; text-align:center; float:left; margin-right:10px;}
+        .cont-img img{ text-align:center;}
+        /*.loadingimg{ position:absolute; width:64px; height:64px; display:block; left:50%; top:50%; margin:-32px 0; background:url(http://js.fgm.cc/learn/lesson5/img/loading.gif) 0 0 no-repeat;}*/
+    </style>
+</head>
+<body>
+<p class="cont-img"><img width="350" data-src="http://hiphotos.baidu.com/lovebyakuya/pic/item/01cf20088f9506f063d98653.jpg" src="http://js.fgm.cc/learn/lesson5/img/loading.gif" alt=""></p>
+<p class="cont-img"><img width="350" data-src="http://img.daimg.com/uploads/allimg/130419/1-13041Z01425.jpg" src="http://js.fgm.cc/learn/lesson5/img/loading.gif" alt=""></p>
+<p class="cont-img"><img width="350" data-src="http://static.dev.ggg.cn/article/res/images/allimg/130418/1-13041Q44T10-L.jpg" src="http://js.fgm.cc/learn/lesson5/img/loading.gif" alt=""></p>
+<!--
+<img id="img1" src="http://js.fgm.cc/learn/lesson5/img/loading.gif" width="100" height="100" />
+<img id="img2" src="http://js.fgm.cc/learn/lesson5/img/loading.gif" width="100" height="100" />
+<img id="img3" src="http://js.fgm.cc/learn/lesson5/img/loading.gif" width="100" height="100" />
+<img id="img4" src="http://js.fgm.cc/learn/lesson5/img/loading.gif" width="100" height="100" />
+<img id="img5" src="http://js.fgm.cc/learn/lesson5/img/loading.gif" width="100" height="100" />
+-->
+
+<script type="text/javascript">
+    var aImgs = document.querySelectorAll('.cont-img img');
+
+    for(var i = 0; i < aImgs.length; i++){
+        var curImg = aImgs[i];
+//        curImg.width = 30;
+//        var oSpan = document.createElement('span');
+//        oSpan.className = 'loadingimg';
+//        curImg.parentNode.appendChild(oSpan);
+        var dataSrc = curImg.getAttribute('data-src');
+
+        imageLoad(dataSrc, curImg, function(obj, imgid){
+            imgid.src = obj.src;
+            imgid.style.width = '100%';
+//            console.log(imgid.parentNode.querySelector('span'));
+//            imgid.parentNode.removeChild(imgid.parentNode.querySelector('span'));
+        });
+    }
+
+    function imageLoad(url, imgid, callback) {
+        var val = url;
+        var oImg = new Image();
+        oImg.addEventListener('load', function(){
+            if (oImg.complete == true) {
+                callback(oImg, imgid);
+            }
+        }, false);
+
+        oImg.addEventListener('error', function(){
+            oImg.src = 'http://www.baidu.com/img/baidu_logo.gif'
+        }, false);
+        oImg.src = val;
+    }
+    //显示图片
+    function checkimg(obj, imgid) {
+        document.getElementById(imgid).src = obj.src;
+    }
+    //初始化需要显示的图片，并且指定显示的位置
+    window.onload = function () {
+//        imageLoad("http://hiphotos.baidu.com/lovebyakuya/pic/item/01cf20088f9506f063d98653.jpg", "img1", checkimg);
+//        imageLoad("http://hiphotos.baidu.com/lovebyakuya/pic/item/7b7b19c70d62f4fdd0006050.jpg", "img2", checkimg);
+//        imageLoad("http://hiphotos.baidu.com/joanne728/pic/item/892557641806d20eaa184c71.jpg", "img3", checkimg);
+//        imageLoad("http://www.neocha.com/-/res/Camilla/20071204181216078845_h.jpg", "img4", checkimg);
+    }
+
+
+</script>
+</body>
+</html>
