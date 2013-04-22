@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{font:12px/1.5;background: #fff;}
+        .dom{ position:relative; width:98px; padding-right:10px;}
+        .main{width:76px;height:72px;padding-left:20px;border-right:none;overflow:hidden;position:relative;background:url(img/z_scrool_middle.gif) no-repeat left top;}
+        .scrolly{width:5px;position:absolute;right:14px;height:77px;z-index:1000;}
+        .scrolly b{width:4px;display:block;position:absolute;cursor:pointer;z-index:1000;background:url(img/z_scrol_bg.gif) no-repeat left top;}
+        .scrol_top{width:96px;height:22px;overflow:hidden;background:url(img/z_scrool_top.gif) no-repeat;}
+        .scrol_bottom{width:96px;height:13px;overflow:hidden;background:#FF00FF url(img/z_scrool_bottom.gif) no-repeat;}
+    </style>
+</head>
+<body>
+<div class="scrol_top"></div>
+<!--scrol_top-->
+<div class="dom">
+    <div class="scrolly" style=""><b class="coin"></b></div>
+    <div class="main" >
+        <div class=" " style="font-size:13px; color:#FFFFFF; line-height:18px; "> Chinese<br />
+            English<br />
+            Frensh<br />
+            German <br />
+            German <br />
+            Chinese<br />
+            English<br />
+            Frensh<br />
+            German <br />
+            German <br />
+            English<br />
+            Frensh<br />
+            German <br />
+            German <br />
+            Chinese<br />
+
+        </div>
+    </div>
+    <!--main-->
+
+</div>
+<!--dom-->
+<div class="scrol_bottom"></div>
+<script type="text/javascript">
+    function getClass(n) {
+        var classElements = [],
+            allElements = document.getElementsByTagName('*');
+
+        for (var i = 0; i < allElements.length; i++) {
+            if (allElements[i].className == n) {
+                classElements[classElements.length] = allElements[i];
+            }
+        }
+        return classElements;
+    }
+    function range(num, max, min) {
+        return Math.min(max, Math.max(num, min));
+    }
+    //取得滚动值
+    function getWheelValue(e) {
+        e = e || event;
+        return ( e.wheelDelta ? e.wheelDelta / 120 : -( e.detail % 3 == 0 ? e.detail / 3 : e.detail ) );
+    }
+
+    function addEvent(obj, type, fn) {
+        var isFirefox = typeof document.body.style.MozUserSelect != 'undefined';
+        if (obj.addEventListener) {
+            obj.addEventListener(isFirefox ? 'DOMMouseScroll' : type, fn, false);
+        } else {
+            obj.attachEvent('on' + type, fn);
+        }
+        return fn;
+    }
+    function stopEvent(e) {
+        e = e || event;
+        if (e.preventDefault) {
+            e.preventDefault()
+        }
+        e.returnValue = false;
+    }
+    //移除事件,这里对mousewheel做了兼容,移除时统一使用mousewheel
+    function delEvent(obj, type, fn) {
+        var isFirefox = typeof document.body.style.MozUserSelect != 'undefined';
+        if (obj.removeEventListener) {
+            obj.removeEventListener(isFirefox ? 'DOMMouseScroll' : type, fn, false);
+        } else {
+            obj.detachEvent('on' + type, fn);
+        }
+    }
+    //鼠标按下之后执行onmousemove和onmouseup
+    function getBar(e, coin, main, mains) {
+        var eve = e || event;
+        var potY = eve.clientY - coin.offsetTop;
+        document.onmousemove = function (e) {
+            moveBar(e, coin, main, mains, potY);
+        }
+        document.onmouseup = function (e) {
+            document.onmousemove = null;
+        }
+    }
+    //鼠标移动
+    function moveBar(e, coin, main, mains, potY) {
+        var eve = e || event;
+        var eveT = eve.clientY - potY;
+        eveT = range(eveT, (main.clientHeight - coin.offsetHeight), 0)
+        scrollNum(coin, main, mains, eveT);
+    }
+    //滚动值算法，有点误差
+    function scrollNum(coin, main, mains, eveT) {
+        coin.style.top = eveT + "px";
+        main.children[0].style.position = "absolute";
+        main.children[0].style.top = -mains * eveT / (main.clientHeight) + "px";
+    }
+
+    window.onload = function () {
+        var main = getClass("main")[0];
+        var coin = getClass("coin")[0];
+        var mains = main.children[0].offsetHeight;
+        addEvent(main, "mousewheel", function (e) {
+            stopEvent(e);
+            var eveT = getWheelValue(e);
+            eveT = range((coin.offsetTop + (-eveT) * 10), (main.clientHeight - coin.offsetHeight), 0)
+            scrollNum(coin, main, mains, eveT)
+            return false;
+        })
+        coin.style.height = Math.ceil(main.clientHeight * main.clientHeight / mains) + "px";
+        coin.onmousedown = function (e) {
+            getBar(e, coin, main, mains)
+            return false;
+        }
+
+    }
+</script>
+</body>
+</html>

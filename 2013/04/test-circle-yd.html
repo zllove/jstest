@@ -9,11 +9,13 @@
         body{font:12px/2 arial;background: #fff;}
         .demo{position: relative;width: 1000px;margin: 0 auto;}
         .radius{position: absolute;background:#f40;border-radius:100px;width: 100px;height: 100px;}
+        .circle{position: absolute;top:0px;left:0px; border:1px solid #ccc;border-radius:500px;width:500px;height:500px;}
     </style>
 </head>
 <body>
 <div class="demo">
     <div id="div1" class="radius"></div>
+    <div class="circle"></div>
 </div>
 <script type="text/javascript">
     var oDiv = document.getElementById('div1');
@@ -24,9 +26,9 @@
 
     setInterval(function(){
         oDiv.style.left = x + Math.sin(angle) * x + 'px';
-        oDiv.style.top = y + Math.cos(angle) * x + 'px';
+        oDiv.style.top = y + Math.cos(angle) * y + 'px';
         angle += speed;
-    }, 20);
+    }, 30);
 
 </script>
 </body>
