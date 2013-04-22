@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title></title>
+</head>
+<body>
+<div id="focus-pic">
+    <span id="btn-left"></span>
+    <ul id="ul01" class="bigImg">
+        <li><a href="javascript:void(0)"><img src="img/focus01.jpg" alt="" /></a></li>
+        <li><a href="javascript:void(0)"><img src="img/focus02.jpg" alt="" /></a></li>
+        <li><a href="javascript:void(0)"><img src="img/focus01.jpg" alt="" /></a></li>
+        <li><a href="javascript:void(0)"><img src="img/focus02.jpg" alt="" /></a></li>
+        <li><a href="javascript:void(0)"><img src="img/focus01.jpg" alt="" /></a></li>
+    </ul>
+    <div class="cutBtn">
+        <ul id="ul02">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+    </div>
+    <span id="btn-right"></span>
+</div>
+<script type="text/javascript">
+    /**
+     * http://bbs.csdn.net/topics/390433554?page=1
+     * 新建 bigimgscroll 对象，目的是为复用或良好代码维护性
+     * 整体感觉写的还是比较精妙，尤其是下面：scroll,starmove,domove这三个方法的剥离，尽量使代码松耦
+     * 欠缺的地方，感觉是没有明参的传入，而ul02的获取是个败笔，不利用重复使用
+     */
+    var bigImgScroll = function () {
+    };
+    function $(id) {
+        return typeof id == "string" ? document.getElementById(id) : id;
+    }
+    bigImgScroll.prototype = { // 公共方法，初始化后实例可以直接调用
+        /**
+         * 初始化方法，下面一堆this目的是给实例绑定公共的变量，以便于在prototype里边的方法里边互相调用
+         * @param obj
+         */
+        init      : function (obj) {
+            var t = this; // 缓存this，以便于在settimeout中引用，原始的setTimeout的this指向window
+            this.obigImgLi = obj.getElementsByTagName("li");
+            this.oBtnLi = $("ul02").getElementsByTagName("li");
+            this.iNow = 0;
+            this.oMaxWidth = this.obigImgLi[0].offsetWidth;
+            this.oTimer = null;
+            this.iSpeed = 0;
+            obj.style.width = this.obigImgLi[0].offsetWidth * this.obigImgLi.length + "px"; // 设置obj的宽度，以便于li能够水平滚动
+            for (i = 0; i < t.oBtnLi.length; i++) {
+                t.oBtnLi[i].index = i;
+                t.oBtnLi[i].onclick = function () { // 单击后调用scroll以便滚动
+                    t.iNow = this.index;
+                    t.scroll(obj, -t.iNow * t.oMaxWidth);
+                }
+            }
+            if ($("btn-right")) { // 右滚动
+                $("btn-right").onclick = function () {
+                    t.autoPlay(obj);
+                }
+            }
+            if ($("btn-left")) { // 左滚动
+                $("btn-left").onclick = function () {
+                    t.leftScroll(obj);
+                }
+            }
+            // 自动滚动
+            var timer = setInterval(function () {
+                t.autoPlay(obj)
+            }, 5000);
+            // 当鼠标经过这个区域是清除定时器，就是清除滚动效果
+            $("focus-pic").onmouseover = function () {
+                clearInterval(timer);
+            };
+
+            // 当鼠标滑出这个区域时，自动滚动
+            $("focus-pic").onmouseout = function () {
+                timer = setInterval(function () {
+                    t.autoPlay(obj)
+                }, 5000);
+            };
+
+        },
+        /**
+         * 自动滚动调用
+         * @param obj
+         * @param tag
+         */
+        scroll    : function (obj, tag) {
+            for (i = 0; i < this.oBtnLi.length; i++) {
+                this.oBtnLi[i].className = "";
+            }
+            this.oBtnLi[this.iNow].className = "active";
+            this.starmove(obj, tag);
+        },
+        /**
+         * 滚动
+         * @param obj
+         * @param tag
+         */
+        starmove  : function (obj, tag) {
+            var t = this;
+            if (t.oTimer) {
+                clearInterval(t.oTimer);
+            }
+            t.oTimer = setInterval(function () {
+                t.domove(obj, tag);
+            }, 30);
+        },
+        /**
+         * 核心滚动方法
+         * @param obj
+         * @param tag
+         */
+        domove    : function (obj, tag) {
+            var t = this;
+            t.iSpeed = (tag - obj.offsetLeft) / 5; // 滚动加速度
+            t.iSpeed = t.iSpeed > 0 ? Math.ceil(t.iSpeed) : Math.floor(t.iSpeed); // 当速度大于零是向上取整，小于等于零时向下取整，这块不是很明白?
+            obj.style.left = obj.offsetLeft + t.iSpeed + "px"; // 设置left值
+        },
+        autoPlay  : function (obj) { // 自动滚动
+            this.iNow++;
+            if (this.iNow >= this.oBtnLi.length) {
+
+                this.iNow = 0;
+            }
+            this.scroll(obj, -this.iNow * this.oMaxWidth);
+        },
+        leftScroll: function (obj) {
+            this.iNow--;
+            if (this.iNow <= -1) {
+
+                this.iNow = this.oBtnLi.length - 1;
+            }
+            this.scroll(obj, -this.iNow * this.oMaxWidth);
+        }
+    }
+
+    new bigImgScroll().init($("ul01")); // 初始化实例，然后调用init方法
+</script>
+</body>
+</html>
+
