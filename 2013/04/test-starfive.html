@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<canvas id="drawing" width="400" height="300">adrawing of something.</canvas>
+<script>
+    function a() {
+        var drawing = document.getElementById("drawing");
+        if (drawing.getContext) {
+            var context = drawing.getContext("2d");
+            context.fillStyle = "#eeeeff";
+            context.fillRect(0, 0, 400, 300);
+
+            //绘制图形
+            context.translate(200, 50);
+            context.fillStyle = 'rgba(255,0,0,0.25)';
+            for (var i = 0; i < 100; i++) {
+                context.translate(25, 25);
+                context.scale(0.95, 0.95);
+                context.rotate(Math.PI / 10);
+                create5Star(context);
+                context.fill();
+            }
+        }
+    }
+    function create5Star(context) {
+        var n = 0;
+        var dx = 100;
+        var dy = 0;
+        var s = 30;
+        //创建路径
+        context.beginPath();
+        context.fillStyle = 'rgba(255,0,0,0.5)';
+        var x = Math.sin(0);
+        var y = Math.cos(0);
+        var dig = 4 * Math.PI / 5;
+        var dig = 0.8 * Math.PI ;
+//        var dig = Math.PI * 4;
+//        var dig = 30 * Math.PI / 180;
+        for (var i = 0; i < 5; i++) {
+            var x = Math.sin(i * dig);
+            var y = Math.cos(i * dig);
+            context.lineTo(dx + x * s, dy + y * s);
+        }
+        context.closePath();
+    }
+    window.onload = a;
+</script>
+
+</body>
+</html>
