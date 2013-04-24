@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        *{margin: 0;padding: 0;}
+        body{font-size: 12px;line-height: 23px;}
+        #container{position: relative;width: 250px;height: 300px;margin: 30px auto 0;overflow:hidden;border: 1px solid #ccc;}
+        #content{position: absolute;top: 0;left: 0;padding:0 10px 10px;}
+        #bar{position: absolute;width:10px;height: 20px;top: 0;left: 0;background: #333;z-index: 2;border-radius:5px;cursor: pointer;}
+        .newDiv{position: absolute;right:0;width:10px;height:300px;background-color:#ccc;z-index: 1;}
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <div id="content">
+        <p>虽然WordPress非常好用，但也会给服务器带来不小的开销，许多WordPress架设的博客访问量稍微大一点就会坍塌。但你现在看到的这个WordPress不一样，它是架设在新浪云上的。和成百上千个用户共享一台古老服务器的虚拟空间不同，它运行在一个由数百数千台服务器组成的集群之上，请求被分摊到N台机器，一旦其中一台机器出现问题，本该发往这台机器的请求将自动被引导至其他机器。换句话说，你再也不用因为担心太受欢迎而不敢写出好文章了，所以放心写吧 ：） </p>
+        <p>这还不算，在WordPress上更换主题是一件超级简单的事情，只需要点几下鼠标就可以完成主题的选择-预览-安装整个全流程，这一切只需要2分钟。 以至于每当我无聊的时候，我就会在WordPress后台一个个换主题玩。 从3.4版本开始，WordPress还可以实时预览和调整主题配色，这样一来，即使你和别人选用了同样的主题，看起来也会非常不一样。 </p>
+    </div>
+    <div class="newDiv" id="side">
+        <div id="bar"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    function scrollBar(){
+        this.init.apply(this, arguments);
+    }
+    scrollBar.prototype = {
+        id : function(id){
+            return typeof id == 'string' ? document.getElementById(id) : id;
+        },
+        init : function(){
+            var that = this;
+
+            this.oContainer = this.id('container');
+            this.oContent = this.id('content');
+            this.oSide = this.id('side');
+            this.oBar = this.id('bar');
+
+            console.log(this.oContent.offsetHeight);
+            this.oBar.style.height = this.oSide.offsetHeight / this.oContent.offsetHeight * 90 + 'px';
+
+            this.drag(this.oBar);
+            this.addEvent(this.oContainer, 'mousewheel', this.setScroll);
+            this.oContainer.addEventListener('DOMMouseScroll', function(e){
+                that.setScroll(e);
+            }, false);
+        },
+        /**
+         * drag bar
+         * @param id
+         */
+        drag : function(id){
+            var obj = this.id(id),
+                that = this,
+                disX = 0,
+                disY = 0;
+
+            obj.onmousedown = function(e){
+                e = e || event;
+                disX = e.clientX - obj.offsetLeft;
+                disY = e.clientY - obj.offsetTop;
+
+                document.onmousemove = function(e){
+                    e = e || event;
+                    var l = e.clientX - disX;
+                    var t = e.clientY - disY;
+
+                    that.setBar(t);
+                }
+                document.onmouseup = function(){
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                }
+                return false;
+            }
+        },
+        /**
+         * add event
+         * @param obj
+         * @param type
+         * @param fn
+         */
+        addEvent : function (obj, type, fn) {
+            if (obj.addEventListener) {
+                obj.addEventListener(type, fn, false);
+            } else if (obj.attachEvent) {
+                obj.attachEvent('on' + type, function () {
+                    fn.call(obj);
+                });
+            }
+        },
+        /**
+         * set bar position
+         * @param t
+         */
+        setBar : function(t){
+            if(t < 0){
+                t = 0;
+            } else if(t > this.oSide.offsetHeight - this.oBar.offsetHeight){
+                t = this.oSide.offsetHeight - this.oBar.offsetHeight;
+            }
+            this.oBar.style.top = t + 'px';
+
+            var scale = this.oBar.offsetTop / (this.oSide.offsetHeight - this.oBar.offsetHeight);
+            this.oContent.style.top = - scale * (this.oContent.offsetHeight - this.oSide.offsetHeight) + 'px';
+        },
+        /**
+         * set bar scroll
+         * @param e
+         */
+        setScroll : function(e){
+            if(this.bindWheel(e)){ // down
+                this.setBar(this.oBar.offsetTop + 10);
+            } else { // up
+                this.setBar(this.oBar.offsetTop - 10);
+            }
+        },
+        /**
+         * bind wheel, if true is down
+         * @param e
+         * @returns {boolean}
+         */
+        bindWheel : function(e){
+            e = e || event;
+            e.preventDefault ? e.preventDefault() : (e.retrunValue = false); // prevent document scroll
+            return e.detail ? e.detail > 0 : e.wheelDelta < 0;
+        }
+    }
+
+    new scrollBar();
+</script>
+</body>
+</html>

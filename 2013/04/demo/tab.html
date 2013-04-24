@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>SlipJs演示</title>
+    <link rel="stylesheet" href=""/>
+    <style type="text/css">
+		*{
+			padding:0px;
+			margin:0px;
+		}
+		body{
+			background: #F2F2F2;
+		}
+		ul,li{
+			list-style-type: none;			
+		}
+		header{
+			width: 100%;
+			height: 40px;
+			background: -webkit-gradient(linear,left top,left bottom,from(#6f85a2),to(#6f85a2));
+			text-shadow: 1px 1px rgba(0, 0, 0, .2);
+			line-height: 40px;
+			text-align: center;
+			color: #F3F3F3;
+			font-size: 19px;
+			font-weight: bold;
+			font-family: helvetica;
+		}
+		#change_screen_div{
+			position:relative;
+			width:320px;
+			height:334px;
+			overflow:hidden;
+			margin:auto;
+		}
+		.tab_title{
+			height:40px;
+			background: white;
+			border-bottom: 1px solid #E0E0E0;
+		}
+		.tab_title span{
+			display:block;
+			float:left;
+			width:80px;
+			height:35px;
+			line-height:40px;
+			text-align:center;
+			font-weight: bold;			
+		}
+		.tab_title ul{
+			height:37px;
+		}
+		.tab_title ul li{
+			height:35px;
+			float:left;
+			width:60px;
+			line-height:40px;
+			text-align:center;
+			color: #999;
+		}
+		#tab_title_ul .black{
+			color:#000000;
+		}
+		#change_screen_ul{
+			width:1280px;
+			height:100%;
+			position: absolute;
+		}
+		#change_screen_ul .change_screen_ul_li{
+			float:left;
+			display:block;
+			width:25%;
+			height:100%;
+		}
+		.content_ul li{
+			height:40px;
+			float:left;
+			width:100%;
+			line-height:40px;
+			overflow:hidden;
+			text-indent: 10px;
+			border-top: 1px solid white;
+			border-bottom: 1px solid #D5D7D7;
+			list-style-type: square;
+			list-style-position: inside;
+		}
+		.content_ul li:first-child {
+			border-top: none;
+		}
+		.slider_status{
+			width:240px;
+			height:3px;
+			right:0px;
+			position:absolute;
+			
+		}
+		#slider_status_span{
+			display:block;
+			width:60px;
+			height:100%;
+			background-color:#7a0103;
+			-webkit-transition: 300ms;
+		}
+		
+	</style>
+</head>
+<body>
+<header>触控TAB切换</header>
+<div id="tbody">
+<div id="change_screen_div">
+	<div class="tab_title">
+    	<span>新闻</span>
+        <ul id="tab_title_ul">
+        	<li class="black">体育</li>
+            <li>娱乐</li>
+            <li>科技</li>
+            <li>互联网</li>
+        </ul>
+        <div class="slider_status">
+            <span id="slider_status_span"></span>
+        </div>
+    </div>
+    <ul id="change_screen_ul">
+        <li class="change_screen_ul_li">
+        	<ul class="content_ul">
+                <li>NBA实力榜：马刺居榜首热火攀至第二 雷霆跌到第3</li>
+                <li>足协处罚再触动川足神经 黎兵:为不打假球而诈伤</li>
+                <li>足总杯：纳尼传射建功 曼联打进8强</li>
+                <li>姚明球衣本赛季难退役 火箭老板:时间还没确定</li>
+                <li>CBA常规赛MVP候选人名单：易建联入选 麦蒂无缘</li>
+                <li>刀锋战士形象万劫不复 两大品牌宣布终止与其合作</li>
+                <li>CBA常规赛MVP候选人名单：易建联入选 麦蒂无缘</li>
+            </ul>
+        </li>
+        
+        <li class="change_screen_ul_li">
+        	<ul class="content_ul">
+                <li>央视春晚收视率出炉 刘谦《魔琴》时段收视最高</li>
+                <li>《西游记》已播2000次 叫骂声中收视节节攀高</li>
+                <li>臧天朔6年刑期未满提前出狱 狱中学习书法</li>
+                <li>暂别“美女秘史” 尤小刚新剧瞄准清朝第一谜案</li>
+                <li>电影上演妖怪吃人吓坏孩子 网友纷纷呼吁分级</li>
+                <li>“找力宏”后李云迪不开腔回应 刘谦很为难</li>
+				<li>赵忠祥批郑渊洁，谁在下风</li>
+            </ul>
+        </li>
+        
+         <li class="change_screen_ul_li">
+        	<ul class="content_ul">
+                <li>神州数码不服财政部行政处罚 坚称未作假</li>
+                <li>比尔·盖茨：对微软创新表现感到不满</li>
+                <li>智能手机应用使用困境：95%已下载应用被弃</li>
+                <li>Win8前景不妙 微软“昏招”自救</li>
+                <li>Ubuntu手机系统本月21日推出 可在Nexus 4上安装</li>
+                <li>智能手机应用使用困境：95%已下载应用被弃</li>
+				<li>大摩：明年全球智能手机市场增速将同比下降20%</li>
+            </ul>
+        </li>
+         <li class="change_screen_ul_li">
+        	<ul class="content_ul">
+                <li>苏宁调架构再谋变局 服务商主宰难长久</li>
+                <li>网店订单积压 今起迎发货高峰</li>
+                <li>互联网公司今年争相投放电视广告</li>
+                <li>汉堡王Twitter账号因受到黑客攻击被暂时关闭</li>
+                <li>中国首例电商代运营联合品牌诞生</li>
+                <li>京东又融资了，可IPO呢？</li>
+				<li>汉堡王Twitter账号因受到黑客攻击被暂时关闭</li>
+            </ul>
+        </li>
+    </ul>
+    
+</div>
+
+
+</body>
+<script src="./js/ai.js" type="text/javascript"></script>
+<script src="./js/slip.js" type="text/javascript"></script>
+<script>
+// 你可能会看到ai.js这个javascript文件，这个文件和slip.js无任何依赖关系，ai.js只是一些常用的函数如：ai.i，这些函数也有非常详细的注释。
+document.addEventListener('DOMContentLoaded', function(){
+	function index(obj, current){ // 取得元素在同辈中的索引值
+		for (var i = 0, length = current.length; i<length; i++) { 
+			if (current[i] == obj ) { 
+				return i; 
+			} 
+		} 
+	}
+    ai.hideUrl();
+	var change_screen_ul = ai.i("change_screen_ul"),
+		slip_status_span = ai.i("slider_status_span"),
+		           tbody = ai.i("tbody"),
+		           minus = ai.ovb.ios() && ai.ovb.safari() ? 60 : 0;
+	tbody.style.height =  ai.wh() - 40 + minus+"px";
+	 
+	function changeScreenEndFun() {
+		slip_status_span.style['webkitTransform'] = 'translateX('+this.page * 60+'px) translateZ(0)';
+		ai.q('#tab_title_ul > li.black').className = '';
+		ai.q('#tab_title_ul > li:nth-child(' + (this.page+1) + ')').className = 'black';
+	}
+	var slipjs = slip('page',change_screen_ul,{
+			num: 4,
+		 endFun: changeScreenEndFun
+	});
+	
+	// 点击便签滑动到指定位置
+	var ul = ai.q('#tab_title_ul');
+	var li = ai.a('#tab_title_ul > li');
+	ai.touchClick(ul,function(e){
+		if(ul.webkitMatchesSelector.call( e.target, 'ul li') ) {
+			var that = e.target;
+			var num = index(that, li);
+			slipjs.toPage(num, 300);
+		}
+	});
+	 
+}, false);
+</script>
+</html>

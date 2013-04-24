@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>SlipJs演示</title>
+<style type="text/css">
+*{
+	padding:0px;
+	margin:0px;
+}
+ul,li{
+	list-style-type: none;			
+}
+html{
+	-webkit-text-size-adjust:100%;
+	-ms-text-size-adjust:100%;
+	-webkit-user-select: none;
+}
+body{
+	background-color:#cbd2d8;
+}
+header{
+	width: 100%;
+	height: 40px;
+	background: -webkit-gradient(linear,left top,left bottom,from(#efefef),to(#d5d5d5));
+	line-height: 40px;
+	text-align: center;
+	color: #333333;
+	font-size: 19px;
+	font-weight: bold;
+	font-family: helvetica;
+	border-bottom: 1px solid #dddddd;
+	-webkit-box-shadow: 0px 0px 9px #949494;
+	position:relative;
+	z-index:1;
+}
+ul li{
+	display:block;
+	height:39px;
+	line-height:39px;
+}
+#bar_list{
+	position:relative;
+	background-color:#FFF;
+	overflow:hidden;
+	padding: 0px 12px 0px 12px;
+	background-image:url(./img/yx.png);
+	background-size:100px 152px;
+	background-repeat: no-repeat;
+	background-position: right bottom;
+	border-top: 1px solid #b4b4b4;
+}
+
+</style>
+</head>
+<body>
+
+<header>极致完美模式</header>
+<div id="bar_list">
+	<ul id="bar_list_ul">
+        <li style="text-align:center;font-weight: bold;">雨巷</li>
+        <li style="text-align:right;"> ——戴望舒</li>
+        <li>撑着油纸伞，独自</li>
+        <li>彷徨在悠长、悠长</li>
+        <li>又寂寥的雨巷，</li>
+        <li>我希望逢着</li>
+        <li>一个丁香一样地</li>
+        <li>结着愁怨的姑娘。</li>
+        <li>她是有</li>
+        <li>丁香一样的颜色，</li>
+        <li>丁香一样的芬芳，</li>
+        <li>丁香一样的忧愁，</li>
+        <li>在雨中哀怨，</li>
+        <li>哀怨又彷徨；</li>
+        <li>她彷徨在这寂寥的雨巷，</li>
+        <li>撑着油纸伞</li>
+        <li>像我一样，</li>
+        <li>像我一样地</li>
+        <li>默默彳亍（ chì chù ）着 </li>
+        <li>冷漠、凄清，又惆怅。</li>
+        <li>她静默地走近</li>
+        <li>走近，又投出</li>
+        <li>太息一般的眼光，</li>
+        <li>她飘过</li>
+        <li>像梦一般地，</li>
+        <li>像梦一般地凄婉迷茫。</li>
+        <li>像梦中飘过</li>
+        <li>一枝丁香的，</li>
+        <li>我身旁飘过这女郎；</li>
+        <li>她静默地远了，远了，</li>
+        <li>到了颓圮（pǐ）的篱墙，</li>
+        <li>走尽这雨巷。</li>
+        <li>在雨的哀曲里，</li>
+        <li>消了她的颜色，</li>
+        <li>散了她的芬芳</li>
+        <li>消散了，甚至她的</li>
+        <li>太息般的眼光，</li>
+        <li>丁香般的惆怅。</li>
+        <li>撑着油纸伞，独自</li>
+        <li>彷徨在悠长、悠长</li>
+        <li>又寂寥的雨巷，</li>
+        <li>我希望飘过</li>
+        <li>一个丁香一样的</li>
+        <li>结着愁怨的姑娘。</li>
+	</ul>
+</div>
+
+
+</body>
+<script src="./js/ai.js" type="text/javascript"></script>
+<script src="./js/slip-min.js" type="text/javascript"></script>
+<script>
+// 你可能会看到ai.js这个javascript文件，这个文件和slip.js无任何依赖关系，ai.js只是一些常用的函数如：ai.i，这些函数也有非常详细的注释。
+window.addEventListener('load', function(){
+	
+	ai.hideUrl();
+	var bar_list_ul = ai.i("bar_list_ul"),
+		bar_list    = ai.i("bar_list"),
+		minus       = ai.ovb.ios() && ai.ovb.safari() && !ai.ovb.ipad() ? -22 : 42;
+		bar_list.style.height =  ai.wh() - minus +"px";
+	var slipjs_yuxiang = slip('px',bar_list_ul,{
+		    perfect: true
+	});
+	ai.resize(function() {
+		ai.hideUrl();
+		bar_list.style.height = ai.wh() - minus +"px";
+		slipjs_yuxiang.refresh();
+	});
+	
+});
+</script>
+</html>

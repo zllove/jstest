@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>SlipJs演示</title>
+    <style type="text/css">
+	*{
+		padding:0px;
+		margin:0px;
+	}
+	ul,li{
+		list-style-type: none;			
+	}
+	html{
+		-webkit-text-size-adjust:100%;
+		-ms-text-size-adjust:100%;
+	}
+	body{
+		background-color:#cbd2d8;
+	}
+	header{
+		width: 100%;
+		height: 45px;
+		background: -webkit-gradient(linear,left top,left bottom,from(#6f85a2),to(#6f85a2));
+		text-shadow: 1px 1px rgba(0, 0, 0, .2);
+		line-height: 45px;
+		text-align: center;
+		color: #F3F3F3;
+		font-size: 19px;
+		font-weight: bold;
+		font-family: helvetica;
+	}
+	.title{
+		text-shadow: 1px 1px white;
+		color:#4c566c;
+		font-weight: bold;
+		margin:20px 10px -10px 10px;
+	}
+	.note{
+		color:#4c566c;
+		text-shadow: 1px 1px white;
+		text-align:center;
+		width:80%;
+		margin:-10px auto 20px; auto;
+		font-size:15px;
+	}
+	ul{
+		border: 1px solid #a1a7ae;
+		margin: 15px 10px 17px 10px;
+		border-radius: 8px;
+		background-color:#FFF;
+	}
+	ul li{
+		display:block;
+		padding: 10px;
+		border-top: 1px solid #cacaca;
+		font-weight: bold;
+		background-image:url(./img/arrow.png);
+		background-size: 19px 39px;
+		background-repeat: no-repeat;
+		background-position: right center;
+	}
+	ul li:last-child {
+		-webkit-border-bottom-left-radius: 8px;
+		border-bottom-left-radius: 8px;
+		-webkit-border-bottom-right-radius: 8px;
+		border-bottom-right-radius: 8px;
+	}
+	ul li:first-child {
+		border-top: 0;
+		-webkit-border-top-left-radius: 8px;
+		border-top-left-radius: 8px;
+		-webkit-border-top-right-radius: 8px;
+		border-top-right-radius: 8px;
+	}
+	</style>
+</head>
+<body>
+
+<header>SlipJs 演示站</header>
+<div class="title">^_^ 请点击下面的列表进入演示例子</div>
+<ul id="ul">
+    <li url="./img.html">触控图片幻灯片</li>
+    <li url="./tab.html">触控TAB切换</li>
+    <li url="./yx.html">惯性滚动 -- 极致完美模式</li>
+    <li url="./sss.html">惯性滚动 -- 极致流畅模式</li>
+    <li url="./qjj.html">惯性滚动 -- 横向模式</li>
+    <li url="./lqz.html">惯性滚动 -- 横向智能模式</li>
+    <li url="./dh.html">惯性滚动 -- 自定义滚动条</li>
+    <li url="./up.html">下拉刷新</li>
+    <li url="./down.html">上拉加载</li>
+</ul>
+<div class="note">部分例子使用了高清图片，打开可能会比较慢，请静静等待~</div>
+</body>
+<script src="./js/ai.js" type="text/javascript"></script>
+<script>
+// 你可能会看到ai.js这个javascript文件，这个文件和slip.js无任何依赖关系，ai.js只是一些常用的函数如：ai.i，这些函数也有非常详细的注释。
+window.addEventListener('load', function(){
+	ai.hideUrl();
+	var ul = ai.i("ul");
+	ai.touchClick(ul,function(e){
+		if(ul.webkitMatchesSelector.call( e.target, 'ul li') ) {
+			var that =  e.target;
+			window.location.href = that.getAttribute("url");
+		}
+	});
+});
+</script>
+</html>

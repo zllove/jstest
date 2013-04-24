@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>SlipJs演示</title>
+	<style type="text/css">
+    *{
+        padding:0px;
+        margin:0px;
+    }
+    ul,li{
+        list-style-type: none;			
+    }
+    html{
+        -webkit-text-size-adjust:100%;
+        -ms-text-size-adjust:100%;
+		-webkit-user-select: none;
+    }
+    body{
+        background-color:#cbd2d8;
+        
+    }
+    header{
+        width: 100%;
+        height: 40px;
+        background: -webkit-gradient(linear,left top,left bottom,from(#6f85a2),to(#6f85a2));
+        text-shadow: 1px 1px rgba(0, 0, 0, .2);
+        line-height: 40px;
+        text-align: center;
+        color: #F3F3F3;
+        font-size: 19px;
+        font-weight: bold;
+        font-family: helvetica;
+    }
+    ul{
+        padding-top: 10px;
+    }
+    ul li{
+        display:block;
+        height:100%;
+        width:20px;
+        line-height:32px;
+        font-weight: bold;
+        border-right-width: 1px;
+        border-right-style: dashed;
+        border-right-color: #f0eeee;
+        float:left;
+        padding:0px 10px 10px 14px;
+        
+    }
+    ul li:last-child {
+        border-right-width: 0px;
+    }
+    ul li:first-child {
+        
+    }
+    #bar_list{
+        position:relative;
+        border: 1px solid #a1a7ae;
+        margin: 10px 10px 10px 10px;
+        border-radius: 8px;
+        background-color:#FFF;
+        overflow:hidden;
+        background-image: url(./img/qjj.png);
+        background-size: 100px 115px;
+        background-repeat: no-repeat;
+        background-position: right bottom;
+    }
+    
+    
+    </style>
+</head>
+<body>
+
+<header>横向模式</header>
+<div id="bar_list">
+	<ul id="bar_list_ul">
+       <li>将进酒</li>
+       <li style="color:#6F85A2;">李白</li>
+       <li>君不见黄河之水天上来，</li>
+       <li>奔流到海不复回。</li>
+       <li>君不见高堂明镜悲白发，</li>
+       <li>朝如青丝暮成雪。</li>
+       <li>人生得意须尽欢，</li>
+       <li>莫使金樽空对月。</li>
+       <li>天生我材必有用，</li>
+       <li>千金散尽还复来。</li>
+       <li>烹羊宰牛且为乐，</li>
+       <li>会须一饮三百杯。</li>
+       <li>岑夫子，</li>
+       <li>丹丘生，</li>
+       <li>将进酒，</li>
+       <li>杯莫停。</li>
+       <li>与君歌一曲，</li>
+       <li>请君为我倾耳听。</li>
+       <li>钟鼓馔玉何足贵，</li>
+       <li>但愿长醉不复醒。</li>
+       <li>古来圣贤皆寂寞，</li>
+       <li>惟有饮者留其名。</li>
+       <li>陈王昔时宴平乐，</li>
+       <li>斗酒十千恣欢谑。</li>
+       <li>主人何为言少钱，</li>
+       <li>径须沽取对君酌。</li>
+       <li>五花马、千金裘，</li>
+       <li>呼儿将出换美酒，</li>
+       <li>与尔同销万古愁。</li>
+	</ul>
+</div>
+
+
+</body>
+<script src="./js/ai.js" type="text/javascript"></script>
+<script src="./js/slip-min.js" type="text/javascript"></script>
+<script>
+// 你可能会看到ai.js这个javascript文件，这个文件和slip.js无任何依赖关系，ai.js只是一些常用的函数如：ai.i，这些函数也有非常详细的注释。
+document.addEventListener('DOMContentLoaded', function(){
+    
+	var bar_list_ul = ai.i("bar_list_ul"),
+		bar_list    = ai.i("bar_list"),
+		minus       = minus       = ai.ovb.ios() && ai.ovb.safari() && !ai.ovb.ipad() ? 0 : 60;
+		var window_width = ai.wh();
+		bar_list.style.height =  window_width - minus+"px";
+		bar_list_ul.style.width = 29 * 45+"px";
+		bar_list_ul.style.height =  window_width - 40 - minus+"px";
+	var slipjs_dh = slip('px',bar_list_ul,{
+			direction: "x",
+				width: ai.ww() - 20
+		});
+	ai.resize(function() {
+		ai.hideUrl();
+		bar_list.style.height = ai.wh() - minus+"px";
+		slipjs_dh.refresh();
+	}, false);
+	ai.hideUrl();
+	 
+}, false);
+
+</script>
+</html>

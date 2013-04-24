@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        #div1{background: #f00;width: 200px;height: 200px;}
+    </style>
+</head>
+<body style="height: 3000px;" >
+<div id="div1"></div>
+<script type="text/javascript">
+    function addEvent(obj, type, fn){
+        if(obj.addEventListener){
+            obj.addEventListener(type, function(){
+                fn.call(obj);
+            }, false);
+        } else if(obj.attachEvent){
+            obj.attachEvent('on' + type, fn);
+        }
+    }
+
+    function fn(e){
+        e = e || event;
+        var bDown = e.detail ? e.detail < 0 : e.wheelDelta > 0;
+
+        if(bDown){
+            this.style.height = this.offsetHeight + 10 + 'px';
+        } else {
+            this.style.height = this.offsetHeight - 10 + 'px';
+        }
+
+        if(e.preventDefault){
+            e.preventDefault();
+        } else {
+            e.returnValue = false;
+        }
+        return false;
+    }
+    onMouseWheel(document.getElementById('div1'));
+    function onMouseWheel(obj){
+        addEvent(obj, 'mousewheel', fn);
+        obj.addEventListener('DOMMouseScroll', fn, false);
+    }
+
+</script>
+</body>
+</html>

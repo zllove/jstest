@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>SlipJs演示</title>
+<style type="text/css">
+*{
+	padding:0px;
+	margin:0px;
+}
+ul,li{
+	list-style-type: none;			
+}
+html{
+	-webkit-text-size-adjust:100%;
+	-ms-text-size-adjust:100%;
+	-webkit-user-select: none;
+}
+body{
+	background-color:#cbd2d8;
+}
+header{
+	width: 100%;
+	height: 40px;
+	background: -webkit-gradient(linear,left top,left bottom,from(#6f85a2),to(#6f85a2));
+	text-shadow: 1px 1px rgba(0, 0, 0, .2);
+	line-height: 40px;
+	text-align: center;
+	color: #F3F3F3;
+	font-size: 19px;
+	font-weight: bold;
+	font-family: helvetica;
+	position:absolute;
+}
+ul li{
+	display:block;
+	height:39px;
+	line-height:39px;
+	padding:0px 12px 0px 12px;
+}
+#bar_list{
+	position: absolute;
+	top:40px;
+	left:0px;
+	width:100%;
+	background-color:#FFF;
+	overflow:hidden;
+}
+
+</style>
+</head>
+<body>
+
+<header>极致流畅模式</header>
+<div id="bar_list">
+	<ul id="bar_list_ul">
+        <li style="text-align:center;font-weight: bold;">三生石</li>
+        <li style="text-align:right;"> ——席慕容</li>
+        <li>那一世，你为古刹，我为青灯；</li>
+        <li>那一世，你为落花，我为绣女；</li>
+        <li>那一世，你为清石，我为月芽儿；</li>
+        <li>那一世，你为强人，我为骏马。</li>
+        <li>我知道，我将生生世世与你结缘。</li>
+        <li>于是我跪在佛前求了500年，</li>
+        <li>求他让我在最美丽的时候遇见你，</li>
+        <li>求他让我们结一段美丽情愫。</li>
+        <li>佛于是把我变成一棵树，</li>
+        <li>长在你必经的路边。</li>
+        <li>阳光下，我慎重地开满了花，</li>
+        <li>朵朵都是我前世的期盼，</li>
+        <li>颤抖的叶是我等待的泪水。</li>
+        <li>然而你，终于无视地走过。</li>
+        <li>在你身后落了一地的，</li>
+        <li>那不是花瓣，那是我凋零的心。</li>
+        <li>我就是这样枯萎了，</li>
+        <li>在我死去的那一瞬间，</li>
+        <li>我看清了你脸上的惊讶，</li>
+        <li>你捧起我的枝叶，泪湿衣襟。</li>
+        <li>那一刻，我含笑。回</li>
+        <li>到佛前，我泪垂不止，长跪不起。</li>
+        <li>佛垂首，叹息。</li>
+        <li>第二世</li>
+        <li>那一世，你为皇帝，我为战俘，</li>
+        <li>你是那样意气风发，少年得志。</li>
+        <li>在我父兄叛乱后，你怒发冲冠。</li>
+        <li>我满身愧疚，满身痛楚。</li>
+        <li>你杀光我的族人，抢掠我回宫，</li>
+        <li>带回一个满身素缟的异族王妃。</li>
+        <li>你说，你等得我好苦，你会爱我，</li>
+        <li>照顾我，生生世世长相厮守。</li>
+        <li>是的，我爱你，在生命的轮回中，</li>
+        <li>我是经过了怎样的期盼与你相逢啊。</li>
+        <li>然而我，</li>
+        <li>抽出你腰间的匕首刺入自己的心脏。</li>
+        <li>我无声的睁大双眼，</li>
+        <li>轻声说：“对不起。”</li>
+        <li>是的，我就这样自绝在你面前，</li>
+        <li>我很残忍，</li>
+        <li>弥留中，我看到你莫大的悲愤与哀伤，</li>
+        <li>我听见整个宫殿回荡你无助的唉啸，</li>
+        <li>你咬破中指，将一滴鲜血点在我的手腕，</li>
+        <li>指天发誓，以此为印，永不弃我，</li>
+        <li>那一刻，我心碎了，你还记得吗?</li>
+        <li>第三世</li>
+        <li>我与苦海中挣扎沉浮，哀求了700年，</li>
+        <li>佛终于肯原谅我，向我伸出莲花圣手，</li>
+        <li>让我再次与你相遇，</li>
+        <li>然而你却不记得我了。</li>
+        <li>轻扶手腕，那血红胎迹竟在发烫。</li>
+        <li>为了这前世未了的溯源，</li>
+        <li>我在你孤傲的身资下握住一把残破旧事。</li>
+        <li>对我微笑吧，</li>
+        <li>即使那微笑里有千里的距离，</li>
+        <li>我也心动。</li>
+        <li>对我怒视吧，</li>
+        <li>若那怒视里有痴心的责备，</li>
+        <li>我亦无悔。</li>
+        <li>然而你只是漠视。</li>
+        <li>每日夜里，我含泪祈祷神明，</li>
+        <li>如果你看了我一眼，</li>
+        <li>我就会幸福的死掉，</li>
+        <li>如果你不看我，</li>
+        <li>我就会痛苦的死掉。</li>
+        <li>是不是爱一个人</li>
+        <li>就是这样生生死死而又心甘情愿？</li>
+        <li>而你，仍然漠视。</li>
+        <li>我等待的心痛苦又幸福，</li>
+        <li>我微笑地看你从我身边无视地走过，</li>
+        <li>看着你的泪花，</li>
+        <li>看着你的目光，</li>
+        <li>从我头顶越过，</li>
+        <li>有你存在的故事里，怎样的结局都好</li>
+        <li>夕阳温柔，</li>
+        <li>听耳边许多新鲜又陌生的笑声响起，</li>
+        <li>于是想：三生已过，来生，你还在吗？</li>
+	</ul>
+</div>
+
+
+</body>
+<script src="./js/ai.js" type="text/javascript"></script>
+<script src="./js/slip-min.js" type="text/javascript"></script>
+<script>
+// 你可能会看到ai.js这个javascript文件，这个文件和slip.js无任何依赖关系，ai.js只是一些常用的函数如：ai.i，这些函数也有非常详细的注释。
+window.addEventListener('load', function(){
+	ai.hideUrl();
+	var bar_list_ul = ai.i("bar_list_ul"),
+		bar_list    = ai.i("bar_list"),
+		minus       = ai.ovb.ios() && ai.ovb.safari() && !ai.ovb.ipad() ? -20 : 40;
+		bar_list.style.height =  ai.wh() - minus +"px";
+	var slipjs_yuxiang = slip('px', bar_list_ul);
+
+	ai.resize(function() {
+		ai.hideUrl();
+		bar_list.style.height = ai.wh() - minus +"px";
+		slipjs_yuxiang.refresh();
+	});
+	
+});
+</script>
+</html>
