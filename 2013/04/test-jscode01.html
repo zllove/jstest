@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    function bindEvent(elem, type, fn){
+        if(elem.attachEvent){
+            var typeRef = '_' + type;
+            if(!elem[typeRef]){
+                elem[typeRef] = [];
+            }
+            for(var i in elem[typeRef]){
+                if(elem[typeRef][i] == fn){
+                    return;
+                }
+            }
+            elem[typeRef].push(fn);
+            elem['on' + type] = function(){
+                for(var i in this[typeRef]){
+                    this[typeRef][i].apply(this, arguments);
+                }
+            }
+        } else {
+            elem.addEventListener(type, fn, false);
+        }
+    }
+
+    var e = {
+        addEvent : function(el, type, fn){
+            
+        }
+    }
+
+</script>
+</body>
+</html>
