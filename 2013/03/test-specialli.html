@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>特别的li-豪情</title>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        ul,li{list-style: none;}
+        body{font:12px/1.5 arial;background: #fff;}
+        .list{ padding:2%;}
+        .list li{width: 49%; height:50px; margin-bottom:2%;background:#ffccff; border:1px solid #ccc;border-radius:10px; display:inline-block;}
+        .list li:nth-child(even){ float:right;}
+        .list li.special{background: #ff0;}
+    </style>
+</head>
+<body>
+<ul class="list">
+    <li>111</li>
+    <li>222</li>
+    <li>333</li>
+    <li>444</li>
+    <li>444</li>
+    <li>444</li>
+    <li>444</li>
+    <li>444</li>
+    <li>444</li>
+    <li>444</li>
+</ul>
+<script type="text/javascript">
+    var oUl = document.querySelectorAll('.list li');
+    var num = 0;
+    for(var i = 0; i < oUl.length; i++){
+        num = 4 * i + 1;
+        oUl[num + 1] && (oUl[num].className = oUl[num + 1].className = 'special');
+    }
+
+</script>
+</body>
+</html>
