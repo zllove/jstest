@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+	<title>test</title>
+	<style type="text/css">
+		#div1{position: absolute;top:40px;left: 0;width: 150px;height: 150px;background:#f60;}
+	</style>
+</head>
+<body>
+<input type="button" value="开始运动" onclick="startMove()" />
+<div id="div1"></div>
+<script type="text/javascript">
+	var timer = null;
+	
+	function startMove(){
+		var oDiv = document.getElementById('div1'),
+			iSpeed = 10;
+
+		clearInterval(timer);
+		timer = setInterval(function(){
+			if (oDiv.offsetLeft >= 300) {
+				clearInterval(timer);
+			} else {
+				oDiv.style.left = oDiv.offsetLeft + iSpeed + 'px';	
+			}
+		}, 30);
+	}
+</script>
+</body>
+</html>
