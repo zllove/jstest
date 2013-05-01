@@ -7,14 +7,14 @@
 		*{margin:0;padding:0;}
 		body{background:#fff;}
 		img{border:none 0;}
-		#img1{filter:alpha(opacity:30);opacity:0.3;}
+		#img1{filter:alpha(opacity=30);opacity:0.3;}
 	</style>
 </head>
 <body>
 <img src="http://i4.vanclimg.com/users/26/20130426/focus/focus_cs_1304266.jpg" id="img1" alt="">	
 <script type="text/javascript">
 	var oImg = document.getElementById('img1'),
-		alpha = 30,
+		alpha = 30, // 当前图片的透明度
 		timer = null;
 
 	oImg.onmouseover = function() {

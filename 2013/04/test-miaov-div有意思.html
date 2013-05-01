@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#div1{width:200px;height:200px;background:#f60;}
+	</style>
+</head>
+<body>
+<div id="div1"></div>	
+<script type="text/javascript">
+	function getStyle(obj, attr){
+	    if (obj.currentStyle) { // ie
+	    	alert(1);
+	    	return obj.currentStyle[attr];
+	    } else { // firefox,chrome
+	    	return getComputedStyle(obj, false)[attr];
+	    }
+	}
+
+	var oDiv = document.getElementById('div1');
+	console.log(getStyle(oDiv, 'width'));
+
+	/*
+	setInterval(function(){
+		oDiv.style.width = oDiv.offsetWidth - 1 + 'px';
+	}, 30);
+*/
+</script>	
+</body>
+</html>
