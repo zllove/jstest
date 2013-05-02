@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		body{font:12px/1.5 arial;background:#fff;}
+		#img1{filter:alpha(opacity=30);opacity:0.3;}
+	</style>
+</head>
+<body>
+	<img src="http://i4.vanclimg.com/users/26/20130426/focus/focus_cs_1304266.jpg" alt="" id="img1">
+<script type="text/javascript">
+	var oImg = document.getElementById('img1'),
+		alpha = 30,
+		timer = null;
+
+	oImg.onmouseover = function(){
+		startMove(100);
+	}
+
+	oImg.onmouseout = function(){
+		startMove(30);
+	}
+
+	function startMove(iTarget){
+		var iSpeed = 0;
+
+		clearInterval(timer);
+		timer = setInterval(function(){
+			if (alpha < iTarget){
+				iSpeed = 10;
+			} else {
+				iSpeed = -10;
+			}
+
+			if (alpha == iTarget){
+				clearInterval(timer);
+			} else {
+				alpha += iSpeed;
+				oImg.style.filter = 'alpha(opacity=' + alpha + ')';
+				oImg.style.opacity = alpha / 100;
+			}
+		}, 30);
+	}
+
+</script>	
+</body>
+</html>

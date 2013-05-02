@@ -29,10 +29,145 @@
         }
     }
 
-    var e = {
+    var sbi = {
         addEvent : function(el, type, fn){
-            
+            var evTypeRef = '_' + type,
+                guid = +new Date();
+
+            if(!el.nodeType) return;
+            if(!el['sbiEvents']){
+                Events['sbi' + guid] = {};
+                Events['sbi' + guid][evTypeRef] = [];
+                var orgEvent = el['on' + type];
+                if(orgEvent) Events['sbi' + guid][evTypeRef][0] = orgEvent;
+                el['sbiEvent'] = Events['sbi' + guid];
+            } else {
+                if(!el['sbiEvents'][evTypeRef]){
+                    el['sbiEvents'][evTypeRef] = [];
+                    var orgEvent = el['on' + type];
+                    if(orgEvent) el['sbiEvents'][evTypeRef][0] = orgEvent;
+                } else {
+                    for(var i = 0, len = el['sbiEvents'][evTypeRef].length; i < len; i++){
+                        if(fn === el['sbiEvents'][evTypeRef][i]) return;
+                    }
+                }
+            }
+            el['sbiEvent'][evTypeRef].push(fn);
+            el['on' + type] = _EventHandler;
+            return this;
+        },
+        removeEvent : function(el, type, fn){
+            var eventsObj = el['sbiEvents'],
+                evTypeRef = '_' + type,
+                eType, re;
+            var ie = sbi.isIE - 0;
+
+            if(!eventsObj) return;
+            eType = eventsObj[evTypeRef];
+            if(!eType) return;
+            if(arguments.length === 1){
+                if(ie && ie < 8){
+                    el.removeAttribute('sbiEvents');
+                } else {
+                    delete el['sbiEvents'];
+                }
+            } else {
+                if(fn){
+                    re = sbi.array(eType).delete(fn);
+                } else {
+                    re = sbi.deleteObjectItem(eventsObj, evTypeRef);
+                }
+                el['sbiEvents'] = re;
+            }
+            return this;
+        },
+        _findElement : function(fn){
+            return function(e){
+                var parent = e.relatedTarget;
+                while(parent && parent != this) parent = parent.parentNode;
+                if(parent != this) fn.call(this, e);
+            }
         }
+    }
+
+    sbi.each(('blur focus focusin focusout load resize scroll unload click dblclick mousedown mouseup mousemove mouseover mouseout' +
+            'change select submit keydown keypress keyup error contextmenu').split(' '), function(i, type){
+        sbi.prototype[type] = function(fn){
+            this.each(function(){
+                if(!this.nodeType) return;
+                fn ? sbi.addEvent(this, type, fn) : sbi.fireEvent(this, type);
+            });
+            return this;
+        }
+    });
+
+    // 给Object添加一个create方法，用来生成一个继承参数o的实例
+    if(typeof Object.create !== 'function'){
+        Object.create = function(o){
+            function F(){};
+            F.prototype = o;
+            return new F();
+        }
+    }
+
+    var Model = {
+        inherited : function(){},
+        created : function(){},
+        prototype : {
+            init : function(){}
+        },
+        create : function(){
+            var object = Object.create(this); // 生成一个继承Model所有方法的实例
+            object.parent = this; // parent属性引用Model对象
+            object.prototype = object.fn = Object.create(this.prototype); // 继承Model.prototype里的所有方法
+            object.created(); // 估计是设置已经创建的状态
+            this.inherited(object); // 执行初始化操作
+            return object;
+        },
+        init : function(){
+            var instance = Object.create(this.prototype); // 创建一个继承Model.prototype的实例
+            instance.parent = this; // parent属性引用Model对象
+            instance.init.apply(instance, arguments); // 执行Model.prototype.init方法
+            return instance;
+        }
+    };
+
+    var Asset = Model.create(); // 创建一个继承了Model以及Modelprototype里的所有方法的实例
+    var User = Model.create();
+    var user = User.init(); // 创建一个继承了Model.prototype里的所有方法的实例
+
+    String.prototype.format = function(arg){
+        var result = this;
+        if(arguments.length > 0){
+            /*
+            var str = '<div><h1>({name})</h1><p>({content})</p></div>'
+            str.format({
+                name : 'xxoo',
+                content : 'xxxxxxooooo'
+            }) ==> '<div><h1>xxoo</h1><p>xxxoooooo</p></div>'
+            */
+
+            if(arguments.length == 1 && typeof args == 'object'){ // 如果参数是一个对象
+                for(var key in args){
+                    if(args[key] != undefined){
+                        var reg = new RegExp('({' + key + '})', 'g'); // 将对象的key生成正则cc
+                        result = result.replace(reg, args[key]); // 用生成的正则匹配字符串，替换成对象中key所对应的值
+                    }
+                }
+            } else {
+                /**
+                 * var str = '<div><h1>({1})</h1><p>({2})</p></div>'
+                 * str.format('xx00', 'xxxxx00000') ==><div><h1>xxoo</h1><p>xxxxx000000</p></div>
+                 */
+                for(var i = 0; i < arguments.length; i++){ // 如果不是对象，则按顺序进行替换
+                    if(arguments[i] != undefined){
+                        var reg = new RegExp('({[' + i + ']})', 'g'); // 将参数的索引生成与此同时
+                        result = result.replace(reg, arguments[i]); // 替换
+                    }
+                }
+            }
+        }
+        return result;
     }
 
 </script>
