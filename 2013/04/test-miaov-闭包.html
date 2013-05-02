@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	function foo(){
+	    var a = 1;
+	    return function(){
+	    	a++;
+	    	alert(a);
+	    }
+	}
+
+	var f = foo();
+	f();
+	f();
+
+</script>	
+</body>
+</html>
