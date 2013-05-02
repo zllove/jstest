@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+<dl id="dl">
+    <dt>Wy</dt>
+    <dd><a href="javascript:void(0)">Wyoming</a></dd>
+    <dt>Washington</dt>
+    <dd><a href="javascript:void(0)">Bellingham</a></dd>
+    <dd><a href="javascript:void(0)">Moses Lake</a></dd>
+    <dd><a href="javascript:void(0)">Olympia</a></dd>
+    <dd><a href="javascript:void(0)">Seattle</a></dd>
+    <dd><a href="javascript:void(0)">Spokane</a></dd>
+    <dd><a href="javascript:void(0)">Tri-Cities (WA)</a></dd>
+    <dd><a href="javascript:void(0)">Walla Walla</a></dd>
+    <dd><a href="javascript:void(0)">Yakima</a></dd>
+</dl>
+<script type="text/javascript">
+    $('#dl dd').on('click', function(){
+        alert($(this).parent('dt').html());
+    });
+</script>
+</body>
+</html>

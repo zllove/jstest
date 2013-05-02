@@ -6,7 +6,17 @@
     <title>test</title>
 </head>
 <body>
-<label onmouseover="document.getElementById('box').style.display='block'" onmouseout="document.getElementById('box').style.display='none'"><input type="checkbox">自动</label>
-<div class="box" id="box">1111</div>
+<script type="text/javascript">
+    function a(){
+        var b = 0;
+        function c(){
+            alert(b++);
+        }
+        for(var i = 0; i < 10; i++){
+            c();
+        }
+    }
+    a();
+</script>
 </body>
 </html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#div1{position:absolute;width:150px;height:150px;left:00px;background:#f00;}
+
+	</style>
+</head>
+<body>
+	<input type="submit" value="测试" id="btn">
+	<div id="div1"></div>
+	<span style="position:absolute;left:300px;width:1px;height:300px;background:black;"></span>
+<script type="text/javascript">
+	var oBtn = document.getElementById('btn');
+	var oDiv = document.getElementById('div1');
+	var timer = null;
+
+	oBtn.onclick = function() {
+		startMove(300);
+	}
+
+	function startMove(iTarget){
+		clearInterval(timer);
+
+		timer = setInterval(function() {
+			var iSpeed = (iTarget - oDiv.offsetLeft) / 8;
+			iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+
+			if (oDiv.offsetLeft == 300) { // 是否到达终点
+				clearInterval(timer); // 到达终点
+			} else {
+				oDiv.style.left = oDiv.offsetLeft + iSpeed + 'px';
+			}
+
+			document.title = oDiv.offsetLeft + ',ispeed = ' + iSpeed;
+		}, 30);
+	}
+
+</script>	
+</body>
+</html>

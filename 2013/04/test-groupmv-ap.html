@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<input type="submit" value="新增" id="btn1">	
+<input type="submit" value="删除" id="btn2">	
+<script type="text/javascript">
+	var oBtn = document.getElementById('btn1');
+	var oBtn2 = document.getElementById('btn2');
+	var oDiv = null;
+
+	oBtn.onclick = function(){
+		if (oDiv == null){
+			oDiv = document.createElement('div');
+			oDiv.innerHTML = '测试的div';
+			document.body.appendChild(oDiv);	
+		} else {
+			alert('已新增！');
+		}
+	}
+
+	oBtn2.onclick = function(){
+		if (oDiv){
+			document.body.removeChild(oDiv)
+			oDiv = null;
+		} else {
+			alert('已删除！');
+		}
+	}
+
+</script>	
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<style>
+    *{ margin:0px; padding:0px; }
+    li{ list-style:none; }
+    #kk{ width:320px; height:50px; }
+    #kk ul li{ width:100px; height:50px; background-color:#999; float:left; text-align:center; line-height:50px; }
+    #ss ul li{ width:320px; height:300px; background-color:#FC9; display:none; }
+    #kk ul li.activ{ background-color:#C36; }
+    #ss ul li.active{ display:block; }
+
+</style>
+<script>
+    window.onload = function () {
+        var sdiv = document.getElementById('kk');
+        var kli = sdiv.document.getElementsByTagName('li');
+        var ndiv = document.getElementById('ss');
+        var sli = ndiv.document.getElementsByTagName('li');
+        for (var i = 0; i < kli.length; i++) {
+            kli[i].index = i;
+            kli[i].onmouseover = function () {
+                for (var i = 0; i < kli.length; i++) {
+                    kli[i].className = '';
+                }
+                this.className = 'activ';
+                sli[this.index].className = 'active';
+
+            }
+        }
+
+    }
+</script>
+<body>
+<div id="kk">
+    <ul>
+        <li class="activ">按钮一</li>
+        <li style="margin-left:10px;">按钮二</li>
+        <li style="margin-left:10px;">按钮三</li>
+    </ul>
+</div>
+
+
+<div id="ss">
+    <ul>
+        <li class="active"></li>
+        <li></li>
+        <li></li>
+
+    </ul>
+</div>
+
+
+</body>
+
+</body>
+</html>
