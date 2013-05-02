@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+	<title>test</title>
+	<style type="text/css">
+		#div1{position: absolute;top:40px;left: 00px;width: 150px;height: 150px;background:#f60;}
+	</style>
+</head>
+<body>
+<input type="button" value="开始运动" onclick="startMove(300)" />
+<span style="position:absolute;left:300px;width:1px;height:300px;background:#000;"></span>
+<div id="div1"></div>
+<script type="text/javascript">
+	var timer = null;
+	
+	function startMove(iTarget){
+		var oDiv = document.getElementById('div1'),
+			iSpeed = 0;
+
+		if (oDiv.offsetLeft < iTarget) {
+			iSpeed = 7;
+		} else {
+			iSpeed = -7;
+		}
+
+		clearInterval(timer);
+		timer = setInterval(function(){
+			if (Math.abs(oDiv.offsetLeft - iTarget) < 7) {
+				clearInterval(timer);
+				oDiv.style.left = iTarget + 'px';
+			} else {
+				oDiv.style.left = oDiv.offsetLeft + iSpeed + 'px';	
+			}
+		}, 30);
+	}
+</script>
+</body>
+</html>

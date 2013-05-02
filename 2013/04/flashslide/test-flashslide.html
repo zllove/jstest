@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		body{background:#333;}
+		ul{padding:0;margin:0;}
+		li{list-style:none;}
+		img{border:0;}
+		.play{width:400px;height:430px;margin:50px auto 0;background:#999;font:12px Arial;border:10px solid #000;border-radius:5px;}
+		.big_pic{width:400px;height:320px;overflow:hidden;border-bottom:1px solid #ccc;background:#000;position:relative;}
+		.big_pic li{width:400px;height:320px;overflow:hidden;position:absolute;top:0;left:0;z-index:0;background:url(loading.gif) no-repeat center center;}
+		.mark_left{width:200px;height:320px;position:absolute;left:0;top:0;background:red;filter:alpha(opacity:0);opacity:0;z-index:3000;}
+		.mark_right{width:200px;height:320px;position:absolute;left:200px;top:0;background:green;filter:alpha(opacity:0);opacity:0;z-index:3000;}
+		.big_pic .prev{width:60px;height:60px;background:url(btn.gif) no-repeat;position:absolute;top:130px;left:10px;z-index:3001;cursor:pointer;filter:alpha(opacity:0);opacity:0;}
+		.big_pic .next{width:60px;height:60px;background:url(btn.gif) no-repeat 0 -60px;position:absolute;top:130px;right:10px;z-index:3001;cursor:pointer;filter:alpha(opacity:0);opacity:0;}
+		.big_pic .text{position:absolute;left:10px;top:302px;z-index:3000;color:#ccc;}
+		.big_pic .length{position:absolute;right:10px;bottom:4px;z-index:3000;color:#ccc;}
+		.big_pic .bg{width:400px;height:25px;background:#000;filter:alpha(opacity=60);opacity:0.6;position:absolute;z-index:2999;bottom:0;left:0;}
+		.big_pic li img{width:400px;height:320px;}
+		/*.big_pic li img{width:100%;height:100%;}*/
+		.small_pic{width:380px;height:94px;position:relative;top:7px;left:10px;overflow:hidden;}
+		.small_pic ul{width:20000px;height:94px;position:absolute;top:0;left:0;}
+		.small_pic li{width:120px;height:94px;float:left;padding-right:10px;background:url(loading.gif) no-repeat center center;cursor:pointer;filter:alpha(opacity=60);opacity:0.6;}
+		.small_pic img{width:120px;height:94px;}
+	</style>
+	<script type="text/javascript" src="../move.js"></script>
+</head>
+<body>
+<div id="playimages" class="play">
+    <ul class="big_pic">
+		<div class="prev"></div>
+		<div class="next"></div>
+
+		<div class="text">加载图片说明……</div>
+		<div class="length">计算图片数量……</div>
+		
+		<a class="mark_left" href="javascript:;"></a>
+		<a class="mark_right" href="javascript:;"></a>
+		<div class="bg"></div>
+		
+        <li style="z-index:1;"><img src="http://img1.gtimg.com/6/646/64695/6469556_980x1200_0.jpg" /></li>
+        <li><img src="http://img1.gtimg.com/sports/pics/hv1/62/188/1315/85555877.jpg" /></li>
+        <li><img src="http://img1.gtimg.com/sports/pics/hv1/108/8/1316/85575048.jpg" /></li>
+        <li><img src="http://img1.gtimg.com/sports/pics/hv1/12/193/1254/81590577.jpg" /></li>
+        <li><img src="http://img1.gtimg.com/sports/pics/hv1/118/88/1308/85075258.jpg" /></li>
+        <li><img src="http://img1.gtimg.com/sports/pics/hv1/121/5/1270/82583146.jpg" /></li>
+    </ul>
+    <div class="small_pic">
+        <ul>
+            <li style="filter:100;opacity:1;"><img src="http://img1.gtimg.com/6/646/64695/6469556_980x1200_0.jpg" /></li>
+            <li><img src="http://img1.gtimg.com/sports/pics/hv1/62/188/1315/85555877.jpg" /></li>
+	        <li><img src="http://img1.gtimg.com/sports/pics/hv1/108/8/1316/85575048.jpg" /></li>
+	        <li><img src="http://img1.gtimg.com/sports/pics/hv1/12/193/1254/81590577.jpg" /></li>
+	        <li><img src="http://img1.gtimg.com/sports/pics/hv1/118/88/1308/85075258.jpg" /></li>
+	        <li><img src="http://img1.gtimg.com/sports/pics/hv1/121/5/1270/82583146.jpg" /></li>
+        </ul>
+    </div>
+</div>
+ 
+	
+<script type="text/javascript">
+	function getByClass(oParent, cls){
+		if (document.getElementsByClassName) {
+			return (oParent || document).getElementsByClassName(cls);
+		} else {
+			var oAll = document.all,
+				res = [];
+
+			for(var i = 0; i < oAll.length; i++){
+				if (oAll[i].className == cls) {
+					res.push(oAll[i]);
+				}
+			}
+			return res;
+		}
+	}
+
+	function fade(obj, val){
+	    obj.style.filter = 'alpha(opacity:' + val + ')';
+	    obj.style.opacity = val / 100;
+	}
+
+	function slide(){
+		var oDiv = document.getElementById('playimages'),
+			oUl = getByClass(oDiv, 'big_pic')[0],
+			aLi = oUl.getElementsByTagName('li'),
+			oMarkLeft = getByClass(oDiv, 'mark_left')[0],
+			oMarkRight = getByClass(oDiv, 'mark_right')[0],
+			oBtnPrev = getByClass(oDiv, 'prev')[0],
+			oBtnNext = getByClass(oDiv, 'next')[0],
+			oSmallUl = getByClass(oDiv, 'small_pic')[0].getElementsByTagName('ul')[0],
+			aSmallLi = oSmallUl.getElementsByTagName('li'),
+			iMinZindex = 2,
+			timer = null,
+			iNow = 0;
+
+		// oSmallUl.style.width = aSmallLi.length * aSmallLi[0].offsetWidth + 'px';
+
+		oBtnPrev.onmouseover = oMarkLeft.onmouseover = function(){
+			startMove(oBtnPrev, 'opacity', 100);
+		}
+		oMarkLeft.onmouseout = function(){
+			startMove(oBtnPrev, 'opacity', 0);
+		}
+		oBtnNext.onmouseover = oMarkRight.onmouseover = function(){
+			startMove(oBtnNext, 'opacity', 100);
+		}
+		oMarkRight.onmouseout = function(){
+			startMove(oBtnNext, 'opacity', 0);
+		}
+
+		// click small img display big img
+		for(var i = 0; i < aSmallLi.length; i++){
+			aSmallLi[i].index = i;
+			aSmallLi[i].onmouseover = function(){
+				startMove(this, 'opacity', 100);
+			}
+			aSmallLi[i].onmouseout = function(){
+				if (this.index != iNow) {
+					startMove(this, 'opacity', 60);
+				}
+			}
+
+			aSmallLi[i].onclick = function(){
+				if (this.index == iNow) { return; }
+				iNow = this.index;
+
+				tab();
+			}
+		}
+
+		function tab(){
+		    for(i = 0; i < aSmallLi.length; i++){
+				startMove(aSmallLi[i], 'opacity', 60);
+			}
+			startMove(aSmallLi[iNow], 'opacity', 100);
+			aLi[iNow].style.zIndex = iMinZindex++;
+			aLi[iNow].style.height = 0;
+
+			startMove(aLi[iNow], 'height', oUl.offsetHeight);
+			if (iNow == 0) {
+				startMove(oSmallUl, 'left', 0);
+			} else if (iNow == aSmallLi.length - 1) {
+				startMove(oSmallUl, 'left', -(iNow - 2) * aSmallLi[0].offsetWidth);
+			} else {
+				startMove(oSmallUl, 'left', -(iNow - 1) * aSmallLi[0].offsetWidth);	
+			}
+			
+		}
+
+		oBtnPrev.onclick = function(){
+			iNow --;
+			if (iNow == -1) { iNow = aSmallLi.length - 1; }
+			tab();
+		}
+
+		oBtnNext.onclick = function(){
+			iNow ++;
+			if (aSmallLi.length == iNow) { iNow = 0; }
+			tab();
+		}
+
+		function auto(){
+		    timer = setInterval(function(){
+				oBtnNext.onclick();
+			}, 1700);
+		}
+
+		// auto();
+
+		oDiv.onmouseover = function(){
+			clearInterval(timer);
+		}
+		oDiv.onmouseout = function(){
+			auto();
+		}
+		
+
+	}
+
+	slide();
+
+</script>	
+</body>
+</html>

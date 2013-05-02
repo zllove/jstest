@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<style>
+* {margin:0; padding:0;}
+#div1 {position:relative; border:1px solid black; width:680px; height:132px; margin:10px auto; overflow:hidden;}
+#div1 ul {position:absolute; left:0;}
+#div1 ul li {list-style:none; float:left; width:150px; height:112px; padding:10px;}
+#div1 ul li img {width:150px;height:112px;}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无缝滚动</title>
+
+</head>
+
+<body>
+<a href="javascript:;">←</a>
+<a href="javascript:;">→</a>
+<div id="div1">
+	<ul>
+    	<li><img src="http://img1.gtimg.com/sports/pics/hv1/216/50/1304/84805566.jpg" /></li>
+    	<li><img src="http://img1.gtimg.com/sports/pics/hv1/144/136/1292/84047124.jpg" /></li>
+    	<li><img src="http://img1.gtimg.com/sports/pics/hv1/211/160/1300/84573511.jpg" /></li>
+    	<li><img src="http://img1.gtimg.com/v/pics/hv1/48/33/1315/85516338.jpg" /></li>
+    </ul>
+</div>
+<script type="text/javascript">
+	var oDiv = document.getElementById('div1');
+	var oUl = oDiv.getElementsByTagName('ul')[0];
+	var aLi = oUl.getElementsByTagName('li');
+	var aA = document.getElementsByTagName('a');
+	var timer = null;
+	var iSpeed = 5;
+
+	oUl.innerHTML += oUl.innerHTML;
+	oUl.style.width = aLi[0].offsetWidth * aLi.length + 'px';
+
+	timer = setInterval(fnMove, 30);
+
+	function fnMove(){
+	    if(oUl.offsetLeft < -oUl.offsetWidth / 2){
+			oUl.style.left = 0;
+		} else if(oUl.offsetLeft > 0){
+			oUl.style.left = -oUl.offsetWidth/2 + 'px';
+		}
+
+		oUl.style.left = oUl.offsetLeft + iSpeed + 'px';
+	}
+
+	aA[0].onclick = function(){
+		iSpeed = -5;
+	}
+
+	aA[1].onclick = function(){
+		iSpeed = 5;
+	}
+
+	oUl.onmouseover = function(){
+		clearInterval(timer);
+	}
+	oUl.onmouseout = function(){
+		timer = setInterval(fnMove, 30);
+	}
+
+</script>
+</body>
+</html>
