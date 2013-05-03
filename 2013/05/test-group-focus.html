@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<input type="text" class="ipt-playername" id="input1" value="xuduoduo">
+<a href="#" class="ipt-closed" id="btn1">X</a>
+<script type="text/javascript">
+    var oBtn = document.getElementById('btn1');
+    var oBtn2 = document.getElementById('btn2');
+    var oInput = document.getElementById('input1');
+
+    oBtn.onclick = function(){
+        onFocus(oInput);
+    }
+    var flag = true;
+    function onFocus(object) {
+        var len = object.value.length;
+        if (object.createTextRange) {
+            var range = object.createTextRange();
+            range.moveStart('character',len);
+            range.collapse();
+            range.select();
+        } else if (object.setSelectionRange) {
+            if (flag) {
+                setTimeout(function () {
+                    flag = false;
+                    object.focus();
+                }, 10);
+                object.blur();
+                object.addEventListener('blur', onBlur, false);
+            }
+            object.setSelectionRange(object.value.length, object.value.length);
+        }
+
+        var str = object.value;
+        function delVal(){
+            if(str == ''){
+                alert('已删完!');
+            }
+            return str = str.slice(0, -1);
+        };
+        object.value = delVal();
+    }
+    function onBlur(object) {
+        flag = true;
+        this.removeEventListener('blur', onBlur, false);
+    }
+
+</script>
+</body>
+</html>
