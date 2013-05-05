@@ -24,28 +24,30 @@
 	}
 
 	function getStyle(obj, attr){
-	    if (obj.currentStyle) { // ie
-	    	return obj.currentStyle[attr];
-	    } else { // firefox,chrome
+	    if(obj.currentStyle){
+	    	return obj.currentStyle(attr);
+	    } else {
 	    	return getComputedStyle(obj, false)[attr];
 	    }
 	}
 
 	function startMove(obj, iTarget){
-		clearInterval(obj.timer);
+	    clearInterval(obj.timer);
 
-		obj.timer = setInterval(function(){
-			var iCur = parseInt(getStyle(obj, 'width'));
-			var iSpeed = (iTarget - iCur) / 8;
-			iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+	    obj.timer = setInterval(function(){
+	    	var iCur = parseInt(getStyle(obj, 'width'));
+	    	var iSpeed = (iTarget - iCur) / 8;
+	    	iSpeed = (iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed));
 
-			if (iCur == iTarget) {
-				clearInterval(obj.timer);
-			} else {
-				obj.style.width = iCur + iSpeed + 'px';
-			}
-		}, 30);	    
+	    	if(iCur == iSpeed){
+	    		clearInterval(obj.timer);
+	    	} else {
+	    		iCur += iSpeed;
+	    		obj.style.width = iCur + 'px';
+	    	}
+	    }, 30);
 	}
+
 </script>	
 </body>
 </html>
