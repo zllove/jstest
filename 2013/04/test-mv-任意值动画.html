@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		div{width:200px;height:50px;margin-top:20px;background:#f00;}
+	</style>
+</head>
+<body>
+<div></div>	
+<div></div>	
+<div>我是一个兵</div>	
+<div>我是一个兵</div>	
+<script type="text/javascript">
+	
+	/**
+	 * [aaa description]
+	 * @param  {[type]} a [description]
+	 * @param  {[type]} b [description]
+	 * @return {[type]}   [description]
+	 */
+	function aaa(a, b){
+		return null
+	}
+	var aDiv = document.getElementsByTagName('div');
+
+	aDiv[0].onclick = function(){
+		var a   = 1;
+			b   = 2222,
+			ccc = 4;
+		startMove(this, 'width', 500);
+	}
+
+	aDiv[1].onclick = function(){
+		startMove(this, 'height', 150);
+	}
+
+	aDiv[2].onclick = function(){
+		startMove(this, 'fontSize', 50);
+	}
+
+	aDiv[3].onclick = function(){
+		startMove(this, 'opacity', 40);
+	}
+
+	function startMove(){
+		
+	}
+	
+</script>	
+</body>
+</html>

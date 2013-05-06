@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		div{width:600px;height:50px;margin-bottom:15px;background:red;}
+	</style>
+</head>
+<body>
+<div></div>
+<div style="width:200px;"></div>
+<div></div>	
+<span style="width:1px;height:300px;position:absolute;top:0;left:300px;background:black;"></span>
+<script type="text/javascript">
+	var aDiv = document.getElementsByTagName('div');
+	var timer = null;
+
+	for(var i = 0; i < aDiv.length; i++){
+		aDiv[i].onmouseover = function(){
+			startMove(this, 300);
+		}
+
+		aDiv[i].onmouseout = function(){
+			startMove(this, 300);
+		}
+	}
+
+	function startMove(obj, iTarget){
+		clearInterval(obj.timer);
+
+		obj.timer = setInterval(function(){
+			var iSpeed = (iTarget - obj.offsetWidth) / 8;
+			// iSpeed = Math.floor(iSpeed);
+			iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+
+			if (obj.offsetWidth == iTarget){
+				clearInterval(obj.timer);
+			} else {
+				obj.style.width = obj.offsetWidth + iSpeed + 'px';
+			}
+			document.title = iSpeed + ' | ' + obj.offsetWidth;
+		}, 30);
+	}
+	// 这里边有三个地方需要分享：
+	// 1. clearInterval(obj.timer); 如果不清除的话，动画会累加。
+	// 2. obj.timer 这是如果不绑定在obj.timer上的话，共用一个timer的话，鼠标在div中来回切换，会造成离开后动画停止的现象。
+	// 3. Math.ceil(), Math.floor() 这两个方法的使用，主要是当iSpeed大于零的情况下，如果不取整的话，速度由于前面是被除8得到的，所以是个小数，只有取整了才会为零，为零的目的是为了达到终点，刚好卡在那个点处。
+	// Math.floor(); 是因为负数的原因，向相反的方法取整
+</script>
+</body>
+</html>
