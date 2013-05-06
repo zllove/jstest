@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<input type="text" class="ipt-playername" id="input1" value="xuduoduo">
+<a href="#" class="ipt-closed" id="btn1">X</a>
+<script type="text/javascript">
+    var oBtn = document.getElementById('btn1');
+    var oInput = document.getElementById('input1');
+
+    oBtn.onclick = function(){
+        onFocus(oInput);
+    }
+    function onFocus(object) {
+        var str = object.value;
+        if(str == ''){
+            alert('已删完!');
+        }
+        object.value = '';
+        object.focus();
+    }
+
+</script>
+</body>
+</html>

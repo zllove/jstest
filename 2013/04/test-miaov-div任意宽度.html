@@ -25,7 +25,6 @@
 
 	function getStyle(obj, attr){
 	    if (obj.currentStyle) { // ie
-	    	alert(1);
 	    	return obj.currentStyle[attr];
 	    } else { // firefox,chrome
 	    	return getComputedStyle(obj, false)[attr];

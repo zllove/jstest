@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .a{ background: #f00;width:200px; height:200px; position:absolute;left: 0;}
+        .b{ position:relative;width:200px; height:200px; border:10px solid #ccc; overflow:hidden;}
+    </style>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+<div class="b">
+    <div class="a"></div>
+</div>
+<script type="text/javascript">
+    setInterval(function(){
+        $('.a').animate({ left : '-200'}, 1200, function(){
+            $('.a').css({left : 200});
+            $('.a').animate({left : '0'}, 1200);
+        });
+    }, 2000);
+</script>
+</body>
+</html>

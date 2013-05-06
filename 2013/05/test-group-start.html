@@ -6,22 +6,17 @@
     <title>test</title>
 </head>
 <body>
+<div id="div1"></div>
 <script type="text/javascript">
-    function a(){
-        var b = 0;
-        function c(){
-            alert(b++);
+    var oDiv = document.getElementById('div1');
+    var str = '';
+    for(var i = 1; i < 16; i ++){
+        for(var j = 1; j <= i; j++){
+            str += '*';
         }
-        for(var i = 0; i < 10; i++){
-            c();
-        }
+        str += '<br>';
     }
-    a();
-
-    alert(undefined == null);
-    alert(null == 0);
-    alert(NaN == NaN);
-    alert(null == 1);
+    oDiv.innerHTML = str;
 </script>
 </body>
 </html>
