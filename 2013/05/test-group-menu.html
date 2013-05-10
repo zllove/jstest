@@ -22,6 +22,7 @@
             var oContent = document.getElementById('content');
             var timer = null;
             var tis = null;
+            var bDrag = true;
             //关闭面板
             clearTimeout(timer);
             oClose.onclick = function () {
@@ -55,7 +56,9 @@
 
             //鼠标移上隐藏面板
             oContent.onmouseout = function () {
-                hidePanel();
+                if(bDrag) {
+                    hidePanel();
+                }
             }
 
             function hidePanel(){
@@ -73,19 +76,17 @@
 
             //鼠标移动拖动面板
             oContent.onmousedown = function (ev) {
-                var oEvent = ev || event;
-
-                var oContent = document.getElementById('content');
-                var disX = 0;
-                var disY = 0;
+                var oEvent = ev || event,
+                    disX = 0,
+                    disY = 0;
 
                 disX = oEvent.clientX - oContent.offsetLeft;
                 disY = oEvent.clientY - oContent.offsetTop;
                 //移动的同时，判断面板的位置
                 document.onmousemove = function (ev) {
-                    var oEvent = ev || event;
-                    var l = oEvent.clientX - disX;
-                    var t = oEvent.clientY - disY;
+                    var oEvent = ev || event,
+                        l = oEvent.clientX - disX,
+                        t = oEvent.clientY - disY;
 
                     if (l < 0) {
                         l = 0;
@@ -106,6 +107,8 @@
                 document.onmouseup = function () {
                     document.onmousemove = null;
                     document.onmouseup = null;
+
+                    bDrag = false;
                 };
 
                 return false;
