@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <style>
+        *{ margin:0; padding:0; }
+        #content{ width:283px; height:648px; background:url(images/qqbg.jpg) no-repeat #ccc; right:10px; top:-640px; position:absolute; cursor:alias }
+        #user{ width:68px; height:68px; background:url(images/userbg1.png) no-repeat #f0f0f0; position:absolute; top:27px; left:5px; }
+        #user:hover{ background:url(images/userbg2.png) no-repeat #f00; }
+        #btn{ display:inline-block; width:20px; height:20px; position:absolute; right:8px; top:0px; text-indent:-9999em; font-size:0; z-index:999; }
+        #side{ width:282px; height:207px; display:none; font-size:12px; position:absolute; right:283px; top:35px; background:url(images/maks.jpg) no-repeat red; }
+        #side p{ padding:130px 0 80px 100px; }
+        #side p a{ display:inline-block; padding:0 3px; color:#09C; text-decoration:none }
+        #side p a:hover{ color:#f00; }
+    </style>
+    <script>
+        window.onload = function () {
+            var oClose = document.getElementById('btn');
+            var oSide = document.getElementById('side');
+            var oUser = document.getElementById('user');
+            var oContent = document.getElementById('content');
+            var timer = null;
+            var tis = null;
+            //关闭面板
+            clearTimeout(timer);
+            oClose.onclick = function () {
+                oContent.style.display = 'none';
+            };
+            //显示个人资料窗口
+            oSide.onmouseover = oUser.onmouseover = function () {
+                clearTimeout(timer);
+                oSide.style.display = 'block';
+            };
+            //隐藏个人资料窗口
+            oSide.onmouseout = oUser.onmouseout = function () {
+                timer = setTimeout(function () {
+                    oSide.style.display = 'none';
+                }, 500);
+            };
+
+            //鼠标移上显示面板
+            oContent.onmouseover = function () {
+                clearInterval(tis);
+
+                tis = setInterval(function () {
+                    if (oContent.offsetTop >= 0) {
+                        clearInterval(tis);
+                    } else {
+                        oContent.style.top = oContent.offsetTop + 50 + 'px';
+                    }
+                }, 30);
+
+            }
+
+            //鼠标移上隐藏面板
+            oContent.onmouseout = function () {
+                hidePanel();
+            }
+
+            function hidePanel(){
+                clearInterval(tis);
+
+                tis = setInterval(function () {
+                    console.log(oContent.offsetTop);
+                    if (oContent.offsetTop <= -640) {
+                        clearInterval(tis);
+                    } else {
+                        oContent.style.top = oContent.offsetTop - 50 + 'px';
+                    }
+                }, 30);
+            }
+
+            //鼠标移动拖动面板
+            oContent.onmousedown = function (ev) {
+                var oEvent = ev || event;
+
+                var oContent = document.getElementById('content');
+                var disX = 0;
+                var disY = 0;
+
+                disX = oEvent.clientX - oContent.offsetLeft;
+                disY = oEvent.clientY - oContent.offsetTop;
+                //移动的同时，判断面板的位置
+                document.onmousemove = function (ev) {
+                    var oEvent = ev || event;
+                    var l = oEvent.clientX - disX;
+                    var t = oEvent.clientY - disY;
+
+                    if (l < 0) {
+                        l = 0;
+                    } else if (l > document.documentElement.clientWidth - oContent.offsetWidth) {
+                        l = document.documentElement.clientWidth - oContent.offsetWidth;
+                    }
+
+                    if (t < 0) {
+                        t = 0;
+                    } else if (t > document.documentElement.clientHeight - oContent.offsetHeight) {
+                        t = document.documentElement.clientHeight - oContent.offsetHeight;
+                    }
+
+                    oContent.style.left = l + 'px';
+                    oContent.style.top = t + 'px';
+                };
+
+                document.onmouseup = function () {
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                };
+
+                return false;
+            };
+
+        };
+    </script>
+</head>
+<body>
+<div id="content">
+    <div id="user"></div>
+    <a href="#" id="btn" title="关闭">关闭</a>
+    <div id="side"><p><a href="#">努力学习</a><a href="#">奋斗</a><a href="#">前端开发</a><a href="#">80后</a></p></div>
+</div>
+</body>
+</html>

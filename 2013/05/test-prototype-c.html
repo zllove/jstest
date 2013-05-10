@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    function Foo(x){
+        this.x = x;
+    }
+
+    Foo.prototype.getX = function(){
+        return this.x;
+    }
+
+    var foo = new Foo('a');
+    console.log(foo.constructor);
+//    console.log(foo.__proto__ === Foo.prototype);
+//    console.log(Foo.prototype);
+//    console.log(Foo.prototype.constructor === foo.constructor);
+
+</script>
+</body>
+</html>

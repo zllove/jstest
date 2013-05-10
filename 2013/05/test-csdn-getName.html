@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<div id="demo">
+    <input type="button" value="aa" name="btn"/>
+    <input type="button" value="aa" name="fuck"/>
+    <input type="button" value="aa" name="kao btn"/>
+    <input type="button" value="aa" name="fuck"/>
+    <input type="button" value="aa" name="btn fuck"/>
+</div>
+<div id="demo2">
+    <input type="button" value="aa" name="btn"/>
+    <input type="button" value="aa" name="kao btn"/>
+    <input type="button" value="aa" name="btn fuck"/>
+</div>
+<div id="demo3">
+    <input type="button" value="aa" class="btn" name="btn"/>
+    <input type="button" value="aa" name="fuck"/>
+    <input type="button" value="aa" class="btn kao" name="kao btn"/>
+    <input type="button" value="aa" name="fuck"/>
+    <input type="button" value="aa" class="fuck btn" name="btn fuck"/>
+</div>
+<script type="text/javascript">
+    function getByName(tName, cls, oParent){
+        var res   = [],
+            parent = (oParent || document).getElementsByTagName(tName),
+            child = null,
+            reg   = new RegExp('(^|\\s)' + cls + '(\\s|$)', 'i');
+
+        for(var i = 0, len = parent.length; i < len; i ++){
+            child = parent[i];
+
+            if(reg.test(child.name)){
+                res.push(child);
+            }
+        }
+        return res;
+    }
+
+    function getByClass(cls, oParent){
+        if(document.getElementsByClassName){
+            return (oParent || document).getElementsByClassName(cls);
+        } else {
+            oParent   = oParent || document;
+            var res   = [],
+                child = null,
+                reg   = new RegExp('(^|\\s)' + cls + '(\\s|$)', 'i');
+
+            for(var i = 0, len = oParent.all.length; i < len; i ++){
+                child = oParent.all[i];
+                if(reg.test(child.className)){
+                    res.push(child);
+                }
+            }
+            return res;
+        }
+    }
+
+    var demo = document.getElementById('demo');
+    var demo3 = document.getElementById('demo3');
+    console.log(getByName('input', 'btn', demo));
+    console.log(getByClass('btn', demo3));
+</script>
+</body>
+</html>
