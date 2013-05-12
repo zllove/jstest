@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        :root { var-color: blue; }
+        div { var-color: green; }
+        #alert { var-color: red; }
+        * { color: var(color); }
+        .foo {
+            width: calc(50% - 100px);background:red;
+        }
+    </style>
+</head>
+<body>
+<!--http://www.w3.org/TR/css-variables-->
+<p>I inherited blue from the root element!</p>
+<div>I got green set directly on me!</div>
+<div id='alert'>
+    While I got red set directly on me!
+    <p>I'm red too, because of inheritance!</p>
+</div>
+<div class='foo'>
+    While I got red set directly on me!
+    <p>I'm red too, because of inheritance!</p>
+</div>
+</body>
+</html>
