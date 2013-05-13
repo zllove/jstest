@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#div1{position:absolute;width:100px;height:100px;background:red;}
+	</style>
+</head>
+<body>
+	<input type="button" value="test" onclick="startMove()">		
+	<div id="div1"></div>
+<script type="text/javascript">
+	var iSpeedX = 46,
+		iSpeedY = 8;
+
+	function startMove(){
+		var oDiv = document.getElementById('div1');
+
+		setInterval(function(){
+			iSpeedY += 5;
+
+			var t = oDiv.offsetTop + iSpeedY,
+				l = oDiv.offsetleft + iSpeedX;
+
+			if(t > document.documentElement.clientHeight - oDiv.offsetHeight){
+				t = document.documentElement.clientHeight - oDiv.offsetHeight;
+			} else if(t <= 0) {
+				iSpeedX *= 0.8;
+				iSpeedY *= -0.8;
+				t = 0;
+			}
+
+			if(l > document.documentElement.clientWidth - oDiv.offsetWidth){
+				l = document.documentElement.clientWidth - oDiv.offsetWidth;
+			} else if(l <= 0) {
+				iSpeedX *= 0.8;
+				iSpeedY *= -0.8;
+				l = 0;
+			}
+
+			oDiv.style.top = t + 'px';
+			oDiv.style.left = l + 'px';
+
+		}, 30);
+	}
+</script>	
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<!--<script>
+    function swap_content(span) {
+        displayType = ( document.getElementById(span).style.display == 'none' ) ? 'block' : 'none';
+        document.getElementById(span).style.display = displayType;
+    }
+</script>
+<a href="###" onclick="swap_content('newOne'); return false;">New</a></div>
+<span id="newOne" style="display: none;">content</span>-->
+
+<a href="###" onclick="swap_content('newOne', true); return false;">New</a></div>
+<span id="newOne" style="display:none;">
+  <form method="post" action="index.php" name="formname">
+      <textarea name="whatever"></textarea>
+      <div id="idname"></div>
+      <br> <input name="buttonName" value="Send" type="submit">
+  </form>
+</span>
+<script>
+    function swap_content(span, bDis) {
+        displayType = ( document.getElementById(span).style.display == 'none' ) ? 'block' : 'none';
+        document.getElementById(span).style.display = displayType;
+        bDis && (document.getElementById(span).style.display = 'block');
+    }
+</script>
+</body>
+</html>
