@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <style>
+        #content{height:120px;width:368px;overflow:hidden;background:#999;position:absolute;left:0;}
+        #txt{width:300px;height:30px;line-height:30px;position:fixed;top:0;}
+        p{height:5000px;}
+        #top{width:100px;height:30px;background:#333;text-align:center;line-height:30px;cursor:pointer;position:fixed;bottom:0;right:0;}
+    </style>
+    <script>
+        window.onload = window.onscroll = function () {
+            var oTop = document.getElementById('top');
+            var oDiv = document.getElementById('content');
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+            var t = scrollTop + parseInt((clientHeight - oDiv.offsetHeight) / 2);
+
+            startMove(t);
+
+            oTop.onclick = function () {
+                gotop()
+            }
+        }
+        var timer = null;
+        var timer2 = null;
+        function startMove(iTarget) {
+            var oDiv = document.getElementById('content');
+            var oTxt = document.getElementById('txt');
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            clearInterval(timer);
+
+            timer = setInterval(function () {
+                var iSpee = (iTarget - oDiv.offsetTop) / 8;
+                iSpee = iSpee > 0 ? Math.ceil(iSpee) : Math.floor(iSpee);
+                if (oDiv.offsetTop === iTarget) {
+                    clearInterval(timer);
+                } else {
+                    oDiv.style.top = oDiv.offsetTop + iSpee + 'px';
+                }
+                document.title = oTxt.value = 'iSpee=' + iSpee + ',目标点=' + iTarget;
+            }, 30)
+        }
+        function gotop() {
+            timer2 = setInterval(function () {
+                var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                if (scrollTop == 0) {
+                    clearInterval(timer2);
+                } else {
+                    document.documentElement.scrollTop = document.body.scrollTop = scrollTop + Math.floor(-scrollTop / 8);
+                }
+            }, 30)
+
+        }
+
+    </script>
+</head>
+<body>
+<div id="content">
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+</div>
+<div id="top">Top</div>
+<input id="txt" type="text"/>
+<p></p>
+</body>
+</html>

@@ -1,0 +1,564 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="author">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://www.gafish.net/api/down/iScroll%20v4.2.5.js"></script>
+    <title>demo</title>
+    <style type="text/css">
+        body{background: black}
+        body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,figure,menu{margin:0;padding:0}article,aside,details,embed,figcaption,figure,footer,header,hgroup,menu,nav,section,summary{display:block}audio,canvas,video{display:inline-block;*display:inline;*zoom:1}command,datalist,keygen,mark,meter,progress,rp,rt,ruby,time,wbr{display:inline}table{border-collapse:collapse;border-spacing:0}th{text-align:inherit}fieldset,img{border:0}iframe{display:block}:focus{outline:0}abbr,acronym{border:0;font-variant:normal}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var,strong,b,em,i{font-style:normal;font-weight:500}ol,ul{list-style-type:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:500}button,input,select,textarea{font-size:100%}q:before,q:after{content:''}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-0.5em}sub{bottom:-0.25em}ins,a{text-decoration:none}img{vertical-align:top}
+        .fl{float: left;}
+        .fr{float:right;}
+        #hlj-dlg-profile{/*background  : transparent;*/ overflow    : hidden;
+            width       : 414px;
+            height      : 270px;
+            border      : 0px;
+            background  : transparent;
+            background  : url("img/bg_profilewindow2.png") center top no-repeat;
+            padding: 14px 0 0 10px;
+            margin: 0 auto;
+        }
+        .dlg-player{
+            overflow: hidden;
+        }
+        .dlg-player dt{
+            width: 80px;
+            height: 80px;
+            float: left;
+            border:#FFFFFF solid 3px;
+        }
+        .dlg-player img{
+            width: 80px;
+            height: 80px;
+
+        }
+        .dlg-player dd:nth-child(2){
+            width: 174px;
+            float: left;
+            padding-left: 10px;
+            margin-right:10px;
+
+        }
+        .dlg-player dd{
+            float: left;
+            width: 120px;
+            padding-left: 10px;
+
+        }
+
+        .dlg-player .dlg-name,.dlg-player .dlg-money,.dlg-player .dlg-layer{
+            color: white;
+        }
+        .dlg-player .dlg-name{
+            background: url(img/profile_editpencil.png) no-repeat right 9px;
+            position: relative;
+            cursor: pointer;
+
+
+        }
+        .dlg-player .ipt-playername{
+            width: 126px;
+            font-weight: 700;
+            font-size: 24px;
+            font-family: 'arial','宋体';
+            text-shadow:-1px 1px -1px rgb(15, 14, 14);
+            height:30px;
+            color: white;
+            padding-right: 30px;
+            cursor: pointer;
+        }
+        .dlg-player .dlg-money,.dlg-expr,.dlg-player .dlg-layer,.play-list .playlist-name,.play-list .playlist-nums,.player-daoju a:first-child, .player-daoju a{
+            font-family: "Microsoft YaHei","微软雅黑E\8F6F\96C5\9ED1"
+        }
+        .dlg-player .dlg-money,.dlg-player .dlg-layer,.play-list .playlist-name{
+            text-shadow:-1px 1px -1px black;
+        }
+        .dlg-player .dlg-money{
+            background: url(img/playerchips.png) no-repeat 0 6px;
+            padding-left: 20px;
+            height: 25px;
+            font-size: 16px;
+            position: relative;
+
+
+        }
+        .dlg-expr{
+            font-size: 16px;
+            color:#C59999;
+            text-shadow:0px 1px 1px #300000;
+        }
+        .dlg-player .dlg-layer{
+            font-size: 57px;
+            display: inline;
+            float: left;
+            height: 51px;
+            line-height: 55px;
+            vertical-align: bottom;
+            margin-top: 14px;
+        }
+        .placeholder{
+            margin-top: 10px;
+            /*border-top:1px #8E2E31 solid;*/
+            opacity: 0.8;
+            background: -webkit-linear-gradient(top,rgba(255,0,0,0.2) 40%,#470000 50%);
+            height: 2px;
+        }
+        .player-message{
+            width: 180px;
+        }
+        .player-title{
+            height: 30px;
+            line-height: 30px;
+        }
+        .play-list,.play-list li{
+            overflow: hidden;
+            zoom:1;
+        }
+        .play-list .playlist-name{
+            width: 80px;
+            text-align: left;
+            font-size: 15px;
+            color: #fff;
+            float: left;
+            display: block;
+        }
+        .play-list .playlist-nums{
+            width: 85px;
+            text-align: right;
+            font-size: 15px;
+            color: #fff;
+            float: left;
+            display: block;
+        }
+        .zj-group{
+            margin-top: 24px;
+            width: 100px;
+            height: 34px;
+            border-radius: 5px;
+            border:1px solid black;
+            position: relative;
+        }
+        .zj-group img{
+            width: 30px;
+            height: 36px;
+        }
+        .zj-group .img-zindex1,.zj-group .img-zindex2,.zj-group .img-zindex3,.zj-group .img-zindex4,.zj-group .img-zindex5{
+            position: absolute;
+        }
+        .zj-group .img-zindex1{
+            position: absolute;
+            z-index: 1;
+            left: 0;
+        }
+        .zj-group .img-zindex2{
+            z-index: 2;
+            left: 20px;
+        }
+        .zj-group .img-zindex3{
+            z-index: 3;
+            left: 40px;
+        }
+        .zj-group .img-zindex4{
+            z-index: 4;
+            left: 60px;
+        }
+        .zj-group .img-zindex5{
+            z-index: 5;
+            left: 80px;
+        }
+        .pro-bar{
+            margin-top: 6px;
+            border:#8C4949 solid 1px;
+            width: 150px;
+            height: 3px;
+            padding:2px;
+        }
+        .pro-bar-width{
+            width: 20%;
+            background: #8ECC4F;
+            display: block;
+            height: 3px;
+        }
+        .ipt-playername{width: 100px;height: 20px; border:none;background: none;}
+        .dlg-name .ipt-closed{display: block;position: absolute;right:20px;top:7px;
+            width: 16px;
+            height: 16px;
+            border-radius: 10px;
+            background: #D84B32;
+            color: #BC9999;
+            font-size: 12px;
+            text-align: center;
+            line-height: 16px;
+            font-family: 'arial';
+            display: none;
+
+        }
+        .dlg-layer-nums{overflow: hidden;width: 156px;}
+        .dlg-layer-nums span:first-child,.dlg-layer-nums span{color: #fff;font-size: 12px;font-weight: 700;display: block;font-family: 'arial';}
+        .dlg-layer-nums span:first-child{float: left;}
+        .dlg-layer-nums span{float: right;}
+        .player-daoju{width: 215px;overflow: hidden;}
+        .player-daoju a:first-child,.player-daoju a{width: 215px;height: 85px;display: block;position: absolute;left: 0;top: 0}
+        .player-daoju div:first-child a{background: url(img/playerprofile_achievementad.png) no-repeat;}
+        .player-daoju div:last-child a{background: url(img/profile_avatarad.png) no-repeat;}
+        .player-daoju div:first-child p,.player-daoju div:last-child a{position:absolute;}
+        .player-daoju div:first-child h4,.player-daoju div:last-child h4{position: absolute;color: white;width: 215px;text-align: center;font-size: 14px;font-weight: 700; }
+        .player-daoju div:first-child span,.player-daoju div:last-child span{position: absolute;color: rgb(243, 219, 45);width: 215px;text-align: center;font-size: 12px;font-weight: 700; z-index: 1000 }
+        .player-daoju div:first-child h4{top:45px;}
+        .player-daoju div:last-child h4{top:50px;}
+        .player-daoju div:first-child span{top:63px;}
+        .player-daoju div:last-child span{top:67px;}
+        .player-daoju div{position: relative;width: 215px;height: 85px;cursor: pointer;}
+        .player-daoju div:active a{opacity: 0.8;}
+        #hlj-dlg-chipstore{background: url(img/bg_chipstorewindow.png) no-repeat center top;width: 454px;height: 302px;margin:0 auto;}
+            /*筹码*/
+        .chip-info{background: url(img/img_background.png) no-repeat;width: 302px;height: 177px;text-align: center;color: white;
+            padding: 20px 10px;font-size: 14px;margin: 0 auto}
+        .chip-info p{margin-top:60px;}
+        .chip-info p:last-child{font-size: 10px;margin-bottom: 0px;}
+            /*娱乐*/
+        .Entertainment{background: url(img/img_gifts_bg.png) no-repeat;width: 357px;height: 279px;margin: 0 auto; position: absolute;left: 0; top: 0}
+        #tabs li{float: left ; width: 156px; height:36px; cursor: pointer;}
+        #tabs li{float: left;width: 156px;height: 36px;display: block;line-height: 36px;color: white;text-align: center;}
+        #tabs li:first-child{background: url(img/tab_entertainment_unselected.png) no-repeat;}
+        #tabs li:last-child{background: url(img/tab_drinks_unselected.png) no-repeat;}
+        #tabs li:first-child.active{background: url(img/tab_entertainment_selected.png) no-repeat;}
+        #tabs li:last-child.active{background: url(img/tab_drinks_selected.png) no-repeat;}
+        #tabs-cont,#tabs-cont1{ margin:10px 0 0 23px; width: 330px;height: 170px;overflow:-hidden; color: white; display: none}
+        .tabs-demo{width: 312px;margin:0 auto;padding-top:20px; overflow: hidden;}
+        .tab-r{width: 330px;height:170px; overflow: hidden;}
+        .tool-list{width: 55px; float: left; margin:0 10px 0 0;}
+        .tool-list a{background:#302E31; border-radius: 10px;-webkit-border-radius: 5px;width: 55px;height: 75px;float: left;margin-bottom: 10px; border:#403E41 solid 1px;box-shadow: 0 1px 0 #636164 inset}
+        .tool-list a:hover{border:#E7D66A solid 1px;}
+        .tool-list a.noactive{opacity: 0.5;}
+        #wrapper{width: 500px; float: left; height: 100%; position:relative;}
+        #scroller{width: 100%;height:100%; display: block;}
+        .chip-title{text-align: center; color: white; padding-top:10px;}
+        .chip-title p:first-child{ font-size: 20px; font-weight: 700}
+        .chip-tabs-demo{margin:10px 10px 20px 100px;height: 100%}
+        .tool-list p{display:-webkit-box;-webkit-box-pack:center;-webkit-box-align:center;text-align: center; color: white;font-size: 12px; font-family: "arial"}
+        .tool-list p:first-child{width:55px;height:27px;}
+        .tool-list p:first-child span{ margin-top: -5px;}
+        .tool-list p:first-child span:first-child{vertical-align: -2px}
+        .tool-list div{width: 55px;height:30px;position: relative;display:-webkit-box;-webkit-box-pack:center;-webkit-box-align:center;text-align: center;}
+        .tool-list div img{max-width: 55px;max-height: 33px;}
+        .tool-hot-icon{background: url(img/badge_itemhot.png) no-repeat; width: 23px;height: 33px; position: absolute;right: -2px;top: -5px;}
+
+
+    </style>
+</head>
+<body>
+<div class="Entertainment">
+    <div id="tabs">
+        <ul class="tabs-demo">
+            <li class="active">娱乐</li>
+            <li>饮料和点心</li>
+        </ul>
+        <!-- 娱乐 -->
+        <div id="tabs-cont" class="a" style="display:block">
+            <div id="tabs-cont-a">
+                <div id="scroller2" class="tab">
+                    <div class="tool-list">
+                        <a href="#" class="active">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                        <a href="#" class="noactive">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                    </div>
+                    <div class="tool-list">
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                    </div>
+                    <div class="tool-list">
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                    </div>
+                    <div class="tool-list">
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                    </div>
+                    <div class="tool-list">
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                    </div>
+                    <div class="tool-list">
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                    </div>
+                    <div class="tool-list">
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                    </div>
+                    <div class="tool-list">
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                    </div>
+                    <div class="tool-list">
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                    </div>
+                    <div class="tool-list">
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                    </div>
+                    <div class="tool-list">
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                    </div>
+                    <div class="tool-list">
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                        <a href="#">
+                            <p>
+                                <span>Rose</span>
+                                <span>Ring</span>
+                            </p>
+                            <div><img src="img/item_bee.png" alt=""><span class="tool-hot-icon"></span></div>
+                            <p>$20000</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 娱乐 end -->
+        <!-- 饮料和点心 star -->
+        <div id="tabs-cont1" class="a">
+            <div id="wrapper">
+                <div id="scroller" class="tab">
+                    <div class="tool-list">
+                        <a href="#">2</a>
+                        <a href="#"></a>
+                    </div>
+                    <div class="tool-list">
+                        <a href="#"></a>
+                        <a href="#"></a>
+                    </div>
+                    <div class="tool-list">
+                        <a href="#"></a>
+                        <a href="#"></a>
+                    </div>
+                    <div class="tool-list">
+                        <a href="#"></a>
+                        <a href="#"></a>
+                    </div>
+                    <div class="tool-list">
+                        <a href="#"></a>
+                        <a href="#"></a>
+                    </div>
+                    <div class="tool-list">
+                        <a href="#"></a>
+                        <a href="#"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 饮料和点心 end -->
+    </div>
+</div>
+<script>
+    function tab(tabwidth, tablistwidth) {
+        var iScrolltab = document.getElementById(tabwidth);
+        var iScrolltablist = iScrolltab.getElementsByClassName(tablistwidth);
+        iScrolltab.style.width = (iScrolltablist[0].offsetWidth + 10) * iScrolltablist.length + "px";
+        iScrolltab.style.background = "red";
+    }
+    tab("tabs-cont-a", "tool-list");
+    tab("wrapper", "tool-list")
+
+    var myscroll;
+    function loaded(id){
+        myscroll = new iScroll(id, {
+            hScrollbar     : false,
+            hScroll        : true,
+            vScroll        : false,
+            checkDOMChanges: true
+        });
+        function tab(id) {
+            var oDiv = document.getElementById(id);
+            oLi = oDiv.getElementsByTagName('li');
+            oCont = oDiv.getElementsByClassName('a');
+            var wrap = document.getElementById('wrapper');
+            wrap.style.width = document.getElementById('scroller').offsetWidth / 2 + 'px';
+            for (var i = 0; i < oLi.length; i++) {
+                oLi[i].index = i;
+                oLi[i].onclick = function () {
+                    for (var i = 0; i < oLi.length; i++) {
+                        oLi[i].className = '';
+                        oCont[i].style.display = 'none';
+                    }
+                    oLi[this.index].className = "active";
+                    oCont[this.index].style.display = "block";
+                };
+            }
+        };
+        tab("tabs");
+    }
+    window.addEventListener("DOMContentLoaded", function () {
+        loaded("tabs-cont");
+    }, false);
+    window.addEventListener("DOMContentLoaded", function () {
+        loaded("tabs-cont1");
+    }, false);
+</script>
+
+</body>
+</html>
