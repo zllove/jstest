@@ -19,10 +19,10 @@
 <body>
 <div class="slide" id="seamLessSlide">
     <ul class="slide_img">
-        <li><img src="http://i1.vanclimg.com/users/26/20130514/focus_fbx_130516.jpg" width="750" height="420"/></li>
         <li><img src="http://i5.vanclimg.com/users/26/20130516/focus_nvxie_130516.jpg" width="750" height="420"/></li>
         <li><img src="http://i4.vanclimg.com/users/26/20130514/focus_brand_130515.jpg" width="750" height="420"/></li>
         <li><img src="http://i3.vanclimg.com/users/26/20130516/focus_ssnz_130516.jpg" width="750" height="420"/></li>
+        <li><img src="http://i1.vanclimg.com/users/26/20130514/focus_fbx_130516.jpg" width="750" height="420"/></li>
     </ul>
     <ul id="slideNum" class="slide_num">
         <li class="cur">1</li>
@@ -41,45 +41,74 @@
             return typeof obj == 'string' ? document.getElementById(obj) : obj;
         },
         init : function(opts){
-            this.wrap = this.id(opts.wrap);
-            this.oUl = this.wrap.getElementsByTagName('ul')[0];
-            this.aLi = this.oUl.getElementsByTagName('li');
-            this.num = this.id(opts.num);
+            this.wrap   = this.id(opts.wrap);
+            this.oUl    = this.wrap.getElementsByTagName('ul')[0];
+            this.aLi    = this.oUl.getElementsByTagName('li');
+            this.num    = this.id(opts.num);
             this.aNumLi = this.num.getElementsByTagName('li');
 
+
+            this.next();
         },
         next : function(){
-            for(var i = 0; i < this.aNumLi.length; i++){
-                this.aNumLi[i].index = i;
-                this.aNumLi[i].onclick = function(){
-                    for(i = 0; i < this.aNumLi.length; i++){
-                        this.aLi[i].style.display = 'none';
-                        this.aNumLi[i].className = '';
-                    }
-                    this.aLi[this.index].style.display = 'block';
-                    this.aLi[lastIndex].style.display = 'block';
+            var that      = this,
+                lastIndex = 0;
 
-                    this.aNumLi[this.index].className = 'cur';
+            for(var i = 0; i < this.aNumLi.length; i++){
+                that.aNumLi[i].index = i;
+                that.aNumLi[i].onclick = function(){
+                    for(i = 0; i < that.aNumLi.length; i++){
+                        that.aLi[i].style.display = 'none';
+                        that.aNumLi[i].className = '';
+                    }
+                    that.aLi[this.index].style.display = 'block';
+                    that.aLi[lastIndex].style.display = 'block';
+
+                    that.aNumLi[this.index].className = 'cur';
+
+                    if(this.index > lastIndex){
+                        console.log(that.oUl);
+                        that.move(that.oUl, {left : 0});
+                    } else if(this.index < lastIndex) {
+                        that.move(that.oUl, {left : -750});
+                    }
+                    lastIndex = this.index;
                 }
             }
         },
-        getStyle : function(){
-
+        css : function(obj, attr){
+            return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj, false)[attr];
+            /*
+            if(obj.currentStyle){
+                return obj.currentStyle[attr];
+            } else {
+                return getComputedStyle(obj, false)[attr];
+            }
+            */
         },
         move : function(obj, json, iTarget){
+            var that = this,
+                iCur = 0;
+
             clearInterval(obj.timer);
 
             obj.timer = setInterval(function(){
-                for(var attr in json){
-                    var val = json[attr],
-                        iSpeed = (iTarget - val) / 8;
+                var bStop = true,
+                    attr;
+
+                for(attr in json){
+                    var val    = json[attr],
+                        iCur = parseInt(that.css(obj, attr)),
+                        iSpeed = (val - iCur) / 8;
+
+                    console.log(iCur);
 
                     iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
 
                     if(val == iTarget){
                         clearInterval(obj.timer);
                     } else {
-                        obj.style[attr] = iSpeed + 'px';
+                        obj.style[attr] = iCur + iSpeed + 'px';
                     }
                 }
             }, 30);

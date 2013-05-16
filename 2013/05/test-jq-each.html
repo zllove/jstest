@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<ul class="ul1">
+    <li>111</li>
+    <li>222</li>
+    <li>333</li>
+</ul>
+<script type="text/javascript">
+    var count = $('.ul1 li').length - 1;
+    console.log('len', $('.ul1 li').length);
+    $('.ul1 li').each(function(index){
+        if(index != count){
+            $(this).css('fontSize', 30);
+        } else {
+            $(this).css('fontSize', 10);
+        }
+    })
+</script>
+</body>
+</html>
