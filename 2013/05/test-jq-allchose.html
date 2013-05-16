@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+    <!--<script type="text/javascript" src="../jquery-1.9.1.min.js"></script>-->
+</head>
+<body>
+<input class="allChose" type="checkbox" name="" id=""/> 全选
+<div class="">
+    <input type="checkbox" name="userId" id=""/>
+    <input type="checkbox" name="userId" id=""/>
+    <input type="checkbox" name="userId" id=""/>
+</div>
+
+<input class="allChose2" type="checkbox" name="" id=""/> 全选
+<div class="">
+    <input type="checkbox" name="userId2" id=""/>
+    <input type="checkbox" name="userId2" id=""/>
+    <input type="checkbox" name="userId2" id=""/>
+</div>
+<script type="text/javascript">
+    $.fn.allChose = function(opt){
+        var T = $(this),
+            set = $.extend({
+                name : ''
+            }, opt || {}),
+            items = $('input[type="checkbox"][name="' + set.name + '"]');
+
+        T.click(function(){
+            items.attr('checked', this.checked);
+        });
+        
+        items.click(function(){
+            T.attr('checked', items.not(':checked').length === 0);
+        });
+    }
+
+    $('.allChose').each(function(){
+        var t = $(this);
+        $(this).allChose({name : 'userId'});
+        $(this).click(function(){
+            t.attr('checked', this.checked);
+        })
+    });
+
+    $('.allChose2').each(function(){
+        var t = $(this);
+        $(this).allChose({name : 'userId2'});
+        $(this).click(function(){
+            t.attr('checked', this.checked);
+        })
+    });
+</script>
+</body>
+</html>

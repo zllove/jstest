@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        *{margin:0;padding:0;}
+        body{font:12px/1.5 arial;background:#333;}
+        ul,li{list-style:none;}
+        .slide{position:relative;width:750px;height:420px;margin:30px auto;overflow:hidden;border:10px solid #f1f1f1;border-radius:10px;}
+        .slide_img{position:absolute;top:0;left:0;width:1500px;}
+        .slide_img li{float:left;}
+        .slide_num{position:absolute;bottom:10px;right:10px;display:block;opacity:0.8;}
+        .slide_num li{background:#fff;border:1px solid #fff;color:#A10000;cursor:pointer;display:inline;float:left;font-size:14px;font-weight:bold;height:18px;line-height:18px;margin-left:4px;opacity:0.85;text-align:center;width:18px;}
+        .slide_num li.cur{color:#fff;opacity:1;background:#000;border:1px solid #999;}
+    </style>
+</head>
+<body>
+<div class="slide" id="seamLessSlide">
+    <ul class="slide_img">
+        <li><img src="http://i1.vanclimg.com/users/26/20130514/focus_fbx_130516.jpg" width="750" height="420"/></li>
+        <li><img src="http://i5.vanclimg.com/users/26/20130516/focus_nvxie_130516.jpg" width="750" height="420"/></li>
+        <li><img src="http://i4.vanclimg.com/users/26/20130514/focus_brand_130515.jpg" width="750" height="420"/></li>
+        <li><img src="http://i3.vanclimg.com/users/26/20130516/focus_ssnz_130516.jpg" width="750" height="420"/></li>
+    </ul>
+    <ul id="slideNum" class="slide_num">
+        <li class="cur">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+</div>
+<script type="text/javascript">
+    function SeamLessSlide(opts){
+        return new SeamLessSlide.prototype.init(opts);
+    }
+    SeamLessSlide.prototype = {
+        constructor : SeamLessSlide,
+        id : function(obj){
+            return typeof obj == 'string' ? document.getElementById(obj) : obj;
+        },
+        init : function(opts){
+            this.wrap = this.id(opts.wrap);
+            this.oUl = this.wrap.getElementsByTagName('ul')[0];
+            this.aLi = this.oUl.getElementsByTagName('li');
+            this.num = this.id(opts.num);
+            this.aNumLi = this.num.getElementsByTagName('li');
+
+        },
+        next : function(){
+            for(var i = 0; i < this.aNumLi.length; i++){
+                this.aNumLi[i].index = i;
+                this.aNumLi[i].onclick = function(){
+                    for(i = 0; i < this.aNumLi.length; i++){
+                        this.aLi[i].style.display = 'none';
+                        this.aNumLi[i].className = '';
+                    }
+                    this.aLi[this.index].style.display = 'block';
+                    this.aLi[lastIndex].style.display = 'block';
+
+                    this.aNumLi[this.index].className = 'cur';
+                }
+            }
+        },
+        getStyle : function(){
+
+        },
+        move : function(obj, json, iTarget){
+            clearInterval(obj.timer);
+
+            obj.timer = setInterval(function(){
+                for(var attr in json){
+                    var val = json[attr],
+                        iSpeed = (iTarget - val) / 8;
+
+                    iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+
+                    if(val == iTarget){
+                        clearInterval(obj.timer);
+                    } else {
+                        obj.style[attr] = iSpeed + 'px';
+                    }
+                }
+            }, 30);
+        }
+    }
+    SeamLessSlide.prototype.init.prototype = SeamLessSlide.prototype;
+
+    SeamLessSlide({
+        wrap : 'seamLessSlide',
+        num : 'slideNum'
+    });
+</script>
+</body>
+</html>
