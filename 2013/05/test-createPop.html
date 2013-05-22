@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<input class="prop-del" type="submit" value="test-del"/>
+<a class="items-use" itemAmount="12312" type="submit" >asdfasdfasdfsdf</a>
+<script type="text/javascript">
+    var aDel = document.getElementsByClassName('prop-del'),
+        aUse = document.getElementsByClassName('items-use'),
+        timer = null,
+        bClick = true;
+
+    addPop(aDel, function(){
+        popDel(this.id);
+    });
+
+    addPop(aUse, function(){
+//        var amount = this.getAttribute('itemAmount');
+        popUse();
+    });
+
+    function addPop(obj, callback){
+        for(var i = 0; i < obj.length; i++){
+            obj[i].addEventListener('click', function(){
+                if(bClick){
+                    callback();
+                    bClick = false;
+                    timer = setTimeout(function(){
+                        bClick = true;
+                        if(timer != null) { clearTimeout(timer); }
+                    }, 3000);
+                }
+            }, false);
+        }
+    }
+
+    function popDel(userItemId){
+        var sHtml = '<div class="pop-inner"><p>是否删除该道具？</p><div class="pop-bot"><input class="pop-yep common-btn" type="button" value="是"><input class="pop-not common-btn ml5" type="button" value="否"></div></div>',
+                oDiv = createPop(sHtml, 'prop-pop'),
+                oMask = createPop('', 'prop-mask', 1),
+                oYep = document.getElementsByClassName('pop-yep')[0],
+                oNot = document.getElementsByClassName('pop-not')[0];
+
+        oYep.addEventListener('click', function(){
+//            location.href = "/gplus/app/inventory/del-user-items.cgi?userItemId=" + userItemId + "&page=${page}";
+            document.body.removeChild(oDiv);
+            document.body.removeChild(oMask);
+        }, false);
+        oNot.addEventListener('click', function(){
+            document.body.removeChild(oDiv);
+            document.body.removeChild(oMask);
+        }, false);
+    }
+
+    function popUse(amount){
+        var sHtml = '<div class="pop-inner"><p>' + amount + '积分之前已经累加到您的账号？</p><div class="pop-bot"><input class="pop-close common-btn" type="button" value="关闭"></div></div>',
+            oDiv = createPop(sHtml, 'prop-pop'),
+            oMask = createPop('', 'prop-mask', 1),
+            oClose = document.getElementsByClassName('pop-close')[0];
+
+        oClose.addEventListener('click', function(){
+            document.body.removeChild(oDiv);
+            document.body.removeChild(oMask);
+        }, false);
+    }
+
+    function createPop(html, cls, isFull){
+        var oDiv = document.createElement('div');
+        cls && (oDiv.className = cls);
+        html && (oDiv.innerHTML = html);
+        document.body.appendChild(oDiv);
+
+        if(!isFull){
+            oDiv.style.left = (innerWidth - oDiv.offsetWidth) / 2 - 8 + 'px';
+            oDiv.style.top = (innerHeight - oDiv.offsetHeight) / 2 + 'px';
+        } else {
+            oDiv.style.width = innerWidth + 'px';
+            oDiv.style.height = innerHeight + 'px';
+        }
+
+        return oDiv;
+    }
+</script>
+</body>
+</html>

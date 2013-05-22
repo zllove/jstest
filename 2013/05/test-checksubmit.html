@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>测试</title>
+</head>
+<script language="javascript">
+    var t = null;
+    var flag = true;
+    function check(obj) {
+        if (flag) {
+//            obj.disabled = flag;
+            flag = false;
+            t = setTimeout(function(){
+                flag = true;
+                if (t != null)
+                    clearTimeout(t);
+            }, 5000); // 5秒间隔
+            alert(11);
+//            window.open("http://www.baidu.com", "newWindow");
+        }
+    }
+
+    function disable(obj) {
+//        obj.disabled = flag;
+        flag = true;
+        if (t != null)
+            clearTimeout(t);
+    }
+</script>
+<body>
+<a href="javascript:void(0)" onclick="check(this)">ceshi1</a>
+</body>
+</html>

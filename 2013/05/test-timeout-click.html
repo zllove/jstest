@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<input id="btn1" type="submit" value="test-button"/>
+<script>
+    var t = null;
+    var flag = true;
+    $('#btn1').on('click', function(){
+        check(this);
+    });
+    function check(obj) {
+        if (flag) {
+            alert(11);
+            flag = false;
+            t = setTimeout(function(){
+                flag = true;
+                if (t != null) { clearTimeout(t); }
+            }, 3000);
+        }
+    }
+</script>
+</body>
+</html>
