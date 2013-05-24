@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script type="text/javascript">
+        /*
+        var cur;
+        window.onload = function () {
+            var otr = document.getElementsByTagName("tr");
+            for (var i = 1; i < otr.length; i++) {
+                otr[i].onclick = function () {
+                    cur ? cur.style.background = "white" : "";
+                    change(this);
+                    cur = this;
+                }
+            }
+        }
+        function change(obj) {
+            obj.style.background = "yellow";
+        }
+        */
+    </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <script type="text/javascript">
+        window.onload = function(){
+            var oTab = document.getElementById('tab');
+            var aTr = oTab.getElementsByTagName('tr');
+            var cur = 0;
+            
+            for(var i = 0; i < aTr.length; i++){
+                aTr[i].index = i;
+                aTr[i].onclick = function(){
+                    this.style.background = '#f60';
+                    cur = this.index;
+                }
+            }
+            document.onclick = function(e){
+                e = e || event;
+                src = e.srcElement || e.target;
+                if(src.tagName.toLowerCase() != 'td'){
+                    for(i = 0; i < aTr.length; i++){
+                        aTr[i].style.background = '';
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+<table id="tab" width="200" border="1" cellspacing="1" cellpadding="1">
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+
+</body>
+</html>
