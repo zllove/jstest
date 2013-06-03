@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://jashkenas.github.com/coffee-script/extras/coffee-script.js"></script>
+    <meta charset=utf-8 />
+    <title>Welcome to JS Bin</title>
+    <meta name="viewport" content="width=device-width">
+    <link href='http://fonts.googleapis.com/css?family=Doppio+One' rel='stylesheet' type='text/css'>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+
+            background: #3FA8C6;
+            background-image: -moz-linear-gradient(top, #3fa8c6 0%, #3fa8c6 0%, #399ab2 100%);
+            background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3fa8c6), color-stop(0%,#3fa8c6), color-stop(100%,#399ab2));
+            background-image: -webkit-linear-gradient(top, #3fa8c6 0%,#3fa8c6 0%,#399ab2 100%);
+            background-image: -o-linear-gradient(top, #3fa8c6 0%,#3fa8c6 0%,#399ab2 100%);
+            background-image: -ms-linear-gradient(top, #3fa8c6 0%,#3fa8c6 0%,#399ab2 100%);
+            background-image: linear-gradient(to bottom, #3fa8c6 0%,#3fa8c6 0%,#399ab2 100%);
+            color: #fff;
+            font-family: 'Doppio One', sans-serif;
+            text-shadow: 0 1px 0 rgba(0,0,0,.3);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .wrapper {
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            letter-spacing: -0.03em;
+            font-size: 2em;
+        }
+
+            /*content*/
+        .content{width:1000px; margin: 0 auto; background:#f5f5fe; }
+
+        .mode{ width:600px; height:150px; background:url(../images/mode.jpg) no-repeat; padding:72px 49px 0px 26px; float:left;}
+        .new{ width:305px; height:223px; float:left; padding-left:18px;}
+        .union{ width:305px; height:37px; background:url(../images/new_01.jpg) no-repeat}
+        .unionList{padding:21px 0 0 13px;}
+        .unionList ul li{ text-indent:0.5em; background:url(../images/ios-02.jpg) repeat-x; width:279px; font-size:14px;}
+        .unionList a{color:#808080;  height:34px; line-height:34px;}
+        .unionList a:hover{ color:#f547a3; text-decoration:none;
+            background: rgba(0,0,0,.1);
+            border-radius: 2em;
+            box-shadow: inset 0 0 1em rgba(0,0,0,.1), 0 2px 2px rgba(255,255,255,.1);
+        }
+        .conphoto{ overflow:hidden;}
+        .conphoto1{ margin-top:20px; overflow:hidden;}
+        #next > div {
+            width: 45%;
+            float: left;
+            padding: 0 2.5%;
+        }
+        img {
+            z-index: 1;
+            -webkit-transition: -webkit-transform 2s ease-in-out;
+            -moz-transition: -moz-transform 2s ease-in-out;
+            -o-transition: -o-transform 2s ease-in-out;
+            -ms-transition: -ms-transform 2s ease-in-out;
+            transition: transform 2s ease-in-out;
+            position: relative;
+        }
+
+        img:active {
+            -webkit-transform: rotate(1440deg) scale(1.2);
+            -moz-transform: rotate(1440deg) scale(1.2);
+            -o-transform: rotate(1440deg) scale(1.2);
+            -ms-transform: rotate(1440deg) scale(1.2);
+            transform: rotate(1440deg) scale(1.2);
+        }
+
+        @media screen and (max-width: 1200px) {
+            .wrapper {
+                width: 80%;
+            }
+        }
+        @media screen and (max-width: 768px) {
+            .wrapper {
+                width: auto;
+                margin: 0;
+            }
+            #welcome {
+                margin-right: 2.5%;
+            }
+        }
+        @media screen and (max-width: 500px) {
+            .wrapper {
+                text-align: center;
+            }
+            #dave {
+                float: none;
+            }
+
+            #welcome {
+                padding: 0 1.5em;
+                margin: 0;
+            }
+
+            h1 {
+                text-align: center;
+                margin-bottom: 0;
+                padding-left: 0;
+                font-size: 1.8em;
+            }
+            #welcome > h2 {
+                margin-bottom: 0.667em;
+            }
+            .bubble {
+                text-align: center;
+            }
+            .bubble:after {
+                display: none;
+            }
+            #features li {
+                width: 47%;
+            }
+            #features li:last-child {
+                float: none;
+                clear: both;
+                margin: 0 auto;
+            }
+
+            #next > div {
+                float none;
+                width: auto;
+            }
+        }
+    </style>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+</head>
+
+<body>
+
+<div class="content">
+    <div class="conphoto">
+        <div class="mode"></div>
+        <div class="new">
+            <div class="union"></div>
+            <div class="unionList">
+                <ul>
+                    <li><a href="#">佣金结算周期调整</a></li>
+                    <li><a href="#">唯品会结算规则更改</a></li>
+                    <li><a href="#">违规规定及处罚条款</a></li>
+                    <li><a href="#">个人与机构的合作流程</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="conphoto1">
+        <div class="mode"></div>
+        <div class="new">
+            <div class="union"></div>
+            <div class="unionList">
+                <ul>
+                    <li><a href="#">佣金结算周期调整</a></li>
+                    <li><a href="#">唯品会结算规则更改</a></li>
+                    <li><a href="#">违规规定及处罚条款</a></li>
+                    <li><a href="#">个人与机构的合作流程</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    if (location.pathname === '/welcome' || location.pathname === '/welcome/') {
+        location = '/welcome/edit?html,live';
+    }
+
+    if (window.location.pathname.indexOf('/edit') !== -1) $('a.open').click(function (event) {
+        event.preventDefault();
+        window.top.$('a[href$="' + this.hash + '"]').mousedown().click();
+    });
+
+    var presses = 0;
+    var spin = [
+        "Woahohaohaohaahoahaohaohaohaohaoha...", "Nononono...aiiiiiiiiiiiiieeeeeeee....", "Aaaaaaaaaghhhhh...woahwoahwoahwoahwoah...", "You're eeeeeeeeviiiiiiilllllllll....", "Eee...eee...eee...eee...eee...", "Woowoowoowoowoowoowoowoowoo..."
+    ];
+
+    var stop = [
+        "Please... never again.", "I'm so dizzy.", "That's just... cruel.", "Don't you have better things to do?", "I can't feel my toes... oh wait, I don't have any toes!", "This isn't fun anymore.", "...", "I'm going to be sick.", "Uh-oh, I think I just dropped some tables...", "Yep, I think I'm about to SQL-project everywhere...", "SELECT * FROM `stomach`...", "var_dump($result)...", "+_+"
+    ];
+
+    $('#dave').mousedown(function () {
+        $('#message').fadeOut(function () {
+            $(this).text(spin[presses % spin.length]);
+            presses = presses + 1;
+        }).fadeIn();
+    }).mouseup(function () {
+        $('#message').fadeOut(function () {
+            $(this).text(stop[presses % stop.length]);
+        }).fadeIn();
+
+        if (presses >= stop.length - 1) {
+            $(this).animate({left: '-999px'}, 1000 * 10, function () {
+                $(this).animate({left: '0'}, 1000 * 4);
+                presses = 0;
+            });
+        }
+    });
+</script>
+</body>
+</html>

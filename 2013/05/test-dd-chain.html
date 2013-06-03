@@ -1,0 +1,67 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8">
+
+    <style>
+        #div1{ background:red; width:100px; height:200px; filter:alpha(opacity:30); opacity:0.3; }
+        #miaov_bottom{ width:100px; position:absolute; right:-100px; height:100px; top:10; background:red; overflow:hidden; }
+        #miaov_box{ position:absolute; left:0px; display:none; width:100px;bottom:0; height:100px; background:yellow; }
+    </style>
+</head>
+<body>
+<a href="###" class="but_show" id="but">eee</a>
+<div id="miaov_bottom">sdfs</div>
+<div id="miaov_box">sdsd</div>
+</body>
+<script>
+    window.onload = function () {
+        var oBtnShow = document.getElementById('but');
+        var oBottom = document.getElementById('miaov_bottom');
+        var oBox = document.getElementById('miaov_box');
+        oBtnShow.onclick = function () {
+            startMove(oBottom, 'right', 0, function () {
+                oBox.style.display = 'block';
+                startMove(oBox, 'bottom', 0)
+            });
+        }
+    }
+    function getStyle(obj, attr) {
+        if (obj.currentStyle) {
+            return obj.currentStyle[attr]
+        } else {
+            return getComputedStyle(obj, false)[attr]
+        }
+    }
+    function startMove(obj, attr, itarget, fn) {
+        // var oDiv = document.getElementById('div1');
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function () {
+            // var iCur=parseInt(getStyle(obj,attr));
+            var iCur = 0;
+            if (attr == 'opacity') {
+                iCur = parseInt(parseFloat(getStyle(obj, attr)) * 100);
+            } else {
+                iCur = parseInt(getStyle(obj, attr));
+            }
+            var iSpeed = (itarget - iCur) / 2;
+            iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+            if (iCur == itarget) {
+                // alert('a')
+                clearInterval(obj.timer);
+                if (fn) {
+                    fn();
+                }
+            } else {
+                if (attr == 'opacity') {
+                    obj.style.filter = 'alpha(opacity:' + (iCur + iSpeed) + ')';
+                    obj.style.opacity = (iSpeed + iCur) / 100;
+                    //document.getElementById("txt1").value=obj.style.opacity
+                } else {
+                    obj.style[attr] = iCur + iSpeed + "px"
+                }
+            }
+        }, 30)
+    }
+</script>
+</html>

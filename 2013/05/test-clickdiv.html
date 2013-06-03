@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+<div id="test">
+    <div id="pid-1-1">1111</div><br />
+    <div id="pid-1-2">1122</div><br />
+    <div id="pid-2-1">2211</div><br />
+    <div id="pid-2-2">2222</div><br />
+    <div id="pid-3-1">3311</div><br />
+    <div id="pid-3-2">3322</div><br />
+    <div id="111pid-3-2">111111</div><br />
+    <div id="222pid-3-2">4445</div><br />
+    <div id="333pid-3-2">3355555522</div><br />
+</div>
+<script type="text/javascript">
+    $('#test div[id^="pid"]').on('click', function(){
+        alert(1);
+    });
+</script>
+</body>
+</html>
