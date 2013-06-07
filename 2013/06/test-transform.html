@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        @-webkit-keyframes win_open{from{-webkit-transform:scale3d(.3,.3,.3)}to{-webkit-transform:scale3d(1,1,1)}}
+        .test{ width:100px; height:100px; border:1px solid #ccc;background: #f00;-webkit-box-sizing:border-box;-webkit-animation-name:win_open;-webkit-animation-duration:300ms;-webkit-animation-timing-function:ease-in;}
+
+        @-webkit-keyframes ep_end{
+            0%{box-shadow:1px 1px 0 rgba(255,255,0,.2),1px -1px 0 rgba(255,255,0,.2),1px -1px 0 rgba(255,255,0,.2),-1px -1px 0 rgba(255,255,0,.2),0 0 3px yellow;}
+            25%{box-shadow:1px 1px 0 rgba(255,255,0,.2),1px -1px 0 rgba(255,255,0,.2),1px -1px 0 rgba(255,255,0,.2),-1px -1px 0 rgba(255,255,0,.2),0 0 16px yellow;}
+            50%{box-shadow:1px 1px 0 rgba(255,255,0,.2),1px -1px 0 rgba(255,255,0,.2),1px -1px 0 rgba(255,255,0,.2),-1px -1px 0 rgba(255,255,0,.2),0 0 3px yellow;}
+            75%{box-shadow:1px 1px 0 rgba(255,255,0,.2),1px -1px 0 rgba(255,255,0,.2),1px -1px 0 rgba(255,255,0,.2),-1px -1px 0 rgba(255,255,0,.2),0 0 16px yellow;}
+            100%{box-shadow:1px 1px 0 rgba(255,255,0,.2),1px -1px 0 rgba(255,255,0,.2),1px -1px 0 rgba(255,255,0,.2),-1px -1px 0 rgba(255,255,0,.2),0 0 3px yellow;}
+        }
+        .role_head{width:100px; height:100px; border:1px solid #ccc;
+            z-index:15;
+            -webkit-animation:ep_end ease-in 1200ms;
+        }
+        @-webkit-keyframes co_logo{
+            0%{opacity: 0}
+            20%{opacity: 1}
+            65%{opacity: 1}
+            100%{opacity: 0}
+        }
+        .co_logo{width:100px; height:100px; border:1px solid #ccc;
+            -webkit-animation: co_logo linear 1.2s forwards;
+        }
+        @-webkit-keyframes Vitem1{
+            0%{opacity:1}
+            15%{opacity:.5}
+            30%{opacity:0}
+            45%{opacity:0}
+            60%{opacity:0}
+            75%{opacity:.5}
+            90%{opacity:1}
+            100%{opacity:1}
+        }
+        .v_item1{width:100px; height:100px; border:1px solid #ccc;
+            opacity:1;
+            background-position:0 0;
+            -webkit-animation:Vitem1 linear infinite 600ms;
+        }
+
+            /* 战斗开始前的动画 */
+        @-webkit-keyframes door_up{
+            width:100px; height:100px; border:1px solid #ccc;
+            0%{-webkit-transform:translate3d(0,0,0)}
+            5%{-webkit-transform:translate3d(0,-8px,0)}
+            10%{-webkit-transform:translate3d(0,0,0)}
+            15%{-webkit-transform:translate3d(0,-4px,0)}
+            20%{-webkit-transform:translate3d(0,0,0)}
+            25%{-webkit-transform:translate3d(0,-2px,0)}
+            30%{-webkit-transform:translate3d(0,0,0)}
+            100%{-webkit-transform:translate3d(0,-670px,0)}
+        }
+        .door_up{
+            -webkit-animation: door_up ease-in 1800ms forwards;
+        }
+
+    </style>
+</head>
+<body>
+<div class="test"></div>
+<div class="role_head"></div>
+<div class="co_logo"></div>
+<div class="v_item1"></div>
+<div class="door_up"></div>
+</body>
+</html>

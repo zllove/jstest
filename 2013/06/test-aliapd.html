@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        .clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+        .clearfix {display:inline-block}
+        * html .clearfix {zoom:100%}
+        .clearfix {display:block}
+        *{margin: 0;padding: 0;}
+        div.content{width: 440px;margin: 0 auto}
+        li{list-style: none;}
+        li{float: left;height: 100px;width: 90px;background: #eee;margin: 10px;text-align: center;line-height: 100px;font-size: 2em}
+        ul.first li{display: inline-block;}
+    </style>
+</head>
+<body>
+<div class="content">
+    <ul class="first clearfix">
+        <li>a</li>
+        <li>b</li>
+        <li>c</li>
+        <li>d</li>
+    </ul>
+    <ul class="clearfix">
+        <li>e</li>
+        <li>f</li>
+        <li>g</li>
+        <li>h</li>
+    </ul>
+    <ul class="last clearfix">
+        <li>i</li>
+        <li>j</li>
+        <li>k</li>
+        <li>l</li>
+    </ul>
+</div>
+<script type="text/javascript">
+    window.onload=function(){
+        var aLi = document.getElementsByTagName("li");
+        var oDiv = null;
+        for(var i = 0; i < aLi.length; i++){
+            aLi[i].onclick = function(e){
+                e = e || event;
+                var target = e.srcElement || e.target;
+                if(target.innerHTML == 'c' || target.innerHTML == 'i'){
+                    oDiv = document.createElement('li');
+                    oDiv.innerHTML = 'Hello';
+                    this.parentNode.insertBefore(oDiv, this);
+//                    this.appendChild(oDiv);
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>
