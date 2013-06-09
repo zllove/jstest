@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>JS Bin</title>
+    <style type="text/css">
+        #search{position: fixed;top:0;left:0; background: #fff;}
+        #wrapper { padding-top:30px;}
+        mask { background: yellow;}
+        mask.current { background: red;color:#fff;}
+    </style>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+<div id="search">
+    <input type="text" id="text-search"/><input type="button" value="搜索" id="btn-search"/><input type="button" value="上一个" id="btn-prev"/><input type="button" value="下一个" id="btn-next"/>
+</div>
+<div id="wrapper">
+    <dl>
+        <dt>[图]NSA'Boundless Informant'软件曝光 政府持有大量公民数据</dt>
+        <dd>继曝光了美国政府所持有的公民电话元数据和互联网监控项目PRISM之后，Glenn Greenwald现在又对外披露了更多关于这一项目的信息。Greenwal指出，政府所使用的监控工具--'Boundless Informant'主要集中在元数据上，而并不是电话或邮件所涉及的内容本身。</dd>
+        <dt>[图]配骁龙800处理器 三星GALAXY S4 LTE-A跑分曝光</dt>
+        <dd>主攻拍照的三星GALAXY S4 Zoom被称为是GALAXY S4系列衍生版本的最后一款机型，但事实似乎却并非如此。日前，在安兔兔跑分测试中出现的一款名为三星SHV-E330S的机型引起了不少人注意。由于该机的处理器主频接近2.3GHz，所以有可能配备的是高通骁龙800处理器，同时该机最终的型号GALAXY S4 LTE-Advanced的出炉，则意味着在将来又会有一款全新的GALAXY S4衍生版本登场。</dd>
+        <dt>[图]中国电信推天阅电纸书 Kindle入华遇新对手</dt>
+        <dd>多次推迟入华的Kindle电子阅读器终于于日前国内开卖，不过马上就遭遇上国内新对手。腾讯科技从中国电信天翼阅读公司内部人士获悉，其将于近期正式对外发布其首款电子阅读器产品——天阅电纸书，售价与Kindle paperwhite一致为849元，但采用了纯触摸屏，号称是目前最轻、最薄的电纸书，用户从今日开始可以在天翼阅读官网进行预定。</dd>
+        <dt>[图]NSA'Boundless Informant'软件曝光 政府持有大量公民数据</dt>
+        <dd>继曝光了美国政府所持有的公民电话元数据和互联网监控项目PRISM之后，Glenn Greenwald现在又对外披露了更多关于这一项目的信息。Greenwal指出，政府所使用的监控工具--'Boundless Informant'主要集中在元数据上，而并不是电话或邮件所涉及的内容本身。</dd>
+        <dt>[图]配骁龙800处理器 三星GALAXY S4 LTE-A跑分曝光</dt>
+        <dd>主攻拍照的三星GALAXY S4 Zoom被称为是GALAXY S4系列衍生版本的最后一款机型，但事实似乎却并非如此。日前，在安兔兔跑分测试中出现的一款名为三星SHV-E330S的机型引起了不少人注意。由于该机的处理器主频接近2.3GHz，所以有可能配备的是高通骁龙800处理器，同时该机最终的型号GALAXY S4 LTE-Advanced的出炉，则意味着在将来又会有一款全新的GALAXY S4衍生版本登场。</dd>
+        <dt>[图]中国电信推天阅电纸书 Kindle入华遇新对手</dt>
+        <dd>多次推迟入华的Kindle电子阅读器终于于日前国内开卖，不过马上就遭遇上国内新对手。腾讯科技从中国电信天翼阅读公司内部人士获悉，其将于近期正式对外发布其首款电子阅读器产品——天阅电纸书，售价与Kindle paperwhite一致为849元，但采用了纯触摸屏，号称是目前最轻、最薄的电纸书，用户从今日开始可以在天翼阅读官网进行预定。</dd>
+        <dt>[图]NSA'Boundless Informant'软件曝光 政府持有大量公民数据</dt>
+        <dd>继曝光了美国政府所持有的公民电话元数据和互联网监控项目PRISM之后，Glenn Greenwald现在又对外披露了更多关于这一项目的信息。Greenwal指出，政府所使用的监控工具--'Boundless Informant'主要集中在元数据上，而并不是电话或邮件所涉及的内容本身。</dd>
+        <dt>[图]配骁龙800处理器 三星GALAXY S4 LTE-A跑分曝光</dt>
+        <dd>主攻拍照的三星GALAXY S4 Zoom被称为是GALAXY S4系列衍生版本的最后一款机型，但事实似乎却并非如此。日前，在安兔兔跑分测试中出现的一款名为三星SHV-E330S的机型引起了不少人注意。由于该机的处理器主频接近2.3GHz，所以有可能配备的是高通骁龙800处理器，同时该机最终的型号GALAXY S4 LTE-Advanced的出炉，则意味着在将来又会有一款全新的GALAXY S4衍生版本登场。</dd>
+        <dt>[图]中国电信推天阅电纸书 Kindle入华遇新对手</dt>
+        <dd>多次推迟入华的Kindle电子阅读器终于于日前国内开卖，不过马上就遭遇上国内新对手。腾讯科技从中国电信天翼阅读公司内部人士获悉，其将于近期正式对外发布其首款电子阅读器产品——天阅电纸书，售价与Kindle paperwhite一致为849元，但采用了纯触摸屏，号称是目前最轻、最薄的电纸书，用户从今日开始可以在天翼阅读官网进行预定。</dd>
+        <dt>[图]NSA'Boundless Informant'软件曝光 政府持有大量公民数据</dt>
+        <dd>继曝光了美国政府所持有的公民电话元数据和互联网监控项目PRISM之后，Glenn Greenwald现在又对外披露了更多关于这一项目的信息。Greenwal指出，政府所使用的监控工具--'Boundless Informant'主要集中在元数据上，而并不是电话或邮件所涉及的内容本身。</dd>
+        <dt>[图]配骁龙800处理器 三星GALAXY S4 LTE-A跑分曝光</dt>
+        <dd>主攻拍照的三星GALAXY S4 Zoom被称为是GALAXY S4系列衍生版本的最后一款机型，但事实似乎却并非如此。日前，在安兔兔跑分测试中出现的一款名为三星SHV-E330S的机型引起了不少人注意。由于该机的处理器主频接近2.3GHz，所以有可能配备的是高通骁龙800处理器，同时该机最终的型号GALAXY S4 LTE-Advanced的出炉，则意味着在将来又会有一款全新的GALAXY S4衍生版本登场。</dd>
+        <dt>[图]中国电信推天阅电纸书 Kindle入华遇新对手</dt>
+        <dd>多次推迟入华的Kindle电子阅读器终于于日前国内开卖，不过马上就遭遇上国内新对手。腾讯科技从中国电信天翼阅读公司内部人士获悉，其将于近期正式对外发布其首款电子阅读器产品——天阅电纸书，售价与Kindle paperwhite一致为849元，但采用了纯触摸屏，号称是目前最轻、最薄的电纸书，用户从今日开始可以在天翼阅读官网进行预定。</dd>
+        <dt>[图]NSA'Boundless Informant'软件曝光 政府持有大量公民数据</dt>
+        <dd>继曝光了美国政府所持有的公民电话元数据和互联网监控项目PRISM之后，Glenn Greenwald现在又对外披露了更多关于这一项目的信息。Greenwal指出，政府所使用的监控工具--'Boundless Informant'主要集中在元数据上，而并不是电话或邮件所涉及的内容本身。</dd>
+        <dt>[图]配骁龙800处理器 三星GALAXY S4 LTE-A跑分曝光</dt>
+        <dd>主攻拍照的三星GALAXY S4 Zoom被称为是GALAXY S4系列衍生版本的最后一款机型，但事实似乎却并非如此。日前，在安兔兔跑分测试中出现的一款名为三星SHV-E330S的机型引起了不少人注意。由于该机的处理器主频接近2.3GHz，所以有可能配备的是高通骁龙800处理器，同时该机最终的型号GALAXY S4 LTE-Advanced的出炉，则意味着在将来又会有一款全新的GALAXY S4衍生版本登场。</dd>
+        <dt>[图]中国电信推天阅电纸书 Kindle入华遇新对手</dt>
+        <dd>多次推迟入华的Kindle电子阅读器终于于日前国内开卖，不过马上就遭遇上国内新对手。腾讯科技从中国电信天翼阅读公司内部人士获悉，其将于近期正式对外发布其首款电子阅读器产品——天阅电纸书，售价与Kindle paperwhite一致为849元，但采用了纯触摸屏，号称是目前最轻、最薄的电纸书，用户从今日开始可以在天翼阅读官网进行预定。</dd>
+        <dt>[图]NSA'Boundless Informant'软件曝光 政府持有大量公民数据</dt>
+        <dd>继曝光了美国政府所持有的公民电话元数据和互联网监控项目PRISM之后，Glenn Greenwald现在又对外披露了更多关于这一项目的信息。Greenwal指出，政府所使用的监控工具--'Boundless Informant'主要集中在元数据上，而并不是电话或邮件所涉及的内容本身。</dd>
+        <dt>[图]配骁龙800处理器 三星GALAXY S4 LTE-A跑分曝光</dt>
+        <dd>主攻拍照的三星GALAXY S4 Zoom被称为是GALAXY S4系列衍生版本的最后一款机型，但事实似乎却并非如此。日前，在安兔兔跑分测试中出现的一款名为三星SHV-E330S的机型引起了不少人注意。由于该机的处理器主频接近2.3GHz，所以有可能配备的是高通骁龙800处理器，同时该机最终的型号GALAXY S4 LTE-Advanced的出炉，则意味着在将来又会有一款全新的GALAXY S4衍生版本登场。</dd>
+        <dt>[图]中国电信推天阅电纸书 Kindle入华遇新对手</dt>
+        <dd>多次推迟入华的Kindle电子阅读器终于于日前国内开卖，不过马上就遭遇上国内新对手。腾讯科技从中国电信天翼阅读公司内部人士获悉，其将于近期正式对外发布其首款电子阅读器产品——天阅电纸书，售价与Kindle paperwhite一致为849元，但采用了纯触摸屏，号称是目前最轻、最薄的电纸书，用户从今日开始可以在天翼阅读官网进行预定。</dd>
+        <dt>[图]NSA'Boundless Informant'软件曝光 政府持有大量公民数据</dt>
+        <dd>继曝光了美国政府所持有的公民电话元数据和互联网监控项目PRISM之后，Glenn Greenwald现在又对外披露了更多关于这一项目的信息。Greenwal指出，政府所使用的监控工具--'Boundless Informant'主要集中在元数���上，而并不是电话或邮件所涉及的内容本身。</dd>
+        <dt>[图]配骁龙800处理器 三星GALAXY S4 LTE-A跑分曝光</dt>
+        <dd>主攻拍照的三星GALAXY S4 Zoom被称为是GALAXY S4系列衍生版本的最后一款机型，但事实似乎却并非如此。日前，在安兔兔跑分测试中出现的一款名为三星SHV-E330S的机型引起了不少人注意。由于该机的处理器主频接近2.3GHz，所以有可能配备的是高通骁龙800处理器，同时该机最终的型号GALAXY S4 LTE-Advanced的出炉，则意味着在将来又会有一款全新的GALAXY S4衍生版本登场。</dd>
+        <dt>[图]中国电信推天阅电纸书 Kindle入华遇新对手</dt>
+        <dd>多次推迟入华的Kindle电子阅读器终于于日前国内开卖，不过马上就遭遇上国内新对手。腾讯科技从中国电信天翼阅读公司内部人士获悉，其将于近期正式对外发布其首款电子阅读器产品——天阅电纸书，售价与Kindle paperwhite一致为849元，但采用了纯触摸屏，号称是目前最轻、最薄的电纸书，用户从今日开始可以在天翼阅读官网进行预定。</dd>
+        <dt>[图]NSA'Boundless Informant'软件曝光 政府持有大量公民数据</dt>
+        <dd>继曝光了美国政府所持有的公民电话元数据和互联网监控项目PRISM之后，Glenn Greenwald现在又对外披露了更多关于这一项目的信息。Greenwal指出，政府所使用的监控工具--'Boundless Informant'主要集中在元数据上，而并不是电话或邮件所涉及的内容本身。</dd>
+        <dt>[图]配骁龙800处理器 三星GALAXY S4 LTE-A跑分曝光</dt>
+        <dd>主攻拍照的三星GALAXY S4 Zoom被称为是GALAXY S4系列衍生版本的最后一款机型，但事实似乎却并非如此。日前，在安兔兔跑分测试中出现的一款名为三星SHV-E330S的机型引起了不少人注意。由于该机的处理器主频接近2.3GHz，所以有可能配备的是高通骁龙800处理器，同时该机最终的型号GALAXY S4 LTE-Advanced的出炉，则意味着在将来又会有一款全新的GALAXY S4衍生版本登场。</dd>
+        <dt>[图]中国电信推天阅电纸书 Kindle入华遇新对手</dt>
+        <dd>多次推迟入华的Kindle电子阅读器终于于日前国内开卖，不过马上就遭遇上国内新对手。腾讯科技从中国电信天翼阅读公司内部人士获悉，其将于近期正式对外发布其首款电子阅读器产品——天阅电纸书，售价与Kindle paperwhite一致为849元，但采用了纯触摸屏，号称是目前最轻、最薄的电纸书，用户从今日开始可以在天翼阅读官网进行预定。</dd>
+    </dl>
+
+</div>
+<script type="text/javascript">
+    var html = $('#wrapper').html(),
+        index = 0,
+        re,
+        len;
+
+    var jump = function (i) {
+        re.removeClass('current').eq(i).addClass('current');
+        document.body.scrollTop = $(re[i]).offset().top;
+    };
+    $('#btn-search').click(function () {
+        var key = $('#text-search').val(),
+            reg = new RegExp(key, 'igm');
+
+        index = 0;
+        $('#wrapper').html(function () {
+            $(this).html(html.replace(reg, function (a) {
+                return '<mask>' + a + '</mask>'
+            }));
+        });
+
+        re = $('mask');
+        len = re.length;
+    });
+
+    $('#btn-prev').click(function () {
+        if (index === 0) return;
+        jump(--index);
+    });
+
+    $('#btn-next').click(function () {
+        if (index === len - 1) return;
+        jump(++index);
+    });
+
+</script>
+</body>
+</html>

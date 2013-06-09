@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<!--http://www.cnblogs.com/lranye/archive/2013/06/08/3127013.html-->
+<script type="text/javascript">
+    function getColorByVal(val) {
+        return ["white","red","green","yellow","gray","blue"][val];
+    }
+
+//    console.log(["white","red","green","yellow","gray","blue"][1]);
+
+    function getValByColor(color){
+        return {"white": 0, "red": 1, "green": 2, "yellow": 3, "gray": 4, "blue": 5}[color];
+    }
+
+//    console.log(getValByColor("red"));
+
+    var a = 5, b = 10;
+    a = [b, b = a][0];
+
+    var arr = [], i = 0;
+    var colors = {"white": 0, "red": 1, "green": 2, "yellow": 3, "gray": 4, "blue": 5};
+    for (arr[i++] in colors);
+
+    console.log(arr);
+
+
+</script>
+
+
+</body>
+</html>
