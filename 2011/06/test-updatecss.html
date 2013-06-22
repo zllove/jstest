@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<HTML>
+    <HEAD>
+        <title>TextStyle</title>
+        <meta name="GENERATOR" Content="Microsoft Visual Studio .NET 7.1">
+        <meta name="CODE_LANGUAGE" Content="C#">
+        <meta name="vs_defaultClientScript" content="JavaScript">
+        <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <script language="javascript">
+        //字体
+        function setFontFamily(family){
+            var style = document.getElementById("changeStyle").style.fontFamily = family;
+            }
+        //背景颜色    
+        function setBgColor(color){
+            document.getElementById("changeStyle").bgColor = color;
+            }
+        //字体大小    
+        function setFontSize(size){
+            var style = document.getElementById("changeStyle").style.fontSize = size;
+            
+            }
+        //字体加粗
+        function setFontStyle(bold){
+            var style = document.getElementById("changeStyle").style.fontWeight = bold;
+            
+            }
+        //文字颜色
+        function setFontColor(color){
+            var style = document.getElementById("changeStyle").style.color = color;
+            
+            }
+        //Decoration
+        function setTxtDecoration(decoration){
+            var style = document.getElementById("changeStyle").style.textDecoration = decoration;
+            }
+        //字体大小
+        function setSelectedFontSize(size){
+            //获取选中文字
+            
+            var oldstr = document.selection.createRange().duplicate().text;
+            //alert(document.selection.createRange())
+            //alert(oldstr)
+            if(oldstr!=""){
+                    var newstr = "<span style =  'FONT-SIZE:"+size+"'>" +oldstr +"</span>"
+                    //document.selection.createRange().duplicate().text = newstr;
+                    //alert(newstr)
+                    document.selection.createRange().pasteHTML(newstr);
+                    //alert(document.selection.createRange().pasteHTML(newstr))
+                }
+            }
+        //字体    
+        function setSelectedFontFamily(family){
+            var oldstr = document.selection.createRange().duplicate().text;
+            if(oldstr!="")
+                {
+                    var newstr = "<span style =  'FONT-FAMILY:"+family+"'>" +oldstr +"</span>"
+                    document.selection.createRange().pasteHTML(newstr);
+                }
+            }
+        //背景    
+        function setSelectedBgColor(color){
+            var oldstr = document.selection.createRange().duplicate().text;
+            if(oldstr!="")
+                {
+                    var newstr = "<span style =  'BACKGROUND-COLOR:"+color+"'>" +oldstr +"</span>"
+                    document.selection.createRange().pasteHTML(newstr);
+                }
+            }
+        //字体加粗
+        function setSelectedFontStyle(bold){
+            var oldstr = document.selection.createRange().duplicate().text;
+            if(oldstr!="")
+                {
+                    var newstr = "<span style =  'FONT-WEIGHT:"+bold+"'>" +oldstr +"</span>"
+                    document.selection.createRange().pasteHTML(newstr);
+                }
+            }
+        //字体颜色
+        function setSelectedFontColor(color){
+            var oldstr = document.selection.createRange().duplicate().text;
+            if(oldstr!="")
+                {
+                    var newstr = "<span style =  'COLOR:"+color+"'>" +oldstr +"</span>"
+                    document.selection.createRange().pasteHTML(newstr);
+                }
+            }
+        //下划线
+        function setSelectedTxtDecoration(decoration){
+            var oldstr = document.selection.createRange().duplicate().text;
+            if(oldstr!="")
+                {
+                    var newstr = "<span style =  'TEXT-DECORATION:"+decoration+"'>" +oldstr +"</span>"
+                    document.selection.createRange().pasteHTML(newstr);
+                }
+            }
+    
+            
+            
+        </script>
+    </HEAD>
+    <body MS_POSITIONING="GridLayout">
+        <form id="Form1" method="post" runat="server">
+            <FONT face="宋体">
+                <table width="100%" cellpadding="0" cellspacing="0" border="1" style="TEXT-DECORATION: overline">
+                    <tr>
+                        <td>
+                            <table width="98%" cellpadding="0" cellspacing="0" border="0" >
+                                <tr>
+                                    <td align="center" height="60" colspan="10">
+                                        <font color="red" size="9">JAVASCRIPT效果（一）</font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="19" style="HEIGHT: 19px">
+                                        页面选项(全页面有效)：<script language="javascript">document.write("文字 <select name=\"selcolor\" onchange=\"setFontColor(this.value)\"><option value=#000000 selected>黑色</option><option value=#FF0000>红色</option><option value=#FFFFFF>白色</option><option value=#555555>灰色</option><option value=#00FF00>绿色</option><option value=#0000FF>蓝色</option><option value=#00cccc>青色</option><option value=#ffff00>黄色</option></select>背景 <select name=select onchange=setBgColor(this.value)><option value=#FFFFFF selected>白色</option><option value=#FFCCFF>粉红</option><option value=#CCCCCC>灰色</option><option value=#CCFFCC>绿色</option><option value=#99CCFF>蓝色</option><option value=#000000>黑色</option><option value=#CCFFFF>青色</option><option value=#FFCCCC>棕色</option></select>");
+document.write("字号 <select name=selsize onchange=setFontSize(this.value)><option value=9pt selected>9 pt</option><option value=10pt>10 pt</option><option value=12pt>12 pt</option><option value=14pt>14 pt</option><option value=16pt>16 pt</option><option value=18pt>18 pt</option><option value=24pt>24 pt</option><option value=30pt>30 pt</option></select>字型 <select name=selStyle onchange=setFontStyle(this.value)><option value=''>正常</option><option value='bold'>加粗</option><option value='italic'>斜体</option></select>");
+document.write("字体 <select name=selfamily onchange=setFontFamily(this.value)><option value=Arial selected>Arial</option><option value=Tahoma>Tahoma</option><option value=\"Times New Roman\">Times New Roman</option><option value=Symbol>Symbol</option><option value=黑体>黑体</option><option value=华文行楷>华文行楷</option><option value=楷体_GB2312>楷体_GB2312</option><option value=宋体>宋体</option></select>Decoration  <select name=seldecoration onchange=setTxtDecoration(this.value)><option value=''>正常</option><option value=underline>下划线</option><option value=\"line-through\">删除线</option><option value=\"overline\">上划线</option></select>");
+                                        </script>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="19" style="HEIGHT: 19px">
+                                        页面选项(选定文字有效)：<script language="javascript">document.write("文字 <select name=\"selcolor\" onchange=\"setSelectedFontColor(this.value)\"><option value=#000000 selected>黑色</option><option value=#FF0000>红色</option><option value=#FFFFFF>白色</option><option value=#555555>灰色</option><option value=#00FF00>绿色</option><option value=#0000FF>蓝色</option><option value=#00cccc>青色</option><option value=#ffff00>黄色</option></select>背景 <select name=select onchange=setBgColor(this.value)><option value=#FFFFFF selected>白色</option><option value=#FFCCFF>粉红</option><option value=#CCCCCC>灰色</option><option value=#CCFFCC>绿色</option><option value=#99CCFF>蓝色</option><option value=#000000>黑色</option><option value=#CCFFFF>青色</option><option value=#FFCCCC>棕色</option></select>");
+document.write("字号 <select name=selSelectedsize onchange=setSelectedFontSize(this.value)><option value=9pt selected>9 pt</option><option value=10pt>10 pt</option><option value=12pt>12 pt</option><option value=14pt>14 pt</option><option value=16pt>16 pt</option><option value=18pt>18 pt</option><option value=24pt>24 pt</option><option value=30pt>30 pt</option></select>字型 <select name=selStyle onchange=setSelectedFontStyle(this.value)><option value=''>正常</option><option value='bold'>加粗</option><option value='italic'>斜体</option></select>");
+document.write("字体 <select name=selSelectedfamily onchange=setFontFamily(this.value)><option value=Arial selected>Arial</option><option value=Tahoma>Tahoma</option><option value=\"Times New Roman\">Times New Roman</option><option value=Symbol>Symbol</option><option value=黑体>黑体</option><option value=华文行楷>华文行楷</option><option value=楷体_GB2312>楷体_GB2312</option><option value=宋体>宋体</option></select>Decoration  <select name=seldecoration onchange=setSelectedTxtDecoration(this.value)><option value=''>正常</option><option value=underline>下划线</option><option value=\"line-through\">删除线</option><option value=\"overline\">上划线</option></select>");
+                                    </script></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10" height="19" align="center">
+                                        魔力小曲
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10" height="300" id="changeStyle" align="center" width="98%">
+                                        oh 今天星期几 oh 今天真生气<br>
+                                        oh 魔力 我不是故意不去玩你 上线就卡机<br>
+                                        oh 明天星期几 oh 明天打露比<br>
+                                        oh baby 没道理上下楼时遇敌 我恨B U G<br>
+                                        星期一 星期二 星期三 星期四 通宵在打玉<br>
+                                        星期五 星期六 星期天 下星期 砍海升级 oh yeah<br>
+                                        情人节 儿童节 母亲节 圣诞节 任务做不停<br>
+                                        这点卡用起来 毫不可惜 送时间水晶<br>
+                                        想离开魔力 舍不得放弃<br>
+                                        兜里几百魔力币 望着水龙衣 买不起<br>
+                                        宁愿爱上单机游戏 不会被欺<br>
+                                        不必等开机 oh 也不会C G<br>
+                                        oh 今天星期几 oh 今天真晦气<br>
+                                        oh 采集 小矿工挖了一组纯银 拐杖已拄起<br>
+                                        oh 明天星期几 oh 明天做回力<br>
+                                        oh baby 没道理做了一个极品 十几把垃圾<br>
+                                        星期一 星期二 星期三 星期四 修炼得意技<br>
+                                        星期五 星期六 星期天 下星期 找人团P oh yeah<br>
+                                        我和你做对情人试一试 小美眉不要这样的矜持<br>
+                                        我和你走出东门比一比 看实力 是否和RP成正比<br>
+                                        星期一 星期二 星期三 星期四 进军哥不林<br>
+                                        星期五 星期六 星期天 下星期 冲一二零 oh yeah<br>
+                                        开启者 拯救者 北行者 解放者 任务做不停<br>
+                                        这BOSS打起来 有些费力 牛鬼在逆袭
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </FONT>
+        </form>
+    </body>
+</HTML>

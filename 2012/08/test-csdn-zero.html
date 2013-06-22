@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<a href="http://blog.sina.com.cn/s/blog_7323532a0100op2s.html" target="_blank">js空位补全</a>
+<br>
+<script type="text/javascript">
+    //    alert(('0000' + 1).slice(-4));
+    function pad1(num, n) {
+        var i = (num + '').length;
+        while (i++ < n) {
+            num = num + '0';
+        }
+        return num;
+    }
+    //    console.log(pad1('3', 5));
+
+    function pad2(num, n) {
+        if ((num + '').length >= n) {
+            return num;
+        }
+        return pad2('0' + num, n);
+    }
+    //    console.log(pad2('4', 3));
+    function pad3(num, n) {
+        return (Array(n).join(0) + num).slice(-n);
+    }
+
+    function pad4(num, n) {
+        return Math.pow(10, n).toString().slice(1) + num;
+    }
+//    console.log(pad4(102, 5));
+
+    function pad5(num, n) {
+        return ('00000000000000000000' + num).slice(-(n + (num + '').length));
+    }
+//    console.log(pad5(102, 5));
+
+    var N = 5000, start = 0;
+    for (var i = 0, c = null; c = ['pad1', 'pad2', 'pad3', 'pad4', 'pad5'][i++];) {
+        start = +new Date;
+        for (var j = 0; j < N; ++j) {
+            window[c](12, 50);
+        }
+        printf(c + ' time:' + (+new Date - start));
+    }
+    function printf(msg) {
+        document.write(msg + '<br/>');
+    }
+
+
+</script>
+</body>
+</html>

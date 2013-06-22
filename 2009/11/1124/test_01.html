@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Untitled Document</title>
+        <style>
+		
+		</style>
+		<script>
+		</script>
+	</head>
+	<body>
+		<p> 对象拥有 nodeName , 等属性。</p>
+		<p> 对象拥有 nodeName , ChildNodes 等属性。</p>
+		<p> 对象拥有 parentNode , ChildNodes 等属性。</p>
+		<p> 对象拥有 ChildNodes 等属性。</p>
+		<div id="jikey">
+			<ul>
+				<li>aaaa</li>
+				<li>aaaa</li>
+				<li>aaaa</li>
+				<li>aaaa</li>
+				<li>aaaa</li>
+			</ul>
+			<div><p>a</p></div>
+		</div>
+		<div id="c">bbbbbbbbbbb</div>
+		<script>
+		/*
+		var ps = document.getElementsByTagName('p');
+		for(var i=0; i<ps.length; i++){
+			ps[i].setAttribute('title', 'hello');
+			
+		}
+		var i = document.getElementById('jikey');
+		if(i.hasChildNodes){
+			alert(i.childNodes.length);
+		}
+		*/
+		var i = document.getElementById('c');
+		//i.nodeValue = 'dddddd'; // 不能修改
+		//i.firstChild.nodeValue = 'test'; //能修改
+		if(i.firstChild.nodeType == 3){
+			i.firstChild.nodeValue = 'test';
+		}
+		/*
+		if(i.nodeType == 1){
+			i[i].setAttribute('title', 'hello');
+		}
+		*/
+		var a = new Date();
+		//alert(a.getDate());
+		var b = a;
+		b.setDate(22);
+		//alert(a.getDate());
+		a = 1;
+		b = a;
+		b = 2;
+		//alert(a);
+		x = [0,1];
+		y = x; // 赋给y的只是x的一个引用，而不是x本身。数组已经在语句中被赋值了，执行过这段代码后，仍旧只有一个数组对象，只不过我们有2个对他的引用了。
+		y[0] = 1;
+		//alert(x[0] + '|' + x[1]);
+		var s = 'hello';
+		var b = s.toUpperCase();
+		s = b;
+		//alert(s);
+		var s = 'hello';
+		function f(){
+			alert(s);
+			var s = 'world';
+			alert(s);
+			//因为js规定当 局部变量和全局变量的名称相同的时候，函数体内的同名全局变量会被隐藏。
+		}
+		f();
+		
+		</script>
+	</body>
+</html>

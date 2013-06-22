@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type " content="text/html; charset=utf-8"/>
+    <title> csstest </title>
+    <style>
+        *{ margin:0; padding:0;}
+        body{font:12px/2 arial;}
+        .default_input{ height:19px; line-height:19px;}
+        .text{border-width:1px;border-color:#AAAAAA;border-style:solid;height:21px;}
+        input.readonly{border-width:1px;border-color:#AAAAAA;border-style:solid;height:21px;background-color:#EEEFED;}
+        span.readonly{border:1px;border-color:#AAAAAA;border-style:solid;height:21px;background-color:#EEEFED;}
+    </style>
+    <script>
+        function protectElement(element) {
+            var element = document.getElementById(element);
+            if (element.type == "text") {
+                element.className = "readonly ";
+            }
+        }
+        function unProtectElement(element) {
+            var element = document.getElementById(element);
+            if (element.type == "text") {
+                element.className = "default_input";
+            }
+        }
+        function checkboxOnclick(){
+            if (document.getElementById("cc").checked == true) {
+                unProtectElement("aa");
+            } else {
+                protectElement("aa");
+            }
+        }
+
+    </script>
+</head>
+<body>
+<form>
+    <input type="text" class="readonly" style="width:70px;" value="20000" id="aa"/>
+    <input type="checkbox" name="cc" id="cc" onclick="checkboxOnclick()"/>
+    <span class="readonly" style="width:172px"> 20000 </span>
+</form>
+</body>
+</html> 

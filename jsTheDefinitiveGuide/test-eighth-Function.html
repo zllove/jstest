@@ -1,0 +1,462 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-eighth-Function</title>
+</head>
+<body>
+<script type="text/javascript">
+    /*
+    function print(msg) {
+        document.write(msg, '<br/>');
+    }
+
+    console.log(print('test'));
+
+    function copyPropertyNamesToArray(o, a) {
+        a = a || [];
+        for (var property in o) {
+            a.push(property);
+        }
+        return a;
+    }
+
+    var o = {name:'jikey', age:30}
+    var a = copyPropertyNamesToArray(o);
+    var p = {school:'nt'}
+    copyPropertyNamesToArray(p, a);
+    console.log(a);
+    function print(msg) {
+        document.write(msg, '<br/>');
+    }
+
+    function f(x) {
+        print(x);
+        arguments[0] = null;
+        print(x);
+    }
+
+    function max() {
+        var m = Number.NEGATIVE_INFINITY;
+        for (var i = 0; i < arguments.length; i++) {
+            if (arguments[i] > m) m = arguments[i];
+        }
+        return m;
+    }
+    //    console.log(max(1, 10, 200));
+    console.log(f(1, 10, 200));
+
+    function arrayCopy(from, from_start, to, to_start, length) {
+        var i = 0;
+        for (to[i++] in from) {
+            if ((i - 1) > length) {
+                to[i - 1] = '';
+                break;
+            }
+        }
+        ;
+    }
+    function easyCopy(arg) {
+        arrayCopy(arg.from,
+                arg.from_start || 0,
+                arg.to,
+                arg.to_start || 0,
+                arg.length);
+    }
+
+    var a = [1, 2, 3, 4, 5, 6];
+    var b = new Array(4);
+    easyCopy({from:a, to:b, length:2});
+    console.log(b);
+
+    function sum(a) {
+        if (a instanceof Array || (a && typeof a == 'object' && 'length' in a)) {
+            var total = 0;
+            for (var i = 0; i < a.length; i++) {
+                var ele = a[i];
+                if (!ele) continue;
+                if (typeof ele == 'number') total += ele;
+                else throw new Error('sum(): all array ele must be numbers!');
+            }
+            return total;
+        } else {
+            throw new Error('sum(): argument must be an array!');
+        }
+    }
+    var s = sum([1, 2, null, 4]);
+    console.log(s);
+    var a;
+    console.log(!a);
+
+    function flexisum(a) {
+        var total = 0;
+        for (var i = 0; i < arguments.length; i++) {
+            var element = arguments[i];
+            if (element == null || element == undefined) continue;
+            var n;
+
+            switch (typeof element) {
+                case 'number':
+                    n = element;
+                    break;
+                case 'object':
+                    if (element instanceof Array)
+                        n = flexisum.apply(this, element);
+                    else n = element.valueOf();
+                    break;
+                case 'function':
+                    n = element();
+                    break;
+                case 'string':
+                    n = parseFloat(element);
+                    break;
+                case 'boolean':
+                    n = NaN;
+                    break;
+            }
+            if (typeof n == 'number' && isNaN('n')) total += n;
+            else throw new Error('can not convert ' + element + 'to number');
+        }
+        return total;
+    }
+
+    //    console.log(flexisum([1,,2,3]));
+
+    function square(x) {
+        return x * x;
+    }
+
+    var a = square(4);
+    var b = square;
+    var c = b(5);
+    console.log(a);
+    console.log(b);
+    console.log(c);
+
+    var o = new Object;
+    o.square = function (x) {
+        return x * x;
+    }
+    y = o.square(16);
+
+    console.log(y);
+
+    var a = new Array(3);
+    a[0] = function (x) {
+        return x * x;
+    }
+    a[1] = 20;
+    a[2] = a[0](a[1]);
+    console.log(a);
+
+    // 将函数作为数据的用法
+    function add(x, y) {
+        return x + y;
+    }
+    function subtract(x, y) {
+        return x - y;
+    }
+    function multiply(x, y) {
+        return x * y;
+    }
+    function divide(x, y) {
+        return x / y;
+    }
+
+    function operate(operator, operand1, operand2) {
+        return operator(operand1, operand2);
+    }
+
+    var i = operate(add, operate(add, 2, 3), operate(multiply, 4, 5));
+    console.log(i);
+
+    var operators = {
+        add     :function (x, y) {
+            return x + y;
+        },
+        subtract:function (x, y) {
+            return x + y;
+        },
+        multiply:function (x, y) {
+            return x * y;
+        },
+        divide  :function (x, y) {
+            return x / y;
+        },
+    }
+
+    function oper2(op_name, operand1, operand2) {
+        if (typeof operators[op_name] == 'function') {
+            return operators[op_name](operand1, operand2);
+        } else {
+            throw 'unknown operator';
+        }
+    }
+
+    var j = oper2('add', 'hello', oper2('add', '', 'word'));
+    console.log(j);
+
+    var sum = {
+        oper1:1,
+        oper2:2,
+        oper3:3,
+        total:function () {
+            var that = this;
+            this.result = this.oper1 + this.oper2;
+            (function () {
+                oper1 = 11;
+                alert(this.oper1); // 11;
+                alert(this.oper2); // undefined;
+                alert(that.oper3); // 3;
+            })();
+        }
+    }
+    sum.total();
+    console.log(sum.result);
+
+    function check(args) {
+        var actual = args.length;
+        var expected = args.callee.length;
+        if (actual != expected) {
+            throw new Error('actual wrong!');
+        }
+    }
+
+
+    function f(x, y, z) {
+        check(arguments);
+        return x + y + z;
+    }
+    console.log(f(1,2));
+     */
+
+</script>
+<script type="text/javascript">
+    /*
+    uni.counter = 0;
+
+
+    function uni(){
+        return uni.counter++;
+    }
+    
+    for(var i=0; i<10; i++){
+        uni();
+    }
+    console.log(uni.counter);
+
+    var biggest = Math.max.apply(null, [1,2,3,4]);
+    console.log(biggest);
+    function f(){
+        alert(this.value);
+
+    }
+
+    function o(x){
+        this.value = 'x';
+    }
+    
+//    f.call(o, 1,2);
+
+    o.m = f;
+    o.m();
+    delete o.m;
+
+    function obj(){ this.value = '对象'; }
+    var value = 'global 变量';
+    function fun1(){ alert(this.value); }
+    var ob = new obj();
+    ob.m = fun1;
+    ob.m();
+    delete ob.m;
+//    fun1.call(ob);
+
+    function getPropertyNames(o){
+        var r = [];
+        for(var name in o){
+            r.push(name);
+        }
+        return r;
+    }
+    
+    var Man = {
+        name: 'jikey',
+        age: 29
+    }
+
+//    console.log(getPropertyNames(Man));
+
+    // 对象工具函数
+    function copyProperties(from, to){
+        to = to || {};
+        for(p in from) to[p] = from[p];
+        return to;
+    }
+    var woman = {
+//        name: 'haoqing',
+        school: 'shanghai'
+    };
+//    copyProperties(Man, woman);
+//    console.dir(copyProperties(Man, woman));
+//    console.dir(woman);
+
+    function copyUndefinedProperties(from, to){
+        for(p in from){
+            console.log(p);
+            if(!(p in to)) {
+                to[p] = from[p];
+            }
+        }
+        return to;
+    }
+    copyUndefinedProperties(Man, woman);
+//    console.log(woman);
+
+    // 数组工具函数
+     */
+
+    function filterArray(a, predicate){
+        var results = [];
+        var len = a.length;
+        for(var i=0; i<len; i++){
+            var element = a[i];
+            if(predicate(element)){
+                results.push(element);
+            }
+        }
+        return results;
+    }
+
+    function getNum(x){
+        if(x % 2 == 0){ return true; }
+    }
+//    console.log(filterArray([1,2,3,4,6,7,8,9,10], getNum));
+    function mapArray(a, f){
+        var r = [];
+        var len = a.length;
+        for(var i=0; i<len; i++){
+            r[i] = f(a[i]);
+        }
+        return r;
+    }
+
+    function addNum(x){
+        return x * x;
+    }
+//    console.log(mapArray([1,2,3], addNum));
+
+    // 用于函数的工具函数
+    function bindMethod(o, f){
+        return function(){
+            return f.apply(o, arguments);
+        }
+    }
+
+    function bindArguments(f){
+        var boundArgs = arguments;
+        return function(){
+            var args = [];
+            for(var i=1; i<boundArgs.length; i++) args.push(boundArgs[i]);
+            for(var i=0; i<arguments.length; i++) args.push(arguments[i]);
+            return f.apply(this, args);
+        }
+    }
+
+    var o = {
+        name: 'jikey',
+        ageMore:29,
+        sayAge: function(){
+            alert(this.ageMore);
+        }
+    }
+
+    function addName(){
+        return this.age + 30;
+    }
+    
+    function sum(){
+        var total = 0;
+        var len = arguments.length;
+        for(var i=0; i<len; i++){
+            total += arguments[i];
+        }
+        return total;
+    }
+
+    var total = bindArguments(sum, 1, 2);
+//    alert(typeof total);
+//    alert(total(3));
+
+/*    var bar = {
+        x:20,
+        test: function(){
+            alert(this === bar);
+            alert(this.x);
+//            this = foo;
+//            alert(this.x);
+        }
+    }
+        bar.test();*/
+    
+//    var sayAddName = bindMethod(o, addName);
+
+//    o.sayAge();
+//    console.log(o.age);
+//    console.log(o.sayAge());
+//    console.log(sayAddName());
+//    console.log(o.sayAge());
+
+    /*
+    function makeFun(x){
+        return function(){
+            return x;
+        }
+    }
+
+    var a = [makeFun(0), makeFun(1), makeFun(2)];
+    alert(a[0]());
+    alert(a[1]());
+    alert(a[2]());
+
+    uniqueID = function(){
+        if(!arguments.callee.id) arguments.callee.id = 0;
+        return arguments.callee.id++;
+    }
+    alert(uniqueID({id: 10}));
+     */
+
+
+</script>
+<script type="text/javascript">
+    /*
+    function makeProperty(o, name, predicate){
+        var value;
+        o['get' + name] = function(){ return value; };
+        o['set' + name] = function(v){
+            if(predicate && !predicate(v)){
+                throw 'set' + name + ': invalid value ' + v;
+            } else {
+                value = v;
+            }
+        }
+    }
+
+    var o = {};
+    makeProperty(o, 'Name', function(x){ return typeof x == 'string'});
+    o.setName('Frank');
+    console.log(o.getName());
+    o.setName(0);
+    */
+
+    var y = 'global';
+    function construcFun(){
+        var y = 'local';
+        return new Function('return y');
+    }
+    alert(construcFun()());
+
+
+</script>
+</body>
+</html>

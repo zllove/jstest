@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-jq-scrollTop</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        .mydiv{height:30px; line-height:30px; overflow:hidden;}
+
+    </style>
+</head>
+<body>
+<div class="mydiv">
+    <p>新版宇商网全新亮相，赶紧来体验吧11！</p>
+    <p>新版宇商网全新亮相，赶紧来体验吧22！</p>
+    <p>新版宇商网全新亮相，赶紧来体验吧33！</p>
+    <p>新版宇商网全新亮相，赶紧来体验吧44！</p>
+</div>
+<input type="text" name="" id="username">
+<script type="text/javascript">
+    var t = $('.mydiv').scrollTop();
+//    console.log(t);
+    function foo(){
+        this.name = 1;
+    }
+    var f = new foo();
+//    console.log(f.name);
+    var iTest = 1;
+    function changeVal(){
+        if(iTest < 10){
+            iTest ++;
+            $('#username').val(iTest);
+        } else {
+            $('#username').val('已经到最大了！');
+        }
+        setTimeout(changeVal, 1000);
+    }
+    changeVal();
+</script>
+<script type="text/javascript">
+    (function($){
+        $.fn.marquee = function (options) {
+            var defaults = {
+                speed    :30,
+                step     :1,
+                direction:'up',
+                pause    :1000
+            };
+            var o = $.extend({}, defaults, options);
+            var dIndex = $.inArray(o.direction, ['right', 'down']);
+            if (dIndex > -1) {
+                o.direction = ['left', 'up'][dIndex];
+                o.step = -o.step;
+            }
+            var mid,
+                div = $(this),
+                divWidth = div.width(),
+                divHeight = div.height(),
+                ul = $('ul', div),
+                li = $('li', ul),
+                liSize = li.size(),
+                liWidth = li.width(),
+                liHeight = li.height(),
+                width = li.width() * li.size(),
+                height = li.height() * li.size();
+
+            if ((o.direction == 'left' && width > divWidth) || (o.direction == 'up' && height > divHeight)) {
+                if (o.direction == 'left') {
+                    ul.width(2 * liSize * liWidth);
+                    if (o.step < 0) o.scrollLeft(width);
+                }
+                else {
+                    ul.height(2 * liSize * liHeight);
+                    if (o.step < 0) o.scrollTop(height);
+                }
+                ul.append(li.clone());
+                mid = setInterval(_marquee, o.speed);
+                div.hover(function () {
+                    clearInterval(mid);
+                }, function () {
+                    mid = setInterval(_marquee, o.speed);
+                });
+            }
+            function _marquee() {
+                if (o.direction == 'left') {
+                    var l = div.scrollLeft();
+                    if (o.step < 0){
+                        div.scrollLeft((l < 0 ? width : l) + o.step);
+                    } else {
+                        div.scrollLeft((l > width ? 0 : l) + o.step);
+                    }
+                    if (l % liWidth == 0) _pause();
+                } else {
+                    var t = div.scrollTop();
+                    if (o.step < 0)
+                        div.scrollTop((t < 0 ? height : t) + o.step);
+                    else
+                        div.scrollTop((t > height ? 0 : t) + o.step);
+                    if (t % liHeight == 0) _pause();
+                }
+            }
+            function _pause() {
+                if (o.pause > 0) {
+                    var tempStep = o.step;
+                    o.step = 0;
+                    setTimeout(function () {
+                        o.step = tempStep;
+                    }, o.pause);
+                }
+            }
+        };
+    })(jQuery);
+
+</script>
+
+</body>
+</html>

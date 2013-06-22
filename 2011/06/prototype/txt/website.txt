@@ -1,0 +1,11 @@
+prototype源码解读
+
+http://www.cnblogs.com/yqstudy/archive/2009/12/14/1623984.html
+
+
+http://www.cnblogs.com/me-sa/articles/566859.html
+
+http://p-x1984.iteye.com/blog/196906
+
+//20110606
+http://www.cnblogs.com/cangqiong/archive/2007/12/21/1008801.html

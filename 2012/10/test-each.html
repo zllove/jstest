@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    function say(i, l){
+        console.log(i, l);
+    }
+    /*
+    $.each( { name: "John", lang: "JS" }, function(i, n){
+        console.log( "Name: " + i + ", Value: " + n );
+    });
+    $.each([[1, 2], [2, 3]], function(i, n){
+        say(n[0], n[1]);
+    });
+    $.each([1, 2, 3], function(i){
+        console.log(i);
+    });
+    var arr = [1,2]
+    var s = 0;
+    var end = $.each(arr, function(i){
+        return arr[i] + '';
+    });
+//    console.log(typeof end);
+    say.call(null, $.each(arr, function(i){
+        return arr[i];
+    }));
+//    var str = '<div>我是一个兵啊哈</div>';
+    var div = document.createElement('div');
+    div.innerHTML = '我是一个兵';
+//    document.body.appendChild(eval(str));
+    document.body.appendChild(div);
+    */
+    var str = 'http://ro.ggg.cn/news_list.php?sort=new';
+    var end = str.split('/');
+    console.log(end);
+
+</script>
+<table border="1" width="1200">
+    <!--<col align="center" />-->
+    <colgroup align="right"></colgroup>
+    <colgroup align="right"></colgroup>
+    <!--<tr>-->
+    <!--<td class="table_infoT" colspan="2">名称</td>-->
+    <!--<td class="table_infoT">解释</td>-->
+    <!--</tr>-->
+    <tr>
+        <!--<td width="10%"><img src="/images/ro/merchant.jpg"/></td>-->
+        <td>杂货商人  莉娜</td>
+        <td>回收购买各种消费道具和出售我处携带的各种物品。  消费道具回收 -  药品及蝴蝶翅膀等一般消费道具回收  出售 – 出售所携带道具 </td>
+    </tr>
+
+    <tr>
+        <!--<td><img src="/images/ro/zhuren.jpg"/></td>-->
+        <td>公会管理员 </td>
+        <td>创建公会：没加入其它公会的任意玩家都可在迟建立自己的公会  公会管理：公会会长及百夫长可以在此管理公会 </td>
+    </tr>
+</table>
+</body>
+</html>

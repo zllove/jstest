@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title> new document </title>
+  <meta name="author" content="" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <script type="text/javascript">
+  (function() {
+	    window.onload = function() {
+	        function ScrollingText(objTextContent, t) {
+	            this.objTextContent = objTextContent;
+	            this.t = t || 300;
+	            this.s = this.objTextContent.defaultValue.split("").reverse();
+	            this.sl = this.s.length;
+	            this.clearObjTextContent();
+	            this.start();
+	            this.click();
+	            this.blur();
+	        }
+	        ScrollingText.prototype = {
+	            start: function() {
+	                //开始自动打字效果
+	                var that = this;
+	                this.timer = setInterval(function() {
+	                    that.setContent();
+	                }, this.t);
+	
+	            },
+	            setContent: function() {
+	                //设置文本逐字显示
+	                var that = this;
+	                if (this.objTextContent.defaultValue.length < this.s.length) {
+	                    this.objTextContent.defaultValue += this.s[--this.sl];
+	                    this.fixDefaultValue();
+	                } else if (this.objTextContent.defaultValue.length == this.s.length) {
+	                    setTimeout(function() {
+	                        that.clearObjTextContent();
+	                        that.sl = that.s.length;
+	                    }, 3000);
+	                }
+	
+	            },
+	            clearObjTextContent: function() {
+	                //清空文本框
+	                this.objTextContent.defaultValue = "";
+	                this.fixDefaultValue();
+	
+	            },
+	            stop: function() {
+	                //停止自动打字
+	                clearInterval(this.timer);
+	
+	            },
+	            click: function() {
+	                //点击清空默认文本
+	                var that = this;
+	                this.objTextContent.onclick = function() {
+	                    that.stop();
+	                    if (that.objTextContent.value == that.objTextContent.defaultValue) {
+	                        that.clearObjTextContent();
+	                    }
+	                }
+	
+	            },
+	            blur: function() {
+	                //指针离开文本区域为空时重新开始自动打字
+	                var that = this;
+	                this.objTextContent.onblur = function() {
+	                    if (that.objTextContent.value == "") {
+	                        that.sl = that.s.length;
+	                        that.start();	
+	                    }
+	
+	                }
+	
+	            },
+	            fixDefaultValue: function() {
+	                //修复IE下defaultValue未赋值到value问题
+	                if (this.objTextContent.defaultValue != this.objTextContent.value) {
+	                    this.objTextContent.value = this.objTextContent.defaultValue;
+	                }
+	
+	            }
+	
+	        }
+	        var inpu = document.getElementsByTagName("input")[0];
+	        var ii = new ScrollingText(inpu);
+	        var textarea = document.getElementsByTagName("textarea")[0];
+	        var area = new ScrollingText(textarea, 150);
+	    }
+	
+	})()		
+  	
+  </script>
+ </head>
+ <body>
+			<input type="text" size="32" value="请输入文字" />
+			<textarea cols="50" rows="10">您好，这里是CMSQUAN官方博客，请您留下您宝贵的意见！我们将及时予以回复。请您随时关注本站，谢谢</textarea>
+ </body>
+</html>

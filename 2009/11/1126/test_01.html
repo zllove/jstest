@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Untitled Document</title>
+        <style>
+		
+		</style>
+		<script>
+		
+		</script>
+	</head>
+	<body>
+		如何点按钮使文本框的值加1
+		<input value="1" id="a">
+		<input type="button" onclick="add(this)" value="+" />
+		<input type="button" onclick="subtract(this)" value="-" />
+		<script>
+			function add(btn){
+				var v = document.getElementById('a');
+				v.value = parseInt(v.value) + 1;
+				if(v.value > 9){
+					alert('库存不足！');
+					return;
+				}
+			}
+			function subtract(btn){
+				var v = document.getElementById('a');
+				v.value = parseInt(v.value) - 1;
+				if(v.value < 1){
+					v.value = 1;
+					alert('请选择商品');
+					return;
+				}
+			}
+		</script>
+	</body>
+</html>

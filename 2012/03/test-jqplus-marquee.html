@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+    <title>test-jqplus-marquee</title>
+    <style type="text/css">
+        *{ margin:0; padding:0; }
+        body{ background:#3f3f3f; }
+        .smt_price{ margin-top:80px; height:40px; overflow:hidden; border:1px solid #ccc; background:#fff; }
+        .smt_price li{ text-align:center; list-style:none; }
+        /*.smt_price li a{ display:inline-block; height:40px; line-height:40px; overflow:hidden; text-indent:-30em; width:200px; }*/
+        /*.smt_price li a{ background-image:url(http://css1.esunnyimg.com/image/trade/v3.0.1/elmes_trade.png); background-repeat:no-repeat; }*/
+        /*.smt_price .price1{ background-position:left -70px; }*/
+    </style>
+</head>
+<body>
+<div class="smt_price">
+    <ul style="height: 180px;">
+        <li><a class="price1"> ¥ 9800/年(双网版)</a></li>
+        <li><a class="price1"> ¥ 2300/年(双网版)</a></li>
+        <li><a class="price1"> ¥ 9800/年(双网版)</a></li>
+        <li><a class="price1"> ¥ 2300/年(双网版)</a></li>
+    </ul>
+</div>
+<script type="text/javascript">
+    (function ($) {
+        $.fn.marquee = function (options) {
+            var defaults = {
+                speed    :30,
+                step     :1,
+                direction:'up',
+                pause    :1000
+            };
+            var o = $.extend({}, defaults, options);
+            var dIndex = $.inArray(o.direction, ['right', 'down']);
+            console.log(dIndex);
+            if (dIndex > -1) {
+                o.direction = ['left', 'up'][dIndex];
+                o.step = -o.step;
+            }
+            var mid,
+                div = $(this),
+                divWidth = div.width(),
+                divHeight = div.height(),
+                ul = $('ul', div),
+                li = $('li', ul),
+                liSize = li.size(),
+                liWidth = li.width(),
+                liHeight = li.height(),
+                width = li.width() * li.size(),
+                height = li.height() * li.size();
+
+            if ((o.direction == 'left' && width > divWidth) || (o.direction == 'up' && height > divHeight)) {
+                if (o.direction == 'left') {
+                    ul.width(2 * liSize * liWidth);
+                    if (o.step < 0) o.scrollLeft(width);
+                } else {
+                    ul.height(2 * liSize * liHeight);
+                    if (o.step < 0) o.scrollTop(height);
+                }
+                ul.append(li.clone());
+                mid = setInterval(_marquee, o.speed);
+                div.hover(function () {
+                    clearInterval(mid);
+                }, function () {
+                    mid = setInterval(_marquee, o.speed);
+                });
+            }
+            function _marquee() {
+                if (o.direction == 'left') {
+                    var l = div.scrollLeft();
+                    if (o.step < 0) {
+                        div.scrollLeft((l < 0 ? width : l) + o.step);
+                    } else {
+                        div.scrollLeft((l > width ? 0 : l) + o.step);
+                    }
+                    if (l % liWidth == 0) _pause();
+                } else {
+                    var t = div.scrollTop();
+                    if (o.step < 0)
+                        div.scrollTop((t < 0 ? height : t) + o.step);
+                    else
+                        div.scrollTop((t > height ? 0 : t) + o.step);
+                    if (t % liHeight == 0) _pause();
+                }
+            }
+
+            function _pause() {
+                if (o.pause > 0) {
+                    var tempStep = o.step;
+                    o.step = 0;
+                    setTimeout(function () {
+                        o.step = tempStep;
+                    }, o.pause);
+                }
+            }
+        };
+    })(jQuery);
+    $('.smt_price').marquee();
+
+</script>
+</body>
+</html>

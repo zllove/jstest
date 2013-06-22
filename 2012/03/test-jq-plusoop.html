@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-jq-plusoop</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<div id="mydiv"></div>
+<script type="text/javascript">
+    (function($, undefined){
+        $.myplus = function (options, element){
+            this.$el = $(element);
+            this._init(options);
+        };
+        $.myplus.defaults = {
+            current: 0,
+            interval: 2000
+        };
+        $.myplus.prototype = {
+            _init: function(options){
+                this.options = $.extend( true, {}, $.myplus.defaults, options );
+                console.log(this.current);
+            }
+        };
+        new $.myplus();
+
+    })(jQuery);
+    console.log($.myplus());
+//    $.data($('#mydiv')[0], 'gallery', 'a');
+//    console.log($.data($('#mydiv')[0], 'gallery'));
+</script>
+</body>
+</html>

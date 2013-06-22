@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<div id="count"></div>
+<div id="count2"></div>
+<script type="text/javascript">
+    String.prototype.repeat = function(n){
+        return Array(n + 1).join(this);
+    };
+
+    function foo(){
+        var str = '0'.repeat(10),
+                arr = [],
+                end = '',
+                end2 = '';
+        console.time('1');
+        arr = str.split('');
+        end = '<b>' + arr.join('</b><b>') + '</b>';
+
+        console.timeEnd('1');
+        console.time('2');
+        for(var i = 0, len = str.length; i < len; i++){
+            end2 += '<b>' + str[i] + '</b>';
+        }
+        console.timeEnd('2');
+        document.getElementById('count').innerHTML = end;
+        document.getElementById('count2').innerHTML = end2;
+    }
+    foo();
+</script>
+</body>
+</html>

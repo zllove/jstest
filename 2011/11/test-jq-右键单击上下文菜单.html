@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+	<style type="text/css">
+		ul{width:200px;}
+		ul li ul{list-style:none;margin:5px;width:200px;}
+		a{display:block;border-bottom:1px solid #fff;text-decoration:none;color:#fff;padding:0.5em;background:#c80;}
+		li{display:inline;}
+		.hover{background:#000;}
+		.info{border:1px solid #ccc;}
+	</style>
+</head>
+<body oncontextmenu="return false;">
+	<p class="info">Books are the world of information. Books are our best friends. A wise man always has library fo several books.</p>
+	<ul id="contextmenu">		<li>
+			<a href="#">Books</a>			<ul>				<li><a href="#">Web Development</a></li>				<li><a href="#">Data Development</a></li>				<li><a href="#">Java Development</a></li>			</ul>		</li>	</ul>
+	<script type="text/javascript">
+		$('#contextmenu').hide();
+		$('.info').mousedown(function(event){
+			if(event.button == 1){
+				alert(1);
+			}
+			if(event.button == 2){
+				$('#contextmenu').show();
+				$('#contextmenu').css({'position':'absolute', 'left': event.screenX, 'top': event.screenY});
+			}
+		});
+		
+		$('a').hover(function(){
+			$(this).addClass('hover');
+		}, function(){
+			$(this).removeClass('hover');
+		});
+		
+		$('body').keypress(function(event){
+			//console.log(1);
+			if(event.keyCode == 27){
+				$('#contextmenu').hide();
+			}
+		});
+	</script>
+</body>
+</html>

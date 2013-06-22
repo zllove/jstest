@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-scopechain</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    /*
+
+    var a = new String('test');
+//    console.log(window['a']);
+//    console.log(a === this.a);
+
+    function foo(x, y, z){
+//        console.log(foo.length); // 3
+//        console.log(arguments.length); // 2
+//        console.log(arguments.callee == foo); // true
+        arguments[2] = 50;
+//        console.log(z);
+    }
+    foo(10, 20);
+    
+    function test(a, b){
+        var c = 10;
+        function d(){};
+        var e = function _e(){};
+        (function x(){});
+    }
+
+    alert(x);
+    var x = 10;
+    alert(x);
+    x = 20;
+    function x(){};
+    alert(x);
+
+    if(true){
+        var a = 1;
+    } else {
+        var b = 2;
+    }
+    alert(a);
+    alert(b);
+
+    alert(a); // undefined
+    b = 10;
+    alert(b); // 10
+    var a = 20;
+    alert(a); // 20
+
+    a = 10;
+    alert(window.a); // 10
+    alert(delete a); // true
+    alert(window.a); // undefined
+
+    var b = 20;
+    alert(window.b); // 20
+    alert(delete b); // false
+    alert(window.b); // 20
+
+    eval('var a = 10');
+    alert(window.a); // 10
+    alert(delete a); // true
+    alert(window.a); // undefined
+
+    var global = this;
+    var a = 10;
+    function foo(){};
+//    alert(foo.__parent__);
+
+    var VO = foo.__parent__;
+    alert(VO.a); // 10
+    alert(VO === global); // true
+
+    a = 10;
+    var d1 = new Date();
+    for(var i=0; i<5; i++){
+        a;
+    }
+    var d2 = new Date();
+    console.log(d2 - d1);
+     */
+
+    a = 10;
+    alert(window.a);
+    alert(window.window.window.a);
+
+</script>
+</body>
+</html>

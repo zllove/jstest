@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Document</title>
+        <style>
+		
+		</style>
+		<script>
+		</script>
+		
+	</head>
+	<body>
+		<SCRIPT type=text/javascript>
+		var focus_width=190;
+		var focus_height=229;
+		var text_height=0;
+		
+		var swf_height = focus_height+text_height
+		var pics='200972554248689.jpg|200972461733721.jpg|200972461760453.jpg|200971248711597.jpg|200971248705269.jpg|200971248698333.jpg';		//图片
+		var links='http://ahzhsm.com/display.asp?id=32|http://ahzhsm.com/display.asp?id=33|http://ahzhsm.com/display.asp?id=34|http://www.ahzhsm.com/display.asp?id=34|http://www.ahzhsm.com/display.asp?id=32|http://www.ahzhsm.com/display.asp?id=33' ;		//链接
+		var texts='酒神之母赛墨勒油画纪念酒|酒神之母赛墨勒音乐纪念酒|酒神之母赛墨勒西班牙5号|西班牙|油画|音乐';	//标题
+		document.write('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="'+ focus_width +'" height="'+ swf_height +'">');
+		document.write('<param name="allowScriptAccess" value="sameDomain"><param name="movie" value="pixviewer.swf"><param name="quality" value="high"><param name="bgcolor" value="#DADADA">');
+		document.write('<param name="menu" value="false"><param name=wmode value="opaque">');
+		document.write('<param name="FlashVars" value="pics='+pics+'&links='+links+'&texts='+texts+'&borderwidth='+focus_width+'&borderheight='+focus_height+'&textheight='+text_height+'">');
+		document.write('<embed src="pixviewer.swf" wmode="opaque" FlashVars="pics='+pics+'&links='+links+'&texts='+texts+'&borderwidth='+focus_width+'&borderheight='+focus_height+'&textheight='+text_height+'" menu="false" bgcolor="#DADADA" quality="high" width="'+ focus_width +'" height="'+ focus_height +'" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />');
+		document.write('</object>');
+		//-->
+	</SCRIPT>
+
+	</body>
+</html>

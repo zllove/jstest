@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+<div id="test"></div>
+<script type="text/javascript">
+    function getParameter(paraName){
+        var sUrl = location.href + '?para1=invest&para2=dollar';
+        var reg = '(?:\\?|&){1}' + paraName + '=([^&]*)';
+        var result = new RegExp(reg, 'gi');
+        result.exec(sUrl);
+        return RegExp.$1;
+    }
+    console.log(getParameter('para1'));
+    console.log(getParameter('para2'));
+
+    var objStr = "我的手机号13522222222，他的手机号13288888888，她的手机号码13699999999";
+    var arr = /13(\d)(\d{8})/g.exec(objStr);
+    for (var i = 0, len = arr.length; i < len; i++) {
+        document.getElementById('test').innerHTML += '<li>' + arr[i] + '</li>';
+    }
+
+
+
+</script>
+</body>
+</html>

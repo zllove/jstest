@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+	<style type="text/css">
+		body{font-size:12px;}
+		ul{width:200px;}
+		ul li ul{list-style:none;margin:5px;width:200px;}
+		a{display:block;border-bottom:1px solid #fff;text-decoration:none;background:#00f;color:#fff;padding:0 5em;}
+		li{display:inline;line-height:30px;margin-bottom:15px;}
+		.hover{background:#00f;color:#fff;}
+		.hot{text-decoration:underline;}
+	</style>
+</head>
+<body>	<table width="500" border="1">		<tr>			<th>name</th>			<th>age</th>			<th>school</th>		</tr>		<tr>			<td>111</td>			<td>222</td>			<td>111</td>		</tr>		<tr>			<td>111</td>			<td>111</td>			<td>333</td>		</tr>	</table>
+	<script type="text/javascript">
+		/*
+		$('table tr').hover(function(){
+			$(this).find('td').addClass('hover');
+		}, function(){
+			$(this).find('td').removeClass('hover');
+		});
+		
+		//$('td:nth-child(2)').addClass('hover'); //匹配其父元素下的第N个子或奇偶元素
+		$('table tr:odd').addClass('hover');
+		*/
+		$('th').hover(function(){
+			//var colindex = $(this).parent().children().index(this);
+			var colindex = $(this).index();
+			$('table td:nth-child(' + (colindex + 1) + ')').addClass('hover');
+		}, function(){
+			$('table tr').children().removeClass('hover');
+		});
+		
+		
+	</script></body>
+</html>

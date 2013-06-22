@@ -1,0 +1,394 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>UIWindowDemo1.0</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <script type="text/javascript" src="../../jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.UIWindow3.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/ui.window.css">
+    <style type="text/css">
+        body{background:#400000;}
+        .main{width:1000px;margin:10px auto;background:#fff3e7;border:1px solid #802800;}
+        .main_wrap{padding:15px;}
+        .main_wrap h1{line-height:35px;font-family:arial;text-align:center;color:#600;font:18px/45px arial,微软雅黑;border-bottom:1px solid #d79769;}
+        .main_list{margin-top:10px;}
+        .main_list li{list-style:inside decimal;padding-bottom:10px;}
+        .main_text{padding:10px 0 0;text-indent:2em;}
+        .main_text h2{font-size:14px;}
+        .mt10{margin-top:10px;}
+        .code{display:none;height:1px;overflow:hidden;}
+        .runbtn{font-size:12px;padding:5px;width:100%;color:#890220;background:#f6d57b;border:solid 1px #edb354;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;cursor:pointer;}
+        .runbtn:hover{background:#84021c;color:#fff;border:1px solid #310303;}
+        .testtab{display:none;}
+        .tab{border-collapse:collapse;border:1px solid #ccc;}
+        .tab td{border:1px solid #ccc;padding:5px;}
+        .h1header{border:1px solid #ccc;background:#fff;}
+        .error{color:#f00;font-weight:bold;}
+        .mouse_area{height:50px;padding:5px;background:#e1e1e1;border:1px solid #ccc;cursor:pointer;}
+        .mouse_area:hover {background:#f0f0f0;}
+        .mouseout_new{width:200px;}
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="main_wrap">
+        <h1>UIWindow: 基于jQuery-1.4.4弹出拖动层插件。</h1>
+        <div class="main_text">
+            <h2>特点：</h2>
+            <p>a. 可通过多种方式调用： 如直接可以在任何DOM元素上通过各种事件(click, blur, change, dblclick)来调用。</p>
+            <p>b. 可直接通过插件方式来调用： 如$.UIWindow({ //coding })...</p>
+            <p>c. 高级可选功能：双击标题栏可放大窗口，单击遮罩层可关闭窗口。</p>
+        </div>
+        <h4 class="mt10">一、绑定到DOM元素上</h4>
+        <ol class="main_list">
+            <li><span>绑定到DOM元素，通过eventType改变调用行为</span>
+<textarea class="code">
+$('.opennew').UIWindow({
+    eventType: 'mouseover',
+    cont: '我是被经过后调用的！<br />可单调 <strong style="color:#f40;">遮罩层</strong>的任意位置关闭！'
+});
+</textarea>
+<pre></pre>
+                <div id="testcontent" class="testtab">
+                    <table class="tab" width="100%">
+                        <tr>
+                            <td>name</td>
+                            <td>address</td>
+                        </tr>
+                        <tr>
+                            <td>豪情</td>
+                            <td>ShangHai</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center"><input id="subBtn" type="submit" value="再来一个小窗口" /></td>
+                        </tr>
+                    </table>
+                </div>
+                <p class="mouse_area opennew"><a href="javascript:void(0)">单击click事件...</a></p>
+                <script type="text/javascript">
+                    $('.opennew').UIWindow({
+                        eventType: 'click',
+                        content: '我是被经过后调用的！<br />可单击<strong style="color:#f40;">遮罩层</strong>的任意位置关闭！',
+//                        mask: true,
+                        isScroll: true
+                    });
+                </script>
+            </li>
+            <li>
+                <span>mouseout事件测试</span>
+                <textarea class="code">
+$('.mouseout_new').UIWindow({
+    eventType: 'mouseout',
+    content: 'mouseout事件测试<br />可单击<strong style="color:#f40;">遮罩层</strong>的任意位置关闭！'
+});                
+                </textarea>
+                <pre></pre>
+                <p class="mouse_area mouseout_new"><a href="javascript:void(0)">当mouseout我时...！</a></p>
+                <div class="mousearea"><a class="menu" href="#menucont">menu</a></div>
+                <div id="menucont">this is menucont</div>
+                <script type="text/javascript">
+                    /*
+                    var ppAuthors = $('.mouseout_new').find('a');
+                    ppAuthors.mouseout(function(e){
+                        e.stopPropagation();
+                    })
+                    */
+                    $('.mouseout_new').UIWindow({
+                        title: 'mouseout测试',
+                        eventType: 'mouseout',
+                        content: '可单击<strong style="color:#f40;">遮罩层</strong>的任意位置关闭！'
+                    });
+                    $('.menu').UIWindow({
+                        eventType: 'click'
+                    });
+
+                </script>
+            </li>
+            <li>
+                <span>弹出id中的内容</span>
+<textarea class="code">
+$('.ajaxUIWindow').UIWindow({
+    eventType: 'click',
+    winID: '#testWinCont',
+    content: '我是一个兵'
+});
+</textarea>
+                <pre></pre>
+                <p id="testWinCont" style="display:none;">这是需要弹出的内容。</p>
+                <p class="testClass" style="display:none;">这是一个类名。</p>
+                <p><a href="javascript:void(0)" class="ajaxUIWindow runbtn">弹出id,class中的内容</a></p>
+                <script type="text/javascript">
+                    $('.ajaxUIWindow').UIWindow({
+                        eventType: 'click',
+                        winID: '#testWinCont',
+                        content: '我是一个兵'
+                    });
+                </script>
+            </li>
+        </ol>
+        <h4 class="mt10">二、直接通过$.UIWindow()调用</h4>
+        <ol class="main_list">
+            <li><span>弹出后，通过外部方法关闭。</span>
+                <textarea class="code">
+document.getElementById('testbtn').onclick = function(){
+    $.UIWindow({
+        content: '<input type="button" id="myBtn" style="cursor:pointer;" value="通过调用外部方法关闭" /><br/><strong style="color:#666;">也可单击遮罩层关闭我</strong>',
+        callOnOpen: function(){
+            var that = this;
+            var btn = document.getElementById('myBtn');
+            btn.onclick = function(){
+                that.close();
+            }
+        }
+    });
+};
+                </textarea>
+                <pre></pre>
+                <p><input id="testbtn" type="button" class="runbtn" value="猛击我吧 ……"></p>
+                <script type="text/javascript">
+                    document.getElementById('testbtn').onclick = function(){
+                        $.UIWindow({
+                            content: '<input type="button" id="myBtn" style="cursor:pointer;" value="通过调用外部方法关闭" /><br/><strong style="color:#666;">也可单击遮罩层关闭我</strong>',
+                            callOnOpen: function(){
+                                var that = this;
+                                var btn = document.getElementById('myBtn');
+                                btn.onclick = function(){
+                                    that.close();
+                                }
+                            }
+                        });
+                    };
+                </script>
+            </li>
+            <li>
+                <span>弹出窗中窗，以字面量方式传值：</span>
+<textarea class="code">
+$('#testbtn2').click(function(){
+    $.UIWindow({
+        content: $('.testtab').html()
+    });
+});
+</textarea>
+<pre></pre>
+                <p><input id="testbtn2" type="button" class="runbtn" value="猛击我吧 ……"></p>
+                <script type="text/javascript">
+                    $('#testbtn2').click(function(){
+                        $.UIWindow({
+//                            winID: '#testcontent'
+                            content: $('.testtab').html()
+                        });
+                    });
+
+                    var w = 550, h;
+                        h = 300;
+                    var winNum = 1;
+                    $('#subBtn').live('click', function(e){
+                        $.UIWindow({
+                            content: $('.testtab').html(),
+                            width: w,
+                            height: h,
+                            padding: '20px 25px',
+                            ESC: true
+                        });
+                        if(w > 400 ){
+                            w -= 50;
+                            h -= 50;
+                        } else {
+                            w = 500;
+                            h = 320;
+                        }
+                        /*
+                        winNum++;
+                        if(winNum >= 10){
+                            $('.testtab').find('#subBtn').closest('tr').html('<td colspan="2" align="center" class="error">已经点了10个，别再点了吧！没有了耶！</td>');
+                        }
+                        */
+                    });
+
+                </script>
+            </li>
+            <li><span>以最大化弹出</span>使用字面量传值。
+<textarea class="code">
+$('#testbtn3').click(function(){
+    $.UIWindow({
+        content: $('.testtab').html(),
+        width: 600,
+        height: 400,
+        padding: '20px 25px',
+        ESC: true,
+        url: 'test.html',
+        fullWin: true
+    });
+});
+</textarea>
+<pre></pre>
+
+                <p><input id="testbtn3" type="button" class="runbtn" value="猛击我吧 ……"></p>
+                <script type="text/javascript">
+                    $('#testbtn3').click(function(){
+                        $.UIWindow({
+                            content: $('.testtab').html(),
+                            width: 600,
+                            height: 400,
+                            padding: '20px 25px',
+                            ESC: true,
+                            url: 'test.html',
+                            fullWin: true
+                        });
+                    });
+                </script>
+            </li>
+            <li><span>没有标题栏</span>
+
+<textarea class="code">
+$('#testbtn4').click(function(){
+    $.UIWindow({
+        content: '内容正在提交，可单击遮罩层关闭我',
+        title: false,
+        padding: '20px 35px',
+        ESC: true
+    });
+});
+</textarea>
+<pre></pre>
+                <p><input id="testbtn4" type="button" class="runbtn" value="猛击我吧 ……"></p>
+                <script type="text/javascript">
+                    $('#testbtn4').click(function(){
+                        $.UIWindow({
+                            content: '内容正在提交,可单击遮罩层关闭我',
+                            title: false,
+                            padding: '20px 35px',
+                            ESC: true
+                        });
+                    });
+                </script>
+            </li>
+            <li><span>2秒后消失</span>
+<textarea class="code">
+$('#testbtn5').click(function(){
+    $.UIWindow({
+        content: '内容正在提交, 弹出层2s后消失',
+        title: false,
+        padding: '20px 35px',
+        ESC: true,
+        timer: 2
+    });
+});
+</textarea>
+<pre></pre>
+                <p><input id="testbtn5" type="button" class="runbtn" value="猛击我吧 ……"></p>
+                <script type="text/javascript">
+                    $('#testbtn5').click(function(){
+                        $.UIWindow({
+                            content: '内容正在提交, 弹出层2s后消失',
+                            title: false,
+                            padding: '20px 35px',
+                            ESC: true,
+                            timer: 2
+                        });
+                    });
+                </script>
+            </li>
+            <li>
+                <span>回调</span>
+                <textarea class="code">
+$('#testbtn6').click(function(){
+    $.UIWindow({
+    content: '回调测试！',
+    padding: '20px 35px',
+    ESC: true,
+    callOnOpen: function(){
+        $.UIWindow({
+            content: '我已经打开！',
+            title: false, // 隐藏标题
+            timer: 2 // 2秒后自动关闭
+        });
+//      alert('我已经打开！'); // 传统的alert已经被替换
+    },
+    callOnClose: function(){
+        $.UIWindow({
+            content: '我已经关闭！',
+            title: false,
+            timer: 2
+        });
+//      alert('我已经关闭'); // 传统的alert已经被替换
+    }
+});                
+                </textarea>
+                <pre></pre>
+                <p><input id="testbtn6" type="button" class="runbtn" value="猛击我吧 ……"></p>
+                <script type="text/javascript">
+                    $('#testbtn6').click(function(){
+                        $.UIWindow({
+                            content: '回调测试！',
+                            padding: '20px 35px',
+                            ESC: true,
+                            callOnOpen: function(){
+                                $.UIWindow({
+                                    content: '我已经打开！',
+                                    title: false,
+                                    timer: 2
+                                });
+//                                alert('我已经打开！'); // 传统的alert已经被替换
+                            },
+                            callOnClose: function(){
+                                $.UIWindow({
+                                    content: '我已经关闭！',
+                                    title: false,
+                                    timer: 2
+                                });
+//                                alert('我已经关闭'); // 传统的alert已经被替换
+                            }
+                        });
+                    });
+                </script>
+            </li>
+            <li>
+                <span>测试Iframe</span>
+                <textarea class="code">
+$('#testbtn7').click(function(){
+    $.UIWindow({
+        title: '测试IFrame',
+        url: 'test.html'
+    });
+});
+                </textarea>
+                <pre></pre>
+                <p><input id="testbtn7" type="button" class="runbtn" value="猛击我吧 ……"></p>
+                <script type="text/javascript">
+                    $('#testbtn7').click(function(){
+                        $.UIWindow({
+                            title: '测试IFrame',
+                            content: '测试content.',
+                            url: 'test.html',
+                            position: 'absolute',
+                            left:0,
+                            top: 200
+                        });
+                    });
+
+                </script>
+            </li>
+
+        </ol>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/hl/highlight.js"></script>
+<script type="text/javascript" src="js/hl/lang-xml.js"></script>
+<script type="text/javascript" src="js/hl/lang-html.js"></script>
+<script type="text/javascript" src="js/hl/lang-js.js"></script>
+<link rel="stylesheet" type="text/css" href="css/jkcodecolor.css">
+<script type="text/javascript">
+(function(){
+    $(".code").each(function(){
+        var code =$(this).val()
+        var hl = new DlHighlight({lang: "js",lineNumbers: false });
+        var formatted = hl.doItNow(code);
+        $(this).next().addClass("jkhightlight").html("<pre>" + formatted + "</pre>")
+    })
+})();
+</script>
+</body>
+</html>

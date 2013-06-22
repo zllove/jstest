@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>UIScrollImg - Demo</title>
+    <script type="text/javascript" src="../../jquery-1.4.4.min.js"></script>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{font:12px/2 arial; background:#3f3f3f;}
+        ul,li{ list-style:none;}
+        .wrap{ width:850px; padding:10px; margin:30px auto; border:1px solid #ccc; background:#fff; overflow:hidden;}
+        .ui_scroll_wrap{ position:relative; padding:0 56px;}
+        .ui_scroll_content{width:726px; overflow:hidden;}
+        .ui_scroll_leftbtn,.ui_scroll_rightbtn{position:absolute; width:39px; height:80px;top:50px; cursor:pointer; background:url(http://js.fgm.cc/learn/lesson7/img/btn.png) no-repeat 0 0;}
+        .ui_scroll_leftbtn{ left:0px; background-position:0 0;}
+        .ui_scroll_rightbtn{ right:0px; background-position:-39px 0;}
+        .ui_scroll_list{ float:left;}
+        .ui_scroll_list li{ float:left; margin-right:10px;}
+        .ui_scroll_list li a img{ border:1px solid #ccc; padding:1px;}
+        .ui_scroll_list li a:hover img{ border:1px solid #f60; padding:1px;}
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div id="UIScroll" class="ui_scroll_wrap">
+        <span id="UILeftBtn" class="ui_scroll_leftbtn"></span>
+        <ul class="ui_scroll_list">
+            <li><a href="#"><img src="http://i5.vanclimg.com/users/18/20120426/n3_20120426.jpg" alt=""></a></li>
+            <li><a href="#"><img src="http://i3.vanclimg.com/users/18/20120425/s16_120425.jpg" alt=""></a></li>
+            <li><a href="#"><img src="http://i2.vanclimg.com/users/18/20120420/n13_120422.jpg" alt=""></a></li>
+            <li><a href="#"><img src="http://i2.vanclimg.com/users/18/20120420/n13_120422.jpg" alt=""></a></li>
+            <li><a href="#"><img src="http://i2.vanclimg.com/users/18/20120420/n13_120422.jpg" alt=""></a></li>
+            <li><a href="#"><img src="http://i3.vanclimg.com/users/18/20120420/s11_20120422.jpg" alt=""></a></li>
+            <li><a href="#"><img src="http://i2.vanclimg.com/users/18/20120420/n13_120422.jpg" alt=""></a></li>
+            <li><a href="#"><img src="http://i2.vanclimg.com/users/18/20120420/n13_120422.jpg" alt=""></a></li>
+            <li><a href="#"><img src="http://i2.vanclimg.com/users/18/20120420/n13_120422.jpg" alt=""></a></li>
+            <li><a href="#"><img src="http://i3.vanclimg.com/users/18/20120420/s11_20120422.jpg" alt=""></a></li>
+        </ul>
+        <span id="UIRightBtn" class="ui_scroll_rightbtn"></span>
+    </div>
+
+</div>
+<script type="text/javascript">
+    (function($){
+        $.fn.UIScrollImg = function(options){
+            var me = this,
+                defaults = {
+                    isAuto: 1
+                },
+                opts = $.extend({}, defaults, options),
+                leftBtn = me.find('#UILeftBtn'),
+                rightBtn = me.find('#UIRightBtn'),
+                scrollList = me.find('ul'),
+                subEle = scrollList.find('li'),
+                totalWidth = subEle.outerWidth(true) * subEle.length, // 内容总宽度
+                listWidth = scrollList.width(),
+                timer = null,
+                isPlay = false;
+            me.wrapInner('<div class="ui_scroll_content"></div>');
+            scrollList.wrap('<div class="ui_scroll_big"></div>');
+            var scrollCont = me.find('.ui_scroll_content');
+            var bigWrap = scrollList.parent();
+            bigWrap.css('width', '5000px');
+            scrollList.clone().appendTo(bigWrap); // 复制子内容，以实现长滚动
+
+            var scroll = {
+                // 自动播放
+                play: function(){
+                    var that = this;
+                    this.invoke();
+                    if(!isPlay){
+                        timer = setTimeout(function(){
+                            opts.isAuto && that.next().play();
+                        }, 2000);
+                    }
+                    return this;
+                },
+                // 上一个
+                prev: function(){
+                    if(!isPlay){
+                        isPlay = true;
+                        scrollCont.animate({scrollLeft: '+=184'}, 1000, 'swing');
+                        if(scrollCont.scrollLeft() >= totalWidth){
+                            scrollCont.scrollLeft(0);
+                        }
+                        isPlay = false;
+                    }
+                    return this;
+                },
+                // 下一个
+                next: function(){
+                    if(scrollCont.scrollLeft() == 0){
+                        scrollCont.scrollLeft(totalWidth);
+                    }
+                    scrollCont.animate({scrollLeft: '-=184'}, 1000, 'swing');
+                    return this;
+                },
+                invoke: function(){
+                    leftBtn.click(this.prev);
+                    rightBtn.click(this.next);
+                }
+            };
+
+            if(this.length < 1){ alert('请绑定正确的根元素!'); }
+            return this.each(function(){
+                opts.isAuto && scroll.play();
+                bigWrap.hover(function(){
+                    clearTimeout(timer);
+                }, function(){
+                    opts.isAuto && scroll.play();
+                });
+                
+            });
+        }
+    })(jQuery);
+    $('#UIScroll').UIScrollImg();
+
+</script>
+</body>
+</html>

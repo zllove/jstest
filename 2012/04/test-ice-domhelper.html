@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-ice-domhelper</title>
+    <script type="text/javascript" src="./js/ice.js"></script>
+    <script type="text/javascript" src="./js/DomHelper.js"></script>
+</head>
+<body>
+<div id="icetest">icetest</div>
+<input id="btn" type="button" value="测试domhelper-innerhtml">
+<script type="text/javascript">
+    var dh = Ice.DomHelper;
+    /*
+    Ice.getDom('btn').onclick = function (){
+//        var res = dh.insertHtml('beforeend', Ice.getDom('icetest'), '<div>我是一个兵</div>');
+        var str = '<table border="1"><tr><td>1111</td><td>1111</td></tr></table>';
+        var res = dh.insertHtml('beforeend', Ice.getDom('icetest'), str);
+//        console.log(res);
+    }
+    */
+    Ice.getDom('btn').onclick = function (){
+        var spec = {
+            id: 'myul',
+            style: { width:'20px', height:'30px'},
+            cls: 'my-list',
+            tag: 'ul',
+            children: [{
+                tag: 'li',id: 'item0', html: 'List item 0'
+            }, {
+                tag: 'li',id: 'item1', html: 'List item 1'
+            },{
+                tag: 'li',id: 'item2', html: 'List item 2'
+            }]
+        };
+        var str1 = '<div>1</div>';
+        var str2 = [{
+            id: 'myul',
+            style: 'width'
+        }];
+        var str4 = [{
+//            tag: 'ol'
+            tag: 'ol',
+            style: {width:'20px', height:'80px'},
+            children: [{
+                tag: 'li', id: 'item0'
+            }, {
+                tag: 'li', id: 'item1'
+            }]
+        }];
+//        var str3 = [1,,];
+//        console.log(dh.makeup(spec));
+        console.log('rs', dh.makeup(str4));
+//        Ice.getDom('icetest').innerHTML = dh.makeup(str1);
+//        Ice.getDom('icetest').innerHTML = dh.makeup(spec);
+    }
+</script>
+
+</body>
+</html>

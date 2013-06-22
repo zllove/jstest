@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-arraylike</title>
+</head>
+<body>
+<h3><a href="http://snandy.iteye.com/blog/580373">将伪数组转换成数组</a></h3>
+<p>11</p><p>11</p><p>11</p>
+<script type="text/javascript">
+    function makeArray(a){
+        var res = [],
+            len = a.length;
+        try{
+            res = [].slice.call(a, 0);
+        } catch(ex) { // for ie
+            for(var i=0; j = obj[i++]; ){
+                res.push(j);
+            }
+        }
+        return res;
+    }
+    /*
+    function fun(){
+        var arr = makeArray(arguments);
+        console.log(arr.constructor);
+    }
+    fun(3, 5);
+    */
+    var els = document.getElementsByTagName('p');
+    var ar1 = makeArray(els);
+//    alert(ar1.constructor);
+    
+    var au = document.getElementsByTagName('h3')[0];
+    console.log(au.children);
+    
+</script>
+
+</body>
+</html>

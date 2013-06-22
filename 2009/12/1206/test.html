@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+body{ font-size:14px;color:#1F376D;}
+
+*{ padding:0px; margin:0px;}
+a{ color:#1F376D; text-decoration:none;}
+a:hover{ color:#BD0A01; text-decoration:underline;}
+li{ list-style:none;}
+.dashline{ height:1px; line-height:1px; background:url(demo_bg.gif) 0px -79px repeat-x; overflow:hidden; width:98%; clear:both; margin:0 1%;}
+.resTag{width:296px; height:27px; background:url(demo_bg.gif) 0px -32px no-repeat;}
+.resTag a{display:block; float:left; width:73px; height:27px; text-align:center; line-height:26px; margin-right:1px;}
+.resTag a.on{background:url(demo_bg.gif) 0px 0px no-repeat; font-weight:bold;}
+.resTag a.normal{background:url(demo_bg.gif) -75px 0px no-repeat;}
+.financeInfo{ background-color:#FFFFFF; border-left:1px solid #AACBEE; border-right:1px solid #AACBEE;width:294px; padding-top:10px;}
+.imgArea{width:100%;}
+.imgPic{ width:120px; float:left; text-align:center;}
+.imgArea ul{ float: left; }
+.imgArea ul li{ background:url(demo_bg.gif) -153px 4px no-repeat; line-height:26px; padding-left:10px;}
+.pic_text{ font-size:13px;}
+.textArea ul{ padding:10px 0px 5px 0px;}
+.textArea ul li{ padding-left:16px; background:url(demo_bg.gif) 2px -100px no-repeat; line-height:25px;}
+.resArea_b{ width:296px; height:4px; background:url(demo_bg.gif) 0px -68px no-repeat; line-height:4px; overflow:hidden;}
+</style>
+<script type="text/javascript">
+
+/**//*定义switchTag对象*/
+function switchTag(){
+}
+
+/**//*定义switchTag的方法（实现标签切换功能）*/
+switchTag.prototype.st = function(arrMenu,arrContent,onClass,normalClass){
+    var _this = this;
+    for(var i=0 ; i<arrMenu.length ; i++){
+        _this.g(arrMenu[i]).value = i;
+        _this.g(arrMenu[i]).onmouseover = function(){
+            //alert("111");
+            for(var j=0 ; j<arrMenu.length ; j++){
+                _this.g(arrMenu[j]).className = normalClass;
+                _this.g(arrContent[j]).style.display = "none";
+            }
+            _this.g(arrMenu[this.value]).className = onClass;
+            _this.g(arrContent[this.value]).style.display = "block";
+        }
+    }
+};
+
+/**//*定义switchTag的方法（获取对象的id）*/
+switchTag.prototype.g = function(o){
+    return document.getElementById(o);
+};
+
+/**//*页面加载时运行*/
+window.onload = function (){
+    var oswitch_tag = new switchTag();  /**//*创建对象实例*/
+    oswitch_tag.st(["menuElement01","menuElement02"],["content01","content02"],"on","normal"); 
+    /**//*调用switchTag的方法（参数分别表示：[标签id名数组]，[显示内容块id名数组]，当前显示状态class名，当前不显示状态class名）*/
+}
+</script>
+</head>
+
+<body>
+<div class="resArea">
+
+    <!-- 显示标签 begin-->
+    <div class="resTag">
+        <a href="#" class="on" id="menuElement01">财经</a>
+        <a href="#" class="normal" id="menuElement02">证券</a>    
+    </div>
+    <!-- 显示标签 end-->
+
+    <!-- 显示的第一个块内容 begin-->    
+    <div class="financeInfo" id="content01">
+        <div class="imgArea">
+            <div class="imgPic">
+                <img src="img.gif"/>
+                <a href="#" class="pic_text">纳市前主席造骗局 </a>
+            </div>
+            <ul>
+                <li><a href="#">74家A股房企负债3000亿</a></li>
+                <li><a href="#">珠三角倒闭潮真相调查 </a></li>
+                <li><a href="#">二套房贷有望年底松绑 </a></li>
+            </ul>
+            <p class="dashline"></p>
+        </div>
+        <div class="textArea">
+            <ul>
+                <li><a href="#">燃油税将从生产环节征收</a> <a href="#">各界盼早降油价</a></li>
+                <li><a href="#">欧元之父建议中国给每人发一百元购物券</a></li>
+                <li><a href="#">解读金融30条：创业板、公司并购成亮点</a></li>
+                <li><a href="#">理财</a> | <a href="#">年终奖N种理财方式</a> <a href="#">你适合炒股吗</a></li>
+                <li><a href="#">博客</a> | <a href="#">房地产已断气</a> <a href="#"> 股市处于历史性大底</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 显示的第一个块内容 end-->    
+    
+    <!-- 显示的第二个块内容 begin-->    
+    <div class="financeInfo"  style="display:none;" id="content02">
+        <div class="imgArea">
+            <div class="imgPic">
+                <img src="img.gif" />
+                <a href="#" class="pic_text">关注三通概念股</a>
+            </div>
+            <ul>
+                <li><a href="#">32只基金冲刺最后建仓</a></li>
+                <li><a href="#">周一必读：可积极介入 </a></li>
+                <li><a href="#">本周分析师最看好股票 </a></li>
+            </ul>
+            <p class="dashline"></p>
+        </div>
+        <div class="textArea">
+            <ul>
+                <li><a href="#">8天1000亿争夺 基金净卖与游资QFII决裂</a></li>
+                <li><a href="#">吴定富：保险资金入市比例还有7%提升空间</a></li>
+                <li><a href="#">基金专户理财首度曝光 为何收益远超大盘？</a></li>
+                <li><a href="#">从影响中国三十年五大趋势中寻找成长股</a></li>
+                <li><a href="#">基金</a>|<a href="#">王亚伟大举加仓 易方达科汇比他更快</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 显示的第二个块内容 end-->    
+    
+    <div class="resArea_b">
+    </div>
+</div>
+</body>
+</html>

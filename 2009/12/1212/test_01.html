@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Document</title>
+        <style>
+		.a{ text-align:left; border-bottom:1px solid #999;}
+		</style>
+		<script>
+		window.onload = function(){
+			/*
+			var jikey = document.getElementById('jikey');
+			document.write(jikey.childNodes.firstChild.childNodes.firstChild);
+			jikey.childNodes.firstChild.removeChild();
+			var tang = document.getElementById('tang');
+			alert(tang.childNodes[0].innerText)
+			*/
+		}
+		</script>
+	</head>
+	<body>
+		<div id="tang">
+			<p>哈哈</p>
+			<p>瓜仉</p>
+		</div>
+		<script>
+			var tang = document.getElementById('tang');
+			for(var i=0; i<tang.childNodes.length; i++){
+				document.write(removeChild(tang.childNodes[1]));
+			}
+			//alert(tang.childNodes.length)
+		</script>
+		<div id="jikey">
+			<ul>
+				<li><a href="http://www.sohu.com">sohu1</a></li>
+				<li><a href="http://www.sohu.com">sohu2</a></li>
+				<li><a href="http://www.sohu.com">sohu3</a></li>
+				<li><a href="http://www.sohu.com">sohu4</a></li>
+				<li><a href="http://www.sohu.com">sohu5</a></li>
+			</ul>
+		</div>
+	</body>
+</html>

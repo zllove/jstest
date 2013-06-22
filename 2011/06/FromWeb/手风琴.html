@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>抽屉式菜单</title>
+<style>
+div,ul,li,span{padding:0px;margin:0px;}
+ul,li{list-style:none;}
+#con{float:left;margin-right:10px;}
+#con li span{display:block;margin-top:1px;height:30px;width:100px;text-align:center;line-height:30px;background:#A9C9E2;color:#069;cursor:pointer;}
+#con li span.on{background:#7ecef4;font-weight:bold;color:#005781;}
+#con li ul{width:100px;text-align:center;display:block;height:0px;overflow:hidden;}
+#con li ul li{margin-top:2px;width:100px;font-size:12px;}
+#con li ul li a{height:23px;line-height:23px;display:block;background:#cfc;color:#0C6;}
+#con li ul li a:hover{background:#aee9ae;color:#48c248;}
+#con li ul li a.current{background:#7cd67c;color:#2c932c;}
+#con li a{color:#22ac38;text-decoration:none;}
+#con li a:hover{color:#bd0a01;text-decoration:underline;}
+</style>
+<script>
+var plug = {
+	getStyle:function(elem, name){
+	    if(elem.style[name]){ //如果该属性存在于style[]中，则它最近被设置过(且就是当前的) 
+	    	return elem.style[name];
+		} else if (elem.currentStyle){ //否则，尝试IE的方式 
+	    	return elem.currentStyle[name];
+		} else if (document.defaultView && document.defaultView.getComputedStyle){  //或者W3C的方法，如果存在的话 
+	        name = name.replace(/([A-Z])/g,"-$1"); //它使用传统的"text-Align"风格的规则书写方式，而不是"textAlign" 
+	        name = name.toLowerCase();
+	        var s = document.defaultView.getComputedStyle(elem,"");  
+	        return s && s.getPropertyValue(name); //获取style对象并取得属性的值(如果存在的话) 
+	    } else {  //否则，就是在使用其它的浏览器 
+			return null;
+		}
+	}
+}
+
+
+
+var itarget=0;
+var timer=[];
+window.onload = function(){
+        var ocon = document.getElementById("con");
+        var ospan = ocon.getElementsByTagName("span");
+        var oul = ocon.getElementsByTagName("ul");
+        var i = 0;
+        for(i=0; i<ospan.length; i++){
+	        oul[i].index = i;
+	        ospan[i].onclick = function(){
+	            var mul = this.parentNode.getElementsByTagName("ul")[0];
+	            if(this.className == "on"){
+	                hide(mul);
+	                this.className = "";
+	            } else {
+	                for(i=0; i<oul.length; i++){
+                        hide(oul[i]);
+                        ospan[i].className = "";
+	                }
+	                show(mul);
+	                this.className = "on";
+	            }
+				
+				var authors = mul.getElementsByTagName('a'),
+					tmpClass = '',
+					ifarme = document.getElementById('myIframe');
+				for(var j=0; j<authors.length; j++){
+					authors[j].onclick = function(){
+						ifarme.src = this.href;
+						tmpClass.className = '';
+						this.className = 'current';
+						tmpClass = this;
+						return false;
+						//console.dir(this);
+					}
+				}
+	        }
+        }
+}
+function hide(mul){
+    if(timer[mul.index]){
+    	clearInterval(timer[mul.index])
+    }
+	
+    timer[mul.index] = setInterval("hideanim(" + mul.index + ")", 30); 
+}
+function hideanim(index){
+    var ocon = document.getElementById("con");
+    var oul = ocon.getElementsByTagName("ul");
+    var speed = Math.ceil((oul[index].offsetHeight - 0) / 5);
+    var h = oul[index].offsetHeight - speed;
+    if(h <= 0){
+        oul[index].style.height = 0 + "px";
+        clearInterval(timer[index]);
+        timer[index] = null;
+    } else {
+		oul[index].style.height = h + "px";
+	}
+}
+function show(mul){
+    var uli = mul.getElementsByTagName("li");
+    var mt = parseInt(plug.getStyle(uli[0],"marginTop"));
+    itarget = uli[0].offsetHeight * uli.length + mt * uli.length;
+    if(timer[mul.index]){
+    	clearInterval(timer[mul.index])
+    }
+    timer[mul.index] = setInterval("showanim(" + mul.index + ")",30);
+}
+function showanim(index){
+    var ocon = document.getElementById("con");
+    var oul = ocon.getElementsByTagName("ul");
+    var speed = Math.ceil((itarget - oul[index].offsetHeight) / 5);
+    var h = oul[index].offsetHeight + speed;
+    if(h >= itarget){
+        oul[index].style.height = itarget + "px";
+        clearInterval(timer[index]);
+        timer[index] = null;
+    } else {
+		oul[index].style.height = h + "px";
+	}
+}
+
+</script>
+</head>
+
+<body>
+<iframe src="" id="myIframe" width=1000 height=800 frameborder="1"></iframe>
+<ul id="con">
+    <li>
+    <span>列表菜单一</span>
+        <ul>
+            <li><a href="http://www.sohu.com">子菜单一</a></li>
+            <li><a href="http://www.sina.com">子菜单二</a></li>
+            <li><a href="http://www.qq.com">子菜单三</a></li>
+            <li><a href="http://www.163.com">子菜单四</a></li>
+        </ul>
+     </li>
+    <li>   
+    <span>列表菜单二</span>
+        <ul>
+            <li><a href="#">子菜单二</a></li>
+            <li><a href="#">子菜单二</a></li>
+            <li><a href="#">子菜单二</a></li>
+            <li><a href="#">子菜单二</a></li>
+            <li><a href="#">子菜单三</a></li>
+            <li><a href="#">子菜单三</a></li>
+            <li><a href="#">子菜单三</a></li>
+            <li><a href="#">子菜单三</a></li>
+            <li><a href="#">子菜单三</a></li>
+            <li><a href="#">子菜单三</a></li>
+            <li><a href="#">子菜单三</a></li>
+        </ul>
+       </li>
+      <li>   
+	<span>列表菜单三</span>
+    <ul>
+        <li><a href="#">子菜单三</a></li>
+        <li><a href="#">子菜单三</a></li>
+        <li><a href="#">子菜单三</a></li>
+        <li><a href="#">子菜单三</a></li>
+    </ul>
+   </li>  
+</ul> 
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-defaultevent</title>
+</head>
+<body>
+<script type="text/javascript">
+    function Class(){
+    }
+    Class.prototype = {
+        // 间接调用
+        evt: function(){
+            if(this.onEvt){
+                for(var i=0,len=this.onEvt.length; i<len; i++){
+                    this.onEvt[i]();
+                }
+            }
+        },
+        // 添加事件
+        addEvt: function(handler){
+            if(!this.onEvt){
+                this.onEvt = [];
+            }
+            this.onEvt.push(handler);
+        },
+        // 移除事件
+        removeEvt: function(handler){
+            this.onEvt.pop(handler);
+        }
+    }
+
+    function makeFn(obj, fn){
+        var args = [];
+        if(!obj){
+            obj = window;
+        }
+        for(var i=2,len=arguments.length; i<len; i++){
+            args.push(arguments[i]);
+        }
+        return function(){
+            obj[fn].apply(obj, args);
+        }
+    }
+
+    function eventHandler(arg){
+        console.log('I am ' + arg);
+    }
+
+    var obj = new Class();
+    obj.addEvt(makeFn(null, 'eventHandler', 'kofe'));
+    obj.evt();
+    obj.removeEvt(makeFn(null, 'eventHandler', 'kofe'));
+    obj.evt();
+    
+</script>
+</body>
+</html>

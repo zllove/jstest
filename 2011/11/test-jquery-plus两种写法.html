@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+	<div class="a"></div>
+	<p id="text"></p>
+	<p>jq 插件两种写法：</p>
+	<ol>		<li>
+			<p>一种是直接挂在$这个工厂函数上的。</p>
+			<p>jquery 本身并不提供 jQuery.color() 这个方法，如果我们需要对jQuery本身提供的方法进行扩展，则我们就需要是用jQuery.fn.extend </p>
+			<p>
+				this.set <br />
+				this.show <br />
+				$.fn.msg 形式的。
+			</p>
+		</li>		<li>
+			<p>jQuery.extend  对jQuery对象的扩展，可以理解为静态方法，不需要实例jQuery就可以使用</p>
+<xmp>
+jQuery.extend( {
+    myshow:function(a,b)
+    {
+     return a+b;
+    }
+  })
+alert($.add(3, 4)); 
+</xmp>
+		</li>	</ol>
+	<script type="text/javascript">
+(function($){
+	
+	//多个的写法
+	//一种是直接挂在$这个工厂函数上的
+$.fn.extend({
+	color: function(val){
+		if(val == undefined){
+			return $(this).css('color');
+		} else {
+			return $(this).css('color', val);
+		}
+	}
+});
+	
+	//单个的写法
+	$.fn.msg = function(options){
+		var defaults = {
+			title: 'this is a test!'
+		};
+		$.extend(defaults, options);
+		this.html(defaults.title);
+		
+		return $;
+	};
+	
+$.extend({
+	add: function(a, b){
+		return a + b;
+	}
+});
+	
+$.sub = function(a, b){
+	return a - b;
+}	
+	
+})(jQuery);
+
+
+(function($){
+	this.set = function(title){
+		this.title = title;
+	};
+	
+	this.show = function(){
+		alert(this.title);
+	}
+	$.message = this;
+	
+	return $;
+})(jQuery);
+
+
+$.message.set('我是一个兵!');
+//$.message.show();
+
+$('#text').msg({title: '我又是一个兵！'});
+$('#text').color('#f00')
+//alert($('#text').color());
+//alert($.add(3, 4));
+//alert($.sub(8,6));
+var a = $('.a').append('<div class="b">testtest</div>');
+var b = a.find('div').html();
+alert(b);
+	</script>
+</body>
+</html>

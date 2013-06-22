@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    /*
+    var s = 'function test(){return 1;};';
+    function demo2(){
+        eval(s);
+        alert(test());
+    }
+    demo2();
+    if(!('a' in window)){
+        var a = 3;
+    }
+    alert(a); // undefined
+    var b,c;
+    function a(){
+        var name = 'jikey';
+        (function(a_name){
+            b = function(){
+                var name = 'tang';
+                (function(b_name, a_name){
+                    c = function(){
+                        var name = 'haoQing';
+                        alert(a_name);
+                        alert(b_name);
+                        alert(name);
+                    }
+                })(name, a_name);
+            }
+        })(name);
+    }
+    a();
+    b();
+    c();
+     */
+
+    function TestObj(name){
+        this.name = name;
+    }
+    var objs = [];
+    var obj;
+    function test(){
+        for(var i=0,len=100; i<len; i++){
+            var name = 'jikey' + i;
+            obj = new TestObj(name);
+            /*
+            obj.printName = function(){
+                console.log(obj.name);
+            };
+            objs.push(obj);
+             */
+            (function(target){
+                obj.printName = function(){
+                    console.log(target.name);
+                }
+            })(obj);
+            objs.push(obj);
+        }
+    }
+    test();
+
+    for(var i in objs){
+        objs[i].printName();
+    }
+</script>
+</body>
+</html>

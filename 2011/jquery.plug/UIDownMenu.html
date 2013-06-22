@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-UIDownMenu</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+    <style type="text/css">
+        body, td, th{font-size:14px;background-color:#FFF }
+        h1{border-bottom:1px solid #999;margin:50px 60px;}
+        *{margin:0;padding:0 }
+        .nav{width:980px;height:30px;left:50%;margin-left:-490px;list-style:none;position:relative;}
+        .nav li{margin:0 3px;position:relative;overflow:hidden;height:30px;/*建议此高度大于等于里面的a标签高度*/float:left;}
+        .nav li span{ display:block;overflow:hidden }
+        .nav li a{text-decoration:none;outline:none;color:#666; float:left;padding:0 10px;text-align:center;background-color:#E1E1E1;font-weight:bold;height:30px;line-height:30px;}
+         /*鼠标经过时样式*/
+        .nav li a.over{background-color:#666;color:#FFF }
+    </style>
+</head>
+<body>
+<h1>向左（速度300毫秒）</h1>
+<ul class="nav" id="nav1">
+    <li><a href="http://www.muzilei.com/">首页</a></li>
+    <li><a href="http://www.muzilei.com/">前端技术</a></li>
+    <li><a href="http://www.muzilei.com/">视觉设计</a></li>
+    <li><a href="http://www.muzilei.com/">文章归档</a></li>
+    <li><a href="http://www.muzilei.com/">工具/书籍</a></li>
+    <li><a href="http://www.muzilei.com/">关于我</a></li>
+</ul>
+<script type="text/javascript">
+(function($){
+    $.fn.UIDownMenu = function(options){
+        var defaults = {
+            direction: 'up',
+            duration: 300
+        };
+        var opts = $.extend({}, defaults, options);
+        var downMenu = {
+            init: function(opts, me){
+                var that = this,
+                    lis = me.children('li'),
+                    links = lis.children('a'),
+                    vertical, level;
+                for(var p in opts){ // 所有传来的参数绑定到downMenu对象上
+                    that[p] = opts[p];
+                }
+                lis.wrapInner('<span />'); // 用span包裹a，以便于创建容器，制作动画效果
+                var span = links.parent(); // 包裹后找到span
+                if(that.direction == 'up' || that.direction == 'down'){
+                    vertical = 1;
+                }
+                if(that.direction == 'right' || that.direction == 'down'){
+                    level = 1;
+                }
+                links.each(function(){
+                    var width = $(this).outerWidth(), // a的宽度,包括padding,不包括margin
+                        linkParent = $(this).parent();
+                    $(this).clone().appendTo(linkParent).addClass('over'); // 复制a,并添加over样式，以便有创建动画的副本
+                    if(vertical){ // 如果是 up,down
+                        linkParent.css('width', width);
+                    } else { // 如果是left,right
+                        linkParent.css('width', width * 2).parent().css('width', width);
+                    }
+                });
+                level && that.levelFn(span); // 如果left,right则调用水平处理方法
+                span.hover(function(){
+                    level ? that.out(vertical,$(this)) : that.over(vertical,$(this));
+                }, function(){
+                    level ? that.over(vertical,$(this)) : that.out(vertical,$(this));
+                });
+            },
+            // 如果是 left,right 方式
+            levelFn: function(ele){
+                var that = this;
+                ele.each(function(){
+                    if(that.direction == 'right'){
+                        $(this).css({'margin-left': -$(this).outerWidth() / 2 });
+                    }
+                    if(that.direction == 'down'){
+                        $(this).css({'margin-top': -$(this).outerHeight() / 2 });
+                    }
+                    $(this).find('a').last().removeClass('over').prev().addClass('over');
+                });
+            },
+            over: function(v, ele){
+                ele.animate(v ? {'margin-top': -ele.outerHeight() / 2} : {'margin-left': -ele.outerWidth() / 2}, this.duration);
+            },
+            out: function(v, ele){
+                ele.animate(v ? {'margin-top': 0} : {'margin-left': 0}, this.duration);
+            }
+        }
+        return this.each(function(){
+            downMenu.init(opts, $(this)); // 初始化调用
+        });
+    }
+})(jQuery);
+    $('#nav1').UIDownMenu({
+        direction: 'down'
+    });
+</script>
+</body>
+</html>

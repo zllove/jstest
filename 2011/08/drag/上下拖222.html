@@ -1,0 +1,152 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Js打造层拖动实例：网站菜单拖拽移位效果 - www.webdm.cn</title>
+<style type="text/css">
+*{ margin:0; padding:0}
+li{ list-style:none}
+.wapper{ width:500px; margin:50px;height:auto; overflow:hidden; position:relative; border:1px #e6e6e6 solid}
+.wapper ol{ position:absolute;top:0; left:0}
+.wapper li{width:30px; height:32px; line-height:32px; padding:3px 0; text-align:center;}
+.wapper .m-li{ padding:3px 3px 3px 30px;height:32px;position:relative}
+.wapper .m-li div,.wapper .m-li-cur div{ line-height:30px; height:30px;background:#ECF3F9; border:1px #ccc solid; padding:0 0 0 16px;color:#316DA9; font-size:14px;cursor:move;}
+.wapper .m-li .m-sub-cur,.wapper .m-li-cur .m-sub-cur{opacity:0.35;filter:Alpha(opacity=35);}
+.wapper .m-li-cur{ padding:0 3px 3px 30px; border-top:3px #FFDAAD solid}
+.wapper .m-li-cur span{ padding:0 0 3px;}
+#tips{ position:absolute; top:0;left:0;cursor:move; z-index:2;display:none}
+#tips div{background:#FDFFDA;line-height:30px; height:30px;border:1px #ccc solid; padding:0 0 0 16px;color:#316DA9; font-size:14px;}
+</style>
+
+	</head>
+<body>
+<div class="wapper" id="box">
+<div class="m-wapper">
+<div class="m-li"><div class="m-sub">ASP源码</div></div>
+<div class="m-li"><div class="m-sub">PHP源码</div></div>
+<div class="m-li"><div class="m-sub">JSP源码</div></div>
+<div class="m-li"><div class="m-sub">JAVA源码</div></div>
+</div>
+<ol id="m-num"></ol>
+<div id="tips"></div>
+</div>
+<script type="text/javascript">
+document.getElementsByClassName=function(eleClassName){
+	var getEleClass = [];
+	var myclass = new RegExp("\\b"+eleClassName+"\\b");
+	var elem = this.getElementsByTagName("*");
+	for(var h=0;h<elem.length;h++){
+		var classes = elem[h].className;
+		if (myclass.test(classes)) getEleClass.push(elem[h]);
+	}
+	return getEleClass;
+}
+function $(o){
+	var t = document.getElementById(o);
+	return t?t:false;
+}
+function hasClass(ele,cls) {
+	return ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
+}
+ 
+function addClass(ele,cls) {
+	if (!this.hasClass(ele,cls)) ele.className += " "+cls;
+}
+ 
+function removeClass(ele,cls) {
+	if (hasClass(ele,cls)) {
+		 var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+    ele.className=ele.className.replace(reg,' ');
+	}
+}
+function getStyle(o,n){
+	return o.currentStyle?o.currentStyle[n]:(document.defaultView.getComputedStyle(o,"").getPropertyValue(n))
+}
+function f(){
+	var d=document;
+	var mNum = document.getElementById("m-num");
+	var ols = document.getElementsByClassName("m-wapper")[0];
+	var lis = document.getElementsByClassName("m-li");
+	var divs = document.getElementsByClassName("m-sub");
+	var tips = document.getElementById("tips");
+	
+	for(var i=0;i<divs.length;i++){
+		var mnumNode=document.createElement("li");
+		mNum.appendChild(mnumNode);
+		mNum.getElementsByTagName("li")[i].innerHTML=i+1;
+		divs[i].onmouseover=function(e){
+			show(this);
+		}
+	}
+	function show(obj){
+		for(var i=0;i<divs.length;i++){
+			if(divs[i]==obj){
+				var voidNum=i;
+				obj.onmousedown=function(e){
+					
+					var cloneNode=obj.cloneNode(true);/*克隆节点*/
+					tips.appendChild(cloneNode);
+					//alert(i)
+					tips.style.width=obj.offsetWidth+"px";
+					tips.style.display="block";
+					//alert(voidNum);
+					tips.style.top=(38*voidNum)+3+"px";
+					tips.style.left="30px"
+					for(var j=0;j<divs.length;j++){ /*恢复行默认样式*/
+						divs[j].className="m-sub";
+					}
+					
+					obj.className="m-sub-cur"; /*选中行添加新样式*/
+					tips.onmouseover=function(e){
+						window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();//清除选择
+						
+						e=e||event;                /*鼠标定位*/
+						var x=e.clientY-tips.offsetTop;
+						//var y=e.clientX-obj.offsetLeft;
+						d.onmousemove=function(e){
+							e=e||event;
+							var tipsTop = e.clientY-x;
+							tips.style.top=tipsTop+"px";
+							if(tipsTop <= 3){
+								tips.style.top="3px";
+							}
+							if(tipsTop >= (38*(i-1)+3)){
+								tips.style.top=38*(i-1)+3+"px";
+							}
+							lisNum = Math.round((tipsTop-3)/38);
+							if(lisNum>=i){
+									lisNum=i;
+								}
+							for(var n=0; n<divs.length; n++){
+								lis[n]["className"]="m-li";
+								lis[lisNum]["className"]="m-li-cur";
+							}
+							//obj.style.left=e.clientX-y+"px";
+						}
+						d.onmouseup = function(){ 
+							d.onmouseup=d.onmousemove="";
+							tips.style.display="none";
+							for(var n=0; n<lis.length; n++){
+								lis[n]["className"]="m-li";
+							}
+							obj.className="m-sub";
+							var newNode=document.createElement("div");
+							var delNode=tips.getElementsByTagName("div")[0];/*清空节点*/
+							var delNode2=lis[voidNum];/*清空节点*/
+							newNode.appendChild(delNode);
+							newNode.className="m-li";
+							ols.insertBefore(newNode,lis[lisNum]);
+							ols.removeChild(delNode2);
+							tips.removeChild(delNode);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+f();
+</script>
+
+<br />
+<a href="http://www.webdm.cn">网页代码站</a> - 最专业的代码下载网站 - 致力为中国站长提供有质量的代码！
+</body>
+</html>

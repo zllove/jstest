@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Document</title>
+        <style>
+		.red{color:#f90;}
+		.blue{color:#003399;}
+		#recont{width:200px;height:100px;border:1px solid #ccc;margin:10px 0 0;}
+		.on{display:block;}
+		.off{display:none;}
+		</style>
+		<script>
+		window.onload = function(){
+			var rep = document.getElementById('replay')
+			var cont = document.getElementById('recont');
+//			alert(rep.innerHTML);
+			rep.onclick = function(){
+//				var repStr = "<span class=red>回复</span>";
+//				var repStr2 = "<span class=blue>回复</span>";
+				rep.innerHTML = rep.innerHTML == '回复' ? '收起回复' : '回复';
+				cont.className = cont.className == 'on' ? 'off' : 'on';
+			}
+		}
+		</script>
+	</head>
+	<body>
+		<a id="replay" href="#">回复</a>
+		<div id="recont" class="off">
+			哈哈哈
+		</div>
+	</body>
+</html>

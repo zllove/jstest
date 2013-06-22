@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>随机显示td</title>
+    <style type="text/css">
+        *{margin:0;padding:0;}
+        body{font:12px/2 arial;}
+        ul{list-style-type:none;}
+        body{font-family:arial;background:#fff;}
+        table{border-collapse:collapse; border:1px solid #ccc;}
+        tr{ line-height:20px;}
+        td{ border:1px solid #ccc; padding:0 5px;}
+        #showtab td{ position:relative; overflow:hidden; font-size:12px; cursor:pointer; width:20px; height:20px; padding:5px; border:1px solid #ccc;}
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <th>行数：</th>
+        <td><input size="10" type="text" name="" id="row"></td>
+        <th>列数：</th>
+        <td><input type="text" size="10" name="" id="col"></td>
+        <td><input id="show" type="button" value="生成表格"></td>
+    </tr>
+</table>
+<h4>你单击数字是： <span id="msg"></span></h4>
+<div id="showtab"></div>
+<script type="text/javascript">
+    function RandomTab(setting){
+        for (var p in setting) {
+            this[p] = (setting[p] || 10);
+        }
+        this.createTab();
+        this.handler();
+    }
+    RandomTab.prototype = {
+        randomNum: function(min, max){
+            return Math.floor(Math.random() * max) + min;
+        },
+        // 得到随机颜色
+        randomColor: function(){
+            var R = 0,
+                G = 0,
+                B = 0;
+
+            R = this.randomNum(0, 255).toString(16);
+            G = this.randomNum(0, 255).toString(16);
+            B = this.randomNum(0, 255).toString(16);
+            return '#' + bit(R) + bit(G) + bit(B);
+            
+            function bit(n){
+                return n.length == 2 ? n : '0' + n;
+            }
+        },
+        // 创建table
+        createTab: function(){
+            var showBox = document.getElementById('showtab'),
+                table = null,
+                tr    = null,
+                td    = null,
+                i     = 0,
+                j     = 0;
+
+            this.tab = table = document.createElement('table');
+            for (; i < this.row; i++) {
+                tr = document.createElement('tr');
+                for (j = 0; j < this.col; j++) {
+                    td = document.createElement('td');
+                    td.innerHTML = this.randomNum(0, 20);
+                    td.style.backgroundColor = this.randomColor();
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+            showBox.innerHTML = '';
+            showBox.appendChild(table);
+        },
+        // 事件代理
+        handler: function(){
+            var tab = this.tab;
+            var me = this;
+            tab.onclick = function (e){
+                this.style.cursor = 'pointer';
+                e = e || event;
+                var oTarget = e.target || e.srcElement,
+                    oMsg = document.getElementById('msg');
+                if(oTarget.tagName.toLowerCase() == 'td'){
+                    oMsg.innerHTML = oTarget.innerHTML;
+                }
+            };
+            tab.onmouseover = function(e){
+                e = e || event;
+                var oTarget = e.target || e.srcElement;
+                if(oTarget.tagName.toLowerCase() == 'td'){
+                    oTarget.style.fontSize = '15px';
+                    oTarget.style.fontWeight = '700';
+                    oTarget.style.color = '#f60';
+                    oTarget.style.backgroundColor = '#000';
+                }
+            };
+            tab.onmouseout = function(e){
+                e = e || event;
+                var oTarget = e.target || e.srcElement;
+                if(oTarget.tagName.toLowerCase() == 'td'){
+                    oTarget.style.fontSize = '12px';
+                    oTarget.style.fontWeight = 'normal';
+                    oTarget.style.color = '#000';
+                    oTarget.style.backgroundColor = me.randomColor();
+                }
+            };
+        }
+    };
+    
+    var rVal = null,
+        cVal = null;
+    document.getElementById('show').onclick = function(){
+        rVal = document.getElementById('row').value,
+        cVal = document.getElementById('col').value;
+        new RandomTab({
+            row: rVal,
+            col: cVal
+        });
+    };
+    
+
+</script>
+</body>
+</html>

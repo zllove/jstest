@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC"-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    
+<head>
+    <title>简单的Javascript实现拖动层效果</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <script type="text/javascript">
+        var Drag = {
+            obj: null,
+            init: function(options) {
+                options.handler.onmousedown = this.start;
+                options.handler.root = options.root || options.handler;
+                var root = options.handler.root;
+                root.onDragStart = options.dragStart || new Function();
+                root.onDrag = options.onDrag || new Function();
+                root.onDragEnd = options.onDragEnd || new Function();
+            },
+            start: function(e) {
+                var obj = Drag.obj = this;
+                obj.style.cursor = 'move';
+                e = e || Drag.fixEvent(window.event);
+                ex = e.pageX; //pageX:FF特有，鼠标在页面上的位置，从页面左上角开始定位，这个可以很方便在整个页面上进行定位，IE没有直接替换的属性。
+                ey = e.pageY;
+                obj.lastMouseX = ex;
+                obj.lastMouseY = ey;
+                var x = obj.root.offsetLeft;
+                var y = obj.root.offsetTop;
+                obj.root.style.left = x + "px";
+                obj.root.style.top = y + "px";
+                document.onmouseup = Drag.end;
+                document.onmousemove = Drag.drag;
+                obj.root.onDragStart(x, y);
+            },
+            drag: function(e) {
+                e = e || Drag.fixEvent(window.event);
+                ex = e.pageX;
+                ey = e.pageY;
+                var root = Drag.obj.root;
+                var x = root.style.left ? parseInt(root.style.left) : 0;
+                var y = root.style.top ? parseInt(root.style.top) : 0;
+                var nx = ex - Drag.obj.lastMouseX + x;
+                var ny = ey - Drag.obj.lastMouseY + y;
+                root.style.left = nx + "px";
+                root.style.top = ny + "px";
+                Drag.obj.root.onDrag(nx, ny);
+                Drag.obj.lastMouseX = ex;
+                Drag.obj.lastMouseY = ey;
+            },
+            end: function(e) {
+                var x = Drag.obj.root.style.left ? parseInt(Drag.obj.root.style.left) : 0;
+                var y = Drag.obj.root.style.top ? parseInt(Drag.obj.root.style.top) : 0;
+                Drag.obj.root.onDragEnd(x, y);
+                document.onmousemove = null;
+                document.onmouseup = null;
+                Drag.obj = null;
+            },
+            fixEvent: function(e) {
+                e.pageX = e.clientX + document.documentElement.scrollLeft;
+                e.pageY = e.clientY + document.documentElement.scrollTop;
+                return e;
+            }
+        }
+    </script>
+</head>
+    
+    <body>
+        <div>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？KKKKK
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？MMMMMM
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？asd
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？asd
+            <br/>
+            <br/>
+            今天你快乐吗？a
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？asd
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？asd
+            <br/>
+            <br/>
+            今天你快乐吗？a
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？asd
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？
+            <br/>
+            <br/>
+            今天你快乐吗？asd
+            <br/>
+            <br/>
+            今天你快乐吗？a
+            <br/>
+        </div>
+        <div id="root" style="width:400px;height:300px;background-color:gray;position:absolute; left:0px; top:0px; z-index:100px;">
+            <h2 id="handler" style="width:400px;height:100px;background-color:red;cursor:move;">
+            </h2>
+        </div>
+        <script type="text/javascript">
+            Drag.init({
+                handler: document.getElementById("handler"),
+                root: document.getElementById("root")
+            });
+        </script>
+    </body>
+
+</html>

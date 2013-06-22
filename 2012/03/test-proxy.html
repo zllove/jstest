@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+    <style type="text/css">
+        .red{ color:#c00;}
+    </style>
+</head>
+<body>
+<div id="test">test</div>
+<div id="test2">test</div>
+<script type="text/javascript">
+    var obj = {
+        name: 'jikey',
+        test: function(){
+            alert(this.id);
+//            $('#test').unbind('click', obj.test);
+        }
+    }
+//    $('#test').click($.proxy(obj, 'test'));
+//    $('#test').bind('click.test', $.proxy(obj, 'test'));
+//    console.log('32-10'.substr(1).split('-')[0]);
+    $('#test2').bind('click', $.proxy(this, 'fn'));
+    $('#test').bind('click', function (){
+        console.log(this.id);
+    });
+    function fn(){
+        this.id = 'name';
+        console.log(this.id);
+    }
+    function boo(name, age){
+//        var args = slice.call(arguments, 2);
+//        console.log(args);
+
+    }
+    boo('jikey', 20);
+
+
+</script>
+<p>Hello</p><span>Hello Again</span>
+<script type="text/javascript">
+//    $('p').add($('span')).addClass('red');
+    $('p,span').addClass('red');
+//    console.log(b);
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+    <HEAD>
+        <TITLE>New Document </TITLE>
+        <script language="javascript">
+            var forasp = new Object;
+            forasp.formate = function(oEvent){
+                var sUserAgent = navigator.userAgent;
+                var isIE = !+'\v1' ? true : false;
+                var isWin = (navigator.platform == "Win32") || (navigator.platform == "Windows");
+                if (isIE && isWin) {
+                    oEvent.charCode = (oEvent.type == "keypress") ? oEvent.keyCode : 0;
+                    oEvent.eventPhase = 2;
+                    oEvent.isChar = (oEvent.charCode > 0);
+                    oEvent.pageX = oEvent.clinetX + document.body.scrollLeft;
+                    oEvent.pageY = oEvent.clinetY + document.body.scrollTop;
+                    oEvent.preventDefault = function(){
+                        this.returnvalue = false;
+                    }
+                    if (oEvent.type == "mouseout") {
+                        oEvent.relatedTaget = oEvent.toElement;
+                    } else if (oEvent.type == "mouseover") {
+                          oEvent.relatedTarget = oEvent.fromElement;
+                        }
+                    oEvent.stopPropagation = function(){
+                        this.cancelBubble = true;
+                    }
+                    oEvent.target = oEvent.srcElement;
+                    oEvent.time = (new Date().getTime());
+                }
+                return oEvent;
+            }
+            forasp.key_action = function(obj, oEvent) {
+                var oEvent = forasp.formate(oEvent);
+                var now_value = parseInt(obj.value);
+                var Key = oEvent.keyCode;
+                document.getElementById("forasp_cn1").value = Key;
+                obj.value = String.fromCharCode(Key).toLowerCase();//转换大小写
+            }
+            window.onload = function(){
+                document.getElementById("forasp_cn").focus();//打开页面时自动获取焦点}
+            }
+        </script>
+    </HEAD>
+    <BODY>
+        <input type="text" id="forasp_cn1" value="15" readonly>
+		<input type="text" id="forasp_cn" value="15" onkeydown ="forasp.key_action(this,event)"  readonly>
+    </BODY>
+</HTML>

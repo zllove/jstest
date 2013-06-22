@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-jq-extend</title>
+	<script type="text/javascript" src="../jquery-1.8.2.js"></script>
+</head>
+<body>
+	<h2><a href="http://www.cnblogs.com/RascallySnake/archive/2010/05/07/1729563.html">$.extend</a></h2>
+<script type="text/javascript">
+	var res1 = $.extend({}, {name: 'tom', age:21}, {name:'Jerry', sex: 'box'});
+	var res2 = $.extend(false, {}, {
+		name: 'John',
+		location: {
+			city: 'boston',
+			country: 'usa'
+		}
+	},{
+		last: 'resig',
+		location: {
+			state: 'ma',
+			country: 'china'
+		}
+	});
+	console.dir(res2);
+
+</script>	
+</body>
+</html>

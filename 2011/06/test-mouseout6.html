@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<style type="text/css">
+		#div1{border:5px solid #ccc;}
+		#div2{border:1px solid #f00;}
+	</style>
+    <script type="text/javascript">
+
+        function mouseoutHandler(event) {
+			var oEvent = event || window.event;
+            var oElem = oEvent.toElement || oEvent.relatedTarget;
+            if (oElem.id == "div2")
+            {
+                window.alert("ok");
+            }
+        }
+        
+    </script>
+</head>
+<body>
+<div onmouseout="mouseoutHandler(event)" id="div1">div1</div>
+<div id="div2">div2</div>
+<div id="father" style="width:500px;height:500px;left:100px;top:100px;border:1px solid red;" onmouseout="test(this,event)">
+  <div>0</div>
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+  ...
+  <div>4</div>
+</div>  
+<script type="text/javascript">
+	function test(obj, e) {
+	    if (e.currentTarget) {
+	        if (e.relatedTarget != obj) {
+	            if (obj != e.relatedTarget.parentNode) {
+	                alert("out");
+	            }
+	        }
+	    }
+	    else {
+	        if (e.toElement != obj) {
+	            if (obj != e.toElement.parentNode) {
+	                alert("out");
+	            }
+	        }
+	    }
+	}
+</script>
+</body>
+</html>

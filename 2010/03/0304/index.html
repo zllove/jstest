@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style type="text/css">
+	
+</style>
+<script type="text/javascript">
+	function getValues(){
+		var oText1 = document.getElementById("txt1");
+		var oText2 = document.getElementById("txt2");
+		alert("This is value of txt1 is \"" + oText1.value + "\"\n" +
+			  "This is value of txt2 is \"" + oText2.value + "\"");
+	}
+	
+	function selectText(){
+		var oTextbox1 = document.getElementById("txt1");
+		oTextbox1.focus();
+		oTextbox1.select();
+	}
+	
+	function setValues(){
+		var oText1 = document.getElementById("txt1");
+		var oText2 = document.getElementById("txt2");
+		oText1.value = "Jikey";
+		oText2.value = "tang";
+	}
+	
+	var FormUtil = new Object;
+	FormUtil.setTextboxes = function(){
+		var colInputs = document.getElementsByTagName("input");
+		var colTextarea = document.getElementsByTagName("textarea");
+		for(var i=0; i<colInputs.length; i++){
+			if(colInputs[i].type == "text" || colInputs[i].type == "password"){
+				colInputs[i].focus = function(){this.select();}
+			}
+		}
+	}
+	//window.onload = setTextboxes;
+	
+	var EventUtil = new Object;
+	EventUtil.formEvent = function(oEvent){
+		
+	}
+	
+	var TextUtil = new Object;
+	TextUtil.isMax = function(oTextArea){
+		return oTextArea.value.length != oTextArea.getAttribute("maxlength");
+	}
+	
+	TextUtil.numbericScroll = function(oTextbox, oEvent){
+		var iValue = oTextbox.value.length == 0 ? 0 : parsetInt(oTextbox.value);
+		if(oEvent.keyCode == 38){
+			oTextbox.value = (iValue + 1);
+		} else if(oEvent.keyCode == 40){
+			oTextbox.value = (iValue - 1);
+		}
+	}
+	
+</script>
+</head>
+
+<body>
+<!--<form action="" name="form" id="form" method="post">
+	<input type="text" name="username" id="" /><br />
+    <input type="text" name="password" id="" /><br />
+    <input type="submit" value="提交" /> <input type="submit" value="复位" onclick="document.forms[0].reset();" />
+</form>-->
+<input type="text" name="" id="txt1" /><br />
+<textarea name="" id="txt2" cols="30" rows="10"></textarea><br />
+<input type="button" value="Get Values" onclick="getValues()" />
+<input type="button" value="Get Focus" onclick="selectText()" />
+<input type="button" value="Set Values" onclick="setValues()" /><br />
+<input type="text" name="Change" id="" onchange="alert('Change')" /><br />
+<input type="text" name="" id="" onfocus="this.select()" /><br />
+<textarea name="" maxlength="150" onkeypress="return TextUtil.isMax(this)" id="" cols="30" rows="10"></textarea><br />
+<input type="text" name="" id="" onpaste="return false" oncontextmenu="return false" />
+
+<input type="text" name="" onkeydown="TextUtil.numbericScroll(this)" id="" />
+
+<table width="200" border="1" id="tt">
+ <tbody>
+  <tr>
+    <td>第一行</td><td>第一行</td>
+  </tr>
+  <tr>
+    <td>第二行</td><td>第二行</td>
+  </tr>
+  <tr>
+    <td>第三行</td><td>第三行</td>
+  </tr>
+  <tr>
+    <td>第四行</td><td>第四行</td>
+  </tr>
+  </tbody>
+</table>
+
+<script type="text/javascript">
+//var aa=document.getElementById("tt");		
+////alert("dsfsd");
+//var trs=aa.getElementsByTagName("tr");
+////alert("dsfsd");
+//for(var i=0; i<trs.length; i++){	
+//	if((i+1)%2==0){
+//		trs[i].style.backgroundColor="red";
+//	}
+//}
+</script>
+
+<script type="text/javascript" charset="GB2312">
+	
+//		var aa=document.getElementById("tt");		
+//		alert("1");
+//		
+//		var trs=aa.getElementsByTagName("tr");
+//		alert("3");
+//		for(var i=0; i<trs.length; i++){			
+//			if((i+1)%2==0){
+//				trs[i].style.backgroundColor="red";
+//			}
+//		}
+	</script>
+</body>
+</html>

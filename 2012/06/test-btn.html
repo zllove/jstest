@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test</title>
+</head>
+<body>
+<table><thead><tr><td class="ui-tpl-tl"></td><td class="ui-tpl-tc"></td><td class="ui-tpl-tr"></td></tr></thead><tbody><tr><td class="ui-tpl-ml"></td><td class="ui-tpl-mc"></td><td class="ui-tpl-mr"></td></tr></tbody><tfoot><tr><td class="ui-tpl-bl"></td><td class="ui-tpl-bc"></td><td class="ui-tpl-br"></td></tr></tfoot></table>
+<input id="btn" type="submit" value="test-sele">
+<select name="" id="select">
+    <option value="">111</option>
+    <option value="">111</option>
+    <option value="">111</option>
+    <option value="">111</option>
+</select>
+<script type="text/javascript">
+    function id(){
+        return document.getElementById(arguments[0]);
+    }
+    var btn = id('btn'), oSel = id('select');
+    btn.onclick = function(){
+        oSel.style.width = '100px';
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-frameneg</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<div id="mydiv"></div>
+<script type="text/javascript">
+    /*
+    console.time('1');
+    var oFrag = document.createDocumentFragment(); // 文档碎片
+    for(var i=1,l=5000; i<=l; i++){
+        var span = document.createElement('span');
+        span.innerHTML += i;
+        oFrag.appendChild(span);
+    }
+    document.body.appendChild(oFrag);
+    console.timeEnd('1');
+    console.time('2');
+    var arr = [];
+    for(var j=0,len=5000; j<len; j++){
+        arr.push('<div>' + j + '</div>');
+    }
+    document.getElementById('mydiv').innerHTML = arr.join('');
+    console.timeEnd('2');
+    */
+
+</script>
+<input type="text" name="" id="">
+<input type="submit" value="test-btn">
+<script type="text/javascript">
+//    console.log($('input').width());
+var arr = ['a', 'b', 'c'],
+    arr2 = [];
+for(var p in arr){
+    arr2[arr[p]] = arr[p];
+}
+//console.log(arr2);
+</script>
+<ul>
+    <li id="foo">foo</li>
+    <li id="bar">bar</li>
+    <li id="baz" class="name">baz</li>
+</ul>
+<script type="text/javascript">
+    var b = $('.name');
+    var i = $('ul').find('li').index(b);
+    console.log(i);
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Document</title>
+        <style>
+		
+		</style>
+		<script>
+		/*
+		window.onload = function(){
+			var formElement = document.createElement('form');
+			var inputElement = document.createElement('input');
+			inputElement.setAttribute('name', 'test');
+			formElement.appendChild(inputElement);
+			document.body.appendChild(formElement);
+		}
+		window.onload = function(){
+			var formElement = document.createElement('form');
+			formElement.innerHTML = "<input type='text' name='testinput' />";
+			document.body.appendChild(formElement);
+			alert(formElement.elements.test);
+		}
+		window.onload = function(){
+			var formElement = document.createElement('form');
+			try {
+				var inputElement = document.createElement("<input type='text' name='testinput' />");
+			} catch (e) {
+				var inputElement = document.createElement('input');
+				inputElement.setAttribute('name', 'test');
+			}
+			document.body.appendChild(formElement);
+			formElement.appendChild(inputElement);
+			alert(formElement.elements.test);
+		}
+		window.onload = function(){
+			var formElement = document.createElement('form');
+			formElement.innerHTML = "<input type='text' name='testinput' />";
+			//formElement.appendChild(inputElement);
+			document.body.appendChild(formElement);
+			formElement.elements.testinput.setAttribute('onfocus','alert(this.name)');
+		}
+		*/
+		window.onload = function(){
+			var h1tag = document.getElementsByTagName('h1')[0];
+			var styleData = 'border:1px solid #ccc;font-weight:bold;';
+			//h1tag.cssText = styleData;
+			if(!+"\v1"){
+	          //use the .cssText hack
+	          h1.style.setAttribute('cssText', styleData);
+	        } else {
+	          //use the correct DOM Method
+	          h1.setAttribute('style', styleData);
+	        }
+		}
+		</script>
+	</head>
+	<body>
+		<!--
+		<h1>请在IE6与IE7下浏览，当然IE8也可以，我已让IE8处在IE7的兼容模式下运作。兼容模式连bugs也兼容了……</h1>
+		-->
+		<h1>这里是h1……</h1>
+	</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<select name="" id="">
+    <option value="ch">中国</option>
+    <option value="sh">上海</option>
+    <option value="nj">南京</option>
+</select>
+<script type="text/javascript">
+    $("select").bind("change",function(){
+        var $this = $(this);
+        alert($this.val());
+        alert($this.find("option:selected").text());
+    })
+</script>
+</body>
+</html>

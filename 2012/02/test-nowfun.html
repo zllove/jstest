@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-nowfun</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<h3><a href="http://www.cnblogs.com/TomXu/archive/2011/12/31/2289423.html">自执行函数</a></h3>
+<script type="text/javascript">
+    /*
+    function makeCounter(){
+        var i = 0;
+        return function(){
+            console.log(++i);
+        }
+    }
+    var c1 = new makeCounter();
+    c1();
+    c1();
+    var c2 = new makeCounter();
+    c2();
+    c2();
+    (function foo(){alert(1)}());
+    (function foo(){alert(11)})();
+
+    var i = function(){ return 10;}();
+    alert(i);
+     */
+
+//    function foo(){ foo(); }
+    var a = 'Design(4)';
+//    a.replace(/\(\)$/g, '');
+//    a.replace(/[^\(]+\(([^\)]*)\)/, '1');
+    console.log(/\w+[^\(]+[\)$]+/.test(a));
+    var b = a.replace(/[\(]+[\d]+[\)]+/, '');
+//    var b = a.replace(/[^\(]+\(([^\)]*)\)/, '');
+    console.log(b);
+
+    name = 'aaa bbb ccc';
+    uw=name.replace(/\b\w+\b/g, function(word){
+        return word.substring(0,1).toUpperCase()+word.substring(1);}
+    );
+    console.log(uw);
+</script>
+<div class="catListPostCategory">
+    <h3 class="catListTitle">随笔分类</h3>
+    <ul>
+        <li><a href="http://www.cnblogs.com/jikey/category/222060.html" id="SingleColumn1_Categories_CatList_LinkList_0_Link_0">css(22)</a> <a onclick="return open_link('http://www.cnblogs.com/jikey/category/222060.html/rss');" href="#" id="SingleColumn1_Categories_CatList_LinkList_0_RssLink_0" style="display: none;">(rss)</a></li>
+        <li><a href="http://www.cnblogs.com/jikey/category/252266.html" id="SingleColumn1_Categories_CatList_LinkList_0_Link_1">Design(4)</a> <a onclick="return open_link('http://www.cnblogs.com/jikey/category/252266.html/rss');" href="#" id="SingleColumn1_Categories_CatList_LinkList_0_RssLink_1" style="display: none;">(rss)</a></li>
+        <li><a href="http://www.cnblogs.com/jikey/category/222059.html" id="SingleColumn1_Categories_CatList_LinkList_0_Link_2">Javascript(138)</a> <a onclick="return open_link('http://www.cnblogs.com/jikey/category/222059.html/rss');" href="#" id="SingleColumn1_Categories_CatList_LinkList_0_RssLink_2" style="display: none;">(rss)</a></li>
+        <li><a href="http://www.cnblogs.com/jikey/category/222061.html" id="SingleColumn1_Categories_CatList_LinkList_0_Link_3">Jquery(26)</a> <a onclick="return open_link('http://www.cnblogs.com/jikey/category/222061.html/rss');" href="#" id="SingleColumn1_Categories_CatList_LinkList_0_RssLink_3" style="display: none;">(rss)</a></li>
+        <li><a href="http://www.cnblogs.com/jikey/category/222204.html" id="SingleColumn1_Categories_CatList_LinkList_0_Link_4">other(29)</a> <a onclick="return open_link('http://www.cnblogs.com/jikey/category/222204.html/rss');" href="#" id="SingleColumn1_Categories_CatList_LinkList_0_RssLink_4" style="display: none;">(rss)</a></li>
+        <li><a href="http://www.cnblogs.com/jikey/category/222062.html" id="SingleColumn1_Categories_CatList_LinkList_0_Link_5">PHP(2)</a> <a onclick="return open_link('http://www.cnblogs.com/jikey/category/222062.html/rss');" href="#" id="SingleColumn1_Categories_CatList_LinkList_0_RssLink_5" style="display: none;">(rss)</a></li>
+        <li><a href="http://www.cnblogs.com/jikey/category/252653.html" id="SingleColumn1_Categories_CatList_LinkList_0_Link_6">Tool(11)</a> <a onclick="return open_link('http://www.cnblogs.com/jikey/category/252653.html/rss');" href="#" id="SingleColumn1_Categories_CatList_LinkList_0_RssLink_6" style="display: none;">(rss)</a></li>
+        <li><a href="http://www.cnblogs.com/jikey/category/345833.html" id="SingleColumn1_Categories_CatList_LinkList_0_Link_7">Vim(4)</a> <a onclick="return open_link('http://www.cnblogs.com/jikey/category/345833.html/rss');" href="#" id="SingleColumn1_Categories_CatList_LinkList_0_RssLink_7" style="display: none;">(rss)</a></li>
+        <li><a href="http://www.cnblogs.com/jikey/category/346637.html" id="SingleColumn1_Categories_CatList_LinkList_0_Link_8">WebStorm(4)</a> <a onclick="return open_link('http://www.cnblogs.com/jikey/category/346637.html/rss');" href="#" id="SingleColumn1_Categories_CatList_LinkList_0_RssLink_8" style="display: none;">(rss)</a></li>
+    </ul>
+</div>
+<script type="text/javascript">
+    /*
+    var hqNav = $('.catListPostCategory').find('ul');
+    var hqNavAuthors = hqNav.find('a');
+    hqNavAuthors.each(function(){
+        var codeHtmla = $(this).html();
+        var cc = codeHtmla.replace(/[\(]+[\d]+[\)]+/, '');
+//        console.log(/[\(]+[\d]+[\)]+/.test(codeHtmla));
+//        console.log(cc);
+        $(this).html(cc);
+        if(codeHtmla == '(rss)'){
+            $(this).hide();
+        }
+    })
+
+    var o = {
+        name: 'jikey',
+        age:30
+    }
+    alert(o.hasOwnProperty('toString')); // false
+    alert(o.hasOwnProperty('name')); // true
+     */
+
+
+
+
+</script>
+<footer></footer>
+<footer></footer>
+<footer></footer>
+<footer></footer>
+<script type="text/javascript">
+    function addhr(){
+        var hrline = document.createElement("hr");
+        var footers = document.getElementsByTagName("footer");
+        for(var i=0; i<footers.length; i++){
+            footers[i].parentNode.insertBefore(hrline, footers[i]);
+        }
+    }
+    addhr();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>帮忙01</title>
+    <style>div, body {padding: 0px;margin: 0px;font-size: 12px;}.rql {position: fixed;left: 0px;background: #F00;width: 100px;height: 300px;}.rqr {position: fixed;right: 0px;background: #F00;width: 100px;height: 300px;}</style>
+<script>
+    var plug = {
+        getStyle: function(elem, name){
+            if (elem.style[name]) 
+                return elem.style[name];
+            else 
+                if (elem.currentStyle) 
+                    return elem.currentStyle[name];
+                else 
+                    if (document.defaultView && document.defaultView.getComputedStyle) {
+                        name = name.replace(/([A-Z])/g, "-$1");
+                        name = name.toLowerCase();
+                        var s = document.defaultView.getComputedStyle(elem, "");
+                        return s && s.getPropertyValue(name);
+                    }
+                    else {
+                        return null
+                    }
+        },
+        addEvent: function(obj, type, fn){
+            if (obj.attachEvent) {
+                obj['e' + type + fn] = fn;
+                obj[type + fn] = function(){
+                    obj['e' + type + fn](window.event);
+                }
+                obj.attachEvent('on' + type, obj[type + fn]);
+            }
+            else 
+                obj.addEventListener(type, fn, false);
+        }
+    }
+    
+    
+    function startMove(obj, json, speed, fnEnd){
+        if (obj.timer) {
+            clearInterval(obj.timer);
+        }
+        obj.timer = setInterval(function(){
+            doMove(obj, json, speed, fnEnd);
+        }, 30);
+    }
+    
+    function doMove(obj, json, speed, fnEnd){
+        var iCur = 0;
+        var attr = '';
+        var sp = speed;
+        var bStop = true;
+        for (attr in json) {
+            if (attr == 'opacity') {
+                iCur = parseInt(100 * parseFloat(plug.getStyle(obj, 'opacity')));
+            }
+            else {
+                iCur = parseInt(plug.getStyle(obj, attr));
+            }
+            if (isNaN(iCur)) {
+                iCur = 0;
+            }
+            var iSpeed = (json[attr] - iCur) / sp;
+            iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+            if (parseInt(json[attr]) != iCur) {
+                bStop = false;
+            }
+            if (attr == 'opacity') {
+                obj.style.filter = "alpha(opacity:" + (iCur + iSpeed) + ")";
+                obj.style.opacity = (iCur + iSpeed) / 100;
+            }
+            else {
+                obj.style[attr] = iCur + iSpeed + 'px';
+            }
+        }
+        if (bStop) {
+            clearInterval(obj.timer);
+            obj.timer = null;
+            if (fnEnd) {
+                fnEnd();
+            }
+        }
+    }
+    
+    
+    
+    function juge(id){
+        var a = document.documentElement.clientWidth;
+        var b = document.documentElement.clientHeight;
+        var dom = document.getElementById(id);
+        var w = parseInt(plug.getStyle(dom, "width"));
+        var h = parseInt(plug.getStyle(dom, "height"));
+        var isIE = !!window.ActiveXObject;
+        var isIE6 = isIE && !window.XMLHttpRequest;
+        var nt = (b - h) / 2;
+        var jt = (b - h / 2) / 2;
+        var timer;
+        if (a < 1024) {
+            if (isIE6) {
+                timer = setInterval(function(){
+                    jt = (b - h / 2) / 2 + document.documentElement.scrollTop;
+                    dom.style.position = "absolute";
+                    dom.style.top = jt + "px";
+                }, 1)
+            }
+            var flag = false;
+            dom.style.width = w / 2 + "px";
+            dom.style.height = h / 2 + "px";
+            dom.style.top = jt + "px";
+            plug.addEvent(dom, "mouseover", function(){
+                if (isIE6) {
+                    if (!flag) {
+                        clearInterval(timer);
+                        nt = nt + document.documentElement.scrollTop;
+                        startMove(this, {
+                            width: w,
+                            height: h,
+                            top: nt
+                        }, 2, function(){
+                            timer = setInterval(function(){
+                                jt = (b - h) / 2 + document.documentElement.scrollTop;
+                                dom.style.position = "absolute";
+                                dom.style.top = jt + "px";
+                            }, 1)
+                        })
+                        flag = true;
+                    }
+                } else {
+                    startMove(this, {
+                        width: w,
+                        height: h,
+                        top: nt
+                    }, 2)
+                }
+            })
+        } else if (isIE6) {
+                setInterval(function(){
+                    nt = (b - h) / 2 + document.documentElement.scrollTop;
+                    dom.style.position = "absolute";
+                    dom.style.top = nt + "px";
+                }, 1)
+            } else {
+                dom.style.top = nt + "px";
+            }
+    }
+    
+    plug.addEvent(window, "load", function(){
+        juge("rql");
+        juge("rqr");
+    })
+</script>
+</head>
+    <body style="height:2000px;">
+        <div class="rql" id="rql">
+        </div>
+        <div class="rqr" id="rqr">
+        </div>
+    </body>
+</html>

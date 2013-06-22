@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    function milliFormat(s){//添加千位符
+        if(/[^0-9\.]/.test(s)) return "invalid value";
+        s=s.replace(/^(\d*)$/,"$1.");
+        s=(s+"00").replace(/(\d*\.\d\d)\d*/,"$1");
+        s=s.replace(".",",");
+        var re=/(\d)(\d{3},)/;
+        while(re.test(s)){
+            s=s.replace(re,"$1,$2");
+        console.log(s);
+        }
+        s=s.replace(/,(\d\d)$/,".$1");
+        return s.replace(/^\./,"0.")
+    }
+
+    milliFormat('191203123');
+    console.log();
+
+    /*
+    var reg3=new RegExp("(http://www.qidian.com/BookReader/)(\\d+),(\\d+).aspx","gi");
+    reg3.test("http://www.qidian.com/BookReader/1017141,20361055.aspx");
+
+    console.log(RegExp.$1); // http://www.qidian.com/BookReader/
+    console.log(RegExp.$2); // 1017141
+    console.log(RegExp.$3); // 20361055
+    */
+
+    function split2(str){
+//        return str.replace(/(\d)(?=(\d{2})+($|\.))/g, '$1|').split('|');
+        return str.replace(/(\d)(?=(\d{2})+($|\.))/g, '$1|');
+    }
+    console.log(split2('123.123'));
+    console.log(split2('1234'));
+
+</script>
+</body>
+</html>

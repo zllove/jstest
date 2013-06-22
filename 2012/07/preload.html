@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <style type="text/css">
+        div{border:#aaaaaa 3px solid;width:200px;padding:2px;margin:2px 9px;font-size:12px;line-height:22px;color:#999999;}
+        .ipt1{width:160px;font-size:12px;color:#1F6478;border:#999999 1px solid;margin-left:9px;}
+        .ipt2{border:#999999 1px solid;margin-left:6px;color:#666666}
+        p{margin:0px;padding:0px;background-image:url(/jscss/demoimg/loading.gif);background-position:center;background-repeat:no-repeat;width:200px;height:200px;text-align:center;font-size:12px;color:#999999;line-height:26px;}
+    </style>
+    <script language="javascript" type="text/javascript">
+        function preloadimg(url, obj, ipt) {
+            var img = new Image();
+            obj.innerHTML = "<p>图片加载中...</p>";
+            img.onload = function () {
+                obj.innerHTML = "";
+                obj.style.width = String(img.width) + "px";
+                ipt.style.width = String(img.width - 40) + "px";
+                obj.appendChild(img);
+            };
+            img.onerror = function () {
+                obj.innerHTML = "图片加载失败！"
+            };
+            img.src = url; //img.src一定要写在img.onload之后，否则在IE中会出现问题
+        }
+        function show() {
+            var div = document.getElementsByTagName("div")[0];
+            var input = document.getElementsByTagName("input");
+            preloadimg("http://www.codefans.net/jscss/demoimg/wall8.jpg", div, input[0]);
+            input[0].onclick = function () {
+                this.value = ""
+            };
+            input[1].onclick = function () {
+                preloadimg(input[0].value, div, input[0]);
+            }
+        }
+        window.onload = show;
+    </script>
+    <title>JavaScript图片预加载代码，显示loading</title>
+</head>
+<body>
+<div></div>
+<br />
+<input type="text" value="将图片地址粘贴在这里" class="ipt1"/><input type="button" value="开始加载" class="ipt2"/>
+</body>
+</html>

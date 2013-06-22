@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Document</title>
+    	<style>
+    		div{ width:200px; height:200px; border:1px solid #000;}
+		</style>
+        <script>
+        	//window.onload = sett;
+			function sett(){
+				var a = document.getElementById('a').offsetHeight;
+				if(a > 10){
+					a = a - 10;
+					document.getElementById('a').style.height = a + 'px';
+					
+				}
+				//alert(a);
+				//setTimeout('sett()', 50);
+			}
+			setInterval('sett()', 50);
+			//document.getElementById('b').offsetHeight = 300 + 'px';
+        </script>
+	</head>
+	<body>
+		<div id="a"></div>
+	</body>
+</html>

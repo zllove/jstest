@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-namefun</title>
+</head>
+<body>
+<h4><a href="http://www.cnblogs.com/TomXu/archive/2011/12/29/2290308.html">揭秘命名函数表达式</a></h4>
+<script type="text/javascript">
+//    ({'x': 5});
+/*
+    var foo;
+    if(true){
+        foo = function(){
+            alert(1);
+        };
+    } else {
+        foo = function(){
+            alert(2);
+        }
+    }
+    foo();
+    console.log(typeof foo); // undefined
+    if(true){
+        function foo(){ return 1; }
+    } else {
+        function foo(){ return 2; }
+    }
+    console.log(typeof foo); // function
+
+    function foo(){ return bar(); }
+    function bar(){ return baz(); }
+    function baz(){ debugger; }
+    foo();
+    console.log(typeof g);
+    var f = function g(){};
+    console.log(f === g);
+    
+    f.expando = 'foo';
+    console.log(g.expando);
+    function obj(){ this.value = '对象'; }
+    var value = 'global 变量';
+    function fun1(){ return this.value; }
+    var a = fun1.call();
+//    var b = fun1.call(obj,args);
+    console.log(a);
+//    console.log(b);
+ */
+
+    var undefined = 1;
+    alert(undefined);
+    (function(window, undefined){
+        alert(undefined);
+    })(window);
+    (function(window){
+        alert(undefined);
+    })(window);
+
+
+</script>
+</body>
+</html>

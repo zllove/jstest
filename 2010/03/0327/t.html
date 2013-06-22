@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+a <input type="text" name="" id="input1" /><br />
+b <input type="text" name="" value="1232434" id="input2" /><br />
+c <input type="text" value="2010-10-20" id="input3" /><br />
+<input type="button" value="点击a" onclick="a()" />
+<input type="button" value="点击b" onclick="b()" />
+<input type="button" value="点击c" onclick="c()" />
+<script type="text/javascript">
+	function a(){
+		var i1 = document.getElementById("input1");
+		if(i1.value < 1){
+			alert("这里边没值");
+		} else {
+			alert("这里边有值!");
+		}
+	}
+	function b(){
+		var i2 = document.getElementById("input2").value;
+		var isNum = /^\d+$/;				
+		alert(isNum.test(i2));
+	}
+	
+	function c(){
+		var i3 = document.getElementById("input3").value;
+		var isDate = /^(\d{1,4}-\d{1,2}-\d{1,2})$/;
+		alert(isDate.test(i3));
+	}
+</script>
+</body>
+</html>

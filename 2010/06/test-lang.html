@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Document</title>
+        </script>
+        <style type="text/css">
+        *{font-size:12px;}
+        .operbtn{width:350px;display:inline-block;}
+        .operbtn span{width:49%;float:left;}
+		.fileButtons{background-image:url(../images/uidemo tton ttonBg.gif);
+		    background-color:#ffffff;
+		    width:50px;
+		    height:22px;
+		    margin:1px 5px 1px 5px;
+		    font-size:9pt;
+		    border:#7b9ebd 1px solid
+		}   
+        </style>
+        <script>
+        </script>
+    </head>
+    <body>
+	<script type="text/javascript">
+	function $(str){return document.getElementById(str)}
+	$("text_name").focus();
+	function text_x(){
+		if ($("text_name").value==''){
+			alert("请输入用户名");
+			this.focus();
+			return false;
+		}
+		if ($("text_pass").value==""){
+			alert("请输入密码");
+			this.focus();
+			return false;
+		}
+		if ($("text_word").value==""){
+			alert("请输入验证密码");
+			return false;
+		}
+		
+		
+	}
+	</script>
+	<form action="" onsubmit="text_x()">
+		用户名：&nbsp;<input name="name" type="text" id="text_name" /><br />
+	    密 　码：<input name="name" type="password" id="text_pass" /><br />
+	    确认密码：<input name="name" type="password" id="text_word" /><br />
+	    <input type="submit" value="提交" style="width:80px; height:20px;" id="submit_button" />
+	</form> 
+	
+	</body>
+</html>

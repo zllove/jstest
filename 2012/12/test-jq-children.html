@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-jq-children</title>
+	<script type="text/javascript" src="../jquery-1.8.2.js"></script>
+</head>
+<body>
+	<form action="">
+		<input type="text" value="">
+		<fieldset>
+			<label for="">Newlaett</label>
+			<input type="text">
+		</fieldset>
+	</form>
+<script type="text/javascript">
+	var input = $('form').find('>input');
+	var input2 = $('form').children('input');
+	console.log(input);
+	console.log(input2);
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <script type="text/javascript" src="../../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<!--<div class="a">this is a</div>
+<a class="b" href="http://www.sohu.com">sohu</a>-->
+
+<script type="text/javascript">
+    //alert($.isArray('1213'));
+    //    var t = 0 ? 'one' : 'two';
+    //    alert(t);
+    //var t = (0 || 1  && (t=3));
+    //alert(t);
+    $('.b').click(function(e){
+        alert(1);
+        e.preventDefault();
+    })
+
+    value = 'test val';
+    function foo(){
+        this.value = 'obj test';
+    }
+
+    function boo(){
+        alert(this.value);
+    }
+//    boo.call(new foo());
+
+
+</script>
+<p>this is p</p>
+
+<div>this is first div</div>
+<div>this is second div</div>
+<script type="text/javascript">
+//    $('p').appendTo('div');
+//    $('div').append($('p'));
+    var arr = [];
+    function myTest(i){
+        document.write(++i);
+        this.name = 'hq';
+    }
+    var my = new myTest(10);
+    arr[arr.length] = my;
+//    alert(my.name) ;
+//    alert(arr[0][name]) ;
+//    console.log(arr[1]);
+    var a = 1;
+    a ? document.write(1111) : document.write(2222);
+</script>
+
+</body>
+</html>

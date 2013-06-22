@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>这是我的第一个文档</title>
+<script type="text/javascript">
+	function Polygon(sides){
+		this.sides = sides;
+	}
+	
+	Polygon.prototype.getArea = function(){
+		return 0;
+	}
+	
+	function Triangle(iBase, iHeight){
+		Polygon.call(this, 3);
+		this.base = iBase;
+		this.height = iHeight;
+	}
+	Triangle.prototype = new Polygon();
+	Triangle.prototype.getArea = function(){
+		return 0.5 * this.base * this.height;
+	}
+	
+	function Rectangle(iLength, iWidth){
+		Polygon.call(this, 4);
+		this.length = iLength;
+		this.width = iWidth;
+	}
+	
+	Rectangle.prototype = new Polygon();
+	Rectangle.prototype.getArea = function(){
+		return this.length * this.width;
+	}
+	
+	var t = new Triangle(2,3);
+	//alert(t.getArea());
+	
+	var r = new Rectangle(4, 6);
+	//alert(r.getArea());
+	
+	//confirm("Are you sure?");
+//	if(confirm("Are you sure?")){
+//		alert("yes");
+//	} else {
+//		alert("no");
+//	}
+
+//	var sResult = prompt("what is your name?");
+//	if(sResult != null){
+//		alert(sResult);
+//	}
+	//alert(document.lastModified);
+	//alert(document.bgColor);
+	//alert(location.href);
+	//alert(document.URL);
+	//alert(location.search);
+	//location.assgin("http://www.sohu.com");
+	//location.reload(true);
+	//alert(screen.width);
+	
+	window.moveTo(10, 10);
+	window.resizeTo(screen.availWidth, screen.availHeight);
+</script>
+</head>
+
+<body>
+
+<a href="http://www.sohu.com/sv?username=jikey">哈哈</a>
+
+</body>
+</html>
+

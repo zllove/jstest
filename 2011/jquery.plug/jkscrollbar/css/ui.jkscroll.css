@@ -1,0 +1,26 @@
+@charset "utf-8";
+/********************************
+ * @autor:  jikey           
+ * @time :  2011-12
+ * @see  :  jikeytang@gmail.com
+ * @info :  jkscroll-css
+ *******************************/
+/* plus */
+.jkscroll-wrap{position:relative;padding:0;overflow:hidden;}
+.jkscroll-cont{position:relative;padding-right:13px;top:0px;z-index:9999;}
+.jkscroll-cont-hover{background:#FFFBE1;}
+.jkscroll-bar{position:absolute;top:0px;right:0px;width:15px;height:100%;background:url(http://app.soche8.com/show/jscoll/s_bg2.gif) repeat-y right 0 #edf7fa;z-index:10000;}
+.jkscroll-bar-top,.jkscroll-bar-bot{position:absolute;height:15px;left:0px;width:100%;cursor:pointer;overflow:hidden;background:url(http://app.soche8.com/show/jscoll/s_bg2.gif) no-repeat 0 0 #bbdef6;}
+.jkscroll-bar-top{top:0px;}
+.jkscroll-bar-bot{bottom:0px;background-position:0 -15px;}
+.jkscroll-bar-mid{position:absolute;top:15px;width:13px;height:100px;border:1px solid #A3C3D5;background:url(http://app.soche8.com/show/jscoll/s_bg2.gif) repeat-y -45px 0 #e0f1fc;}
+.jkscroll-wrap .hover{background:url(http://app.soche8.com/show/jscoll/s_bg2.gif) repeat-y -58px 0 #dceffc;}
+/* simple */
+.jkscroll-wrap .jkscroll-simple{width:12px;background:#f2f2f2;border-left:1px solid #dadada;}
+.jkscroll-wrap .jkscroll-simple .jkscroll-bar-top,.jkscroll-wrap .jkscroll-simple .jkscroll-bar-bot{display:none;}
+.jkscroll-wrap .jkscroll-simple .jkscroll-bar-mid{top:0;right:-2px;background:#c0c0c0;border:none 0;}
+.jkscroll-wrap .jkscroll-simple .hover{background:#909090;}
+/* blue */
+.jkscroll-wrap .jkscroll-gray{background:url(http://app.soche8.com/show/jscoll/s_bg.gif) repeat-y right 0 #edf7fa;}
+.jkscroll-wrap .jkscroll-gray .jkscroll-bar-top,.jkscroll-wrap .jkscroll-gray .jkscroll-bar-bot{background:url(http://app.soche8.com/show/jscoll/s_bg.gif);}
+.jkscroll-wrap .jkscroll-gray .jkscroll-bar-mid{background:url(http://app.soche8.com/show/jscoll/s_bg.gif) repeat-y -45px 0;border:1px solid #BCBCBC;}

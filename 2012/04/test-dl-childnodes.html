@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test</title>
+</head>
+<body>
+<dl id="dl1">
+    <dt>aa</dt>
+    <dd>
+        <ul>
+            <li>aaa</li>
+            <li>bbb</li>
+        </ul>
+    <dd>
+    <dt>bb</dt>
+    <dd>
+        <ul>
+            <li>111</li>
+        </ul>
+    <dd>
+</dl>
+<script type="text/javascript">
+    /*
+    var count = 0;
+    var dls = document.getElementById('dl1');
+    function showNode(o){
+        if(!o){
+            return;
+        }
+        var child = o.children;
+        var len = child.length;
+        for(var i=0; i<len; i++){
+            var v = child[i];
+            if(v.nodeType == 1){
+//                console.log('找到的子元素节点是：' + v.nodeName);
+                count ++;
+                if(v.children.length > 0){
+                    var subV = v.children[i];
+                    if(subV && subV.parentNode.tagName == 'UL' && subV.nodeType == 1){
+                        console.log('aa', subV.parentNode.tagName);
+                        subV.parentNode.id = 'my' + count;
+                    }
+                    showNode(v);
+                }
+            }
+        }
+    }
+    showNode(dls);
+//    console.log(count);
+    */
+    function mm() {
+        var a = document.getElementById("dl1");
+        var b = a.getElementsByTagName("*");
+        console.log(b.length);
+        var c = a.getElementsByTagName("ul");
+        for (var i = 0; i < c.length; i++) {
+            c[i].id = "ul" + i;
+        }
+        var d = document.getElementById("ul0");
+        console.log(d.id);
+    }
+    window.onload = mm;
+</script>
+</body>
+</html>

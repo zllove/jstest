@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    (function(){
+//        alert('jq框架分析！');
+        jQuery = window.jQuery = window.$ = function(selector, context){
+
+        };
+        jQuery.fn = jQuery.prototype = {
+            init: function(selector, context){
+
+            },
+            jquery: 1.3.2,
+            size: function(){
+
+            }
+
+        };
+
+    })();
+    console.log(jQuery);
+
+</script>
+</body>
+</html>

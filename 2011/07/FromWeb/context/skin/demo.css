@@ -1,0 +1,40 @@
+#DownLoader {
+	width:700px;
+	padding:8px;
+	margin:0 auto;
+	
+	background:#F7F9FF;
+	color: #006F99;
+	font-size:12px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#DownLoader ol li {
+	line-height:22px;	
+}
+
+/*title样式*/
+.download-title {
+	font-weight:bold;
+	font-size:16px;
+	padding:5px;
+	padding-left:0px;
+}
+/*内容样式*/
+.download-content {
+	padding:3px;
+	margin-top:5px;
+	border-top:1px solid #E0E0E0;
+}
+
+/*设定链接样式*/
+.download-content a {
+	text-decoration:none;
+	color:#006F99;
+}
+.download-content a:hover {
+	text-decoration:underline;
+}
+.text-decoration {
+	background:#CAD8FF;
+}

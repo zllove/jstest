@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-extendclass</title>
+</head>
+<body>
+<script type="text/javascript">
+    function Base(){
+        f1 = function (){
+            console.log('f1 in base');
+        };
+        f2 = function(){
+            console.log('f2 in base.');
+        };
+    }
+    Base.prototype = {
+        f3: function(){
+            console.log('f3 in base.');
+        },
+        f4: function(){
+            console.log('f4 in base.');
+        }
+    }
+    function Child(){
+    }
+    function Extend(subFn, superFn){
+        subFn.prototype = new superFn();
+        subFn.prototype.constructor = subFn;
+    }
+    function Animal(){
+        this.say1 = function (){
+            console.log('Animal');
+        }
+    }
+    function Tiger(){
+        this.say2 = function (){
+            console.log('tiger');
+        }
+    }
+    Extend(Tiger, Animal);
+    var tiger = new Tiger();
+    tiger.say1();
+    tiger.say2();
+
+
+
+
+
+</script>
+
+</body>
+</html>

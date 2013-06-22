@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-exec</title>
+</head>
+<body>
+<script type="text/javascript">
+    function matchdemo(){
+        var reg = /(a)in/ig, str = 'the rain main in', r;
+        r = str.match(reg);
+        console.log(r);
+    }
+//    matchdemo();
+    function regExptest(){
+//        var str = 'http://sumsung753.blog.163.com/blog/I love you',
+        var str = 'The rain in Spain falls mainly in the plain',
+//            reg = /\w+/g,
+            reg = /[\w]*(ai)n/g,
+            arr;
+        while((arr = reg.exec(str)) != null){
+            document.write(arr.index + ' - ' + arr.lastIndex + ' : ' + arr + '<br/>');
+            for (var key in arr) {
+                document.write(key + ' => ' + arr[key] + '<br/>');
+            }
+            document.write('<br/>');
+        }
+    }
+    regExptest();
+    function searchDemo(){
+        var r, r2, reg1 = /falls/i, reg2 = /tom/i, str = 'The rain in Spain falls mainly in the plain';
+        r = str.search(reg1);
+        r2 = str.search(reg2);
+        console.log(r);
+        console.log(r2);
+    }
+    searchDemo();
+</script>
+</body>
+</html>

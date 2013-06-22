@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+<h3><a href="http://www.cnblogs.com/rubylouvre/archive/2009/11/03/1595549.html">正则学习笔记1-6</a></h3>
+<script type="text/javascript">
+    /*
+    var str = '<font color="red">red</font>hhhh字符串<hr height="2"><hr><p>字符串rrrrrr<h1>bbb</h1>';
+    str = str.replace(/<(?!hr(.*)*>)[^>]+>/ig, '');
+    console.log(str);
+
+
+    /(.+)_(.+)/.test('pub_form_year_01');
+    console.log(RegExp.$1);
+    console.log(RegExp.$2);
+
+    var str = 'aa{1}bb,cc{3}dd,dd{0}ee,ee{2}ff',
+        arr = ['a', 'b', 'c', 'd'],
+        re = /(\d+)/g;
+    str = str.replace(re, function($0, $1){
+        console.log($0);
+        console.log('a', $1);
+        return arr[$1];
+    });
+    console.log(str);
+
+    var reg = new RegExp("\\d", "g");
+    var str = "abd1afa4sdf";
+    str.replace(reg, function () {
+//        console.log(arguments.length);
+        for(var i=0,len=arguments.length; i<len; i++){
+            console.log('第' + (i + 1) + '参数的值:' + arguments[i]);
+        }
+    });
+
+    var str = '中华人民共和国，中华人民共和国',
+        reg = /(人)/g;
+    str = str.replace(reg, function($1){
+        return "<font color=red>" + $1 + "</font>";
+    });
+    console.log(str);
+
+    var str = '他今年22岁，她今年20岁，他的爸爸今年45岁，她的爸爸今年44岁，一共有4人',
+        reg = /(\d+)岁/g,
+        newstr = '';
+
+    newstr = str.replace(reg, function($1){
+        console.log((new Date()).getFullYear());
+        var gyear = (new Date()).getFullYear() - parseInt($1) + 1;
+        return $1 + '(' + gyear + '年出生)';
+    });
+    console.log(str);
+    console.log(newstr);
+
+    var str = "<font color='#555fff'>33asfdasdf</font>22asdfasdf",
+        b = str.replace(/<\/?font[^>]*>/gi, '');
+
+    console.log(b);
+
+    console.log("123450,0,1,2,5,3,2,12,4,1,1,123450".match(/(\b\d+\b)(?!(?:,[^,]+)*,\1(?:,|$))/ig));
+    console.log();
+    console.log();
+
+
+    var str='<embed src="http://img.ku6.com/common/V2.0.1.swf?vid=l8JX92SeoScVpyaj" type="application/x-shockwave-flash" width="480" height="415"></embed>';
+    var re = /(?:swf\?)([^"]+)/
+    console.log(str.match(re));
+    console.log(str.match(re)[1]);
+
+    var str = 'aaa4444aaaaaa55555-aaaaaa666666aaaa51515aaa';
+    var reg = /(\d{4,6})(?!\d*-)/ig;
+    console.log(str.match(reg));
+
+    var str = 'abbb1234abbbaabbbaaabbb1234',
+        reg = /a*bbb/g;
+    console.log(str.match(reg));
+
+    var str = 'aa/bb*cc';
+    console.log(str.split(/[\/\*]/));
+     */
+
+    var re = /<tag>([\s\S]*?)<\/tag>/g;
+    var str = '<tag>abc</tag><tag>def</tag>';
+    var res = [];
+    str.replace(re, function(a, b){
+        res.push(b);
+    });
+    console.log(res);
+
+
+</script>
+</body>
+</html>

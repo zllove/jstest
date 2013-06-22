@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>bom</title>
+</head>
+<body>
+<div style="width:10000px;"></div>
+<script type="text/javascript">
+    function getArgs(){
+        var args = new Object();
+        var query = location.search.substring(1);
+        var pairs = query.split('&');
+        for(var i=0; i<pairs.length; i++){
+            var pos = pairs[i].indexOf('=');
+            if(pos == -1){
+                continue;
+            }
+            var argname = pairs[i].substring(0, pos);
+            var value = pairs[i].substring(pos + 1);
+            value = decodeURIComponent(value);
+            args[argname] = value;
+        }
+        return args;
+    }
+//    console.log(getArgs());
+    var windowWidth = window.outerWidth;
+    var windowHeight = window.outerHeight;
+    var windowX = window.screenX;
+    var windowY = window.screenY;
+    var viewportWidth = window.innerWidth;
+    var viewportHeight = window.innerHeight;
+    var horizontalScroll = window.pageXOffset;
+    var verticalScroll = window.pageYOffset;
+
+    /*
+    console.log(windowWidth); // 1366
+    console.log(windowX); // 0
+    console.log(viewportWidth); // 1366
+    console.log(horizontalScroll); // 0
+    */
+//    console.log(navigator.appVersion);
+
+    var w = window.open('test-13-webbrowser.html', 'smallwin', 'width=400,height=350,status=yes,resizable=yes');
+    w.close();
+
+</script>
+<script type="text/javascript">
+    var Geometry = {};
+
+    if(window.screenLeft){ // ie 窗口左上角在屏幕上的坐标
+        Geometry.getWindowX = function(){ return window.screenLeft; };
+        Geometry.getWindowY = function(){ return window.screenTop; };
+    } else if(window.screenX){ // firefox
+        Geometry.getWindowX = function(){ return window.screenX; };
+        Geometry.getWindowY = function(){ return window.screenY; };
+    } 
+    if(window.innerWidth){ // no ie
+        Geometry.getViewportWidth = function(){ return window.innerWidth; };
+        Geometry.getViewportHeight = function(){ return window.innerHeight; };
+        Geometry.getHorizontalScroll = function(){ return window.pageXOffset; };
+        Geometry.getVerticalScroll = function(){ return window.pageYOffset; };
+    } else if(document.documentElement && document.documentElement.clientWidth){ // ie6 在 doctype 中时
+        Geometry.getViewportWidth = function(){ return document.documentElement.clientWidth; };
+        Geometry.getViewportHeight = function(){ return document.documentElement.clientHeight; };
+        Geometry.getHorizontalScroll = function(){ return document.documentElement.scrollLeft; };
+        Geometry.getVerticalScroll = function(){ return document.documentElement.scrollTop; };
+    } else if(document.body.clientWidth){ // ie5.5
+        Geometry.getViewportWidth = function(){ return document.body.clientWidth; };
+        Geometry.getViewportHeight = function(){ return document.body.clientHeight; };
+        Geometry.getHorizontalScroll = function(){ return document.body.scrollLeft; };
+        Geometry.getVerticalScroll = function(){ return document.body.scrollTop; };
+    }
+
+    // document 大小
+    if(document.documentElement && document.documentElement.scrollWidth){
+        Geometry.getDocumentWidth = function(){ return document.documentElement.scrollWidth; };
+        Geometry.getDocumentHeight = function(){ return document.documentElement.scrollHeight; }; 
+    } else if(document.body.scrollWidth){
+        Geometry.getDocumentWidth = function(){ return document.body.scrollWidth; };
+        Geometry.getDocumentHeight = function(){ return document.body.scrollHeight; };
+
+    }
+</script>
+</body>
+</html>

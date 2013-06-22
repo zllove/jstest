@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-arguments</title>
+</head>
+<body>
+	<h2><a href="http://www.coding123.net/article/20121008/javascript-function-arguments-callee-caller.aspx" target="_blank">argument</a></h2>
+	<script type="text/javascript">
+		console.group('test-arguments');
+		Array.prototype.safeValue = 1;
+		console.log('array ' + new Array().safeValue);
+		function setValue () {
+			console.log('arg ' + arguments.safeValue);
+		}
+		setValue();
+
+		console.groupEnd();
+		console.group('test-callerDemo');
+		
+		function callerDemo(){
+			if (callerDemo.caller) {
+				console.log(callerDemo.caller.toString());
+			} else{
+				console.log('this is top function call');
+			};
+		}
+		function callerParent(){
+			callerDemo();
+		}
+		callerParent();
+		console.groupEnd();
+		console.group('test-callee');
+
+		function calleeDemo(){
+			console.log(arguments.callee);
+		}
+		calleeDemo();
+
+		var sumRecursion = function(n) {
+			if(n == 1){
+				return 1;
+			} else{
+				return n + arguments.callee(n - 1);
+			}
+		};
+
+		console.log(sumRecursion(10));
+
+
+		console.groupEnd();
+
+
+
+
+
+	</script>
+</body>
+</html>

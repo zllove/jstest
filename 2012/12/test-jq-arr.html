@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-arr</title>
+	<script type="text/javascript" src="../jquery-1.8.2.js"></script>
+</head>
+<body>
+	<div id="test">test content.</div>
+	<div id="mydiv">mydiv content.</div>
+	<script type="text/javascript">
+		console.group('arr');
+		var arr = [];
+		arr.push(1,2);
+		arr.push(2);
+		console.log(arr);
+		arr = [];
+		console.log(arr);
+		console.groupEnd();
+
+		console.group('insertBefore');
+		/*
+		var test = document.getElementById('test');
+		var ele = document.createElement('div');
+		ele.appendChild(document.createTextNode('this is div content.'));
+		test.insertBefore(ele, test.children[0]);
+		console.log(test);
+		*/
+		console.groupEnd();
+
+		console.group('jqInsertBefore');
+		var testdiv = $('<b>', {
+			class: 'testdiv',
+			text: 'testdiv content'
+		});
+		var mydiv = $('#mydiv');
+		// testdiv.insertBefore('#test');
+		// var enddiv = testdiv.appendTo('#test');
+		var endmy = mydiv.append(testdiv);
+		console.log(endmy);
+		console.groupEnd();
+
+
+
+
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<div id="temp"></div>
+<ul class="JQ-content-box" style="padding:20px; background:#FFFFFF">
+    <li>第一行
+        <ul>
+            <li>这是公告标题1</li>
+            <li>这是公告标题2</li>
+            <li><span>这是公告标题3</span></li>
+            <li><span>这是公告标题4</span></li>
+        </ul>
+    </li>
+</ul>
+<script type="text/javascript">
+    /*
+    $('li').live('click', function(event){
+        $('#temp').html('clicked:' + event.target.nodeName);
+            $(event.target).css('color', '#f30');
+    });
+    */
+
+    $('li').live('click', function(event){
+        $('#temp').html('clicked:' + event.target.nodeName);
+        $(this).css('color', '#f30');
+//        event.stopPropagation();
+    });
+</script>
+</body>
+</html>

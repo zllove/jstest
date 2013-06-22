@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+    <title>test-jq-50code</title>
+    <style type="text/css">
+            /*.replacetext{ display:none;}*/
+        .mydiv{ border:1px solid #ccc; background:#f0f0f0; }
+        .some{ color:#f00; }
+    </style>
+</head>
+<body>
+<h2>50个必备的实用jQuery代码段</h2>
+
+<h3><a target="_blank" href="http://www.cnblogs.com/smailxiaobai/archive/2012/01/09/2316933.html">http://www.cnblogs.com/smailxiaobai/archive/2012/01/09/2316933.html</a>
+</h3>
+
+<div class="a">aaaa
+    <div class="b">bbbbb
+        <div class="c">ccccc</div>
+        <div class="d">dddddd</div>
+        <div class="e">eee</div>
+    </div>
+</div>
+<ul>
+    <li>111</li>
+    <li>222</li>
+    <li>333</li>
+</ul>
+<div class="replacetext">我是要替换的文本</div>
+<dl>
+    <dt>term 1</dt>
+    <dd>definition 1-a</dd>
+    <dd>definition 1-b</dd>
+    <dd>definition 1-c</dd>
+    <dd>definition 1-d</dd>
+
+    <dt id="term-2">term 2</dt>
+    <dd>definition 2-a</dd>
+    <dd>definition 2-b</dd>
+    <dd>definition 2-c</dd>
+
+    <dt>term 3</dt>
+    <dd>definition 3-a</dd>
+    <dd>definition 3-b</dd>
+</dl>
+<script type="text/javascript">
+    /*
+     var text = $('.c').filter(':not(:has(.d))').html();
+     //    console.log(text);
+     //    var t = $('.a').has('.c').html('我是一个兵o');
+     //    $('.replacetext').replaceAll('.d');
+
+     $('ul li').click(function(){
+     var index = $(this).prevAll().length;
+     alert(index);
+
+     alert($(this).index())
+     })
+     $('#term-2').prevUntil('dt').css('background-color', 'red');
+     */
+</script>
+<input id="testbtn1" type="button" value="testbtn">
+<script type="text/javascript">
+    /*
+     $(document).bind('contextmenu', function(e){
+     return false;
+     })
+     $('#testbtn1').live('click', function(e){
+     alert(e.button);
+     if(($.browser.msie && e.button == 0) || ($.browser.msie && e.button == 1) || e.button == 0){
+     alert('left mouse button clicked.');
+     } else if(e.button == 2){
+     alert('right mouse button clicked.');
+     }
+     })
+
+     var hash = [];
+     hash.push({
+     name: 'haoqing',
+     age:29
+     })
+     var hashindex = hash.length - 1;
+     console.log(!!hash[hashindex].name);
+     */
+
+</script>
+<p><input type="text"/> <span>focusout fire</span></p>
+
+<p><input type="password"/> <span>focusout fire</span></p>
+<script type="text/javascript">
+    $('p').focusin(function () {
+        $(this).find('span').css('display', 'inline').fadeOut(1000);
+    });
+</script>
+<div class="a">
+    <div class="b">
+        <div class="mydiv">this is mydiv</div>
+    </div>
+</div>
+<script type="text/javascript">
+    /*
+     setTimeout(function(){
+     $('.mydiv').hide('blind', {}, 500);
+     }, 2000);
+
+     //    $('.mydiv').delay(2000).fadeOut();
+     var newDiv = $('<div>this is my new div</div>');
+     newDiv.attr('id', 'myNewDiv').appendTo('body');
+     alert(newDiv.text());
+
+     var oldDiv = $('<div></div>');
+     $('body').append(oldDiv);
+     alert(oldDiv.html());
+
+     $.fn.center = function(){
+     this.css('position', 'absolute');
+     this.css('top', ($(window).height() - this.height())/2 + $(window).scrollTop() + 'px');
+     this.css('left', ($(window).width() - this.width())/2 + $(window).scrollLeft() + 'px');
+     return this;
+     }
+     $('.mydiv').center();
+     var divpar = $('.mydiv').closest('div');
+     alert(divpar.html());
+     */
+
+
+    $.log = $.fn.log = function (msg) {
+        if (console) console.log('%s: %o', msg, this);
+        return this;
+    }
+    $('.mydiv').hide().log('div hidden').addClass('some');
+
+
+</script>
+
+<ul>
+    <li><a href="#">Link 1</a></li>
+    <li><a href="#">Link 2</a></li>
+    <li><a href="#">Link 3</a></li>
+    <li><a href="#">Link 4</a></li>
+</ul>
+<script type="text/javascript">
+    $('ul li').click(function () {
+        window.location = $(this).find('a').attr('href');
+    })
+</script>
+</body>
+</html>

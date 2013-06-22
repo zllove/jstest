@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title></title>
+</head>
+<body>
+<input type="button" value="test-createBtn" onclick="createBtn()" />
+<input type="button" value="test-getBtn" id="btn" onclick="getBtn()" />
+<script type="text/javascript">
+    function createBtn () {
+        // var btn = document.createElement('input');
+        var btn = null;
+        if (document.all) {
+            btn = document.createElement('<input name="create" id="create" type="button" value="test" />');
+        } else{
+            btn = document.createElement('input');
+            btn.id = 'create';
+            btn.name = 'create';
+            btn.type = 'button';
+            btn.value = 'test';
+        };
+        // var btn = document.createElement('<input name="create" id="create" type="button" value="test" />');
+        // btn.id = 'create';
+        // btn.setAttribute('id', 'create');
+        // btn.setAttribute('name', 'create');
+        // btn.setAttribute('type', 'button');
+        // btn.setAttribute('value', 'test');
+        // btn.name = 'creat';
+        // btn.type = 'button';
+        // btn.value = 'test';
+        document.body.appendChild(btn);
+    }
+
+    function getBtn(){
+        var btn = document.getElementsByName('create');
+        alert(btn.length);
+    }
+    $().empty();
+    $().remove();
+    jQuery.cleanData( [ elem ] );
+
+</script>
+</body>
+</html>

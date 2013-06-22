@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="a.css" media="screen">
+    <style type="text/css">
+        .wrap{ height:1000px;}
+        .area_name{}
+    </style>
+</head>
+<body>
+<a href="http://www.cnblogs.com/edison1105/archive/2012/07/31/2617518.html">jqcode</a>
+<p>Hello</p><p>cruel</p><p>World</p>
+<script type="text/javascript">
+//    $('link[media="screen"]').attr('href', 'main.css');
+    $('p').replaceWith('<b>Paragraph.</b>');
+</script>
+<button>btn</button>
+<ul>
+    <li>111</li>
+    <li>222</li>
+    <li>333</li>
+</ul>
+<div id="tar">this is target</div>
+<input class="swap" type="text" name="" id="">
+<input class="swap" type="text" name="" id="">
+<input class="swap" type="text" name="" id="">
+<script type="text/javascript">
+    $('button').click(function(){
+        $(this).clone(true).insertAfter(this);
+    });
+    $("ul > li").click(function () {
+        var i = $(this).prevAll().length;
+        var end = $(this).index();
+    });
+    /*
+    var author = $('a', {
+        href: '#',
+        class: 'a-class another-class',
+        title: '链接'
+    });
+    */
+//    author.appendTo('body');
+    if($('#tar').length){
+//        console.log(1);
+    } else {
+        console.log(2);
+    }
+
+    $('.swap').each(function(i){
+        var swapVal = $(this).val();
+        $(this).focusin(function(){
+            if($(this).val() == swapVal){
+                $(this).val('');
+            }
+        }).focusout(function(){
+            if($.trim($(this).val()) == ''){
+                $(this).val(swapVal);
+            }
+        });
+    });
+    
+    var newDiv = $('div');
+    newDiv.attr('id', 'myNewDiv').appendTo('body');
+
+</script>
+<div class="wrap">test</div>
+<div class="area_name">area_name</div>
+<script type="text/javascript">
+    $.fn.autoScroll = function(){
+        $('html,body').animate({scrollTop: $(this).offset().top}, 500);
+    }
+//    $('.area_name').autoScroll();
+    if($.browser.safari){
+        console.log('safari');
+    }
+    if($.browser.mozilla && $.browser.version >= 2){
+        console.log($.browser.version);
+    }
+    if($.browser.msie && $.browser.version >= 2){
+        console.log($.browser.version);
+    }
+    $(document).bind('contextmenu', function(){
+//        return false;
+    });
+    if($('.area_name').is(':visible')){
+//        console.log('1');
+    }
+</script>
+<input type="text" name="table" id="">
+<input type="text" name="table" id="">
+<input type="text" name="table" id="">
+<div id="target">test</div>
+<script type="text/javascript">
+    var arr = [];
+    $('input[name="table"]').each(function(){
+        arr.push($(this).val());
+    });
+//    console.log(arr);
+    $(document).mousemove(function(e){
+        $('#target').html('x: ' + e.pageX + ', y: ' + e.pageY);
+    });
+</script>
+</body>
+</html>

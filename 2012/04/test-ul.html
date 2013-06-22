@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#demo1>li").hover(function(){
+                var pos = $(this).index();
+                $("#demo2>li").eq(pos).show().siblings('li').hide();
+            }, function(){
+                $("#demo2>li").eq(0).show().siblings('li').hide();
+            });
+        });
+    </script>
+<head>
+<body>
+<ul id="demo1">
+    <li>demo-a</li>
+    <li>demo-b</li>
+    <li>demo-c</li>
+</ul>
+<ul id="demo2">
+    <li>demo-a-aa</li>
+    <li style="display:none;">demo-b-aa</li>
+    <li style="display:none;">demo-c-aa</li>
+</ul>
+</body>
+</html>

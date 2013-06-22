@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    var a = '11';
+    var r = typeof a === 'number';
+    var r2 = (a === +a);
+//    console.log(r);
+//    console.log(r2);
+//    console.log(11 === 11);
+
+    function isNumber1(a){
+        return a === +a;
+    }
+    function isNumber2(a){
+        return typeof a === 'number';
+    }
+    function isNumber3(a){
+        return Object.prototype.toString.call(a) === '[object Number]';
+    }
+
+    var arr = ['1',true, false,{}, [], undefined, null, 1];
+    for (var i = 0; i < arr.length; i++) {
+        console.log(isNumber2(arr[i]));
+    }
+    console.log(isNumber1(NaN));
+</script>
+</body>
+</html>

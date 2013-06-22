@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<div id="test">
+    <a class="ok" href="#">111</a>
+    <a class="ok no" href="#">222</a>
+    <a class="ok" href="#">333</a>
+    <a class="ok" href="#">444</a>
+</div>
+<script type="text/javascript">
+    $('#test').find('a:not(".no")').each(function(i, el){
+        console.log(el.innerHTML);
+    });
+
+    $('dl:not(".no")').each(function(i, el){
+        console.log(el.innerHTML);
+    });
+
+    $.each( { name: "John", lang: "JS" }, function(i, n){
+        console.log( "Name: " + n );
+    });
+
+</script>
+</body>
+</html>

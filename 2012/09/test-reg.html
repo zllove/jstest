@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<h4><a href="http://www.cnblogs.com/zhujl/archive/2012/01/09/2259982.html">正则01</a></h4>
+<script type="text/javascript">
+    var str = '~!ab@cd#12$%e3^';
+    var reg = /\w+/g;
+//    console.log(str.match(reg));
+
+    var str2 = '<a href="http://g.cn">Google</a>', reg2 = /(<(\w+)[^>]*>)[^<]*(<\/\2>)/g;
+    if(reg2.test(str2)){
+//        console.log(RegExp.$1);
+//        console.log(RegExp.$3);
+    }
+
+    var str3 = 'jsafter', reg3 = /js(?=after)/g;
+    console.log(reg3.exec(str3));
+
+
+</script>
+</body>
+</html>

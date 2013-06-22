@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<div id="outer" style="width:200px;height:300px;position:relative;left:100px;border:1px solid #ccc;">
+    <div id="inner" style="position:absolute;left:50px;top:60px;width:150px;height:300px;border:1px solid #c00;">
+    </div>
+</div>
+<script type="text/javascript">
+    // 获取相对于最近的父级(position:relative)的位置
+    var vp = $('#inner').position();
+    console.log('vpl', vp.left);
+    console.log('vpt', vp.top);
+
+    // 始终返回相对于浏览器文档的距离，它会忽略外层元素。
+    var vp = $('#inner').offset();
+    console.log('vpl', vp.left);
+    console.log('vpt', vp.top);
+</script>
+</body>
+</html>

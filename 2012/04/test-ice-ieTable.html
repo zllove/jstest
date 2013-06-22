@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-ice-ietable</title>
+    <script type="text/javascript" src="./js/ice.js"></script>
+    <script type="text/javascript" src="./js/DomHelper.js"></script>
+</head>
+<body>
+<div id="icetest">icetest</div>
+<!--<table>
+    <tr>
+        <td>1111</td>
+        <td id="icetest"></td>
+    </tr>
+</table>-->
+<input id="btn" type="button" value="测试domhelper-innerhtml">
+<script type="text/javascript">
+(function(){
+    var tempTableEl = null,
+        emptyTags = /^(?:br|frame|hr|img|input|link|meta|range|spacer|wbr|area|param|col)$/i,
+        tableRe = /^table|tbody|tr|td$/i,
+        confRe = /tag|children|cn|html$/i,
+        tableElRe = /td|tr|tbody/i,
+        cssRe = /([a-z0-9-]+)\s*:\s*([^;\s]+(?:\s*[^;\s]+)*);?/gi,
+        endRe = /end/i,
+        pub,
+        afterbegin = 'afterbegin',
+        afterend = 'afterend',
+        beforebegin = 'beforebegin',
+        beforeend = 'beforeend',
+        ts = '<table>',
+        te = '</table>',
+        tbs = ts+'<tbody>',
+        tbe = '</tbody>'+te,
+        trs = tbs + '<tr>',
+        tre = '</tr>'+tbe;
+    function ieTable(depth, s, h, e){
+        tempTableEl.innerHTML = [s, h, e].join('');
+        var i = -1,
+            el = tempTableEl,
+            ns;
+        while(++i < depth){
+            el = el.firstChild;
+        }
+        if(ns = el.nextSibling){
+            var df = document.createDocumentFragment();
+            while(el){
+                ns = el.nextSibling;
+                df.appendChild(el);
+                el = ns;
+            }
+            el = df;
+        }
+        return el;
+    }
+    function insertIntoTable(tag, el, where, html){
+        var node, before;
+        tempTableEl = tempTableEl || document.createElement('div');
+        if(tag == 'td' && (where == afterbegin || where == beforeend) || !tableElRe.test(tag) && (where == beforebegin || where == afterend)) {
+            return;
+        }
+        before = where == beforebegin ? el : where == afterend ? el.nextSibling : where == afterbegin ? el.firstChild : null;
+        if(where == beforebegin || where == afterend){
+            el = el.parentNode;
+        }
+        if(tag == 'td' || (tag == 'tr' && (where == beforeend || where == afterbegin))){
+            node = ieTable(4, trs, html, tre);
+        } else if((tag == 'tbody' && (where == beforeend || where == afterbegin)) || (tag == 'tr' && (where == beforebegin || where == afterend))) {
+            node = ieTable(3, tbs, html, tbe);
+        } else {
+            node = ieTable(2, ts, html, te);
+        }
+        el.insertBefore(node, before);
+        return node;
+    }
+
+
+    var dh = Ice.DomHelper;
+    Ice.getDom('btn').onclick = function (){
+        //        var res = dh.insertHtml('beforeend', Ice.getDom('icetest'), '<div>我是一个兵</div>');
+        var str = '<tr><td>1111</td><td>1111</td></tr>';
+//        var str = '<table border="1"><tr><td>1111</td><td>1111</td></tr></table>';
+//        insertIntoTable(el.tagName.toLowerCase(), el, where, html);
+//        console.log(Ice.getDom('icetest'));
+//        insertIntoTable('div', Ice.getDom('icetest'), 'beforeend', str);
+        insertIntoTable(Ice.getDom('icetest').tagName.toLowerCase(), Ice.getDom('icetest'), 'beforeend',  str);
+//        var res = dh.insertHtml('beforeend', Ice.getDom('icetest'), str);
+        //        console.log(res);
+    }
+})();
+
+</script>
+</body>
+</html>

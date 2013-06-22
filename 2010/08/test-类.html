@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Document</title>
+        </script>
+		<style type="text/css">
+		
+		</style>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+		<script type="text/javascript">
+			/*
+			var People = {
+				name: 'jikey',
+				age: 29,
+				sayHello: function(){
+					alert('Hello, My name ' + this.name + ', I am age ' + this.age);
+				}
+			}
+			People.sayHello();
+			alert(People.name);
+			
+			var People = {
+				Create: function(name, age) {
+					this.name = name;
+					this.age = age;
+				},
+				sayHello: function(){
+					alert('Hello My name ' + this.name + ', I am age ' + this.age);
+				}
+			}
+			People.Create('jikey', 30);
+			People.sayHello();
+			
+			
+			var Person = function(){}
+			var p = new Person();
+			alert(p._proto_ === p.prototype._proto_)
+			*/
+			
+			var Person = function(){};
+			Person.prototype.Say = function(){
+				alert('Person Say');
+			}
+			Person.prototype.Salary = 5000;
+			var Programmer = function(){};
+			Programmer.prototype = new Person();
+			Programmer.prototype.WriteCode = function(){
+				alert('Programmer Coder');
+			}
+			var p = new Programmer();
+			p.Say();
+			p.WriteCode();
+			alert(p.Salary);
+			
+			
+			
+		</script>
+    </head>
+	<body>
+		
+		
+	</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+	<style type="text/css">
+		.label{float:left;width:120px;}
+		.infobox{margin-top:20px;}
+		.error{color:#c00;}
+		.submit{margin-left:20px;margin-top:10px;}
+	</style>
+</head>
+<body>
+	<form action="" method="post" id="signup">
+		<input type="radio" name="paymode" id="pizza" value="5" class="infobox" />Pizza $5 <br />
+		<input type="radio" name="paymode" id="hotdog" value="3" class="infobox" />HotDog $3 <br />
+		<input type="radio" name="paymode" id="coke" class="infobox" value="3" />Coke $3 <br />
+		<p class="error">Select at least one checkbox</p>
+		<p class="result"></p>
+		<select name="" id="letter">
+			<option value="1">aaa</option>
+			<option value="2">bbb</option>
+			<option value="3">ccc</option>
+		</select>
+		<input type="submit" value="submit" class="submit" />
+	</form>
+	<script type="text/javascript">
+		$('.error').hide();
+		$('.submit').click(function(event){
+			var count = $('input:checked').length, amt = 0;
+			var oLet = document.getElementById('letter');
+			//alert(oLet.options[oLet.selectedIndex].value);
+			//alert(oLet.options[oLet.selectedIndex].innerHTML); JS 选中的Text
+			//alert($('#letter option:selected').text()); //JQ 选中的Text
+			//alert($('#letter')[0].selectedIndex); //JQ 选中的 索引
+			
+			if(count == 0){
+				$('p.result').hide();
+				$('.error').show();
+			} else {
+				$('.error').hide();
+				$('p.result').show();
+				$('p.result').text('You bill is $ ' + $('input:checked').val());
+			}
+			event.preventDefault();
+		});
+		
+	</script>
+</body>
+</html>

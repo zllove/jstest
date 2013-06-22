@@ -1,0 +1,90 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>无标题文档</title>
+    <link rel="stylesheet" href="http://www.solbox.com/lib/css/default.css">
+    <link rel="stylesheet" href="http://www.solbox.com/lib/css/main.css">
+    <script type="text/javascript" src="../../jquery-1.7.1.min.js"></script>
+    <!--<script src="http://www.solbox.com/lib/js/jquery-1.7.2.min.js"></script>-->
+    <script src="http://www.solbox.com/lib/js/jquery.bxSlider.js"></script>
+    <script type="text/javascript">
+        (function($) {
+            $(document).ready(function() {
+                var $slider = $('#slider1').bxSlider({
+                    pause: '10000',
+                    randomStart: true,
+                    auto: true,
+                    pager: true,
+                    speed: 1000,
+                    controls: false
+                });
+                $('#slider2').bxSlider({
+                    pager: false
+                });
+                $('#slider3').bxSlider({
+                    pager: true,
+                    controls: false
+                });
+                $('#slider4').bxSlider({
+                    auto: true,
+                    displaySlideQty: 9,
+                    moveSlideQty: 1
+                });
+                $(window).resize(function(){
+                    $slider.reloadShow();
+                });
+
+            });
+        })(jQuery);
+    </script>
+    <script src="http://www.solbox.com/lib/js/default.js"></script>
+</head>
+
+<body>
+
+<div style="z-index: 1; position: relative; height: 360px; overflow: hidden;">
+    <div id="slider1">
+        <div class="panel1">
+            <div><img src="http://www.solbox.com/img/main/1.png" alt="SOLBOX CDN" usemap="#slideMap1"></div>
+        </div>
+        <div class="panel2">
+            <div><img src="http://www.solbox.com/img/main/2.png" alt="SOLBOX CLOUD" usemap="#slideMap2"></div>
+        </div>
+        <div class="panel3">
+            <div><img src="http://www.solbox.com/img/main/3.png" alt="SOLBOX MOBILE" usemap="#slideMap3"></div>
+        </div>
+        <div class="panel4">
+            <div><img src="http://www.solbox.com/img/main/4.png" alt="MANAGED CDN" usemap="#slideMap4"></div>
+        </div>
+    </div>
+</div>
+<map name="slideMap1">
+    <area shape="rect" coords="58,159,150,178" href="http://www.solbox.com/solutions/cdn.php" alt="cdn learn more">
+</map>
+<map name="slideMap2">
+    <area shape="rect" coords="57,160,153,186" href="http://www.solbox.com/solutions/cloud.php" alt="learn more">
+</map>
+<map name="slideMap3">
+    <area shape="rect" coords="59,160,154,186" href="http://www.solbox.com/solutions/mobile.php" alt="mobile learn more">
+</map>
+<map name="slideMap4">
+    <area shape="rect" coords="57,159,154,191" href="#" onclick="alert('준비중입니다.')" alt="managed learn more">
+</map>
+<div class="newsticker">
+    <div class="newstickerWrap">
+        <div class="sns">
+            <a href="https://twitter.com/solbox" target="_blank"><img src="http://www.solbox.com/img/main/icon_twitter.gif" alt="twitter"></a>
+            <a href="http://www.facebook.com/pages/Solbox/408091885925037?sk=photos_stream#!/pages/Solbox/408091885925037" target="_blank"><img src="http://www.solbox.com/img/main/icon_facebook.gif" alt="facebook"></a>
+        </div>
+        <div class="newsticker">
+            <div id="slider2">
+                <div><a href="http://www.facebook.com/pages/Solbox/408091885925037" target="_blank"><span>2012.10.21</span>아시아 콘텐츠실크로드 "우리 CDN 기술이 깐다"</a></div>
+                <div><a href="http://www.facebook.com/pages/Solbox/408091885925037" target="_blank"><span>2012.10.21</span>솔박스는 지난 10일부터 7일동안 서울 63컨벤션센터에서 개최된 제 48회 아시아-태평양 방송...</a></div>
+                <div><a href="http://www.facebook.com/pages/Solbox/408091885925037" target="_blank"><span>2012.10.21</span>ETRI, 통신망 트래픽 30% 이상 줄일 콘텐츠 전송SW 개발</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

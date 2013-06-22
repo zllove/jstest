@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+	<style type="text/css">
+		.label{float:left;width:180px;}
+		.infobox{padding:5px;}
+		.error{color:#c00;padding-left:10px;}
+		.submit{margin-left:180px;margin-top:10px;}
+		option{background:#c00;color:#fff;}
+		.meal{background:#ccc;color:#06c;}
+	</style>
+</head>
+<body>
+	<form action="">		<div class="infobox"><input type="checkbox" name="" id="checkAll" />check/uncheck all checkboxes</div>		<div class="infobox"><input type="checkbox" name="" id="pizza" value="5" />Pizza $5</div>		<div class="infobox"><input type="checkbox" name="" id="hotdog" value="2" />Hotdog $2</div>		<div class="infobox"><input type="checkbox" name="" id="coke" value="5" />Coke $5</div>	</form>
+	<script type="text/javascript">
+		$('#checkAll').click(function(){
+			//alert($('#checkAll').is(':checked'));
+			$("input[type='checkbox']").attr('checked', $('#checkAll').is(':checked')); //is 返回布尔值，如果匹配则返回true，否则返回false
+		});
+		
+		//console.log($('form').find(':checkbox').text());
+		$('form').find(':checkbox').click(function(){
+			var amt = 0;
+			console.log($('div:gt(0)'));
+			$('div').filter(':gt(0)').find(':checkbox').each(function(){ //gt 大于给定索引值的元素，从0开始
+				if($('div:gt(0)')){
+					if($(this).is(':checked')){
+						amt = amt + parseInt($(this).val());
+					}
+				}
+			});
+			$('p').remove();
+			$('<p>').insertAfter('div:eq(3)'); //插入到后边
+			$('p').text('You bill is $ ' + amt);
+		});		
+	</script>
+</body>
+</html>

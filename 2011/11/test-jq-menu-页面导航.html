@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+	<style type="text/css">
+		body{font-size:12px;}
+		ul{width:200px;}
+		ul li ul{list-style:none;margin:5px;width:200px;}
+		a{display:block;border-bottom:1px solid #fff;text-decoration:none;background:#00f;color:#fff;padding:0 5em;}
+		li{display:inline;line-height:30px;margin-bottom:15px;}
+		.hover{background:#000;}
+		.hot{text-decoration:underline;}
+	</style>
+</head>
+<body>
+	<table>		<tr>			<td width="300">
+				<ul>
+					<li><a href="#">Books</a>
+						<ul>
+							<li><a id="webd" href="#"><span class="hot">W</span>eb Development</a></li>
+							<li><a href="#"><span class="hot">P</span>rogramming</a></li>
+							<li><a href="#"><span class="hot">R</span>dbms</a></li>
+						</ul>
+					</li>
+				</ul>
+			</td>
+			<td valign="top">
+				<p class="web">　中新网11月30日电(吴博) 随着新一届中共云南省委领导班子于29日选出，目前已有14个省区完成党委换届，近半数省份党委新班子产生。近期，中央高层密集发声谈干部作风，《人民日报》上“仲祖文”亦连续发文，为新班子“接棒”作出指引。</p>
+				<p class="prog">从2011年起到2012年上半年，中国省市县乡四级党委自下而上集中进行换届。从十月上旬开始，省级党委换届拉开大幕。截至目前，已经有辽宁、河南、江西、安徽、新疆、山西、江苏、内蒙古、西藏、广西、福建、河北、湖南和云南14个省区完成省级党委换届。</p>
+				<p class="rdbms">随着新一届领导班子陆续产生，“新班子新形象新作风”的话题广受关注。近日，《人民日报》上“仲祖文”连发五文，集中聚焦此问题，要求新班子“换好届还要接好棒”，“当好科学发展的带头人”，“始终把一切为了人民幸福作为最大的执政责任和追求。”，“做敢抓善管的表率”，“既要一心干事又要一身干净”。</p>
+			</td>		</tr>	</table>
+	<script type="text/javascript">
+		$('.web, .prog, .rdbms').hide();
+		
+		$('body').keypress(function(event){
+			//fromCharCode() 可接受一个指定的 Unicode 值，然后返回一个字符串。
+			//alert(String.fromCharCode(event.keyCode));
+			//alert(event.keyCode);
+			if(String.fromCharCode(event.keyCode) == 'w' || String.fromCharCode(event.keyCode) == 'W'){
+				
+				$('#webd').hover();
+				
+				alert(event.keyCode);
+			}
+		});
+		
+		
+		
+		$('#webd').hover(function(){
+			$('.web').show();
+			$('.prog, .rdbms').hide();
+			$('#webd').addClass('hover');
+		}, function(){
+			$('#webd').removeClass('hover');
+		});
+		
+		$('a').hover(function(){
+			$(this).addClass('hover');
+		}, function(){
+			$(this).removeClass('hover');
+		});
+	</script>
+</body>
+</html>

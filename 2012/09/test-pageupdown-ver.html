@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-pageannot</title>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{ position:relative;font:12px/1 arial; background:#333;}
+        img{vertical-align:middle;border:0 none;}
+        ul,li{ list-style:none;}
+        .content{ position:relative; width:100%; height:100%; overflow:hidden;}
+        .page-annot a{ position:absolute; text-indent:-9999em;}
+        .list li{ float:left; width:100%;}
+        .web1{ background:url(http://xcb.ggg.cn/web/page1/page1_bg.jpg) center 0 no-repeat;}
+        .web2{ background:url(http://xcb.ggg.cn/web/page2/page2_bg.jpg) center 0 no-repeat;}
+        .web3{ background:url(http://xcb.ggg.cn/web/page3/page3_bg.jpg) center 0 no-repeat;}
+        .left{ float:left;}
+        .second{ width:1000px; height:700px; margin:0 auto;}
+        .web2 .second{ width:1200px;}
+        .web3 .second{ width:1080px;}
+        .first{}
+        .prev,.next{ width:136px; height:68px; display:block; top:50%; left:10px; margin-top:-68px; overflow:hidden; z-index:1; background:url(http://xcb.ggg.cn/images/prev.gif) 0 0 no-repeat;}
+        .next{ left:auto; right:10px; background:url(http://xcb.ggg.cn/images/next.gif) 0 0 no-repeat;}
+        .foot{ height:49px; line-height:49px; background:#0E0C0D;}
+        .ro-hang{position:absolute;right:5px;width:211px;z-index:55;}
+        .ro-menu{}
+        .ro-menu a{ cursor:pointer;}
+        .ro-menu a:hover{}
+        .ro-menu a i{display:block;width:215px;height:60px;text-indent:-9999em;background:url(http://static.ggg.cn/others/ro/images/share-menu.png) 0 0 no-repeat;}
+        .ro-menu .game-info{background-position:0 -90px;}
+        .ro-menu .game-info:hover,.ro-menu a.selected i.game-info{background-position:-223px -90px;}
+        .ro-menu .game-screen{background-position:0 -150px;}
+        .ro-menu .game-screen:hover,.ro-menu a.selected i.game-screen{background-position:-223px -150px;}
+        .ro-menu .back-home{background-position:0 -30px;}
+        .ro-menu .back-home:hover,.ro-menu a.selected i.back-home{background-position:-223px -30px;}
+        .ro-share-wrap{padding-top:10px;}
+        .ro-menu{margin-top:35px;}
+    </style>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<div class="ro-hang">
+    <div class="ro-menu">
+        <a class="selected" href="###"><i class="back-home pngfix">返回首页</i></a>
+        <a class="" href="###" style="left: -108px;"><i class="game-info pngfix">游戏介绍</i></a>
+        <a class="" href="###" style="left: -108px;"><i class="game-screen pngfix">精彩截图</i></a>
+    </div>
+</div>
+<div class="content" style="height:750px;">
+    <ul class="list">
+        <li class="web1">
+            <div class="second">
+                <div><img src="http://xcb.ggg.cn/web/page1/page1_r1_c2.jpg"><img src="http://xcb.ggg.cn/web/page1/page1_r1_c3.jpg"></div>
+                <div><img src="http://xcb.ggg.cn/web/page1/page1_r2_c2.jpg"><img src="http://xcb.ggg.cn/web/page1/page1_r2_c3.jpg"></div>
+                <div><img src="http://xcb.ggg.cn/web/page1/page1_r3_c2.jpg"><img src="http://xcb.ggg.cn/web/page1/page1_r3_c3.jpg"></div>
+                <div><img src="http://xcb.ggg.cn/web/page1/page1_r4_c2.jpg"><img src="http://xcb.ggg.cn/web/page1/page1_r4_c3.jpg"></div>
+                <div><img src="http://xcb.ggg.cn/web/page1/page1_r5_c2.jpg"><img src="http://xcb.ggg.cn/web/page1/page1_r5_c3.jpg"></div>
+                <div><img src="http://xcb.ggg.cn/web/page1/page1_r6_c2.jpg"><img src="http://xcb.ggg.cn/web/page1/page1_r6_c3.jpg"></div>
+            </div>
+            <div class="foot"></div>
+        </li>
+        <li class="web2">
+            <div class="second">
+                <div><img src="http://xcb.ggg.cn/web/page2/page2_r1_c2.jpg"><img src="http://xcb.ggg.cn/web/page2/page2_r1_c4.jpg"></div>
+                <div><img src="http://xcb.ggg.cn/web/page2/page2_r2_c2.jpg"><img src="http://xcb.ggg.cn/web/page2/page2_r2_c4.jpg"></div>
+                <div><img src="http://xcb.ggg.cn/web/page2/page2_r3_c2.jpg"><img src="http://xcb.ggg.cn/web/page2/page2_r3_c3.jpg"><img src="http://xcb.ggg.cn/web/page2/page2_r3_c5.jpg"></div>
+                <div><img src="http://xcb.ggg.cn/web/page2/page2_r4_c2.jpg"><img src="http://xcb.ggg.cn/web/page2/page2_r4_c4.jpg"></div>
+                <div><img src="http://xcb.ggg.cn/web/page2/page2_r5_c2.jpg"><img src="http://xcb.ggg.cn/web/page2/page2_r5_c4.jpg"></div>
+            </div>
+        </li>
+        <li class="web3">
+            <div class="second">
+                <div class="left"><img src="http://xcb.ggg.cn/web/page3/page3_r1_c2.jpg"><br><img src="http://xcb.ggg.cn/web/page3/page3_r4_c2.jpg"></div>
+                <div class="left"><img src="http://xcb.ggg.cn/web/page3/page3_r1_c5.jpg"><br><img src="http://xcb.ggg.cn/web/page3/page3_r3_c5.jpg"></div>
+                <div class="left"><img src="http://xcb.ggg.cn/web/page3/page3_r1_c8.jpg"><br><img src="http://xcb.ggg.cn/web/page3/page3_r2_c8.jpg"></div>
+                <div class="left"><img src="http://xcb.ggg.cn/web/page3/page3_r1_c12.jpg"><br><img src="http://xcb.ggg.cn/web/page3/page3_r2_c12.jpg"></div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="page-annot">
+    <a class="first" href="###">向上</a><a class="prev" href="###" title="上一页">上一页</a><a class="next" href="###" title="下一页">下一页</a>
+</div>
+<script type="text/javascript">
+    (function ($) {
+        var doc         = $(document),
+            viewWidth   = $(window).width(),
+            viewHeight  = $(window).height(),
+            oContent    =  $('.content'),
+            oUl         = oContent.find('ul'),
+            oLi         = oUl.find('li'),
+            len         = oLi.length,
+            contWidth   = oContent.width(),
+            oPrev       = $('.prev'),
+            oNext       = $('.next'),
+            num         = 0;
+
+        oUl.css('width', viewWidth * 4);
+        oLi.css('width', viewWidth);
+
+        oPrev.click(function(){
+            if(!oContent.is(':animated')){
+                oContent.animate({'scrollLeft': '-=' + contWidth}, 'slow', 'linear', function(){
+                    if(num < 0){
+                        num = 0;
+                    }
+                    num--;
+                });
+            }
+        });
+
+        oNext.click(function(){
+            if(!oContent.is(':animated')){
+                oContent.animate({'scrollLeft': '+=' + contWidth}, 'slow', 'linear', function(){
+                    if(num > len - 2){
+                        num = len - 2;
+                    }
+                    num++;
+                });
+            }
+        });
+
+
+        doc.mousemove(function (e){
+            if(e.clientX > viewWidth / 2){ // 显示 next
+                if(num == len - 1 ){
+                    oNext.hide();
+                } else {
+                    oNext.fadeIn();
+                }
+                oPrev.hide();
+            } else { // 显示 prev
+                if(num == 0){
+                    oPrev.hide();
+                } else {
+                    oPrev.fadeIn();
+                }
+                oNext.hide();
+            }
+        });
+
+        $('.ro-menu').find('a').click(function (){
+            var idx = $(this).index();
+            $(this).addClass('selected').siblings().removeClass('selected');
+            if(!oContent.is(':animated')){
+                oContent.animate({'scrollLeft': '+' + contWidth * idx}, 'slow', 'linear');
+            }
+        });
+
+   }(jQuery));
+
+</script>
+
+</body>
+</html>

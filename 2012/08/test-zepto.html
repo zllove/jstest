@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../zepto.js"></script>
+</head>
+<body>
+<p><span>111</span></p>
+<script type="text/javascript">
+//    $('p>span').html('yoho').css({color: 'red'});
+    $('p').bind('click', function(){
+        $('span', this).css({color: 'red'});
+    });
+</script>
+</body>
+</html>

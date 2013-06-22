@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html> 
+    <head> 
+        <title>Mouse Events Example </title> 
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <script type="text/javascript"> 
+            function handleEvent(oEvent) { 
+                var oTextbox = document.getElementById("txt1"); 
+                oEvent = (window.event)?event:oEvent;
+                oTextbox.value += "\n>" + oEvent.type;
+                if(window.event) if(oEvent.toElement) oTextbox.value += "\n    relatedTarget is " + oEvent.toElement.tagName
+                else if(oEvent.relatedTarget) oTextbox.value += "\n    relatedTarget is " + oEvent.relatedTarget.tagName; 
+            } 
+        </script> 
+    </head> 
+    <body> 
+        <p>Use your mouse to click and double click the red square. </p> 
+        <div style="width: 100px; height: 100px; background-color: red" 
+            onmouseover="handleEvent(event)" 
+            onmouseout="handleEvent(event)" 
+            onmousedown="handleEvent(event)" 
+            onmouseup="handleEvent(event)" 
+            onclick="handleEvent(event)" 
+            ondblclick="handleEvent(event)" id="div1"> </div> 
+        <p> <textarea id="txt1" rows="15" cols="50"> </textarea> </p> 
+    </body> 
+</html> 

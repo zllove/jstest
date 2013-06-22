@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+</head>
+<body>
+	<script>
+		/*
+		function Person(name){
+			this.name = name;
+			this.getName = function(){
+				return this.name;
+			}
+		}
+		var p1 = new Person('jikey');
+		var p2 = new Person('jikeytang');
+		console.log(p1 instanceof Person);
+		console.log(p2 instanceof Person);
+		
+		function getName(){
+			return this.name;
+		}
+		function Person(name){
+			this.name = name;
+			this.getName = getName;
+		}
+		var p1 = new Person('jikey');
+		var p2 = new Person('jikeytang');
+		console.log(p1 instanceof Person);
+		console.log(p2 instanceof Person);
+		
+		function Person(name){
+			this.name = name;
+
+			Person.prototype.getName = function(){
+				return this.name;
+			}
+		}
+		
+		var p1 = new Person('jikey');
+		var p2 = new Person('jikeytang');
+		console.log(p1 instanceof Person);
+		console.log(p2 instanceof Person);
+		
+		for(var i=0,a; a=['jikey', 'tang', 'tony', 'name'][i++]; ){
+			//console.log(a);
+		}
+		console.log(['jikey', 'tang'][1]);
+		*/
+		var a = ['jikey', 'tang', 'tony', 'name'];
+		for(var b in a){
+			//console.log(b);
+			console.log(b + ':' + typeof b);
+		}
+	</script>
+</body>
+</html>

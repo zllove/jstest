@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		ul,li{list-style:none;}
+		.last{border:1px solid #ccc;background:#f0f0f0;}
+		ul{width:500px;margin:10px auto;}
+		.b{border:1px solid #ccc;}
+	</style>
+</head>
+<body>
+	<img id="vstar" src="http://www.blueidea.com/common/wwwcaseimg/2011062001.jpg" alt="" />
+	<div id="console"></div>
+	<script type="text/javascript">
+		/*
+		$('#vstar')[0].onmouseover = function(){
+			say('Whee');
+		}
+		function say(text){
+			$('#console').append('<div>' + new Date() + ' ' + text + '</div>');
+		}
+		*/
+		$('#vstar').toggle(function(event){
+			$(event.target).css('opacity', '0.4');
+		}, function(event){
+			$(event.target).css('opacity', '1.0');
+		});
+	</script>
+</body>
+</html>

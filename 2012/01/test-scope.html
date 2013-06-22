@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-scope</title>
+</head>
+<body>
+<h2><a href="http://www.cnblogs.com/TomXu/archive/2012/01/18/2312463.html">http://www.cnblogs.com/TomXu/archive/2012/01/18/2312463.html</a> </h2>
+<script type="text/javascript">
+    /*
+    var x = 10;
+    function foo(){
+        var y = 20;
+        function bar(){
+            return x + y;
+        }
+        return bar;
+    }
+    console.log(foo()());
+    var x = 10;
+    function foo(){
+        var y = 20;
+        alert(x + y);
+    }
+    console.log(foo());
+
+    var x = 10;
+    function foo(){
+        var y = 20;
+        function bar(){
+            var z = 30;
+            alert(x + y + z);
+        }
+        console.log(y);
+        bar();
+    }
+    console.log(foo());
+    
+    function foo2(){
+        var y = 33;
+        console.log('y ' + y);
+    }
+    foo2();
+
+    var x = 10;
+    function foo(){
+        alert(x);
+    }
+    (function(){
+        var x = 20;
+        foo(); // 10
+    })();
+     */
+
+    function foo(){
+        var x = 20;
+        function bar(){
+            alert(x);
+        }
+        bar();
+    }
+    Object.prototype.x = 10;
+    console.log(foo());
+
+</script>
+</body>
+</html>

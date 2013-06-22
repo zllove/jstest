@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-extendfn</title>
+</head>
+<body>
+<script type="text/javascript">
+    function extend(){
+        return function(sb, sp){
+            function F(){ }
+            var sbp, spp = sp.prototype;
+            F.prototype = spp;
+            sbp = sb.prototype = new F();
+            spp.constructor = sb;
+            return sb;
+        }
+    }
+    /*
+//    extend();
+    function foo(){  }
+    function bar(){
+    }
+    bar.prototype = {
+        sayBar: function (){
+            console.log('sayBar');
+        },
+        sayHiBar: function (){
+            console.log('sayHiBar');
+        }
+    }
+    extend(foo, bar);
+    var f = new foo();
+//    f.sayBar();
+//    console.log(foo);
+
+    function foo(){
+        console.log(this.fruit);
+    }
+    var fruit = 'apple';
+    var park = {
+        fruit: 'orange',
+        f: function (){
+        }
+//        foo: foo
+    }
+//    park.f.call(foo);
+    foo.apply(window);
+    foo.apply(park);
+
+    function foo(){
+        if(this === window){
+            console.log('this is foo');
+        }
+    }
+    foo.boo = function (){
+        if(this === foo){
+            console.log('this is foo.boo.');
+        } else if(this === window){
+            console.log('this is window.');
+        }
+    }
+//    foo();
+    foo.boo();
+    foo.boo.call(null);
+     */
+
+    
+    Array.prototype.min = function (){
+        var min = this[0];
+        for(var i=0,len=this.length; i<len; i++){
+            if(this[i] < min){
+                min = this[i];
+            }
+        }
+        return min;
+    }
+//    console.log([2,4,0,1,2].min());
+    var arr = [2,4,0,1,2];
+    var total = 0;
+    for (var i in arr) {
+        if(arr.hasOwnProperty(i)){
+            total += parseInt(arr[i], 10);
+        }
+    }
+    console.log(total);
+
+
+</script>
+</body>
+</html>

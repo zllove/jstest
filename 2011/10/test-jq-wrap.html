@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		ul,li{list-style:none;}
+		.last{border:1px solid #ccc;background:#f0f0f0;}
+		ul{width:500px;margin:10px auto;}
+		.b{border:1px solid #ccc;}
+	</style>
+</head>
+<body>
+	<div class="a">this is a</div>
+	<img id="icon" src="http://www.blueidea.com/common/wwwcaseimg/2011062001.jpg" alt="" />
+	<p class="b"></p>
+	<p class="append_p">但对此次新规的再调整，部分抗议卖家并没有完全买账。</p>
+	<p class="appendto_p"></p>
+	<input type="button" value="append" id="append" />
+	<input type="button" value="appendTo" id="appendTo" />
+	<script type="text/javascript">
+		$('div.a').after('<p>I am replacing the div</p>').remove();
+		$('img').clone().appendTo('p.b');
+		$('#append').click(function(){
+            $('p.append_p').append('<b><a href="http://www.xiaoxiaozi.com/" target="_blank">xiaoxiaozi.com</a></b>');
+        });
+		$('#appendTo').click(function(){
+            $('<b><a href="http://www.xiaoxiaozi.com/" target="_blank">xiaoxiaozi.com</a></b>').appendTo('p.appendto_p');
+        });
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>drag</title>
+</head>
+<body>
+<script type="text/javascript">
+    (function(w) {
+        var drag = function(op) {
+            this.hander = op.hander || null;
+            this.target = op.target || op.hander || null;
+            this.start = op.start || null;
+            this.move = op.move || null;
+            this.end = op.end || null;
+            this.pos = null;
+            this.draging = false;
+            if(this.hander) {
+                addEvent(this.hander, 'mousedown', bind(this, this.dragStart));
+                addEvent(document, 'mousemove', bind(this, this.dragMove));
+                addEvent(document, 'mouseup', bind(this, this.dragEnd));
+            }
+        }
+        drag.prototype = {
+            dragStart: function(e) {
+                this.start && this.start.call(this, e);
+                this.pos = [e.pageX - parseInt(this.target.style.left), e.pageY - parseInt(this.target.style.top)];
+                this.draging = true;
+                e.stop();
+            },
+            dragMove: function(e) {
+                if(this.draging) {
+                    this.target.style.left = e.pageX - this.pos[0] + 'px';
+                    this.target.style.top = e.pageY - this.pos[1] + 'px';
+                    this.move && this.move.call(this, e);
+                }
+            },
+            dragEnd: function(e) {
+                this.draging = false;
+                this.pos = null;
+                this.end && this.end.call(this, e);
+            }
+        };
+
+        function bind(o, fn) {
+            return function(e) {
+                var ev = e || window.event;
+                ev.pageX = e.pageX || ev.clientX;
+                ev.pageY = e.pageY || ev.clientY;
+                ev.stop = e.preventDefault? function() {
+                    e.preventDefault();
+                    e.stopPropagation();
+                } : function() {
+                    ev.cancelBubble = true;
+                    ev.returnValue = false;
+                }
+                fn.call(o, e);
+            }
+        }
+        function addEvent(dom, type, fn) {
+            if(document.addEventListener) {
+                dom.addEventListener(type, fn, false);
+            } else if(document.attachEvent) {
+                dom.attachEvent('on' + type, fn);
+            } else {
+                dom['on' + type] = fn;
+            }
+        }
+        function removeEvent(dom, type, fn) {
+            if(document.removeEventListener) {
+                dom.removeEventListener(type, fn, false);
+            } else if(document.detachEvent) {
+                dom.detachEvent('on' + type, fn);
+            } else {
+                dom['on' + type] = null;
+            }
+        }
+
+        w.drag = drag;
+    })(window);
+</script>
+<div id="box" style="width:400px;height:200px;background:#f0f;"></div>
+<script type="text/javascript">
+    new drag({
+        hander: document.getElementById('box'),
+        start: function(e) {
+            var s = document.getElementById('test');
+            if(!s) {
+                s = document.createElement('div');
+                s.id = 'test';
+                s.style.position = 'absolute';
+                s.style.width = '200px';
+                s.style.height = '200px';
+                s.style.backgroundColor = '#f00';
+                document.body.appendChild(s);
+                this.target = s;
+            } else {
+                s.style.display = 'block';
+            }
+            s.style.left = e.pageX + 'px';
+            s.style.top = e.pageY + 'px';
+        },
+        end: function(e) {
+            this.target.style.display = 'none';
+        }
+    });
+</script>
+</body>
+</html>

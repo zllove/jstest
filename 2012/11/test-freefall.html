@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <script type="text/javascript">
+
+        //我把电脑说明书拿出来看了下 我的显示器1px=1/4000 (m)//由于重力加速度g太他妈大了 速度快得根本看不见了  改成4 所以后面是2*t*t
+        var fastHeigh = window.innerHeight - 80;  //小球初始高度 以小球底部为质点
+        var t = 0;          //时间
+        var v = 0;          //速度
+        var fastTop = 1;     //初始margin-top值
+        var movetime;    //运动时间
+        var height;        //每次弹起的高度
+        function gotodown(obj) {
+            if (parseInt(obj.style.marginTop) >= fastHeigh) {
+                //alert(t);
+                v = 3.6 * t; //每次落地速度损失10%
+                if (v <= 0.00001) {  //无法弹起时候停止
+                    return;
+                }
+                height = (v * (t * 0.9)) - 2 * (t * 0.9) * (t * 0.9);//能上升的高度 m
+                movetime = 0.9 * t;
+                //alert(4000*height+"px");    // px
+                t = 0;
+                gotoUp();  //运动时间
+                //return;
+            } else {
+                setTimeout('down()', 10);
+            }
+        }
+
+        function down() { //向下加速
+            t = t + 0.01;
+            if (fastTop + (t * t * 2) * 4000 >= fastHeigh) {
+                obj.style.marginTop = fastHeigh + "px";
+            } else {
+                obj.style.marginTop = (fastTop + (t * t * 2) * 4000) + "px";
+            }
+            gotodown(obj);
+        }
+
+        function gotoUp() {
+            var maxheight = (window.innerHeight - parseInt(obj.style.marginTop)) / 4000;
+            if (t >= movetime || maxheight >= height) {
+                //alert(t);
+                //retuen;
+                fastTop = parseInt(obj.style.marginTop);
+                v = 0;
+                t = 0;
+                gotodown(obj);
+            } else {
+                setTimeout('up()', 10);
+            }
+        }
+        function up() {//向上减速
+            t = t + 0.01;
+            obj.style.marginTop = window.innerHeight - (v * t - 2 * t * t) * 4000 + "px";
+            gotoUp();
+        }
+
+
+        window.onload = function () {
+            obj = document.getElementById("d");
+            gotodown(obj);
+        }
+
+    </script>
+    <style type="text/css">
+        body{ padding:0; margin:0; }
+    </style>
+</head>
+
+<body>
+<div class="myimg" id="d" style="height:80px; width:80px;/* border:1px solid #000; */position:absolute; background:#f1f1f1; margin-top:1px;"></div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<style type="text/css">
+		select{width:150px;height:100px;}
+	</style>
+    <script type="text/javascript">
+    	function $d(){ return document.getElementById(arguments[0])};
+		
+    function selectMove(selectSrc, selectDes) {
+		var varitem = new Option();
+		for(var i=selectSrc.options.length-1; i>=0; i--){
+			if(selectSrc.options[i].selected == true){
+				selectDes.options.add(new Option(selectSrc.options[i].text, selectSrc.options[i].value));
+				selectSrc.remove(i);
+			}
+		}
+    }
+    </script>
+</head>
+<body>
+<select multiple="multiple" id="select1" size="10">
+	<option value="add">添加</option>
+	<option value="add2">选择</option>
+	<option value="add3">反选</option>
+	<option value="add4">打印</option>
+	<option value="add5">扫描</option>
+</select>
+<input type="button" value="<" onclick="selectMove(document.getElementById('select2'),document.getElementById('select1'))"/>
+<input type="button" value=">" onclick="selectMove(document.getElementById('select1'),document.getElementById('select2'))"/>
+<input type="button" value="<<"/>
+<input type="button" value=">>"/>
+<select multiple="multiple" id="select2" size="10"></select>
+</body>
+</html>

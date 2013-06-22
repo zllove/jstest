@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-keydown</title>
+    <style type="text/css">
+        ul{list-style:none; margin: 0; padding:0;}
+        ul li{line-height:20px; border-bottom:1px solid #ccc;cursor:pointer; margin:1px 0; font-size:12px; text-indent:5px;}
+        ul li.over{ background:#36c; color:#fff;}
+        .list{ display:none;position:absolute;width:126px;left:0;top:22px;border:1px solid #ccc; background:#fff; }
+    </style>
+</head>
+<body>
+<form action="">
+    <input type="text" name="" onkeydown="checkForm()" id=""> <input type="button" value="按钮">
+</form>
+<script type="text/javascript">
+    function checkForm(){
+        if(event.keyCode == 13){
+            event.keyCode = 9;
+        }
+    }
+
+    function noNumbers(e){
+        var keynum = null, keychar = null;
+        keynum = window.event ? e.keyCode : e.which;
+        keychar = String.fromCharCode(keynum);
+        console.log(keynum + ' : ' + keychar);
+    }
+</script>
+<input type="text" name="" id="" onkeydown="return noNumbers(event)">
+<div onkeydown="alert('div')" tabindex="0"> onkeydown</div>
+<div>null empty div.</div>
+<script type="text/javascript">
+    var hogo = {
+        createHtml: function(target, config){
+            target = target || 'div';
+            config = config || {};
+            var tag = document.createElement(target);
+
+            for (var p in config) {
+                switch(p){
+                    case 'style':
+                        tag.style.cssText = config[p];
+                        break;
+                    case 'class':
+                    case 'cls':
+                        tag.className = config[p];
+                        break;
+                    case 'html':
+                        if(typeof config[p] == 'object'){
+                            tag.appendChild(config[p]);
+                        } else {
+                            tag.innerHTML = config[p];
+                        }
+//                        tag.innerHTML = config[p];
+                        break;
+                    default:
+                        tag.setAttribute(p, config[p]);
+                }
+            }
+
+            //此处try为释放tag引用，否则创建的DOM永远无法被释放
+            try{
+                return tag;
+            } finally {
+                tag = null;
+            }
+        },
+        addEvent: function(ele, type, handler){
+            if(ele.addEventListener){
+                ele.addEventListener(type, handler, false);
+            } else if(ele.attachEvent){
+                ele.attachEvent('on' + type, handler);
+            } else {
+                ele['on' + type] = handler;
+            }
+        },
+        removeEvent: function(ele, type, handler){
+            if(ele.removeEventListener){
+                ele.removeEventListener(type, handler, false);
+            } else if(ele.detachEvent){
+                ele.detachEvent('on' + type, handler);
+            } else {
+                ele['on' + type] = null;
+            }
+        },
+        preventDefault: function(event) {
+            if (event.preventDefault) {
+                event.preventDefault();
+            } else {
+                event.returnValue = false;
+            }
+
+        }
+    };
+
+
+    var oUl = document.createElement('ul');
+    var oLi = null;
+    var handler = {
+        over: function(e){
+            e = e || window.event;
+            var target = e.target || e.srcElement;
+            target.className = 'over';
+        },
+        out: function(e){
+            e = e || window.event;
+            var target = e.target || e.srcElement;
+            target.className = '';
+        },
+        down: function(e){
+            e = e || window.event;
+            var key = e.which ? e.which : e.keyCode;
+            var target = e.target || e.srcElement;
+            switch(key){
+                case 9: // tab
+                    return true;
+                    break;
+                case 13: // enter
+                    clearSelect();
+                    break;
+                case 27: // esc
+                    clearSelect();
+                    break;
+                case 33: // page up
+                    keyDownHandler();
+                    break;
+                case 34: // page down
+                    keyDownHandler();
+                    break;
+                case 35: // end
+                    keyDownHandler();
+                    break;
+                case 36: // home
+                    keyDownHandler();
+                    break;
+                case 38: // up
+                    target.className = '';
+                    hogo.preventDefault(e);
+                    keyDownHandler();
+                    break;
+                case 40: // down
+                    target.className = '';
+                    hogo.preventDefault(e);
+                    keyDownHandler();
+                    break;
+                default:
+                    hogo.preventDefault(e);
+                    break;
+            }
+        }
+    }
+    for(var i=0,len=10; i<len; i++){
+        oLi = hogo.createHtml('li', {
+            html: i
+//            'tabindex': i
+        });
+        oUl.appendChild(oLi);
+        oLi.onkeydown = function(event){
+            console.log(event);
+            handler.down(event);
+        }
+//        hogo.addEvent(oLi, 'mouseover', handler.over);
+//        hogo.addEvent(oLi, 'mouseout', handler.out);
+    }
+//        hogo.addEvent(oUl, 'keydown', handler.down);
+    document.body.appendChild(oUl);
+
+    function bar(){
+        console.log(2);
+    }
+    function foo(){
+        console.log('1');
+    }
+
+    function keyDownHandler(){
+        console.log(1);
+    }
+
+</script>
+</body>
+</html>

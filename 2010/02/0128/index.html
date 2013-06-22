@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Untitled Document</title>
+<style type="text/css">
+body{font-size:12px;}
+.peos{width:60px;height:20px;text-align:center;line-height:20px;float:left;border:1px solid #ccc;background:#fff;padding:2px;margin:2px;}
+a.close{ width:10px;height:20px;margin-left:5px;float:right;text-indent:-9999em;overflow:hidden;background:url(../../images/close.png) no-repeat center center;cursor:pointer;}
+label{float:left;border:1px solid #ccc;margin:0 5px;}
+label input{vertical-align:middle;}
+.clear{clear:both;}
+.inputtext{}
+.activediv{width:500px;padding:2px 0;line-height:30px;border:1px solid #bbb;}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var oTxt = document.getElementById('cValue');
+	var oMem = document.getElementById('member');
+	var oRadio = oMem.getElementsByTagName('input');
+	for(var i=0;i<oRadio.length;i++){
+		oRadio[i].onclick = function(){
+			//alert(this.nextSibling.nodeValue);
+			oTxt.innerHTML += '<div class="peos"><a href="javascript:///" class="close" onclick="removeObj(this)">移除</a>' + this.nextSibling.nodeValue + '</div>';
+		}
+	}	
+}
+
+function removeObj(element){
+	var oTar = element.parentNode.parentNode;
+	if(oTar){
+		oTar.removeChild(element.parentNode);
+	}
+}
+</script>
+</head>
+<body>
+<div id="member">
+	<label for="m01"><input type="radio" name="mb" id="m01" />张三丰</label>
+    <label for="m02"><input type="radio" name="mb" id="m02" />李四光</label>
+    <label for="m03"><input type="radio" name="mb" id="m03" />赵强荧</label>
+</div>
+<div class="clear"></div><br />
+<!--<input type="submit" id="cBut" value="复制" /><br />-->
+<div class="activediv">
+	<div style="float:left;" id="cValue" ></div>
+    <input type="text" style="border:none;float:left;" name="" id="" />
+</div>    
+
+</body>
+</html>

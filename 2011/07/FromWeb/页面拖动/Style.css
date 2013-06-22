@@ -1,0 +1,85 @@
+body
+{
+	text-align:center;
+	font-size:12px;
+}
+#header
+{
+	margin:10px;
+	padding:10px;
+	text-align:left;
+	border:solid 5px #FCFCFC;
+}
+#header p
+{
+	margin:0px;
+}
+#container
+{
+	width:800px;
+	margin:0px auto;
+	text-align:left;
+}
+ul#tabs,ul#tabs li
+{
+	list-style:none;
+	margin:0px;
+	padding:0px;
+}
+ul#tabs li
+{
+	float:left;
+	padding:5px;
+	margin-left:10px;
+	border:solid 1px #CCCCCC;
+	background:#FCFCFC;
+	cursor:pointer;
+}
+ul#tabs li.tabSelected
+{
+	background:#CCCCCC;
+	color:White;
+}
+ul#tabs li.tabHover
+{
+	background:#999999;
+	color:White;
+}
+#pages
+{
+	clear:both;
+}
+.columns
+{
+	clear:both;
+	display:none;
+}
+.column
+{
+	width:200px;border:solid 1px #CCCCCC;background:#FCFCFC;padding:0px;float:left;margin:10px;
+}
+.item
+{
+	text-align:center;padding:0px;margin:10px;border:solid 1px #CCCCCC;background:white;width:auto;
+}
+.item h3
+{
+	margin:0px;height:20px;border-bottom:solid 1px #CCCCCC;color:white;cursor:move;
+}
+
+.page1
+{
+	background-color:Red;
+}
+.page2
+{
+	background-color:Blue;
+}
+.page3
+{
+	background-color:Black;
+}
+.page4
+{
+	background-color:#CCCCCC;
+}

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-jq-offset</title>
+	<script type="text/javascript" src="../jquery-1.8.2.js"></script>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		body{font-size:12px;background:#fff;}
+		.parent{width:600px;height:300px;margin-left:55px;padding:22px;border:1px solid #ccc;}
+		.child{background-color:#666;width:200px;height:200px;color:#fff;}
+		.copyright{position:absolute;}
+	</style>
+</head>
+<body>
+<div class="parent" style="float:right">
+    父容器的position是默认值，也就是static,子容器的position为默认值，也是static,这个时候，offset和position值相同<br><br><br>
+    <div class="child"></div>
+</div>
+<div style="clear:both"></div>
+<br>
+<div class="parent" style="position:relative">
+    父容器的position是相对定位，也就是ralative,子容器的position为默认值，也是static,这个时候，offset和position值不同
+    <div class="child"></div>
+</div>
+<br>
+<div style="position:absolute;padding:15px;border:3px solid #ff0000;">
+    <div class="parent">
+        父容器的position是绝对定位，也就是absolute,子容器的position为默认值，也是static,这个时候，offset和position值不同
+        <div class="child"></div>
+    </div>
+</div>
+<div class="copyright"><a href="http://www.playgoogle.com">©playgoogle.com</a></div>
+
+	<script type="text/javascript">
+		$('.child').each(function () {
+			var text = 'position().left=' + $(this).position().left;
+			text += '<br>position().top=' + $(this).position().top;
+			text += '<br>offset().left=' + $(this).offset().left;
+			text += '<br>offset().top=' + $(this).offset().top;
+			text += '<br>parent of offset().top=' + $(this).parents('.parent').offset().top;
+			text += '<br>parent of offset().left=' + $(this).parents('.parent').offset().left;
+			$(this).html(text);
+		});
+
+	</script>
+</body>
+</html>

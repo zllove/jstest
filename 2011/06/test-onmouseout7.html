@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title></title>
+</head>
+<body>
+<div id="test" style="border: 1px solid green; position: absolute; left: 100px; top: 10px; width: 100px; height: 100px; background: yellow;">
+     <div>test</div>  
+     dddd
+</div>
+<script type="text/javascript">
+<!--
+function withinElement(event, elem) {
+        event.target = event.target ? event.target : event.srcElement;
+        if ( !event.relatedTarget && event.fromElement )
+            event.relatedTarget = event.fromElement == event.target ? event.toElement : event.fromElement;
+        var parent = event.relatedTarget;
+        while ( parent && parent != elem ) try { parent = parent.parentNode; } catch(error) { parent = elem; }
+        return parent == elem;
+}
+var oDiv = document.getElementById("test")
+oDiv.onmouseover = function(e){
+    e = event || e;
+   if(!withinElement(e, this)){
+    alert("over");
+   }
+}
+oDiv.onmouseout = function(e){
+    e = event || e;
+   if(!withinElement(e, this)){
+    alert("out");
+   }
+}
+//-->
+</script>
+</body>
+</html>

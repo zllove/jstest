@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{font:12px/1 arial;background:#fff;}
+        ul,li{list-style:none;}
+        img{ border:none;}
+        .myFocus{ position:relative; width:800px; height:300px; overflow:hidden;}
+        .myFocus ul{width:100%; height:300px;}
+        .myFocus ul li{ float:left;}
+        .focusTab{ position:absolute;right:5px; bottom:5px; z-index:1000; display:inline-block; height:20px;}
+        .focusTab a{ display:inline-block; width:20px; text-align:center; line-height:20px;background:#D4D4D4;color:#666; text-decoration:none; margin:0 2px;}
+        .focusTab a.cur{background:#f00;}
+        .focusTitle{width:100%; height:30px; line-height:30px; position:absolute;left:0; bottom:0px;color:#fff;background:#000;filter:alpha(opacity = 70); -moz-opacity:0.7; opacity:0.7; z-index:999; text-indent:10px; }
+    </style>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<h3>焦点图1</h3>
+<div id="focus1" class="myFocus">
+    <ul>
+        <li><a href="#" title="第一张图片"><img src="http://img2081.poco.cn/mypoco/myphoto/20111204/13/64539193201112041337575970020143720_044.jpg" alt=""/></a></li>
+        <li><a href="#" title="第二张图片"><img src="http://img2081.poco.cn/mypoco/myphoto/20111204/13/64539193201112041337575970020143720_078.jpg" alt=""/></a></li>
+        <li><a href="#" title="第三张图片"><img src="http://img2081.poco.cn/mypoco/myphoto/20111204/13/64539193201112041337575970020143720_077.jpg" alt=""/></a></li>
+        <li><a href="#" title="第四张图片"><img src="http://img2081.poco.cn/mypoco/myphoto/20111204/13/64539193201112041337575970020143720_073.jpg" alt=""/></a></li>
+    </ul>
+</div>
+<script type="text/javascript">
+(function($){
+    $.fn.myFocus = function(options){
+        var defaults = {
+                width: 960,
+                height: 300,
+                animation: 'defaults',
+                times: 5000
+            },
+            opts = $.extend({},defaults, options),
+            setId = [];
+
+        this.each(function(){
+            var that = $(this),
+                ul = that.find('ul'),
+                li = ul.find('li'),
+                len = li.size(),
+                firstTitle = li.eq(0).find('a').attr('title'),
+                tab = '';
+
+            li.css({width: opts.width, height: opts.height});
+
+            tab = '<span class="focusTab">';
+            for(var i=0; i<len; i++){
+                if(i == 0){
+                    tab += '<a href="#">' + (i + 1) + '</a>';
+                } else {
+                    tab += '<a href="#">' + (i + 1) + '</a>';
+                }
+            }
+            tab += '</span>';
+            $(this).append(tab).append('<p class="focusTitle">' + firstTitle + '</p>');
+            li.each(function(i){
+                $(this).data('index', i);
+            });
+            that.data('currFocus', 0);
+
+
+        });
+    }
+
+    $("#focus1").myFocus({
+        width :680,
+        height:320,
+        times :4000
+    });
+
+}(jQuery));
+</script>
+</body>
+</html>

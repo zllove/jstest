@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<a href="#">哈哈</a>
+<script type="text/javascript">
+    var message = "left";
+    $("a").bind("click", { msg: message }, function(e) {
+        alert(e.data.msg);
+        return false;
+    });
+
+    var message = "right";
+    $("a").bind("contextmenu", { msg: message }, function(e) {
+        alert(e.data.msg);
+        return false;
+    });
+
+</script>
+</body>
+</html>

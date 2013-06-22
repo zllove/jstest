@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Document</title>
+        <style>
+		
+		</style>
+		<script>
+		
+		</script>
+	</head>
+	<body>
+		<div id="div1">This is div1</div>
+		<script type="text/javascript">
+			var oDiv = document.getElementById('div1');
+			/*
+			function fn(){
+				alert('tak');
+			}
+			function fn2(){
+				alert('tab2');
+			}
+			oDiv.onclick = function(){
+				var oEvent = arguments[0];
+				alert(oEvent);
+			}
+			if(!+'\v1'){
+				oDiv.attachEvent('onclick', fn);
+				oDiv.attachEvent('onclick', fn2);
+			} else {
+				oDiv.addEventListener('click', fn, false);
+				oDiv.addEventListener('click', fn2, false);
+			}
+			//oDiv.removeEventListener('click', fn, false);
+			function handeEvent(oEvent){
+				if(oEvent.type == 'click'){
+					alert('Clicked');
+				}
+				if(oEvent.type == 'mouseover'){
+					alert('Mouseover');
+				}
+			}
+			oDiv.onclick = handeEvent;
+			oDiv.onmouseover = handeEvent;
+			*/
+			var bShift = oEvent.shiftKey;
+			var bAlt = oEvent.altKey;
+			var bCtrl = oEvent.ctrlKey;
+			
+			var iClientX = oEvent.clientX;
+			var iClientY = oEvent.clientY;
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

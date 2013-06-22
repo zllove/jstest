@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>左侧导航</title>
+<link href="index.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+window.onload = function(){
+	toolsListPosition();//设定工具栏展开区域的位置
+	toolsHover();//前端工具
+}
+
+//设定工具栏展开区域的位置
+function toolsListPosition(){
+	var obj = document.getElementById("toolsList").getElementsByTagName("dl");
+	var num = 0;
+	for(var i=0; i<obj.length; i++){
+		num = i*33; //33是 toolsBar 里面的 h3 高度
+		obj[i].setAttribute("style","top:"+ num +"px;");
+	}
+}
+
+//前端工具
+function toolsHover(){
+	var obj = document.getElementById("toolsBar").getElementsByTagName("dd");
+	var _obj = document.getElementById("toolsList").getElementsByTagName("dl");
+	//obj 与 _obj 的数组长度应该相等
+	
+	for(var i=0; i<obj.length; i++){
+		(function(){
+			var t=i;
+			//第一级菜单事件 鼠标移入，移出
+			obj[t].onmouseover=function (){
+				obj[t].setAttribute("class", "active");
+				_obj[t].style.display = "block";
+			}
+			obj[t].onmouseout=function (){
+				obj[t].setAttribute("class", "");
+				_obj[t].style.display = "none";
+			}
+			
+			//第二级菜单事件 鼠标移入，移出
+			_obj[t].onmouseover=function (){
+				obj[t].setAttribute("class", "active");
+				_obj[t].style.display = "block";
+			}
+			_obj[t].onmouseout=function (){
+				obj[t].setAttribute("class", "");
+				_obj[t].style.display = "none";
+			}
+			
+		})()
+		/*
+		//与上面的写法运行结果是一样的
+		(function(i){
+			obj[i].onmouseover=function (){
+				alert(i);
+			}
+		})(i)
+		*/
+	}
+}
+</script>
+</head>
+<body>
+<div id="main">
+	<div id="leftBar">
+		<strong id="toolsTitle">便携工具栏</strong>
+		<dl id="toolsBar">
+			<dd><h3><a href="#">我的前端</a></h3></dd>
+			<dd><h3><a href="#">互动社区</a></h3></dd>
+			<dd><h3><a href="#">前端工具</a></h3></dd>
+			<dd><h3><a href="#">前端酷站</a></h3></dd>
+			<dd><h3><a href="#">简历中心</a></h3></dd>
+			<dd><h3><a href="#">名企招聘</a></h3></dd>
+			<dd><h3><a href="#">前端团购</a></h3></dd>
+			<dd><h3><a href="#">前端培训</a></h3></dd>
+			<dd><h3><a href="#">厘米服务</a></h3></dd>		
+		</dl>
+		<div id="toolsList">
+			<dl>
+				<dt>我的前端</dt>
+				<dd>
+					<a href="#">我的W3C</a>
+					<a href="#">我的简历</a>
+					<a href="#">个人主页</a>
+					<a href="#">我的帖子</a>
+					<a href="#">我的笔记</a>
+					<a href="#">我的作品</a>
+					<a href="#">我的收藏</a>
+					<a href="#">我的分享</a>
+					<a href="#">我是明星</a>
+					<a href="#">我的好友</a>
+					<a href="#">修改头像</a>
+					<a href="#">个人资料</a>
+					<a href="#">修改密码</a>
+				</dd>
+			</dl>
+			<dl>
+				<dt>互动社区</dt>
+				<dd>
+					<a href="#">自由交流</a>
+					<a href="#">晒晒作品</a>
+					<a href="#">前端讨论</a>		
+					<a href="#">我的面试</a>
+					<a href="#">xHTML+CSS</a>
+					<a href="#">HTML5/CSS3</a>
+					<a href="#">JavaScript</a>
+					<a href="#">jQuery</a>
+				</dd>
+			</dl>
+			<dl>
+				<dt>前端工具</dt>
+				<dd>					
+					<a href="#">Mootools</a>		
+					<a href="#">Yahoo Yui</a>
+					<a href="#">ProtoType</a>
+				</dd>
+			</dl>
+			<dl>
+				<dt>前端酷站</dt>
+				<dd>		
+					<a href="#">精彩酷站</a>
+					<a href="#">酷站推荐</a>
+					<a href="#">人气酷站</a>
+				</dd>
+			</dl>
+			<dl>
+				<dt>简历中心</dt>		
+				<dd>
+					<a href="#">我的简历</a>
+					<a href="#">求职意向</a>
+					<a href="#">预览简历</a>
+				</dd>
+			</dl>
+			<dl>		
+				<dt>名企招聘</dt>
+				<dd>
+					<a href="#">企业入驻</a>
+					<a href="#">发布招聘</a>
+				</dd>
+			</dl>
+			<dl>		
+				<dt>前端团购</dt>
+				<dd>
+					<a href="#4" target="_blank">我希望团到</a>		
+					<a href="#" target="_blank">提意见说想法</a>
+					<a href="#" target="_blank">团购广播</a>
+				</dd>
+			</dl>
+			<dl>
+				<dt>金牌课程</dt>
+				<dd>		
+					<a href="#" target="_blank">CSS标准班</a>
+					<a href="#" target="_blank">CSS加强班</a>
+					<a href="#" target="_blank">CSS零基础班</a>
+				</dd>
+				<dt class="mt15px">服务中心</dt>
+				<dd>
+					<a href="#" target="_blank">职业生涯</a>		
+					<a href="#" target="_blank">优秀学员</a>
+					<strong><a href="#" target="_blank" class="red">立即报名</a></strong>
+					<strong><a href="#" target="_blank" class="red">立即咨询</a></strong>
+				</dd>
+			</dl>
+			<dl>
+				<dt>厘米服务</dt>
+				<dd>
+					<a href="#" target="_blank">前端培训</a>
+					<a href="#" target="_blank">P2H服务</a>
+					<a href="#">专业解答</a>
+					<a href="#">简历指导</a>
+				</dd>
+			</dl>
+		</div>
+	</div>
+	
+	<div id="content">
+		content
+	</div>
+	
+	<div id="sideBar">
+		sideBar
+	</div>
+	
+</div>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+<h3><a href="http://www.cnblogs.com/rubylouvre/archive/2009/11/03/1594911.html">正则学习笔记1-6</a></h3>
+<div id="a"></div>
+<script type="text/javascript">
+    /*
+    var myStr="<p> <br>我爱北京天安门</p>";
+    var end = myStr.replace(/<[^>]*>/g, '');
+    console.log(end);
+
+    var str = 'BasdfasdfBasdasdfBasasdddd',
+        num = 1,
+        reg = /B/g;
+    str = str.replace(reg, function(){
+        return 'C' + num++;
+    });
+    console.log(str);
+
+    var reg = /\d+/,
+        str = '司徒正美1234567890';
+    console.log(str.replace(reg, '0'));
+    var reg2 = /\d+?/;
+    console.log(str.replace(reg2, '0'));
+
+    var str = 'For more information, see Chapter 3.4.5.1',
+        reg1 = /chapter \d+(\.\d)* /i,
+        reg2 = /(chapter \d+(\.\d)*)/i,
+        res1 = str.match(reg1),
+        res2 = str.match(reg2);
+
+    alert(res2);
+    console.log(res1);
+    console.log(res2);
+
+    var str = '124weqffadsfasdfadsfewrffsd<img src ="images/artery-3_imags/top-3.gif" width="403" height="120">asfdasfewfwqefew',
+        re = /src\s*=\s*[^\s]+/gi;
+
+    console.log(str.match(re));
+
+    var str = '<test1>=<test2>+<test3>';
+    var reg = /[^<]+?(?=>)/ig;
+    console.log(str.match(reg));
+
+    var str = '$aa = $c + $d + $e',
+        re = /(?:\=|\+)\s*\$([^\s\+]*)/ig;
+
+    while(re.exec(str)){
+        console.log(RegExp.$1);
+    }
+
+    var css = 'width:5px;height:8px;';
+    console.log(css.replace(/(width:)[^;]+/, '$16px'));
+    console.log(css.replace(/(width:)[^:]+/, '$16px'));
+     */
+    var s = '<table border=0 cellpadding=0 cellspacing=0 width="100%" height=100 >no=sss';
+    var s = /<(\w+)(.+)>(.+)/.exec(s);
+    console.log(s);
+    s[2] = s[2].replace(/=([^\s|>]*)/ig, '=<font color=#ff00ff>$1</font>');
+    a.innerHTML = '<' + s[1] + s[2] + '>' + s[3];
+
+
+
+
+</script>
+</body>
+</html>

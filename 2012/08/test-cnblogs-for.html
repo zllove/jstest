@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<h2><a href="http://www.cnblogs.com/lixlib/archive/2012/07/31/js-for-loop.html">for循环</a></h2>
+<div id="nod">
+    <div>aaa</div>
+    <div>bbb</div>
+    <p id="p"><span>11</span><em>222</em></p>
+    <p>222</p>
+    <p>333</p>
+    <p>444</p>
+</div>
+<span><em>111</em></span>
+<script type="text/javascript">
+    /*
+    var i = 1;
+    for(; i<10; console.log(i++));
+    var arr = ['jikey', 'tang', 'name'];
+    for(var i= 0, a; a=arr[i++];){
+        console.log(a);
+    }
+     */
+    function sibling(elem){
+        var r = [],
+            n = elem.parentNode.firstChild;
+
+        for(; n; n = n.nextSibling){
+            if(n.nodeType === 1 && n !== elem){
+                r.push(n);
+            }
+        }
+        return r;
+    }
+    var a = sibling(document.getElementById('p'));
+//    console.log(a);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test</title>
+</head>
+<body>
+<select name="" id="select" onchange="selectinput(this)">
+    <option value="嘉定">嘉定1</option>
+    <option value="闸北">闸北1</option>
+    <option value="浦东新区">浦东新区1</option>
+</select>
+<script type="text/javascript">
+    function selectinput(choose){
+        console.log(choose.value);
+//        console.log(choose.options[choose.selectedIndex].text);
+    }
+    var select = document.getElementById('select');
+    select.value = '闸北';
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-01</title>
+</head>
+<body>
+<script type="text/javascript">
+	function loadScript (url, callback) {
+		var script = document.createElement('script');
+		script.type = 'text/javascript';
+
+		if (script.readyState) {
+			script.onreadystatechange = function(){
+				if (script.loaded == 'loaded' && script.readystate == 'complete') {
+					script.onreadystatechange = null;
+					callback();
+				};
+			}
+		} else {
+			script.onload = function(){
+				callback();
+			}
+		}
+		script.src = url;
+		document.getElementsByTagName('head')[0].appendChild(script);
+	}
+
+	loadScript('http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js', function(){
+		// alert(1);
+	});
+
+	
+
+</script>	
+</body>
+</html>

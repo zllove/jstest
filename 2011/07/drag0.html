@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>Drag and Drop</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <style type="text/css">
+        body,h1,p{margin:0;padding:0;font-size:12px;}
+        #drag{width:200px;height:150px;background:#efefef;border:1px solid #000;z-index:999;position:absolute;display:none;}
+        #drag h1{height:25px;line-height:25px;border-bottom:1px solid #ccc;font-size:14px;background:#000;text-indent:1em;cursor:move;color:#fff;}
+        #drag h1 .close{float:right;cursor:pointer;margin-right:10px;font-size:12px;}
+        #drag p{padding:10px;}
+        #p{display:block;color:#000;padding:10px;}
+        #clickTarget{width:300px;margin:0 auto;padding-top:30px;text-align:center;}
+        #mask{position:absolute;z-index:1;background:#33393c;filter:alpha(opacity=60);opacity:0.6;display:none;}
+    </style>
+</head>
+<body>
+    <div id="mask"></div>
+    <p>拖动可能选中文本</p>
+    <p id="clickTarget"><a href="javascript:void(0)">猛击我</a></p>
+    <div id="drag">
+        <h1><span class="close" id="closeDrag">关闭</span>这是标题</h1>
+        <p>This is drag!</p>
+        <span id="p"></span>
+    </div>
+    <script type="text/javascript">
+        var posx, posy,
+            drag = document.getElementById('drag'),
+            title = drag.getElementsByTagName('h1')[0],
+            clickTarget = document.getElementById('clickTarget'),
+            closeDrag = document.getElementById('closeDrag'),
+            mask = document.getElementById('mask');
+        title.onmousedown = function(e){
+            if(!e){ e = window.event; }
+            posx = e.clientX - parseInt(drag.style.left);
+            posy = e.clientY - parseInt(drag.style.top);
+            document.onmousemove = mousemove;
+            document.getElementById('p').innerHTML = 'x= ' + posx + '<br />y= ' + posy;
+        }
+        title.onselectstart = function() {
+            return (false);
+        }
+        document.onmouseup = function(){
+            document.onmousemove = null;
+        }
+        function mousemove(ev){
+            if(!ev){ ev = window.event; }
+            drag.style.left = (ev.clientX - posx) + 'px'
+            drag.style.top = (ev.clientY - posy) + 'px'
+        }
+        clickTarget.onclick = function(e){
+            if(!e){ e = window.event; }
+            drag.style.display = 'block';
+            drag.style.left = (document.body.clientWidth - drag.offsetWidth)/2 + 'px';
+            drag.style.top = (document.documentElement.clientHeight - drag.offsetHeight)/2 - 50 + 'px';
+            mask.style.display = 'block';
+            mask.style.width = document.documentElement.clientWidth + 'px';
+            mask.style.height = document.documentElement.clientHeight + 'px';
+            //alert(document.body.scrollHeight + '\n height: ' + document.documentElement.scrollHeight);
+        }
+        closeDrag.onclick = function(){
+            drag.style.display = 'none';
+            mask.style.display = 'none';
+        }
+        document.write("网页可见区高度:"+document.body.clientHeight+"px;<br />")
+        document.write("网页可见区宽度:"+document.body.clientWidth+"px;<br />");
+        document.write("网页正文全文高:"+document.body.scrollHeight+"px;<br />");
+    </script>        
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Document</title>
+		<style>
+			a.hover{ display:none;}
+			.link a.hover{ display:inline;}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+	<body>
+		<div onmouseover="this.className='link'" onmouseout="this.className=''">
+				<a href="#">链接名称</a> <a class="hover" href="#">收藏</a>
+		</div>
+		
+		<li>
+				<a onmouseover="this.nextSibling.style.display='inline'" href="#">链接名称</a><a href="#" style="display:none">收藏</a>
+		</li>
+	</body>
+</html>

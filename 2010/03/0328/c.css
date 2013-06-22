@@ -1,0 +1,5 @@
+@charset "utf-8";
+*{margin:0px;padding:0px;font-size:12px;}
+#nav li{float:left; list-style:none;}
+#nav li a{color:#000;text-decoration:none;display:block;width:100px;height:25px;line-height:25px;text-align:center;background:#ececec;margin-left:2px;}}
+#nav li a:hover{background:#999;color:#eee;}

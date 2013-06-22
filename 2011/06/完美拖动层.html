@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>完美拖拽</title>
+<style>
+*{margin:0;padding:0;}
+#zhezhao{width:100%;height:100%;background:#000;filter:alpha(opacity:30);opacity:0.3;z-index:9999;position:absolute;top:0;left:0;display:none;}
+#div2{width:200px;height:200px;display:block;z-index:99999;overflow:hidden;position:relative;left:50%;top:80px;background:#EEEEEE;border:1px solid #f00;}
+#div1{width:15px;height:15px;background:#99CC00;position:absolute;right:0px;bottom:0px;cursor:nw-resize;overflow:hidden;font-size:12px;text-align:center;line-height:15px;color:#fff;float:right;z-index:3;}
+#right{width:15px;height:100%;background:#f00;float:right;position:absolute;right:0;top:0;cursor:e-resize;overflow:hidden;filter:alpha(opacity:0);opacity:0;z-index:1;}
+#bottom{width:100%;height:15px;background:#f00;position:absolute;left:0;bottom:0;cursor:n-resize;overflow:hidden;filter:alpha(opacity:0);opacity:0;z-index:1;}
+#div2 p{padding:10px;line-height:24px;font-size:13px;text-indent:24px;color:#996600;}
+#div2 h2{width:100%;height:25px;line-height:25px;font-size:14px;background:#CC9900;color:#FFFFFF;text-indent:15px;cursor:move;overflow:hidden;position:relative;z-index:9999;}
+#close{float:right;font-weight:normal;font-size:12px;padding-right:10px;cursor:pointer;display:block;text-indent:0;}
+</style>
+<script type="text/javascript">
+window.onload=function()
+{
+	var oDiv        = document.getElementById("div1"); //右下角拖动按钮
+	var oDiv2       = document.getElementById("div2"); //最外层容器
+	var zhezhao     = document.getElementById("zhezhao"); //遮罩层
+	var h2          = oDiv2.getElementsByTagName("h2")[0]; //拖拽手柄
+	var right       = document.getElementById("right"); //右拖拽手柄
+	var bottom      = document.getElementById("bottom"); //底拖拽手柄
+	var sClose      = document.getElementById("close"); //关闭按钮
+	var mouseStart  = {}; //mouseStart 对象
+	var divStart    = {}; //divStart 对象
+	var rightStart  = {}; //rightStart 对象
+	var bottomStart = {}; //bottomStart 对象
+	
+	/**
+	 * 往右拖
+	 * @param {Object} ev
+	 */
+	right.onmousedown=function(ev){
+		var oEvent = ev || event;
+		mouseStart.x = oEvent.clientX; //鼠标指针向对于浏览器页面的水平坐标。
+		mouseStart.y = oEvent.clientY; //鼠标指针向对于浏览器页面的垂直坐标。
+
+		rightStart.x = right.offsetLeft; //返回当前元素的左边界到它的包含元素的左边界的偏移量，以像素为单位。
+		//console.log(rightStart.x)
+		
+		//鼠标事件捕获到当前文档的指定的对象。这个对象会为当前应用程序或整个系统接收所有鼠标事件。 
+		//参数为true时（默认）容器会捕获容器内所有对象的鼠标事件，即容器内的对象不会触发鼠标事件（跟容器外的对象一样）；
+		//releaseCapture方法释放鼠标捕获，并触发onlosecapture事件。
+		//object.setCapture() 当一个object的被 setCapture 后，他的方法将会被继承到整个文档进行捕获。
+  		//当不需要把方法继承到整个文档捕获时，要用 object.releaseCapture()
+		if(right.setCapture){ 
+			right.onmousemove=doDrag1;
+			right.onmouseup=stopDrag1;
+			right.setCapture();
+			console.log(1);
+		}else{
+			document.addEventListener("mousemove", doDrag1, true);
+			document.addEventListener("mouseup", stopDrag1, true);
+		}
+	};
+	
+	/**
+	 * 拖动
+	 * @param {Object} ev
+	 */
+	function doDrag1(ev){
+		var oEvent = ev || event;
+		var l = oEvent.clientX - mouseStart.x + rightStart.x;
+		var w = l + oDiv.offsetWidth;
+		
+		/*
+		if(w < oDiv.offsetWidth){
+			console.log(1);
+			w = oDiv.offsetWidth;
+		}else if (w > document.documentElement.clientWidth - oDiv2.offsetLeft){
+			w = document.documentElement.clientWidth - oDiv2.offsetLeft - 2;
+			console.log(2);
+		}
+		*/
+		oDiv2.style.width = w + "px";
+	};
+	
+	/**
+	 * 停止拖动
+	 */
+	function stopDrag1(){
+		
+		//释放鼠标捕获
+		if(right.releaseCapture){
+			right.onmousemove=null;
+			right.onmouseup=null;
+			right.releaseCapture();
+		}else{
+			document.removeEventListener("mousemove",doDrag1,true);
+			document.removeEventListener("mouseup",stopDrag1,true);
+		}
+	};
+	
+	/**
+	 * 向下拽
+	 * @param {Object} ev
+	 */
+	bottom.onmousedown = function(ev){
+		var oEvent = ev||event;
+		mouseStart.x = oEvent.clientX;
+		mouseStart.y = oEvent.clientY;
+		bottomStart.y = bottom.offsetTop;
+		if(bottom.setCapture){
+			bottom.onmousemove = doDrag2;
+			bottom.onmouseup = stopDrag2;
+			bottom.setCapture();
+		} else {
+			document.addEventListener("mousemove", doDrag2, true);
+			document.addEventListener("mouseup", stopDrag2, true);
+		}
+	};
+	
+	
+	function doDrag2(ev){
+		var oEvent = ev||event;
+		var t = oEvent.clientY-mouseStart.y+bottomStart.y;
+		var h = t+oDiv.offsetHeight;
+		
+		if(h<oDiv.offsetHeight){
+			h=oDiv.offsetHeight;
+		}else if(h > document.documentElement.clientHeight - oDiv2.offsetTop){
+			h=document.documentElement.clientHeight-oDiv2.offsetTop-2;
+		}
+		
+		oDiv2.style.height=h+"px";
+	};
+	function stopDrag2(){
+		if(bottom.releaseCapture){
+			bottom.onmousemove=null;
+			bottom.onmouseup=null;
+			bottom.releaseCapture();
+		}else{
+			document.removeEventListener("mousemove",doDrag2,true);
+			document.removeEventListener("mouseup",stopDrag2,true);
+		}
+	};
+	
+	//左右同时拽
+	oDiv.onmousedown=function(ev){
+		var oEvent = ev||event;
+		mouseStart.x = oEvent.clientX;
+		mouseStart.y = oEvent.clientY;
+		divStart.x = oDiv.offsetLeft;
+		divStart.y = oDiv.offsetTop;
+		if(oDiv.setCapture)	{
+			oDiv.onmousemove=doDrag;
+			oDiv.onmouseup=stopDrag;
+			oDiv.setCapture();
+		} else {
+			document.addEventListener("mousemove",doDrag,true);
+			document.addEventListener("mouseup",stopDrag,true);
+		}
+		zhezhao.style.display='block';
+	};
+	
+	function doDrag(ev){
+		var oEvent = ev||event;
+		var l = oEvent.clientX-mouseStart.x+divStart.x;
+		var t = oEvent.clientY-mouseStart.y+divStart.y;
+		
+		
+		var w = l+oDiv.offsetWidth;
+		var h = t+oDiv.offsetHeight;
+		//console.log(w);
+		
+		if(w < oDiv.offsetWidth){
+			w = oDiv.offsetWidth;
+		}else if(w > document.documentElement.clientWidth - oDiv2.offsetLeft){
+			w = document.documentElement.clientWidth - oDiv2.offsetLeft-2;
+		}
+		if(h < oDiv.offsetHeight) {
+			h=oDiv.offsetHeight;
+		} else if(h > document.documentElement.clientHeight - oDiv2.offsetTop){
+			h = document.documentElement.clientHeight - oDiv2.offsetTop - 2;
+		}
+		
+		oDiv2.style.width = w + "px";
+		oDiv2.style.height = h + "px";
+	};
+	function stopDrag(){
+		if(oDiv.releaseCapture)	{
+			oDiv.onmousemove=null;
+			oDiv.onmouseup=null;
+			oDiv.releaseCapture();
+		} else {
+			document.removeEventListener("mousemove",doDrag,true);
+			document.removeEventListener("mouseup",stopDrag,true);
+		}
+		zhezhao.style.display='none';
+	};
+	
+	//h2完美拖拽
+	h2.onmousedown=function(ev){
+		var oEvent = ev||event;
+		mouseStart.x = oEvent.clientX;
+		mouseStart.y = oEvent.clientY;
+		divStart.x = oDiv2.offsetLeft;
+		divStart.y = oDiv2.offsetTop;
+		
+		if(h2.setCapture){
+			h2.onmousemove=doDrag3;
+			h2.onmouseup=stopDrag3;
+			h2.setCapture();
+		} else {
+			document.addEventListener("mousemove",doDrag3,true);
+			document.addEventListener("mouseup",stopDrag3,true);
+		}
+		
+		zhezhao.style.display='block';
+	};
+	function doDrag3(ev){
+		var oEvent= ev||event;
+		var l = oEvent.clientX - mouseStart.x + divStart.x;
+		var t = oEvent.clientY - mouseStart.y + divStart.y;
+		
+		//控制拖动的范围，以免超出显示范围
+		if(l < 0){
+			l = 0;
+		} else if(l > document.documentElement.clientWidth - oDiv2.offsetWidth){
+			l = document.documentElement.clientWidth - oDiv2.offsetWidth;
+		} 
+		if (t < 0){
+			t = 0;
+		}else if(t > document.documentElement.clientHeight - oDiv2.offsetHeight){
+			t = document.documentElement.clientHeight - oDiv2.offsetHeight;
+		}
+		oDiv2.style.left = l + "px";
+		oDiv2.style.top = t + "px";
+	};
+	
+	function stopDrag3(){
+		if(h2.releaseCapture){
+			h2.onmousemove = null;
+			h2.onmouseup = null;
+			h2.releaseCapture();
+		} else {
+			document.removeEventListener("mousemove", doDrag3, true);
+			document.removeEventListener("mouseup", stopDrag3, true);
+		}
+		
+		zhezhao.style.display = 'none';
+	}
+	//关闭
+	sClose.onmousedown = function (ev){
+		//cancelBubble的字面意思是取消冒泡，stopPropagation的字面意思是停止传播。 
+		//如果事件句柄想阻止事件传播到包容对象，必须把该属性设为 true。
+		(ev||event).cancelBubble=true;
+	}
+	sClose.onclick = function(){
+		oDiv2.style.display="none";
+	};
+};
+</script>
+</head>
+<body>
+	
+<div id="div2">
+	<div style="width:100%; height:100%; overflow:hidden;">
+	<h2><span id="close">关闭</span>完美拖拽</h2>
+	<p><a href="http://www.kaivon.com/">个人网站</a><a href="http://www.kaivon.com/">个人网站</a><a href="http://www.kaivon.com/">个人网站</a><a href="http://www.kaivon.com/">个人网站</a><a href="http://www.kaivon.com/">个人网站</a><a href="http://www.kaivon.com/">个人网站</a><a href="http://www.kaivon.com/">个人网站</a><a href="http://www.kaivon.com/">个人网站</a><a href="http://www.kaivon.com/">个人网站</a><a href="http://www.kaivon.com/">个人网站</a><a href="http://www.kaivon.com/">个人网站</a><a href="http://www.kaivon.com/">个人网站</a><a href="http://www.kaivon.com/">个人网站</a><a href="http://www.kaivon.com/">个人网站</a>', '好冷啊', '一口气睇晒  '我承认我是个没有鼓励就没有动力的人，缺乏太多毅力。等过了这个冬天。也许我真的能把自己的心收拾干净。空出心里最重要的位置。给自己未来的新娘。剩下的空间，全是梦想，家庭和朋友。'</p>
+	<div id="right"></div>
+	<div id="div1">拖</div>
+	<div id="bottom"></div>
+	</div>
+</div>
+<div id="zhezhao"></div>
+</body>
+</html>

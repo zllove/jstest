@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-show</title>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		body{font:14px/2 arial;background:#fff;}
+		.w{width:960px;padding:15px;margin:20px auto;}
+		.a{color:#888;}
+		.b{color:#666;}
+	</style>
+</head>
+<body>
+	<div id="w" class="w">
+		<div id="a" class="a">
+			<p>登录极游客户端，通过发码中心可以领取极游独家“新服礼包”！</p>
+			<p>《怪物x联盟》是一款画面出众，操作简单的回合制RPG游戏。神奇的训练师踏上征程，百多种不同的战宠等着你驯服。玩家在游戏中将通过野外探险，开启宠物图鉴，依靠宠物天性和技能强化等将自己的宠物培养成无敌强大的战宠。丰富的对战模式需要训练师们绞尽脑汁将战宠训练得无敌强大。不同属性不同天性相克的秘诀，也值得好好研究。训练师们带上你们的战宠来迎接挑战吧。...</p>
+		</div>
+		<div id="b" class="b" style="display:none;">
+			<p>登录极游客户端，通过发码中心可以领取极游独家“新服礼包”！</p>
+			<p>《怪物x联盟》是一款画面出众，操作简单的回合制RPG游戏。神奇的训练师踏上征程，百多种不同的战宠等着你驯服。玩家在游戏中将通过野外探险，开启宠物图鉴，依靠宠物天性和技能强化等将自己的宠物培养成无敌强大的战宠。丰富的对战模式需要训练师们绞尽脑汁将战宠训练得无敌强大。不同属性不同天性相克的秘诀，也值得好好研究。训练师们带上你们的战宠来迎接挑战吧。</p>
+			<p>更多更好玩的安卓游戏和攻略尽在极游网，欢迎到极游网论坛bbs.ggg.cn和游戏达人们一起讨论</p>
+			<p>或在新浪微博上@极游网一起找达人为您解答游戏问题并参与分享！</p>
+		</div>
+		<input type="button" value="test-show" id="c" class="c">
+
+	</div>	
+	<script type="text/javascript">
+		function id () {
+			return document.getElementById(arguments[0]);
+		}
+		(function() {
+			var a = id('a'),
+				b = id('b'),
+				c = id('c'),
+				is = 0,
+				dis;
+
+			c.onclick = function () {
+				is = b.style.display == 'none' ? 0 : 1;
+				a.style.display = setIs(!is);
+				b.style.display = setIs(is);
+			}
+
+			function setIs (is) {
+				return is == 0 ? 'block' : 'none';
+			}
+		}());
+	</script>
+</body>
+</html>

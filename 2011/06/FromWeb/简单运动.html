@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title>无标题文档</title>
+<style type="text/css">
+*{margin:0;padding:0;}
+ul {list-style-type:none;}
+input {float:left;}
+.tip {width:600px;height:20px;color:blue;margin:80px auto;font-size:12px;}
+.bu {width:200px;margin:20px auto;}
+#list {width:100px;height:20px;overflow:hidden;float:left;position:relative;margin:0 10px;}
+#ul {position:absolute;left:0px;top:0;width:100px;}
+#ul li {float:left;display:inline;width:100px;height:20px;line-height:20px;background-color:#fff;color:#000;text-align:center;}
+</style>
+
+<script type="text/javascript">
+window.onload=function(){
+	//没注释的地方你肯定懂，不多说
+	var oUl=document.getElementById("ul");
+	var aLi=oUl.getElementsByTagName("li");
+	var prev=document.getElementById("prev");
+	var next=document.getElementById("next");
+	new Move(oUl,prev,next,aLi);
+}
+
+function Move(oElement,prev,next,iTarget){
+	var obj=this;
+	this.oElement=oElement;
+	this.prev=prev;
+	this.next=next;
+	this.iTarget=iTarget;
+	this.oElement.style.width=this.iTarget.length*this.iTarget[0].offsetWidth+"px";
+	this.iDivL=0;
+	this.iResult=0;
+	this.iOpa=100;
+	this.timer=null;
+	this.Left=true;
+	this.oElement.style.left="0px";
+	
+	this.prev.onmouseover=function(){//这四个可以封一个方法，然后传值，为了看着方便，我就不加了
+		this.style.background="red";
+	}
+	this.next.onmouseover=function(){
+		this.style.background="red";
+	}
+	this.prev.onmouseout=function(){
+		this.style.background="yellow";
+	}
+	this.next.onmouseout=function(){
+		this.style.background="yellow";
+	}
+
+
+	this.next.onclick=function(){//执行下一个
+		if(obj.iResult>=obj.iTarget.length-1){
+			alert("不好意思是最后一个了");
+			return;
+		}
+		else{
+			obj.move();
+		}
+		obj.iResult++;
+		obj.iOpa=100;
+		obj.Left=true;
+	};
+	this.prev.onclick=function(){//执行上一个
+		if(obj.iResult<=0){
+			alert("就是第一个");
+			return;
+		}//可以在这里写入按钮变灰的判断
+		else{
+			obj.move();
+		}
+		obj.iResult--;
+		obj.iOpa=100;
+		obj.Left=false;
+	};
+}
+Move.prototype.move=function(){
+	var obj=this;
+	if(this.timer){clearInterval(this.timer);}
+	this.timer=setInterval(function(){obj.doMove();},30);
+}
+
+
+Move.prototype.doMove=function(){
+
+	//向左
+	if(this.Left){
+		if(this.iDivL<=(-1*this.iResult*this.iTarget[0].offsetWidth)){
+			clearInterval(this.timer);
+			this.iDivL=(-1*this.iResult*this.iTarget[0].offsetWidth);
+		}
+		this.iDivL-=3;
+		this.iOpa-=3;
+		this.oElement.style.left=this.iDivL+"px";
+		this.iTarget[this.iResult].style.opacity=100;//初始化，可以写在外边
+		this.iTarget[this.iResult].style.filter="alpha(opacity=100)";//初始化，可以写在外边
+		this.iTarget[this.iResult-1].style.opacity=this.iOpa/100;
+		this.iTarget[this.iResult-1].style.filter="alpha(opacity="+this.iOpa+")";
+	}
+	//向右
+	else{
+		if(this.iDivL>=(-1*this.iResult*this.iTarget[0].offsetWidth)){
+			clearInterval(this.timer);
+			this.iDivL=(-1*this.iResult*this.iTarget[0].offsetWidth);
+		}
+		this.iDivL+=3;
+		this.iOpa-=3;
+		this.oElement.style.left=this.iDivL+"px";
+		this.iTarget[this.iResult].style.opacity=100;//初始化，可以写在外边
+		this.iTarget[this.iResult].style.filter="alpha(opacity=100)";//初始化，可以写在外边
+		this.iTarget[this.iResult+1].style.opacity=this.iOpa/100;
+		this.iTarget[this.iResult+1].style.filter="alpha(opacity="+this.iOpa+")";
+	}
+}
+
+</script>
+</head>
+
+<body>
+<div class="tip">可意向li里边任意的添加人的名字了,你自己试试吧，呵呵。至于向右时为啥不会渐变，你自己试试，呵呵</div>
+<div class="bu">
+
+<input type="button" id="prev" value="向左" />
+
+<div id="list">
+
+	<ul id="ul">
+		<li>张西西</li>
+		<li>王东东</li>
+		<li>小刘刘</li>
+		<li>牛小小</li>
+		<li>二球球</li>
+		<li>牛小小</li>
+		<li>二球球</li>
+		<li>牛小小</li>
+		<li>二球球</li>
+	</ul>
+
+</div>
+
+<input type="button" id="next" value="向右" />
+
+
+</div>
+</body>
+</html>

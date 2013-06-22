@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<p>这只是一个测试</p>
+<script type="text/javascript">
+//    $('p').slideUp().delay(3000).slideDown();
+</script>
+<img id="imgtest" src="http://www.google.com.hk/intl/zh-CN/images/logo_cn.png" alt="google" />
+<input type="button" id="test" value="包裹" />
+<script type="text/javascript">
+    jQuery("#test").toggle(function() {
+        jQuery("#imgtest").wrap("<a href=''></a>");
+        console.log(1);
+    }, function() {
+        jQuery("#rap #imgtest").unwrap();
+    });
+
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-23547264-1']);
+    _gaq.push(['_setDomainName', 'ggg.cn']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        console.log(ga.src);
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+
+</script>
+</body>
+</html>

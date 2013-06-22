@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<script type="text/javascript">
+window.onload = function(){
+	var oForm = document.forms[0];
+	oForm.elements[0].focus();
+	//alert(oForm.elements[0].value);
+	var txt1 = document.getElementById("txt1");
+	//alert(txt1.value.length);
+	txt1.focus();
+	txt1.select();
+	var colInputs = document.getElementsByTagName('input');
+	var colTextarea = document.getElementsByTagName("textarea");
+	for(var i=0;i<colInputs.length; i++){
+		if(colInputs[i].type=="text" || colInputs[i].type=="password"){
+			colInputs[i].onfocus = function(){this.select();}
+		}
+	}
+	for(var i=0;i<colTextarea.length; i++){		
+		colTextarea[i].onfocus = function(){this.select();}		
+	}
+
+}
+</script>
+</head>
+
+<body>
+
+<form action="" method="get" name="form1">
+	<input type="text" id="txt1" name="text1" value="用户名" /><br />
+    <input type="button" value="提交"  onclick="document.forms[0].reset()" /><br />
+    <input type="image" src="images/tj.gif" alt="" /><br />
+    <input type="text" name="" id="" value="这是密码" onblur="alert('Blur')" onchange="alert('change')" />
+    <textarea name="" id="" onfocus="this.select()" cols="30" rows="10">这是爱的呼唤</textarea>
+</form>
+
+</body>
+</html>

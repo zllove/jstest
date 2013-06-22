@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-add</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+    <style type="text/css">
+        ul.test{ overflow:hidden; }
+        ul.test li{ width:50px; height:50px; float:left; display:inline; border:1px solid green; margin-right:10px }
+        .paragraph{ clear:both; padding:5px; border:1px solid orange; margin-top:10px; }
+    </style>
+</head>
+<body>
+<div class="demo">
+    <ul class="test">
+        <li>test</li>
+        <li>test</li>
+        <li>test</li>
+        <li>test</li>
+    </ul>
+    <p class="paragraph">paragraph</p> <span id="span">test span</span>
+</div>
+<script type="text/javascript">
+//    $('ul.test li').add('.paragraph').css('background', 'green');
+//    $('ul.test li').add('.demo p').css('border', '3px solid red');
+//    $('.paragraph').clone().add('<span>新创建的一个span标签</span>').appendTo('div.demo');
+    $('.paragraph').add(document.getElementById('span')).css('background', 'lime');
+    function toCamelCase(hyphenatedValue){
+        var result = hyphenatedValue.replace(/-\D/g,function(character){
+            console.log(character.charAt(2));
+            return character.charAt(1).toUpperCase();
+        });
+        return result;
+    }
+    var a = 22,
+        b = 3, c = 4;
+    a == 2 ? b = 33 : b = 333, c = 5;
+    console.log(c);
+
+
+
+</script>
+</body>
+</html>

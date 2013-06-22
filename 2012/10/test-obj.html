@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+
+</head>
+<body>
+<button id="btn">test</button>
+<script type="text/javascript">
+    /*
+    var overall = {
+        IE         :$.browser.msie,
+        IE6        :!window.XMLHttpRequest,
+        $window    : $(window),
+        $document  : $(document),
+        viewWidth  : overall.$window.width(),
+        viewHeight : $(document).height(),
+    };
+    console.log(overall.viewWidth);
+
+    var obj = {
+        name: 'jikey',
+        sayname: obj
+    }
+    console.log(obj);
+    */
+    $('#btn').click(function(e){
+        console.log(e.clientX);
+        console.log(e.currentTarget);
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <style type="text/css">
+        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td, font{ padding:0; margin:0; font-family:"宋体", Arial, Helvetica, sans-serif; }
+        table{ border-collapse:collapse; border-spacing:0; }
+        table a{ text-decoration:none; color:#666; }
+        table a:hover{ text-decoration:underline; }
+        fieldset, img{ border:0; vertical-align:top; }
+        address, caption, cite, code, dfn, em, th, var{ font-weight:normal; font-style:normal; font-family:Tahoma, Arial, Helvetica, sans-serif,; }
+        ol li, ul li, dl dt, dl dd{ list-style:none; }
+        caption, th{ text-align:left; }
+        h1, h2, h3, h4, h5, h6{ font-weight:normal; font-size:100%; }
+        input, button, textarea, checkbox, select, radio{ vertical-align:top; }
+        #bos{ width:800px; height:600px; overflow:hidden; background:#0FF; margin:0 auto; }
+        #bos ul{ zoom:1; overflow:hidden; }
+        #bos ul li{ width:200px; height:300px; position:relative; overflow:hidden; float:left; margin:5px; background:#FC0; }
+        #bos ul li div{ width:200px; height:50px; background:#069; position:absolute; top:300px; }
+    </style>
+</head>
+
+<body>
+<div id="bos">
+    <ul>
+        <li>
+            <div></div>
+        </li>
+        <li>
+            <div></div>
+        </li>
+        <li>
+            <div></div>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    var bos = document.getElementById('bos');
+    var lis = bos.getElementsByTagName('li');
+    var len = lis.length;
+    while (len--) {
+        lis[len].onmouseover = function () {
+            over(this.getElementsByTagName('div')[0]);
+        }
+        lis[len].onmouseout = function () {
+            out(this.getElementsByTagName('div')[0]);
+        }
+    }
+    function over(obj) {
+        var ypos = 300;
+        if (obj.time) {
+            clearInterval(obj.time)
+        }
+        obj.time = setInterval(function () {
+            if (ypos > 250) {
+                ypos--;
+            }
+            obj.style.top = ypos + "px";
+        }, 2)
+    }
+    function out(obj) {
+        var ypos = 250;
+        if (obj.time) {
+            clearInterval(obj.time)
+        }
+        obj.time = setInterval(function () {
+            if (ypos < 300) {
+                ypos++;
+            }
+            obj.style.top = ypos + "px";
+        }, 2)
+    }
+</script>
+</body>
+</html>

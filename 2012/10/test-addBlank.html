@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<a href="http://www.sohu.com">sohu</a>
+<a href="http://www.qq.com">qq</a>
+<a href="/blank.html">qq</a>
+<script type="text/javascript">
+    var vhost = location.hostname;
+    console.log(vhost);
+    $('a[http:^="http://"]:not([href*="' + vhost + '"]), [href^="https://"]:not([href*="' + vhost + '"])').attr('target', '_blank');
+//    $('a').attr('target', '_blank');
+
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<style type="text/css">
+		body{font:12px/2 serif;text-align:center;}
+		.text{width:50px;border:1px solid #ccc;background:#f0f0f0;padding:2px;margin-right:15px;}
+	</style>
+</head>
+<body>
+	<input type="text" class="text" /><input type="button" value="判断是否是两位数" />
+	<script type="text/javascript">
+		var oInput = document.getElementsByTagName('input');
+		oInput[0].onkeyup = function(){
+			this.value = this.value.replace(/[^\d]/, '');
+		}
+		oInput[1].onclick = function(){
+			alert(/^\d{2}$/.test(oInput[0].value) ? '√ 是两位数' : '这是' + oInput[0].value.length + '位数');
+		}
+	</script>
+</body>
+</html>

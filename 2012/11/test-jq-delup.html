@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <style type="text/css">
+        .list {
+            background: #EEEEEE none repeat scroll 0 0;
+            border-top: 1px solid #CCCCCC;
+            border-bottom: 1px solid #CCCCCC;
+            padding: 15px 10px; margin-bottom:10px;
+            width: 300px;
+        }
+        .del {
+            color: Blue;
+            display: block;
+            float: right;
+            width: 35px;
+        }
+    </style>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<div class="list">
+    <a id="del-1" class="del" href="#">删除</a>
+    <strong>jQuery学习,jQuery框架学习</strong>
+</div>
+<div class="list">
+    <a id="del-2" class="del" href="#">删除</a>
+    <strong>jQuery学习,jQuery框架学习</strong>
+</div>
+<div class="list">
+    <a id="del-3" class="del" href="#">删除</a>
+    <strong>jQuery学习,jQuery框架学习</strong>
+</div>
+<div class="list">
+    <a id="del-4" class="del" href="#">删除</a>
+    <strong>jQuery学习,jQuery框架学习</strong>
+</div>
+<div class="list">
+    <a id="del-5" class="del" href="#">删除</a>
+    <strong>jQuery学习,jQuery框架学习</strong>
+</div>
+<div class="list">
+    <a id="del-6" class="del" href="#">删除</a>
+    <strong>jQuery学习,jQuery框架学习</strong>
+</div>
+<script type="text/javascript">
+    $('.del').click(function(){
+        var p = $(this).parent();
+        var that = $(this);
+
+        p.slideUp(300, function(){
+            console.log($(this));
+            $(this).remove();
+        });
+    });
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+</head>
+<body>
+	<div>
+		<ul id="menu">
+			<li><a href="http://www.xxx.com/abg?id=1">test</a></li>
+		</ul>
+	</div>
+		<p>From:http://www.cnblogs.com/snandy/archive/2011/03/28/1997414.html</p>		<p>target: 指事件源对象，点击嵌套元素最里层的某元素，该元素就是target。IE6/7/8对应的是srcElement。</p>		<p>currentTarget: 指添加事件handler的元素本身，如el.addEventListener中el就是currentTarget。IE6/7/8没有对应属性，可在handler内使用this来替代如evt.currentTarget = this。</p>		<p>relativeTarget: 指事件相关的元素，一般用在mouseover，mouseout事件中。IE6/7/8中对应的是fromElement，toElement。</p>
+	<script>
+		document.getElementById('menu').onclick = function(e){
+			e = e || window.event;
+			var target = e.target || e.srcElement;
+			var curr = e.currentTarget;
+			alert(target.innerHTML);
+			var pageid, hrefparts;
+			if( target.nodeName !== 'A'){ return; }
+			hrefparts = target.href.split('/');
+			pageid = hrefparts[hrefparts.length - 1];
+			//alert('hrefparts= ' + hrefparts + ' pageid = ' + pageid);
+			return false;
+		}
+	</script>
+</body>
+</html>

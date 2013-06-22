@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" " http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns=" http://www.w3.org/1999/xhtml">
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<head>
+</head>
+<body>
+<table id="myTable" border="1">
+  <tr>
+    <td>单元格3</td>
+    <td>单元格4</td>
+    <td>单元格5</td>
+    <td>单元格6</td>
+    <td>单元格7</td>
+    <td>单元格8</td>
+    <td>单元格9</td>
+    <td>单元格10</td>
+  </tr>
+  <tr>
+    <td>单元格3</td>
+    <td>单元格4</td>
+    <td>单元</td>
+    <td>单元格6</td>
+    <td>单元格7</td>
+    <td>单元格8</td>
+    <td>单元格9</td>
+    <td>单元格10</td>
+  </tr>
+</table>
+<form>
+  <input type="button" onclick="setColSpan(1,6,6)" value="改变colspan值">
+</form>
+</body>
+</html>
+<script type="text/javascript"> 
+function setColSpan(a, b, c){
+    //var rows = table.rows.length;//行数    
+    //var cells = table.rows[i].cells.length;//列数   
+    
+    var rows = document.getElementById('myTable').rows.length;
+    var cells = document.getElementById('myTable').rows[0].cells.length;
+    
+    var dom = document.getElementById('myTable').rows[a].cells;
+    dom[b].colSpan = c;
+    
+    
+    if (c + b >= cells || c >= cells || b >= cells || a >= rows || c > cells) 
+        return false;
+    
+    for (var i = b + 1; i < c + b; i++) {
+        dom[i].style.display = 'none';
+    }
+}
+
+</script>

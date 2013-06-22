@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<iframe name="topFrame" id="topFrame" width="100" height="100"></iframe>
+<table>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td><a href="aa.html" target="topFrame">点我</a></td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td><a href="aa.html" target="topFrame">点我</a></td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td><a href="aa.html" target="topFrame">点我</a></td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td><a href="aa.html" target="topFrame">点我</a></td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td><a href="aa.html" target="topFrame">点我</a></td>
+    </tr>
+</table>
+<script>
+    var a = document.getElementsByTagName('a'),
+    len = a.length,
+    tr = document.getElementsByTagName('tr');
+    
+    for(var i = 0; i < len; i++){
+        !function(i){
+            a[i].onclick = function(){
+                for(var j = 0; j < len; j++){
+                    tr[j].style.background = '#fff';    
+                }
+                tr[i].style.background = '#000';
+            };    
+        }(i);
+    }
+    
+    
+</script>
+</body>
+</html>

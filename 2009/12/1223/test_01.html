@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Document</title>
+        <style>
+		
+		</style>
+		<script>
+		
+		</script>
+	</head>
+	<body>
+		<div id="elemdiv">division element</div>
+		<script type="text/javascript">
+//			var d = document.getElementById('elemdiv');
+//			d.attachEvent('onclick', Eventhandler);
+//			function Eventhandler(){
+//				alert(this.event.srcElement.value);
+//			}
+			/*
+			var d = document.getElementById('elemdiv');
+			d.onclick = function(){
+				alert(this.innerHTML);
+			}
+			function o(){
+				var n = 'jikey';
+				this.n = 'tang';
+			}
+			o.prototype.toString = function(){
+				return 'name = ' + this.n;
+			}
+			var o = new o();
+			alert(o.toString());
+			Function.prototype.getName = function(){
+				return 'name = tang';
+			}
+			function foo(){};
+			alert(foo.getName());
+			*/
+			function outerF(){
+				this.N = 'out name';
+				function innerF(){
+					this.N = 'inner name';
+					alert('name is ' + this.N);
+				}
+				return innerF;
+			}
+			outerF()();
+		</script>
+	</body>
+</html>

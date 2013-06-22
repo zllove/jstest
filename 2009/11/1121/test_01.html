@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>真是一个好东西</title>
+        <style>
+		
+		</style>
+         <script>
+			
+         </script>
+	</head>
+	<body>
+		<div id="cssrain">
+			<div id="a">aa</div>
+			<div id="b">bbbbbbb</div>
+			<div id="c">ccc</div>
+		</div>
+         <script>
+			var a = document.getElementById('a');
+			var b = document.createElement('p');
+			b.setAttribute('title', '真是一个好东西');
+			b.setAttribute('id','bb');
+			a.appendChild(b);
+			var d = document.createTextNode('This is my textNode;');
+			b.appendChild(d);
+			//var newpa = a.cloneNode(true);
+			//var nn = newpa.cloneNode(newpa);
+			//document.body.appendChild(newpa);
+			var e = document.getElementById('b');
+			var c = document.getElementById('c');
+			a.insertBefore(e,c);
+			
+			
+         </script>
+	</body>
+</html>

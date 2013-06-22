@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-san-extend</title>
+</head>
+<body>
+<h3><a href="http://www.cnblogs.com/sanshi/archive/2009/07/08/1519036.html">JavaScript继承详解</a></h3>
+<img src="http://images.cnblogs.com/cnblogs_com/sanshi/199114/o_jclass3-update.jpg" alt="">
+<script type="text/javascript">
+    /*
+    function Person(name){
+        this.name = name;
+    }
+    Person.prototype = {
+        getName: function (){
+            return this.name;
+        }
+    }
+    function Employee(name, id){
+        this.name = name;
+        this.id = id;
+    }
+    Employee.prototype = new Person();
+    Employee.prototype.constructor = Employee;
+    Employee.prototype.getId = function (){
+        return this.id;
+    }
+    var z = new Employee('jikey', 001);
+    console.log(z.constructor === Employee);
+    var isInit = false;
+    function Person(){
+        if(!isInit){
+            this.init.apply(this, arguments);
+        }
+    }
+    Person.prototype = {
+        init: function(name){
+            this.name = name;
+        },
+        getName: function (){
+            return this.name;
+        }
+    }
+    function Employee(){
+       if(!isInit){
+           this.init.apply(this, arguments);
+       }
+    }
+    isInit = true;
+    Employee.prototype = new Person();
+    Employee.prototype.constructor = Employee;
+    isInit = false;
+    Employee.prototype.init = function (name, id){
+        this.name = name;
+        this.id = id;
+    }
+    Employee.prototype.getId = function (){
+        return this.id;
+    }
+    var z = new Employee('jikey11', 001);
+//    z.init('jikey11', 001);
+    console.log(z.getName());
+    console.log(z.constructor === Employee);
+     */
+
+    /*
+    var isInit = false;
+    function jClass(baseClass, prop){
+        // 只有一个参数的时候
+        if(typeof baseClass === 'object'){
+            prop = baseClass;
+            baseClass = null;
+        }
+        // 本次调用所创建的类(构造函数)
+        function F(){
+            // 如果是实例化阶段的类，则调用init原型函数
+            if(!isInit){
+                this.init.apply(this, arguments);
+            }
+        }
+        // 如果此类从其它类扩展
+        if(baseClass){
+            isInit = true;
+            F.prototype = new baseClass();
+            F.prototype.constructor = baseClass;
+            isInit = false;
+        }
+        // 覆盖父类同名的函数
+        for (var name in prop) {
+            if(prop.hasOwnProperty(name)){
+                F.prototype[name] = prop[name];
+            }
+        }
+        return F;
+    }
+
+    var Person = jClass({
+        init: function(name){
+            this.name = name;
+        },
+        getName: function(){
+            return this.name;
+        }
+    });
+    var Employee = jClass(Person, {
+        init: function(name, id){
+            this.name = name;
+            this.id = id;
+        },
+        getId: function(){
+            return this.id;
+        }
+    });
+    var z = new Employee('jikey11', 001);
+    console.log(z.getName());
+    console.log(z.constructor === Employee);
+    */
+    // 类创建时
+    var isInit = false;
+    /**
+     * 继承
+     * @param baseClass 要继承的父类
+     * @param prop 继承的方法对象
+     */
+    function jClass(baseClass, prop){
+        // 只有一个参数的时候
+        if(typeof baseClass === 'object'){
+            prop = baseClass;
+            baseClass = null;
+        }
+        // 本次调用所创建的类(构造函数)
+        function F(){
+            // 如果是实例化阶段的类，则调用init原型函数
+            if(!isInit){
+                // 这里边this指向实例化后的实例对象
+                // 如果baseClass存在，则让实例对象的baseprototype指向父类原型，从而可以调用父类的方法
+                if(baseClass){
+                    this.baseprototype = baseClass.prototype;
+                }
+                this.init.apply(this, arguments);
+            }
+        }
+        // 如果此类从其它类扩展
+        if(baseClass){
+            isInit = true;
+            F.prototype = new baseClass();
+            F.prototype.constructor = F;
+            isInit = false;
+        }
+        // 覆盖父类同名的函数
+        for (var name in prop) {
+            if(prop.hasOwnProperty(name)){
+                // 如果此类继承自父类baseClass，并且父类原型中存在同名函数name
+                if(prop[name] && typeof prop[name] == 'function' && typeof F.prototype[name] == 'function'){
+                    // 重定义函数name
+                    // 首先在函数上下文设置this.base指向父类原型中的同名函数
+                    // 然后调用函数prop[name],返回函数结果
+                    // 注意：这里的自执行函数创建了一个上下文，这个上下文返回另一个函数
+                    // 此函数中可以应用此上下文中的变量，这就是闭包
+                    // 这是js框架开发中常用的技巧
+                    F.prototype[name] = (function(name, fn){
+                        return function(){
+                            this.base = baseClass.prototype[name];
+                            return fn.apply(this, arguments);
+                        }
+                    })(name, prop[name]);
+                } else {
+                    F.prototype[name] = prop[name];
+                }
+            }
+        }
+        return F;
+    }
+
+    var Person = jClass({
+        init: function(name){
+            this.name = name;
+        },
+        getName: function(){
+            return this.name;
+        }
+    });
+    var Employee = jClass(Person, {
+        init: function(name, id){
+//            this.base.init.apply(this, [name]);
+            this.base(name);
+            this.id = id;
+        },
+        getId: function(){
+            return this.id;
+        },
+        getName: function (name){
+//            return 'Employee name: ' + this.base.getName.apply(this, [name]);
+            return 'Employee name: ' + this.base();
+        }
+    });
+    var z = new Employee('jikey11', 001);
+    console.log(z.getName());
+    console.log(z.constructor === Employee);
+
+
+</script>
+
+</body>
+</html>

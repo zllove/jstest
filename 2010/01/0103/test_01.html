@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Document</title>
+        <style>
+		#nav{height:100%;}
+		#nav li{height:30px;line-height:30px;}
+		</style>
+		<script>
+		var $test = 'hi';
+		test = 'jikey';
+//		document.write($test);
+		var myTest = 'tang', mySecondTest = 'ji';
+//		document.write(myTest + '<br>');
+//		document.write(mySecondTest);
+		var sTest = 'hello';
+		var sTest2 = sTest + 'World';
+//		document.write(sTest2);
+//		原始值:是存储在栈中的简单数据，也就是说，它们的值直接存储在变量访问的位置
+//		引用值:是存储在堆中的对象，也就是说，存储在变量处的值是一个指针，指向存储对象的内存处
+//		ECMAScript 有五种原始类型：Undefined,Null,Boolean,Number和String
+		//1. undefined
+		var sTemp = 'test string';
+//		document.write(typeof sTemp + '<br>');
+//		document.write(typeof 95);
+//		undefined 当声明的变量未被初始化时，该变量的默认值是undefined
+		var oTemp;
+//		document.write(oTemp == undefined);
+		// var oTemp2;
+//		alert(oTemp2 == undefined); //返回error
+		function testFun(){
+			//this is function;
+		}
+//		alert(testFun() == undefined);
+		//2. Null
+//		document.write(null == undefined);
+		var bFound = true;
+		var bLost = false;
+//		alert(bFound == 1);
+		//6. String
+		var sColor1 = 'blue';
+//		document.write(sColor1 + '\n');
+//		document.write(sColor1 + '\n');
+//		document.write(sColor1.length);
+//		document.write(bFound.toString());
+		var iNum = 20;
+//		document.write(iNum.toString() + '<br>');
+//		document.write(iNum.toString(2) + '<br>');
+//		document.write(iNum.toString(8) + '<br>');
+//		document.write(iNum.toString(16) + '<br>');
+		var iNum1 = parseInt('10', 8);
+//		document.write(iNum1 + '<br>');
+		//强制类型转换
+		//Boolean, Number, String
+		var b1 = Boolean('aaa');
+//		document.write(b1);
+		var s1 = String(null);
+//		document.write(s1.toString());
+		var fNum1 = parseFloat('123blue');
+//		document.write(fNum1);
+		var fNum2 = parseFloat('OXA');
+//		document.write(fNum2);
+		var fNum3 = parseFloat('22.3433455555555555555555555555555555555555555555544444444'); //最多输出15位
+//		document.write(fNum3);
+		var fNum4 = parseFloat('090');
+//		document.write(fNum4);
+		//要得到数字引用类型的原始值就得用valueOf();
+		var num = new Number(4455);
+//		document.write(num.valueOf());
+//		document.write(num.toPrecision(1));
+		var s1 = new String('aaaas,a');
+//		document.write(s1.length);
+		var oString = new String('ahello Wrold!');
+		var oC = oString.charAt(0);
+//		document.write(oString);
+//		document.write(oC);
+		var oA = oString.charCodeAt(0); //输出字符ASCII值
+//		document.write(oA);
+//		var oResult = oString.concat(' World!');
+		var oResult = oString + ' Wrold!';
+//		document.write(oResult);
+		var o = oResult.indexOf('e');
+//		document.write(o);
+		var s2 = new String('hello wrold');
+//		document.write(s2.slice(3));
+//		document.write(s2.slice(3,7));
+//		document.write(s2.substring(3,8));
+//		document.write(s2.substring(-3));
+//		document.write(s2.substring(3, -2)); //substring把最小的数字做为起始位，最大的数字做为终止位。 一个新的字符串，该字符串值包含 stringObject的一个子字符串，其内容是从 start 处到 stop-1 处的所有字符，其长度为 stop 减 start。
+//		document.write(s2.slice(3, -2));
+//		document.write(s2.substring(1, 4));
+//		document.write(s2.toLocaleLowerCase());		
+//		document.write(s2.toUpperCase());		
+//		document.write(s2.toLocaleUpperCase());		
+//		document.write(s2 instanceof String); //变量s2是否为String类的实例
+		var o = new Object;
+		o.name = 'jikey';
+//		document.write(o.name);
+		delete o.name; //删除对以前定义的对象属性和方法的引用 
+//		document.write(o.name);
+		var iN = 22;
+		--iN;
+//		document.write(iN); // 输出21
+//		document.write(--iN); // 输出20
+//		document.write(iN); //输出20 减量增量都发生在表达式之前 -> 先计算后使用
+		var iM = 10;
+		iM--;
+//		document.write(iM); // 输出9
+//		document.write(iM--); // 输出9 后缀式运算符是在计算过包含它们的表达式后才进行增量或减量运算的 -> 先使用后计算
+//		document.write(iM); //输出8
+		var iK = 22;
+		ik = +iK;
+//		document.write(iK); //输出 22
+		var i = 0;
+		/*
+		do{
+			i+=2;
+			document.write('i = ' + i + '<br>');
+		} while(i < 10);
+		while(i < 10){
+			i+=2;
+			document.write('i = ' + i + '<br>');
+		}
+		var iNum = 0;
+		for(var i=1; i<10; i++){
+			if(i % 5 == 0){
+				continue;
+			}
+			iNum++;
+		}
+		document.write(iNum);
+		
+		function tF(i){
+			if(i == '1'){
+				alert('1');
+			}
+			if(i == '2'){
+				alert('2');
+			}
+			if(i == '3'){
+				alert('3');
+			}
+		}
+		function s(i){
+			switch(i){
+				case 1:
+					alert('1');
+					break;
+				case 2:
+					alert('2');
+					break;
+				case 3:
+					alert('3');
+					break;
+				default:
+					alert('other');
+			}
+		}
+		s();
+		function sum(inum1, inum2){
+			return document.write( inum1 + inum2);
+			alert('1');
+		}
+		sum(1,3);
+		*/
+		function dao(aa){
+			alert(aa + 10);
+		}
+		function dao(aaa){
+			alert(aaa + 100);
+		}
+		dao(10);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		</script>
+	</head>
+	<body>
+		<!--
+		<div id="n">			<ul id="nav">				<li class="test-1">11111</li>				<li class="test-2">1111</li>				<li class="test-3">222</li>				<li class="test-4">2222</li>				<li class="test-5">222</li>				<li class="test-6">222</li>				<li class="test-7">333</li>				<li class="test-8">333</li>			</ul>		</div>
+		-->
+		<a href="javascript:void(window.open('about:blank'))">Click me</a>
+		<script type="text/javascript">
+			/*
+			var n = document.getElementById('n');
+//			alert(n.offsetHeight);
+			
+			var a = document.getElementById('nav');
+			var l = a.getElementsByTagName('li');
+			for(var i=0;i<l.length;i++){
+//				alert(l[0].offsetHeight);
+			}
+//			alert(a.offsetHeight);
+			*/
+		</script>
+	</body>
+</html>

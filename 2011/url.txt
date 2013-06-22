@@ -1,0 +1,40 @@
+2011-11
+
+http://www.ituring.com.cn/article/467
+jQuery代码优化：事件委托篇
+
+http://www.offid.cn/i/564/note/100470.html
+jQuery获取Select选中的Text和Value
+
+http://app.soche8.com/show/jscoll/
+jq滚动条
+
+http://www.cnblogs.com/dumuqiao/archive/2011/09/09/2172511.html
+jq live bind delegate的区别
+
+2011-12
+
+http://www.cnblogs.com/rubylouvre/archive/2010/05/01/1725462.html
+http://wenku.baidu.com/view/f9a35ecfda38376baf1faec2.html
+滚动事件
+
+http://www.cnblogs.com/sunwangji/archive/2006/08/21/482341.html
+call,apply
+
+http://msdn.itellyou.cn/
+多系统下载
+http://www.huacolor.com/soft/43178.html
+win7 64位
+
+http://www.cnblogs.com/dragon/archive/2006/05/08/394078.html
+深入浅出之正则表达式（一）
+http://www.cnblogs.com/dragon/archive/2006/05/09/394923.html
+深入浅出之正则表达式（二）
+http://www.cnblogs.com/libinqq/archive/2008/07/31/1257699.html
+温故知新 javascript 正则表达式
+http://www.cnblogs.com/sadier/articles/149209.html
+经典正则表达式
+http://www.tracefact.net/document/Regular-Expression-Tutorial.pdf
+正则表达式
+http://www.cnblogs.com/rubylouvre/archive/2010/03/09/1681222.html
+javascript正则表达式

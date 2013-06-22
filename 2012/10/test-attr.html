@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<a href="http://www.sohu.com" target="blank">sohu</a>
+<div class="item" name="2">111</div>
+<div class="item" name="3">111</div>
+<div class="item" name="4">111</div>
+<div class="item" name="1">111</div>
+<script type="text/javascript">
+    var end = $('.item').attr('name', function(i, v){
+        if(v > 2){
+            $(this).css('color', 'red');
+        }
+    });
+</script>
+</body>
+</html>

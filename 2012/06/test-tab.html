@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<table id="table">
+    <tr>
+        <td>111</td>
+        <td>111</td>
+        <td>111</td>
+    </tr>
+    <tr>
+        <td>111</td>
+        <td>111</td>
+        <td>111</td>
+    </tr>
+    <tr>
+        <td>111</td>
+        <td>111</td>
+        <td>111</td>
+    </tr>
+    <tr>
+        <td>111</td>
+        <td>111</td>
+        <td>111</td>
+    </tr>
+</table>
+<script type="text/javascript">
+    var oTable = document.getElementById("table");
+    var oTr = oTable.rows;
+    for (var i = 0; i < oTr.length; i++) {
+        if (i == 0) {
+            oTr[i].style.backgroundColor = "#000";
+        }
+        else if (i % 2 == 0) {
+            oTr[i].style.backgroundColor = "#eee";
+        }
+
+    };
+</script>
+</body>
+</html>

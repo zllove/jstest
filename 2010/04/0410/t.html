@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script type="text/javascript">
+//var dd = [1,1,'fuck','fuck','ok','ok',4,4,4,4];
+//(function(target){
+//	var ret={};
+//	for(var i=0,item=null;item=target[i];i++){
+//		if(!(item in ret)){
+//			ret[item]=1;
+//		}else{
+//			ret[item]++
+//		}
+//	}
+//	var show='';
+//	for(var key in ret){
+//		show+=key+':'+ret[key]+'\n';
+//	}
+//	alert(show);
+//	return ret;
+//})(dd);
+
+var dd = [1,1,'fuck','fuck','ok','ok',4,4,4,4];
+var a = dd.sort();
+var ret = [];
+var i;
+ret.push([a[0], 1]);
+for (i = 1; i < a.length; i++)
+	if (a[i] == a[i - 1])
+		ret[ret.length - 1][1]++;
+	else ret.push([a[i], 1]);
+
+var s = '';
+for (i = 0; i < ret.length; i++)
+	s += ret[i].join('\t') + '\n';
+alert(s);
+
+</script>
+</head>
+
+<body>
+
+sdfsdf
+</body>
+</html>

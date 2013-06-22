@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        #menu{  border:1px solid #ccc; margin-top:2px; zoom:1;}
+        #menu ul { float:left; list-style:none; border:#00F 1px solid; zoom:1;}
+        #menu ul li { float:left; position:relative; z-index:1; border:1px solid green; zoom:1;}
+        #menu ul li a{ width:80px; height:18px; line-height:18px; display:inline-block; text-decoration:none; zoom:1; text-align:center;}
+        #menu ul li ul{ padding:1px 1px 1px 20px; border:1px solid red; background:#F0F7F9 ; position: absolute; left:0px; top:18px; z-index:80; zoom:1;}
+        /*.menu_icon{ width:20px; height:100px; display:block; border:5px solid #000; background: #c0dde6; position:absolute; zoom:1; z-index:1000; top:0px; left:0px;}*/
+        #menu ul li ul li.menu_icon{position:absolute;float:none; zoom:1; width:20px; height:100px; background:#f00; border:1px solid #ccc; left:0; top:0px; z-index:99;}
+        #menu ul li ul li.menu_icon span{ zoom:1;}
+        #menu ul li ul li{ border:none; width:150px; zoom:1;}
+    </style>
+</head>
+
+<body>
+<div id="menu">
+    <ul>
+        <li><a href="javascript:;">主页</a></li>
+        <li>
+            <a href="javascript:;">服务范围</a>
+            <ul class="ul_01">
+                <li class="menu_icon"><span>我找不到了</span></li>
+                <li>子域名平台系统</li>
+                <li>工作报告管理系统</li>
+                <li>库存管理系统</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    for(var i=0,len=3; i<len; i++){
+        for(var j=3; j>=0; j--){
+            if(i == j) {
+                continue;
+            }
+            console.log('i=' + i + 'j=' + j);
+        }
+    }
+</script>
+</body>
+
+</html>

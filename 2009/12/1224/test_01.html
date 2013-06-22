@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Document</title>
+        <style>
+        .Tborder{border-collapse:collapse; border:1px solid #d9d9d9; text-align:center; margin:0 auto;}
+		.Tborder th{border:1px solid #d9d9d9;}
+		.Tborder td{border:1px solid #d9d9d9;text-align:left; padding:3px 3px 3px 15px; }
+		.Tborder tr {height:23px;}
+		#d, #e{display:none;}
+		</style>
+		<script>
+		function showD(id){
+			document.getElementById(id).style.display = document.getElementById(id).style.display == 'block' ? 'none' : 'block';
+		}
+		</script>
+	</head>
+	<body>
+		<table width="500" class="Tborder">			<tr>				<td><a href="#">del</a></td>				<td><a href="#">add</a></td>				<td><input type="submit" value="update" onclick="showD('d')" /></td>			</tr>			<tr id="d">				<td>id</td>				<td>name</td>				<td>pwd</td>			</tr>			<tr>				<td><a href="#">del</a></td>				<td><a href="#">add</a></td>				<td><input type="submit" value="update" onclick="showD('e')" /></td>			</tr>			<tr id="e">				<td>id</td>				<td>name</td>				<td>pwd</td>			</tr>		</table>
+	</body>
+</html>

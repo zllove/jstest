@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+div,span,img{padding:0px; margin:0px;}
+img{vertical-align:top;}
+.samll_img{ width:200px;height:167px;position:relative;border:1px solid #000;}
+.float_div{ width:50px;height:41px;position:absolute;top:0px;left:0px;border:1px solid #000;background:#fff;filter: alpha(opacity: 30); opacity: 0.3;display:none;}
+.big_img{width:250px;height:217px;position:absolute;overflow:hidden;border:1px solid #000;top:5px;left:215px;display:none;}
+.big_img img{position:absolute;top:0px;left:0px;}
+.mark {width:100%; height:100%; position:absolute; z-index:2; left:0px; top:0px;background:red; filter:alpha(opacity:0); opacity:0;}
+</style>
+<script>
+function $class(classname){
+	var adiv = document.body.getElementsByTagName("*")
+	var aT = [];
+	for(var i = 0;i<adiv.length;i++){
+		if(adiv[i].className == classname){
+			aT.push(adiv[i]);
+		}
+	}
+	return aT;
+}
+
+window.onload = function(){
+	var os = $class("samll_img")[0];
+	var of = $class("float_div")[0];
+	var ob = $class("big_img")[0];
+	var obi = ob.getElementsByTagName("img")[0];
+	var om = $class("mark")[0];
+	var v = document.getElementById("val");
+	os.onmouseover = function(){
+		of.style.display = "block";
+		ob.style.display = "block";
+	}
+	os.onmouseout = function(){
+		of.style.display = "none";
+		ob.style.display = "none";
+	}
+	os.onmousemove = function(ev){
+		var oe = ev||event;
+		var l = oe.clientX - om.offsetLeft- os.offsetLeft  - of.offsetWidth/2;
+		var t = oe.clientY - om.offsetTop - os.offsetTop - of.offsetHeight/2;
+		v.value = oe.clientX;
+		if(l<0){
+			l = 0;
+		}
+		else if(l>om.offsetWidth - of.offsetWidth){
+			l = om.offsetWidth - of.offsetWidth;
+		}
+		if(t<0){
+			t = 0;
+		}
+		else if(t>om.offsetHeight - of.offsetHeight){
+			t = om.offsetHeight - of.offsetHeight;
+		}
+		of.style.left = l + "px";
+		of.style.top = t + "px";
+		var pX = l/(om.offsetWidth - of.offsetWidth);
+		var pY = t/(om.offsetHeight - of.offsetHeight);
+		obi.style.left = -pX*(obi.offsetWidth - ob.offsetWidth) + "px";
+		obi.style.top = -pY*(obi.offsetHeight - ob.offsetHeight) + "px";
+	}
+}
+</script>
+</head>
+
+<body>
+
+<div class="samll_img">
+<span class="mark"></span>
+<span class="float_div"></span>
+<img src="images/samll.jpg" />
+</div>
+<div class="big_img">
+	<img src="images/big.jpg" />
+</div>
+
+<input type="text" name="" id="val" />
+</body>
+</html>

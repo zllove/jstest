@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{font:12px/1 arial; background:#3f3f3f;}
+        .num{ width:1000px; padding:10px 0; text-align:center; margin:120px auto;letter-spacing:30px; font-size:62px; font-weight:bold; border:5px solid #ccc; background:#fff;}
+    </style>
+</head>
+<body>
+<div id="num" class="num" style="display:none;">12300</div>
+<script type="text/javascript">
+    String.prototype.repeat = function(l){
+        return new Array(l+1).join(this);
+    }
+
+    function getPad (num, n) {
+        var i = (num + '').length;
+        while(i++ < n){
+            num = '0' + num;
+        }
+        return num;
+    }
+
+    var i;
+    var num = 11163;
+//    var num = document.getElementById('num').innerHTML;
+    var l = (num + '').length;
+    function numAnim(){
+        var nlen = 0;
+        var firstLen = 0;
+        if(typeof i === 'undefined'){
+            firstLen = 1;
+            i = 5;
+        }
+        var end = 0;
+        var n = 0;
+
+        if(num > 0 && i < num){
+            i += Math.ceil((num - i) / 3);
+            end = n + '' + i;
+            nlen = (i + '').length;
+            firstLen = l - nlen;
+            if(firstLen == 0){
+                end = end.slice(1);
+            }
+//            n = getPad(0, firstLen);
+            n = '00000000000000'.slice(firstLen);
+            console.log(end);
+            document.getElementById('num').innerHTML = end;
+            document.getElementById('num').style.display = 'block';
+        }
+        setTimeout(numAnim, 25);
+    }
+    numAnim();
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style type="text/css">
+.a { text-align:center; }
+.b { float:left; height:39px; width:100%; background:url(../../0303/images/center_bg.gif) repeat-x; text-align:center; }
+.btn { height:25px; width:75px; background:url(../../0303/images/bt2.gif) no-repeat; border:none; line-height:25px; ; }
+</style>
+<script type="text/javascript">
+	
+</script>
+</head>
+<body>
+<p>Hello World!</p>
+<p>Isn't this exciting?</p>
+<p style="color:red;" id="p1">You're learning to use the DOM!</p>
+<div class="b">
+  <div>
+    <input type="submit" id="btnSubmit" value="新增" class="btn" >
+  </div>
+  <img src="../../images/logo_cn.gif" width="276" height="110" /></div>
+  <input type="text" name="radColor" value="red" id="" />
+  <input type="text" name="radColor" value="blue" id="" />
+  <input type="text" name="radColor" value="green" id="" />
+  
+  <div id="div1">This is my first layer</div>
+<script type="text/javascript">
+	/*
+	var oHtml = document.documentElement;
+//	var oHead = oHtml.firstChild;
+	//var oBody = oHtml.lastChild;
+	//alert(oHead);
+	//alert(oBody);
+	var oHead = oHtml.childNodes.item(1);
+	var oBody = document.body;
+	//alert(oHead);
+	//alert(oBody.parentNode == oHtml);
+	//alert(document.nodeType);
+	//alert(document.documentElement.nodeType);
+	var oImgs = document.getElementsByTagName("img");
+	//alert(oImgs[0].tagName);
+	var oRadios = document.getElementsByName("radColor");
+	//alert(oRadios[0].value);
+	var oDivs = document.getElementsByTagName("div");
+	var oDiv1 = null;
+	for(var i=0; i<oDivs.length; i++){
+		if(oDivs[i].id == "div1"){
+			oDiv1 = oDivs[i];
+			break;
+		}
+	}
+	//alert(oDiv1.innerHTML);
+	*/
+	var oP = document.createElement("p");
+	var oText = document.createTextNode("Hello Wrold!");
+	oP.appendChild(oText);
+	document.body.appendChild(oP);
+	var oDiv = document.getElementById("div1");
+	//oDiv.innerText = "喀格勒克";
+	
+	window.onload = function(){
+		var oP = document.body.getElementsByTagName("p")[0];
+		//document.body.removeChild(oP);
+		oP.parentNode.removeChild(oP);
+	}
+	
+	
+	
+</script>
+</body>
+</html>

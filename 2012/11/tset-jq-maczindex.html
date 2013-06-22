@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .navigation{margin:80px auto;width:640px;}
+        ul.menu{list-style:none;font-family:"Verdana",sans-serif;border-top:1px solid #bebebe;margin:0px;padding:0px;float:left;}
+        ul.menu li{position:relative;float:left;padding:0 !important;}
+        ul.menu li a{text-decoration:none;background:#7E7E7E url(http://www.jquery001.com/demo/images/bgMenu.png) repeat-x top left;padding:15px 0px;width:128px;color:#333333;float:left;text-align:center;border-right:1px solid #a1a1a1;border-left:1px solid #e8e8e8;font-weight:bold;font-size:16px;-moz-box-shadow:0 1px 3px #555;-webkit-box-shadow:0 1px 3px #555;text-shadow:0 1px 1px #fff;}
+        ul.menu li a:hover{background-image:none;color:#fff;text-shadow:0 -1px 1px #000;}
+        ul.menu li a.first{-moz-border-radius:0px 0px 0px 10px;-webkit-border-bottom-left-radius:10px;border-left:none;}
+        ul.menu li a.last{-moz-border-radius:0px 0px 10px 0px;-webkit-border-bottom-right-radius:10px;}
+        ul.menu li span{width:64px;height:64px;background-repeat:no-repeat;background-color:transparent;position:absolute;z-index:-1;top:80px;cursor:pointer; left:30px;}
+        ul.menu li span.ipod{background-image:url(http://www.jquery001.com/demo/images/ipod.png);}
+        ul.menu li span.video_camera{background-image:url(http://www.jquery001.com/demo/images/video_camera.png);}
+        ul.menu li span.television{background-image:url(http://www.jquery001.com/demo/images/television.png);}
+        ul.menu li span.monitor{background-image:url(http://www.jquery001.com/demo/images/monitor.png);}
+    </style>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<div class="navigation">
+    <ul class="menu" id="menu">
+        <li><span class="ipod"></span><a href="#" class="first">播放器</a></li>
+        <li><span class="video_camera"></span><a href="#">照相机</a></li>
+        <li><span class="television"></span><a href="#">电视</a></li>
+        <li><span class="monitor"></span><a href="#">显示器</a></li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var d = 1000;
+        $('#menu span').stop().animate({'top':'-17px'}, d += 250);
+
+        $('#menu > li').hover(function () {
+            //光标移动到上边时设置图标高度，
+            //并改变z-index为10，使得图标从上边滑下
+            $(this).find("span").stop().animate({
+                'top':'40px'
+            }, 300).css({
+                'zIndex':'10'
+            });
+        }, function () {
+            //移出时，重新将图标隐藏起来
+            //改变z-index为-1，使得从下边滑出
+            $(this).find("span").stop().animate({
+                'top':'-17px'
+            }, 800).css({
+                'zIndex':'-1'
+            });
+        });
+    });
+
+    $("#apple").detach()
+</script>
+</body>
+</html>

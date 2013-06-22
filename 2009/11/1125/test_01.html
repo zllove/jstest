@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Untitled Document</title>
+        <style>
+		
+		</style>
+		<script>
+		function a(x){
+			document.write(x);
+		}
+		function b(y){
+			document.write(y);
+			return y;
+		}
+		//alert(a(1)); // 返回undefined
+		//alert(b(2)); // 2
+		
+		function f(x){
+			return x*x;
+		}
+		var f = function fact(x){
+			return x*fact(x - 1);
+		}
+		//alert(a);
+		function s(x, y){
+			document.write(x + ' ' + y);
+		}
+		//s(1,2,4);
+		function te(m, n){
+			document.write(m + ' ' + n); 
+		}
+		//te(1); // 输出 1 undefined
+		function x(a, b){
+			var b = b || '嘿嘿';
+			document.write(a + ' ' + b);
+		}
+		//x(1);
+		</script>
+	</head>
+	<body>
+		<div id="a">
+			sdsaf
+			<ul>
+				<li>this is li1</li>
+				<li>this is li2</li>
+				<li>this is li3</li>
+				<li>this is li4</li>
+				<li>this is li5</li>
+			</ul>
+		</div>
+		<script>
+			
+		var v = document.getElementById('a');
+		//var v1 = v.firstChild.nodeValue;
+		var v1 = v.childNodes[0].nodeValue;
+		//alert(v1);
+		</script>
+		<!--
+		<select id="s1">
+			<option value="1">aaa</option>
+			<option value="2">bbb</option>
+			<option value="3">ccc</option>
+		</select>
+		-->
+		<script>
+			/*
+			var s = document.getElementById('s1');
+			for(var i=0; i<s.length; i++){
+				a = document.getElementsByTagName('option')[i].text;
+				if(a == 'ccc'){
+					document.getElementsByTagName('option')[i].selected = true;
+				}
+				//alert(a);
+			}
+			
+			var s = document.getElementsByTagName('option');
+			for(var i=0; i<s.length; i++){
+				if(s[i].text == 'bbb'){
+					s[i].selected = true;
+				}
+			}
+			*/
+		</script>
+	</body>
+</html>

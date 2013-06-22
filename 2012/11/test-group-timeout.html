@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title></title>
+</head>
+<body>
+	<div id="txt"></div>
+	<script type="text/javascript">
+		var test = document.getElementById('txt');
+		function testTime () {
+			var oTime = new Date();
+			var h = oTime.getHours();
+			var m = oTime.getMinutes();
+			var n = oTime.getSeconds();
+			document.getElementById('txt').innerHTML = h + ':' + m + ':' + n;
+			t = setTimeout(testTime, 1000);
+		}
+		testTime();
+	</script>
+</body>
+</html>

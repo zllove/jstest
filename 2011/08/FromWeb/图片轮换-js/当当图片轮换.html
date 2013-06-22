@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>杂学</title>
+<style type="text/css">
+<!--
+*{padding:0; margin:0;}
+body{font:12px Arial, Helvetica, sans-serif; background:#fff;}
+img{border:0;}
+ul{list-style-type:none;}
+.switch{margin:20px auto; position:relative; width:704px; height:185px; border:solid 4px #ECEEED; background:#ECEEED;}
+.switch_button{position:absolute; top:164px; right:4px; z-index:12; width:363px; height:17px;}
+.switch_button dl{float:left; margin-right:6px;}
+.switch_button dl dt{overflow:hidden; display:none; float:left; padding-left:8px; height:17px; line-height:17px; width:0; background:#F5F4F2;}
+.switch_button dl dt a{color:#CA4B04; text-decoration:none;}
+.switch_button dl dt a:hover{color:#900; text-decoration:underline;}
+.switch_button dl dt,.switch_button dl dd{float:left; margin-left:6px;}
+.switch_button dl dd{display:inline; overflow:hidden; height:13px; width:13px; line-height:14px; color:#f00; font-family:"宋体"; text-align:center; cursor:pointer; border:solid 2px #FFFDFE; background:#D5D7D4;}
+.switch_button dl dd.current{font-weight:700; color:#F8F4F1; background:#f00;}
+.l_button,.r_button{overflow:hidden; float:left; margin-top:3px; width:6px; height:11px; cursor:pointer;}
+.l_button{background:url(http://www.cnblogs.com/images/cnblogs_com/chenjmdg/20100112/switch_button_bg.gif) no-repeat left top;}
+.r_button{background:url(http://www.cnblogs.com/images/cnblogs_com/chenjmdg/20100112/switch_button_bg.gif) no-repeat left -11px;}
+.swith_bg{position:absolute; z-index:11; height:26px; width:704px; top:159px; left:0; background:#000;}
+.switch_img{position:relative; overflow:hidden; width:704px; height:185px;}
+.switch_img ul li{position:absolute; overflow:hidden; z-index:0; left:704px; width:704px; height:185px; background:#fff;}
+-->
+</style>
+<script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
+<script type="text/javascript">
+<!--
+var DDSwitch = function(options){
+	this.SetOptions(options);
+	this.oSwithBg = this.options.oSwithBg;
+	this.oSwithButton = this.options.oSwithButton;
+	this.oSwithImg = this.options.oSwithImg;
+	this.oSwithRbutton = this.options.oSwithRbutton;
+	this.oSwithLbutton = this.options.oSwithLbutton;
+	this.oSwithClear = this.options.oSwithClear;
+	
+	this.iSwithBg = $(this.oSwithBg);
+	this.iSwithButton = $("#" + this.oSwithButton + " > dd");
+	this.iSwithTitle = $("#" + this.oSwithButton + " > dt");
+	this.iSwithImg = $(this.oSwithImg + " > ul > li");
+	this.iSwithRbutton = $(this.oSwithRbutton);
+	this.oSwithLbutton = $(this.oSwithLbutton);
+	this.iSwithClear = $(this.options.oSwithClear)
+	this.timer = null;
+	
+	this.init();
+	
+	this.ClickButton();
+	
+	var _this = this;
+	this.iSwithClear.bind("mouseover", function(){
+		_this.Stop();
+	}).bind("mouseout", function(){
+		_this.AutoButton("auto");
+	});
+	
+	this.AutoButton("auto");
+	this.ClickRLbutton();
+};
+DDSwitch.prototype = {
+	SetOptions: function(options){
+		this.options = {
+			oSwithBg: ".swith_bg",
+			oSwithButton: "switchButton",
+			oSwithImg: ".switch_img",
+			oSwithRbutton: ".r_button",
+			oSwithLbutton: ".l_button",
+			oSwithClear: ".switch_button"
+		};
+		$.extend(this.options, options || {});
+	},
+	init: function(){
+		this.iSwithBg.css({ opacity: 0.3 });
+		$(this.iSwithButton[0]).addClass("current");
+		$(this.iSwithTitle[0]).css({ display: "block", width: "208px" });
+		$(this.iSwithImg[0]).css({ "z-index": 1, left: 0 });
+	},
+	ClickButton: function(){
+		var _this = this;
+		for(var i = 0; i < this.iSwithButton.length; i++){
+			(function(){
+				var index = i;
+				$(_this.iSwithButton[index]).click(function(){
+					if($(_this.iSwithButton[index]).attr("class") == "current") return;
+					for(var j = 0; j < i; j++){
+						if(index == j){
+							$(this).addClass("current");
+							$(_this.iSwithTitle[index]).css({ display: 'block' });
+							$(_this.iSwithTitle[index]).animate({ width: "+=208px" }, 500);
+							$(_this.iSwithImg[index]).css({ "z-index": 3 });
+							$(_this.iSwithImg[index]).animate({ left: "-=704px" }, {
+								duration: 500,
+								complete: function(){
+									for(var k = 0; k < j; k++){
+										k == index ? $(this).css({ "z-index": 1 }) : $(_this.iSwithImg[k]).css({ "z-index": 0, left: "704px" });
+									}
+								}
+							});
+						} else {
+							$(_this.iSwithTitle[j]).stop(true, true);
+							$(_this.iSwithImg[j]).stop(true, true);
+							$(_this.iSwithTitle[j]).css({ display: "none", width: 0 });
+							$(_this.iSwithButton[j]).removeClass();
+						}
+					}
+				})
+			})();
+		}
+	},
+	Pointer: function(){
+		for(var i = 0; i < this.iSwithButton.length; i++){
+			if($(this.iSwithButton[i]).attr("class") == "current"){
+				return i;
+			}
+		}
+	},
+	Action: function(state, direction){
+		var _this = this, pointer = this.Pointer();
+		switch(state.toLowerCase()){
+			case "right":
+				if(pointer >= (_this.iSwithButton.length - 1)) { pointer = -1 }
+				break;
+			case "left":
+				if(pointer <= 0) { pointer = _this.iSwithButton.length }
+				break;
+		}
+		var index = pointer + direction;
+		
+		for(var i = 0; i < _this.iSwithButton.length; i++){
+			if( i == (index)){
+				$(_this.iSwithButton[index]).addClass("current");
+				$(_this.iSwithTitle[index]).css({ display: 'block' });
+				$(_this.iSwithTitle[index]).animate({ width: "+=208px" }, 500);
+				$(_this.iSwithImg[index]).css({ "z-index": 3 });
+						$(_this.iSwithImg[index]).animate({ left: "-=704px" }, {
+							duration: 500,
+							complete: function(){
+								for(var k = 0; k < i; k++){
+									k == (index) ? $(this).css({ "z-index": 1 }) : $(_this.iSwithImg[k]).css({ "z-index": 0, left: "704px" });
+								}
+							}
+						});
+			} else {
+				$(_this.iSwithTitle[i]).stop(true, true);
+				$(_this.iSwithImg[i]).stop(true, true);
+				$(_this.iSwithTitle[i]).css({ display: "none", width: 0 });
+				$(_this.iSwithButton[i]).removeClass();
+			}
+		}
+	},
+	Stop: function(){
+		clearTimeout(this.timer);
+  },
+	AutoButton: function(){
+		var _this = this;
+		if(arguments[0] == "auto"){
+			this.timer = window.setTimeout(function(){ _this.AutoButton("auto"); _this.Action("right", 1); }, 3000);
+		}
+	},
+	ClickRLbutton: function(){
+		var _this = this;
+		this.iSwithRbutton.click(function(){ _this.Action("right", 1); });
+		this.oSwithLbutton.click(function(){ _this.Action("left", -1); });
+	}
+};
+$(document).ready(function(){
+	var zz = new DDSwitch();
+});
+//-->
+</script>
+</head>
+<body>
+<div id="debug"></div>
+<div class="switch">
+	<div class="switch_img">
+    	<ul>
+        	<li><img src="http://www.cnblogs.com/images/cnblogs_com/chenjmdg/20100112/img1.jpg" /></li>
+            <li><img src="http://www.cnblogs.com/images/cnblogs_com/chenjmdg/20100112/img2.jpg" /></li>
+            <li><img src="http://www.cnblogs.com/images/cnblogs_com/chenjmdg/20100112/img3.jpg" /></li>
+            <li><img src="http://www.cnblogs.com/images/cnblogs_com/chenjmdg/20100112/img4.jpg" /></li>
+            <li><img src="http://www.cnblogs.com/images/cnblogs_com/chenjmdg/20100112/img5.jpg" /></li>
+        </ul>
+    </div>
+    
+    <div class="switch_button">
+    	<div class="l_button"></div>
+        <dl id="switchButton">
+        	<dd>1</dd>
+            <dt><a href="#">2010百货直减总动员</a></dt>
+            <dd>2</dd>
+            <dt><a href="#">当当网商店街年终回馈 免运费</a></dt>
+            <dd>3</dd>
+            <dt><a href="#">当当网商店街年终回馈 免运费</a></dt>
+            <dd>4</dd>
+            <dt><a href="#">名品冬鞋均价99元、199元、299元</a></dt>
+            <dd>5</dd>
+            <dt><a href="#">品牌手机限时疯抢 最低128元！</a></dt>
+        </dl>
+        <div class="r_button"></div>
+    </div>
+	<div class="swith_bg"></div>
+</div>
+</body>
+</html>

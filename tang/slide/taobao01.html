@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>豪情</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="Keywords" content="豪情" />
+    <meta name="description" content="豪情" />
+    <link href="../css/ui.common.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        body,ul,li,p{margin:0;padding:0;}
+        ul{list-style-type:none;}
+        body{font-family:"Times New Roman",Times,serif;}
+        .box{position:relative;width:492px;height:172px;margin:150px auto;}
+        .box .imgList{position:relative;width:490px;height:170px;overflow:hidden;}
+        .box .imgList li{position:absolute;top:0;left:0;width:490px;height:170px;}
+        .box .countNum{position:absolute;right:0;bottom:5px;}
+        .box .countNum li{width:20px;height:20px; line-height:20px;float:left;color:#fff;border-radius:20px;background:#f90;text-align:center;margin-right:5px;cursor:pointer;opacity:0.7;filter:alpha(opacity = 70);}
+        .box .countNum li.cur{background:#f60;font-weight:bold;opacity:1;filter:alpha(opacity = 70);}
+    </style>
+</head>
+<body>
+<div id="wrap" class="box">
+    <ul class="imgList">
+        <li><a href="#"><img src="http://i.mmcdn.cn/simba/img/T117eTXmXqXXXXXXXX.jpg" alt=""></a></li>
+        <li><a href="#"><img src="http://img03.taobaocdn.com/tps/i3/T1t8eTXbBtXXXXXXXX-490-170.png" alt=""></a></li>
+        <li><a href="#"><img src="http://i.mmcdn.cn/simba/img/T1OVOUXeNjXXXXXXXX.jpg" alt=""></a></li>
+        <li><a href="#"><img src="http://i.mmcdn.cn/simba/img/T1J.9TXc8lXXXXXXXX.jpg" alt=""></a></li>
+        <li><a href="#"><img src="http://img03.taobaocdn.com/tps/i3/T1ITuTXbRnXXXXXXXX-490-170.png" alt=""></a></li>
+    </ul>
+</div>
+
+</body>
+<script type="text/javascript">
+    function SlideImg(setting){
+        this.init(setting);
+    }
+    SlideImg.prototype = {
+        init: function(setting){
+            var defaults = {
+                box     : null, // 外层容器
+                imgList : null, // 图片列表
+                numList : null, // 数字按钮
+                prev    : null, // 上一个
+                next    : null, // 下一个
+                timer   : 20,   // 间隔时间
+                index   : 0,    // 当前显示项
+                isAuto  : true  // 是否自动播放
+            };
+
+            var opts     = this.apply(this, setting, defaults);
+            this.box     = this.get(opts.box);
+            this.ulList  = this.box.getElementsByTagName('ul')[0];
+            this.imgList = this.ulList.getElementsByTagName('li');
+            this.imgLen  = this.imgList.length;
+
+            this.box.appendChild(this.createNum());
+            this.numWrap = this.box.getElementsByTagName('ul')[1];
+            this.numList = this.numWrap.getElementsByTagName('li');
+            // 设定初始默认值
+            for(var j=0, len=this.numList.length; j<len; j++){
+                this.alpha(j, 0);
+            }
+            this.alpha(0, 100);
+            this.numList[0].className = 'cur';
+
+            this.autoPlay();
+            this.handler();
+        },
+        /**
+         * 绑定参数
+         * @param obj 对象
+         * @param config 需要配置对象
+         * @param defaults 默认参数
+         */
+        apply: function(obj, config, defaults){
+            defaults && this.apply(obj, defaults);
+            if(obj && config && typeof config == 'object'){
+                for (var p in config) {
+                    this[p] = config[p];
+                }
+            }
+            return obj;
+        },
+        get: function(node){
+            return document.getElementById(node);
+        },
+        // 创建按钮
+        createNum: function(){
+            var oUl = document.createElement('ul'),
+                arr = [];
+
+            oUl.className = 'countNum';
+            for(var i=1,len=this.imgLen; i<=len; i++){
+                arr.push('<li>' + i + '</li>');
+            }
+            oUl.innerHTML = arr.join('');
+            return oUl;
+        },
+        /**
+         * 图片切换
+         * @param num 当前的index
+         * @param numList 数字按钮列表
+         * @param imgList 图片列表
+         */
+        imgSlide: function(num){
+            this.index = num; // 记录当前播放值
+            var imgList  = this.imgList,
+                len      = this.imgLen,
+                numList  = this.numList,
+                preAlpha = 100,
+                curAlpha = 0,
+                i        = 0,
+                j        = 0;
+
+            for(; i<len; i++){
+                numList[i].className = '';
+            }
+            numList[this.index].className = 'cur';
+            clearInterval(this.timer);
+            for(; j<len; j++){
+                this.alpha(j, 0);
+            }
+            this.alpha(this.prev, 100);
+            this.alpha(this.index, 0);
+
+            var me = this;
+            me.timer = setInterval(function(){
+                preAlpha -= 2;
+                curAlpha += 2;
+                me.alpha(me.prev, preAlpha);
+                me.alpha(me.index, curAlpha);
+            }, 20);
+        },
+        // 自动播放
+        autoPlay: function(){
+            var me = this;
+            me.play = setInterval(function(){
+                me.prev = me.index;
+                me.index++;
+                if(me.index > me.imgLen - 1){
+                    me.index = 0;
+                }
+                me.imgSlide(me.index);
+            }, 2000);
+        },
+        // 设置透明度
+        alpha: function(i, val){
+            if(this.imgList[i]){
+                this.imgList[i].style.opacity = val / 100;
+                this.imgList[i].style.filter = 'alpha(opacity=' + val + ')';
+            }
+        },
+        // 图片处理
+        handler: function(){
+            var me      = this,
+                box     = me.box,
+                len     = me.imgLen,
+                numSub  = null,
+                i       = 0;
+
+            box.onmouseover = function(){
+                clearInterval(me.play);
+            };
+            box.onmouseout = function(){
+                me.autoPlay();
+            };
+            // 数字按钮的 onmouseover
+            for(; i<len; i++){
+                numSub = me.numList[i];
+                numSub.index = i;
+                numSub.onmouseover = function(){
+                    me.imgSlide(this.index);
+                }
+            }
+        }
+    };
+
+    new SlideImg({
+        box: 'wrap'
+    });
+
+</script>
+</html>

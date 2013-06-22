@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<span id="content">span</span>
+<div id="mydiv1">test content1</div>
+<div id="mydiv2">test content2</div>
+<div id="mydiv3">test content3</div>
+<div>
+    <p>1111</p>
+    <p>2222</p>
+</div>
+<script type="text/javascript">
+    
+    var cont = $('#mydiv1').html();
+//    $('#mydiv1').wrap('<div class="wrap"></div>');
+    /*
+    $('#mydiv1').wrap(document.getElementById('content'));
+    $('#mydiv2').wrap(function(){
+        return '<div>' + $(this).text() + '</div>';
+    });
+    */
+//    $('div').wrapInner('<em></em>');
+    $('p').unwrap();
+</script>
+</body>
+</html>

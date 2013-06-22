@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+ <head>
+  <title> 菜单 </title>
+  <meta content="" name="Keywords" />
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+  <style type="text/css">
+  	body{font-size:12px;}
+    .wrap{width:120px;margin:0 auto;}
+    *{padding:0;margin:0;}
+    ul{list-style:none}
+    ul li{height:25px;line-height:25px;text-indent:1em;font-size:12px;border:1px solid #ccc;border-bottom:none;position:relative;}
+    ul li ul{position:absolute;right:-120px;top:-1px;width:120px;display:none;}
+	#print{position:absolute;top:10px;left:10px;padding:10px;border:1px solid #ccc;background:#fff;}
+  </style>
+    <script type="text/javascript">
+    	function Menu(){}
+		Menu.prototype = {
+			$: function(){ return document.getElementById(arguments[0]); },
+			
+			//需初始化对象
+			init: function(id){
+				this.change(id);
+			},
+			
+			//变换菜单
+			change: function(id){
+				var that = this,
+					ele = this.$(id),
+					item = ele.getElementsByTagName('ul');
+				var firstLi = ele.children;
+				
+				for(var i=0, len=item.length; i<len; i++){
+					var print = this.$('print');
+					
+					var subLis = item[i].getElementsByTagName('li'); // ul的子级li
+										
+					var eleLi = item[i].parentNode; // ul的父级元素li
+					
+					this.addEvent(eleLi, 'mouseover', function(){
+						this.getElementsByTagName('ul')[0].style.display = 'block';
+					});
+					
+					subLis.onmouseout = eleLi.onmouseout = function(event){
+						
+						var e = event || window.event;
+						var rel = e.toElement || e.relatedTarget;
+						var uls = this.getElementsByTagName('ul')[0];
+						if(window.event){
+							e.cancelBubble = true;
+						} else {
+							e.stopPropagation();
+						}
+						
+						
+						if(rel != uls){
+							uls.style.display = 'none';
+						}
+					
+						
+					}
+					
+					//this.addEvent(subLis, 'mouseout', handler);
+					//this.addEvent(eleLi, 'mouseout', handler);
+				}
+				
+			},
+			
+			/**
+			 * 添加事件
+			 * @param {Object} obj
+			 * @param {Object} type 事件类型
+			 * @param {Object} fun 事件处理函数
+			 */
+			addEvent: function(obj, type, fun){
+				if(obj.addEventListener){
+					obj.addEventListener(type, fun, false);
+				} else if(obj.attachEvent){
+					obj.attachEvent('on' + type, function() {
+			            fun.call(obj, window.event);
+			        });
+				} else {
+					obj['on' + type] = function() {
+			            fun.call(obj, window.event);
+			        }
+				}
+			},
+			
+			/**
+			 * 移除事件
+			 * @param {Object} obj
+			 * @param {Object} type 事件类型
+			 * @param {Object} fun 事件处理函数
+			 */
+			removeEvent: function(obj, type, fun){
+				if(obj.removeEventListener){
+					obj.removeEventListener(type, fun, false);
+				} else if(obj.detachEvent){
+					obj.detachEvent('on' + type, fun);
+				} else {
+					obj['on' + type] = null;
+				}
+			}
+			
+		}
+		
+    </script>
+ </head>
+ <body>
+ 	<div id="print"></div>
+    <div class="wrap">
+        <ul id="list">
+            <li><a href="">标题1</a></li>
+            <li>
+                <a href="">标题2</a>
+                <ul>
+                    <li><a href="">小列表</a></li>
+                    <li><a href="">小列表</a></li>
+                    <li><a href="">小列表</a></li>
+                    <li><a href="">小列表</a></li>
+                    <li style="border-bottom:1px solid #ccc"><a href="">小列表</a></li>
+                </ul>
+            </li>
+            <li><a href="">标题3</a></li>
+            <li><a href="">标题4</a></li>
+            <li style="border-bottom:1px solid #ccc">
+                <a href="">标题5</a>
+                <ul>
+                    <li><a href="">小列表222</a></li>
+                    <li><a href="">小列表222</a>
+                        <ul>
+                            <li><a href="">小列表333</a></li>
+                            <li><a href="">小列表333</a></li>
+                            <li><a href="">小列表333</a></li>
+                            <li><a href="">小列表333</a></li>
+                            <li style="border-bottom:1px solid #ccc"><a href="">小列表</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="">小列表</a></li>
+                    <li><a href="">小列表</a></li>
+                    <li style="border-bottom:1px solid #ccc"><a href="">小列表</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+	<script type="text/javascript">
+		var m = new Menu();
+		m.init('list');
+	</script>
+ </body>
+</html>

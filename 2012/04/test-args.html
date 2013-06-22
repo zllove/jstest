@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-args</title>
+    <style media="screen" type="text/css">     </style>
+    <style media="print" type="text/css">     </style>
+</head>
+<body>
+<script type="text/javascript">
+    function foo(args1, args2, args3){
+        if(args3 == true){
+            args2 = Array.prototype.slice.call(arguments, 0);
+            args2 = args2.concat(args3);
+        }
+        console.log(args2);
+    }
+//    foo({name: 1},[2,3], true);
+    
+    function bar(args1, args2, args3){
+        var method = this;
+        if(typeof args3 == 'number'){
+            var callArgs = args2 || arguments;
+            callArgs = Array.prototype.slice.call(arguments, 0);
+            var applyArgs = [args3, 0].concat(args2);
+            console.log('callArgs', callArgs);
+            console.log('applyArgs', applyArgs);
+            Array.prototype.splice.apply(callArgs, applyArgs);
+            console.log('endcall', callArgs);
+        }
+    }
+    bar(2,3,2);
+
+</script>
+<script type="text/javascript">
+//    var mydiv = $('<div id="mydiv"></div>').appendTo($('#target'));
+//    mydiv.wrapInner('<div id="innerdiv"></div>');
+</script>
+<p id="el1">111</p><p id="el2">222</p><p>333</p>
+<script type="text/javascript">
+    var pElement = document.getElementsByTagName('p');
+    console.log(pElement);
+</script>
+</body>
+</html>

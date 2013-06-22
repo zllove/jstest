@@ -1,0 +1,639 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>
+            js拖拽组件5
+        </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<script type="text/javascript" src="Drag.js"></script>
+        <script type="text/javascript">
+//------------------------Utility------------------------
+function findPosX(obj) {//辅助函数 得到元素左边与浏览器左边的边距
+	var curleft = 0;
+	if (obj && obj.offsetParent) {
+		while (obj.offsetParent) {
+			curleft += obj.offsetLeft;
+			obj = obj.offsetParent;
+		}
+	} else if (obj && obj.x) curleft += obj.x;
+	return curleft;// + document.body.scrollLeft - document.body.clientLeft;
+}
+
+function findPosY(obj) {//辅助函数 得到元素上边与浏览器上边的边距
+	var curtop = 0;
+	if (obj && obj.offsetParent) {
+		while (obj.offsetParent) {
+			curtop += obj.offsetTop;
+			obj = obj.offsetParent;
+		}
+	} else if (obj && obj.y) curtop += obj.y;
+	return curtop;// + document.body.scrollTop - document.body.clientTop;
+}
+
+var StringBuilder = function(){
+	var self = this;
+	var array = [];
+	this.append = function(str){
+		array.push(str);
+	}
+	this.toString = function(){
+		return array.join("");
+	}
+}
+
+function setCookie(sName,sValue,oExpires,sPath,sDomain,bSecure){
+	var sCookie = sName + "=" + encodeURIComponent(sValue);
+	if(oExpires)
+		sCookie += "; expires=" + oExpires.toGMTString();
+	if(sPath)
+		sCookie += "; path=" + sPath;
+	if(sDomain)
+		sCookie += "; domain=" + sDomain;
+	if(bSecure)
+		sCookie += "; secure";
+		
+	document.cookie = sCookie;
+}
+
+function getCookie(sName){
+	var sRE = "(?:; )?" + sName + "=([^;]*);?";
+	var oRE = new RegExp(sRE);
+	if(oRE.test(document.cookie))
+		return decodeURIComponent(RegExp["$1"]);
+	else
+		return null;
+}
+
+var dragGhost = document.createElement("div");
+dragGhost.style.border = "dashed 1px #CCCCCC";
+dragGhost.style.background = "white";
+dragGhost.style.display = "none";
+dragGhost.style.margin = "10px";
+
+var isIE = document.all;
+
+//------------------------Start Here------------------------
+var XDrag = new Object();
+XDrag.tabs = [];//所有的tab集合 每个元素是tab对象 tab.elm才是html对象
+XDrag.pages = [];//所有的页的集合 每个元素是html对象
+XDrag.selectedTab = null;//当前选中的tab
+XDrag.changeTabTimeout = 1000;
+
+XDrag.save = function(){//将结果保存到cookie
+	var jsonString = new StringBuilder();
+	jsonString.append('{"pages":[')
+	for(var i=0;i<XDrag.pages.length;i++){//遍历每一页
+		jsonString.append("[");
+		var page = XDrag.pages[i];
+		for(var j=0;j<page.childNodes.length;j++){//遍历每一列
+			var column = page.childNodes[j];
+			if(column.nodeName.toLowerCase() != "div")
+				continue;
+			jsonString.append("[");
+			for(var k=0;k<column.childNodes.length;k++){//遍历每一列的module
+				var module = column.childNodes[k];
+				if(module.nodeName.toLowerCase() != "div" || module.style.display == "none")
+					continue;
+				jsonString.append('"' + module.id + '",');
+			}
+			jsonString.append("],");
+		}
+		jsonString.append("],");
+	}
+	jsonString.append(']}');
+	var jsonStr = jsonString.toString();
+	var cookieValue = jsonStr.replace(/,]/g,"]");
+	setCookie("XDrag",cookieValue,null,null,null,false);
+}
+XDrag.defaultLayout = '{"pages":[[["ab49194c-7e8a-3d69-0982-263d89e78a18","7e3cc8bc-1f3e-778a-3dc8-4ae5caae7441","d528aafe-46b2-af22-8742-1d1ac2ce8370","e7cba86c-76b1-12b7-ff4d-3700d0148630"],["5a4df923-f335-bc5f-5f4d-c2f415bb0f1c","2221085c-54d7-ec27-31f1-d8a9d9be4163","77bd4ea9-3f11-bf3f-99ec-e4752b3c7fad","baadcd83-6603-eb06-9af3-fbe05a3e59f7"],["5b769e55-63d3-e3c4-c33e-b4a6eb6b94eb","e1d3b9c1-a397-6a09-3f32-f7b641d54b4b","81dbcb9a-cc8c-b1b5-cd5c-208a33edb2ac","3d67e4d4-28cc-da98-d375-659bb17f3ca8"]],[["81f687a5-ac69-7a17-71e0-b1cef14e79e6","d5f60dea-15d9-5db3-ca97-6eda5be414ce","78aae17b-0631-dbd1-7e46-a3f6148925e2","4dbb253a-c6e2-1141-265a-8bc4b55c6b71"],["386b7cd6-2a4d-729a-84d6-1a7198ad6608","a30558b3-252f-dd9a-6f79-c85e4925c795","83901491-d362-5aa8-17d2-7662a24292da","ab45d062-c2a4-c1eb-16b2-bd805ae77799"],["e649b443-8df8-7e3b-c02e-8314bac89c70","bb7aecea-33df-cb58-1b11-801a01c9aefa","d854515e-3ced-6317-27c7-87692d8514f8","9cd35136-9d03-bd92-7d70-a7e8a21454a6"]],[["86afdf5a-33b2-8cf6-a2d3-9b78b4bf020d","c59373b6-cc26-af60-2774-361c53939e11","f27371e8-ed63-72b2-9269-61de99e841d3","2b7126a3-34ab-1496-6661-0252ac23468c"],["34b7edb9-2a86-f4ab-ba5c-594813099469","67f730da-67c8-49e4-35e9-e672e73ebca1","173ef9d5-3a2b-d0b7-25e2-1bda82816217","4846bc25-e8a3-fa39-3f1b-a47a922f56ca"],["f4bd4bbe-375c-ab61-6b58-71f74da319e8","c27ec91b-935e-47b3-56cb-757125a97664","14a5e9ca-f676-0599-2cc7-afba7b692b80","3776c44b-636f-7cb8-bc91-ea8bf8633864"]],[["099b9d02-8938-acbb-7764-04ae76a55527","d2b69d52-3aef-0ac5-bb16-7ee0d34ab843","6589d3e9-e923-bc22-8aba-684b02cb3d69","fb78f69b-37b6-9595-4335-291b6b4a1756"],["acb961ec-7072-3618-0dd8-47455db37ec7","e39ee189-3adc-bd87-d1b4-d46dc5bab73b","46e7156a-46fa-6537-f272-968f5c9139f9","b2fd9dd2-7834-ba26-79e8-dbb5de7dd23c"],["a237d5d7-cc4a-6bc4-7898-a9e12b114e2a","3de4a463-6c69-07c2-b44b-db3482a66b37","01a6e85a-adab-dd16-19fb-224416824562","45d36a37-74ba-2c1a-64f7-1e439b31ad58"]]]}';
+XDrag.readFromCookie = function(){//读取cookie
+	var value = getCookie("XDrag") || XDrag.defaultLayout;
+	var obj = eval('(' + value + ')');
+	return obj;
+}
+XDrag.init = function(){
+	var tabs = document.getElementById("tabs");
+	for(var i=0;i<tabs.childNodes.length;i++){
+		if(tabs.childNodes[i].nodeName.toLowerCase() == "li")
+			XDrag.tabs.push(new tab(tabs.childNodes[i]));
+	}//初始化所有的tab页标签
+	
+	var pages = document.getElementById("pages");
+	for(var i=0;i<pages.childNodes.length;i++){
+		if(pages.childNodes[i].nodeName.toLowerCase() == "div"){
+			XDrag.pages.push(pages.childNodes[i]);
+		}
+	}//找到所有的页
+	data = XDrag.readFromCookie();
+	for(var i=0;i<XDrag.tabs.length;i++){
+		if(XDrag.pages[i]){
+			var page =  XDrag.pages[i];//page
+			XDrag.tabs[i].page = page;
+			page.tab = XDrag.tabs[i];//page和tab可以互相引用
+			
+			var pageData = data.pages[i];
+			var columnIndex = 0;
+			for(var j=0;j<page.childNodes.length;j++){
+				var column = page.childNodes[j];//column
+				if(column.nodeName.toLowerCase() == "div"){
+					var columnData = pageData[columnIndex];
+					if(!page.columns)
+						page.columns = [];
+					page.columns.push(column);
+					column.page = page;
+					
+					for(var k=0;k<columnData.length;k++){
+						
+						var moduleElm = document.getElementById(columnData[k]);
+						moduleElm.column = column;
+						column.appendChild(moduleElm);
+						new module(moduleElm);
+						//if(column.childNodes[k].nodeName.toLowerCase() == "div"){
+						//	var moduleElm = column.childNodes[k];//module
+						//	moduleElm.column = column;
+						//	new module(moduleElm);
+						//	
+						//	moduleIndex ++;
+						//}
+					}
+					columnIndex ++;
+				}
+			}
+		}
+	}//把tab页标签和页内容对应起来 初始化每个module
+	
+	XDrag.tabs[0].select();//默认选中第一个页签
+}
+var tab = function(tabElm){
+	var self = this;
+	this.page = null;
+	this.elm = tabElm;
+	this.select = function(){
+		if(!this.page)
+			return;
+		if(XDrag.selectedTab){
+			XDrag.selectedTab.elm.className = "";
+			XDrag.selectedTab.page.style.display = "none";
+		}
+		this.elm.className = "tabSelected";
+		this.page.style.display = "block";
+		XDrag.selectedTab = this;
+	}
+	this.elm.onclick = function(){
+		//this.select(); 这个时候this指的是this.elm
+		self.select();
+	}
+	this.elm.onmouseover = function(){
+		if(XDrag.selectedTab != self)
+			this.className = "tabHover";
+	}
+	this.elm.onmouseout = function(){
+		if(XDrag.selectedTab != self)
+			this.className = "";
+	}
+}
+var module = function(moduleElm){
+	var self = this;
+	this.elm = moduleElm;
+	this.elm.module = this;
+	this.column = moduleElm.column;
+	this.page = this.column.page;
+	this.handle = this.elm.getElementsByTagName("h3")[0];
+	
+	if(this.handle && this.elm){
+		Drag.init(this.handle,this.elm);
+	}else{
+		return;
+	}
+	this.elm.onDragStart = function(left,top,mouseX,mouseY){
+		//开始拖动的时候设置透明度
+		
+		this.style.opacity = "0.5";
+		this.style.filter = "alpha(opacity=50)";
+		dragGhost.style.height = (isIE?this.offsetHeight:this.offsetHeight - 2) + "px";
+		
+		//this指的是item
+		
+		this.style.width = this.offsetWidth + "px";//因为初始的width为auto
+		this.style.left = (findPosX(this) - 5) + "px";
+		this.style.top = (findPosY(this) - 5) + "px";
+		this.style.position = "absolute";
+		
+		//将ghost插入到当前位置
+		
+		dragGhost.style.display = "block";
+		self.column.insertBefore(dragGhost,this);
+		
+		//记录每一列的左边距 在拖动过程中判断拖动对象所在的列会用到
+		
+		this.columnsX = [];
+		for(var i=0;i<self.column.page.columns.length;i++){
+			this.columnsX.push(findPosX(self.column.page.columns[i]));
+		}
+			
+	}
+	this.elm.onDrag = function(left,top,mouseX,mouseY){
+		this.currentTab = null;
+		//判断是否在tab上
+		
+		for(var i=0;i<XDrag.tabs.length;i++){
+			var tabElm = XDrag.tabs[i].elm;
+			if((findPosX(tabElm) < mouseX) &&
+				(findPosX(tabElm) + tabElm.offsetWidth > mouseX) &&
+				(findPosY(tabElm) < mouseY) &&
+				(findPosY(tabElm) + tabElm.offsetHeight > mouseY)){
+				this.currentTab = XDrag.tabs[i];
+				break;
+			}
+		}
+		if(this.currentTab != null){
+			if(dragGhost.parentNode)
+				dragGhost.parentNode.removeChild(dragGhost);
+
+			function changeTab(){
+				//先得把module放到当前的这一页
+				//否则会随着tab的改变而消失
+				
+				var currentColumn = self.elm.currentTab.page.columns[0];
+				
+				var flag = false;
+				for(var i=0;i<currentColumn.childNodes.length;i++){
+					if(currentColumn.childNodes[i].nodeName.toLowerCase() == "div"){
+						currentColumn.insertBefore(self.elm,currentColumn.childNodes[i]);
+						flag = true;
+						break;
+					}
+				}
+				if(!flag)
+					currentColumn.appendChild(this);
+				self.column = currentColumn;//将拖动的module添加到这一页的第一列 因为display还为absolute 所以module还跟着鼠标在走
+				
+				self.elm.currentTab.select();
+				XDrag.changeTabTimeoutId == null;
+			}
+			
+			//如果Timeout不为空（防止重复设置Timeout） 而且移动到的tab不是当前的tab（如果是当前tab则不需要改变tab页了）
+			
+			if(XDrag.changeTabTimeoutId == null && this.currentTab != XDrag.selectedTab)
+				XDrag.changeTabTimeoutId = setTimeout(changeTab,XDrag.changeTabTimeout);
+			return;//如果鼠标在tab上 则不必理会页面内的移动了
+			
+		}
+		
+		//以下是计算在页面内拖拽的代码
+		
+		clearTimeout(XDrag.changeTabTimeoutId);
+		XDrag.changeTabTimeoutId = null;//既然鼠标都没有在tab上了 当然就应该清空timeout了
+		//先要判断在哪一列移动
+		
+		var columnIndex = 0; 
+		
+		for(var i=0;i<this.columnsX.length;i++){
+			if((left + this.offsetWidth/2) > this.columnsX[i]){
+				columnIndex = i;
+			}
+		}
+		//如果columnIndex在循环中没有被赋值 则表示当前拖动对象在第一列的左边
+		//此时也把它放到第一列
+		
+		var column = self.column.page.columns[columnIndex];
+		
+		if(self.column != column){
+			//之前拖动对象不在这个列
+			//将ghost放置到这一列的最下方
+			
+			//如果已经跨页拖放了 也会执行这里的
+			
+			column.appendChild(dragGhost);
+			self.column = column;
+		}
+		
+		//然后在判断放在这一列的什么位置
+		
+		var currentNode = null;
+		for(var i=0;i<self.column.childNodes.length;i++){
+			if(self.column.childNodes[i].className == "item"
+			&& self.column.childNodes[i] != this//不能跟拖动元素自己比较 否则不能在本列向下移动
+			
+			&& top < findPosY(self.column.childNodes[i])){//从上到下找到第一个比拖动元素的上边距大的元素
+			
+				currentNode = self.column.childNodes[i];
+				break;
+			}
+		}
+		if(currentNode)
+			self.column.insertBefore(dragGhost,currentNode);
+		else//拖到最下边 没有任何一个元素的上边距比拖动元素的top大 则添加到列的最后
+		
+			self.column.appendChild(dragGhost);
+	}
+	this.elm.onDragEnd = function(left,top,mouseX,mouseY){
+		if(this.currentTab != null){
+			//this.currentTab != null表示鼠标拖拽的module在tab上释放 无论这个时候tab是否因为鼠标的停留而转换了页签
+			
+			clearTimeout(XDrag.changeTabTimeoutId);
+			XDrag.changeTabTimeoutId = null;
+			var firstColumn = this.currentTab.page.columns[0];
+			var flag = false;
+			for(var i=0;i<firstColumn.childNodes.length;i++){
+				if(firstColumn.childNodes[i].nodeName.toLowerCase() == "div"){
+					firstColumn.insertBefore(this,firstColumn.childNodes[i]);
+					flag = true;
+					break;
+				}
+			}
+			if(!flag)
+				firstColumn.appendChild(this);
+			self.column = firstColumn;
+		}else{
+			self.column.insertBefore(this,dragGhost);
+		}
+		this.style.opacity = "1";
+		this.style.filter = "alpha(opacity=100)";
+		
+		this.style.position = "static";
+		this.style.display = "block";
+		this.style.width = "auto";
+		dragGhost.style.display = "none";
+		self.page = self.column.page;//需要手动更新(奇怪 self.page难道是个值类型)
+		//也可以不要最后这一句 仅仅是为了数据的完整性
+		
+	}
+}
+window.onload=function(){
+	XDrag.init();
+	window.onbeforeunload = RunOnBeforeUnload;
+}
+
+function RunOnBeforeUnload(){
+	XDrag.save();
+}
+
+
+        </script>
+        <link href="Style.css" type="text/css" rel="Stylesheet" />
+    </head>
+    <body>
+    	<h4>http://www.cnblogs.com/LongWay/archive/2008/10/06/1304686.html</h4>
+        <div id="container">
+			<div id="header">
+				<p><input id="Button1" type="button" value="Save to cookie" onclick="XDrag.save();alert('Save success!');" />将数据保存到Cookie 实际上在每次页面离开的时候会自动保存</p>
+				<p><input id="Button2" type="button" value="Read JSON string from cookie" onclick="alert(getCookie('XDrag'));" />从Cookie读取数据 这里只是提供查看JSON字符串</p>
+			</div>
+			<ul id="tabs">
+				<li>
+					Page1
+				</li>
+				<li>
+					Page2
+				</li>
+				<li>
+					Page3
+				</li>
+				<li>
+					Page4
+				</li>
+			</ul>
+			<div id="pages">
+				<div id="page1" class="columns">
+					<div class="column" style="width:300px;">
+					</div>
+					<div class="column">
+					</div>
+					<div class="column">
+					</div>
+				</div>
+				<div id="page2" class="columns">
+					<div class="column">
+					</div>
+					<div class="column" style="width:300px;">
+					</div>
+					<div class="column">
+					</div>
+				</div>
+				<div id="page3" class="columns">
+					<div class="column">
+					</div>
+					<div class="column">
+					</div>
+					<div class="column" style="width:300px;">
+					</div>
+				</div>
+				<div id="page4" class="columns">
+					<div class="column">
+					</div>
+					<div class="column" style="width:300px;">
+					</div>
+					<div class="column">
+					</div>
+				</div>
+			</div>
+			<div id="tempContaniner" style="display:none;">
+			
+				<div id="ab49194c-7e8a-3d69-0982-263d89e78a18" class="item">
+					<h3 class="page1">Page1 Header</h3>
+					<p>column1 item1</p>
+				</div>
+				<div id="7e3cc8bc-1f3e-778a-3dc8-4ae5caae7441" class="item">
+					<h3 class="page1">Page1 Header</h3>
+					<p>column1 item2<br />Some text here, so that the height is different!</p>
+				</div>
+				<div id="d528aafe-46b2-af22-8742-1d1ac2ce8370" class="item">
+					<h3 class="page1">Page1 Header</h3>
+					<p>column1 item3</p>
+				</div>
+				<div id="e7cba86c-76b1-12b7-ff4d-3700d0148630" class="item">
+					<h3 class="page1">Page1 Header</h3>
+					<p>column1 item4</p>
+				</div>
+				
+				<div id="5a4df923-f335-bc5f-5f4d-c2f415bb0f1c" class="item">
+					<h3 class="page1">Page1 Header</h3>
+					<p>column2 item1</p>
+				</div>
+				<div id="2221085c-54d7-ec27-31f1-d8a9d9be4163" class="item">
+					<h3 class="page1">Page1 Header</h3>
+					<p>column2 item2</p>
+				</div>
+				<div id="77bd4ea9-3f11-bf3f-99ec-e4752b3c7fad" class="item">
+					<h3 class="page1">Page1 Header</h3>
+					<p>column2 item3<br />Some text here, so that the height is different!</p>
+				</div>
+				<div id="baadcd83-6603-eb06-9af3-fbe05a3e59f7" class="item">
+					<h3 class="page1">Page1 Header</h3>
+					<p>column2 item4<br />Some text here, so that the height is different!</p>
+				</div>
+				
+				<div id="5b769e55-63d3-e3c4-c33e-b4a6eb6b94eb" class="item">
+					<h3 class="page1">Page1 Header</h3>
+					<p>column3 item1</p>
+				</div>
+				<div id="e1d3b9c1-a397-6a09-3f32-f7b641d54b4b" class="item">
+					<h3 class="page1">Page1 Header</h3>
+					<p>column3 item2</p>
+				</div>
+				<div id="81dbcb9a-cc8c-b1b5-cd5c-208a33edb2ac" class="item">
+					<h3 class="page1">Page1 Header</h3>
+					<p>column3 item3</p>
+				</div>
+				<div id="3d67e4d4-28cc-da98-d375-659bb17f3ca8" class="item">
+					<h3 class="page1">Page1 Header</h3>
+					<p>column3 item4</p>
+				</div>
+				
+				<div id="81f687a5-ac69-7a17-71e0-b1cef14e79e6" class="item">
+					<h3 class="page2">Page2 Header</h3>
+					<p>column1 item1</p>
+				</div>
+				<div id="d5f60dea-15d9-5db3-ca97-6eda5be414ce" class="item">
+					<h3 class="page2">Page2 Header</h3>
+					<p>column1 item2<br />Some text here, so that the height is different!</p>
+				</div>
+				<div id="78aae17b-0631-dbd1-7e46-a3f6148925e2" class="item">
+					<h3 class="page2">Page2 Header</h3>
+					<p>column1 item3</p>
+				</div>
+				<div id="4dbb253a-c6e2-1141-265a-8bc4b55c6b71" class="item">
+					<h3 class="page2">Page2 Header</h3>
+					<p>column1 item4</p>
+				</div>
+				
+				<div id="386b7cd6-2a4d-729a-84d6-1a7198ad6608" class="item">
+					<h3 class="page2">Page2 Header</h3>
+					<p>column2 item1</p>
+				</div>
+				<div id="a30558b3-252f-dd9a-6f79-c85e4925c795" class="item">
+					<h3 class="page2">Page2 Header</h3>
+					<p>column2 item2</p>
+				</div>
+				<div id="83901491-d362-5aa8-17d2-7662a24292da" class="item">
+					<h3 class="page2">Page2 Header</h3>
+					<p>column2 item3<br />Some text here, so that the height is different!</p>
+				</div>
+				<div id="ab45d062-c2a4-c1eb-16b2-bd805ae77799" class="item">
+					<h3 class="page2">Page2 Header</h3>
+					<p>column2 item4<br />Some text here, so that the height is different!</p>
+				</div>
+				
+				<div id="e649b443-8df8-7e3b-c02e-8314bac89c70" class="item">
+					<h3 class="page2">Page2 Header</h3>
+					<p>column3 item1</p>
+				</div>
+				<div id="bb7aecea-33df-cb58-1b11-801a01c9aefa" class="item">
+					<h3 class="page2">Page2 Header</h3>
+					<p>column3 item2</p>
+				</div>
+				<div id="d854515e-3ced-6317-27c7-87692d8514f8" class="item">
+					<h3 class="page2">Page2 Header</h3>
+					<p>column3 item3</p>
+				</div>
+				<div id="9cd35136-9d03-bd92-7d70-a7e8a21454a6" class="item">
+					<h3 class="page2">Page2 Header</h3>
+					<p>column3 item4</p>
+				</div>
+				
+				<div id="86afdf5a-33b2-8cf6-a2d3-9b78b4bf020d" class="item">
+					<h3 class="page3">Page3 Header</h3>
+					<p>column1 item1</p>
+				</div>
+				<div id="c59373b6-cc26-af60-2774-361c53939e11" class="item">
+					<h3 class="page3">Page3 Header</h3>
+					<p>column1 item2<br />Some text here, so that the height is different!</p>
+				</div>
+				<div id="f27371e8-ed63-72b2-9269-61de99e841d3" class="item">
+					<h3 class="page3">Page3 Header</h3>
+					<p>column1 item3</p>
+				</div>
+				<div id="2b7126a3-34ab-1496-6661-0252ac23468c" class="item">
+					<h3 class="page3">Page3 Header</h3>
+					<p>column1 item4</p>
+				</div>
+				
+				<div id="34b7edb9-2a86-f4ab-ba5c-594813099469" class="item">
+					<h3 class="page3">Page3 Header</h3>
+					<p>column2 item1</p>
+				</div>
+				<div id="67f730da-67c8-49e4-35e9-e672e73ebca1" class="item">
+					<h3 class="page3">Page3 Header</h3>
+					<p>column2 item2</p>
+				</div>
+				<div id="173ef9d5-3a2b-d0b7-25e2-1bda82816217" class="item">
+					<h3 class="page3">Page3 Header</h3>
+					<p>column2 item3<br />Some text here, so that the height is different!</p>
+				</div>
+				<div id="4846bc25-e8a3-fa39-3f1b-a47a922f56ca" class="item">
+					<h3 class="page3">Page3 Header</h3>
+					<p>column2 item4<br />Some text here, so that the height is different!</p>
+				</div>
+				
+				<div id="f4bd4bbe-375c-ab61-6b58-71f74da319e8" class="item">
+					<h3 class="page3">Page3 Header</h3>
+					<p>column3 item1</p>
+				</div>
+				<div id="c27ec91b-935e-47b3-56cb-757125a97664" class="item">
+					<h3 class="page3">Page3 Header</h3>
+					<p>column3 item2</p>
+				</div>
+				<div id="14a5e9ca-f676-0599-2cc7-afba7b692b80" class="item">
+					<h3 class="page3">Page3 Header</h3>
+					<p>column3 item3</p>
+				</div>
+				<div id="3776c44b-636f-7cb8-bc91-ea8bf8633864" class="item">
+					<h3 class="page3">Page3 Header</h3>
+					<p>column3 item4</p>
+				</div>
+				
+				<div id="099b9d02-8938-acbb-7764-04ae76a55527" class="item">
+					<h3 class="page4">Page4 Header</h3>
+					<p>column1 item1</p>
+				</div>
+				<div id="d2b69d52-3aef-0ac5-bb16-7ee0d34ab843" class="item">
+					<h3 class="page4">Page4 Header</h3>
+					<p>column1 item2<br />Some text here, so that the height is different!</p>
+				</div>
+				<div id="6589d3e9-e923-bc22-8aba-684b02cb3d69" class="item">
+					<h3 class="page4">Page4 Header</h3>
+					<p>column1 item3</p>
+				</div>
+				<div id="fb78f69b-37b6-9595-4335-291b6b4a1756" class="item">
+					<h3 class="page4">Page4 Header</h3>
+					<p>column1 item4</p>
+				</div>
+				
+				<div id="acb961ec-7072-3618-0dd8-47455db37ec7" class="item">
+					<h3 class="page4">Page4 Header</h3>
+					<p>column2 item1</p>
+				</div>
+				<div id="e39ee189-3adc-bd87-d1b4-d46dc5bab73b" class="item">
+					<h3 class="page4">Page4 Header</h3>
+					<p>column2 item2</p>
+				</div>
+				<div id="46e7156a-46fa-6537-f272-968f5c9139f9" class="item">
+					<h3 class="page4">Page4 Header</h3>
+					<p>column2 item3<br />Some text here, so that the height is different!</p>
+				</div>
+				<div id="b2fd9dd2-7834-ba26-79e8-dbb5de7dd23c" class="item">
+					<h3 class="page4">Page4 Header</h3>
+					<p>column2 item4<br />Some text here, so that the height is different!</p>
+				</div>
+				
+				<div id="a237d5d7-cc4a-6bc4-7898-a9e12b114e2a" class="item">
+					<h3 class="page4">Page4 Header</h3>
+					<p>column3 item1</p>
+				</div>
+				<div id="3de4a463-6c69-07c2-b44b-db3482a66b37" class="item">
+					<h3 class="page4">Page4 Header</h3>
+					<p>column3 item2</p>
+				</div>
+				<div id="01a6e85a-adab-dd16-19fb-224416824562" class="item">
+					<h3 class="page4">Page4 Header</h3>
+					<p>column3 item3</p>
+				</div>
+				<div id="45d36a37-74ba-2c1a-64f7-1e439b31ad58" class="item">
+					<h3 class="page4">Page4 Header</h3>
+					<p>column3 item4</p>
+				</div>
+			</div>
+        </div>
+    </body>
+</html>

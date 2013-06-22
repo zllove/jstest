@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+span{display:inline-block;margin:0 5px;width:50px;height:30px;line-height:30px;background:#ccc;padding:0 5px;}
+#test{border:1px solid #ccc;background:#efefef;}
+</style>
+</head>
+
+<body>
+<span>哈哈</span><span>嘿嘿</span><span>呵呵</span>
+<a href="#">哈哈</a><a href="#">嘿嘿</a><a href="#">呵呵</a>
+<div id="test">这里是test
+<br />
+<br />
+<br />
+<br />
+
+
+</div>
+<script type="text/javascript">
+	function displayEle(id){
+		var ele = document.getElementById(id);
+		ele.style.display = ele.style.display == "block" ? "none" : "block";
+	}
+	setInterval("displayEle('test')",1000);
+</script>
+</body>
+</html>

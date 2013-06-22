@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Div + CSS 选项卡</title>
+<style type="text/css">
+.clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
+.clearfix { display:inline-block; }
+* html .clearfix, * html { height:1%; }
+.clearfix { display:block; }
+.clear { border-top:1px solid transparent!important; border-top:0; clear:both; line-height:0; font-size:0; height:0; height:1%; }
+.goods-detail-tab { margin:30px 0 0 0; background:url(images/tabsepbg.gif) repeat-x 0 1px; padding-left:5px; overflow:visible; }
+.goods-detail-tab div { cursor:pointer; background:url(images/tabs_common.gif) no-repeat; color:#666; display:block; float:left; height:17px; padding:4px 2px; text-align:center; width:91px; }
+.goods-detail-tab .active { background:url(images/tabs_on.gif) no-repeat; color:#000; display:block; font-size:14px; font-weight:bold; height:28px; position:relative; margin-bottom:-4px; margin-top:-8px; padding-top:6px; width:117px; }
+</style>
+</head>
+<body>
+<div class="goods-detail-tab clearfix" id="tabs">
+  <div class="goodsDetailTab active">商品详情</div>
+  <div class="goodsDetailTab">购买咨询</div>
+  <div class="goodsDetailTab">商品评论</div>
+</div>
+<div class="clear"></div>
+<div id="ka">
+  <div>11111</div>
+  <div>22222</div>
+  <div>33333</div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+var tab = document.getElementById('tabs').getElementsByTagName('div');
+var kbs = document.getElementById('ka').getElementsByTagName('div');
+function put_css(){	
+	for(var i=0; i<tab.length; i++){
+		tab[i].currentI = i;
+		kbs[i].style.display = i == 0 ? "block" : "none";
+		tab[i].onclick = function(){
+			 //alert(this.currentI);
+			 //alert(i);			 
+			 for(var j=0; j<kbs.length; j++){				 
+				 kbs[j].style.display = "none";
+				 if(j == this.currentI){
+					 kbs[this.currentI].style.display = "block";					
+				 } 
+				 tab[j].className = 'goodsDetailTab';				 
+			 }	
+			 tab[this.currentI].className = 'goodsDetailTab active';			 
+		}
+		
+	}
+}
+put_css();
+//put_css(1);
+</script>

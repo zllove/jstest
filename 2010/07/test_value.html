@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>豪情</title>
+<script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js"></script>
+<script>
+$(document).ready(function() {
+	$('dt:first').css('border-top-width','0');
+	$('dd:not(:first)').hide(); //第一个展开
+	//$('dd').hide(); //第一个不展开
+	$('dt').click(function() {
+		$('dd').slideUp(500);
+		$(this).next().slideDown(500);
+	});
+});
+</script>
+<style type="text/css">
+* { margin:0; padding:0; }
+dl { width:300px; font-size:12px; text-align:center; margin:10px; border:1px #ADCD3C solid; }
+dt { cursor:pointer; font-size:14px; font-weight:bold; line-height:30px; background:#F0FBEB; }
+dt { border-top:1px #dedede solid; }
+ul { list-style-type:none; }
+li { background:#F2FDDB; line-height:25px; border-top:1px #9BDF70 solid; }
+.line { border-top:1px #dedede solid; }
+
+
+</style>
+</head>
+<body>
+<dl>
+  <dt>第一章</dt>
+  <dd>
+    <ul>
+      <li>我的祖国</li>
+      <li>我的祖国</li>
+      <li>我的祖国</li>
+      <li>我的祖国</li>
+    </ul>
+  </dd>
+  <dt>第二章</dt>
+  <dd>
+    <ul>
+      <li>小英雄喜洋洋</li>
+      <li>小英雄喜洋洋</li>
+      <li>小英雄喜洋洋</li>
+      <li>小英雄喜洋洋</li>
+    </ul>
+  </dd>
+  <dt>第三章</dt>
+  <dd>
+    <ul>
+      <li>唐诗宋词赏析</li>
+      <li>唐诗宋词赏析</li>
+      <li>唐诗宋词赏析</li>
+      <li>唐诗宋词赏析</li>
+    </ul>
+  </dd>
+</dl>
+</body>
+</html>

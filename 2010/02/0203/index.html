@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<script type="text/javascript">
+	var EventUtil = new Object();
+	EventUtil.formatEvent = function(oEvent){
+		if(isIE && isWin){
+			oEvent.charCode = (oEvent.type == "keypress") ? oEvent.keyCode : 0;
+			oEvent.eventPhare = 2;
+			oEvent.isChar = (oEvent.charCode > 0);
+		}
+		return oEvent;
+	}
+	
+	var TextUtil = new Object();
+	TextUtil.isNotMax = function(oTextArea){
+		return oTextArea.value.length != oTextArea.getAttribute("maxlength");
+	}
+
+	TextUtil.allowChars = function(oText, oEvent){
+		oEvent = EventUtil.formatEvent(oEvent);
+		var sChar = String.fromCharCode(oEvent.charCode);	
+	}
+
+</script>
+</head>
+
+<body oncontextmenu="return false;">
+<textarea name="" id="" cols="30" rows="10" maxlength="10" onkeypress="return TextUtil.isNotMax(this)" ></textarea>
+<input type="text" name="" id="" onpasete="return false;" oncontextmenu="return false;" />
+
+
+</body>
+</html>

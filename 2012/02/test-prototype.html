@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-prototype</title>
+</head>
+<body>
+<script type="text/javascript">
+    Array.prototype.min = function(){
+        var min = this[0] ;
+        for(var i=0; i<this.length; i++){
+            if(this[i] < min){
+                min = this[i];
+            }
+        }
+        return min;
+    }
+//    console.log([1,56,34,12].min());
+    var arr = [1, 56, 34, 12];
+//    console.log(arr.constructor == Array); // true
+//    var foo = function(){}; // 等价于 var foo = new Function();
+    var foo = new Function();
+    /*
+    console.log(foo.constructor === Function); // true;
+    var obj = new foo();
+    console.log(obj.constructor == foo);
+    console.log(obj.constructor.constructor == Function);
+    function Person(name){
+        this.name = name;
+    }
+    Person.prototype.getName = function(){
+        return this.name;
+    }
+    var p = new Person('haoQing');
+    console.log(p.constructor == Person);
+    console.log(Person.prototype.constructor == Person);
+
+    function a(){};
+    alert(typeof a);
+    var a=1;
+
+    function two(a,b,c){
+        var i, arr =[];
+        for(i = 0; i<3; i++){
+            arr[i] = arguments[i] * 2;
+        }
+        return arr;
+    }
+    function addOne(a){
+        return a + 1;
+    }
+    var myArr = [];
+    myArr = two(10,20,30);
+    for(i = 0; i<3; i++){
+        myArr[i] = addOne(myArr[i]);
+    }
+    function f(){
+        var b = 'b';
+        return function(){
+            return b;
+        }
+    }
+    var n = f();
+    console.log(n);
+    var m = n();
+    console.log(m);
+    function f(arg){
+        var n = function(){
+            return arg;
+        };
+        arg++;
+        return n;
+    }
+    var m = f(123);
+    console.log(m);
+    var n = m();
+    console.log(n);
+
+    function f(){
+        var i = 0;
+        return function(){
+            return i++;
+        }
+    }
+    var incr = f();
+    console.log(incr());
+    console.log(incr());
+    console.log(incr());
+    function outer(){
+        var name = 'jikey';
+        function inner(){
+            console.log('Hello ' + name);
+        }
+        inner();
+    }
+    outer();
+
+    function sayHello(name){
+        var prefix = 'Hello';
+        var phrase = [prefix, name];
+        console.log(phrase.join(''));
+    }
+    sayHello('jikey');
+    function a(){
+        var i=0;
+        function b(){
+            alert(++i);
+        }
+        return b;
+    }
+    var c = a();
+    console.log(c());
+    var deep_thought = {
+        the_answer: 42,
+        ask_question: function(){
+            return this.the_answer;
+        }
+    }
+    var the_meaning = deep_thought.ask_question();
+    console.log(the_meaning);
+     *
+
+    function fun(){
+        alert(this);
+    }
+    fun.call(1);
+    fun.call('a');
+    fun.call(true);
+    fun.call({name: 'jikey'});
+    fun.call(undefined);
+    var s = 0;
+    (function(){
+        alert(s); // 0
+        s = 1;
+    })();
+    alert(s); // 1
+     */
+
+    function MyObj(id){
+        this.id = id;
+    }
+    var obj = new MyObj(1);
+    alert(MyObj.constructor); // 本地代码
+    alert(obj.constructor); // MyObj.toString();
+    alert(MyObj.prototype); // [Object Object]
+    alert(obj.prototype); // undefined
+
+
+</script>
+
+</body>
+</html>

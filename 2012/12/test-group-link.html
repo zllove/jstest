@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-group-link</title>
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.min.js"></script>
+	
+</head>
+<body>
+	<ul id="menu_li">
+		<li>aaaaa</li>
+		<li>aaaaaii</li>
+		<li>aaaaa333</li>
+	</ul>
+	<a href="" id="left"></a>
+	<script type="text/javascript">
+		var lis = $("#menu_li li"); //获得菜单的集合
+		var src_html = ['left.html', 'right.html', 'main.html'];
+		var left = $('#left');
+
+		lis.click(function(){
+			var idx = $(this).index();
+			left.attr('href', src_html[idx]);
+		});
+	</script>	
+</body>
+</html>

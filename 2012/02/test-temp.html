@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <script src="../jquery.js"></script>
+    <script src="../SF.js"></script>
+
+    <script src="qabox.js"></script>
+    <script src="../msgbox/msgbox.js"></script>
+
+    <style type="text/css">
+        *{ margin:0; padding:0; }
+    </style>
+</head>
+<body>
+<button id="delBtn">Delete</button>
+<button id="delBtn2">Delete2</button>
+<select name="" id="">
+    <option value="1">测试select遮罩</option>
+
+    <option value="1">test select option</option>
+</select>
+</body>
+</html>
+<script type="text/javascript">
+    $("#delBtn").on("click", function () {
+        SF.qabox.qa('确定删除邮件', '此操作不可逆!').done(function () {
+            SF.msgbox.show("del mail ok", 0, 2000);
+        }).fail(function () {
+            SF.msgbox.show("del mail fail", 1, 2000);
+        });
+    });
+
+    $("#delBtn2").on("click", function () {
+        SF.qabox.qa('确定删除邮件组', '此操作不可逆!').done(function () {
+            SF.msgbox.show("del mail group ok", 0, 2000);
+        }).fail(function () {
+            SF.msgbox.show("del mail group fail", 1, 2000);
+        });
+    });
+
+</script>

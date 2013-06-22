@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<div id="tar"></div>
+<div id="tar2"></div>
+<script type="text/javascript">
+    var json = [{
+        dd: 'sb',
+        AA: '东东',
+        red: 123
+    }, {
+        cccc: 'dd',
+        lk: 'lqw'
+    }];
+
+    var str = '';
+    for(var i=0; i<json.length; i++){
+        for (var p in json[i]) {
+            str += 'name:' + p + ', val: ' + json[i][p] + '<br/>';
+        }
+    }
+    document.getElementById('tar').innerHTML = str;
+
+    var obj = {
+        name: '冯娟',
+        password: '123456',
+        department: '技术部',
+        sex: '女',
+        old: 30
+    };
+    var str2 = '<br/>';
+    for (var per in obj) {
+        str2 += 'name: ' + per + ', val:' + obj[per] + '<br/>';
+    }
+    document.getElementById('tar2').innerHTML = str2;
+
+</script>
+</body>
+</html>

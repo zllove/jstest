@@ -1,0 +1,89 @@
+body {
+	background: #F2F2F2;	
+	font: 12px/1.5 Verdana,'ËÎÌו',tahoma, Srial, helvetica, sans-serif;
+	margin:0;
+	padding:0;
+}
+
+a {
+	font-size:12px;
+	color:#0F83DB;
+	text-decoration:none;
+}
+
+#header a:hover,#content p a:hover,#footer a:hover{
+	text-decoration:underline;
+}
+
+#header{
+	width:100%;
+	background: #666;
+	border-bottom:1px solid #FFF;
+	overflow:hidden;
+	height:32px;
+}
+
+#header_nav{
+	width:800px;
+	margin: 0px auto;
+	padding: 6px 0px;
+}
+
+#header a{
+	line-height:12px;
+	color: #FFF;
+}
+
+#header .top_home{
+	border-right: 1px solid #FFF;
+	padding-right: 6px;
+	margin-right: 2px;
+}
+
+.fleft{ display: inline; float:left;}
+
+.fright{ display: inline; float:right;}
+
+#content,#footer{
+	width: 760px;
+	margin: 50px auto;
+	margin-bottom:0;
+	padding:20px 20px 40px;
+	background: #FFF;	
+	border: 1px solid #CCC;
+	border-bottom:none;
+}
+
+#content h1 {
+	margin: 0; color: #F60;
+}
+
+hr {
+	border: none;
+	height: 1px; line-height: 1px;
+	background: #CCC;	
+	margin-bottom: 20px;
+	padding: 0;
+}
+
+p {
+	margin: 0;	
+	padding: 7px 0;
+}
+
+#footer{
+	width:780px;
+	padding:3px 10px;
+	margin: 0px auto;
+	border: 1px solid #CCC;
+	border-top:none;
+	overflow:hidden;
+}
+
+#footer .fleft,#footer .fleft a{
+	font:bold 9px/20px Verdana, Geneva, sans-serif;
+	color:#AAA;
+}
+
+#footer a{ font-weight:bold;color:#AAA; text-decoration:underline;}
+#footer a:hover{ color:#F80;}

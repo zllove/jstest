@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+body{padding:0px;margin:0px;}
+html{overflow-x:hidden;}
+#waidiv{height:64px;left:0px;bottom:0px;position:fixed;width:100%;}
+#waidiv .inner{ position:relative;background:url(wcup_bg_5.gif);width:970px;height:64px;padding:0px; margin:0px auto;left:50%;margin-left:-485px;}
+#waidiv .inner .close{display:block;background:url(btn_close.gif) left center no-repeat;float:right;color:#fff;cursor:pointer;padding:0 9px 0 18px;line-height:15px;margin-top:6px;font-family:宋体; white-space:nowrap;width:24px;position:absolute;top:6px;right:6px;font-size:12px;}
+#oimg{position:absolute;cursor:pointer;right:0px;display:block;bottom:0px;}
+</style>
+<script>
+var plug = {
+	getStyle:function(elem,name){
+		if(elem.style[name])
+			return elem.style[name];
+		else if(elem.currentStyle)	
+			return elem.currentStyle[name];
+		else if(document.defaultView&&document.defaultView.getComputedStyle){
+			name = name.replace(/([A-Z])/g,"-$1");
+			name = name.toLowerCase();
+			var s = document.defaultView.getComputedStyle(elem,"");
+			return s&&s.getPropertyValue(name);
+		}
+		else{return null}
+	},
+	addEvent:function(obj, type, fn){
+		if ( obj.attachEvent ) {
+            obj['e'+type+fn] = fn;
+            obj[type+fn] = function(){obj['e'+type+fn]( window.event );}
+            obj.attachEvent( 'on'+type, obj[type+fn] );
+        } else
+            obj.addEventListener( type, fn, false );	
+	}
+}
+
+//还是我那个运动函数
+function startMove(obj, json,speed, fnEnd){
+	if(obj.timer){
+		clearInterval(obj.timer);
+	}
+	obj.timer=setInterval(function (){
+		doMove(obj, json, speed,fnEnd);
+	}, 30);
+}
+function doMove(obj, json,speed,fnEnd){
+	var iCur=0;
+	var attr='';
+	var sp = speed;
+	var bStop=true;
+	for(attr in json){
+		if(attr=='opacity'){
+			iCur=parseInt(100*parseFloat(plug.getStyle(obj, 'opacity')));
+		}
+		else{
+			iCur=parseInt(plug.getStyle(obj, attr));
+		}
+		if(isNaN(iCur)){
+			iCur=0;
+		}
+		var iSpeed=(json[attr]-iCur)/sp;
+		iSpeed=iSpeed>0?Math.ceil(iSpeed):Math.floor(iSpeed);
+		if(parseInt(json[attr])!=iCur){
+			bStop=false;
+		}
+		if(attr=='opacity'){
+			obj.style.filter="alpha(opacity:"+(iCur+iSpeed)+")";
+			obj.style.opacity=(iCur+iSpeed)/100;
+		}
+		else{
+			obj.style[attr]=iCur+iSpeed+'px';
+		}
+	}
+	if(bStop){
+		clearInterval(obj.timer);
+		obj.timer=null;
+		if(fnEnd){
+			fnEnd();
+		}
+	}
+}
+
+function domfixed(btn,bdiv,sdiv){
+	var timer;
+	var stimer;
+	var isIE=!!window.ActiveXObject;
+	var isIE6 = isIE&&!window.XMLHttpRequest;//判断IE6浏览器，万恶的ie6下面我们要对它单独做很多事情
+	var odiv = document.getElementById(bdiv);
+	var rdiv = document.getElementById(sdiv);
+	var cbtn = document.getElementById(btn);
+	var bw = odiv.offsetWidth;
+	var bh = odiv.offsetHeight;
+	var bl = odiv.offsetLeft;
+	var bml = parseInt(plug.getStyle(odiv,"marginLeft"));
+	var realleft = bl + Math.abs(bml);//求出大的div在其他浏览器下真实的偏移距离,为后面做动画用
+	var oleft = (document.documentElement.clientWidth-bw)/2 + document.documentElement.scrollLeft;
+	var left = (document.documentElement.clientWidth-bw)/2 + document.documentElement.scrollLeft;
+	var top = document.documentElement.clientHeight - bh + document.documentElement.scrollTop;
+	var sTop = document.documentElement.clientHeight-rdiv.offsetHeight + document.documentElement.scrollTop;
+	odiv.style.bottom = "0px";
+	rdiv.style.right = -rdiv.offsetWidth - 10 + "px";//开始就把右下角DIV设置负的right隐藏到浏览器之外
+	function ie6hack(){//针对IE6做的hack函数
+		top = document.documentElement.clientHeight - bh + document.documentElement.scrollTop;
+		left = (document.documentElement.clientWidth-bw)/2 + document.documentElement.scrollLeft;
+		odiv.style.top = top + "px";
+		odiv.style.left = left + "px";
+	}
+	if(isIE6){//如果是IE6就用这个
+		odiv.style.marginLeft = "0px";
+		//rdiv.style.display = "none";
+		timer = setInterval(ie6hack,1)
+		stimer = setInterval(function(){
+			sTop = document.documentElement.clientHeight - rdiv.offsetHeight + document.documentElement.scrollTop;
+			rdiv.style.top = sTop + "px";
+		},1)
+	}
+	else{//其他的都可以直接用fixed这个属性
+		rdiv.style.position = "fixed";
+	}
+	plug.addEvent(cbtn,"click",function(){//给关闭按钮绑定点击事件
+		clearInterval(timer)//清除那个IE6的hack函数时钟
+		if(isIE6){//还是对IE6单独设置运动函数，因为IE6的left会不断改变，所以要用没有改变的那个oleft
+			//rdiv.style.display = "block";
+			startMove(odiv,{left:2*oleft+bw},2,function(){										
+				odiv.style.display = "none";
+				startMove(rdiv,{right:0},2)//把小div以运动方式移入浏览器，下面的同理
+			})	
+		}
+		startMove(odiv,{left:2*left+bw+realleft},2,function(){//把大的div移出浏览器，然后隐藏								   
+			odiv.style.display = "none";
+			startMove(rdiv,{right:0},2)
+		})						
+	})
+	plug.addEvent(rdiv,"click",function(){//给右下角的DIV绑定鼠标点击事件
+		if(isIE6){//单独处理IE6
+			startMove(rdiv,{right:-rdiv.offsetWidth-10},2,function(){
+				odiv.style.display = "block";
+				//rdiv.style.display = "none";
+				odiv.style.top = document.documentElement.clientHeight - bh + document.documentElement.scrollTop + "px";
+				startMove(odiv,{left:left},2,function(){
+					timer = setInterval(ie6hack,1)//还原IE6的hack函数时钟							  
+				})													
+			})
+		}
+		else{
+			startMove(rdiv,{right:-rdiv.offsetWidth-10},2,function(){//其他浏览器就无所谓了。只要执行运动函数即可
+				odiv.style.display = "block";
+				startMove(odiv,{left:realleft},2)//把大的div以动画方式移入浏览器									
+			})
+		}
+	})
+}
+
+plug.addEvent(window,"load",function(){domfixed("close","worldcup_float","oimg")})//执行
+</script>
+</head>
+
+<body style="height:1000px;">
+    <div id="waidiv">
+        <div class="inner" id="worldcup_float">
+                <div class="w_cup_19"></div>
+                <div class="close" id="close" title="关闭">关闭</div>
+            </div>
+            <div id="oimg">
+                <img src="wcup_btn1.gif" alt="世界杯精彩速递" title="世界杯精彩速递"/>
+             </div>
+    </div> 
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test</title>
+</head>
+<body>
+<img src="http://www.baidu.com/img/baidu_sylogo1.gif" src2="http://www.google.com.hk/images/srpr/logo3w.png" alt="" id="myImg" />
+<script type="text/javascript">
+    /*
+    function chgImg() {
+        var the_img = document.getElementById("myImg");
+        the_img.src = "http://www.baidu.com/img/baidu_sylogo1.gif";
+        setTimeout(function(){
+            the_img.src = "http://www.google.com.hk/images/srpr/logo3w.png";
+        }, 1000);
+    }
+    setInterval(chgImg, 1000);
+    */
+    function chgImg() {
+        var o = document.getElementById('myImg');
+        var src = o.src;
+        o.src = o.getAttribute('src2');
+        o.setAttribute('src2', src);
+    }
+    window.onload = function() {
+        window.setInterval(chgImg, 1000);
+    }
+
+</script>
+
+</script>
+</body>
+</html>

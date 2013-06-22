@@ -1,0 +1,83 @@
+<HTML><HEAD><TITLE></TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<META content="MSHTML 6.00.2600.0" name=GENERATOR>
+<style type="text/css">
+	#spliter{cursor:e-resize;}
+</style>
+
+</HEAD>
+<BODY leftMargin=0 topMargin=0>
+<TABLE width="7" height="100%" border=0 cellPadding=0 cellSpacing=0>
+  <TBODY>
+  <TR>
+      <td id="spliter"  bgcolor="#e1e1e1">
+      <div  align="center"><img src="images/hide.gif" alt="弹出/收缩" name="expandpic" id='expandpic' style="cursor:pointer;" onclick="expand()"></div>
+    </TR>
+  </TBODY>
+</TABLE>
+<SCRIPT language=javascript>
+function id(){ return document.getElementById(arguments[0]); }
+function right(){
+	var rightEle = id('spliter'), //拖动手柄
+		oDiv = parent.document.getElementById('fset').cols,
+		mouseStart = {}, //事件拖动对象
+		rightStart = {};
+	
+	rightEle.onmousedown = function(ev){
+			var oEvent = ev || window.event;
+			
+			mouseStart.x = oEvent.clientX; //鼠标指针向对于浏览器页面的初始水平坐标
+			mouseStart.y = oEvent.clientY;
+			
+			rightStart.x = rightEle.offsetLeft;
+			console.log(rightStart.x);
+			
+			if(rightEle.setCapture){
+				//右拖动开始
+				rightEle.onmousemove = rightStartDrag;
+				rightEle.onmouseup = rightStopDrag;
+				
+				rightEle.setCapture();
+			} else {
+				document.addEventListener('mousemove', rightStartDrag, true);
+				document.addEventListener('mouseup', rightStopDrag, true);
+				
+			}
+		};
+		
+		function rightStopDrag(){
+			if(rightEle.releaseCapture){
+				rightEle.onmousemove = null;
+				rightEle.onmouseup = null;
+				rightEle.releaseCapture();
+			} else {
+				document.removeEventListener('mousemove', rightStartDrag, true);
+				document.removeEventListener('mouseup', rightStopDrag, true);
+			}
+		};
+		
+		function rightStartDrag(ev){
+			var e = ev || window.event,
+				l = e.clientX - mouseStart.x + rightStart.x,
+				w = parent.document.getElementById('fset').offsetWidth;
+				
+			parent.document.getElementById('fset').cols = l + ',7,*';
+		}
+}	
+right();
+	
+function expand(){
+	if(parent.document.getElementById('fset').cols == "190,7,*"){
+	    id('expandpic').src = "images/hide.gif";
+	    parent.document.getElementById('fset').cols = "0,7,*";
+	    id('expandpic').src = "images/show.gif";
+	} else {
+		id('expandpic').src = "images/hide.gif";
+		parent.document.getElementById('fset').cols = "190,7,*";
+	}
+}
+
+
+</SCRIPT>
+</BODY>
+</HTML>

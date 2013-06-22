@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<input type="text" id="txtUser" style="width:200px; " />
+<script type="text/javascript">
+    $('#txtUser').focus(function(){
+//        $(this).width('500px');
+        $(this).animate({width: '500px'}, 1000);
+    }).blur(function(){
+        $(this).animate({width: '200px'}, 1000);
+//        $(this).width('200px');
+    });
+</script>
+</body>
+</html>

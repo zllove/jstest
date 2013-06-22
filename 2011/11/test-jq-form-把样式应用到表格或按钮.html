@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+	<style type="text/css">
+		.label{float:left;width:180px;}
+		.infobox{width:150px;}
+		.error{color:#c00;padding-left:10px;}
+		.submit{margin-left:180px;margin-top:10px;}
+		option{background:#c00;color:#fff;}
+		.meal{background:#ccc;color:#06c;}
+	</style>
+</head>
+<body>
+	<form action="" method="post" id="signup">
+		<span class="label">Select the Food Item</span>
+		<select name="" id="food" class="infobox">
+			<option value="0">select a Food</option>
+			<option value="Pizza$5">Pizza$5</option>
+			<option value="HotDog$3">HotDog$3</option>
+			<option value="Coke$1">Coke$1</option>
+		</select>
+		<p class="error">You have not selected any Option</p>
+		<p class="result"></p>
+		<input type="submit" value="submit" class="submit" />
+	</form>
+	<script type="text/javascript">
+		$('.error').hide();
+		$('option:odd').addClass('meal');
+		$('.submit').click(function(event){
+			var selectedopts = '';
+			var count = $('select option:selected').val(); //JQ选中的值
+			
+			if(count == 0){
+				$('p.result').hide();
+				$('.error').show();
+			} else {
+				$('select option:selected').each(function(){
+					selectedopts += $(this).text() + ',';
+				});
+				$('.error').hide();
+				$('p.result').show();
+				$('p.result').text('You bill is ' + selectedopts);
+			}
+			event.preventDefault();
+		});
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,526 @@
+BODY {
+    margin : 0px;
+    padding : 0px;
+    background:#fff;
+    SCROLLBAR-FACE-COLOR: #D0E5FF;
+    SCROLLBAR-HIGHLIGHT-COLOR: #F5F9FF;
+    SCROLLBAR-SHADOW-COLOR: #828282;
+    SCROLLBAR-3DLIGHT-COLOR: #828282;
+    SCROLLBAR-ARROW-COLOR: #797979;
+    SCROLLBAR-TRACK-COLOR: #ECECEC;
+    SCROLLBAR-DARKSHADOW-COLOR: #ffffff
+}
+BODY, DIV, P, TD, TH {
+    font-family : arial, helvetica, sans-serif;
+    font-size : 100%;
+    font-size : 10pt;
+}
+
+form input.focus, form textarea.focus {
+    border-color: orange;
+    color: #000;
+}
+
+form select {
+    padding-left: 0px;
+}
+
+select {
+    width:153px;
+}
+
+button {
+    margin-right: 5px;
+}
+
+div.standardsNote {
+    display: none;
+}
+
+#yinbo-body {
+    margin : 5px;
+    margin-top : 0px;
+    padding : 5px ;
+    -moz-border-radius : 3px;
+    border-style : solid;
+    border-width : 0px 1px 1px 1px;
+    border-color : #ccc;
+    width : 96%;
+    text-align : left;
+}
+
+p {
+    font: 12px/20px;
+    margin: 0px 0px 16px 0px;
+    padding: 0px;
+}
+
+hr {
+    color: #000000;
+}
+
+/* --------------------------------------------- */
+/*  Header                                       */
+/* --------------------------------------------- */
+
+#yinbo-header {
+    width : 100%;
+    height : 62px;
+    border : 0px;
+    background-image : url(./images/jrimage_topback.gif);
+    background-repeat : repeat-x;
+}
+
+#yinbo-header .info {
+    font-size : 8pt;
+    color : #fff;
+    padding-right : 1em;
+    text-align : right;
+}
+
+#yinbo-header .info A{
+    color : #CEE1FA;
+    text-decoration : none;
+    padding : 3px 8px 3px 2px;
+}
+
+#yinbo-header .info A:hover {
+    color : #fff;
+    text-decoration : underline;
+}
+
+#yinbo-content {
+    padding : 5px 5px 5px 5px;
+}
+
+#yinbo-header #yinbo-tabs UL, #yinbo-header #yinbo-tabs LI {
+    display : inline;
+    padding : 3px;
+    margin : 0px;
+}
+#yinbo-header #yinbo-tabs LI {
+    font-family : verdana;
+    font-size : 8pt;
+    font-weight : bold;
+}
+
+#yinbo-header #yinbo-tabs LI A  {
+    color : #CEE1FA;
+    text-decoration : none;
+    padding : 3px 3px 3px 5px;
+}
+#yinbo-header #yinbo-tabs LI A:hover {
+    color : #fff;
+    text-decoration : underline;
+}
+
+#yinbo-header #yinbo-logout {
+    white-space : nowrap;
+}
+#yinbo-header #yinbo-logout A{
+    color : #CEE1FA;
+    font-size : 8pt;
+    font-family : verdana;
+    font-weight : bold;
+    text-decoration : none;
+}
+#yinbo-header #yinbo-logout A:hover {
+    color : #fff;
+    text-decoration : underline;
+}
+
+/* --------------------------------------------- */
+/*  main                                       */
+/* --------------------------------------------- */
+
+#yinbo-main {
+    background-repeat : repeat-y;
+   
+    white-space : nowrap;
+}
+
+#yinbo-main #yinbo-title {
+    font-size : 12pt;
+    font-weight : bold;
+    padding-bottom : 1em;
+}
+
+#yinbo-main #yinbo-breadcrumbs {
+    padding : 5px;
+    font-size : 8pt;
+    /* font-weight : bold; */
+    font-family : verdana;
+    white-space : nowrap;
+    padding-top : 2px;
+}
+#yinbo-main #yinbo-breadcrumbs A {
+    color : #000;
+    text-decoration : none;
+}
+#yinbo-main #yinbo-breadcrumbs A:hover {
+    color : #000;
+    text-decoration : underline;
+}
+
+
+/* --------------------------------------------- */
+/*  Tasks                                        */
+/* --------------------------------------------- */
+
+#yinbo-runningtask {
+    margin-left : 1em;
+}
+
+/* --------------------------------------------- */
+/*  tables styles                                 */
+/* --------------------------------------------- */
+.list {
+    border-color : #bbb;
+    border-style : solid;
+    border-width : 1px 1px 1px 1px;
+}
+.list TH, .list TD {
+    padding : 3px;
+}
+.list TH {
+    background-color : #E4E4E4;
+    border-bottom : 1px #bbb solid;
+    border-right : 0px #bbb solid;
+    text-align : left;
+    font-family : verdana;
+    font-size : 8pt;
+    font-weight : bold;
+}
+
+table.list th a, table.list th a:visited {
+	background-color: transparent;
+	color: #000000;
+	text-decoration: none;
+}
+
+table.list th a:hover {
+	background-color: transparent;
+	color: #008000 !important;
+	text-decoration: overline underline;
+}
+
+th.sorted a, th.sortable a {
+	background-position: right;
+	display: block;
+}
+
+table.list th.order1 a {
+	background-image: url(./images/arrow_down.png) !important;
+}
+
+table.list th.order2 a {
+	background-image: url(./images/arrow_up.png) !important;
+}
+
+table.list th.sortable a {
+	background-image: url(./images/arrow_off.png);
+}
+
+table.list th.sorted {
+	background-color: #ffd;
+	color: #000000;
+}
+
+table.list th.sorted a, table.list th.sortable a {
+	background-position: right;
+	background-repeat: no-repeat;
+	display: block;
+}
+
+table.list th.sortable:hover {
+	background: #FFFF40;
+	color: #008000;
+}
+
+table.list thead tr {
+	background-color: #FFCC00;
+}
+table.list tr.even {
+	background: #EEEEEE;
+	border-top: 1px solid #C0C0C0;
+	color: #000000;
+}
+table.list tr.odd {
+	background: #FFFFFF;
+	border-top: 1px solid #C0C0C0;
+	color: #000000;
+}
+
+/* highlight table row onmouseover */
+table.list tr.over {
+	background: #FFFF40;
+	border-bottom: 1px solid #C0C0C0;
+	border-top: 1px solid #C0C0C0;
+	color: #000000;
+	cursor: pointer;
+	cursor: hand; /* IE 5.5 non-compliant workaround */
+}
+.over {
+	background: #FFFF40;
+	border-bottom: 1px solid #C0C0C0;
+	border-top: 10px solid #C0C0C0;
+	color: red;
+	cursor: pointer;
+	cursor: hand; /* IE 5.5 non-compliant workaround */
+}
+.oddover TD {
+	background: #EEEEEE;
+	border-top: 1px solid #C0C0C0;
+	color: #000000;
+}
+.evenover TD {
+		background: #FFFFFF;
+	border-top: 1px solid #C0C0C0;
+	color: #000000;
+}
+
+/* override width for user list */
+table.userList {
+	width: 80% !important;
+}
+
+table.activeUserList, body#activeUsers span.pagelinks {
+    width: 450px !important;
+}
+/* --------------------------------------------- */
+/*  Quote original styles                        */
+/* --------------------------------------------- */
+
+.yinbo-quoteheader {
+    font-weight : bold;
+    width : 90%;
+    margin-left : 15px;
+}
+.yinbo-quote {
+    border : #d1d7dc 1px solid;
+    /* font-size : 11px; */
+    color : #444;
+    /* line-height : 125%; */
+    /* font-family : Verdana, Arial, Helvetica, sans-serif; */
+    background-color : #fafafa;
+    width : 90%;
+    margin-left : 15px;
+}
+
+/* --------------------------------------------- */
+/*  Logviewer tabs                               */
+/* --------------------------------------------- */
+
+#logviewer .yinbo-tabs TD {
+    font-family : verdana;
+    font-size : 8pt;
+}
+#logviewer .yinbo-tabs .yinbo-tab, .yinbo-tabs .yinbo-tab-active {
+    border : 1px #ccc solid;
+    white-space : nowrap;
+    padding : 4px 1em 4px 1em;
+    background-color : #ddd;
+}
+#logviewer .yinbo-tabs .yinbo-tab-active {
+    border-bottom : 1px #fff solid;
+    background-color : #fff;
+}
+#logviewer .yinbo-tabs .yinbo-spacer, .yinbo-tabs .yinbo-stretch {
+    border-bottom : 1px #ccc solid;
+}
+#logviewer .yinbo-tabs .yinbo-tab A, #logviewer .yinbo-tabs .yinbo-tab-active A {
+    text-decoration : none;
+    font-weight : bold;
+    color : #000;
+}
+#logviewer .yinbo-tabs .yinbo-tab A:hover, #logviewer .yinbo-tabs .yinbo-tab-active A:hover {
+    text-decoration : underline;
+}
+
+/* --------------------------------------------- */
+/*  Messages - errors, success and info   */
+/* --------------------------------------------- */
+
+.yinbo-error TABLE, .yinbo-info TABLE, .yinbo-success TABLE {
+    border : 1px #ccc solid;
+}
+.yinbo-error TD, .yinbo-info TD, .yinbo-success TD {
+    padding : 3px;
+    vertical-align : top;
+}
+.yinbo-error-text, .yinbo-error .yinbo-icon-label, .yinbo-error-text A, .yinbo-error .yinbo-icon-label A {
+    color : #f00;
+}
+.yinbo-success-text, .yinbo-success .yinbo-icon-label, .yinbo-success-text A, .yinbo-success .yinbo-icon-label A {
+    color : #090;
+}
+.yinbo-info-text, .yinbo-info .yinbo-icon-label, .yinbo-info-text A, .yinbo-info .yinbo-icon-label A {
+    color : #306;
+}
+
+div.exportlinks {
+	margin: 10px 0px 0px 10px;;
+	padding: 2px 4px 2px 0px;
+	width: 300px;
+}
+
+div.exportlinks a {
+	text-decoration: none;
+}
+
+div.exportlinks span {
+	background-repeat: no-repeat;
+}
+
+span.csv {
+	background-image: url(./images/ico_file_csv.png);
+}
+
+span.excel {
+	background-image: url(./images/ico_file_excel.png);
+}
+
+span.pdf {
+	background-image: url(./images/ico_file_pdf.png);
+}
+
+span.xml {
+	background-image: url(./images/ico_file_xml.png);
+}
+
+span.export {
+	cursor: pointer;
+	display: inline;
+	display: inline-block;
+	padding: 0 4px 1px 20px;
+}
+
+span.pagebanner {
+	display: block;
+	margin: 10px 0px 0px 10px;
+	padding: 2px 4px 2px 0px;
+	width: 79%;
+}
+
+span.pagelinks {
+	display: block;
+	font-size: .95em;
+	margin-bottom: 5px;
+	margin-top: -18px;
+	padding: 2px 0px 2px 0px;
+	text-align: right;
+	width: 80%;
+}
+
+/* --- AUTOCOMPLETE CSS --- */
+.autocomplete {
+  position: absolute;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #666;
+  font-family: Arial;
+  overflow: hidden;
+}
+
+.autocomplete ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  overflow: auto;
+}
+
+.autocomplete li {
+  display: block;
+  white-space: nowrap;
+  cursor: pointer;
+  margin: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: 1px solid #fff;
+}
+
+.autocomplete li.selected {
+  background-color: #cef;
+  border-top: 1px solid #9bc;
+  border-bottom: 1px solid #9bc;
+}
+
+/* Animated throbber */
+
+input.form-autocomplete {
+  background: url('./images/throbber.gif') no-repeat 100% 2px;
+}
+
+input.throbbing {
+  background-position: 100% -18px;
+}
+
+/* Animated throbber */
+
+input.form-autocomplete {
+  background: url('./images/throbber.gif') no-repeat 100% 2px;
+}
+
+input.throbbing {
+  background-position: 100% -18px;
+}
+
+
+/* --- CALLOUT CSS --- */
+
+.calloutBox {
+  width: 250px;
+  background-color: #ddd;
+  border-width: 1px;
+  border-style: solid;
+  border-top-color: #eee;
+  border-left-color: #eee;
+  border-right-color: #999;
+  border-bottom-color: #999;
+  padding: 0;
+  display: none;
+  filter:alpha(opacity=90);
+  -moz-opacity:0.9;
+  opacity: 0.9;
+}
+.calloutTitle {
+  background-color: #000;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px solid #666;
+  padding: 2px 4px;
+  color: #ccc;
+  font: bold 10pt Arial;
+}
+.calloutContent {
+  padding: 4px;
+  color: #000;
+  font: 10pt Arial;
+}
+.calloutClose {
+  float: right;
+  padding: 2px 4px;
+  margin-top: 1px;
+  color: #fff;
+  font: bold 8pt Arial;
+  cursor: pointer;
+}
+
+
+/* --- TOGGLE CSS --- */
+
+#watchedResponseContainer {
+  border: 1px solid #ccc;
+  width: 300px;
+  padding: 4px;
+  margin-top: 10px;
+  background-color: #eee;
+}
+
+#watchedResponse {
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin: 4px;
+  background-color: #fff;
+}

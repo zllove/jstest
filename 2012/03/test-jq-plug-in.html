@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-jq-plug-in</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<div id="mydiv">this is mydiv</div>
+<a href="http://www.sohu.com">111</a><a href="http://www.sina.com">222</a><a href="http://www.google.com">3333</a>
+<script type="text/javascript">
+    /*
+    (function($){
+        function Obj(even, odd){
+            this.even = even;
+            this.odd = odd;
+        }
+        Obj.prototype = {
+            init: function(){
+
+            }
+        }
+        function runObj(locale){
+            return new Obj(locale.even, locale.odd);
+        }
+        $.fn.colors = function(options){
+            var opts = $.extend({
+                even: '#c00',
+                odd: '#f00'
+            }, options);
+            var run = runObj(opts);
+            return this.each(function(){
+
+            });
+        }
+    })(jQuery);
+    (function($){
+        $.fn.hilight = function(options){
+            
+            $.extend({}, $.fn.hilight.defaults, options);
+
+        };
+        $.fn.hilight.defaults = {
+            foreground: 'red',
+            background: 'blue'
+        };
+    })(jQuery);
+    $('#mydiv').hilight({
+        foreground: 'blue'
+    });
+    var someobj = $('#mydiv');
+    $.fn.myNew = function(){
+        alert(this === someobj);
+    }
+    someobj.myNew();
+     */
+    (function($){
+        $.fn.showLink = function(){
+            /*
+            return this.filter('a').each(function(){
+               $(this).append('(' + $(this).attr('href') + ')');
+            });
+            */
+            return this.filter('a').each(function(){
+                $(this).append('(' + $(this).attr('href') + ')');
+            })
+        };
+    })(jQuery);
+$('a').showLink();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>豪情</title>
+        <style>
+                    .b{border:1px solid #ccc;}
+            		#tag a{margin:0 3px;}
+                    
+        </style>
+        <script type="text/javascript">
+            window.alert = function(txt){
+                var shield = top.window.document.createElement("DIV");
+                shield.id = "shield";
+                shield.style.position = "absolute";
+                shield.style.left = "0px";
+                shield.style.top = "0px";
+                shield.style.width = "100%";
+                shield.style.height = top.window.document.body.scrollHeight + "px";
+                shield.style.background = "#333";
+                shield.style.textAlign = "center";
+                shield.style.zIndex = "10000";
+                shield.style.filter = "alpha(opacity=0)";
+                var alertFram = top.window.document.createElement("DIV");
+                alertFram.className = "dragAble";
+                alertFram.id = "alertFram";
+                alertFram.style.position = "absolute";
+                alertFram.style.left = "600px";
+                alertFram.style.top = "400px";
+                alertFram.style.marginLeft = "-225px";
+                alertFram.style.marginTop = "-75px";
+                alertFram.style.width = "200px";
+                alertFram.style.height = "auto";
+                alertFram.style.background = "white";
+                alertFram.style.textAlign = "center";
+                alertFram.style.lineHeight = "150px";
+                alertFram.style.zIndex = "10001";
+                strHtml = "<ul style=\"list-style:none;margin:0px;padding:0px;width:100%;height:auto;border:3px solid #1567ea;border-top:0px solid #1567ea\">\n";
+                strHtml += "<li style=\"position: relative ;background-image: url(d-x3.gif);background-repeat:repeat-x;text-align:left;padding-left:10px;font-size:14px;font-weight:bold;height:25px;line-height:25px;\"><div style=\"cursor:default;font:Calibri;color:white;\">Warning</div></li>\n";
+                strHtml += "<li style=\"background:#fff;text-align:center;font-size:12px;height:auto;line-height:30px;\"><div style=\"cursor:default\">" + txt + "</div></li>\n";
+                strHtml += "<li style=\"background:#f5f5f5;text-align:center;font-weight:bold;height:25px;line-height:25px; border-top:1px solid #f5f5f5;\"><input type=\"button\" class=\"sbutton\" onMouseOver=\"this.className='button'\" onMouseOut=\"this.className='sbutton'\" value=\"Close\" onclick=\"doOk()\" /></li>\n";
+                strHtml += "</ul>\n";
+                alertFram.innerHTML = strHtml;
+                top.window.document.body.appendChild(alertFram);
+                top.window.document.body.appendChild(shield);
+                var c = 0;
+                top.window.doAlpha = function(){
+                    if (c++ > 20) {
+                        self.window.clearInterval(ad);
+                        return 0;
+                    }
+                    shield.style.filter = "alpha(opacity=1);";
+                }
+                var ad = self.window.setInterval("parent.doAlpha()", 5);
+                top.window.doOk = function(){
+                
+                    alertFram.style.display = "none";
+                    shield.style.display = "none";
+                }
+                alertFram.focus();
+                top.window.document.body.onselectstart = function(){
+                    return false;
+                };
+            }
+            var ie = top.window.document.all;
+            var nn6 = top.window.document.getElementById && !top.window.document.all;
+            var isdrag = false;
+            var y, x;
+            var oDragObj;
+            
+            function moveMouse(e){
+                if (isdrag) {
+                    oDragObj.style.top = (nn6 ? nTY + top.window.e.clientY - y : nTY + top.window.event.clientY - y) + "px";
+                    oDragObj.style.left = (nn6 ? nTX + top.window.e.clientX - x : nTX + top.window.event.clientX - x) + "px";
+                    return false;
+                }
+            }
+            
+            function initDrag(e){
+                var oDragHandle = nn6 ? top.window.e.target : top.window.event.srcElement;
+                var topElement = "HTML";
+                while (oDragHandle.tagName != topElement && oDragHandle.className != "dragAble") {
+                    oDragHandle = nn6 ? oDragHandle.parentNode : oDragHandle.parentElement;
+                }
+                if (oDragHandle.className == "dragAble") {
+                    isdrag = true;
+                    oDragObj = oDragHandle;
+                    nTY = parseInt(oDragObj.style.top + 0);
+                    y = nn6 ? top.window.e.clientY : top.window.event.clientY;
+                    nTX = parseInt(oDragObj.style.left + 0);
+                    x = nn6 ? top.window.e.clientX : top.window.event.clientX;
+                    top.window.document.onmousemove = moveMouse;
+                    return false;
+                }
+            }
+            
+            top.window.document.onmousedown = initDrag;
+            top.window.document.onmouseup = new Function("isdrag=false");
+            //-->
+        </script>
+		
+    </head>
+    <body>
+        <textarea name="" id="" cols="30" rows="6">
+            多条内容用空格或逗号分隔
+        </textarea>
+        <br/>
+        <span id="tag"><strong>热门：</strong><a href="javascript:void(0)">摄影</a><a href="javascript:void(0)">运动</a><a href="javascript:void(0)">看电影</a><a href="javascript:void(0)">阅读</a><a href="javascript:void(0)">网游</a></span>
+        <script type="text/javascript">
+			alert('aa');
+		</script>
+    </body>
+</html>

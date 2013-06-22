@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-UIScrollText-demo</title>
+    <script type="text/javascript" src="../../jquery-1.4.4.min.js"></script>
+    <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
+    <style type="text/css">
+        body{ font:12px/2 arial; background:#3f3f3f;}
+        a{ text-decoration:none;}
+        .scroll_news p{ background:#fff; height:30px; line-height:30px; overflow:hidden; }
+        .scroll_news a{ color:#B75200; display:block; height:30px; padding-left:18px; }
+        .scroll_news a:hover{ color:#f30;}
+    </style>
+</head>
+<body>
+<div class="scroll_news">
+    <p id="news1">
+        <a target="_blank" href="http://www.esunny.com/">新版宇商网全新亮相，赶紧来体验吧！</a>
+        <a target="_blank" href="http://mall.esunny.com/unionpay/">网上交易请选择宇商安全支付，货款都安全</a>
+        <a target="_blank" href="http://mall.esunny.com/">批发市场第二期火爆上线，批发进货看这里！</a>
+        <a target="_blank" href="http://www.esunny.com/">新版宇商网全新亮相，赶紧来体验吧！</a>
+        <a target="_blank" href="http://mall.esunny.com/unionpay/">网上交易请选择宇商安全支付，货款都安全</a>
+        <a target="_blank" href="http://mall.esunny.com/">批发市场第二期火爆上线，批发进货看这里！</a>
+    </p>
+
+    <p id="news2">
+        <a target="_blank" href="http://www.esunny.com/">新版宇商网全新亮相，赶紧来体验吧！</a>
+        <a target="_blank" href="http://mall.esunny.com/unionpay/">网上交易请选择宇商安全支付，货款都安全</a>
+        <a target="_blank" href="http://mall.esunny.com/">批发市场第二期火爆上线，批发进货看这里！</a>
+        <a target="_blank" href="http://www.esunny.com/">新版宇商网全新亮相，赶紧来体验吧！</a>
+    </p>
+</div>
+<script type="text/javascript">
+(function($){
+    $.fn.UIScrollText = function(options){
+        var scrollText = {
+            // 默认设定
+            settings: {
+                lineHeight :0,    // 每次滚动的距离
+                speed      :20,   // 速度
+                delay      :2000, // 延迟时间
+                direction  :'up', // 滚动方向
+                auto       :true
+            },
+            /**
+             * 初始化方法
+             * @param me 插件调用者
+             * @param options 参数选项
+             */
+            init: function(me, options){
+                this.me = me;
+                this.isEven = 2;
+                this.isPlay = false;
+                this.size = me.children().size();
+                this.space = me.children().height();
+                var opts = $.extend({}, this.settings, options);
+                for (var p in opts) {
+                    this[p] = opts[p];
+                }
+                this.auto && me.append(me.html());
+                this.autoPlay();
+            },
+            // 滚动
+            play: function(){
+                var that = this;
+                that.timer = setTimeout(function(){
+                    that.isPlay = true;
+                    that.checkDir();
+                }, that.speed);
+            },
+            // 检查方向，以便做出不同的处理
+            checkDir: function(){
+                var that = this,
+                    me = that.me,
+                    scrollDir = that.direction == 'up' ? 'scrollTop' : 'scrollLeft';
+                that.dirFn(scrollDir); // 滚动处理
+                me[scrollDir] % that.space != 0
+                /*
+                me[scrollDir]() % that.space != 0 ? that.timer = setTimeout(function(){
+                    that.checkDir();
+                }, that.speed) : that.auto ? that.timer = setTimeout(function(){
+                    that.play();
+                }, that.delay) : null;
+                */
+            },
+            // 滚动方向处理
+            dirFn: function(scrollDir){
+                var me = this.me;
+                if(me[scrollDir]() >= parseInt(this.height / 2) && this.auto){
+                    me[scrollDir](0);
+                }
+                me[scrollDir](me[scrollDir]() + this.isEven);
+            },
+            // 自动滚动
+            autoPlay: function(){
+                var that = this, isPlay = that.isPlay, delay = that.delay;
+                if(that.auto){
+                    that.me.hover(function(){
+                        clearTimeout(that.timer);
+                    }, function(){
+                        that.timer = setTimeout(function(){
+                            that.play();
+                        }, delay);
+                    });
+                    that.timer = setTimeout(function(){
+                        that.play();
+                    }, delay);
+                }
+            }
+        }
+        return this.each(function(){
+            function F(){}
+            F.prototype = scrollText;
+            var f = new F();
+            f.init($(this), options);
+        });
+    }
+})(jQuery);
+
+//    $('#news1').UIScrollText({ space:31, speed:25, delay:3000 });
+    $('#news2').UIScrollText();
+</script>
+
+</body>
+</html>

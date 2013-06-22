@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-json</title>
+</head>
+<body>
+<script type="text/javascript">
+    jsono = [
+        {
+            text  : '组件',
+            items : [
+                {text: '日历', url: 'parts/calendar01.html'},
+                {text: '日历', url: 'parts/calendar01.html'}
+            ]
+        },
+        {
+            text: '图片轮换',
+            items: [
+                {text: 'Taobao轮换', url: 'slide/taobao01.html'},
+                {text: 'Taobao轮换', url: 'slide/taobao01.html'}
+            ]
+        }
+    ];
+    
+    function foo(ini){
+        for (var k in ini) {
+            this.ini[k] = ini[k];
+            console.log(this.ini);
+        }
+    }
+    foo.prototype = {
+        ini: {
+
+        }
+    }
+    new foo({
+        url         : 'tree/',
+        itemIco     : 'page.gif',
+        file        : 'ie.gif',
+        caption     : '我的文档',
+        json        : jsono,
+        // show:'',
+        shell       : 'dhooo_tree'
+    });
+</script>
+</body>
+</html>

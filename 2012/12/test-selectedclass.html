@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-selectedclass</title>
+	<style type="text/css"></style>
+</head>
+<body>
+<select name="" id="test">
+	<option value="1" class="1">1111</option>
+	<option value="2" class="2">2222</option>
+	<option value="3" class="3">3333</option>
+	<option value="4" class="4">4444</option>
+</select>	
+<script type="text/javascript">
+	var test = document.getElementById('test');
+	test.onchange = function(){
+		console.log(test[test.selectedIndex].className);
+	}
+</script>	
+</body>
+</html>

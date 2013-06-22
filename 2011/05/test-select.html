@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<style type="text/css">#other,#school{display:none;}</style>
+</head>
+<body>
+	<select name="" id="sele">
+		<option value="1">1111</option>
+		<option value="2">其它</option></select>
+	<div id="other"><input type="text" name="" id="" /></div>
+	<hr />
+	<select name="" id="out">
+		<option value="1">1111</option>
+		<option value="2">其它</option>
+	</select>
+	<div id="school"><input type="text" name="" id="" /></div>
+	<script type="text/javascript">
+		function $d(){ return document.getElementById(arguments[0]); }
+		var out = $d('out');
+		//alert(out.onchange.value);
+		out.onchange = function(){
+			alert(this.options[this.options.selectedIndex].innerHTML);
+		}
+		/*
+		function changeVal(handler, disDiv){
+			var obj = $d(handler),
+				objDiv = $d(disDiv);
+			obj.onchange = function(){
+				objDiv.style.display = this.value == '2' ? 'block' : 'none';
+			}
+		}
+		changeVal('sele', 'other');
+		changeVal('out', 'school');
+		*/
+	</script>
+</body>
+</html>

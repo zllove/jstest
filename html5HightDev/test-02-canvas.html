@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>test-02-canvas</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<canvas>
+    Update you browser to enjoy canvas!
+</canvas>
+<div id="support"></div>
+<script type="text/javascript">
+    try{
+        document.createElement('canvas').getContext('2d');
+        document.getElementById('support').innerHTML = 'HTML5 Canvas is supported in your browser.';
+    } catch (e){
+        document.getElementById('support').innerHTML = 'HTML5 Canvas is not supported in your browser.';
+
+    }
+</script>
+<canvas id="diagonal" style="border:1px solid #ccc;" width="200" height="200"></canvas>
+<script type="text/javascript">
+    /*
+    function drawDiagonal(){
+        var canvas = document.getElementById('diagonal');
+        var context = canvas.getContext('2d');
+        context.beginPath();
+        context.moveTo(70, 140);
+        context.lineTo(140, 70);
+        context.stroke();
+    }
+//    window.addEventListener('load', drawDiagonal, false);
+    drawDiagonal();
+    */
+    function drawDiagonal(){
+        var canvas = document.getElementById('diagonal');
+        var context = canvas.getContext('2d');
+        context.save();
+        context.translate(70, 140);
+        context.beginPath();
+        context.moveTo(0, 0);
+        context.lineTo(70, -70);
+        context.stroke();
+        context.restore();
+    }
+    window.addEventListener('load', drawDiagonal, true);
+</script>
+<canvas id="trails" width="300" height="300" style="border:1px solid #ccc;background:#ff0;"></canvas>
+<script type="text/javascript">
+    function createCanopyPath(context){
+        context.beginPath();
+        context.moveTo(0, 0);
+        context.lineTo(110, 0);
+
+        /*
+        context.moveTo(-25, -50);
+        context.lineTo(-10, -80);
+        context.lineTo(-20, -80);
+        context.lineTo(-5, -110);
+        context.lineTo(-15, -110);
+        // 树的顶点
+        context.lineTo(0, -140);
+        context.lineTo(15, -110);
+        context.lineTo(5, -110);
+        context.lineTo(20, -80);
+        context.lineTo(10, -80);
+        context.lineTo(25, -50);
+        context.closePath();
+        */
+    }
+    function drawTrails(){
+        var canvas = document.getElementById('trails');
+        var context = canvas.getContext('2d');
+        context.save();
+        context.translate(130, 250);
+        createCanopyPath(context);
+        context.lineWidth = 4;
+        context.lineJoin = 'round';
+        context.strokeStyle = '#e00';
+        // 绘制当前路径
+        context.stroke();
+        context.restore();
+        context.fillStyle = '#390';
+        context.fill();
+        context.fillStyle = '#630';
+        context.fillRect(-5, -50, 10, 50);
+    }
+    drawTrails();
+</script>
+</body>
+</html>

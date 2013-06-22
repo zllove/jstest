@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style type="text/css">
+        .ceshi a{
+            width:200px;
+            height:200px;
+            position:relative;
+            background-color:#0F0;
+            display:block; zoom:1;
+        }
+        .ceshi a .b{
+            width:100px;
+            height:100px;
+            position:absolute;
+            right:0px;
+            bottom:0px;
+            background-color:#000;
+        }
+        .ceshi a:hover{
+            border:0 none; /*这个地方是在网上看的方法，IE6下无法起到作用*/
+        }
+        .ceshi a:hover .b{
+            display:none;
+            background:none;
+        }
+    </style>
+</head>
+
+<body>
+<div class="ceshi">
+    <a href="#" target="_blank">
+        <div class="b"></div>
+    </a>
+</div>
+</body>
+</html>

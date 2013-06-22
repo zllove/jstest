@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="js/ice.js"></script>
+    <script type="text/javascript" src="js/DomHelper.js"></script>
+    <script type="text/javascript" src="js/Element.js"></script>
+    <script type="text/javascript" src="js/Element.insertion.js"></script>
+    <script type="text/javascript" src="js/ice-more.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+
+    /*
+    var foo = function (){
+        return {
+            demoFn: function (){
+                console.log('返回对象中的方法 demoFn');
+            }
+        };
+    }
+    foo.demoFn2 = function (){
+        console.log('demofn2 为 foo 静态方法');
+    }
+    console.log(typeof foo);
+    console.log(typeof foo());
+    foo.demoFn2();
+    foo().demoFn();
+
+    var a = 0, b = 1, c = 3;
+    a || b || (c = 4);
+    console.log(c);
+    console.log(Number(-13.3));
+//    var div = Ice.getBody().createChild('<div class="x-hide-offsets" style="width:100px;height:50px;overflow:hidden;"><div style="height:200px;"></div></div>');
+//    var child = div.child('div', true);
+//    console.log(child);
+
+    var arr = [1,0,2,3];
+    var re = Ice.mean(arr);
+    console.log(re);
+
+    var r = Ice.partition([1,0,1]);
+    console.log(r);
+     */
+
+</script>
+<p id="el1">111</p><p id="el2">222</p><p>333</p>
+<div>111</div>
+<script type="text/javascript">
+//    var pe = document.getElementsByTagName('p');
+//    console.log(typeof document.getElementsByTagName);
+    /*
+    var pElement = document.getElementsByTagName('p');
+    console.log(pElement);
+    var p = document.getElementById('el1');
+    var ap = Array.prototype.slice.call(pElement);
+    var ael = Ice.invoke(ap, 'getAttribute', 'id');
+    console.log(ael);
+    function foo(){
+        console.log(1);
+    }
+    var str = '11\"12';
+    String.escape(str);
+//    Ice.escape(str);
+//    console.log(str);
+//    var r = String.leftPad('aa', 5);
+//    console.log(r);
+
+    var str = '  abc  1';
+//    str = str.toggle('abc', 'cde');
+    str = str.trim();
+//    console.log(str);
+     */
+
+    var num = 3;
+    num = num.constrain(5,6);
+    console.log(num);
+
+</script>
+</body>
+</html>

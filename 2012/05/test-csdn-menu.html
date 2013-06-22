@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{font:12px/2 arial;}
+        .menu{ width:500px; margin:30px auto; height:30px; line-height:30px;}
+        .menu a{ float:left; margin-right:10px; padding:5px 10px;}
+        .menu a.cur,.menu a:hover{ background:#f3f3f3;}
+    </style>
+</head>
+<body>
+<div class="menu"><a class="cur" href="#">111</a><a href="#">222</a><a href="#">333</a></div>
+<script type="text/javascript">
+    var authors = $('.menu').find('a'), temp;
+    authors.click(function(){
+        $(this).addClass('cur').siblings().removeClass('cur');
+    });
+</script>
+</body>
+</html>

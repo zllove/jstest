@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
+    <style type="text/css">
+        *{ text-decoration:none;}
+    </style>
+
+</head>
+<body>
+<div id="target">test target</div>
+<div id="count">912039800008</div>
+<div id="count2">912039800008</div>
+<script type="text/javascript">
+    String.prototype.repeat = function(n){
+        return Array(n + 1).join(this);
+    };
+
+    var divNum = 0;
+    function add() {
+        var tipStr1 = document.getElementById("name1").value;
+        var tipStr2 = document.getElementById("comments1").value;
+        var tipStr3 = document.getElementById("datepicker").value;
+        var mydiv = $('<div id="mydiv"></div>').appendTo($('#target'));
+        mydiv.wrapInner('<div id="div0" style="border:1px solid #BDD2ED;float:left" onmousedown="down(this,event)" onmousemove="move(event)" onmouseup="up(this)">undefined<br/>undefined<br/>undefined</div>');
+        divNum++;
+    }
+//    $('#count').wrapInner('<em></em>');
+    function foo(){
+        var str = '0'.repeat(10),
+            arr = [],
+            end = '',
+            end2 = '';
+        console.time('1');
+        arr = str.split('');
+        end = '<b>' + arr.join('</b><b>') + '</b>';
+
+        console.timeEnd('1');
+        console.time('2');
+        for(var i = 0, len = str.length; i < len; i++){
+            end2 += '<b>' + str[i] + '</b>';
+        }
+        console.timeEnd('2');
+        document.getElementById('count').innerHTML = end;
+        document.getElementById('count2').innerHTML = end2;
+    }
+    foo();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+" http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text ml; charset=utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<script type="text/javascript">
+
+	var Obj=function(height,head,like,eat){
+		this.height=(height==undefined)?"height":height;
+		this.height=(head==undefined)?"head":head;
+		this.like=(like==undefined)?"like":like;
+		this.eat=eat==undefined?"eat":eat;
+	};
+	
+
+	function dan(height,head,like,eat){
+		var dan=new Object();
+		this.height=height;
+		this.head=head;
+		this.like=like;
+		this.eat=eat;
+		//alert("dan的简历\n身高："+this.height+"\n发型："+this.head+"\n爱好："+this.like+"\n爱吃："+this.eat);
+		document.write("dan的简历<br/>身高："+this.height+"<br/>发型："+this.head+"<br/>爱好："+this.like+"<br/>爱吃："+this.eat);
+		return this;
+	}
+
+	function checkName(name){
+		if (name=="dan"){		
+				var userName=new Object();
+				this.name="dan";
+				this.mp3="ipod shuffle 3代";
+				this.capacity="4GB";
+				this.mac="铁三角ATH-ES7";
+				//alert(this.name+"的MP3\n型号："+this.mp3+"\n内存大小："+this.capacity+"\n耳机型号："+this.mac);		
+				document.write("<p>"+this.name+"的MP3<br/>型号："+this.mp3+"<br/>内存大小："+this.capacity+"<br/>耳机型号："+this.mac+"</p>");
+		}
+		else{
+			alert("这人不是dan");
+		}
+	}
+	var user1=new dan("185cm","bancun","ball","shala");
+
+	var user2=new checkName("dan");
+
+</script> 
+</body>
+<html>

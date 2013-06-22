@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>test</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" href="../resources/css/ui.common.css">
+    <script type="text/javascript" src="../mass-Framework/mass.js"></script>
+</head>
+<body>
+<table id="dataTable" border="1" width="500">
+    <tr>
+        <td>111</td>
+        <td>111</td>
+    </tr>
+    <tr>
+        <td>111</td>
+        <td>111</td>
+    </tr>
+    <tr>
+        <td>111</td>
+        <td>111</td>
+    </tr>
+</table>
+<script type="text/javascript">
+    /*
+    $.require('ready, node', function(){
+//        $.log('将日志打印到页面上', true);
+        $('<pre>将日志打印到页面上</pre>').appendTo('body');
+    });
+    $(function(){
+        $('<pre>将日志打印到页面上</pre>').appendTo('body');
+    });
+    $(function(){
+        $("#dataTable tbody tr").on("click", function(event){
+            alert($(this).text());
+        });
+    });
+     */
+
+    $.require("lang",function(){
+        alert( $.String.toUpperCase("aa") )
+    });
+
+</script>
+</body>
+</html>

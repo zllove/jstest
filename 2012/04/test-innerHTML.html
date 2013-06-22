@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    /*
+    var temp = '<table><tr><td>111</td><td>222</td></tr></table><span>span content</span>';
+    var tempTable = document.createElement('div');
+    tempTable.innerHTML = temp;
+//    console.log(tempTable.firstChild);
+
+//    console.log(tempTable.firstChild.nextSibling);
+    var table = document.createElement('table');
+    var tbody = document.createElement('tbody');
+    table.appendChild(tbody);
+    table.innerHTML = '<tr><td>111</td></tr>';
+//    document.body.appendChild(table);
+    var select = document.createElement('select');
+    select.innerHTML = '<option>111</option>';
+//    document.body.appendChild(select);
+    function fun(){
+        alert('我被调用了');
+        return 'jack';
+    }
+    var f = new fun();
+    console.log(f);
+     */
+
+    function fun(){
+        this.name = 'tom';
+        return 'jack';
+    }
+    var c = new fun();
+    for (var atr in c) {
+        console.log(atr);
+    }
+    console.log(c.name);
+
+</script>
+</body>
+</html>

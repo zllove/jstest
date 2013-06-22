@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<img id="fuck" width="405" src="http://static.ggg.cn/videoalbum/screens/000/019/19/20120905164205/1.jpg" alt=""> <br>
+<a href="#"><img width="130" src="http://static.ggg.cn/videoalbum/screens/000/034/34/20120905175711/1.jpg" alt=""></a>
+<a href="#"><img width="130" src="http://static.ggg.cn/videoalbum/screens/000/038/38/20120906094917/1.jpg" alt=""></a>
+<a href="#"><img width="130" src="http://static.ggg.cn/videoalbum/screens/000/011/11/20120905163215/1.jpg" alt=""></a>
+<script type="text/javascript">
+    var images = [
+        'http://static.ggg.cn/videoalbum/screens/000/019/19/20120905164205/1.jpg',
+        'http://static.ggg.cn/video/screens/002/162/2162/20120913100843/1.jpg',
+        'http://static.ggg.cn/video/screens/002/160/2160/20120913100454/1.jpg'
+    ];
+    function show(obj, as, fn) {
+        for (var i = 0, len = as.length; i < len; i++) {
+            as[i].onmouseover = fn.call(obj, i);
+        }
+    }
+    function setURI(i) {
+        var img = this;
+        return function () {
+            img.src = images[i];
+        }
+    }
+
+    var as = document.getElementsByTagName('a');
+    var img = document.getElementById('fuck');
+    show(img, as, setURI);
+
+    /*
+    function show() {
+        var links = document.getElementsByTagName('a');
+        var imgnode = document.getElementById('pic');
+        for (var i = 0; i < links.length; i++) {
+            links[i].index = i;
+            links[i].onmouseover = function () {
+                imgnode.src = images[this.index];
+            }
+        }
+    }
+    */
+</script>
+</body>
+</html>

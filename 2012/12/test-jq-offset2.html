@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-jq-offset</title>
+	<script type="text/javascript" src="../jquery-1.8.2.js"></script>
+	<style type="text/css">
+		.parent{width:600px;height:300px;padding:25px;margin-left:55px;border:3px solid #ccc;}
+		input{height:30px;float:right;}
+		.copyright{position:absolute;right:0;}
+		.tip{position:absolute;display:none;border:3px dotted #690;background:#eee;}
+	</style>
+</head>
+<body>
+	<h3><a href="http://www.jb51.net/article/18340.htm">offset,position</a></h3>
+用offset, 该例中元素B在DOM的最下面，也就是，其父容器为body
+<div class="parent" style="position:absolute;left:150px">
+    父元素是绝对定位的
+    <input type="button" value="点击我，正好在我的下面显示元素B，且左边和我对齐">
+    <div class="tip">
+	    我是元素B<br>
+	    现在用的是offset
+	</div>
+</div>
+<br><br><br><br><br><br><br><br>
+
+<script type="text/javascript">
+	$('input').click(function () {
+		$('.tip').css({
+			left: $(this).offset().left + 'px',
+			top: $(this).offset().top + 35 + 'px'
+			// left: $(this).position().left + 'px',
+			// top: $(this).position().top + 35 + 'px'
+		});
+		$('.tip').toggle();
+	});
+
+</script>
+</body>
+</html>

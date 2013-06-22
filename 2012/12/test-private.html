@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-jsprivate</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function Person(name, age, job) {
+	        this.name = name;
+	        this.age = age;
+	        this.job = job;
+	        this.friends = ['Shelby', 'Court'];
+	        var _this = this;
+	        this.method = {
+	        	sayHello: function () {
+	        		console.log('hello ' + _this.age);
+	        	}
+	        };
+	    };
+	    Person.prototype = {
+	        constructor: Person,
+	        sayName: function() {
+	            console.log(this.name);
+	        },
+	        sayJob: function() {
+	        	console.log(this.job)
+	        }
+	    };
+
+	    var p1 = new Person('haoqing', 30, 'webdeveloper');
+	    p1.method.sayHello();
+	    p1.sayName();
+	    console.log('p1', p1);
+	    var p2 = new Person('redZhang', 28, 'javaer');
+	    p2.method.sayHello();
+	    p2.sayName();
+	    console.log('p2', p2);
+
+	</script>
+</body>
+</html>

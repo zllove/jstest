@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>test</title>
+<style type="text/css">
+*{ margin:0; padding:0}
+li{ list-style:none}
+input{vertical-align:middle;}
+.wapper{ width:928px; margin:50px;max-height:380px; overflow-x:hidden;overflow-y:auto; position:relative; border:1px #e6e6e6 solid}
+.wapper ol{ position:absolute;top:0; left:0}
+.wapper li{width:30px; height:32px; line-height:32px; padding:3px 0; text-align:center;}
+.wapper .m-li{ padding:3px 3px 3px 30px;height:32px;position:relative}
+.wapper .m-li div,.wapper .m-li-cur div{ line-height:30px; height:30px;background:#ECF3F9; border:1px #ccc solid; padding:0 0 0 16px;color:#316DA9; font-size:14px;cursor:move;}
+.wapper .m-li .m-sub-cur,.wapper .m-li-cur .m-sub-cur{opacity:0.35;filter:Alpha(opacity=35);}
+.wapper .m-li-cur{ padding:0 3px 3px 30px;height:32px;position:relative; border-top:3px #FFDAAD solid}
+.wapper .m-li-cur span{ padding:0 0 3px;}
+#tips{ position:absolute; top:0;left:0;cursor:move; z-index:2;display:none}
+#tips div{background:#FDFFDA;line-height:30px; height:30px;border:1px #ccc solid; padding:0 0 0 16px;color:#316DA9; font-size:14px;}
+#m-last{ height:0; padding:0; line-height:0; font-size:0; overflow:hidden; }
+</style>
+</head>
+<body>
+<div class="wapper" id="box">
+<div class="m-wapper" style="position:relative">
+<div class="m-li"><div class="m-sub" ><input type="checkbox" name="hlm" id="" /> 红楼梦1</div></div>
+<div class="m-li"><div class="m-sub" ><input type="checkbox" name="hlm" id="" /> 石头梦2</div></div>
+<div class="m-li"><div class="m-sub" ><input type="checkbox" name="hlm" id="" /> 睡不醒3</div></div>
+<div class="m-li"><div class="m-sub" ><input type="checkbox" name="hlm" id="" /> 醒不了4</div></div>
+<div class="m-li"><div class="m-sub" ><input type="checkbox" name="hlm" id="" /> 红楼梦5</div></div>
+<div class="m-li"><div class="m-sub" ><input type="checkbox" name="hlm" id="" /> 石头梦6</div></div>
+<div class="m-li"><div class="m-sub" ><input type="checkbox" name="hlm" id="" /> 睡不醒7</div></div>
+<div class="m-li"><div class="m-sub" ><input type="checkbox" name="hlm" id="" /> 醒不了8</div></div>
+<div class="m-li"><div class="m-sub" ><input type="checkbox" name="hlm" id="" /> 睡不醒9</div></div>
+<div class="m-li"><div class="m-sub" ><input type="checkbox" name="hlm" id="" /> 醒不了10</div></div>
+<div class="m-li"><div class="m-sub" ><input type="checkbox" name="hlm" id="" /> 醒不了11</div></div>
+<div class="m-li"><div class="m-sub" ><input type="checkbox" name="hlm" id="" /> 睡不醒12</div></div>
+<div class="m-li"><div class="m-sub" ><input type="checkbox" name="hlm" id="" /> 醒不了13</div></div>
+</div>
+<ol id="m-num"></ol>
+<div id="tips"></div>
+</div>
+<div id="ee"></div>
+<script type="text/javascript">
+//$("m1").onmouseover=function(){alert(1)}
+document.getElementsByClassName=function(eleClassName){
+	var getEleClass = [];
+	var myclass = new RegExp("\\b"+eleClassName+"\\b");
+	var elem = this.getElementsByTagName("*");
+	for(var h=0;h<elem.length;h++){
+		var classes = elem[h].className;
+		if (myclass.test(classes)) getEleClass.push(elem[h]);
+	}
+	return getEleClass;
+}
+function $d(o){
+	var t = document.getElementById(o);
+	return t?t:false;
+}
+function hasClass(ele,cls) {
+	return ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
+}
+ 
+function addClass(ele,cls) {
+	if (!this.hasClass(ele,cls)) ele.className += " "+cls;
+}
+ 
+function removeClass(ele,cls) {
+	if (hasClass(ele,cls)) {
+		 var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+    	ele.className=ele.className.replace(reg,' ');
+	}
+}
+function getStyle(o,n){
+	return o.currentStyle?o.currentStyle[n]:(document.defaultView.getComputedStyle(o,"").getPropertyValue(n))
+}
+function dropMent(){
+	var d=document;
+	var lisNum;
+	var mNum = $d("m-num");
+	var ols = document.getElementsByClassName("m-wapper")[0];
+	var lis = document.getElementsByClassName("m-li");
+	var divs = document.getElementsByClassName("m-sub");
+	var inputs = ols.getElementsByTagName('input');
+	var tips = $d("tips");
+	for(var i=0;i<divs.length;i++){
+		if(mNum.getElementsByTagName("li").length < divs.length){
+			var mnumNode=document.createElement("li");
+			mNum.appendChild(mnumNode);
+			mNum.getElementsByTagName("li")[i].innerHTML=i+1;
+		}
+		divs[i].setAttribute("id",("m"+i))
+		
+		/*
+		addEvent($d("m"+i), 'mouseover', function(){
+			show(this);
+		});
+		
+		*/
+		$d("m"+i).onmouseover=function(){
+			show(this);
+		}
+		$d("m"+i).onclick = function(){
+			//alert(1);
+		}
+		
+		/*
+		addEvent($d("m"+i), 'click', function(){
+			
+			inputs[i].checked = true;
+		});*/
+		
+		
+	}
+	function show(o){
+		
+		o.onmousedown=function(e){
+			var cloneNode=o.cloneNode(true);//克隆所选节点
+			if(tips.innerHTML!==""){tips.innerHTML=""}
+			tips.appendChild(cloneNode);
+			tips.style.width=o.offsetWidth+"px";
+			
+			tips.style.display="block";
+			//visibility:visible;
+			tips.style.top=o.parentNode.offsetTop+3+"px";
+			tips.style.left=o.offsetLeft+"px";
+			
+			var lastNode=document.createElement("div");
+			lastNode.setAttribute("id","m-last");
+			
+			lastNode.setAttribute("class","m-li");
+			ols.appendChild(lastNode);
+			
+			
+			
+			tips.onmouseover=function(e){
+				window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();//清除选择
+				e=e||event;                //鼠标定位
+				var x=e.clientY-tips.offsetTop;
+				d.onmousemove=function(e){
+					e=e||event;
+					var tipsTop = e.clientY-x;
+					tips.style.top=tipsTop+"px";
+					for(var n=0; n < $d("m-num").getElementsByTagName("li").length; n++){
+						//alert(n)
+						$d("m"+n).parentNode.className="m-li";
+						$d("m-last").className="m-li";
+					}
+					if(tipsTop <= 3){               //判断移动范围
+						tips.style.top=3+"px";
+						lisNum = 0;
+						$d("m0").parentNode.className="m-li-cur";
+					}else{
+						if(tipsTop >= (o.parentNode.offsetHeight*(divs.length-1)+3)){
+							tips.style.top=o.parentNode.offsetHeight*(divs.length-1)+3+"px";
+							lisNum = divs.length;
+							$d("m-last").className="m-li-cur";
+						}else{
+							lisNum = Math.round((parseInt(tips.style.top)-3)/(o.offsetHeight+3*2));
+							lis[lisNum].className="m-li-cur";
+						}
+					}
+				}
+				
+				d.onmouseup = function(){ 
+					d.onmouseup=d.onmousemove="";
+					tips.style.display="none";
+					ols.removeChild(lastNode);
+					//alert(lisNum)
+					if(o==$d("lisNum") || !lisNum) return false; //防止无拖拽bug
+					
+					for(var n=0; n<lis.length; n++){
+						$d("m"+n).parentNode.className="m-li";
+						$d("m-last").className="m-li";
+					}
+					newNode=document.createElement("div");
+					var delNode=delNodeClone=tips.getElementsByTagName("div")[0];//清空所选节点\获取克隆节点
+					newNode.appendChild(delNode);
+					newNode.className="m-li";
+					
+					if(lisNum >= divs.length){  //插入所选节点
+						ols.appendChild(newNode);
+					}else{
+						//ols.insertBefore(newNode,$d("m"+lisNum).parentNode);
+					}
+					ols.removeChild(o.parentNode);
+					
+					//alert(delNode)
+					tips.innerHTML="";
+					dropMent(); //给新节点添加事件
+				}
+			}
+		}
+	}
+}
+dropMent();
+
+function addEvent(obj, type, fun){
+	if(obj.addEventListener){
+		obj.addEventListener(type, fun, false);
+	} else if(obj.attachEvent){
+		obj.attachEvent('on' + type, function() {
+            fun.call(obj, window.event);
+        });
+	} else {
+		obj['on' + type] = function() {
+            fun.call(obj, window.event);
+        }
+	}
+}
+</script>
+</body>
+</html>

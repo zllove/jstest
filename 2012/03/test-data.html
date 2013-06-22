@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-data</title>
+    <!--<script type="text/javascript" src="../jquery-1.4.4.min.js"></script>-->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+</head>
+<body>
+<div id="mydiv">mydiv</div>
+<div id="mydiv2">mydiv2</div>
+<script type="text/javascript">
+    $.data(document.getElementById('mydiv'), 'test1', 'testVal');
+//    $('#mydiv').data('test', 'testVal');
+//    console.log($.data(document.getElementById('mydiv'), 'test1'));
+//    console.log($('#mydiv').data('test'));
+    if (typeof Object.create !== 'function') {
+        Object.create = function (o) {
+            function F() {}
+            F.prototype = o;
+            return new F();
+        };
+    }
+    var o = {
+        name: 'jikey',
+        sayName: function(ele){
+//            console.log(ele.html());
+        }
+    };
+    var obj = Object.create(o);
+    obj.sayName($('#mydiv'));
+    obj.sayName($('#mydiv2'));
+    o.sayName($('#mydiv'));
+    o.sayName($('#mydiv2'));
+//    console.log(obj);
+//    console.log(o);
+
+//    o.sayName();
+
+</script>
+<p>111</p><p>222</p><p>333</p>
+<script type="text/javascript">
+    $('p').wrap('<div class="wrap"></div> ');
+    var foo = {
+        bar: function () {
+            alert(this);
+        }
+    };
+
+//    (foo.bar = foo.bar)();
+    var h = $(document).height();
+    $('#mydiv').css({width:$(window).width(), height:$(document).height()});
+//    console.log(h);
+    var page = $('<div class="pagenum">111</div> ');
+//    console.log(page.html());
+
+
+
+</script>
+<div id="test">test</div>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test</title>
+</head>
+<body>
+<div id="test">test</div>
+<input id="btn" type="button" value="test-button">
+<script type="text/javascript">
+    var $ = function (el){
+        return new _$(el);
+    };
+    var _$ = function (el){
+        this.el = (el && el.nodeType == 1) ? el : document;
+    }
+    _$.prototype = {
+        constructor: this,
+        show: function(){
+            var el = this.el;
+            el.style.display = 'block';
+        },
+        hide: function (){
+            var el = this.el;
+            el.style.display = 'none';
+        }
+    };
+
+    var btn = document.getElementById('btn'), test = document.getElementById('test');
+    btn.onclick = function(){
+        $(test).hide();
+    }
+
+</script>
+</body>
+</html>

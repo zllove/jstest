@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<div class="div1">div1</div>
+<div class="div2" style="display:none;">div2</div>
+<ul id="menu">
+    <li>111</li>
+    <li>1112</li>
+    <li>11123</li>
+</ul>
+<script type="text/javascript">
+    $('.div1,.div2').toggle();
+$(function () {
+    var menuNu_liu;
+    $("#menu li").hover(function () {
+        menuNu_liu = $(this).index();
+        $("#menu li").eq(menuNu_liu + 1).css("background", "#CCCCCC");
+    }, function () {
+        $("#menu li").eq(menuNu_liu - 1).css("background", "#f3f3f3");
+    });
+});
+
+    
+</script>
+</body>
+</html>

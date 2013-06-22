@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-lyarr</title>
+</head>
+<body>
+	<script type="text/javascript">
+		
+        function getNum () {
+	        var o = [],
+	        	arr = 'aaadfdfseffserfef1235512312sefseeffffftsdg',
+				ret = [];
+
+			/*	
+			for(var i = 0, j; j = arr[i]; i++) {
+	            if(typeof o[j] != 'number') {
+	                ret.push(j);
+	                o[j] = 1;
+	            } else {
+	                o[j]++;
+	            }
+	        }
+	        */
+
+	        for(var i = 0, len = arr.length; i < len; ++i) {
+	            o[arr[i]] = (o[arr[i]] || 0) + 1;
+	        }
+
+	        return o;
+
+	        /*
+	        for(var i = 0, len = arr.length; i < len; ++i) {
+	            o[arr[i]] = (o[arr[i]] || 0) + 1;
+	        }
+	        */
+        }
+
+        console.log(getNum());
+        
+	</script>
+</body>
+</html>

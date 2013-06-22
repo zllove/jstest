@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Document</title>
+        <style>
+		#ele{width:200px;height:20px;border:1px solid #000;background:#ccc;}
+		</style>
+		<script>
+		window.onload = function(){
+			/*
+			var obj = document.getElementById('ele');
+			var isCorrect = 0;
+			if(!obj){
+				return false;
+			}
+			obj.onclick = function(){
+				if(isCorrect == 0){
+					this.style.border = '2px solid #f90';
+					isCorrect = 1;
+				} else {
+					this.style.border = '1px solid #000';
+					isCorrect = 0;
+				}
+			}
+			*/
+			var obj = document.getElementById('ele');
+			if(!obj) return false;
+			function h(){
+				var hDiv = obj.offsetHeight;
+//				alert(hDiv);
+				if(hDiv < 500){
+					obj.style.height = hDiv + 200 + 'px';
+					
+//					alert(hDiv);
+				}
+			}
+			
+			setInterval(h, 50);
+			
+		}
+		</script>
+	</head>
+	<body>
+	<div id="ele">
+		sdfaslkdfjsdafj
+	</div>
+	</body>
+</html>

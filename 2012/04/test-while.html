@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-while</title>
+</head>
+<body>
+<script type="text/javascript">
+    /*
+    var i = 0;
+    while(i<=10){
+        document.write('菜鸟' + i + '号');
+        document.write('<br/>');
+        i = i+1;
+    }
+    */
+    
+    function foo(){
+        var t = 1, i=0;
+        while(t){
+            if(i<=10){
+                document.write('菜鸟' + i + '号');
+            } else {
+                t = 0;
+            }
+            i++;
+        }
+    }
+    foo();
+</script>
+</body>
+</html>

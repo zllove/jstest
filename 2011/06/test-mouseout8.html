@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+  	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <style type="text/css">
+  *{margin:0;padding:0;}
+  ul{list-style:none;margin-top:44px;}
+  ul li{width:120px;background:orange;float:left;margin-left:1px}
+  #pop{position:absolute;top:62px;left:365px;width:120px;height:100px;}
+  #pop p{background:pink;margin-bottom:1px;}
+  </style>
+  <script>
+
+
+function lists() {
+    document.getElementById("pop").style.display = "block";
+}
+function closes() {
+    var pop = document.getElementById("pop");
+    pop.onmouseout = function(event) {
+        var e = window.event ? window.event: event;
+        var obj = e ? e.toElement: e.relatedTarget;
+        if (!this.contains(obj)) { // 防鼠标干扰，必须，不然鼠标移到 div 的子元素，也会触发div 的mouseout 事件
+            this.style.display = "none";
+        }
+
+    }
+
+}
+window.onload = closes;
+  </script>
+  </head>
+
+
+  <body>
+  <ul id="nav">
+  <li><a href="">首页</a></li>
+  <li><a href="">首页1</a></li>   
+
+  <li><a href="">首页2</a></li>   
+  <li onmouseover="lists()"><a href="">首页3</a></li>   
+  <li><a href="">首页4</a></li>
+  </ul>
+  <div id="pop" style="display:none">
+  <p><a href="">子菜单</a></p>
+  <p><a href="">子菜单</a></p>
+  <p><a href="">子菜单</a></p>
+  <p><a href="">子菜单</a></p>
+  </div>
+  </body>
+</html>

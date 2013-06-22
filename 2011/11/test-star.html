@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+ <script type="text/javascript">
+function initEvent() {
+	var main = document.getElementById("main");
+	var stars = main.getElementsByTagName("td");
+	
+	for (var i = 1; i <= stars.length; i++) {
+		stars[i-1].style.cursor = 'pointer';
+		
+		stars[i-1].index = i;
+		stars[i-1].onmouseover = function(){
+			for(i=0; i<stars.length; i++){
+				stars[i].innerHTML = i < this.index ? '★' : '☆';
+			}
+		};
+		stars[i-1].onmouseout = function(){
+			for(i=0; i<stars.length; i++){
+				stars[i].innerHTML = '☆';
+				console.log(i);
+			}
+		};
+		stars[i-1].onclick = function(){
+			for(i=0; i<stars.length; i++){
+				stars[i].innerHTML = i < this.index ? '★' : '☆';
+			}
+		};
+	}
+
+}
+
+function point(iScore){
+	for(var i=0; i<stars.length; i++){
+			stars[i].innerHTML = i < iScore ? '★' : '☆';
+		}
+}
+     function over(){ 
+     	 var main = document.getElementById("main");
+         var stars = main.getElementsByTagName("td");
+         for (var i = 0; i < stars.length; i++) {
+             var star = stars[i];
+			 //alert(star.tagName);
+             if (this == star) {
+                for (i = 0; i <=stars[i].length; i++) {
+                     star.innerHTML = "★";
+                }
+             } else {
+                 for (i = stars[i] + 1; i < stars.length; i++)
+                     star[i].innerHTML = "☆";
+             }
+         }
+     }
+
+ </script>
+</head>
+<body onload="initEvent()">
+<table id="main">
+	<tr>
+		<td>☆</td><td>☆</td><td>☆</td><td>☆</td><td>☆</td>
+	</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-oop</title>
+</head>
+<body>
+<h3><a href="http://www.cnblogs.com/TomXu/archive/2012/02/06/2330609.html">面向对象编程之ECMAScript实现（推荐）</a></h3>
+<script type="text/javascript">
+    /*
+    console.log(typeof false); // boolean
+    console.log(typeof Boolean); // function
+    var foo = {x: 10};
+    foo.y = 20;
+    foo.x = function(){
+        console.log('foo.x');
+    };
+    console.log(foo);
+    var a = {
+        valueOf: function(){
+            return 100;
+        },
+        toString: function(){
+            return '__test';
+        }
+    }
+    alert(a);
+    alert(a + 10);
+    delete a.valueOf;
+    alert(a + 10);
+
+    var getClass = Object.prototype.toString;
+    console.log(getClass.call({})); // [Object Object]
+    console.log(getClass.call([])); // [Object Array]
+    getClass.call(new Number(1));
+    console.log(getClass.call(document.childNodes.item));
+
+    function Person(){
+        this.x = 10;
+        return [1,2,3];
+    }
+    var p = new Person();
+    console.log(p.x, p); // undefined, 1,2,3
+    function A(){ }
+    A.prototype.x = 10;
+    var a = new A();
+    alert(a.x); // 10
+    A.prototype = {
+        constructor: A,
+        y: 100
+    }
+    var b = new A();
+    alert(b.x); // undefined
+    alert(b.y); // 100
+    alert(a.x);
+    function B(){
+        this.x = 10;
+        return new Array();
+    }
+    var b = new B();
+    alert(b.x);
+    alert(Object.prototype.toString.call(b));
+
+    function A(){}
+    var a = new A();
+    console.log(a.constructor);
+    console.log(a.constructor === A);
+    // 对象独立于构造函数
+    // 因为实例的原型独立于构造函数和构造函数的prototype属性，构造函数完成了自己的主要工作（创建对象）以后可以删除。原型对象通过引用[[Prototype]]属性继续存在
+    function A(){}
+    A.prototype.x = 10;
+    var a = new A();
+    console.log(a.x); // 10
+    A = null;
+    var b = new a.constructor();
+    console.log(b.x); // 10
+    delete a.constructor.prototype.constructor;
+    delete b.constructor.prototype.constructor;
+//    var c = new b.constructor();
+//    console.log(c.x);
+    console.log(a.x); // 10
+    console.log(b.x); // 10
+
+    function A(){}
+    A.prototype.x = 10;
+    var a = new A();
+    console.log(a.x); // 10
+    console.log(a instanceof A); // true
+    A.prototype = null;
+    console.log(a.x); // 10
+    console.log(a instanceof A); // false
+    function A(x){
+        this.x = x || 100;
+    }
+    A.prototype = (function(){
+        // 初始化上下文
+        // 使用额外的对象
+        var _someSharedVar = 500;
+        function _someHelper(){
+            console.log('internal helper:' + _someSharedVar);
+        }
+        function method1(){
+            console.log('method1: ' + this.x);
+        }
+        function method2(){
+            console.log('method2: ' + this.x);
+            _someHelper();
+        }
+        // 原型自身
+        return {
+            constructor: A,
+            method1: method1,
+            method2: method2
+        };
+    })();
+    var a = new A(10);
+    var b = new A(20);
+    a.method1();
+    a.method2();
+    b.method1();
+    b.method2();
+    alert(a.method1 === b.method1);
+    alert(a.method2 === b.method2);
+
+    Object.prototype.x = 100;
+    var foo = {};
+    console.log(foo.x); // 100
+    foo.x = 10;
+    console.log(foo.x); // 10
+    delete foo.x;
+    console.log(foo.x); // 100
+
+    var a = {testProperty: 10};
+    alert(a.testProperty); // 10
+    alert(a['testProperty']); // 10
+    var propertyName = 'Property';
+    alert(a['test' + propertyName]); // 10
+     */
+
+//    console.log(1..toString());
+
+
+
+
+
+
+</script>
+
+<div class="a">aaa111</div>
+<div class="a">aaa222</div>
+<div class="a">aaa333</div>
+<script type="text/javascript">
+    /*
+    var ele = document.querySelectorAll('div.a');
+//    console.log(ele);
+    if(typeof Object.create !== 'function'){
+        Object.create = function(o){
+            function F(){}
+            F.prototype = new o();
+            return new F();
+        };
+    };
+    function Person(){};
+    /*
+    Person.prototype.sayName = function(){
+        alert('this name');
+    };
+    Person.prototype = {
+        sayName: function(){
+            alert('this name');
+        }
+    }
+    Person.saySchool = function(){
+        alert('this school say.');
+    }
+    var let = {
+        sayAge: function(){
+            alert('sayAge!');
+        }
+    };
+    function Man(){};
+    Man.prototype = new Person();
+    var man = Object.create(Person);
+    man.sayName();
+
+    function Person(name){
+        this.name = name;
+    }
+    Person.prototype = {
+        getName: function(){
+            return this.name;
+        }
+    }
+    var jikey = new Person('jikey');
+    Array.prototype.min = function(){
+        var min = this[0];
+        for(var i=1; i<this.length; i++){
+            if(this[i]<min){
+                min = this[i];
+            }
+        }
+        return min;
+    }
+    console.log([1,45,34,12].min());
+    var arr = [1, 33, 45,23];
+    var total = 0;
+    for(var i in arr){
+        if(arr.hasOwnProperty(i)){
+            total += parseInt(arr[i], 10);
+        }
+    }
+    console.log(total);
+    var arr = [1,2,33,4];
+    console.log(arr.constructor == Array);
+
+    function myObject(msg){
+    }
+    myObject.prototype.constructor.name = 'china';
+    var my = new myObject('Hello');
+    alert(my.constructor.name);
+//    myObject.name='china';
+//    myObject.nameThis='china';
+    alert(myObject.name); //IE: china FF:myObject
+//    alert(myObject.nameThis); //IE,FF: china
+
+    var arr = [1,2,33,4];
+//    console.log(arr.constructor == Array);
+    var Foo = function(){};
+//    console.log(Foo.constructor == Function); // true
+    var obj = new Foo();
+    console.log(obj.constructor === Foo); // true
+    console.log(obj.constructor.constructor === Function); // true
+
+    function Person(name){
+        this.name = name;
+    }
+    Person.prototype = new Object({
+        constructor: Person,
+        getName: function(){
+            return this.name;
+        }
+    });
+    var p = new Person('jikey');
+    console.log(p.constructor === Person);
+    console.log(Person.prototype.constructor === Person);
+    console.log()
+     */
+
+
+
+
+</script>
+</body>
+</html>

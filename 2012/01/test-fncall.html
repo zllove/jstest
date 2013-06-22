@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title></title>
+</head>
+<body>
+<input type="text" name="" id="ele" />
+<script type="text/javascript">
+    function foo(name, age){
+        this.name = name;
+        this.age = age;
+    }
+    foo.prototype = {
+        sayName: function(){
+            return this.name;
+        },
+        sayAge: function(){
+            this.sayName();
+            return this.age;
+        }
+    }
+    var f = new foo('haoqing', 29);
+    console.log(f.sayAge());
+    
+    var b = {
+        sayHi: function(msg){
+            return msg;
+        },
+        sayHello: function(hi){
+            return hi;
+        }
+    }
+    
+    console.log(b.sayHi('Hello world!'));
+
+    function obj(){ this.value = '对象'; }
+    var value = 'global 变量';
+    function fun1(){ alert(this.value); }
+    fun1(); // global 变量
+    fun1.call(this);
+    fun1.call(document.getElementById('ele')); // test
+
+
+
+
+
+</script>
+</body>
+</html>

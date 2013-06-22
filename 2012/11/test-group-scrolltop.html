@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<style type="text/css">
+*{margin:0; padding:0;}
+html{margin-top:9999px;}
+button{border:0 none; outline:none; display:block; width:37px; overflow:hidden; text-indent:999em; line-height:9999px; margin:5px;float:left; background:url(images/top_bottom.gif) no-repeat;}
+.btn_top{background-position:0 0; height:22px;cursor:pointer;}
+.btn_top:hover{background-position:-38px 0;}
+.btn_feedback{background-position:0 -22px; height:28px;}
+.btn_feedback:hover{background-position:-38px -22px;}
+.btn_bottom{background-position:0 -50px; height:21px;}
+.btn_bottom:hover{background-position:-38px -50px;}
+#bottom_to_top{
+	width:47px; 
+	height:106px; 
+	position:fixed; 
+	right:20px; 
+	top:30%; 
+	border-radius:5px; 
+	background-color:white; 
+	box-shadow:0 0 2px #6E6E6E; 
+	_position:absolute; 
+	border:1px solid #6E6E6E\9;
+	overflow:hidden;
+	display:none;
+}
+#bottom{width:100%; height:30px; background-color:#000; line-height:30px; color:#FFF;}
+#bottom span{color:red; float:right;}
+</style>
+<body>
+<div id="bottom_to_top">
+<button class="btn_top"title="点我就能朝上">点我就能朝上</button>
+<button class="btn_feedback" title="点击这里留言">点击这里留言</button>
+<button class="btn_bottom" title="点我就朝下">点我就朝下</button>
+</div>
+<div id="bottom">
+	<p>版权所有&copy;<a href="http://www.321xz.com">前端小站</a><span>这里是底部</span></p>
+</div>
+<script type="text/javascript">
+$(function(){
+/*
+	$('#bottom_to_top').css('top',window.screen.availHeight/2 -100); //让区域居中显示
+*/
+	$(window).scroll(function() {
+		if($(window).scrollTop() <= 1000) {
+			$('#bottom_to_top').fadeOut(400);
+		} else {
+			$('#bottom_to_top').fadeIn(400);
+		}
+	});
+	$('#bottom_to_top .btn_top').click(function() {
+		$('html,body').animate({
+			scrollTop: '0px'
+		}, 1000);
+
+	});
+	$('#bottom_to_top .btn_bottom').click(function() {
+		$('html,body').animate({
+			// scrollTop: '+' + $(document).height()
+			// scrollTop: document.documentElement.scrollHeight
+			scrollTop: $('#bottom').offset().top
+		}, 1000);
+	});
+
+});
+</script>
+</body>
+</html>

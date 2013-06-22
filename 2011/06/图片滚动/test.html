@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+body{font:12px/1.5 Tahoma, Helvetica, Arial, '宋体', sans-serif;}
+body, div, ul, li,img,a{margin:0px;padding:0px;}
+img,a{border:none;}
+img{vertical-align:top;}
+li {list-style:none;}
+a{text-decoration:none;}
+.clearall:after{content: '\20';clear:both;display:block;}
+
+.roll{width:480px;height:160px;overflow:hidden;;margin:0px auto;}
+.roll ul li{float:left;width:160px;}
+.roll ul li img{width:160px;height:160px;}
+</style>
+<script>
+var plug = {
+        getStyle:function(elem,name){//小插件一,获取元素样式表中样式
+                if(elem.style[name])
+                        return elem.style[name];
+                else if(elem.currentStyle)        
+                        return elem.currentStyle[name];
+                else if(document.defaultView&&document.defaultView.getComputedStyle){
+                        name = name.replace(/([A-Z])/g,"-$1");
+                        name = name.toLowerCase();
+                        var s = document.defaultView.getComputedStyle(elem,"");
+                        return s&&s.getPropertyValue(name);
+                }
+                else{return null}
+        },
+        addEvent:function(obj, type, fn){//小插件二，事件监听
+                if ( obj.attachEvent ) {
+            obj['e'+type+fn] = fn;
+            obj[type+fn] = function(){obj['e'+type+fn]( window.event );}
+            obj.attachEvent( 'on'+type, obj[type+fn] );
+        } else
+            obj.addEventListener( type, fn, false );        
+        },
+        Bind:function(object, fun) {//小插件三，给this绑定上下文
+                var args = Array.prototype.slice.call(arguments).slice(2);
+                return function() {
+                        return fun.apply(object, args.concat(Array.prototype.slice.call(arguments)));
+                }
+        }
+}
+
+function soll(obj){
+        var _this = this;
+        this.obj = document.getElementById(obj);
+        this.ul = this.obj.getElementsByTagName("ul")[0];
+        this.lis = this.obj.getElementsByTagName("li");
+        this.w = parseInt(plug.getStyle(_this.obj,"width"));
+        this.t = null;
+        this.tp = 1;//控制滚动速度。当为0的时候不滚动
+        this.obj.onmouseover = function(){
+                _this.tp = 0;
+        }
+        this.obj.onmouseout = function(){
+                _this.tp = 1;
+        }
+}
+soll.prototype.init = function(){//初始化
+        this.ul.innerHTML+=this.ul.innerHTML;
+        this.ul.style.width = this.lis[0].offsetWidth*this.lis.length + "px";
+        this.run();//执行滚动函数
+}
+
+soll.prototype.run = function(){//滚动函数
+                this.obj.scrollLeft+=this.tp;
+                if(this.obj.scrollWidth-this.obj.scrollLeft<=this.w){
+                        clearTimeout(this.t);
+                        this.obj.scrollLeft = this.obj.scrollWidth/2 - (this.obj.scrollWidth-this.obj.scrollLeft);
+                }
+                this.t = setTimeout(plug.Bind(this,this.run),1)
+}
+plug.addEvent(window,"load",function(){
+        var start = new soll("slide");//new对象
+        start.init();//开始执行
+})
+</script>
+</head>
+
+<body>
+<div class="roll clearall" id="slide">
+        <ul>
+            <li><img src="images/1.jpg" /></li>
+        <li><img src="images/2.jpg" /></li>
+        <li><img src="images/3.jpg" /></li>
+        <li><img src="images/4.jpg" /></li>
+        <li><img src="images/1.jpg" /></li>
+        <li><img src="images/2.jpg" /></li>
+    </ul>
+</div>
+</body>
+</html>

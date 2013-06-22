@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" " http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns=" http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>仿126网络硬盘上传 by littlelam</title>
+</head>
+<script>
+var TotalFiles = 0;
+function AddFiles()
+{
+    TotalFiles ++;
+    var file=document.createElement("input"); 
+    file.type = "file";
+    file.id = "f"+ TotalFiles.toString();
+    file.name = "files"+ TotalFiles.toString(); 
+    file.hideFocus = true;
+    file.size = 1;
+    file.style.cssText = "cursor:pointer; width:1px; border:none; height:32px; padding:0px; margin:0px;position:absolute; opacity:0;filter:alpha(opacity=0);left:-32px !important;left:-5px;left/**/:-3px; font-size:20px;";
+    file.onchange = function ()
+    {
+        $("s"+TotalFiles.toString()).innerHTML = $("f"+TotalFiles.toString()).value.substring($("f"+TotalFiles.toString()).value.lastIndexOf("\\")+1,$("f"+TotalFiles.toString()).value.length) + "    <span onclick=\"DelFile('"+TotalFiles.toString()+"')\" style=\"cursor:pointer;color:red\">X</span>";
+        this.style.display = "none";
+        AddFiles();
+    };
+    $("UpFilePanelHidden").appendChild(file);
+    var div=document.createElement("div"); 
+    div.id = "s"+ TotalFiles.toString();
+    $("UpFilePanelShow").appendChild(div);
+
+}
+function $(str)
+{
+    return document.getElementById(str);
+}
+function DelFile(str)
+{
+    $("UpFilePanelHidden").removeChild($("f"+str));
+    $("UpFilePanelShow").removeChild($("s"+str));    
+}
+function DelEmpty()
+{
+    for (var i=1;i<=TotalFiles;i++)
+    {
+        if ($("f"+i.toString()))
+        {
+            if ($("f"+i.toString()).value == "")
+                $("UpFilePanelHidden").removeChild($("f"+i.toString()));
+        }
+            
+    }
+}
+</script>
+<body>
+<FORM METHOD="post" NAME="form1" ACTION="savetofile.asp" ENCTYPE="multipart/form-data" onsubmit="DelEmpty();return true;">
+<div style="width:100px; height:30px;background-image:url( http://mimg.163.com/netfolder/images/all_toolbar.gif);background-position:2px -64px; margin:6px 4px; border:1px solid #bebebe; cursor:pointer; "><a id="UpFilePanelHidden" href="javascript:void(0);" ></a></div>
+<div id="UpFilePanelShow"></div><script>AddFiles();</script>
+<br />
+<input type="submit" name="Submit" value="提交" />
+</form>
+</body>
+</html>

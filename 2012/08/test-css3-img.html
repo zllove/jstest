@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>用于WebKit的CSS诀窍</title>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{font:12px/2 arial; background:#fff;}
+        img{ display:block;}
+        .a{-webkit-transform:rotate(5deg);-webkit-box-shadow:10px 10px 5px #888;}
+        .b{-webkit-transform:scale(0.8);}
+        .b:hover{-webkit-transform:scale(1);}
+        .img_wrap img{-webkit-transform:opacity 1s ease-in-out;}
+        .c, .img_wrap:hover .d{ opacity:1.0;}
+        .img_wrap:hover .c, .d{ opacity:0;}
+        .col{-webkit-column-count:3;-webkit-column-gap:25px;-moz-column-count:3;-moz-column-gap:25px;}
+        .col p{ height:300px;}
+        #boxes div { border: 2px solid black; padding: 10px; margin:5px; width:200px; text-align:center; background:#eee; }
+        #box1{z-index:100;position:absolute;top:5px;left:5px;width:100px;height:250px;padding:5px;-webkit-border-radius:10px;border:2px solid black;background:#dddddd;z-index:200;}
+        #slider{z-index:100;position:absolute;top:30px;left:5px;height:200px;width:90px;padding-top:10px;padding-left:15px;-webkit-border-radius:10px;border:1px solid black;background:#eeeeee;-webkit-transition:-webkit-transform 0.5s ease-in;}
+    </style>
+</head>
+<body>
+<img class="a" src="http://i5.vanclimg.com/users/18/20120814/focus_tz_120815.jpg" alt="">
+<img class="b" src="http://i5.vanclimg.com/users/18/20120810/focus_xb_120810.jpg" alt="">
+<div class="img_wrap">
+    <img class="c" style="position:absolute;" src="http://i5.vanclimg.com/users/18/20120810/focus_xb_120810.jpg" alt="">
+    <img class="d" src="http://i2.vanclimg.com/users/18/20120809/focus_nz_120809.jpg" alt="">
+</div>
+<div class="col">
+    <p>column A</p>
+    <p>column B</p>
+    <p>column C</p>
+</div>
+<div id="boxes">
+    <div style="-webkit-border-radius:15px;">
+        All sides
+    </div>
+    <div style="-webkit-border-bottom-left-radius:15px;-webkit-border-top-right-radius:15px;">
+        Opposite corners
+    </div>
+    <div style="-webkit-border-top-left-radius:15px;-webkit-border-top-right-radius:15px;">
+        Top
+    </div>
+    <div style="-webkit-border-top-right-radius:15px;-webkit-border-bottom-right-radius:15px;">
+        Side
+    </div>
+</div>
+<input type="range" style="-webkit-appearance:slider-horizontal;"><br/><br/>
+<button style="-webkit-appearance:button;width:200px;height:30px;">gradient button</button><br/><br/>
+<button style="-webkit-appearance:push-button;width:200px;">aqua button</button><br/><br/>
+<input type="text" style="-webkit-appearance:searchfield;" value="kitten"></input><br/>
+<script type="text/javascript">
+    function popout() {
+        document.getElementById('slider').style.webkitTransform = 'translate(105px,0)';
+    }
+</script>
+<div id="slider">
+    Slider<br/>Content
+</div>
+<div id="box1">
+    <a href="javascript:popout();">Popout</a>
+</div>
+</body>
+</html>

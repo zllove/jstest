@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-03-generate</title>
+    <script type="text/javascript" src="js/ADS.js"></script>
+    <script type="text/javascript" src="js/generateDOM.js"></script>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{ font:12px/21px arial; background:#3f3f3f;}
+        textarea{ font-size:12px; width:100%; overflow:auto;}
+        .title{ text-indent:1em; line-height:40px; height:40px; color:#cc2f27; background:#f0f0f0; border-bottom:1px solid #ccc;}
+        #content{ width:50%; margin:0 auto;padding:15px;}
+        #content h2{ margin-bottom:5px; color:#f27602;;}
+        #content label{ display:block; margin-bottom:3px; color:#999;}
+        #content fieldset{ padding:10px; border:1px solid #ddd; background:#fff;}
+        #generate{ display:block; width:100%; margin:5px 0; padding:5px; cursor:pointer;}
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+    ADS.isCompatible();
+</script>
+<h1 class="title">DOM Generation</h1>
+<div id="content">
+    <form id="generator" action="">
+        <fieldset>
+            <h2>Source</h2>
+            <label for="source">Enter an HTML document fragment</label>
+            <textarea name="" id="source" cols="30" rows="15"><div></div></textarea>
+            <input id="generate" type="button" value="&#8595;generate &#8595;">
+            <h2>DOM Code</h2>
+            <label for="result">and voila! DOM goodness:</label>
+            <textarea name="" id="result" cols="30" rows="15"></textarea>
+        </fieldset>
+    </form>
+</div>
+<script type="text/javascript">
+    var btn = ADS.$('generate');
+    btn.onclick = function(){
+        var sourcehtml = ADS.$('source').value;
+        if(!sourcehtml) {
+            alert('HTML不能为空！');
+            return;
+        }
+        ADS.$('result').value = generateDOM.generate(sourcehtml);
+    }
+</script>
+<div class="a">this a</div>
+<div class="b">this b</div>
+</body>
+</html>

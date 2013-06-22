@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<h4><a href="http://bbs.blueidea.com/thread-2774049-1-1.html" target="_blank">http://bbs.blueidea.com/thread-2774049-1-1.html</a></h4>
+<script type="text/javascript">
+    function foo(){
+        foo.abc = function(){
+            console.log('def');
+        }
+        /*
+        this.abc = function(){
+            console.log('xyz');
+        }
+        */
+        abc = function(){
+            console.log('@@@@');
+        }
+        var abc = function(){
+            console.log('$$$$$');
+        }
+    }
+    foo.prototype.abc = function(){
+        console.log('456');
+    }
+    foo.abc = function(){
+        console.log('123');
+    }
+    var f = new foo();
+    f.abc();
+    foo.abc();
+    abc();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test-jq</title>
+    <script type="text/javascript" src="../jquery-1.8.2.js"></script>
+    <style type="text/css">
+	#dvSelected, #dvSelects{ zoom:1; overflow:hidden; }
+    #dvSelects{ width:400px; }
+    #dvSelects div{float:left;padding:5px;border:1px solid #ccc;margin:5px;}
+    #dvSelected div{float:left;padding:5px;background:#FFDEB7;border:1px dotted #c00;margin:5px;}
+    #dvSelected div a{ padding-left:5px;display:none;}
+    </style>
+</head>
+<body>
+<script type="text/javascript" src="http://www.coding123.net/js/jquery.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var item, newItem;
+        $('#dvSelected div').live('mouseover', function(){
+        	$(this).find('a').show();
+        });
+        $('#dvSelected div').live('mouseout', function(){
+        	$(this).find('a').hide();
+        });
+
+        $('#dvSelected a').live('click', function () {
+            item = $(this).parent();
+            $('#dvSelects div:eq(' + item.attr('index') + ')').show();
+            item.remove();
+            return false;
+        });
+        $('#dvSelects div').click(function () {
+            item = $(this);
+            newItem = item.clone();
+            newItem.append('<a href="#">x</a>').attr('index', item.index());
+            item.hide();
+            $('#dvSelected').append(newItem);
+        });
+    });
+</script>
+<div id="dvSelected"></div>
+<div id="dvSelects">
+    <div>学生</div>
+    <div>公务员</div>
+    <div>媒体人</div>
+    <div>音乐人</div>
+    <div>自由职业者</div>
+    <div>白领</div>
+    <div>挨踢民工</div>
+</div>
+</body>
+</html>

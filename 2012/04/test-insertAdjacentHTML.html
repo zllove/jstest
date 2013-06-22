@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test</title>
+</head>
+<body>
+<h3>From:http://www.blogjava.net/Scott/archive/2007/08/30/141449.html</h3>
+<input id="btn" type="button" value="测试插入" onclick="myfun()">
+<div id="mytest">我是被测试的内容</div>
+<script type="text/javascript">
+    function myfun(){
+        var btn = document.getElementById('btn'),
+            mydiv = document.getElementById('mytest');
+        mydiv.insertAdjacentHTML('Afterbegin', '<div>我是一个兵</div>')
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-know-js</title>
+</head>
+<body>
+<h4><a href="http://www.cnblogs.com/TomXu/archive/2012/02/10/2342098.html">深入理解js</a></h4>
+<script type="text/javascript">
+    /*
+    if(!('a' in window)){
+        var a = 1;
+    }
+    alert(a); // undefined
+
+    var a = 1,
+        b = function a(x){
+            x && a(--x);
+        };
+    alert(a); // 1
+
+    function a(x){
+        return x*2;
+    }
+    var a;
+    alert(a); // fn
+
+    function b(x, y, a){
+        arguments[2] = 10;
+        alert(a);
+    }
+    b(1,2); // 10
+     */
+
+    function a(){
+        alert(this);
+    }
+    a.call(null); // window
+    /*
+ */
+
+
+</script>
+</body>
+</html>

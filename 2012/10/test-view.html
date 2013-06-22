@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+
+</head>
+<body>
+<script type="text/javascript">
+    function getViewportSize(w) {
+        w = w || window;
+        if (window.innerWidth != null) return {w:w.innerWidth, h:w.innerHeight}
+        var d = w.document;
+        if (document.compatMode == "CSS1Compat") return {w:d.documentElement.clientWidth, h:d.documentElement.clientHeight};
+        return {w:d.body.clientWidth, h:d.body.clientHeight}
+    }
+    window.onload = function () {
+        var num1 = getViewportSize()
+        alert(num1.w + ' ' + num1.h)
+    }
+</script>
+</body>
+</html>

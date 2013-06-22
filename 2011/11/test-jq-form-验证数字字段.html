@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+	<style type="text/css">
+		.label{float:left;width:120px;}
+		.infobox{width:200px;}
+		.error{color:#c00;padding-left:10px;}
+		.submit{margin-left:125px;margin-top:10px;}
+	</style>
+</head>
+<body>
+	<form action="" method="post" id="signup">
+		<div><span class="label">User Id *</span><input type="text" name="userid" id="" class="infobox" /><span class="error">Only num allowed.</span></div>
+		<input type="submit" class="submit" value="Submit" />
+	</form>
+	<script type="text/javascript">
+		$('.error').hide();
+		$('.submit').click(function(event){
+			var data = $('.infobox').val();
+			var len = data.length;
+			var c = 0;
+			var age = 0;
+			var flag = 0;
+			
+			for(var i=0; i<len; i++){
+				c = data.charAt(i).charCodeAt(0); // charCodeAt() 查找ASCII值
+				if(c < 48 || c > 57){
+					$('.error').show();
+					flag = 1;
+					event.preventDefault();
+					break;
+				} else {
+					$('.error').hide();
+				}
+			}
+			
+			if(flag == 0){
+				age = parseInt(data);
+				if(age < 5 || age > 99){
+					$('.error').show();
+					$('.error').text('Invalid age. Please enter the age within the range 5 to 99');
+					event.preventDefault();
+				}
+			}
+			
+		});
+	</script>
+</body>
+</html>

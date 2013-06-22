@@ -1,0 +1,152 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>豪情</title>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+        <style>
+            table{font-size:12px;border-collapse:collapse;border:1px solid #A9C9E2;}
+            td,th{padding:5px;border:1px solid #A9C9E2;}
+            tr{cursor:pointer;}
+            .tab01{background:#EEFAFF;}
+            .tab02,#tab03{background:#F7F7F7;}
+            tr.even{background:#F0FBEB;}
+            tr.highlight,td.highlight,th.highlight{background:#FFFFDD;}
+            tr.selected{background:#C2ECA7;}
+        </style>
+        <script>
+        $(function(){
+            //1 隔行，滑动，点击变色
+            $('.tab01 tr:even').addClass('even');
+            $('.tab01 tr:not(:first)').hover(function(){
+                $(this).addClass('highlight');
+            }, function(){
+                $(this).removeClass('highlight');
+            });
+            $('.tab01 tr:not(:first)').click(function(){
+                $(this).toggleClass('selected');
+            });
+			
+			$('.tab01 th').hover(function(){
+				var colindex = $(this).index();
+				$('.tab01 td:nth-child(' + (colindex + 1) + '),.tab01 th:nth-child(' + (colindex + 1) + ')').addClass('highlight');
+            }, function(){
+            	$('.tab01 tr').children().removeClass('highlight');
+            });
+			
+			
+			
+            //2  checkbox 选中变色
+            $('.tab02 tr:even').addClass('even');
+            $('.tab02 tr:not(:first)').hover(function(){
+                $(this).addClass('highlight');
+            }, function(){
+                $(this).removeClass('highlight');
+            });
+            //默认选中的添加样式
+            $('.tab02 input[type="checkbox"]:checked').parents('tr').addClass('selected');
+            $('.tab02 tr:not(:first)').click(function(){
+                if($(this).hasClass('selected')){
+                    $(this).removeClass('selected');
+                    $(this).find('input[type="checkbox"]').removeAttr('checked');
+                } else {
+                    $(this).addClass('selected');
+                    $(this).find('input[type="checkbox"]').attr('checked', 'checked');
+                }
+            });
+			
+            //3  radio 选中变色
+            //默认选中的添加样式
+            $('#tab03 tr:even').addClass('even');
+            $('#tab03 input[type="radio"]:checked').parents('tr').addClass('selected');
+            $('#tab03 tr:not(:first)').click(function(){
+                $(this).siblings().removeClass('selected'); //先移除全部兄弟样式
+                $(this).addClass('selected'); //给this添加样式
+                $(this).find('input[type="radio"]').attr('checked', 'checked');
+            });
+		   
+        });
+        </script>
+    </head>
+<body>
+    <h4>1.隔行变行</h4>
+    <table width=500 class="tab01">
+        <tr>
+            <th>Java交流群</th>
+            <th>管理特长</th>
+            <th>QQ</th>
+        </tr>
+        <tr>
+            <td>38611691</td>
+            <td>擅长java</td>
+            <td>249056406</td>
+        </tr>
+        <tr>
+            <td>38611691</td>
+            <td>擅长js,css,ps</td>
+            <td>249056406</td>
+        </tr>
+        <tr>
+            <td>38611691</td>
+            <td>擅长sql,oracle</td>
+            <td>249056406</td>
+        </tr>
+    </table>
+    <h4>2.隔行变行，多选变色</h4>
+    <table width=500 class="tab02">
+        <tr>
+            <td>Java交流群</td>
+            <td>Java交流群</td>
+            <td>管理特长</td>
+            <td>QQ</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="" id="" /></td>
+            <td>38611691</td>
+            <td>擅长java</td>
+            <td>249056406</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="" id="" /></td>
+            <td>38611691</td>
+            <td>擅长js,css,ps</td>
+            <td>249056406</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="" id="" /></td>
+            <td>38611691</td>
+            <td>擅长sql,oracle</td>
+            <td>249056406</td>
+        </tr>
+    </table>
+    <h4>3.隔行变行，多选变色</h4>
+    <table width=500 id="tab03">
+        <tr>
+            <td>Java交流群</td>
+            <td>Java交流群</td>
+            <td>管理特长</td>
+            <td>QQ</td>
+        </tr>
+        <tr>
+            <td><input type="radio" name="" id="" /></td>
+            <td>38611691</td>
+            <td>擅长java</td>
+            <td>249056406</td>
+        </tr>
+        <tr>
+            <td><input type="radio" name="" id="" /></td>
+            <td>38611691</td>
+            <td>擅长js,css,ps</td>
+            <td>249056406</td>
+        </tr>
+        <tr>
+            <td><input type="radio" name="" id="" /></td>
+            <td>38611691</td>
+            <td>擅长sql,oracle</td>
+            <td>249056406</td>
+        </tr>
+    </table>
+    
+</body>
+</html>

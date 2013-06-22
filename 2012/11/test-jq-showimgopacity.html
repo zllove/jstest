@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+    <style type="text/css">
+        #showimg {
+            width: 730px;
+            margin: 30px 0;
+        }
+        #showimg img {
+            width: 150px;
+            height: 150px;
+            margin:0 20px 20px 0;
+            border: solid 2px #CCC; overflow:hidden; display:inline-block;
+        }
+    </style>
+</head>
+<body>
+<div id="showimg">
+    <img src="http://www.jquery001.com/images/demo/2010/anyixuan1.jpg" alt="安以轩" style="opacity: 1;">
+    <img src="http://www.jquery001.com/images/demo/2010/anyixuan2.jpg" alt="安以轩" style="opacity: 1;">
+    <img src="http://www.jquery001.com/images/demo/2010/anyixuan3.jpg" alt="安以轩" style="opacity: 1;">
+    <img src="http://www.jquery001.com/images/demo/2010/anyixuan4.jpg" alt="安以轩" style="opacity: 1;">
+    <img src="http://www.jquery001.com/images/demo/2010/anyixuan5.jpg" alt="安以轩" style="opacity: 1;">
+    <img src="http://www.jquery001.com/images/demo/2010/anyixuan6.jpg" alt="安以轩" style="opacity: 1;">
+    <img src="http://www.jquery001.com/images/demo/2010/anyixuan7.jpg" alt="安以轩" style="opacity: 1;">
+    <img src="http://www.jquery001.com/images/demo/2010/anyixuan8.jpg" alt="安以轩" style="opacity: 1;">
+</div>
+<script type="text/javascript">
+    $('#showimg img').hover(function(){
+        $(this).siblings().stop().fadeTo(500, 0.5);
+    }, function(){
+        $(this).siblings().stop().fadeTo(500, 1);
+    });
+</script>
+</body>
+</html>

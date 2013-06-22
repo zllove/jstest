@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+</head>
+<body>
+网易，搜狐 <br>
+<input type="button" value="添加链接" onclick="addLink()">
+<script type="text/javascript">
+    function addLink(){
+        var oSelect = window.getSelection();
+        var oRange = document.selection.createRange();
+        if(oRange.text != ''){
+            var oUrl = window.prompt('链接地址...', 'http://www.163.com');
+            var oHtml = '<a href="' + oUrl + '" target="_blank">' + oRange.text + '</a>';
+            oRange.pasteHTML(oHtml);
+        } else {
+            alert('没有选择添加链接的文字！');
+        }
+    }
+
+
+    function getSel() {
+        var txt = "";
+        var foundIn = "";
+        if (window.getSelection) {
+            txt = window.getSelection();
+            foundIn = 'window.getSelection()';
+        }
+        else if (document.getSelection) {
+            txt = document.getSelection();
+            foundIn = 'document.getSelection()';
+        } else if (document.selection) {
+            //txt=document.selection.createRange().text;//代码可以捕获到选中的网页中的纯文//本内容(不含HTML标签)
+            txt = document.selection.createRange().htmlText//HTML标签
+            foundIn = 'document.selection.createRange()';
+        } else {
+            return;
+        }
+        document.forms[0].selectedtext.value = 'Found in: ' + foundIn + '\n' + txt;
+    }
+
+</script>
+</body>
+</html>

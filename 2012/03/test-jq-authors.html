@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-jq-authors</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+    <style type="text/css">
+        a{ display:block;}
+        .finishedFading{ color:#f00;}
+    </style>
+</head>
+<body>
+<a href="http://www.a.com">1111</a>
+<a href="http://www.b.com">2222</a>
+<a href="http://www.baidu.com">3333</a>
+<div>111
+    <a href="http://www.aa.com">1111</a>
+    <a href="http://www.bb.com">2222</a>
+</div>
+<div>222</div>
+<script type="text/javascript">
+(function($){
+    $.fn.showLink = function(){
+        /*
+        return this.filter('a').each(function(){
+             $(this).append('(' + $(this).attr('href') + ')');
+        });
+        */
+        return this.append(function(){
+            return '(' + this.href + ')';
+        })
+    };
+    $.fn.fadeInAndAddClass = function(duration, className) {
+        return this.fadeIn(duration, function(){
+            $(this).addClass(className);
+        });
+    };
+})(jQuery);
+//    $('a').showLink();
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

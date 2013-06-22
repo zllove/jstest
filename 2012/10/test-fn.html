@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test-fn</title>
+</head>
+<body>
+<h2><a href="http://software.intel.com/zh-cn/articles/javascript-first-class-citizen-function/?cid=sw:prccsdn229032">js一等公民</a></h2>
+<script type="text/javascript">
+    function test(){
+        console.log(arguments.length);
+    }
+//    test(1);
+//    test(1, 'a');
+//    test(1, [], {});
+
+    var mylib = (function(global){
+        function log(msg){
+            console.log(msg);
+        }
+        log1 = log;
+        global.log2 = log;
+        return {
+            log: log
+        };
+    }(window));
+
+//    log1('test full');
+//    log2('test global');
+//    mylib.log('test mylib log');
+
+    function negative(n){
+        return -n;
+    }
+
+    function square(n){
+        return n*n;
+    }
+
+    function process(nums, callback) {
+        var result = [];
+        for (var i = 0, len = nums.length; i < len; i++) {
+            result[i] = callback(nums[i]);
+        }
+        return result;
+    }
+
+    var nums = [-3, -2, -1, 0, 1, 2, 3];
+    var n_neg = process(nums, negative);
+//    console.log(n_neg);
+    function generator(){
+        var i = 0;
+        return function(){
+            return i++;
+        };
+    }
+    var gen1 = generator();
+    var gen2 = generator();
+//    console.log(gen1());
+//    console.log(gen1());
+//    console.log(gen1());
+
+    function Person(name){
+        this.name = name;
+        this.toString = function(){
+            return 'Hello, ' + this.name + '!';
+        }
+    }
+    var p = new Person('Ghostheaven');
+//    console.log(p);
+
+    function Myclass(name){
+        this.name = name;
+        return name;
+    }
+    var obj1 = new Myclass('foo');
+    var obj2 = Myclass('foo');
+    var obj3 = new Myclass({});
+    var obj4 = Myclass({});
+//    console.log(obj1);
+//    console.log(obj2);
+//    console.log(obj3);
+//    console.log(obj4);
+
+    function selfUpdate(){
+        window.selfUpdate = function(){
+            console.log('second run!');
+        }
+        console.log('first run!');
+    }
+    selfUpdate();
+    selfUpdate();
+    selfUpdate();
+
+
+</script>
+</body>
+</html>

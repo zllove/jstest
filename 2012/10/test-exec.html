@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    /*
+    var str = '1a1b1c',
+        reg = new RegExp('1.', 'g');
+
+//    end = reg.exec(str);
+    end = str.match(reg);
+    console.log(end);
+    console.log(end[0]);
+    console.log(end[1]);
+    console.log(end[2]);
+    console.log(end['index']);
+
+    var str = 'ahi',
+        exp = /a(hi)/;
+
+    var arr1 = exp.exec(str);
+    var arr2 = str.match(exp);
+    console.log(arr1[0], arr1[1]);
+    console.log(arr2);
+    */
+
+    var u = "http://msdn.microsoft.com:80/scripting/default.htm";
+    var s = /(\w+):\/\/([^/:]+)(:\d*)?([^# ]*)/;
+    var a = s.exec(u);
+    for (i = 1; i < a.length; i++) {
+//        alert(a[i]);
+    }
+    console.log(a);
+    console.log(RegExp.$1); // http
+    console.log(RegExp.$2); // msdn.microsoft.com test-exec.html:37
+    console.log(RegExp.$3); // :80
+    console.log(RegExp.$4); // /scripting/default.htm
+
+</script>
+</body>
+</html>

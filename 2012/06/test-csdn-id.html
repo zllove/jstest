@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title> New Document </title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{ font-size:12px;}
+        .chizai_bt{
+            width:742px;
+            height:24px;
+            margin-top:23px;
+            border-bottom:solid 1px #3d91c3;
+        }
+        .chizai_bt ul{
+            width:100%;
+        }
+        .chizai_bt ul li{
+            color:#1d72cb;
+            float:left; list-style:none;
+        }
+    </style>
+</head>
+<body>
+<!--这一条循环两次的时候，点第二条的显示按钮第一条的就显示，他们的id肯定是重复的--><!---循环第一条开始--->
+<div class="chizai_bt">
+    <ul>
+        <li>&nbsp;朝鲜团队游</li>
+        <li style="width:50px;height:18px;float:right;padding-right:8px;" >结束按钮</li>
+        <li style="width:50px;height:18px;float:right;padding-right:8px;" class="show">显示按钮</li>
+    </ul>
+</div>
+<!--datu-->
+<div style="width:100%;height:154px;margin-top:5px;display:none;">
+    <div style="width:237px;height:154px;float:left;"><img src="images/miao.jpg" width="237" height="154" /></div>
+    <div class="czcx">
+        我社在您朝鲜旅游期间安排的早餐都是在下榻的宾馆来用的，有时是桌餐，有时是自助餐。
+    </div>
+</div>
+<!---循环第一条结束---><!---循环第一条开始--->
+<div class="chizai_bt">
+    <ul>
+        <li>&nbsp;朝鲜团队游</li>
+        <li style="width:50px;height:18px;float:right;padding-right:8px;" onclick="stop(2)">结束按钮</li>
+        <li style="width:50px;height:18px;float:right;padding-right:8px;" onclick="stop(1)" class="show">显示按钮</li>
+    </ul>
+
+</div>
+<div style="width:100%;height:154px;margin-top:5px;display:none;">
+    <div style="width:237px;height:154px;float:left;"><img src="images/miao.jpg" width="237" height="154" /></div>
+    <div class="czcx">
+        我社在您朝鲜旅游期间安排的早餐都是在下榻的宾馆来用的，有时是桌餐，有时是自助餐。
+    </div>
+</div>
+<!--datu-->
+<script type="text/javascript">
+    $('.show').click(function(){
+        $(this).closest('.chizai_bt').next().toggle();
+    });
+</script>
+</body>
+</html>

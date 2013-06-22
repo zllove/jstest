@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .a_gsjj{ width:104px; height:142px; background:url(../img/) 0 0 no-repeat; }
+        .a_gsjj:hover{ background-position:0 0; }
+    </style>
+</head>
+<body>
+<ul id="list">
+    <li>1111</li>
+    <li>1111</li>
+    <li>1111</li>
+</ul>
+<ul id="list2">
+    <li>1111</li>
+    <li>1111</li>
+    <li>1111</li>
+</ul>
+<input type="submit" onclick="say(event)" value="猛击我吧！"/>
+<script type="text/javascript">
+    function startMove(obj, attr, itarget) {
+        // var oDiv = document.getElementById('div1');
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function () {
+            // var iCur=parseInt(getStyle(obj,attr));
+            var iCur = 0;
+            if (attr == 'opacity') {
+                iCur = parseInt(parseFloat(getStyle(obj, attr)) * 100);
+            } else {
+                iCur = parseInt(getStyle(obj, attr));
+            }
+            var iSpeed = (itarget - iCur) / 2;
+            iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+            if (iCur == itarget) {
+                clearInterval(obj.timer);
+            } else {
+                if (attr = 'opacity') {
+                    obj.style.filter = 'alpha(opacity:' + (iCur + iSpeed) + ')';
+                    obj.style.opacity = (iSpeed + iCur) / 100;
+                    //document.getElementById("txt1").value=obj.style.opacity
+                } else {
+                    obj.style[attr] = iCur + iSpeed + "px"
+                }
+
+            }
+        }, 30)
+    }
+
+</script>
+
+<script type="text/javascript">
+    /**
+     * Copyright (c) 2011 Jikeytang (http://jikey.cnblog.com/)
+     * Version: 0.0.1
+     * Demo: http://jikey.cnblog.com/
+     */
+    ;
+    (function ($) {
+        $.fn.pluginsname = function (options) {
+            var defaults = {
+                IE         :$.browser.msie,
+                IE6        :!window.XMLHttpRequest,
+                FIREFOX    :$.browser.mozilla
+            };
+            var opts = $.extend({}, defaults, options);
+
+            var instance = {
+                // 初始化方法
+                method        :function (opts, me) {
+                },
+            };
+            var eventType = opts.eventType;
+            if (eventType) { // 如果是 $.fn.pluginsname 方式调用
+                return this.each(function (index) {
+                    $(this).bind(eventType, function () {
+                        instance.open(opts, $(this));
+                        return false;
+                    });
+                });
+            } else { // 如果是 $.pluginsname 方式调用
+                instance.open(opts, $(this));
+            }
+        };
+        $.pluginsname = function (s) {
+            $.fn.pluginsname(s);
+        };
+    })(jQuery);
+
+</script>
+</body>
+</html>

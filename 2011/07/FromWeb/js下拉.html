@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <title>更多</title>
+   <style>
+	div,body,span,ul,li{margin:0;padding:0;font-size:12px;}
+	li{list-style:none;}
+	.more{width:100px;margin:40px auto;}
+	.more span{height:24px;width:50px;display:block;background:#ccc;text-align:center;line-height:24px;cursor:pointer;}
+	.more ul{display:none;height:0;overflow:hidden;}
+	.more ul li{height:18px;background:#eee;padding-left:13px;}
+   </style>
+ </head>
+ <body>
+<div class="more" id="div1">
+	<span>更多</span>
+	<ul>
+		<li>论坛</li>
+		<li>博客</li>
+		<li>视频</li>
+		<li>音乐</li>
+	</ul>
+</div>
+<script>
+(function(){
+	var Gnet={	
+			    startMove:function(obj,attrs,fnCallBack){
+					    if(obj.timer)clearInterval(obj.timer);
+					    obj.timer=setInterval(function (){
+						    Gnet.doMove(obj, attrs, fnCallBack);
+					    }, 30);
+				    },
+			    doMove:function(obj,attrs,fnCallBack){
+					    var now=0;
+					    var iSpeed=0;
+					    var attr='';
+					    var bStop=true;	
+					    for(attr in attrs)
+					    {
+						    if(attr=='opacity')
+						    {
+							    now=parseInt(parseFloat(Gnet.getStyle(obj, attr))*100);
+						    }
+						    else
+						    {
+							    now=parseInt(Gnet.getStyle(obj, attr));
+						    }
+						    if(now!=attrs[attr])
+						    {
+							    bStop=false;
+						    }
+						    iSpeed=(attrs[attr]-now)/5;
+						    iSpeed=iSpeed>0?Math.ceil(iSpeed):Math.floor(iSpeed);
+						    if(attr=='opacity')
+						    {
+							    obj.style.filter="alpha(opacity:"+(now+iSpeed)+")";
+							    obj.style.opacity=(now+iSpeed)/100;
+						    }
+						    else
+						    {
+							    obj.style[attr]=now+iSpeed+'px';
+						    }
+					    }
+					    if(bStop)
+					    {
+						    clearInterval(obj.timer);
+						    obj.timer=null;
+    						
+						    if(fnCallBack)fnCallBack();
+					    }
+				    },
+			    getStyle:function(obj, attr){
+					    return obj.currentStyle?obj.currentStyle[attr]:document.defaultView.getComputedStyle(obj, false)[attr];
+				    }
+		    };
+			var _$=function(id){return typeof id=="string"?document.getElementById(id):id};
+			var oUl=_$("div1").getElementsByTagName("ul")[0];
+			var oSpan=_$("div1").getElementsByTagName("span")[0];
+			function getHeight(obj)
+			{
+				obj.style.position="absolute";
+				obj.style.left=-1000+"px";
+				obj.style.display="block";
+				obj.style.height="auto";
+				var ulHeight=obj.offsetHeight;
+				obj.style.position="static";
+				obj.style.display="none";
+				obj.style.height="0";
+				return ulHeight;
+			}
+			//alert(getHeight(oUl));
+			oUl.onmouseover=oSpan.onmouseover=function(){
+				oUl.style.display="block";
+				Gnet.startMove(oUl,{height:80});
+			}
+			oUl.onmouseout=oSpan.onmouseout=function(){
+				Gnet.startMove(oUl,{height:0});
+			}
+			
+})();
+</script>
+  </body>
+</html>

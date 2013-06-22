@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<script type="text/javascript">
+	/*
+	var sColor = "red,green,blue";
+	var aColor = sColor.split(",");
+	//alert(aColor.toString());
+	var aCs = ["red", "green", "blue"];
+	var aa = aCs.split(",");
+	//alert(aa);
+	
+	var str = "abcdef";
+	var aTr = str.split("");
+	//alert(aTr);
+	var aCs = ["red", "green", "blue"];
+	for(var i=0; i<aCs.length; i++){
+		document.write(aCs[i] + "<br>");
+	}
+	
+	function createCar(colors, doors){
+		var oCar = new Object;
+		oCar.color = colors;
+		oCar.door = doors;
+		oCar.showColor = function(){
+			alert(this.color);
+		};
+		return oCar;
+	}
+	var c1 = createCar("red", 4);
+	c1.showColor();
+	
+	
+	function Car(color, door){
+		this.color = color;
+		this.door = door;
+		this.showColor = function(){
+			alert(this.color);
+		}
+	}
+	var c1 = new Car("red", 3);
+	c1.showColor();
+	
+	function Car(){};
+	Car.prototype.color = "red";
+	Car.prototype.door = 4;
+	Car.prototype.showColor = function(){
+		alert(this.color);
+	}
+	var c1 = new Car();
+	c1.showColor();
+	
+	function Car(color, door){
+		this.color = color;
+		this.door = door;
+		this.dirvers = new Array("jikey", "tang", "jonse");
+	}
+	Car.prototype.showColor = function(){
+		alert(this.color);
+	}
+	
+	var c1 = new Car("red", 4);
+	c1.showColor();
+	c1.dirvers.push("jingjing");
+	alert(c1.dirvers);
+	
+	var a = ["red", "blue", "green"];
+	var d = a.join("");
+	alert(d);
+	*/
+	function StringBuffer(){
+		this._string = new Array;
+	}
+	StringBuffer.prototype.append = function(str){
+		this._string.push(str);
+	}
+	StringBuffer.prototype.toString = function(){
+		this._string.join("");
+	}
+	
+	
+	
+	
+	
+</script>
+</head>
+
+<body>
+</body>
+</html>

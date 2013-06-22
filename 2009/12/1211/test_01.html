@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <script language="javascript" type="text/javascript">
+            function RemoveMe(){
+                var o_ddlTest;
+                	o_ddlTest = document.getElementById("ddlTest");
+                if (o_ddlTest.options.length != 0) {
+                    var selectedIndex;
+                    selectedIndex = o_ddlTest.options.length - 1;
+                    selectedOption = o_ddlTest.options(selectedIndex);
+                    o_ddlTest.removeChild(selectedOption);
+                }
+            }
+            
+            function addNew(){
+                var newOption = document.createElement("OPTION");
+                newOption.value = "newOne";
+                newOption.innerText = "newOne2";
+                newOption.selected = true;
+                o_ddlTest = document.getElementById("ddlTest");
+                o_ddlTest.appendChild(newOption);
+            }
+        </script>
+    </head>
+    <body>
+        <form id="form1" name="form1" method="post" action="">
+            <label>
+                <select name="select" id="ddlTest" style="background-color:#0033FF; color:#FF0000">
+                    <option value="111111111">1111111111</option>
+                    <option value="22222">22222222</option>
+                    <option value="33333333">33333</option>
+                    <option value="4444444444">44444</option>
+                </select>
+            </label>
+        </form>
+        <input name="" onclick="RemoveMe();" value="Remove It" type="button" /><input name="" onclick="addNew();" value="addNew" type="button" />
+    </body>
+</html>

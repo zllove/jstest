@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>图库管理登陆</title>
+<style type="text/css">
+body { font:12px/19px Arial, Helvetica, sans-serif; color:#666;}
+form div { margin:5px 0;}
+.int label { float:left; width:100px; text-align:right;}
+.int input { padding:1px 1px; border:1px solid #ccc;height:16px;}
+.sub { padding-left:100px;}
+.sub input { margin-right:10px; }
+.formtips{width: 200px;margin:2px;padding:2px;}
+.onError{
+    background:#FFE0E9 url(image/reg3.gif) no-repeat 0 center;
+        padding-left:25px;
+}
+.onSuccess{
+    background:#E9FBEB url(image/reg4.gif) no-repeat 0 center;
+        padding-left:25px;
+}
+.high{
+    color:red;
+}
+</style>
+<script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+<script type="text/javascript">
+$(function(){
+        $("form :input.required").each(function(){
+        var required = $("<strong class='high'> *</strong>"); //创建元素
+        $(this).parent().append(required); //然后将它追加到文档中
+});
+
+$('form :input').blur(function(){
+    var $parent=$(this).parent();
+    $parent.find(".formtips").remove();
+    if($(this).is('#username') || $(this).is('#password')){
+        if(this.value==""||this.value.length<6){
+            var errorMsg="请输入不小于6位字符";
+            $parent.append('<span class="formtips onError">'+errorMsg+'</span>');
+            }else{
+                var okMsg="输入正确";
+            	$parent.append('<span class="formtips onSuccess">'+okMsg+'</span>');
+            }
+        }
+    }).keyup(function(){
+    	$(this).triggerHandler("blur");
+    }).focus(function(){
+    	$(this).triggerHandler("blur");
+    })
+            
+	$('#send').click(function(){ 
+		$("form :input.required").trigger('blur');
+		var numError = $('form .onError').length;
+		if(numError){
+		    return false;
+		} 
+            
+    });
+
+})  
+</script>
+</head>
+
+<body>
+<form id="form" name="form" method="post" action="admin_Judge.php">
+	<div>用户名：<input type="text" id="username" name="username"  class="required" /></div>
+	<div>密码：<input type="password" id="password" name="password" class="required"/></div>
+	<input type="submit" name="button" id="send" class="send" value="登陆" />
+</form>
+</body>
+</html>

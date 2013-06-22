@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        #showRating a{ display:block;}
+    </style>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+</head>
+<body>
+<span id="showRating"><a></a><a></a></span>
+<script type="text/javascript">
+    $("#showRating a").html("<img src='http://i1.vanclimg.com/users/26/20120415/focus_bag_120415.jpg' />");
+
+    $("#showRating a").mouseover(function() {
+//        $(this).html("<img src='http://i1.vanclimg.com/users/26/20120415/focus_bag_120415.jpg' />").siblings().html("<img src='http://i1.vanclimg.com/users/26/20120415/focus_bag_120415.jpg' />");
+        $(this).nextAll().html("<img src='http://i1.vanclimg.com/users/26/20120415/focus_bag_120415.jpg' />");
+    });
+    /*
+    $('#showRating a').delegate(document, 'click', function (){
+        alert(1);
+    })
+    */
+    $("#showRating a").click(function () { alert(1) });
+
+</script>
+</body>
+</html>

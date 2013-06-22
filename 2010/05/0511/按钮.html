@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Document</title>
+		<script type="text/javascript" src="../lib/jquery-1.3.2.min.js"></script>
+		<style>
+			ul,li{list-style:none;}
+			.list_items{margin:50px auto;width:400px;}
+			.list_items li{float:left;margin:0 5px 5px 0;padding:0 5px;border:1px solid #fff;text-align:left;cursor:pointer;position:relative;white-space:nowrap;}
+			.list_items li span{float:left;margin-right:5px;}
+			.list_items li a{cursor:pointer;position:absolute;right:3px;}
+			.list_items li.selected{border:1px solid #ccc;background:#efefef;}
+			.list_items .del{width:5px;height:15px;background:url(images/del.gif) 0 center no-repeat;}
+		</style>
+		<script>
+		$(function(){
+			$('.del').hide();
+			$('.list_items li').toggle(function(){
+				$(this).addClass('selected');
+				$(this).find('.del').css('display', 'block');
+			},function(){
+				$(this).removeClass('selected');
+				$(this).find('.del').hide();
+			});
+			$('.list_items .del').click(function(){
+				$(this).parent().remove();
+			});
+		})
+		</script>
+	</head>
+	<body>
+		<span id="a">aaa</span>
+		<div id="b">bbb</div>
+		<input type="text" name="" id="i1" value="test" />
+		<input type="text" name="" id="i2" value="test2" />
+		<ul class="list_items">			<li class="selected"><span>湖南菜</span><a class="del"></a></li>			<li><span>湖菜</span><a class="del"></a></li>			<li><span>湖南南菜</span><a class="del"></a></li>			<li><span>湖南南南菜</span><a class="del"></a></li>			<li><span>湖菜</span><a class="del"></a></li>			<li><span>湖菜</span><a class="del"></a></li>			<li><span>湖南南南菜</span><a class="del"></a></li>			<li><span>湖菜</span><a class="del"></a></li>			<li><span>湖菜</span><a class="del"></a></li>			<li><span>湖南南南菜</span><a class="del"></a></li>			<li><span>湖菜</span><a class="del"></a></li>			<li><span>湖菜</span><a class="del"></a></li>		</ul>
+		
+	</body>
+</html>

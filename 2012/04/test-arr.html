@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<ul id="myUl">
+    <li><a href="#">aaa</a>
+        <div class="bbb" style="display:none;">bb></div>
+    </li>
+    <li><a href="#">ccc</a>
+        <div class="bbb" style="display:none;">dd</div>
+    </li>
+</ul>
+<script type="text/javascript">
+    $('#myUl>li').click(function(){
+        $(this).find('.bbb').show();
+    })
+</script>
+<script type="text/javascript">
+    function foo(arr){
+        for(var i=0,len=arr.length; i<len; i++){
+            for (var m in arr[i]) {
+                document.write(arr[i][m] + '<br>');
+            }
+        }
+    }
+    foo([{
+        id: '1',
+        name: 'jikey',
+        age: 29
+    },{
+        id: '2',
+        name: 'tang',
+        age: 31
+    }]);
+
+
+</script>
+
+</body>
+</html>

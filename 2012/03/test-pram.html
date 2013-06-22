@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-param</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    function obj(o){
+        this.init(o); 
+    }
+    obj.prototype = {
+        init: function(o){
+            for(var p in o){
+//                this.name = o.name;
+                this[p] = o[p];
+            }
+//            console.log(this.defaults);
+        }
+    };
+    new obj({
+        name: 'jikey',
+        age: 30,
+        defaults: 'red'
+    })
+    var a = {
+        name: 'jikey',
+        age: 29
+    }
+            /*
+    for(var par in a){
+        console.log('name:', par);
+        console.log('perporty:', a[par]);
+    }
+    var arr = [];
+    arr.push('1', '2');
+    arr.push('3');
+//    console.log(arr);
+    var timer = 0, a = 1, b = 0;
+    timer ? (a = 2, b = 1) : (a = 0, b=3);
+//    timer && (b = 1);
+//    console.log(a);
+//    console.log(b);
+             */
+
+
+</script>
+<dl id="mydl">
+    <dd>111</dd>
+    <dd class="active">222</dd>
+    <dd>333</dd>
+</dl>
+<script type="text/javascript">
+//    var dl = $('#mydl').find('dd').eq(1);
+    var num = $('#mydl').find('.active').index();
+//    console.log(num);
+    function fun(){};
+    fun.extend = function (obj){
+        for(var a in obj){
+            this[a] = obj[a];
+        }
+    }
+    fun.extend({name: 'fun', method1: function(){}});
+//    console.dir(fun);
+    var obj = {
+        name: 'jack',
+        getName: function(){
+            return this.name;
+        },
+        toString: function(){
+            return 'I\'m jack';
+        }
+    };
+    for (var atr in obj) {
+//        alert(atr);
+    }
+    setInterval(function (){
+        var a = 1;
+        if(a < 10){
+            a++;
+        } else {
+            a--;
+        }
+//        console.log(a);
+    }, 1000)
+
+
+</script>
+<p class="b">Hello</p><p>2nd Paragraph</p>
+<style type="text/css">
+    .a{ width:100px;}
+    .b{ width:100px; margin:20px;}
+</style>
+<script type="text/javascript">
+    var p = $("p:first");
+    $("p:last").text( "outerWidth:" + p.outerWidth() + ", outerWidth(true):" + p.outerWidth(true) );
+</script>
+</body>
+</html>

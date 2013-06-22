@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    var num = '234134134'.split('').reverse().join('').replace(/(\w{3})(?=\w+)/g, function(a, b) { return b + ','; }).split('').reverse().join('');
+//    console.log(num);
+    var num2 = '234134134'.replace(/(\w{3})(?=\w+)/g, function(a, b) { return b + ','; });
+//    console.log(num2);
+    var arr1 = ['1', '2', '3', '4', '5'].reverse();
+//    console.log(arr1);
+    var ob = {
+        x: 1,
+        b: '',
+        sayHi: function(){
+//            this.x = b = 12;
+            b = this.x = 11;
+            console.log(b);
+            console.log(this.x);
+        }
+    };
+//    ob.sayHi();
+//    console.log(num2);
+    function pad(n) {
+        return n < 10 ? '0' + n.toString(10) : n.toString(10);
+    }
+    function a(str){
+        var s = str.split("-");
+        return [s[0],pad(s[1]),pad(s[2])  ].join("-");
+    }
+    console.log(a('8-9-0-5'));
+</script>
+
+</body>
+</html>

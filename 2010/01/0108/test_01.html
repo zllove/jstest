@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Document</title>
+        <style>
+        body{font-size:12px;}
+		div{border:1px solid #ccc;width:500px;}
+		p{line-height:30px;}
+		span{display:block;}
+		</style>
+		<script>
+		/*
+		window.onload = function(){
+			var str = '<div><p>哈哈</p><span></span></div>';
+			var t = '';
+			for(var i=0; i<100; i++){
+				t = t + str;
+			}
+			document.getElementById('main').innerHTML = t;
+		}
+		
+		function sayHi(){
+			if(arguments[0] == 'bye'){
+				return;
+			}
+			alert(arguments[0]);
+		}
+		sayHi('a', 'b');
+		
+		function doAdd(){
+			if(arguments.length == 1){
+				alert(arguments[0] + 10);
+			}
+			if(arguments.length == 2){
+				alert(arguments[0] + arguments[1]);
+			}
+		}
+//		doAdd(10);
+//		doAdd(10, 20);
+		function sayHi(name, message){
+			alert('Hello ' + name + ', ' + message);
+		}
+		sayHi('jikey', 'nice day!')
+		var doAdd = new Function('iNum', 'alert(iNum + 10);');
+		doAdd(10);
+		//把函数做为参数传递给函数
+		function callAnotherFunc(func, arg){
+			func(arg);
+		}
+		var doAdd = new Function('iNum', 'alert(iNum + 10);');
+		callAnotherFunc(doAdd, 10);
+		function doAdd(iNum){
+			alert(iNum + 10);
+		}
+		alert(doAdd.toString());
+		//闭包
+		var message = 'Hello World!';
+		function sayHi(){
+			alert(message);
+		}
+		sayHi();
+		var iBaseNum = 20;
+		function addNumbers(iNum1, iNum2){
+			function doAdd(){
+				alert(iNum1 + iNum2 + iBaseNum);				
+			}
+			return doAdd();
+		}
+		addNumbers(10, 20);
+		var a = new Array(20);
+		a[0] = 'a';
+		alert(a.length + a[0]);
+		
+		//数组最多可放 4294967295 项
+		var aColors = new Array('green', 'blue', 'red');
+//		alert(aColors.length);
+		aColors[22] = 'purple';
+//		alert(aColors.length);
+//		document.write(aColors.toString() + '<br>');
+//		document.write(aColors.valueOf());
+//		aColors.join(',');
+//		var a = aColors.join('-spring-');
+//		var a = aColors.join('][');
+//		alert(a);
+		var sColors = 'red, green, blue';
+		var aColors = sColors.split(',');
+		alert(aColors.toString());
+		var sColors = 'green';
+		var aColors = sColors.split('');
+		alert(aColors.toString());
+		//concat 与  push 的区别：concat返回的是新添加后的， push返回的数组的长度，它会改变原来的值，而concat则不会
+		var aColors = new Array('green', 'blue', 'red', 'yellow', 'purple');
+//		var b = aColors.concat('white');
+//		var c = aColors.push('black');
+//		var a = aColors.slice(-1);
+//		var a = aColors.slice(-1);
+		var a = aColors.slice(1,3);
+		alert(a);
+		var a = [];
+		alert(a.toString())
+		a.push('1,2,3','a', 'b');
+		a.pop();
+		alert(a.toString());
+		var aColors = ['red', 'green', 'blue'];
+		aColors.unshift('aaa','bbb', 'ccc');
+//		aColors.pop();
+		aColors.push('jikey');
+		alert(aColors);
+		var a = new Array('red','blue','green','purple','yellow');
+//		a.splice(0, 1); //删除前面第一项
+//		a.splice(2, 0, 'aaaa', 'bbbb'); //在第三项前面插入后面参数两项
+		a.splice(2, 3, 'aaaa', 'bbbb'); //在第三项前面插入后面参数两项  并删除三个项
+		//开始的项 要删除项目的个数  要插入的项
+		alert(a);
+		Array.prototype.clear = function(){
+			this.length = 0;
+		}
+		Array.prototype.insertAt = function(index, obj){
+			this.splice(index, 0, obj);
+		}
+		Array.prototype.removeAt = function(index){
+			this.splice(index, 1);
+		}
+		Array.prototype.remove = function(obj){
+			var index = this.indexOf(obj);
+			if(index >= 0){
+				this.removeAt(index);
+			}
+		}
+		
+		var a = [];
+		for(var i=0;i<10;i++){
+			a.insertAt(9, i);
+		}
+		a.removeAt(9);
+		document.write(a.toString());
+		var d = new Date();
+//		alert(d.getDate());
+//		alert(d.getFullYear());
+//		alert(d.getMonth() + 1);
+		var dateWeek = '';
+		switch(d.getDay()){
+			case 0:
+				dateWeek = '星期一';
+				break;
+			case 1:
+				dateWeek = '星期二';
+				break;
+		}
+		document.write('今天是：' + d.getFullYear() + '年' + d.getMonth() + 1 + '月' + d.getDate() + '日' + dateWeek + d.getHours() + '小时' + d.getMinutes() + '分');
+		var a = ['aaaa','bbb'];
+		var str = 'abcdefg';
+//		var b = a.toString.charAt(0);
+		var b = str.charAt(0);
+		alert(b);
+		var d = new Date();
+		var str = '星期' + '日一二三四五六'.charAt(d.getDay);
+		alert(str); 
+		function resfres(){
+			var d = new Date();
+			time.innerHTML = d.toLocaleString() + ' 星期' + '日一二三四五六'.charAt(d.getDay());
+			setTimeout(resfres, 1000);
+		}
+		setTimeout(resfres, 1000);
+		eval("alert('hi')");
+		*/
+		var iMax = Math.max(2,43,44);
+		var iMax = Math.min(2,43,44);
+		alert(iMax);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		</script>
+	</head>
+	<body>
+		<div id="time"></div>
+	</body>
+</html>

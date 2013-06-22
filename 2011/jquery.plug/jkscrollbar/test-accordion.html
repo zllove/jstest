@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        *{margin:0;padding:0;}
+        body{font:12px/21px arial;background:#3f3f3f;}
+        a{color:#000;text-decoration:none;}
+        a:hover{color:#c00;text-decoration:underline;}
+        img{border:none 0;}
+        .demo{width:500px;padding:1px;margin:20px auto;border:1px solid #ccc;background:#fff;}
+        .pubBox{border:1px solid #ccc;background-color:#fff;border-radius:5px;box-shadow:0 0 2px #ccc}
+        .game-explain{margin-bottom:12px;overflow:hidden;height:367px;}
+        .game-explain-title{font-size:14px;height:29px;line-height:32px;cursor:pointer;border-bottom:1px solid #ccc;border-radius:5px 5px 0 0;text-shadow:1px 1px 1px #fff;overflow:hidden;background:url(http://www.alpha.ggg.cn/images/common/banner.png) 0 0 repeat-x;}
+        .game-explain .hover{background:url(http://www.alpha.ggg.cn/images/video/video-effect-bg.png) 0 -38px repeat-x;}
+        .game-explain-title h2{ font-size:100%;float:left;text-indent:2em;background:url(http://www.alpha.ggg.cn/images/video/game-explain-show.png) 10px -41px no-repeat;}
+        .game-explain-title.show h2{background:url(http://www.alpha.ggg.cn/images/video/game-explain-show.png) 10px 9px no-repeat;}
+        .game-explain-outer{position:relative;height:277px;overflow-y:auto;border-bottom:1px solid #ccc;}
+        .game-explain-item li{padding:10px 0;overflow:hidden;color:#999;zoom:1;background:url(http://www.alpha.ggg.cn/images/video/game-items-icons.png) 0 bottom repeat-x;}
+        .game-explain-item li.hover{background:url(http://www.alpha.ggg.cn/images/video/game-items-icons.png) #ebf7ff 0 bottom repeat-x;}
+        .game-explain-item li .img{float:left;padding:0 10px 0 24px;}
+        .game-explain-info{margin-left:116px;}
+        .game-explain-info h3{height:18px;font-weight:normal;margin-bottom:7px;overflow:hidden;}
+        .game-explain-info h3 a{color:#00a3e3;}
+    </style>
+    <link rel="stylesheet" href="css/ui.jkscroll.css" />
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.UIScrollbar.js"></script>
+</head>
+<body>
+<div class="demo">
+    <div id="gameInfo" class="pubBox game-explain">
+        <div class="game-explain-title show">
+            <h2>极游新视线</h2>
+        </div>
+        <div class="game-explain-outer none" style="display: block; ">
+            <ul class="game-explain-item">
+                <li class="">
+                    <a class="img" href="#"><img src="http://static.ggg.cn/icons/230/951/20120611100201/230951.png" alt=""></a>
+                    <div class="game-explain-info">
+                        <h3><span class="super"></span><a href="#">★三星通关攻略1111三星通★《…</a></h3>
+                        <p>播放:5061</p><p>评论:3</p>
+                    </div>
+                </li>
+                <li class="">
+                    <a class="img" href="#"><img src="http://static.ggg.cn/icons/230/951/20120611100201/230951.png" alt=""></a>
+                    <div class="game-explain-info">
+                        <h3><span class="super"></span><a href="#">★三星通关攻略1111三星通★《…</a></h3>
+                        <p>播放:5061</p><p>评论:3</p>
+                    </div>
+                </li>
+                <li class="">
+                    <a class="img" href="#"><img src="http://static.ggg.cn/icons/230/951/20120611100201/230951.png" alt=""></a>
+                    <div class="game-explain-info">
+                        <h3><span class="super"></span><a href="#">★三星通关攻略1111三星通★《…</a></h3>
+                        <p>播放:5061</p><p>评论:3</p>
+                    </div>
+                </li>
+                <li class="">
+                    <a class="img" href="#"><img src="http://static.ggg.cn/icons/230/951/20120611100201/230951.png" alt=""></a>
+                    <div class="game-explain-info">
+                        <h3><span class="super"></span><a href="#">★三星通关攻略1111三星通★《…</a></h3>
+                        <p>播放:5061</p><p>评论:3</p>
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
+
+        <div class="game-explain-title">
+            <h2>安卓游戏解说</h2>
+        </div>
+        <div class="game-explain-outer none" style="display: none; ">
+            <ul class="game-explain-item">
+                <li class="">
+                    <a class="img" href="#"><img src="http://static.ggg.cn/icons/230/951/20120611100201/230951.png" alt=""></a>
+                    <div class="game-explain-info">
+                        <h3><span class="super"></span><a href="#">★三星通关攻略1111三星通★《…</a></h3>
+                        <p>播放:5061</p><p>评论:3</p>
+                    </div>
+                </li>
+                <li class="">
+                    <a class="img" href="#"><img src="http://static.ggg.cn/icons/230/951/20120611100201/230951.png" alt=""></a>
+                    <div class="game-explain-info">
+                        <h3><span class="super"></span><a href="#">★三星通关攻略1111三星通★《…</a></h3>
+                        <p>播放:5061</p><p>评论:3</p>
+                    </div>
+                </li>
+                <li class="">
+                    <a class="img" href="#"><img src="http://static.ggg.cn/icons/230/951/20120611100201/230951.png" alt=""></a>
+                    <div class="game-explain-info">
+                        <h3><span class="super"></span><a href="#">★三星通关攻略1111三星通★《…</a></h3>
+                        <p>播放:5061</p><p>评论:3</p>
+                    </div>
+                </li>
+                <li class="">
+                    <a class="img" href="#"><img src="http://static.ggg.cn/icons/230/951/20120611100201/230951.png" alt=""></a>
+                    <div class="game-explain-info">
+                        <h3><span class="super"></span><a href="#">★三星通关攻略1111三星通★《…</a></h3>
+                        <p>播放:5061</p><p>评论:3</p>
+                    </div>
+                </li>
+                <li>
+                    <a class="img" href="#"><img src="http://static.ggg.cn/icons/230/951/20120611100201/230951.png" alt=""></a>
+                    <div class="game-explain-info">
+                        <h3><span class="super"></span><a href="#">★三星通关攻略1111三星通★《…</a></h3>
+                        <p>播放:5061</p><p>评论:3</p>
+                    </div>
+                </li>
+                <li>
+                    <a class="img" href="#"><img src="http://static.ggg.cn/icons/230/951/20120611100201/230951.png" alt=""></a>
+                    <div class="game-explain-info">
+                        <h3><span class="super"></span><a href="#">★三星通关攻略1111三星通★《…</a></h3>
+                        <p>播放:5061</p><p>评论:3</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="game-explain-title">
+            <h2>安卓游戏解说</h2>
+        </div>
+        <div class="game-explain-outer none" style="display: none; ">
+            <ul class="game-explain-item">
+                <li class="">
+                    <a class="img" href="#"><img src="http://static.ggg.cn/icons/230/951/20120611100201/230951.png" alt=""></a>
+                    <div class="game-explain-info">
+                        <h3><span class="super"></span><a href="#">★三星通关攻略1111三星通★《…</a></h3>
+                        <p>播放:5061</p><p>评论:3</p>
+                    </div>
+                </li>
+                <li class="">
+                    <a class="img" href="#"><img src="http://static.ggg.cn/icons/230/951/20120611100201/230951.png" alt=""></a>
+                    <div class="game-explain-info">
+                        <h3><span class="super"></span><a href="#">★三星通关攻略1111三星通★《…</a></h3>
+                        <p>播放:5061</p><p>评论:3</p>
+                    </div>
+                </li>
+                <li class="">
+                    <a class="img" href="#"><img src="http://static.ggg.cn/icons/230/951/20120611100201/230951.png" alt=""></a>
+                    <div class="game-explain-info">
+                        <h3><span class="super"></span><a href="#">★三星通关攻略1111三星通★《…</a></h3>
+                        <p>播放:5061</p><p>评论:3</p>
+                    </div>
+                </li>
+                <li class="">
+                    <a class="img" href="#"><img src="http://static.ggg.cn/icons/230/951/20120611100201/230951.png" alt=""></a>
+                    <div class="game-explain-info">
+                        <h3><span class="super"></span><a href="#">★三星通关攻略1111三星通★《…</a></h3>
+                        <p>播放:5061</p><p>评论:3</p>
+                    </div>
+                </li>
+                <li>
+                    <a class="img" href="#"><img src="http://static.ggg.cn/icons/230/951/20120611100201/230951.png" alt=""></a>
+                    <div class="game-explain-info">
+                        <h3><span class="super"></span><a href="#">★三星通关攻略1111三星通★《…</a></h3>
+                        <p>播放:5061</p><p>评论:3</p>
+                    </div>
+                </li>
+                <li>
+                    <a class="img" href="#"><img src="http://static.ggg.cn/icons/230/951/20120611100201/230951.png" alt=""></a>
+                    <div class="game-explain-info">
+                        <h3><span class="super"></span><a href="#">★三星通关攻略1111三星通★《…</a></h3>
+                        <p>播放:5061</p><p>评论:3</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $.fn.utilDrawer = function(options){
+        var defaults = {
+                    title     : 'li',    // tab 标签名
+                    eventType : 'click', // 触发的事件类型
+                    subName   : '.utilDrawerSub',
+                    showType  : 'slideDown', // 触发的效果类型
+                    speed     : 'slow'
+                },
+                opts = $.extend({}, defaults, options),
+                that = $(this),
+                title = that.find(opts.title);
+
+        title[opts.eventType](function() {
+            var nextNode = $(this).next();
+            if(!nextNode.is(':visible')){
+                nextNode[opts.showType](opts.speed).siblings(opts.subName).hide();
+                $(this).addClass('show').siblings(opts.title).removeClass('show')
+            }
+        });
+        title.hover(function(){
+            $(this).addClass('hover');
+        }, function(){
+            $(this).removeClass('hover');
+        });
+    };
+
+    $('#gameInfo').utilDrawer({
+        title    : '.game-explain-title',
+        subName  : '.game-explain-outer'
+    });
+
+    $('.game-explain-outer').UIScrollbar({
+        pattern:'jkscroll-blue'
+    });
+</script>
+</body>
+</html>

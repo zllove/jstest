@@ -1,0 +1,110 @@
+<html>
+<style>     body{       
+        font-size:9pt;
+    }  
+
+    table,th,td{
+        font-size:9pt;
+    }     .lsitTalbe{         table-layout:fixed;         width:30%;         border-collapse:collapse; 
+        border-color:#507010;         color:#003300;
+    }     .pageda{         font-family:Webdings;         font-size:12pt;         color:#CCCCCC;         cursor:default;
+    }     .pageua{
+        font-family:Webdings;
+        font-size:12pt;
+    }     .even{
+        background:#e8f8d0;     .odd{
+        background:#f8fcf0;     .header{
+        background:a0dc40;
+        color:003300; </style> <head>  
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		 <TITLE>Drag Table Demo</TITLE> 
+		</head> 
+		<body> 
+		<table>
+<tr>
+<td>
+<table class="lsitTalbe" align="center" border="1" cellspacing="1" cellpadding="1" onmousedown="mousedown()"   onmouseup="mouseup()"   onmousemove="mousemove()" >
+    <tr class="header">
+        <th width="10%">列1</th>
+        <th width="10%">列2</th>
+        <th width="40%">列3</th>
+        <th width="40%">列4</th>
+	</tr>
+    <tr class="even" id="tr_1">      
+        <TD style="cursor:move" title="按住可拖动">1</TD>
+        <TD style="cursor:move" title="按住可拖动"><INPUT class=inputStyle id=chkTaskItem_3 type=checkbox value=3 name=chkTaskItem></TD>
+        <TD style="cursor:move" title="按住可拖动"><INPUT class=inputStyle id=txtTaskName_3 type=txtTaskName size=10 name=txtTaskName value="test1"></TD>
+        <TD style="cursor:move" title="按住可拖动">test1</TD>     
+    </tr>
+     <tr class="odd" id="tr_2"> 
+        <TD style="cursor:move" title="按住可拖动">2</TD>
+        <TD style="cursor:move" title="按住可拖动"><INPUT class=inputStyle id=chkTaskItem4 type=checkbox value=4 name=chkTaskItem></TD>
+        <TD style="cursor:move" title="按住可拖动"><INPUT class=inputStyle id=txtTaskName_4 type=txtTaskName size=10 name=txtTaskName value="test2"></TD>
+        <TD style="cursor:move" title="按住可拖动">test2</TD>       
+    </tr>
+     <tr class="even" id="tr_3">
+        <TD style="cursor:move" title="按住可拖动">3</TD>
+         <TD style="cursor:move" title="按住可拖动"><INPUT class=inputStyle id=chkTaskItem_5 type=checkbox value=5 name=chkTaskItem></TD>
+        <TD style="cursor:move" title="按住可拖动"><INPUT class=inputStyle id=txtTaskName_5 type=txtTaskName size=10 name=txtTaskName value="test3"></TD>
+        <TD style="cursor:move" title="按住可拖动">test3</TD>   
+    </tr>    
+</table> <td>
+</tr>
+</table> </body> </html> <script language="javaScript">      //源对象
+    var srcRowIndex;    //目标对象
+    var targetRowIndex;
+    var bDragMode ;    //Drag对象
+    var objDragItem ;     var el;
+          window.onload = function(){         
+		 	initAdditionalElements();
+    }
+
+    function initAdditionalElements(){
+        objDragItem = document.createElement("DIV");
+        with(objDragItem.style){                     
+            backgroundColor = "buttonshadow";
+            cursor = "default";
+            position = "absolute";
+            filter = "progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=50)";
+            zIndex = 3001;
+            display ="none";         
+        }        //再次承认js很强大，本人好自卑啊，总是要查文档，将刚创建的objDragItem对象加到body后
+        window.document.body.insertAdjacentElement("afterBegin", objDragItem);
+    }        function mousedown(){    
+        el = window.event.srcElement;
+        if(el==null||el.tagName!="TD") return false;      
+        //alert(el.innerHTML);         if( el.parentNode.rowIndex<2) return false;         //srcRowIndex = el.parentElement;       
+srcRowIndex = el;    
+        bDragMode = true ;       
+        if (objDragItem!=null){
+            with(objDragItem){                     
+                innerHTML = el.innerHTML;
+                style.height = el.offsetHeight;
+                style.width = el.offsetWidth;         }
+        el.setCapture();     
+    function mouseup(){         if(el==null ||el.tagName !="TD" || el.parentNode.rowIndex<2) {
+           alert("不能拖动到非TD元素");
+        objDragItem.style.display ="none"; 
+        bDragMode = false ;
+        return false;                
+        if(srcRowIndex == el) {
+         alert("不能拖动到自身");
+        objDragItem.style.display ="none"; 
+        bDragMode = false ;
+        return false;        
+        //targetRowIndex = el.parentElement;
+                 targetRowIndex = el;         srcRowIndex.swapNode(targetRowIndex);         bDragMode = false ;
+        objDragItem.style.display ="none";    
+    }
+   function mousemove(){
+        el = window.event.srcElement;
+         if(el==null||el.tagName!="TD") return false;      
+            //alert(el.tagName);         window.event.cancelBubble = false; //left
+        cliX = window.event.clientX; //top
+        cliY = window.event.clientY;      
+        if(bDragMode && objDragItem!=null){
+            with(objDragItem){
+                style.display ="";
+                style.posLeft = cliX +1;
+                style.posTop = cliY - offsetHeight/2;         } </script>
+

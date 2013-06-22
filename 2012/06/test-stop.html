@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test</title>
+    <style type="text/css">
+        body{font:12px/2 arial; color:#333;}
+    </style>
+</head>
+<body>
+<p>什么是事件冒泡,通俗的来讲就是 我们为页面内body添加一个单击事件,同样再为页面内li元素添加一个单击事件..当你单击li的时候.
+    <br>body的事件也会被触发.....因为li被包含在body元素内...你单击了li同时也单击了body...这就是事件冒泡....
+    <br />在有些时候.我们要阻止这种情况发生...也就是单击li事件.不会触发body的事件.... 这就叫阻止冒泡!
+</p>
+<div id="a">
+    <ul id="lia">请单击下面的列表.会触发body事件
+        <li class="btn">项目1</li>
+        <li>项目2</li>
+        <li>项目3</li>
+    </ul>
+    <ul id="lib">请单下面的列表.不会触发body事件.
+        <li class="btn">项目1</li>
+        <li>项目2</li>
+        <li>项目3</li>
+    </ul>
+</div>
+<script type="text/javascript">
+    /*
+    document.body.onclick = function(){
+        console.log('body事件!');
+    }
+    */
+
+    function fna(){
+        var li = document.getElementById('lia').getElementsByTagName('li');
+        for(var i=0,len=li.length; i<len; i++){
+            li[i].onclick = function(){
+                console.log('li事件');
+            }
+        }
+    }
+
+    function fnb(){
+        var li = document.getElementById('lib').getElementsByTagName('li');
+        for(var i=0,len=li.length; i<len; i++){
+            li[i].onclick = function(e){
+                console.log('li事件');
+                stop(e);
+            }
+        }
+    }
+
+    function fnc(){
+        document.onclick = function(e){
+            e = e || window.event;
+            var target = e.srcElement || e.target;
+            if(target.className == 'btn'){
+                console.log('li委托!');
+            }
+        }
+    }
+
+    function stop(e){
+        if(e && e.stopPropagation){
+            e.stopPropagation();
+        } else {
+            window.event.cancelBubble = true;
+        }
+    }
+//    fna();
+//    fnb();
+    fnc();
+</script>
+</body>
+</html>

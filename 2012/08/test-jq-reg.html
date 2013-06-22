@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{font:12px/2 arial; background:#fff;}
+        .last{ position:relative; left:200px; top:400px;}
+    </style>
+</head>
+<body>
+<input id="btn" type="button" value="test-btn"><br>
+<script type="text/javascript">
+    var a = $.grep([1, 2, -1], function(n){
+        return n > 0;
+    });
+//    console.log(a);
+    $('#btn').one('click', function(){
+//        console.log($(this).val());
+    });
+
+</script>
+<button id="old">trigger('click')</button>
+<button id="new">triggerHandler('click')</button><br>
+<input type="text" name="" id="input" value="To Be Focued">
+<script type="text/javascript">
+    $('#old').click(function(){
+        var trigger = $('input').trigger('click');
+        console.log(trigger);
+    });
+    $('#new').click(function(){
+        var triggerHandler = $('#input').triggerHandler('click');
+        console.log(triggerHandler);
+    });
+    $('#input').click(function(){
+        $('<span>Focused!</span>').appendTo('body').fadeOut(1000);
+        return 'ok';
+    });
+    $('body').click(function(){
+        console.log(123);
+    });
+</script>
+<input type="button" id="mybutton" value="test-trigger">
+<script type="text/javascript">
+    var btn = $('#mybutton');
+    btn.click(function(text){
+        var text = text + '如果是点击click，他不会吃text这个参数的值';
+        console.log(text);
+    });
+    btn.trigger('click', '这里是trigger事件！');
+    $('body').trigger('click');
+</script>
+<p>Hello</p><p class="last">2nd Paragraph</p>
+<script type="text/javascript">
+    var p = $('p:last');
+    var offset = p.offset();
+    p.html('left: ' + offset.left + ', top: ' + offset.top);
+</script>
+<h1>111</h1>
+<h2>111</h2>
+<h3>111</h3>
+<div id="box">
+    <span>1111</span>
+    <span>2222</span>
+    <span>3333</span>
+</div>
+<script type="text/javascript">
+    $(':header').css('color', 'red');
+    $.extend($.expr[':'], {
+        hasSpan: function(e){
+            return $(e).find('span').length > 0;
+        }
+    });
+//    console.log($('#box:hasSpan').html());
+
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-a</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+//    alert('a' in window);
+/*
+    myname = 'jikey';
+    function foo(){
+        console.log(myname);
+        var myname = 'local';
+        console.log(myname);
+    }
+    foo();
+    */
+    var person = new Object();
+    person.name = 'scott';
+    person.sayName = function(){
+        return 'I\'m ' + this.name;
+    }
+    console.log(person.sayName());
+</script>
+<form id="mainForm" action="">
+    <input type="text" name="" id="">
+</form>
+<script type="text/javascript">
+    console.log($('#mainForm').val());
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Document</title>
+        <style>
+		
+		</style>
+		<script>
+		window.onload = function(){
+			var otherPwd = document.getElementsByName('otherpwd');
+			for(var i=0;i<otherPwd.length;i++){
+				otherPwd[i].onclick = function(){
+					var a = document.getElementById('perpwd');
+					if(otherPwd[0].checked){
+						a.style.display = 'none';
+					}
+					if(otherPwd[1].checked){
+						a.style.display = 'block';
+//						a.style.display = a.style.display == 'none' ? 'block' : 'none';
+					}
+				}
+			}
+		}
+		</script>
+	</head>
+	<body>
+	<form action="">
+		<input type="radio" id="qqpwd" name="otherpwd" checked="checked" value="1" /><label for="qqpwd">QQ密码</label>  <br>
+		<input type="radio"  id="otherpwd" name="otherpwd" value="0" /><label for="otherpwd">其它密码</label> <br>
+		<div id="perpwd" style="display:none;padding:0 0 0 2em;">
+			<input type="radio" name="subradion" id="" value="a" />个人帐户支付密码 <br>
+			<input type="radio" name="subradion" id="" value="b" />网络硬盘密码  <br>
+			<input type="radio" name="subradion" id="" value="c" />通讯录密码  <br>
+		</div>
+	</form>	
+	</body>
+</html>

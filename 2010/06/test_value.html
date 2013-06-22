@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Document</title>
+		<style>
+		h1{cursor:pointer;}
+		</style>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+		<script>
+		$(function(){
+			$("#b1").click(function(){
+				alert('a');
+				$("#block1").animate( { left: 50, opacity: 'show'}, 1000)
+			});
+		})
+
+		</script>
+	</head>
+	<body>
+		<input type="button" id="b1" value="test" />
+		<div id="block1">documentdocumentdocumentdocumentdocument</div>
+<div id="divBox">	<p><span class="red">sdsfsdf</span></p></div>
+		
+ <INPUT TYPE="button" VALUE="按我" ONCLICK="t()">
+  <INPUT TYPE="text" NAME="" id="t1">
+  <INPUT TYPE="text" NAME="" id="t2">
+ </BODY>
+<SCRIPT LANGUAGE="JavaScript">
+	function t(){document.getElementById("t2").value=document.getElementById("t1").value}
+	function $(id){
+		return document.getElementById(id);
+	}
+	var t1 = $('t1'), t2 = $('t2');
+	t1.onkeyup = function(){
+		t2.value = t1.value;
+	}
+	
+</SCRIPT>
+
+	</body>
+</html>

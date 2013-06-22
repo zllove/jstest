@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Document</title>
+        <style>
+		
+		</style>
+		<script>
+		/*	
+		window.onload = function(){
+			var oHtml = document.documentElement;
+			var oHead = oHtml.firstChild;
+			for(var i=0;i<oHead.length;i++){
+				document.wirte(oHead[i]);
+			}
+		}
+		
+		window.onload = function(){
+			var imgs = document.getElementsByTagName('img')[0];
+			alert(imgs.width);
+		}
+		window.onload = function(){
+			var rad = document.getElementsByName('radcolor')[1];
+			alert(rad.getAttribute('value'));
+			var oImg = document.getElementsByTagName('img');
+			alert(oImg[0].tagName);
+		}
+		
+//		alert(document.nodeType);
+		window.onload = function(){
+			var oP = document.createElement('p');
+			var od = document.createTextNode('Hello World!');
+			oP.appendChild(od);
+			document.body.appendChild(oP);
+			
+		}
+		window.onload = function(){
+			var oP = document.getElementsByTagName('p')[0];
+//			document.body.removeChild(oP);
+			oP.parentNode.removeChild(oP);
+
+		}
+		window.onload = function(){
+			var oNew = document.createElement('p');
+			var oText = document.createTextNode('Hello China!');
+			oNew.appendChild(oText);
+			var oP = document.getElementsByTagName('p')[0];
+			oP.parentNode.replaceChild(oNew, oP);
+		}
+		
+		window.onload = function(){
+			var oP = document.createElement('p');
+			var oText = document.createTextNode('Hello China people!');
+			oP.appendChild(oText);
+			document.body.appendChild(oP);
+		}
+		window.onload = function(){
+			var oNew = document.createElement('p');
+			var oText = document.createTextNode('Hello ShangHai!');
+			oNew.appendChild(oText);
+			var oOld = document.getElementsByTagName('p')[0];
+			document.body.insertBefore(oNew, oOld);
+		}*/
+		window.onload = function(){
+			var a = ['1','2','3','4','5','6'];
+			var oFrag = document.createDocumentFragment();
+			for(var i=0;i<a.length;i++){
+				var oP = document.createElement('p');
+				var oText = document.createTextNode(a[i]);
+				oP.appendChild(oText);
+				oFrag.appendChild(oP);
+			}
+			document.body.appendChild(oFrag);
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		</script>
+	</head>
+	<body>
+		<img src="logo_cn.gif" alt="" width="276" height="110" /><br />
+		<img src="./baidu_logo.gif" alt="" width="270" height="129" /><br />
+		<fieldset>
+			<legend>What color do you like</legend>
+			<input type="radio" name="radcolor" value="red" />Red <br />
+			<input type="radio" name="radcolor" value="blue" />blue <br />
+			<input type="radio" name="radcolor" value="green" />green <br />
+		</fieldset>
+		<p>111</p>		<p>222</p>		<p>333</p>		<p>444</p>		<p>555</p>
+		
+		
+		
+		
+		
+	</body>
+</html>

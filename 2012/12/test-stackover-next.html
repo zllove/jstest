@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-stackover-next</title>
+	<script type="text/javascript" src="../jquery-1.8.2.js"></script>
+	<style type="text/css">
+		.act{color:red;}
+		.act a{color:red;}
+	</style>
+</head>
+<body>
+<div id="modalTab">
+ <ul id="tab">
+    <li><a id="btnDetailsTab" href="#detailsTab">About</a></li>
+    <li><a id="middleTab" href="#middleTab">Middle</a></li>
+    <li class="act"><a id="btnCommentsTab" href="#commentsTab">&nbsp;Comments&nbsp</a></li>        
+ </ul>
+ <div id="ui-tab-dialog-close" class="tab-content" style="width:25px; height:0px; vertical-align:middle">
+ </div>
+ <br />
+ <div id="detailsTab" class="tab-content" style="width: 95%;overflow: auto; padding:0px; ">
+ </div>    
+<div >
+      <input id="next" type=button value=next>            
+      <input id="back" type=button value=back>            
+</div>
+<script type="text/javascript">
+var oLi = $('#tab').find('li'),
+	len = oLi.length,
+	idx = 0;
+
+$('#next').click(function(){
+	setAct(true);
+});	
+
+$('#back').click(function(){
+	setAct();
+});	
+
+function setAct(next){
+	idx = oLi.index($('li.act'));
+	if(next === true){
+		idx == len - 1 ? (idx = 0) : idx ++;
+	} else {
+		idx == 0 ? (idx = len - 1) : idx --;
+	}
+	oLi.removeClass('act').eq(idx).addClass('act');
+}
+
+</script>
+</body>
+</html>

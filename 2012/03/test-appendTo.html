@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="dom"></div>
+<script type="text/javascript">
+    var spans = "<span>ss</span>";
+    var spans2 =$("<span>ss</span>");
+    console.log($(spans).html() == $(spans2).html());
+    console.log($(spans2));
+    $(spans).appendTo($("#dom"));
+    var ss = "<span><span>gg</span></span>";
+    $(ss).append($(spans));
+
+    /*
+    var spans =$("<span>11</span>");
+    spans.appendTo($("#dom"));
+    var ss = $("<span><span>gg</span></span>");
+    ss.appendTo(spans);
+    */
+
+
+
+
+</script>
+</body>
+</html>

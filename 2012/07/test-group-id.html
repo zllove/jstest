@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    $(function () {
+        $("#btn1").click(function () {
+            var now = new Date();
+            var year = now.getYear();
+            var month = now.getMonth() + 1;
+            var day = now.getDate();
+            var hour = now.getHours();
+            var minute = now.getMinutes();
+            var second = now.getSeconds();
+            var l_time = year + "_" + month + "_" + day + "_" + hour + "_" + minute + "_" + second;
+            $div = $(".wai").clone();
+            $div.removeClass("wai");
+            $div.attr("id", "div" + l_time)
+            $div.find("div").html("div" + l_time);
+            $("#content").append($div);
+        });
+        $('#btn2').click(function(e) {
+            var el = $('#content').children('div');
+            el.each(function(){
+                alert($(this).attr('id'));
+            });
+        });
+    })
+</script>
+</head>
+<body>
+
+<!--<button id="btn2">-->
+    <!--<div class="wai">-->
+        <!--<div></div>-->
+    <!--</div>-->
+    <!--<div id="content"></div>-->
+<!--</button>-->
+<!--<button id="btn1">按钮"</button>-->
+<button id="btn1">按钮"<button>
+<div class="wai"><div></div></div>
+<div id="content"></div>
+</body>
+</html>

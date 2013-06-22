@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+	<style type="text/css">
+	</style>
+</head>
+<body onresize="report()">
+	<div id="testsub">图片延迟加载技术（ImageLazyLoad），在页面上图片比较多的时候，打开一张页面必然引起与服务器大数据量的交互。尤其是对于高清晰的图片，占的几M的空间。ImageLazyLoad技术就是，当前可是界面的图片是加载进来的，而不可见页面（通过滚动条下拉可见）中的图片是不加载的，这样势必会引起速度上质的提升。
+使用此技术的网站有太多太多，如淘宝，还有一些动漫网站，眼下比较常用的图片延迟加载技术有四种：kissy(淘宝的JS框架),Jquery 图片延迟插件，Prototype，YUI 2。
+YUI的图片延迟技术是就成熟的，Jquery的图片延迟插件的设计灵感就来自于YUI的延迟技术（Lazyloader is inspired by YUI ImageLoader Utility by Matt Mlinac），闲话不说，一起来看看如何使用。</div>
+	<div id="display" class="test1 test2 test3"></div>
+	
+	<script type="text/javascript">
+		$(function(){
+			report();
+		});
+		
+		function report(){
+			$('#display').html($('#testsub').width() + 'x' + $('#testsub').height());
+		}
+		$.fn.getClassName = function(){
+			if(name = this.attr('className')){
+				return name.split(' ');
+			} else {
+				return [];
+			}
+		}
+		alert($('#display').getClassName());
+	</script>
+</body>
+</html>

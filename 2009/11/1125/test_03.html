@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Untitled Document</title>
+        <style>
+		
+		</style>
+		<script>
+		
+		</script>
+	</head>
+	<body>
+		<div id="jikey">
+			<p title="test" id="a">a</p>
+			<p id="b">b</p>
+			<p id="c">c</p>
+		</div>
+		<script>
+			var ps = document.getElementById('jikey');
+			if(ps.hasChildNodes){
+				alert(ps.childNodes.length);
+			}
+			/*
+			var paras = document.getElementsByTagName('p');
+			for(var i=0; i<paras.length; i++){
+				var title_text = paras[i].getAttribute('title');
+				/*
+				if(title_text != null){
+					alert(title_text);
+					// 弹出： ie7.0 3次  firefox 1次
+				}
+				if(title_text != ''){
+					alert(title_text); // ie7.0 1次  firefox 2次
+				}
+				if(title_text){
+					//alert(title_text); //ie7.0 1次 firefox 1次， 这才是我们想要的结果
+				}
+				
+			}
+			*/
+			/*
+			var meg = document.getElementById('jikey');
+			var b = document.getElementById('b');
+			var para = document.createElement('p');
+			*/
+			//meg.replaceChild(para,b);
+			//alert(b.parentNode.nodeType);
+			//var c = b.parentNode;
+			//c.removeChild(b);
+			//meg.removeChild(b);
+		</script>
+	</body>
+</html>

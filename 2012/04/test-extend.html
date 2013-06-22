@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-extend</title>
+</head>
+<body>
+<script type="text/javascript">
+    function SP(){
+        this.cls = 'super class';
+    }
+    SP.prototype.print = function (){
+        console.log(this.cls);
+    };
+    function SB(){
+    }
+    SB.prototype = new SP();
+    SB.prototype.print = function (){
+        console.log('changed by subclass');
+    };
+    new SB().print(); // change by subclass
+//    new SP().print(); // super class
+    function F(){} // 避免在子类SB中获得得到在父类SP函数体中定义的属性(this.xxx)
+    F.prototype = SP.prototype;
+    SB.prototype = new F();
+    new SB().print();
+
+    var test = (function (){
+        return '我是一个兵';
+    });
+    var test2 = function(){
+        return '我也是一个兵';
+    }
+    console.log(test2());
+    
+</script>
+http://linder0209.iteye.com/blog/1076172
+<script type="text/javascript">
+    var BaseClass = function (){
+        this.method1 = function (){
+            console.log('Defined by the "this" in the instance method');
+        }
+    }
+    var instance1 = new BaseClass();
+    instance1.method1 = function (){
+        console.log('Defined directly in the instance method');
+    }
+    BaseClass.prototype.method1 = function (){
+        console.log('Defined by the prototype instance method');
+    }
+    instance1.method1(); // Defined directly in the instance method
+    // 通过运行结果跟踪测试可以看出直接定义在实例上的变量的优先级要高于定义在“this”上的，
+    // 而定义在“this”上的又高于 prototype定义的变量。即直接定义在实例上的变量会覆盖定义在“this”上和prototype定义的变量，
+    // 定义在“this”上的会覆盖prototype定义的变量。
+</script>
+</body>
+</html>

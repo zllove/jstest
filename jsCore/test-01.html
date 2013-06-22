@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    /*
+    var obj1 = {
+        id: 'self',
+        name: 'object',
+        toString: function(){
+            return 'object 1';
+        }
+    }
+    var obj2 = 'object 1';
+    console.log(obj1 == obj2);
+    console.log(obj1 === obj2);
+    var str = 'global';
+    function scopeTest(){
+        console.log(str);
+        var str = 'local';
+        console.log(str);
+        var b = str;
+    }
+    scopeTest();
+    Array.prototype.remove = function(from, to){
+        var rest = this.slice((to || from) + 1 || this.length);
+        this.length = from < 0 ? this.length + from : from;
+        return this.push.apply(this, rest);
+    }
+    var arr = [1,2,3,4,5,66];
+    arr.remove(0);
+    console.log(arr);
+
+    var CachedSearchBox = (function(){
+        var cache = {},
+            count = [];
+        return {
+            attachSearchBox: function(dsid){
+                if(dsid in cache){
+                    return cache[dsid];
+                }
+                var fsb = new uikit.webctr1.SearchBox(dsid);
+                cache[dsid] = fsb;
+                if(count.length > 100){
+                    delete cache[count.shift()];
+                }
+                return fsb;
+            },
+            clearSearchBox: function(dsid){
+                if(dsid in cache){
+                    cache[dsid].clearSelection();
+                }
+            }
+
+        }
+    })();
+
+    var person = function(){
+        var name = 'default';
+        return {
+            getName: function(){
+                return name;
+            },
+            setName: function(newName){
+                name = newName;
+            }
+        }
+    }
+    person.setName('jikey');
+    console.log(person.getName());
+
+    var obj = {};
+    var ref = obj;
+    obj.name = 'ecma';
+    console.log(ref.name); // ecma
+    obj = ['one', 'two', 'three'];
+    console.log(ref.name); // ecma
+    console.log(obj.length); // 3
+    console.log(ref.length); // undefined
+     */
+
+    var obj = {};
+    var ref1 = obj;
+    var ref2 = obj;
+    obj.func = 'function';
+    console.log(ref1.func); // function
+    console.log(ref2.func); // function
+
+
+</script>
+</body>
+</html>

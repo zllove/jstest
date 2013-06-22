@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		body{font:12px/1.5 arial;background: #fff;}
+		.demo{width: 637px;height: 340px;border: 1px solid #ccc;}
+		.placeimg{width:80px;height:80px;position:relative;top:130px;left:308px;}
+	</style>
+</head>
+<body>
+	<div class="demo">
+		<img id="place" width="80" height="80" class="placeimg" src="http://www.wincofoods.com/wp-content/plugins/simplemap/inc/images/loading.gif" alt="">
+		<img id="img" src="" alt="">
+	</div>
+	<script type="text/javascript">
+		function loadImage (url) {
+			var oImg = new Image(),
+				place = document.getElementById('place'),
+				img = document.getElementById('img');
+			oImg.src = url;
+
+			if (oImg.complete) {
+				place.style.display = 'none';
+				img.src = url;
+			} else {
+				oImg.onload = function() {
+					place.style.display = 'none';
+					img.src = url;
+				};
+			}
+		}
+
+		setTimeout(function(){
+			loadImage('http://static.ggg.cn/market/recommendation/screens/002/242/2242/20121123104026/1.jpg');
+		}, 2000);
+
+
+	</script>
+</body>
+</html>

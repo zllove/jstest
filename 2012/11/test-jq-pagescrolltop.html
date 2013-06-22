@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{font:12px/1 arial;background:#fff;}
+        #content-left{width:650px;margin:0 auto;}
+        .demo h1{text-align:center;font-size:30px;margin-bottom:10px;color:Black;}
+        #content-left li{list-style:none;padding:5px 0 5px 3px}
+        #content-left h2{padding-left:15px;}
+        .demo p{line-height:1.8;margin:0 0 15px;text-indent:2em;}
+
+
+
+
+    </style>
+</head>
+<body>
+<div id="content-left" class="demo">
+    <h1><a id="top">平滑的jQuery滚动效果</a></h1>
+    <p>原文请查看<a href="http://www.jquery001.com/jquery-smooth-page-scroll.html">平滑的jQuery滚动效果</a></p>
+    <ul>
+        <li><a href="#jQuery">jQuery</a></li>
+        <li><a href="#Technique">Technique</a></li>
+    </ul>
+    <h2 id="jQuery">jQuery</h2>
+    <a href="#top">返回顶部</a>
+    <p>前三篇总结了jquery的一些基础，有jquery对象的介绍、jquery操作css样式和jquery操作元素。今天总结一下jquery事件，这是比较重要的一块，希望本次总结能帮助到很多同我一样的新手</p>
+    <p>前三篇总结了jquery的一些基础，有jquery对象的介绍、jquery操作css样式和jquery操作元素。今天总结一下jquery事件，这是比较重要的一块，希望本次总结能帮助到很多同我一样的新手</p>
+    <p>前三篇总结了jquery的一些基础，有jquery对象的介绍、jquery操作css样式和jquery操作元素。今天总结一下jquery事件，这是比较重要的一块，希望本次总结能帮助到很多同我一样的新手</p>
+    <p>前三篇总结了jquery的一些基础，有jquery对象的介绍、jquery操作css样式和jquery操作元素。今天总结一下jquery事件，这是比较重要的一块，希望本次总结能帮助到很多同我一样的新手</p>
+    <p>前三篇总结了jquery的一些基础，有jquery对象的介绍、jquery操作css样式和jquery操作元素。今天总结一下jquery事件，这是比较重要的一块，希望本次总结能帮助到很多同我一样的新手</p>
+    <p>前三篇总结了jquery的一些基础，有jquery对象的介绍、jquery操作css样式和jquery操作元素。今天总结一下jquery事件，这是比较重要的一块，希望本次总结能帮助到很多同我一样的新手</p>
+    <h2 id="Technique">Technique</h2>
+    <a href="#top">返回顶部</a>
+    <p>今天使用windows 2003时，当点击.exe安装文件时碰到了如标题中提到的问题。
+        在网上找了一些解决方法后，没有得到解决，始终提示“windows无法访问指定设备路径或文件你可能没有权限”。
+        在快要放弃的时候，查看了一下文件的属性。发现属性中多了一个“解除锁定”的选项，点击确认后发现问题得到了解决。
+    </p>
+    <p>今天使用windows 2003时，当点击.exe安装文件时碰到了如标题中提到的问题。
+        在网上找了一些解决方法后，没有得到解决，始终提示“windows无法访问指定设备路径或文件你可能没有权限”。
+        在快要放弃的时候，查看了一下文件的属性。发现属性中多了一个“解除锁定”的选项，点击确认后发现问题得到了解决。
+    </p>
+    <p>今天使用windows 2003时，当点击.exe安装文件时碰到了如标题中提到的问题。
+        在网上找了一些解决方法后，没有得到解决，始终提示“windows无法访问指定设备路径或文件你可能没有权限”。
+        在快要放弃的时候，查看了一下文件的属性。发现属性中多了一个“解除锁定”的选项，点击确认后发现问题得到了解决。
+    </p>
+    <p>今天使用windows 2003时，当点击.exe安装文件时碰到了如标题中提到的问题。
+        在网上找了一些解决方法后，没有得到解决，始终提示“windows无法访问指定设备路径或文件你可能没有权限”。
+        在快要放弃的时候，查看了一下文件的属性。发现属性中多了一个“解除锁定”的选项，点击确认后发现问题得到了解决。
+    </p>
+    <p>今天使用windows 2003时，当点击.exe安装文件时碰到了如标题中提到的问题。
+        在网上找了一些解决方法后，没有得到解决，始终提示“windows无法访问指定设备路径或文件你可能没有权限”。
+        在快要放弃的时候，查看了一下文件的属性。发现属性中多了一个“解除锁定”的选项，点击确认后发现问题得到了解决。
+    </p>
+    <p>今天使用windows 2003时，当点击.exe安装文件时碰到了如标题中提到的问题。
+        在网上找了一些解决方法后，没有得到解决，始终提示“windows无法访问指定设备路径或文件你可能没有权限”。
+        在快要放弃的时候，查看了一下文件的属性。发现属性中多了一个“解除锁定”的选项，点击确认后发现问题得到了解决。
+    </p>
+    <div style="height:500px;"></div>
+</div>
+<script type="text/javascript">
+    $('a[href*=#]').click(function(){
+        var target = $(this.hash);
+        if(target.length){
+            var vtop = target.offset().top;
+            console.log(target);
+            $('html, body').animate({scrollTop: vtop}, 1000);
+            return false;
+        }
+    });
+
+
+</script>
+</body>
+</html>

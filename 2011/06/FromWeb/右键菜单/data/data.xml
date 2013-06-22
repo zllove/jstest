@@ -1,0 +1,73 @@
+<root>
+
+	<menu>
+		<ul>
+			<li enabled="false">更换模板</li>
+		</ul>
+		<ul>
+			<li onclick="{alert('您点击我了')}">一个真实的我</li>
+			<li>工作与事业</li>
+			<li child="two">笔记 - 学习笔记</li>
+			<li>用镜头记录生活</li>
+			<li>网页设计作品</li>
+			<li child="one">可以说悄悄话哦</li>
+		</ul>
+		<ul>
+			<li>收集各种网络资源</li>
+			<li>网页设计作品</li>
+		</ul>
+	</menu>
+
+	<menu id="one">
+		<ul>
+			<li>更换模板</li>
+		</ul>
+		<ul>
+			<li>一个真实的我</li>
+			<li>工作与事业</li>
+			<li>笔记 - 学习笔记</li>
+			<li>用镜头记录生活</li>
+			<li>网页设计作品</li>
+			<li>可以说悄悄话哦</li>
+		</ul>
+		<ul>
+			<li>收集各种网络资源</li>
+			<li>网页设计作品</li>
+		</ul>
+	</menu>
+
+	<menu id="two">
+		<ul>
+			<li>更换模板</li>
+		</ul>
+		<ul>
+			<li>一个真实的我</li>
+			<li>工作与事业</li>
+			<li>笔记 - 学习笔记</li>
+			<li>网页设计作品</li>
+			<li>可以说悄悄话哦</li>
+		</ul>
+		<ul>
+			<li child="three">收集各种网络资源</li>
+			<li>网页设计作品</li>
+		</ul>
+	</menu>
+
+	<menu id="three">
+		<ul>
+			<li>更换模板</li>
+		</ul>
+		<ul>
+			<li>一个真实的我</li>
+			<li>工作与事业</li>
+			<li>笔记 - 学习笔记</li>
+			<li>网页设计作品</li>
+			<li>可以说悄悄话哦</li>
+		</ul>
+		<ul>
+			<li>收集各种网络资源</li>
+			<li>网页设计作品</li>
+		</ul>
+	</menu>
+
+</root>

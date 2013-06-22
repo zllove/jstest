@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Document</title>
+        <style>
+        	*{margin:0;padding:0;}
+        .phb ol {
+            float: left;
+            margin: 35px 0px 0px 0px;
+            padding: 0px;
+            border: 1px solid #FFF;
+            width: 200px;
+            list-style-position: inside;
+        }
+        
+        .phb ol li {
+            margin: 0px;
+           padding:0px 5px;
+        }
+            li{cursor:pointer;}
+        </style>
+        <script>
+        </script>
+    </head>
+    <body>
+    	<ul>    		<li>1111</li>    		<li>1111</li>    		<li>1111</li>    		<li>1111</li>    		<li>1111</li>    	</ul>
+    	<script>
+		var li = document.getElementsByTagName('li');
+		  for(var i=0;i<li.length;i++){	
+		  /*
+		       (function(){
+			   		var that = i;
+				   	li[that].onclick=function(){
+				    alert(that);
+				   		li[that].innerHTML += "haha";
+			       }
+			   })();
+			   
+			  li[i].onclick = function(num){
+			  	return function(){
+					li[num].innerHTML += 'haha';
+				}
+			  }(i);
+			  */
+			 (function(){
+			 	var ii = i;
+			 	li[ii].onclick = function(){
+					alert(ii);
+					li[ii].innerHTML += 'haha';
+				}
+			 })();
+		  }
+		</script>
+    </body>
+</html>

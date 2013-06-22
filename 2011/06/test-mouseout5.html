@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+    div {
+        border-style:solid;
+        border-width:1px;
+    }
+
+</style>
+<script type="text/javascript">
+
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+
+    function doMouseOut(e, father) {
+                
+        var event = e || window.event;
+        
+        var parent = isIE ? event.toElement : event.relatedTarget;
+        
+        while ( parent && parent !== father ) {
+            parent = parent.parentNode;
+        }
+
+        if ( parent !== father ) {
+            alert("1");
+        }
+        
+    }
+
+</script>
+</head>
+<body>
+<div id="father" style="width:500px;height:500px;left:100px;top:100px;position:absolute; background-color:#ffffff;" onmouseout="doMouseOut(event, this)" >
+  <div>0</div>
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+  <div>4</div>
+</div>  
+
+</body>
+</html>

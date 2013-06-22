@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title></title>
+</head>
+<body>
+<div class="test" style="width:100px;padding:100px;">111</div>
+<p>222</p>
+1
+2
+3
+<script type="text/javascript">
+    /*
+    function myObj(msg) {
+        //公有属性，只有在实例化后才能被调用
+        this.msg = msg;
+        this.address = '上海';
+
+        //私有属性
+        var name = 'jikey';
+        var age = 29;
+
+        //私有方法
+        function sayName() {
+            alert(this.name);
+        }
+
+        //公有方法
+        this.sayAge = function () {
+            alert(age);
+        }
+    }
+
+    //公有方法
+    myObj.prototype.sayHello = function () {
+        alert('hello everyone!');
+    }
+
+    //静态属性
+    myObj.name = 'china';
+    myObj.alertname = function () {
+        alert(this.name);
+    }
+
+    var m = new myObj('hello newtouch!');
+    //    console.log(myObj.name); //china
+    //    console.log(m.name); //undefined
+    //    console.log(m.constructor.name); //china 实例访问静态变量
+    //    console.log(myObj.address); //undefined 实例
+    //    console.log(myObj.alertname());
+    console.log(myObj.constructor);
+    var n = 2;
+    var showNumber = function () {
+        n = 1;
+        alert(n);
+    };
+    (function (){
+        n = 3;
+        alert(n);
+    })()*/
+
+    /*var obj1 = ();
+    var obj3 = //;
+    alert(obj1);
+    alert(obj3);*/
+    //console.log(myObj.sayHello());
+
+    function Test(str){
+        var privateArg = 'abc';
+        this.publicStr = str;
+        this.publicArr = [];
+        this.publicFn = function(){
+            alert(this.publicStr);
+        }
+    }
+    Test.prototype = {
+        staticStr: 'static',
+        staticArr: [],
+        staticFn: function(){
+            Test.prototype.staticStr = 'already set by fn.';
+        }
+    }
+
+    var t1 = new Test('p1');
+    Test.prototype.staticStr = 's1';
+//    console.log(t1.staticStr);
+    var t2 = new Test('p2');
+//    t2.staticFn();
+//    console.log(t2.staticStr);
+//    t2.staticStr = 's2';
+//    console.log(t1.staticStr);
+//    console.log(Test.prototype.staticStr);
+//    t1.staticArr.push('newArg');
+//    console.log(t2.staticArr);
+//    Test.publicFn();
+//    t1.publicFn();
+//    t2.publicFn();
+//    t1.publicArr.push('newArg');
+//    console.log(t2.privateArg); //私有属性不能被实例引用
+    function sayName(){
+        this.name = 'jikey';
+//        alert(this.name);
+    }
+    function sayHello(value){
+//        var age = 29;
+//        alert(value);
+    }
+//    sayHello.prototype.say = sayName();
+//    sayHello.call(document.getElementById('test'));
+//    var s = new sayHello();
+//    alert(s);
+    sayHello.call(this, 10);
+    var a = {
+        name: 'jikey',
+        age: 29
+    }
+    var b = ['jikey', 'name'];
+
+    function testClass(){
+        this.name = 'haoqing';
+    }
+    testClass.prototype = {
+        altName: function(){
+            testClass.altName(this.name);
+        }
+    }
+
+    testClass.extend = function(o, p) {
+        if(!p) {p = o; o = this;}
+        for (var i in p) {
+            o[i] = p[i];
+        }
+        return o;
+    }
+
+    testClass.extend({
+        altName: function(str){
+            alert('my name is: ' + str);
+            //console.log(1);
+        },
+        add: function(i){
+            alert(++i);
+        }
+    });
+
+    var tc = new testClass();
+    for(var i in tc){
+        alert(i + ' = ' + tc[i]);
+    }
+    //    tc.altName();
+    //    testClass.add(10);
+
+
+</script>
+
+</body>
+</html>

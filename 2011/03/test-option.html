@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<style type="text/css" title="">
+	#logo {
+		height: 200px;overflow:hidden;border:10px solid #f00;
+	}
+	#b{height:500px;border:5px solid #ccc;}
+	</style>
+
+</head>
+<body>
+	<select id="a" size="100" >
+	<script>
+		for(var i=0; i<100; i++){
+			document.write("<option>text text " + i + "</option>");
+		}
+	</script>
+	</select>
+	<script>
+		var a = document.getElementById('a');
+		//a.selectedIndex = 0;
+		setInterval(function(){
+			document.title = a.options[a.selectedIndex].text;
+		}, 10);
+		/*
+		a.onmousemove = function(){
+			document.title = a.options[a.selectIndex].text;
+		}
+		*/
+	</script>
+	<div id="logo">
+		<div id="b">
+			3、变速箱，车不同，发动机曲线不同，喷N时机不同，齿比就应该不同，要知道变速箱跟发动机配才是唯一的道理。这个齿比是要不断测试的，没有扭矩图，只能瞎调，目的就是尽量使最佳换档区域靠近红线区，同时兼顾低转扭矩不能太小，不然1档加速太慢影响成绩，这个只能在实战中来感受。我的习惯是3档喷N2O，1档调最低，2档调比较低，3档4档是N2O发力区所以尽量调高，5档、6档配合4档换档时机调。我无法给出建议的调教图，因为真的是每个人每台车每种改法每个蓝图都不一样的！一句话——成绩才是硬道理，调后反复测试，再调再测......
+		</div>
+	</div>
+	  <script type="text/javascript">
+	console.log(document.getElementById("logo").clientHeight+'px'); 
+	</script>
+
+</body>
+</html>

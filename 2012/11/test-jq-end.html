@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<div id="test">
+    <h1>jQuery end()方法</h1>
+    <p>讲解jQuery中end()方法。</p>
+</div>
+<script type="text/javascript">
+    $("#test").click(function() {
+        $(this).find("p").hide().end().hide();
+    });
+</script>
+</body>
+</html>

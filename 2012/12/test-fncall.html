@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-fncall</title>
+</head>
+<body>
+<script type="text/javascript">
+	function Person(name, age){
+		this.name = name;
+		this.age = age;
+	}
+	Person.prototype.sayName = function(){
+		console.log(this.name);
+	}
+	function Son(school, sex, name){
+		this.school = school;
+		this.sex = sex;
+		Person.call(this, name);
+	}
+	Son.prototype = new Person();
+	Son.prototype.saySex = function(){
+		console.log(this.sex);
+	}
+	var s = new Son('sh', 'male', 'tony');
+	s.sayName();
+
+</script>
+</body>
+</html>

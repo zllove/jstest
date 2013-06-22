@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test</title>
+    <script type="text/javascript" src="js/ice.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    /*
+    var cls = 'myclass', text = 'mytest';
+    var s = '<div class="{0}">{1}</div>';
+    var res = String.format(s, cls, text);
+//    console.log(res);
+    var arr = [{name:1}, 1, 2, s];
+//    var pos = arr.indexOf(s, 2);
+//    console.log(pos);
+    arr.removeAt(1);
+//    console.log(arr);
+    var sayHi = function (name){
+        console.log('hi, ' + name);
+    }
+    sayHi('jikey');
+    var say2 = sayHi.createInterceptor(function(name){
+        return name == 'tang';
+    });
+    say2('jikey');
+    say2('tang');
+    function oldFn(){
+        alert('test');
+    }
+    function res(){
+        return false;
+    }
+//    var newFn = oldFn.createInterceptor(res);
+    var obj = { name: 'jack' };
+    obj.method = oldFn.createInterceptor(res);
+    var rt = obj.method();
+    console.log(rt);
+     */
+    
+
+</script>
+<button id="mybtn">mybtn</button>
+<script type="text/javascript">
+    var btn = document.getElementById('mybtn');
+    function handle(name){
+        console.log('hi' + name);
+    }
+    btn.addEventListener('click', handle.createCallback('jikey'), false);
+</script>
+<a id="myauthor" href="#">sina</a>
+<script type="text/javascript">
+    /*
+    var author = document.getElementById('myauthor');
+    function sayName(name){
+        console.log('hi ' + name);
+    }
+    var sayName2 = sayName.createDelegate(author, ['jikey']);
+    author.onclick = sayName2;
+    */
+
+</script>
+<a id="sohu" href="#">sohu</a>
+<script type="text/javascript">
+    var sohu = document.getElementById('sohu');
+    function sayName(name){
+        console.log('实际参数： ' + arguments.length);
+        console.log('hi ' + arguments[0]);
+        console.log('hello ' + arguments[1]);
+    }
+    var sayName2 = sayName.createDelegate(sohu, ['jikey'], 0);
+    sohu.onclick = sayName2;
+
+    var sayHi = function (name){
+        console.log('Hi, ' + name);
+    }
+    sayHi('Fred');
+    sayHi.defer(1000, this, ['Fre']);
+    function Person(){
+    }
+    Person.prototype = {
+        sayName: function (){
+            console.log('hi');
+        }
+    }
+    var p = new Person();
+    console.log(p);
+</script>
+</body>
+</html>

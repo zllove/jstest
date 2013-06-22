@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		ul,li{list-style:none;}
+		.normal{color:#ccc;}
+		.red{color:#c00;}
+	</style>
+</head>
+<body>
+	<p class="a">不过，从此次抗议者维权聚集平台YY语音的在线人数来看，和解迹象也已经出现，抗议频道在线人数已由最高时的5万人缩水到了1万余人，发言人数较几天前也大大减少。</p>
+	<p class="to">抗议者发声明要求听证</p>
+	<p class="to2">17日，阿里巴巴董事局主席马云宣布投入18亿推出消费者保障及商家扶持计划</p>
+	<script type="text/javascript">
+		/*
+		$('p').addClass('normal');
+		if($('p').hasClass('a')){
+			$('p').addClass('red');
+		}
+		//alert($('p').hasClass('a').html());
+		*/
+		//$('p.a').append('<b>我是一个b</b>');
+		
+		var toAppend = $('p.a')[0];
+		$('p').append(toAppend);
+	</script>
+	<fieldset id="source">
+		<legend>Source elements</legend>
+		<img id="baidu" src="http://www.baidu.com/img/baidu_sylogo1.gif" alt="" />
+		<img id="icon" src="http://www.blueidea.com/common/wwwcaseimg/2011062001.jpg" alt="" />
+	</fieldset>
+	<fieldset id="target">
+		<legend>Target elements</legend>
+		<p>这是1</p>
+		<p>这是2</p>
+		<img src="http://www.blueidea.com/common/wwwcaseimg/2011082401.jpg" alt="" />
+		<img src="http://www.blueidea.com/common/wwwcaseimg/2011082401.jpg" alt="" />
+	</fieldset>
+	<script type="text/javascript">
+		$('#baidu').appendTo('#target p');
+		$('#icon').appendTo('#target p:first');
+	</script>
+</body>
+</html>

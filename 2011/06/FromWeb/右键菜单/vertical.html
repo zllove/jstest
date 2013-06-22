@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title> Context Menu </title>
+
+<link rel="stylesheet" type="text/css" href="skin/style-vertical.css" />
+<link rel="stylesheet" type="text/css" href="skin/demo.css" />
+<script type="text/javascript" src="src/sl.js"></script>
+<script type="text/javascript" src="src/menu.js"></script>
+
+</head>
+<body>
+<div id="DownLoader">
+	<p style="text-align:right;">Copy @:<a href="http://www.scriptlover.com">脚本爱好者</a></p>
+	
+	<div class="download-title">模式切换</div>
+	<div class="download-content">
+		<p>
+			<a href="index.html">右键文档模式</a>&nbsp;&nbsp;|&nbsp;
+			<a href="skin-1.html">默认皮肤A模式</a>&nbsp;&nbsp;|&nbsp;
+			<a href="horizontal.html">横排菜单模式</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="vertical.html" class="text-decoration">竖排菜单模式</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="mark.html">前缀图标模式</a>
+		</p>
+	</div>
+
+	<div class="download-title">菜单演示</div>
+	<div style="margin-left:100px;height:200px;">
+		<style type="text/css">
+			.hor {
+				list-style:none;
+				margin:0;
+			}
+			.hor li {
+				line-height:20px;
+				width:146px;
+				margin:1px;
+				padding:2px;
+				cursor:default;
+			}
+		</style>
+		<ul class="hor">
+			<li id="tempA" onmouseover="{this.className = 'over'}" onmouseout="{this.className = 'out'}" class="out">
+				菜单项A
+			</li>
+			<li id="tempB" onmouseover="{this.className = 'over'}" onmouseout="{this.className = 'out'}" class="out">
+				菜单项B
+			</li>
+			<li id="tempC" onmouseover="{this.className = 'over'}" onmouseout="{this.className = 'out'}" class="out">
+				菜单项C
+			</li>
+		</ul>
+	</div>
+
+	<div class="download-title">菜单特色</div>
+	<div class="download-content">
+		<p>如果你有任何的意见或建议，请到scriptlover.com上面留言。</p>
+		<ol>
+			<li>支持无限级菜单</li>
+			<li>xml方式书写菜单</li>
+			<li>完全自定义菜单项</li>
+			<li>一个文档可实例化多个对象</li>
+			<li>多种显示模式</li>
+			<li>可支持灵活切换皮肤</li>
+			<li>多浏览器兼容(ie6+ ,firefox ,sarari ,opera?)</li>
+		</ol>
+	</div>
+
+	<div class="download-title">调用说明</div>
+	<div class="download-content">
+		<p><strong><i>Menu类的属性和方法：</i></strong></p>
+		<ol>
+			<li>属性width:控制菜单宽度，默认为180px</li>
+			<li>属性xml:菜单数据源文件</li>
+			<li>属性xmlString:数据xml串</li>
+			<li>属性trigger:触发弹出菜单的对象</li>
+			<li>方法init:初始化对象的属性和方法</li>
+			<li>方法show:显示主菜单，接受参数为"当前事件源"</li>
+		</ol>
+		<p>xml和xmlString属性两者设定其一就可以；trigger对象可不设定，那么可调show方法显示菜单。</p>
+
+		<p><strong><i>xml描述文件节点及属性：</i></strong></p>
+		<ol>
+			<li>节点root:文档根节点</li>
+			<li>节点menu:描述一个菜单</li>
+			<li>节点ul:描述一个菜单项组合</li>
+			<li>节点li:描述一个菜单项</li>
+			<li>属性enabled:为false，那么该菜单为无效状态</li>
+			<li>属性id:节点id</li>
+			<li>属性child:指向的子菜单id</li>
+		</ol>
+		<p><strong><i>xml描述文件中为节点添加事件：</i></strong></p>
+		<p>最终li元素将会在html文档中解析为li元素，且它的属性都会全部被解析，因此可用下列方法添加：</p>
+			<ol>
+				<li>直接在li节点中写属性，比如onclick="{alert('clicked me')}"。</li>
+				<li>可以给li元素一个id，然后在脚本中为元素添加事件。</li>
+			</ol>
+		</p>
+	</div>
+
+</div>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+/*@tempA*/
+sampleA = new Menu();
+sampleA.width = 150;
+sampleA.xml = "data/data.xml";
+sampleA.init();
+document.getElementById("tempA").onclick = function(e){
+	sampleA.show(e ,"right");
+};	
+document.getElementById("tempB").onclick = function(e){
+	sampleA.show(e ,"right");
+};	
+document.getElementById("tempC").onclick = function(e){
+	sampleA.show(e ,"right");
+};	
+
+//]]>
+</script>
+
+</body>
+</html>

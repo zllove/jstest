@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0042)http://mrthink.net/demo/thinkjq100723a.htm -->
+<HTML><HEAD><TITLE>基于jQuery的控制左右滚动及自动滚动效果_点击滚动版@Mr.Think</TITLE>
+<META charset=gbk><LINK rel=stylesheet 
+href="基于jQuery的控制左右滚动及自动滚动效果_点击滚动版@Mr_Think_files/base.css"><LINK 
+rel="shortcut icon" type=image/x-icon 
+href="http://mrthink.net/wp-content/themes/zsofa/favicon.ico">
+<META name=author content=Mr.Think又名青鸟简称i>
+<META name=keywords 
+content=i,Mr.Think,前端开发,WEB前端,前端技术,前端开发,WEB前端开发,用户体验,网站策划,网站优化,青鸟,javascript,jQuery,css,xhtml,html,UE,SEO,Mr.Think的博客,青鸟的博客,PHP爱好者>
+<META name=description 
+content=Mr.Think的博客,中文网名青鸟,现专注于WEB前端开发,同时也是一位PHP的爱好者.爱思考,有点代码洁癖,生吃过螃蟹腿,喜好肉食.这里是我记录知识与生活琐事的地方.><LINK 
+rel=pingback href="http://mrthink.net/xmlrpc.php"><LINK 
+title="Mr.Think的博客 RSS Feed" rel=alternate type=application/rss+xml 
+href="http://mrthink.net/feed/">
+<SCRIPT 
+src="基于jQuery的控制左右滚动及自动滚动效果_点击滚动版@Mr_Think_files/jquery.min.js"></SCRIPT>
+
+<STYLE>
+/*demo css*/
+.ibox{width:850px; height:210px; background:#ddd; margin:1em auto; border:1em solid #ddd; position:relative; overflow:hidden}
+.ibox .showbox{position:absolute;left:0;width:2550px; height:170px; background:#fff}
+.ibox .showbox ul li{float:left;margin:7px}
+.ibox .showbox ul li img{width:150px; height:150px; border:3px solid #a40000}
+.ibox span{position:absolute;padding:2px 5px; background:#fff; cursor:pointer;}
+.ibox span.pre{left:10px; bottom:0}
+.ibox span.next{right:10px; bottom:0}
+.ibox span.num{right:45%; bottom:0; background:#ddd;line-height:18px;}
+.ibox span.num li{display:inline;margin:0 5px; padding:1px 5px; line-height:18px}
+.ibox span.num .numcur{background:#a40000; color:#fff}
+
+</STYLE>
+
+<SCRIPT>
+/**
+ * @author Mr.Think
+ * @author blog http://mrthink.net/
+ * @2010.07.23
+ * 可自由转载及使用,但请注明版权归属
+ */
+$(function(){
+    //@Mr.Think***变量
+    var $cur = 1;//初始化显示的版面
+    var $i = 5;//每版显示数
+    var $len = $('.showbox>ul>li').length;//计算列表总长度(个数)
+    var $pages = Math.ceil($len / $i);//计算展示版面数量
+    var $w = $('.ibox').width();//取得展示区外围宽度
+    var $showbox = $('.showbox');
+    var $num = $('span.num li')
+    var $pre = $('span.pre')
+    var $next = $('span.next');
+ 	//@Mr.Think***向前滚动
+    $pre.click(function(){
+        if (!$showbox.is(':animated')) {  //判断展示区是否动画
+            if ($cur == 1) {   //在第一个版面时,再向前滚动到最后一个版面
+                $showbox.animate({
+                    left: '-=' + $w * ($pages - 1)
+                }, 500); //改变left值,切换显示版面,500(ms)为滚动时间,下同
+                $cur = $pages; //初始化版面为最后一个版面
+            }
+            else { 
+                $showbox.animate({
+                    left: '+=' + $w
+                }, 500); //改变left值,切换显示版面
+                $cur--; //版面累减
+            }
+            $num.eq($cur - 1).addClass('numcur').siblings().removeClass('numcur'); //为对应的版面数字加上高亮样式,并移除同级元素的高亮样式
+        }
+    });
+    //@Mr.Think***向后滚动
+    $next.click(function(){
+        if (!$showbox.is(':animated')) { //判断展示区是否动画
+            if ($cur == $pages) {  //在最后一个版面时,再向后滚动到第一个版面
+                $showbox.animate({
+                    left: 0
+                }, 500); //改变left值,切换显示版面,500(ms)为滚动时间,下同
+                $cur = 1; //初始化版面为第一个版面
+            }
+            else {
+                $showbox.animate({
+                    left: '-=' + $w
+                }, 500);//改变left值,切换显示版面
+                $cur++; //版面数累加
+            }
+            $num.eq($cur - 1).addClass('numcur').siblings().removeClass('numcur'); //为对应的版面数字加上高亮样式,并移除同级元素的高亮样式
+        }
+    });
+    //@Mr.Think***数字点击事件
+    $num.click(function(){
+        if (!$showbox.is(':animated')) { //判断展示区是否动画
+            var $index = $num.index(this); //索引出当前点击在列表中的位置值
+            $showbox.animate({
+                left: '-' + ($w * $index) 
+            }, 500); //改变left值,切换显示版面,500(ms)为滚动时间
+            $cur = $index + 1; //初始化版面值,这一句可避免当滚动到第三版时,点击向后按钮,出面空白版.index()取值是从0开始的,故加1
+            $(this).addClass('numcur').siblings().removeClass('numcur'); //为当前点击加上高亮样式,并移除同级元素的高亮样式
+        }
+    });
+})
+</SCRIPT>
+
+<META name=GENERATOR content="MSHTML 8.00.6001.19046"></HEAD>
+<BODY>
+<DIV id=d_head>
+<H1><A title=返回Mr.Think的博客 
+href="http://mrthink.net/">Mr.Think的博客</A><EM>可自由转载及使用,但请注明出处.</EM></H1>
+<H2><SPAN><A title=订阅Mr.Think的博客 href="http://mrthink.net/feed/">RSS 
+Feed</A></SPAN>@专注Web前端技术, 热爱PHP, 崇尚简单生活的凡夫俗子.</H2></DIV>
+<DIV class=return>返回文章页:<A 
+href="http://mrthink.net/jquery-clicksl…oslide-showimg/">基于jQuery的控制左右滚动及自动滚动效果</A></DIV><!--DEMO start-->
+<DIV id=demo class=ibox>
+<DIV class=showbox>
+<UL>
+  <LI><IMG title=demo alt=demo 
+  src="基于jQuery的控制左右滚动及自动滚动效果_点击滚动版@Mr_Think_files/f8a9dd53720bf31b5917915e8222c27370a3681c_m.jpg"></LI>
+  <LI><IMG title=demo alt=demo 
+  src="基于jQuery的控制左右滚动及自动滚动效果_点击滚动版@Mr_Think_files/15a1d7982c49b0e638ae3340cf86dc4469f955cc_m.jpg"></LI>
+  <LI><IMG title=demo alt=demo 
+  src="基于jQuery的控制左右滚动及自动滚动效果_点击滚动版@Mr_Think_files/68e9a7a8476e26a1022fa5e39ccdda669a5d4f08_m.jpg"></LI>
+  <LI><IMG title=demo alt=demo 
+  src="基于jQuery的控制左右滚动及自动滚动效果_点击滚动版@Mr_Think_files/56d1b9aaff5b424f1cdb08b80544d5150839b4de_m.jpg"></LI>
+  <LI><IMG title=demo alt=demo 
+  src="基于jQuery的控制左右滚动及自动滚动效果_点击滚动版@Mr_Think_files/56d1b9aaff5b424f1cdb08b80544d5150839b4de_m.jpg"></LI>
+  <LI><IMG title=demo alt=demo 
+  src="基于jQuery的控制左右滚动及自动滚动效果_点击滚动版@Mr_Think_files/20417dfc945bae6c720a660625e9652a154c2c94_m.jpg"></LI>
+  <LI><IMG title=demo alt=demo 
+  src="基于jQuery的控制左右滚动及自动滚动效果_点击滚动版@Mr_Think_files/f4a9f29299f3dba6e7af0ac3c5aff93e01f874d3_m.jpg"></LI>
+  <LI><IMG title=demo alt=demo 
+  src="基于jQuery的控制左右滚动及自动滚动效果_点击滚动版@Mr_Think_files/ca6f0c9ac0c6e3bfce827cd92833e1db620b6377_m.jpg"></LI>
+  <LI><IMG title=demo alt=demo 
+  src="基于jQuery的控制左右滚动及自动滚动效果_点击滚动版@Mr_Think_files/809fcfbb8a1f58d1d47a760fd4283556cce201ef_m.jpg"></LI>
+  <LI><IMG title=demo alt=demo 
+  src="基于jQuery的控制左右滚动及自动滚动效果_点击滚动版@Mr_Think_files/15a1d7982c49b0e638ae3340cf86dc4469f955cc_m.jpg"></LI>
+  <LI><IMG title=demo alt=demo 
+  src="基于jQuery的控制左右滚动及自动滚动效果_点击滚动版@Mr_Think_files/56d1b9aaff5b424f1cdb08b80544d5150839b4de_m.jpg"></LI>
+  <LI><IMG title=demo alt=demo 
+  src="基于jQuery的控制左右滚动及自动滚动效果_点击滚动版@Mr_Think_files/15a1d7982c49b0e638ae3340cf86dc4469f955cc_m.jpg"></LI>
+  <LI><IMG title=demo alt=demo 
+  src="基于jQuery的控制左右滚动及自动滚动效果_点击滚动版@Mr_Think_files/49d6ae8901500f473a2e3e58e5b5ddc0e788bc9d_m.jpg"></LI></UL></DIV><SPAN 
+class=pre>&laquo;向左滚动</SPAN><SPAN class=next>向右滚动&raquo;</SPAN><SPAN class=num>
+<OL>
+  <LI class=numcur>1</LI>
+  <LI>2</LI>
+  <LI>3</LI></OL></SAPN></DIV><!--DEMO end--><!--@Mr.Think的统计及广告代码,使用样例请勿复制:)-->
+<DIV id=adsense>
+<H2>测试一下广告转化率&nbsp;:)&nbsp;&nbsp;有木有？？？</H2>
+<P><A href="http://weibo.com/mrthink/" 
+target=_blank>@关注Mr.Think</A><SUB>新浪微博</SUB></P></DIV>
+<SCRIPT>
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</SCRIPT>
+
+<SCRIPT>
+try {
+var pageTracker = _gat._getTracker("UA-15924173-1");
+pageTracker._trackPageview();
+} catch(err) {}
+</SCRIPT>
+<!--@end--></SPAN></BODY></HTML>

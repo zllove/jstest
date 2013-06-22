@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>div放大</title>
+        <style>
+        	input{text-align:center;padding-left:100px;}
+        	#testzoom{border:1px solid #ccc;background:#eee;}
+        </style>
+    </head>
+    <body>
+    	<input type="button" value="大家好" style="width:167px;text-align:left" />
+    	<input type="button" value="test-div" onclick="zoomDiv('testzoom')" />
+    	<div id="testzoom" style="width:100px;height:100px;">This is a div</div>
+		<script type="text/javascript">
+			function $(id){ return document.getElementById(id); }
+			function zoomDiv(id){
+				var obj = $(id);
+				var changeW = function (){
+					var obj_w = parseInt(obj.style.width);
+					var obj_h = parseInt(obj.style.height);
+					if (obj_h <= 350 || obj_w < 400) {
+						obj.style.width = (obj_w + Math.ceil((400 - obj_w) / 10)) + 'px';
+						obj.style.height = (obj_h + Math.ceil((350 - obj_h) / 10)) + 'px';
+					}
+					else {
+						clearInterval(bw1);
+					}
+				}
+				bw1= setInterval(changeW,1);
+			}
+			
+		</script>
+	</body>
+</html>

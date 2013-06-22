@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+
+    <style type="text/css">
+        *{ margin:0; padding:0; }
+        body{ font:12px/1.5 arial; background:#fff; }
+        .lucky_draw{ height:270px; padding-left:60px }
+        .lucky_draw .l_dTit{ height:25px; color:#666; padding-left:198px; line-height:25px; padding-bottom:8px; font-size:14px }
+        .lucky_pic{ width:598px; float:left }
+        .lucky_pic div{ width:172px; height:158px; float:left; background-image:url(prize_img.png); margin-right:4px; _margin-right:2px; overflow:hidden }
+        .lucky_btn{ width:205px; height:73px; margin-top:27px; line-height:73px; display:block; float:left }
+    </style>
+</head>
+<body>
+<div class="lucky_draw">
+    <p class="l_dTit">三张图片一致则获得图片所示奖品 (奖品以实物为准)</p>
+    <div>
+        <div class="lucky_pic">
+            <div id="f1"></div>
+            <div id="f2"></div>
+            <div id="f3"></div>
+        </div>
+        <a href="javascript:void(0);" class="lucky_btn" id="lucky_btn">点击抽奖</a>
+    </div>
+</div>
+<script type="text/javascript">
+    var slot = slotMachines = {
+        init :function () {
+        },
+        speed:0,
+        timer:[],
+        start:function () {
+        },
+        stop :function () {
+        }
+    };
+    (function(slot) {
+        slot.getRandomNum = function() {
+            return Math.floor((Math.random() * 60));
+        };
+        slot.init = function() {
+            document.getElementById('f1').style.backgroundPosition = '0 -' + (1 * 158) + 'px';
+            document.getElementById('f2').style.backgroundPosition = '0 -' + (2 * 158) + 'px';
+            document.getElementById('f3').style.backgroundPosition = '0 -' + (3 * 158) + 'px';
+        };
+        slot.speed = 50;
+        slot.timer = [];
+        slot.index = [];
+        slot.start = function (id) {
+            if (slot.timer[id]) return;
+            var o = document.getElementById(id);
+            slot.index[id] = 0;
+            slot.timer[id] = setInterval(function () {
+                o.style.backgroundPosition = '0 -' + ((id.replace('f', '') + slot.index[id]++) % 9 * 158) + 'px';
+            }, slot.speed);
+        };
+        slot.stop = function (id) {
+            clearInterval(slot.timer[id]);
+            slot.timer[id] = null;
+        };
+    })(slotMachines);
+
+    var rq = {eventId:2};
+    $(function () {
+        rq = {
+            eventId:2,
+            drawingInfo:{id:0, name:'', start_date:0, end_date:1, description:''},
+            init:function () {
+//                var txt = $.ajax({url: '/webservice/rest/1.0/market/drawings/' + this.eventId, async: false, cache:false}).responseText;
+//                this.drawingInfo = eval('(' + txt +')');
+            },
+            rand:function () {
+                return new Date().getTime();
+            },
+            logIn:function () {
+                return getCookie("X-Auth-MAIN-NORMAL") != null;
+            },
+            remainingDrawingTimes:function () {
+                var txt = $.ajax({url:'/webservice/rest/1.0/market/drawings/' + this.eventId + '/qualification', async:false, cache:false}).responseText;
+//                return parseInt(eval('(' + txt +')').remain_times,10);
+            },
+            luckyNum:function () {
+                var txt = $.ajax({url:'/webservice/rest/1.0/market/drawings/' + this.eventId + '/submit',
+                    async            :false, cache:false, type:'POST', contentType:'application/json', data:'{}'}).responseText;
+//                var json = eval('(' + txt +')');
+                /*
+                 if (json.rate_limit)
+                 return -1;//rate limit
+                 if (json.win){
+                 return (json.item_id - 1);
+                 }
+                 */
+//                return -2; //miss
+//                return json.item_id - 1; //miss
+                return 1; //miss
+            },
+            isRewarded:function (luckyNumber) {
+                return luckyNumber >= 0;
+            },
+            setWindows:function (luckyNumber) {
+                $('#f1')[0].style.backgroundPosition = '0 -' + (luckyNumber * 158) + 'px';
+                $('#f2')[0].style.backgroundPosition = '0 -' + (luckyNumber * 158) + 'px';
+                $('#f3')[0].style.backgroundPosition = '0 -' + (luckyNumber * 158) + 'px';
+            },
+            isRunning:false,
+            draw:function () {
+                if (this.isRunning) return;
+//                if(!this.logIn()){
+                if (1) {
+//                    var qualifications = this.remainingDrawingTimes();
+                    var qualifications = 1;
+                    if (qualifications > 0) {
+                        this.startSlot();
+                        var luckyNumber = this.luckyNum();
+                        console.log(luckyNumber);
+                        setTimeout(function () {
+                            rq.stopSlot();
+                            if (luckyNumber == -1) {
+                                alert('亲，您今天已经抽过了，努力签到分享, 明天再抽吧！');
+                                return;
+                            }
+                            if (rq.isRewarded(luckyNumber)) {
+                                rq.setWindows(luckyNumber);
+                                alert("恭喜您赢得了此奖品, 我们会稍后公布中奖名单并发送礼品给您");
+                            } else {
+                                alert("抱歉, 您没有赢得奖品, 明天再努力吧!");
+                            }
+                        }, 500);
+                    } else {
+                        alert("抱歉, 您没有资格参加抽奖, 请签到并分享到微博, 明天再来抽奖吧!");
+                    }
+                } else {
+                    alert("请先登陆");
+                    location.href = encodeURI("/account/login.cgi?from=" + document.URL);
+                }
+            },
+            startSlot:function () {
+                this.isRunning = true;
+                slot.start('f1');
+                slot.start('f2');
+                slot.start('f3');
+            },
+            stopSlot:function () {
+                this.isRunning = false;
+                slot.stop('f1');
+                slot.stop('f2');
+                slot.stop('f3');
+            }
+        };
+        rq.init();
+        if (!rq.drawingInfo.end_date) {
+            alert('访问人数过多，服务器故障，请稍后重试！');
+            return;
+        }
+        $('#lucky_btn').click(function () {
+            rq.draw();
+        });
+    });
+
+    var str="1 plus 2 equal 3";
+    var pattern1= new RegExp("\\d+","g");
+    var pattern2= /\d+/g;
+    document.write(str.match(pattern1))
+    document.write(str.match(pattern2));
+
+</script>
+</body>
+</html>

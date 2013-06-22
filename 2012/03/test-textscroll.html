@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>官网首页</title>
+    <link type="text/css" rel="stylesheet" href="global.css" />
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+    <style type="text/css">
+        body{ font:12px/2 arial;}
+        a{ text-decoration:none;}
+        .gd-bulletin p{ height:30px; line-height:30px; overflow:hidden; }
+        .gd-bulletin a{ color:#B75200; display:block; height:30px; padding-left:18px; }
+    </style>
+</head>
+<body>
+http://www.esunny.com/
+<div class="gd-bulletin">
+    <p id="gdBulletin">
+        <a target="_blank" href="http://www.esunny.com/">新版宇商网全新亮相，赶紧来体验吧！</a>
+        <a target="_blank" href="http://mall.esunny.com/unionpay/">网上交易请选择宇商安全支付，货款都安全</a>
+        <a target="_blank" href="http://mall.esunny.com/">批发市场第二期火爆上线，批发进货看这里！</a>
+        <a target="_blank" href="http://www.esunny.com/">新版宇商网全新亮相，赶紧来体验吧！</a>
+        <a target="_blank" href="http://mall.esunny.com/unionpay/">网上交易请选择宇商安全支付，货款都安全</a>
+        <a target="_blank" href="http://mall.esunny.com/">批发市场第二期火爆上线，批发进货看这里！</a>
+    </p>
+</div>
+<script type="text/javascript">
+    //滚动插件
+    (function ($) {
+        $.fn.Scroll = function (options) {
+            var defaults = {
+                space:0,        // 每次滚动的距离
+                direction:"up",
+                speed:20,
+                auto:true,
+                delay:2000,
+                elems:"a",
+                style:"V",
+                next:null,
+                prev:null
+            };
+            var opts = $.extend(defaults, options);
+            this.each(function () {
+                scrollFn($(this));
+            });
+            function scrollFn(v) {
+                var par = v.find(opts.elems).parent(),
+                    size = par.children().size(),
+                    timer = null,
+                    height = 0,
+                    sizeSpace = 0,
+                    isEven = 0,
+                    isPlay = false,
+                    auto= opts.auto,
+                    speed = opts.speed,
+                    space = opts.space,
+                    delay = opts.delay,
+                    dir = opts.direction; // 方向
+                if (size == 1 || !space) { return; }
+                if (auto) { par.append(par.html()); }
+                space % 2 == 0 ? isEven = 2 : isEven = 1, speed = parseInt(speed / 2);
+                function timerFn() {
+                    timer = setTimeout(function () {
+                        isPlay = true;
+                        checkDir(dir);
+                    }, speed);
+                }
+                function checkDir(o) {
+                    switch (o) {
+                        case"up":
+                            upFn();
+                            break;
+                        case"left":
+                            leftFn();
+                            break;
+                        case"down":
+                            downFn();
+                            break;
+                        case"right":
+                            rightFn();
+                            break;
+                    }
+                    if (dir == "left" || dir == "right") {
+                        v.scrollLeft() % space != 0 ? timer = setTimeout(function () {
+                            checkDir(dir);
+                        }, speed) : auto ? timer = setTimeout(timerFn, delay) : null;
+                    } else {
+                        v.scrollTop() % space != 0 ? timer = setTimeout(function () {
+                            checkDir(dir);
+                        }, speed) : auto ? timer = setTimeout(timerFn, delay) : null;
+                    }
+                }
+                function upFn() {
+                    if (v.scrollTop() >= parseInt(height / 2) && auto) {
+                        v.scrollTop(0);
+                    }
+                    v.scrollTop(v.scrollTop() + isEven);
+                }
+                function leftFn() {
+                    if (v.scrollLeft() >= parseInt(sizeSpace / 2) && auto) {
+                        v.scrollLeft(0);
+                    }
+                    v.scrollLeft(v.scrollLeft() + isEven);
+                }
+                function downFn() {
+                    if (v.scrollTop() <= 0 && auto) {
+                        v.scrollTop(parseInt(height / 2));
+                    }
+                    v.scrollTop(v.scrollTop() - isEven);
+                }
+                function rightFn() {
+                    if (v.scrollLeft() <= 0 && auto) {
+                        v.scrollLeft(parseInt(sizeSpace / 2));
+                    }
+                    v.scrollLeft(v.scrollLeft() - isEven);
+                }
+                if (auto) {
+                    v.hover(function () {
+                        isPlay && clearTimeout(timer);
+                    }, function () {
+                        isPlay && (timer = setTimeout(timerFn, delay));
+                    });
+                    timer = setTimeout(function () {
+                        if (dir == "left" || dir == "right") {
+                            sizeSpace = 2 * size * space;
+                            par.css("width", sizeSpace);
+                        } else {
+                            height = v.get(0).scrollHeight;
+                        }
+                        v.scrollLeft(0);
+                        timerFn();
+                    }, delay);
+                } else {
+                    if (c.style == "H") {
+                        sizeSpace = size * space;
+                        par.css("width", sizeSpace);
+                    } else {
+                        height = v.get(0).scrollHeight;
+                    }
+                    v.scrollLeft(0);
+                    opts.next.bind("click", function () {
+                        opts.style == "V" ? dir = "down" : dir = "right";
+                        timerFn();
+                    });
+                    opts.prev.bind("click", function () {
+                        opts.style == "H" ? dir = "left" : dir = "up";
+                        timerFn();
+                    })
+                }
+            }
+        }
+    })(jQuery);
+    $('#gdBulletin').Scroll({
+        space:30,
+        speed:50,
+        delay:3000
+    });
+</script>
+</body>
+</html>

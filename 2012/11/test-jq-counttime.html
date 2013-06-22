@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+<p class="count"></p>
+    <div>
+        <p><em class="a"></em></p>
+    </div>
+    <p></p>
+<script type="text/javascript">
+    var count = 10;
+    countdown = setInterval(function(){
+        $('.count').html(count + ' 秒后将跳转!');
+        if(count == 0){
+            clearInterval(countdown);
+            location.href = 'http://google.com';
+        }
+        count --;
+    }, 1000);
+</script>
+</body>
+</html>

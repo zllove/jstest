@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>select</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <script type="text/javascript" src="js/hogo.core.js"></script>
+    <script type="text/javascript" src="js/hogo.select.js"></script>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{font:12px/2 arial; background:#fff;}
+        .wrap{ margin:20px; position:relative; width:100px;}
+        .wrap ul{list-style:none; margin: 0; padding:0;}
+        .wrap ul li{line-height:20px; cursor:pointer; margin:1px 0; font-size:12px; text-indent:5px;}
+        .selectbox{width:128px; height:23px; line-height:23px; background: #ccc url(images/s-bg.gif) no-repeat; border:none;  font-size:12px; text-indent:5px; cursor:pointer;}
+        .list{ display:none;position:absolute;width:126px;left:0;top:22px;border:1px solid #ccc; background:#fff; }
+        .hover{ background:#36c; color:#fff;}
+    </style>
+</head>
+<body>
+<div id="wrap" class="wrap">
+    <select name="" id="select" style="display:none;">
+        <option value="金山">金山</option>
+        <option value="杨浦" selected="selected">杨浦</option>
+        <option value="长宁">长宁</option>
+        <option value="青浦">青浦</option>
+        <option value="嘉定">嘉定</option>
+        <option value="闸北">闸北</option>
+        <option value="浦东新区">浦东新区</option>
+        <option value="闵行">闵行</option>
+        <option value="黄浦">黄浦</option>
+    </select>
+    <div class="selectbox" id="selectbox"></div>
+</div>
+<script type="text/javascript">
+    new hogo.select({
+        selected   : 'select',
+        showNode   : 'selectbox',
+        wrap       : 'wrap',
+        cssName    : 'list',
+        hoverClass : 'hover'
+    });
+</script>
+</body>
+</html>

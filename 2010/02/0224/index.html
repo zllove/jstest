@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+
+</head>
+
+<body>
+<div id="a">adfasdf</div>
+<div id="b">bb</div>
+<div><span>Shadow</span> | No shadow</div>
+
+<script type="text/javascript">
+	var element = document.getElementsByTagName("span")[0];
+	var t1 = element.cloneNode(false).innerHTML;
+	var t2 = element.cloneNode(true).innerHTML;
+	b.innerHTML = t2;
+	alert(t1);
+	alert(t2);
+	/*
+	var i=0;
+	var a = document.getElementById("a");
+	while(i < 10){
+		i++;
+		a.innerHTML = i;
+	}
+	var iNum=0;
+	for(var i=1; i<10; i++){
+		if(i % 5 == 0){
+			continue;
+		}
+		iNum ++;
+	}
+	alert(iNum);	
+	
+	function t(){
+		if(arguments[0] == "bye"){
+			alert("bye");
+		}
+		if(arguments[1] == "good"){
+			alert("good");
+		}
+	}
+	t("bye", "goodd");
+	
+	function t(){
+		if(arguments.length > 1){
+			alert("arguments num 2");
+		} else {
+			alert("arguments num 1");
+		}
+	}
+	t("1");
+	//t("1", "3");
+	
+	var a = document.getElementById("a");
+	var b = document.getElementById("b");
+	var c = a.cloneNode(true).innerHTML;
+	b.innerHTML = c;
+	//alert(b.innerHTML);
+	*/
+	
+	
+	
+</script>
+</body>
+</html>

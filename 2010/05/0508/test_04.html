@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>豪情</title>
+        <style>
+		body{-moz-user-select:none;}
+		</style>
+		
+	</head>
+	<body oncopy="document.selection.empty()" oncut="return false" onselect="document.selection.empty()" ondragstart="return false" onselectstart="return false">
+		<script>
+		//禁止右键
+		document.body.oncontextmenu=function(oEvent){
+		   if(document.all){
+		        oEvent=window.event;
+		        oEvent.returnValue=false;
+		   }else{
+		       oEvent.preventDefault();
+		   }
+		}
+		</script>
+		<!-- 禁止复制 -->
+		<noscript><iframe src="*.html"></iframe></noscript>
+		<p>this is test content</p>
+	</body>
+</html>

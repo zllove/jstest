@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<div id="test"></div>
+<script type="text/javascript">
+    /*
+    var person = {};
+    person.name = 'jikey';
+    console.log(person.name);
+
+    var num1 = 5;
+    var num2 = num1;
+    console.log(num2); // 5
+    num2 = 10;
+    console.log(num1); // 5
+    console.log(num2); // 10
+
+    var o1 = {};
+    o1.name = 'jikey';
+    console.log(o1.name); // jikey
+    var o2 = o1;
+    o2.name = 'tang';
+    console.log(o1.name); // tang
+    console.log(o2.name); // tang
+
+
+    function setName(obj){ // 按值传递，不会改变
+        obj.name = 'jikey';
+        obj = {};
+        obj.name = 'tang';
+    }
+    var person = {};
+    setName(person);
+    console.log(person.name);
+    */
+    var element = document.getElementById('test');
+    var myobject = {};
+    myobject.element = element;
+    element.someobject = myobject;
+
+    myobject.element = null;
+    element.someobject = null;
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test</title>
+    <link rel="stylesheet" href="resources/css/ext-all.css">
+    <script type="text/javascript" src="adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="ext-all.js"></script>
+    
+    
+</head>
+<body>
+<button id="test2">test-btn</button>
+<input type="text" name="" id="text">
+<div id="test"></div>
+<script type="text/javascript">
+    /*
+    Ext.onReady(function(){
+        Ext.MessageBox.alert('Helloworld', 'hello world!');
+    });
+    var test = Ext.get('test');
+    test.on('click', function(){
+        alert('handler1');
+    });
+    test.on('click', function(){
+        alert('handler2');
+    });
+    Ext.EventManager.onWindowResize(function (width, height){
+        alert('width:' + width + ', height:' + height);
+    });
+    Ext.get('text').on('keypress', function (e){
+        if(e.charCode == Ext.EventObject.SPACE){
+            Ext.Msg.alert('info', '空格');
+        }
+    });
+    Ext.get(document.body).on('mousewheel', function (e){
+        var delta = e.getWheelDelta();
+        var test = Ext.get('test');
+        var width = test.getWidth();
+        test.setWidth(width + delta * 500, true);
+    });
+    var box = new Ext.BoxComponent({
+        el: 'test',
+        style: 'background-color:red;position:absolute;',
+        pageX: 100,
+        pageY: 50,
+        width: 200,
+        height: 150
+    });
+    box.render();
+    var panel = new Ext.Panel({
+        el: 'test',
+        title: '测试标题',
+        floating: true,
+        shadow: true,
+        draggable: true,
+        collapsible: true,
+        html: '测试内容',
+        pageX: 100,
+        pageY: 50,
+        width: 200,
+        height: 150
+    });
+    panel.render();
+     */
+
+    var tabs = new Ext.TabPanel({
+        renderTo: document.body,
+        height: 100
+    });
+    tabs.add({
+        title: '标题1',
+        html: '内容1'
+    });
+    tabs.add({
+        id: Ext.id(),
+        title: '标题2',
+        html: '内容2',
+        closable: true
+    });
+//    tabs.activate(0);
+
+    var tab = tabs.add({
+        title: '表格' + id,
+        closable: true,
+        layout: 'fit',
+        items: [grid]
+    });
+    tabs.activate(tab);
+
+
+
+
+
+
+</script>
+</body>
+</html>

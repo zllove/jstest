@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<h4><a href="http://www.cnblogs.com/jscode/archive/2012/07/25/2605395.html">http://www.cnblogs.com/jscode/archive/2012/07/25/2605395.html</a></h4>
+<input type="checkbox" name="" id="age">
+<script type="text/javascript">
+    var isChecked = $('#age').is(':checked');
+//    var isChecked2 = $('#age').prop('checked');
+//    console.log(isChecked);
+//    console.log(isChecked2);
+</script>
+<script type="text/javascript">
+    var myUrl = 'http://example.com/index.html?param=1&anotherParam=2';
+    var myOtherUrl = 'http://example.com/index.html?url=' + encodeURIComponent(myUrl);
+//    console.log(myOtherUrl);
+
+    var myArray = ['a', 'b', 'c'];
+    delete myArray[0];
+    for(var i=0; i<myArray.length; i++){
+//        console.log(myArray[i]);
+    }
+    var myArray2 = ['a', 'b', 'c'];
+    myArray2.splice(0, 1); // 真正的删除
+    for(var j=0; j<myArray2.length; j++){
+//        console.log(myArray2[j]);
+    }
+    var sHex = (255).toString(16);
+//    console.log(sHex);
+    var iNum = parseInt('ff', 16);
+//    console.log(iNum);
+    var testHtml = 'a' +
+        'b' +
+        'c';
+//    console.log(testHtml);
+    var testHtml2 = 'a\
+        b\
+        c';
+//    console.log(testHtml2);
+    String.prototype.endWidth = function(suffix){
+        return this.indexOf(suffix, this.length - suffix.length) !== -1;
+    }
+    var items = [1, 2, 3, 4];
+    $(items).each(function(i){
+//        console.log('this is ' + i + 1);
+    });
+
+    
+</script>
+<br>
+<input id="btn" type="submit" value="test-addEvent">
+<script type="text/javascript">
+    function addEvent(target, type, handler){
+        if(target.addEventHandler){
+            target.addEventListener(type, handler, false);
+        } else if(target.attachEvent){
+            target.attachEvent('on' + type, function(){
+                return handler.call(target, window.event);
+            });
+        } else {
+            target['on' + type] = handler;
+        }
+    }
+    var btn = document.getElementById('btn');
+    addEvent(btn, 'click', function(){
+        alert('over ' + this.id);
+    });
+</script>
+<script type="text/javascript">
+    Array.prototype.unique = function(){
+        var a = this.concat();
+        for(var i=0; i<a.length; i++){
+            for(var j=i+1; j<a.length; j++){
+                if(a[i] == a[j]){
+                    a.splice(j, 1);
+                }
+            }
+        }
+        return a;
+    }
+    var arr1 = ['a', 'b'];
+    var arr2 = ['b', 'c', 'a'];
+    var arr3 = arr1.concat(arr2).unique();
+//    console.log(arr3);
+</script>
+<!--<img id="imgTest" src="http://jscode.chinacxy.com/img_lib/m_400_600_01.jpg" alt="s">-->
+<script type="text/javascript">
+    /*
+    document.getElementById('imgTest').style.borderBottom = '5px solid #f60';
+
+    setTimeout(function(){
+        document.getElementById('imgTest').style.borderBottom = '5px solid #f60';
+    }, 0);
+    */
+    function getQueryString(){
+        var result = {},
+            questString = location.search.substring(1),
+            re = /([^&=]+)=([^&]*)/g,
+            m;
+
+        while(m = re.exec(questString)){
+            result[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+        }
+        return result;
+    }
+    var myParam = getQueryString()['myParam'];
+//    console.log(myParam);
+
+
+</script>
+<div id="test">aaa</div>
+<script type="text/javascript">
+    var te = $('#test');
+    var te2 = document.getElementById('test');
+    if(te instanceof jQuery){
+//        alert(1);
+    }
+    if(te2 instanceof Object){
+//        alert(2);
+    }
+    function isInt(n){
+        return typeof n === 'number' && n % 1 == 0;
+    }
+    function isFloat(n){
+        return n === +n && n !== (n | 0);
+    }
+//    console.log(isFloat(1.3));
+    var css = '*{font-size:12px;}',
+        head = document.getElementsByTagName('head')[0],
+        style = document.createElement('style');
+
+    style.type = 'text/css';
+    if(style.styleSheet){ // ie
+        style.styleSheet.cssText = css;
+    } else {
+        style.appendChild(document.createTextNode(css));
+    }
+    head.appendChild(style);
+
+</script>
+<code> A </code>
+<code> B </code>
+<code> C </code>
+<script type="text/javascript">
+//    $('code').contents().unwrap().wrap('<pre/>');
+    $('code').replaceWith(function(){
+        return $('<pre/>').append($(this).contents());
+    });
+</script>
+<p>Hello</p><p>cruel</p><p>World</p>
+<script type="text/javascript">
+//    $('p').replaceWith('<b>Paragraph.</b>');
+    var arr = [100, 0, 50];
+    var min = Math.min.apply(null, arr),
+        max = Math.max.apply(null, arr);
+
+//    console.log(min);
+//    console.log(max);
+    function inter(a, b){
+        var ai = 0,
+            bi = 0,
+            result = [];
+
+        while(ai < a.length && bi < b.length){
+            if(a[ai] < b[bi]){
+                ai ++;
+            } else if(a[ai] > b[bi]){
+                bi ++;
+            } else {
+                result.push(a[ai]);
+                ai ++;
+                bi ++;
+            }
+        }
+        return result;
+    }
+//    console.log(inter([1,3,5], [3,5,7]));
+//    console.log(inter([1,2,3], [2,3,4,5,6]));
+    var temp = 'This is a string';
+    var count = temp.match(/is/g).length;
+//    console.log(count);
+    function createIterator(x){
+        var i = 0;
+        return function(){
+            return x[i++];
+        }
+    }
+    var iterator = createIterator(['a','b','c','d','e','f','g']);
+    var current;
+    while(current = iterator()){
+//        console.log(current);
+    }
+
+    function getAge(dateString){
+        var today = new Date();
+        var birthDate = new Date(dateString);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        return age;
+    }
+    var allAge = getAge('2005,8,1');
+    console.log(allAge);
+
+</script>
+
+</body>
+</html>

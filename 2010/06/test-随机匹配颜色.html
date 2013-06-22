@@ -1,0 +1,20 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>兼容firefox的添加到收藏夹代码</title>
+<script language="JavaScript" type="text/javascript">
+	function addfavorite(url,name) {
+		if (document.all) {
+		window.external.addFavorite(url,name);
+		} 
+		else if (window.sidebar) {
+		window.sidebar.addPanel(name, url, "");
+		}
+	} 
+</script>
+</head>
+
+<body onunload="addfavorite('http://www.163code.com','163特效代码网')">
+<a href="#" onClick="addfavorite('http://www.163code.com','163特效代码网')">加为收藏</a>
+</body>
+</html>

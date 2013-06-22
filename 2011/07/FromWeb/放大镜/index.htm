@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>新致BPO数据录入系统</title>
+<link href="css/newtouch-bpo-login.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+<!--
+#loadingDIV{position:absolute;z-index:10;height:auto;left:400px;margin-left:150px;top:200px;width:300px;display:none;border-style:solid;border-color:gray;background-color:#FFFFFF;text-align:center;}
+-->
+</style>
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="js/nt-jikey-login.js"></script>
+<script type="text/javascript">
+	function go() {
+	    var userName = document.LoginFrom.userName.value;
+	    if (userName == null || userName == "") {
+	        document.LoginFrom.userName.focus();
+	        return false;
+	    }
+	    var password = document.LoginFrom.password.value;
+	    if (password == null || password == "") {
+	        document.LoginFrom.password.focus();
+	        return false;
+	    }
+	    $("#loadingDIV").show();
+	    $("#showMessage").html("正在登陆......");
+	    $.ajax({
+	        type: "post",
+	        dataType: "html",
+	        url: "login",
+	        data: 'userName=' + encodeURI(userName) + '&password=' + encodeURI(password),
+	        error: function() {
+	            $("#loadingDIV").hide();
+	            document.getElementById("show").innerHTML = '<font color="red">登录失败</font>';
+	        },
+	        success: function(datas) {
+	            $("#loadingDIV").hide();
+	            if (datas == '0') {
+	                window.location.href = 'content.jsp';
+	            } else {
+	                document.getElementById("show").innerHTML = '<font color="red">用户名或密码有误</font>';
+	                document.getElementById("userName").focus();
+	            }
+	        }
+	    })
+	}
+	
+	function enter(event) {
+	    e = event ? event: (window.event ? window.event: null);
+	    if (e.keyCode == 13) {
+	        go()
+	    }
+	}
+</script>
+</head>
+
+<body>
+<form action="login" method="post" name="LoginFrom">
+<div class="nt_login_wrap">
+  <div class="nt_login_cont">
+  	 <span id="show" class="show_msg"></span>
+     <ul class="nt_login_userinfo">
+       <li>
+         <label for="username">用户名：</label>
+         <input type="text" size="25" class="nt_login_input_style" name="userName" id="userName" />
+       </li>
+       <li>
+         <label for="pwd">密  码：</label>
+         <input type="password" size="25" class="nt_login_input_style" name="password" id="pwd" size="15" onKeyPress="return enter(event);" />
+       </li>
+       <li class="pl60">
+         <input hidefocus="true" id="submit" type="button" value="提交" class="nt_login_btn" onclick="return go();" />
+       </li>
+     </ul>
+  </div>
+</div>
+<!--/login-->
+</form>
+<script type="text/javascript">
+$(document).ready(function(){
+	document.getElementById("userName").focus();
+	
+	//为IE6兼容hover特别函数
+	JLogin.focusFn('userName', 'nt_login_input_focus', 'nt_login_input_style');
+	JLogin.focusFn('pwd', 'nt_login_input_focus', 'nt_login_input_style');
+	JLogin.focusFn('submit', 'nt_login_btn_focus', 'nt_login_btn');
+});
+
+</script>
+<div id="loadingDIV">
+	<br /><br /><br /><br /><br /><br />
+	<img src="images/loadbg.gif" /><br /><br />
+	<span id="showMessage" style="font-size:16px;font-weight:600;">正在登陆.....</span>
+</div>
+</body>
+</html>

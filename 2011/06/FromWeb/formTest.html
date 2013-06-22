@@ -1,0 +1,25 @@
+<!doctype>
+<html>
+	<head>
+		<title>测试form</title>
+		<meta charset="gbk" />
+	</head>
+	<body>
+		<form name="testF" >
+			<input type="text" name="text" />
+			<input type="submit" value="提交" />
+		</form>
+		<script type="text/javascript">
+		(function(){
+			document["forms"]["testF"]["onsubmit"] = function(){
+				var p = this,t = true;
+				if(p["text"].value == "")
+					alert("请输入内容"),p["text"].focus(),t = false;
+				else
+					p["action"] = "http://www.163.com",p["target"] = "_blank",t = true;
+				return t;
+			}
+		})();	
+		</script>
+	</body>
+</html>

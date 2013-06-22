@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    var end = $.inArray(1, [2,2,11, 2, 3]);
+//    console.log(end);
+
+    function inArray(elem, arr){
+        var ret = 0;
+        for(var i= 0,len=arr.length; i<len; i++){
+            if(arr[i] == elem){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    var uniq = function(arr){
+        var a = [],
+            o = {},
+            i, v, len = arr.length;
+
+        for(var i=0; i<len; i++){
+            v = arr[i];
+            if(o[v] !== 1){
+                a.push(v);
+                o[v] = 1;
+            }
+        }
+        return a;
+    }
+
+//    console.log(uniq([1, 2, 3, 3, 2]));
+
+    function countStr(){
+        var str = 'aaadfdfseffserfefsefseeffffftsdg',
+            arr = str.split(''),
+            o = {},
+            a = {},
+            n = '',m = 0,
+            ret = [];
+
+        for(var i= 0,j; j=arr[i]; i++){
+            if(typeof o[j] != 'number'){
+                ret.push(j);
+                o[j] = 1;
+            } else {
+                o[j] ++;
+            }
+        }
+        m = o['a'];
+        for (var p in o) {
+            if(m < o[p]){
+                m = o[p];
+                n = p;
+            }
+        }
+        console.log(n);
+        console.log(m);
+    }
+//    countStr();
+
+
+    function foo(){
+        var x = 0;
+        try{
+            return console.log('x' + (++x));;
+        } finally {
+            console.log('x finally' + (++x));
+        }
+    }
+//    foo();
+
+    var array = [];
+    console.log(Object.prototype.toString.call(array));
+    array['one'] = 1;
+    console.log(Object.prototype.toString.call(array));
+    array['two'] = 2;
+    array['three'] = 3;
+    console.log(typeof array);
+    console.log(array);
+
+    console.log(['2', '中国', '上海']);
+
+</script>
+</body>
+</html>

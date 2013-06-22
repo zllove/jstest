@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Document</title>
+        </script>
+		<style type="text/css">
+		
+		</style>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+		<script type="text/javascript">
+			/*
+			window.name = 'from window';
+			var get_name = function(){
+				return this.name;
+			}
+			//alert(get_name());
+			var obj = {};
+			obj.name = 'from obj';
+			//alert(get_name.apply(obj));
+			var inner_obj = {
+				'name': 'from inner_obj'
+			}
+			inner_obj.get_name = get_name;
+			//alert(inner_obj.get_name());
+			
+			var test = function(name,gender){
+				alert(this.age + name + gender);
+			} 
+			test.call({age:24}, 'jikey', 'male');
+			test.apply({age:24}, ['jikey', 'female']);
+			
+			
+			var change_color = function(){
+				this.style.color = 'red';
+			}
+			window.onload = function(){
+				var text = document.getElementById('text');
+				text.onclick = change_color;
+			}
+			}
+			
+			
+			var global_scope = "I'm global";
+			var fun = function(){
+				var fun_scope = "I'm in fun scope";
+				return function innerfun(){
+					var inner_func_scope = "I'm in inner func scope";
+					return global_scope + fun_scope + inner_func_scope;
+				}
+			}
+			alert(fun()());
+			
+			
+			function Introduce(name, age){
+				document.write('My name is ' + name + ',I am ' + age + '<br>');
+			}
+			
+			function Boy(name, age){
+				this.BoyIntroduce = function(){
+					Introduce.call(this, name, age);
+				}
+			}
+			var b = new Boy('tang', 29);
+			b.BoyIntroduce();
+			
+			
+			var Person = function(){};
+			Person.prototype.Say = function(){
+				alert('Person say');
+			}
+			Person.prototype.Salary = 50000;
+			var Programmer = function(){}
+			Programmer.prototype = new Person();
+			Programmer.prototype.WriteCode = function(){
+				alert('Programmer Coder');
+			}
+			Programmer.prototype.Salary = 500;
+			var p = new Programmer();
+			p.Say();
+			p.WriteCode();
+			alert(p.Salary);
+			alert(undefined == null);
+			
+			
+			function Hello(){
+				alert('hello');
+			}
+			Hello();
+			
+			function Hello(){
+				alert('hello world');
+			}
+			Hello();
+			*/
+		</script>
+    </head>
+	<body>
+		<span id="text">this is text content</span>
+		<span id="another" onclick="change_color()">My color will be change2</span>
+	</body>
+</html>

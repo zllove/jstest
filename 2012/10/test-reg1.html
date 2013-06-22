@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+<h3><a href="http://www.cnblogs.com/rubylouvre/archive/2009/11/02/1594731.html">正则学习笔记1-6</a></h3>
+<script type="text/javascript">
+    /*
+    var str = '<a href="www.51js.com" target="_self">abcdefg</a>';
+    console.log(str.replace(/<(.*)(\s*.*)(.*)a(.*)(<\/\1>)/g, '<$1$2$3<font color="red">a</font>$4$5'));
+    console.log(str);
+
+    var str2 = 'alkdflksdf';
+    var reg = /(.*)/;
+//    console.log(reg.test(str2));
+    var endstr2 = str2.replace(/(.*)/g, '');
+    console.log(endstr2);
+    console.log(str2);
+    */
+
+    function example1(str, search){
+        var re = /<(\w+?).+?>(.+?)<\/\1>/g;
+        str.match(re);
+        var str2 = RegExp.$2,
+            re2 = new RegExp('(' + search + ')', 'g'),
+            newstrarr = str.split(str2);
+
+        return newstrarr.join(str2.replace(re2, '<font color=red>$1</font>'));
+    }
+
+    var str = '<a href="www.51js.com" target="_blank">abcadefg</a>',
+        searchStr = 'a';
+    console.log(example1(str, searchStr));
+
+    console.log('a/b'.replace(/\//ig, '\\'));
+
+
+
+
+
+</script>
+</body>
+</html>

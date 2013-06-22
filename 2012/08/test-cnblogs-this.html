@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<a href="#">http://www.cnblogs.com/rush/archive/2012/07/31/2617429.html</a>
+<script type="text/javascript">
+    /*
+    var foo = {
+        name: 'Foo'
+    }
+    var person = {
+        name: 'jikey',
+        say: function(){
+//            console.log(this === person);
+//            this = foo;
+//            console.log('My names is: ' + this.name);
+        }
+    }
+    */
+//    foo.say = person.say;
+//    console.log(foo.say());
+//    (function(){
+//        console.log(this);
+//    })();
+    /*
+    var foo = {
+        bar: function(){
+            console.log(this);
+        }
+    }
+    (foo.bar = foo.bar)();
+
+    function Foo(){
+        console.log(this);
+        this.x = 13;
+    }
+    var f = new Foo();
+    f.x = 23;
+    console.log(f.x);
+     */
+
+    var myObject = {};
+    var myFunction = function(param1, param2){
+        this.foo = param1;
+        this.bar = param2;
+        console.log(this);
+    }
+    myFunction.call(myObject, 'foo', 'bar');
+    console.dir(myObject);
+
+
+</script>
+</body>
+</html>

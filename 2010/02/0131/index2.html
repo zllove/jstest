@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<script type="text/javascript">
+	/*
+	window.onload = function(){
+		var fnClick = function(){
+			alert('clicked');
+		}
+		var fnClick2 = function(){
+			alert('clicked2');
+		}
+		var oDiv = document.getElementById('test');
+		
+		//oDiv.attachEvent("onclick", fnClick);
+		//oDiv.detachEvent('onclick', fnClick);
+		//oDiv.addEventListener('click', fnClick, false);
+//		oDiv.onclick = fnClick;
+//		oDiv.onclick = fnClick2;
+//		oDiv.addEventListener('click', fnClick, false);
+//		oDiv.addEventListener('click', fnClick2, false);
+		//oDiv.onclick = function(){
+//			var oEvent = window.event;
+//			alert(oEvent);
+//		}
+		//var sType = oEvent.type;
+//		function handleEvent(oEvent){
+//			if(oEvent.type == "click"){
+//				alert("Clicked");
+//			} else if(oEvent.type == "mouseover"){
+//				alert("Mouse Over!");
+//			}
+//		}
+		//oDiv.onclick = handleEvent;
+		//oDiv.onmouseover = handleEvent;
+		//clientX或clientY属性获取鼠标指针在客户端的位置
+		//screenX或screenY属性获取鼠标指针在计算机屏幕中的位置
+		function handleEvent(){
+			var oEvent = window.event;
+			var iClientX = oEvent.clientX;
+			alert(iClientX);
+		}
+		oDiv.onclick = handleEvent;
+//		var bShift = oEvent.shiftKey;
+		}
+		
+		//window.onload = function(oEvent){
+//			var e = oEvent.event || oEvent.target;
+//			
+//		}
+		function handleEvent(oEvent){
+			var oTextbox = document.getElementById('txt1');
+			oTextbox.value += '\n>' + oEvent.type;
+			oTextbox.value += '\n target is ' + (oEvent.target || oEvent.srcElement).id; 
+			/*
+			var arrKeys = [];
+			if(oEvent.shiftKey){
+				arrKeys.push("shift");
+			}
+			if(oEvent.ctrlKey){
+				arrKeys.push("Ctrl");
+			}
+			oTextbox.value = '\n keys down are ' + arrKeys;
+			
+			
+			
+		}
+		*/
+		
+		
+		window.onscroll = function(){
+			document.body.style.background = '#000';
+			
+		}
+		
+	
+</script>
+</head>
+
+<body style="height:900px;">
+	<div onclick="handleClick()">2222 me</div>
+    <div id="test" onclick="handleEvent(event)">Click Me!</div>
+    <textarea name="" id="txt1" cols="30" rows="10"></textarea>
+    <a href="http://www.sohu.com">aaa</a>
+    
+    
+</body>
+</html>

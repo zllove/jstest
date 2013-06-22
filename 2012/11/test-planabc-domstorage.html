@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<input class="a" type="button" value="test">
+<p>test is my first test</p>asdfsdfsdfsdfasdasdfasdsdaf
+<input type="text" name="" id="field">
+<script type="text/javascript">
+    var a = $('.a');
+    console.log(a);
+    var field = document.getElementById('field');
+    if(sessionStorage.autosave){
+        field.value = sessionStorage.autosave;
+    }
+</script>
+</body>
+</html>

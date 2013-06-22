@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        input{ width:150px; height:35px;cursor:pointer;}
+        .demo{width:960px; height:350px; background-color:#ccc; overflow:hidden;}
+    </style>
+</head>
+<body>
+<input id="btn1" type="button" value="由快到慢">
+<div id="demo1" style="display:none;" class="demo"></div> <br>
+<input id="btn2" type="button" value="由慢到快">
+<div id="demo2" style="display:none;" class="demo"></div>
+<script type="text/javascript">
+    function id(){
+        return document.getElementById(arguments[0]);
+    }
+
+    function expand(){
+        var btn = id('btn2'),
+            obj = id('demo2'),
+            timer = 0,
+            oh = 0,
+            mg = 1;
+        
+        btn.onclick = function(){
+            if(obj.style.display == 'none'){
+                obj.style.display = 'block';
+                obj.style.height = '1px';
+                var open = function(){
+                    oh = parseInt(obj.style.height);
+                    if(oh < 350){
+                        mg *= 1.03;
+                        obj.style.height = (oh + mg) + 'px';
+                    } else {
+                        clearInterval(timer);
+                    }
+                }
+                timer = setInterval(open, 5);
+            } else {
+                var close = function(){
+                    oh = parseInt(obj.style.height);
+                    if(oh > 0){
+                        obj.style.height = (oh - Math.ceil(oh / 15)) + 'px';
+                    } else {
+                        clearInterval(timer);
+                        obj.style.display = 'none';
+                    }
+                }
+                timer = setInterval(close, 5);
+            }
+        }
+        
+    }
+    expand();
+</script>
+</body>
+</html>

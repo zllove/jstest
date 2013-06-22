@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+.a{width:100px;height:100px; background:#f90000 url(../../images/logo_cn.gif) no-repeat 0 0;}
+</style>
+<title>Untitled Document</title>
+
+</head>
+
+<body onload="insertMessage()">
+<p>Hello World!</p>
+
+<script type="text/javascript">
+	function replaceMessage(){
+		var oNew = document.createElement("p");
+		var oNtext = document.createTextNode("Jikey");
+		oNew.appendChild(oNtext);
+		//alert(document == document.body);
+		var oP = document.body.getElementsByTagName("p");
+		alert(oP.length);
+		//var o = document.getElementsByTagName("p");
+		//alert(o.length);
+		//oP.parentNode.replaceChild(oNew, oP);
+	}
+	
+	function insertMessage(){
+		var oNew = document.createElement("p");
+		var oText = document.createTextNode("Hello Jikey");
+		oNew.appendChild(oText);
+		var oOldP = document.getElementsByTagName("p")[0];
+		document.body.insertBefore(oNew, oOldP);
+	}
+	
+</script>
+</body>
+</html>

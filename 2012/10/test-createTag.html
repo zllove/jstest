@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<div id="test"></div>
+<script type="text/javascript">
+    /**
+     * create tag
+     * @param tagName
+     * @param obj
+     * @param parent
+     */
+    function creatTag(tagName, obj, parent){
+        var node = document.createElement(tagName || 'DIV');
+        if(obj){
+            for (var attr in obj) {
+                if(obj.hasOwnProperty(attr)){
+                    if(attr == 'children' || typeof obj[attr] == 'function'){
+                        continue;
+                    }
+                    switch(attr){
+                        case 'cls':
+                        case 'className':
+                            node.className = obj.cls || obj.className;
+                            break;
+                        case 'html':
+                        case 'innerHTML':
+                            node.innerHTML = obj.html || obj.innerHTML || '';
+                            break;
+                        case 'style':
+                            if(typeof obj.style === 'string' ){
+                                var reg = /\s?([a-z\-]*)\:\s?([^;]*);?/gi,
+                                    sty;
+                                while((sty = reg.exec(obj.style)) != null){
+                                    Dom.setStyle(node, sty[1], sty[2]);
+                                }
+                            } else {
+                                Dom.setStyle(node, obj.style);
+                            }
+                            break;
+                        case 'handle':
+                            var handle = obj.handle;
+                            for (var eventName in obj) {
+                                if(handle.hasOwnProperty(eventName)){
+                                    Event.addDomListener(node, eventNode, obj.handle[eventName]);
+                                }
+                            }
+                            break;
+                        default :
+                            if(node.setAttribute){
+                                node.setAttribute(attr, obj[attr]);
+                            } else {
+                                node[attr] = obj[attr];
+                            }
+                    }
+                }
+            }
+        }
+        if(parent){
+            parent.appendChild(node);
+        }
+        return node;
+    }
+
+    var n = creatTag('div', {
+        cls: 'get',
+        html: '<b>我是一个兵</b>',
+    }, document.getElementById('test'));
+    console.log(n);
+</script>
+</body>
+</html>

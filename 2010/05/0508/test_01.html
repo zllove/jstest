@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Document</title>
+        <style>
+		div{padding:10px 0;}
+		</style>
+		<script>
+		function showKeyCode(){
+			alert('输入ASCII值是 ' + event.keyCode);
+			if(event.keyCode == 32){
+				alert('你输入的是一个空格！');
+			}
+		}
+		function enter(){
+			if(event.keyCode == 13){
+				alert('You 单击了我');
+				return false;
+			}
+		}
+		//获取键盘的keyCode
+		function keydown(){
+			if (!+'\v1') {
+				var iekey = event.keyCode;
+				var realkey = String.fromCharCode(event.keyCode).toLowerCase();
+				//if(event.keyCode == 32){ realkey = '空格'}
+				if(event.keyCode == 27){ realkey = 'Esc'}
+				if(event.keyCode == 16){ realkey = 'Shift'}
+				if(event.keyCode == 17){ realkey = 'Ctrl'}
+				if(event.keyCode == 18){ realkey = 'Alt'}
+				alert('ie浏览器中的键值 ' + iekey + '\n' + '实际键为 ' + realkey);
+			} else {
+				alert('非ie!');
+				var nkey = event.keyCode;
+				var realkey = String.fromCharCode(event.keyCode);
+				alert('非ie浏览器中的键值 ' + nkey + '\n' + '实际键为 ' + realkey);
+				
+			}
+		}
+		</script>
+	</head>
+	<body>
+		<div>测试输入值代码：<input type="text" name="" onkeydown="showKeyCode()" id="" /></div>		<div>测试键盘输入对应keycode: <input type="text" name="" onkeydown="keydown()" id="" /></div>		<div><input type="button" value="测试回车" onkeydown="enter()" /></div>
+		
+	</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-16-css</title>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{font:12px/23px serif;}
+        .bigpar{ width:600px; height:600px; border:1px solid #ccc;}
+        .parent{ width:300px; height:500px; margin:30px; border:1px solid #c0c0c0; overflow:hidden;}
+        .a{ width:100px; height:100px; margin:50px; border:1px solid #ccc;}
+        .tooltipshadow{}
+        .tooltipContent{left:-4px; top:-4px; background:#ff0; border:1px solid #ccc; padding:5px;}
+        #urgent{ border:5px solid #ccc;}
+
+    </style>
+</head>
+<body>
+<!--<div class="bigpar">
+    <div class="parent">
+        <div id="mydiv" class="a">this is a</div>
+    </div>
+</div>-->
+<div>
+    <p>In addition to the childNodes property, the Node interface defines a few other useful properties. firstChild and lastChild refer to the first and last children of a node, and nextSibling and previousSibling refer to adjacent siblings of a node. (Two nodes are siblings if they have the same parent node.) These properties provide another way to loop through the children of a node, demonstrated in Example 15-3. This example defines a function named getText() that finds all Text nodes at or beneath a specified node. It extracts and concatenates the textual content of the nodes and returns it as a single JavaScript string. The need for a utility function like this arises surprisingly frequently in DOM programming.</p>
+    <div class="tooltipContent">
+        <p>this tooltip is in english</p>
+        <p>the text underneath is fake latin</p>
+    </div>
+</div>
+<script type="text/javascript">
+    // 水平位移
+    function getX(x){
+        var x = 0;
+        while(e){
+            x += e.offsetLeft;
+            e = e.offsetParent;
+        }
+        return x;
+    }
+
+    // 垂直位移
+    function getY(element){
+        var y = 0;
+        for(var e = element; e; e = e.offsetParent){
+            y += e.offsetTop;
+        }
+        for(e = element.parentNode; e && e != document.body; e = e.parentNode){
+            if(e.scrollTop){
+                y -= e.scrollTop;
+            }
+        }
+        return y;
+    }
+//    console.log(getY(document.getElementById('mydiv')));
+
+    // 提示工具
+    function Tooltip(){
+        this.tooltip = document.createElement('div');
+        this.tooltip.style.position = 'absolute';
+        this.tooltip.style.visibility = 'hidden';
+        this.tooltip.className = 'tooltipShadow';
+
+        this.content = document.createElement('div');
+        this.content.style.position = 'relative';
+        this.content.className = 'tooltipContent';
+
+        this.tooltip.appendChild(this.content);
+    }
+
+    Tooltip.prototype.show = function(text, x, y){
+        this.content.innerHTML = text;
+        this.tooltip.style.left = x + 'px';
+        this.tooltip.style.top = y + 'px';
+        this.tooltip.style.visibility = 'visible';
+        if(this.tooltip.parentNode != document.body){
+            document.body.appendChild(this.tooltip);
+        }
+    }
+    Tooltip.prototype.hide = function(){
+        this.tooltip.style.visibility = 'hidden';
+    }
+
+</script>
+
+<div id="urgent">
+    <h1>Red Alert!</h1>
+    The web server is under attack!
+</div>
+<script type="text/javascript">
+    var e = document.getElementById('urgent');
+    e.style.border = '5px solid #ccc;';
+    e.style.padding = '50px';
+    var colors = ['white', 'yellow', 'orange', 'red'];
+    var nextColor = 0;
+    /*
+    setInterval(function(){
+        e.style.borderColor = colors[nextColor ++% colors.length];
+    }, 500);
+    */
+
+    // 基于css的动画
+    function animateCss(element, numFrames, timePerFrame, animation, whendone){
+        var frame = 0;
+        var time = 0;
+
+        var intervalId = setInterval(displayNextFrame, timePerFrame);
+
+        function displayNextFrame(){
+            if(frame >= numFrames){
+                clearInterval(intervalId);
+                if(whendone) whendone(element);
+                return;
+            }
+            for(var cssprop in animation){
+                try{
+                    element.style[cssprop] = animation[cssprop](frame, time);
+                } catch(e){ }
+            }
+            frame++;
+            time += timePerFrame;
+        }
+    }
+</script>
+<div id="title" class="gettitle">In addition to the childNodes property, the Node interface defines a few other useful properties.</div>
+<script type="text/javascript">
+    /*
+    animateCss(document.getElementById('title'), 40, 50,
+        {
+            top: function(f, t){ return 300 - f * 5 + 'px'; },
+            clip: function(f, t){ return 'rect(auto ' + f * 10 + 'px auto auto)';}
+        }
+    )
+    */
+
+    var CSSClass = {};
+    CSSClass.is = function(e, c){
+        if(typeof e == 'string') {
+            e = document.getElementById(e);
+        }
+        var classes = e.className;
+        if(!classes) {
+            return false;
+        }
+        if(classes == c) {
+            return true;
+        }
+        return e.className.search('\\b' + c + '\\b') != -1;
+    }
+    CSSClass.add = function(e, c){
+        if(typeof e == 'string') {
+            e = document.getElementById(e);
+        }
+        if(CSSClass.is(e, c)) {
+            return;
+        }
+        if(e.className){
+            c = '' + c;
+        }
+        e.className += c;
+    }
+    CSSClass.remove = function(e, c){
+        if(typeof e == 'string'){
+            e = document.getElementById(e);
+        }
+        e.className = e.className.replace(new RegExp('\\b' + c + '\\b\\s*', 'g'), '');
+    }
+//    console.log(CSSClass.remove('title', 'gettitle'));
+
+    function Stylesheet(ss){
+        if(typeof ss == 'number'){
+            ss = document.styleSheets[ss];
+        }
+        this.ss = ss;
+    }
+
+    Stylesheet.prototype.getRules = function(){
+        return this.ss.cssRules ? this.ss.cssRules : this.ss.rules;
+    }
+
+    Stylesheet.prototype.getRule = function(s){
+        var rules = this.getRules();
+        if(!rules){
+            return null;
+        }
+        if(typeof s == 'number'){
+            return rules[s];
+        }
+        s = s.toLowerCase();
+        for(var i=rules.length - 1; i>= 0; i --){
+            if(rules[i].selectorText.toLowerCase() == s){
+                return rules[i];
+            }
+        }
+        return null;
+    }
+    Stylesheet.prototype.getStyles = function(s){
+        var rule = this.getRule(s);
+        if(rule && rule.style){
+            return rule.style;
+        } else {
+            return null;
+        }
+    }
+    Stylesheet.prototype.getStyleText = function(s){
+        var rule = this.getRule(s);
+        if(rule && rule.style && rule.style.cssText){
+            return rule.style.cssText;
+        } else {
+            return '';
+        }
+    }
+    Stylesheet.prototype.insertRule = function(selector, styles, n){
+        if(n == undefined){
+            var rules = this.getRules();
+            n = rules.length;
+        }
+        if(this.ss.insertRule){
+            this.ss.insertRule(selector + '{' + styles + '}', n);
+        } else if(this.ss.addRule){
+            this.ss.addRule(selector, styles, n);
+        }
+    }
+    Stylesheet.prototype.deleteRule = function(s){
+        if(s == undefined){
+            var rules = this.getRules();
+            s = rules.length - 1;
+        }
+        if(typeof s != 'number'){
+            s = s.toLowerCase();
+            var rules = this.getRules();
+            for(var i=rules.length - 1; i>=0; i--){
+                if(rules[i].selectorText.toLowerCase() == s){
+                    s = i;
+                    break;
+                }
+            }
+            if(i == -1){
+                return;
+            }
+        }
+        if(this.ss.deleteRule){
+            this.ss.deleteRule(s);
+        } else if(this.ss.removeRule){
+            this.ss.removeRule(s);
+        }
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-height</title>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{ background:#3f3f3f;font:12px/2 arial;}
+        ul,li{list-style-type:none;}
+        a{color:#24d;text-decoration:none;}
+        a:hover{color:#e40000;text-decoration:underline;}
+        a:focus{outline:0;}
+        .container{ width:1000px; margin:0 auto; background:#fff; overflow:hidden; padding:15px;}
+        .silder{ float:left; width:180px; padding:10px; border-right:1px solid #ccc; background:#efefef;}
+        .main{ float:right; width:760px; padding:10px; background:#c0d3e2;}
+        .minheight400{min-height:400px;height:auto !important;height:400px;overflow:visible;}
+    </style>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="main" class="container">
+    <div id="leftNav" class="silder">
+        <ul class="slide_menu">
+            <li><a href="#"><span></span>我的首页</a></li>
+            <li><a href="#"><span></span>我的博客</a></li>
+            <li><a href="#"><span></span>我的心情日记</a></li>
+        </ul>
+    </div>
+    <div id="rightMain" class="main">
+        <ul class="main_cont">
+            <li>我是首页内容</li>
+            <li style="display:none;">我的博客内容</li>
+            <li style="display:none;">我的心情日记内容</li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    // 取得高度
+    function getHeight(o){
+        if($('#' + o).length > 0){ // 判断页面元素存在否
+            return $('#' + o).outerHeight(); // 获取匹配元素外部高度（默认包括 padding 和 border），如果为 true,则包含 margin。
+        } else {
+            return 0;
+        }
+    }
+    /**
+     * 自动高度函数
+     * @param minHeight 最小值
+     */
+    function autoHeight(minHeight){
+        var leftHeight = getHeight('leftNav1'),
+            rightHeight = getHeight('rightMain1'),
+            maxHeight,
+            lastHeight;
+        if(leftHeight || rightHeight){ // 如果两个中有一个存在
+            maxHeight = Math.max(leftHeight, rightHeight); // 取两个中最大的一个
+            lastHeight = maxHeight < minHeight ? minHeight : maxHeight; // 设页面的最小值，以免防止两边没内容是页面收回去
+        } else { // 如果都不存在
+            lastHeight = minHeight;
+        }
+        $('#leftNav,#rightMain').height(lastHeight); // 设置高度
+    }
+    autoHeight(500);
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<style type="text/css">
+		button{width:90px;height:20px;color:#000;margin:10px;top:10px;}
+	</style>
+
+</head>
+<body>
+	<script type="text/javascript">
+		/**
+		 * getNumber
+		 * @param  {number} x x方向的坐标
+		 * @param  {number} y y方向的坐标
+		 * @param  {number} l 横向的长度
+		 * @param  {number} s 为开始的数字，默认从0开始
+		 * @return {number}  
+		 */
+		function getNumber(x, y, l, s) {
+			if(!s) s = 0;
+			return l - 0.5 - Math.abs(l - 0.5 - ((y % 2) * l + x) % (2 * l)) + y * l;
+		}
+
+		for(var y = 0; y < 10; y++) {
+			for(var x = 0; x < 10; x++) {
+				var b = document.createElement('button');
+				b.innerHTML = getNumber(x, y, 10, 0);
+				document.body.appendChild(b);
+				if(x == 9) {
+					document.body.appendChild(document.createElement('br'));
+				};
+			}
+		}
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<div id="test"></div>
+<script type="text/javascript">
+    var navs = [ {
+        "id" : "19",
+        "name" : "\u90e8\u5c5e\u5355\u4f4d",
+        "code" : "6-4",
+        "children" : [{
+            "id" : "34",
+            "tid" : "19",
+            "lid" : "0",
+            "name" : "\u6cb3\u5317\u7701\u5de5\u4e1a\u548c\u4fe1\u606f\u5316\u5385",
+            "domain" : "ii.gov.cn",
+            "secdomain" : "",
+            "url" : "http:\/\/www.ii.gov.cn\/index.html"
+        }, {
+            "id" : "42",
+            "tid" : "19",
+            "lid" : "0",
+            "name" : "\u6e56\u5357\u7701\u5de5\u4e1a\u548c\u4fe1\u606f\u5316\u5385",
+            "domain" : "hainan.gov.cn",
+            "secdomain" : "",
+            "url" : "http:\/\/iitb.hainan.gov.cn\/hnsgxt\/"
+        }, {
+            "id" : "56",
+            "tid" : "19",
+            "lid" : "0",
+            "name" : "\u5409\u6797\u7701\u5de5\u4e1a\u548c\u4fe1\u606f\u5316\u5385",
+            "domain" : "gxt.jl.gov.cn",
+            "secdomain" : "",
+            "url" : "http:\/\/gxt.jl.gov.cn\/"
+        }]
+    }, {
+        "id" : "21",
+        "name" : "\u5171\u5efa\u9ad8\u6821",
+        "code" : "6-6",
+        "children" : []
+    }, {
+        "id" : "23",
+        "name" : "\u56fd\u9632\u79d1\u5de5\u529e",
+        "code" : "6-7",
+        "children" : [{
+            "id" : "39",
+            "tid" : "23",
+            "lid" : "0",
+            "name" : "\u6cb3\u5317\u7701\u56fd\u9632\u79d1\u5de5\u5c40",
+            "domain" : "hbjg.gov.cn",
+            "secdomain" : "",
+            "url" : "http:\/\/www.hbjg.gov.cn\/"
+        }, {
+            "id" : "53",
+            "tid" : "23",
+            "lid" : "0",
+            "name" : "\u6e56\u5357\u7701\u56fd\u9632\u79d1\u5b66\u6280\u672f\u5de5\u4e1a\u529e",
+            "domain" : "hngfkgb.gov.cn",
+            "secdomain" : "",
+            "url" : "http:\/\/www.hngfkgb.gov.cn\/"
+        }]
+    }];
+
+    var str = [];
+    for(var i=0,len=navs.length; i<len; i++){
+        var item = navs[i];
+        var child = item.children;
+        str.push('<div id="' + item.id + '">' + item.name + '</div>');
+        str.push('<ul>');
+
+        for(var j=0,len=child.length; j<len; j++){
+            str.push('<li id="' + child[j].id + '"><a href="' + child[j].url + '">' + child[j].name + '</a><span style="padding-left:10px;">' + child[j].domain +'</span></li>');
+        }
+        str.push('</ul>');
+    }
+    document.getElementById('test').innerHTML = str.join('');
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>豪情</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<style type="text/css">
+		#c{position:absolute;width:200px;height:200px;border:20px solid #ccc;background:#fff;padding:10px;display:none;}
+		body{background:#eee;}
+	</style>
+</head>
+<body>
+	
+	<div id="c">
+	x: <input type="text" name="" id="a" /><br />
+	y: <input type="text" name="" id="b" />
+	</div>
+	<script type="text/javascript">
+		var a = document.getElementById('a'), b = document.getElementById('b'), c = document.getElementById('c');
+		document.onmousemove = function(e) {
+			var e = e || window.event;
+			var x = e.offsetLeft + 'px', 
+			y = e.clientY + document.documentElement.scrollTop + 'px';
+			//alert('x = ' + x + '\ny = ' + y);
+			a.value = x;
+			b.value = y;
+			
+			c.style.display = 'block';
+			c.style.left = parseInt(x) + 20 + 'px';
+			c.style.top = parseInt(y) + 20 + 'px';
+		}
+	</script>
+</body>
+</html>

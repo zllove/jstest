@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-jq-map</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<p><b>Values: </b></p>
+<form>
+    <input type="text" name="name" value="John"/>
+    <input type="text" name="password" value="password"/>
+    <input type="text" name="url" value="http://ejohn.org/"/>
+</form>
+<script type="text/javascript">
+    var i = $('input').map(function(){
+        return $(this).val();
+    });
+    $('p').append($('input').map(function(){
+        return $(this).val();
+    }).get().join(','));
+</script>
+<ul>
+    <li>111</li>
+    <li>222</li>
+    <li>333</li>
+</ul>
+<div id="div2"></div>
+<script type="text/javascript">
+    var items = $('ul li');
+    var mapItems = items.map(function(key){
+        return $(this).text() + ': Map';
+    });
+    mapItems.each(function(){
+        $('#div2').append(this + '<br>');
+    });
+    console.log(mapItems);
+
+</script>
+</body>
+</html>

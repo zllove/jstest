@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-csdn-json</title>
+
+</head>
+<body>
+<div id="mydiv"></div>
+<script type="text/javascript">
+    var cityjsonObject = ({
+        "centerCity": ["所有地区", "北京", "天津", "上海", "重庆"],
+        "province": {
+            "山东": ["济南市", "青岛市", "淄博市", "枣庄市", "东营市", "烟台市", "莱阳市", "潍坊市", "济宁市"],
+            "江苏": ["苏州市", "南京市", "无锡市", "常州市", "徐州市", "南通市", "扬州市", "泰州市", "盐城市"],
+            "浙江": ["杭州市", "温州市", "宁波市", "金华市", "台州市", "嘉兴市", "绍兴市", "湖州市", "丽水市"],
+            "河北": ["石家庄市", "保定市", "沧州市", "廊坊市", "唐山市", "邢台市", "邯郸市", "衡水市"],
+        }
+    });
+    /*
+    var arr = [];
+    for (var p in cityjsonObject) {
+        arr.push('<ul>');
+        for (var c in cityjsonObject[p]) {
+            arr.push('<li>' + c + '</li>');
+        }
+        arr.push('</ul>');
+    }
+    document.getElementById('mydiv').innerHTML = arr.join('');
+    */
+    for (var p in cityjsonObject) {
+        if (cityjsonObject[p][0]) {
+            for (var i = 0; i < cityjsonObject[p].length; i++) {
+                alert(cityjsonObject[p][i])
+            }
+        } else {
+            for (var c in cityjsonObject[p]) {
+                alert(c)
+                if (cityjsonObject[p][c][0]) {
+                    for (var i = 0; i < cityjsonObject[p][c].length; i++) {
+                        alert(cityjsonObject[p][c][i])
+                    }
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>

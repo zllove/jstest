@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+//    var arr = ['border', 'wrap', 'container', 'section'];
+    var arr = ' border wrap container section';
+    var elclasses = arr.replace(/^\s+|\s+$/, '').split(/\s+/);
+    for(var i=0,len=arr.length; i<len; i++){
+        var cls = arr[i];
+        if(typeof cls == 'string'){
+            cls = cls.replace(/^\s+|\s+$/, '');
+            var idx = arr.indexOf(cls);
+            if(idx != -1){
+                elclasses.splice(idx, 1);
+            }
+        }
+    }
+    var res = elclasses.join(' ');
+    console.log(res);
+</script>
+</body>
+</html>

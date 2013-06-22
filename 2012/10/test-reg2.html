@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+<h3><a href="http://www.cnblogs.com/rubylouvre/archive/2009/11/02/1594833.html">正则学习笔记1-6</a></h3>
+<b>iiii</b>
+<b>2222</b>
+<b>3333</b>
+<script type="text/javascript">
+    /*
+    var str = '<td width="100%">test\
+               test1 test2\
+               test3 test4\
+            </td>/';
+    console.log(str.replace(/(<[^>]+>)([^<]+)(<\/.+>)/, '$1<nobr>$2</nobr>$3'));
+    console.log(str.match(/(<[^>]+)([^<]+)/));
+    console.log(str.match(/(<\/.+>)/));
+    var str = '<font size=2> <b> This is an example</b></font>';
+    str = str.replace(/>(\S*)(\s)+([^<>]*)</g, '>$1 $3<');
+    console.log(str);
+
+    var str = '111abc222abbbc333abbc'; // 问题：str="1111abc2222abbbc333abbc";我要把字符串里所有匹配/a(b*)d/的子串中的(b*)取出来。对这个str就是把'b','bb','bbb'都取出来。
+    var re = /[a-z]([a-z]+)[a-z]/ig;
+    var tmp;
+    while((tmp = re.exec(str)) != null){
+        console.log(tmp[1]);
+    }
+    str="5,3,13,231,33,71,9,5"; // 求一正则，删除“3,13,231,33,71,9,5"中一元素
+    console.log(str.replace(/(\b5,\b)(,\b5\b$)/g, ''));
+    console.log(str.replace(/^3,|,3\b/g, ''));
+
+    str="<div id='name2'><b>正文内容12</b></div><div id='name1'><b>正文内容44</b></div><div id='name3'><b>正文内容33</b></div>";
+    var reg=/\<div id\=[^>]+\>([^div]+)\<\/div\>/g;
+    while(reg.test(str)){
+        console.log(RegExp.$1);
+    }
+
+    console.log(/[^\d]/g.test('a123456'));
+    console.log('a123456'.match(/[\d]{1,2}/g));
+
+    console.log('http://www.163.com/index.asp?a=test1&b=test2&c=test3'.replace(/&[^&]+$/, ''));
+    console.log('http://www.163.com/index.asp?a=test1&b=test2&c=test3'.match(/&[^&]+$/));
+     */
+
+    var html = '<b>sss</b><i>iiii</i>';
+    html = html.replace(/<b>(.+?)<\/b>/ig, '<strong>$1</strong>');
+    console.log(html);
+
+
+
+
+</script>
+</body>
+</html>

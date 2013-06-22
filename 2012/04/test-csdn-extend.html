@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    function ClassA(sColor, sName) {
+        this.sColor = sColor;
+        this.sName = sName;
+        this.age = 20;
+    }
+
+    ClassA.prototype.sayColor = function () {
+        alert(this.sColor);
+    };
+
+    function ClassB(sColor, sName) {
+        ClassA.call(this, sColor);
+        this.sName = sName;
+    }
+
+    ClassB.prototype = new ClassA();
+    ClassB.prototype.constructor = ClassB;
+    //这里将ClassB的prototype设置为ClassA的一个实例
+    //那么ClassB的name属性不会被丢弃吗？
+    //子类的属性和方法不是应该出现在 prototype 属性被赋值后吗？
+    ClassB.prototype.sayName = function () {
+        alert(this.age);
+    };
+
+
+    var objA = new ClassA("blue", '豪情');
+    var objB = new ClassB("red");
+//    objA.sayColor(); // blue
+    objB.sayColor(); // red
+    objB.sayName(); // john
+</script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		body{background:#fff;font-size:12px;}
+		.drag_wrap{width:500px;height:300px;position:absolute;border:1px solid #ccc;display:none;z-index:3;background:#fff;}
+		.drag_wrap h1{position:relative;height:35px;line-height:35px;text-indent:1em;font-size:14px;cursor:move;font-weight:normal;background:#efefef;border-bottom:1px solid #ccc;}
+		.drag_wrap h1 span{position:absolute;font-size:12px;bottom:1px;right:10px;cursor:pointer;}
+		.drag_cont{padding:10px;line-height:23px;text-indent:2em;}
+		.mask{position:absolute;left:0;top:0;z-index:2;background:#000;filter:alpha(opacity=50);opacity: 0.5;}
+		.in{margin:50px auto;width:80px;}
+	</style>
+</head>
+<body>
+	<div class="in"><input type="button" value="猛击我" onclick="drag.init().move('drag')" /></div>
+	<div class="in"><a href="###" onclick="drag.init('drag2').move('drag2')">铁道部回应京沪高铁频出故障：设备处于磨合期</a></div>
+	
+	<div id="drag2" class="drag_wrap">
+		<h1>铁道部回应京沪高铁频出故障<span>关闭</span></h1>
+		<div class="drag_cont">
+			<p>各位网友好！首先我要感谢人民网强国论坛为我提供与广大网友再聚的机会。在我来之前，看了许多网友的留言，其中就有一位网友提醒我要做好挨骂和挨拍的准备。是的，今天来到这里，就是代表铁路系统向大家真诚道歉、说明情况。京沪高铁开通半个月以来，总体客流和服务情况是好的。但近几天连续发生故障，影响列车正常运行</p>
+			<p>6月30日，京沪高铁开通运营。请您介绍一下总体运营情况，比如开行列车数量、运送旅客人数、正点率、安全情况等。</p>
+		</div>
+	</div>
+    <div style="height:3000px;"></div>
+	
+	<script type="text/javascript">
+		var drag = {
+			$: function(){ return document.getElementById(arguments[0]);},
+			
+			/**
+			 * 得到视口的大小
+			 */
+			getWindowsSize: function(){
+				var de = document.documentElement,
+					pageWidth = window.innerWidth,
+					pageHeight = window.innerHeight;
+				if(typeof pageWidth != 'number'){ //如果pageWidth不是数字,则ie,非ie支持innerWidth
+					if(document.compatMode == 'CSS1Compat'){ //Standars mode 标准模式，完整dtd
+						pageWidth = de.clientWidth;
+						pageHeight = de.clientHeight;
+					} else { //如果是 Quirks mode
+						pageWidth = document.body.clientWidth;
+						pageHeight = document.body.clientHeight;
+					}
+				}
+				return {
+					width: pageWidth,
+					height: pageHeight
+				}
+			},
+			
+			/**
+			 * 创建标签
+			 * @param {String} target 标签名称，为空则创建一个空的div
+			 * @param {Object} config 属性列表
+			 */
+			createElement: function(target, config){
+				target = target || 'div';
+				config = config || {};
+				
+				var tag = document.createElement(target);
+				for(var p in config){
+					if(p.toLowerCase() == 'style'){
+						tag.style.cssText = config[p];
+					} else if(p.toLowerCase() == 'class' || p.toLowerCase() == 'cls'){
+						tag.className = config[p];
+					} else if(p.toLowerCase() == 'innerHTML'){
+						tag.innerHTML = config[p];
+					} else {
+						tag.setAttribute(p, config[p]);
+					}
+				}
+				//此处try为释放tag引用，否则创建的DOM永远无法被释放
+				try{
+					return tag;
+				} finally {
+					tag = null;
+				}
+			},
+			
+			getEvent: function(event){
+				return event ? event : window.event;
+			},
+			
+			init: function(id){
+				var that = this,
+					ele = this.$(id) || false,
+					winWidth = this.getWindowsSize().width,
+					winHeight = this.getWindowsSize().height;
+				
+				if(!ele) {
+					ele = this.createElement('div', {
+						id: 'drag',
+						cls: 'drag_wrap'
+					});
+					var h1 = this.createElement('h1');
+					h1.innerHTML = '我是标题栏';
+					var span = this.createElement('span');
+					span.innerHTML = '关闭';
+					var cont = this.createElement('div', {
+						cls: 'drag_cont'
+					});
+					cont.innerHTML = '<p>上半年，面对复杂多变的国际形势和国内经济运行出现的新情况新问题，党中央、国务院坚持实施积极的财政政策和稳健的货币政策，不断加强和改善宏观调控，经济运行总体良好，继续朝着宏观调控预期方向发展。</p><p>初步测算，上半年国内生产总值204459亿元，按可比价格计算，同比增长9.6%；其中，一季度增长9.7%，二季度增长9.5%。分产业看，第一产业增加值15700亿元，增长3.2%；第二产业增加值102178亿元，增长11.0%；第三产业增加值86581亿元，增长9.2%。从环比看，二季度国内生产总值增长2.2%。</p>';
+					
+					h1.appendChild(span);
+					ele.appendChild(h1);
+					ele.appendChild(cont);
+					//ele.style.display = 'block';
+					
+					document.body.appendChild(ele);
+					
+					span.onclick = function(){
+						document.body.removeChild(ele);
+						document.body.removeChild(oMask);
+					}
+				} else {
+					var handler = ele.getElementsByTagName('h1')[0],
+						close = handler.getElementsByTagName('span')[0];
+						
+					close.onclick = function(){
+						ele.style.display = 'none';
+						document.body.removeChild(oMask);
+					}
+				}
+				
+				var oMask = this.createElement('div', {
+					cls: 'mask'
+				});
+				oMask.style.cssText = 'width:' + winWidth + 'px;height:' + winHeight + 'px;';
+				
+				document.body.appendChild(oMask);
+				
+				ele.style.display = 'block';
+				ele.style.left = (winWidth - ele.offsetWidth)/2 + 'px';
+				ele.style.top = (winHeight - ele.offsetHeight)/2 + 'px';
+				
+				return this;
+			},
+			
+			move: function(id){
+				var that = this,
+					ele = this.$(id),
+					winWidth = this.getWindowsSize().width,
+					winHeight = this.getWindowsSize().height,
+					posx,
+					poy;
+				
+				if(!ele) return false;
+				
+				var handler = ele.getElementsByTagName('h1')[0],
+					close = handler.getElementsByTagName('span')[0];
+				handler.onmousedown = function(e){
+					evt = that.getEvent(e);
+					posx = evt.clientX - parseInt(ele.style.left);
+					posy = evt.clientY - parseInt(ele.style.top);
+					
+					if (handler.setCapture) { //防止ie下拖动过快丢失对象
+		                handler.setCapture();
+		            } else if (window.captureEvents) {
+		                window.captureEvents(e.MOUSEMOVE | e.MOUSEUP);
+		            }
+					
+					document.onmousemove = function(e){
+						e = that.getEvent(e);
+						var l = e.clientX - posx,
+							t = e.clientY - posy;
+							
+						if(l < 0){
+							l = 0;
+						} else if(l > winWidth - ele.offsetWidth){
+							l = winWidth - ele.offsetWidth;
+						}
+						
+						if(t < 0){
+							t = 0;
+						} else if(t > winHeight - ele.offsetHeight){
+							t = winHeight - ele.offsetHeight;
+						}
+						
+						ele.style.left = l + 'px';
+						ele.style.top = t + 'px';
+						
+						window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty(); //取消选择文本
+					}
+				};
+				
+				document.onmouseup = function(e){
+					e = that.getEvent(e);
+					
+					if (handler.releaseCapture) {
+	                    handler.releaseCapture();
+	                } else if (window.captureEvents) {
+	                    window.captureEvents(e.MOUSEMOVE | e.MOUSEUP);
+	                }
+					
+					document.onmousemove = null;
+				};
+				
+				return this;
+			},
+			
+			close: function(id){
+				var that = this,
+					ele = this.$(id);
+					
+				if(!ele) return false;
+				ele.style.display = 'none';
+			}
+		}
+		
+	</script>
+</body>
+</html>
+

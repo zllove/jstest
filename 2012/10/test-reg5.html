@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+<h3><a href="http://www.cnblogs.com/rubylouvre/archive/2009/11/03/1594911.html">正则学习笔记1-6</a></h3>
+<div id="test"></div>
+<script type="text/javascript">
+    /*
+    var str = '1234567890abcde';
+    console.log(/^.{5,15}$/.test(str));
+
+
+    // 取HTML标签中间的内容
+    var str = '<table><tr><td>我是一个呆子！一个S子，一个狂人！</td></tr></table>',
+        reg = /(\<[^<>]+\/?\>)|(\<\/[^<>]+\>)/g;
+    str = str.replace(reg, '');
+    console.log(str);
+
+    var str = '123bcde556dbcde',
+        re = /\d+(?=bc)/g;
+    console.log(str.match(re));
+
+    var str = 'windows 98 windows 2000 windows 2003',
+        reg1 = /windows 98|2000|2003/g,
+        reg3 = /windows (?=98|2000)/g,
+        reg4 = /windows (?!98|2000)/g,
+        reg2 = /windows (98|2000|2003)/g;
+    console.log(str.match(reg1));
+    console.log(str.match(reg2));
+    console.log(str.match(reg3));
+
+
+    // replace 方法在使用函数时，输入的参数是根据正则表达式中的子匹配所产生的，如果你要对参数进行修改，那就要修改正则表达式中的子匹配模式。
+    // 例如：参数名是自定义的，第一个参数表示正则表达式本身，其它依次是表达式中的其它子匹配，如果你少传一个 d 参数，那么 e 参数就会取代 d 原来的值，只有修改正则的子匹配才可以控制函数的参数。
+    var str = '无忧脚本 51js.com 风云突变',
+        re1 = /(.+)\s(\w+)\.(\w+)\s(.+)/,
+        re2 = /(.+)\s(\w+)\.\w+\s(.+)/;
+
+    str.replace(re1, function(a, b, c, d, e){
+        console.log(a);
+        console.log(b);
+        console.log(c);
+        console.log(d);
+        console.log(e);
+    });
+
+    console.log('====================================');
+    str.replace(re1, function(a, b, c, e){
+        console.log(a);
+        console.log(b);
+        console.log(c);
+        console.log(e);
+    });
+
+    console.log('====================================');
+    str.replace(re1, function(a, b, c, d){
+        console.log(a);
+        console.log(b);
+        console.log(c);
+        console.log(d);
+    });
+
+    console.log(/^[(\u0100-\uffff)]*$/.test('看看(是不）是全是中文'));
+
+    var str = "<html><head></head><body dg gdfgd  d dg onload='sdasd'><div>sdflkjasdfkljasdfkljkl</div>fsew<scrip><br><p></p></body>534532</html>";
+    str = str.match(/<body[^>]*>(.*)<\/body>/);
+//    str.match(/<body[^>]*>([\s\S]*)<\/body>/);
+//    str = str.match(/<body[^>]*>([\s\S]*)<\/body>/);
+//    console.log(RegExp.$1);
+    console.log(str[1]);
+
+    var str = "Hi is a boy.And she is a girl.Hello! I'm a boy!   What a great boy!",
+//        reg = /(^\s*|[\.\?!]\s*)([\w]*)/g;
+          reg = /(^\s*|[.?!]\s*)(\w*)/g;
+    str = str.replace(reg, '$1' + '$2'.fontcolor('#ff0000'));
+    document.getElementById('test').innerHTML = str;
+    console.log(str);
+
+    var str = '[fdgfdgfdgdfgdfgdfgdfg] gdfgdfgdfgdfg';
+    console.log(str.replace(/\[.*]/, ''));
+    console.log(str.replace(/\[.*?\]/, ''));
+     */
+
+    // 问题：将[URL=http://www.swmr.mobi]dddd[/URL]换换成<a href=http://www.swmr.mobi>dddd</a>
+    var str = '[URL=http://www.swmr.mobi]dddd[/URL]';
+    console.log(str.replace(/\[URL=(.+)\](.+)\[\/URL]/img, '<a href="$1">$2</a>'));
+
+
+
+
+</script>
+</body>
+</html>

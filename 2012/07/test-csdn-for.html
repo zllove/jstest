@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<input type="submit" id="hideDiv" value="hide">
+<input type="submit" id="showDiv" value="show">
+<div id="div1">div11</div>
+<div id="div2">div12</div>
+<table>
+    <tr class="pay0">
+        <td>1111</td>
+    </tr>
+    <tr class="pay1">
+        <td>1111</td>
+    </tr>
+</table>
+<script type="text/javascript">
+    var arr = ["pay0","pay1"];
+    $('#showDiv').click(function(){
+        $(arr).each(function(){
+            $('tr.' + this).show();
+        });
+    });
+
+    $('#hideDiv').click(function(){
+        $(arr).each(function(){
+            $('tr.' + this).hide();
+        });
+    });
+</script>
+<script type="text/javascript">
+    var baz = 100;
+    var foo = {
+        bar:function () {
+            return this.baz;
+        },
+        baz        :1
+    };
+    var b = (function () {
+        return arguments[0]();
+    })(foo.bar);
+    alert(b);
+
+    var baz = 100;
+    var foo = {
+        bar:function () {
+            return this.baz;
+        },
+        baz        :1
+    };
+    var b = (function (xx) {
+        return xx();
+    })(foo.bar);
+    alert(b);
+
+</script>
+</body>
+</html>

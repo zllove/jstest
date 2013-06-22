@@ -1,0 +1,30 @@
+@charset "utf-8";
+*{margin:0;padding:0;word-wrap:break-word;}
+body{font-size:12px; color:#333; font-family:Tahoma, Arial;text-align:center;}
+a{color:#333;text-decoration:none;}
+a:hover{color:#333;text-decoration:none;}
+.hide{display:none;}
+
+#main{margin:20px auto;width:980px;zoom:1;text-align:left;}
+#main:after{display:block; height:0; clear:both; visibility:hidden; overflow:hidden; content:'.';}
+
+#leftBar,#content,#sideBar{display:inline; float:left; position:relative;}
+#leftBar{width:200px;background:#f60;z-index:3;}
+#content{margin:0 10px;width:525px;height:300px;background:#ccc;z-index:2;}
+#sideBar{width:235px;height:300px;background:#f60;z-index:1;}
+
+#toolsBar{padding:3px 0 4px 0;background:#E5EBF4;border-style:solid;border-width:0 1px 1px 1px;border-color:#6A83B7;}
+
+#toolsTitle,#toolsBar h3,#toolsBar h3 a:hover{background:url(images/bgs.gif) no-repeat;}
+#toolsTitle{display:block;height:30px;line-height:30px;font-size:14px;text-indent:12px;color:#fff;background-position:0 0;}
+#toolsBar h3{width:191px;height:33px;line-height:33px;background-position:0 -40px;}
+#toolsBar h3 a{display:block;width:160px;font-size:14px;text-indent:20px;position:relative;z-index:2;}
+#toolsBar h3 a:hover, #toolsBar .active a{height:29px;text-indent:19px;line-height:29px;text-decoration:none;border-width:2px 0 2px 1px;border-color:#6a83b7;border-style:solid none solid solid;background-color:#f4f5f6;background-position:0 -83px;}
+
+#toolsList{top:33px;left:160px;z-index:1;position:absolute;}/*对应这个 leftBar 的位置  z-index:1; 要小于 #toolsBar h3 a ，要不然a标签会在下方*/
+#toolsList dl{display:none;padding:10px 15px;width:270px;border:2px #6a83b7 solid;background:#f4f5f6;position:absolute;}
+#toolsList dl dt{height:22px;font-weight:700;}
+#toolsList dl .mt15px{margin-top:15px;}
+#toolsList dl dd{width:270px;overflow:hidden;}
+#toolsList dl dd a,#toolsList dl dd strong{display:inline; width:90px; height:30px; line-height:30px; color:#0051a1; float:left;}
+#toolsList dl dd strong a{color:#f60;font-weight:normal;}

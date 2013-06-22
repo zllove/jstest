@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Untitled Document</title>
+        <style>
+		
+		</style>
+		<script>
+		
+		</script>
+	</head>
+	<body>
+		<div id="jikey">
+			<p id="meg">this is meg!</p>
+			<p id="meg11">this is meg!</p>
+			<p id="content"> content</p>
+			<p id="a">aaa</p>
+		</div>
+		<script>
+			var meg = document.getElementById('meg');
+			var content = document.getElementById('content');
+			//content.appendChild(meg);
+			var test = document.getElementById('jikey');
+			var a = document.getElementById('a')
+			test.insertBefore(meg, a);
+			
+			/*
+			var b = document.createTextNode('my demo');
+			var a = document.createElement('p');
+			//alert('nodeType = ' + a.nodeType + ' nodeValue = ' + a.nodeValue + ' nodeName = ' + a.nodeName);
+			a.appendChild(b);
+			document.body.appendChild(a);
+			var meg = document.createTextNode('Hello World!');
+			var container = document.createElement('p');
+			container.appendChild(meg);
+			document.body.appendChild(container);
+			
+			var newpara = container.cloneNode(false); //true的话：是<p>hello world</p> 克隆。false： 只克隆 <p></p> ，里面的文本不克隆。
+
+			document.body.appendChild(newpara);
+			*/
+		</script>
+	</body>
+</html>

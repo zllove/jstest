@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="myscroll">
+    <ul id="items">
+        <li><a href="#">1111</a></li>
+        <li><a href="#">1111</a></li>
+        <li><a href="#">1111</a></li>
+        <li><a href="#">1111</a></li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    (function ($) {
+        $.fn.marquee = function (options) {
+            var _slide = $("#slide");
+            var _slide_width = $(_slide).width();
+            var _slide_ul_width = $("#myscroll").width($("#items li").width() * $("#items li").length).width();
+            var defaults = {
+                speed:30,
+                dir:'left',
+            };
+            var opts = $.extend({}, defaults, options);
+            return this.each(function () {
+                function Marquee() {
+                    switch (opts.dir) {
+                        case "left":
+                            if (_slide.scrollLeft() + _slide_width >= _slide_ul_width)
+                                opts.dir = "right";
+                            else {
+                                _slide.scrollLeft(_slide.scrollLeft() + 1);
+                            }
+                            break;
+                        case "right":
+                            if (_slide.scrollLeft() == 0)
+                                opts.dir = "left";
+                            else {
+                                _slide.scrollLeft(_slide.scrollLeft() - 1);
+                            }
+                            break;
+                    }
+                }
+
+                var sliding = setInterval(Marquee, opts.speed);
+
+                $(this).hover(function () {
+                    clearInterval(sliding);
+                }, function () {
+                    sliding = setInterval(Marquee, opts.speed);
+                });
+            });
+        }
+    })(jQuery);
+
+    // 调用
+    $('#items li').marquee();
+</script>
+</body>
+</html>

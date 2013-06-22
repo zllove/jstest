@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-pageannot</title>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{ position:relative;font:12px/1 arial; background:#333;}
+        img{vertical-align:middle;border:0 none;}
+        ul,li{ list-style:none;}
+        .content{ position:relative; width:100%; height:100%; overflow:hidden;}
+        .page-annot a{ position:absolute; text-indent:-9999em;}
+        .web1{ background:url(http://xcb.ggg.cn/web/page1/page1_bg.jpg) center 0 no-repeat;}
+        .web2{ background:url(http://xcb.ggg.cn/web/page2/page2_bg.jpg) center 0 no-repeat;}
+        .web3{ background:url(http://xcb.ggg.cn/web/page3/page3_bg.jpg) center 0 no-repeat;}
+        .left{ float:left;}
+        .second{ position:relative; width:1000px; height:700px; margin:0 auto;}
+        .web2 .second{ width:1200px;}
+        .web3 .second{ width:1350px;}
+        .first{}
+        .prev,.next{ width:136px; height:68px; display:block; top:20px; right:50%; margin-right:-330px; overflow:hidden; display:none; z-index:1; background:url(http://xcb.ggg.cn/images/prev.gif) 0 0 no-repeat;}
+        .next{ top:705px; background:url(http://xcb.ggg.cn/images/next.gif) 0 0 no-repeat;}
+        .foot{ height:49px; line-height:49px; background:#0E0C0D;}
+         .nav{ background-color:#0e0c0d;padding-left:150px; }
+         .nav ul{width:465px;height:49px;margin:0 auto;}
+         .nav ul li{float:left;width:93px;vertical-align:middle;text-align:center; background:url(../background/li_bg.jpg) right 0 no-repeat;}
+         .nav ul li.nav5{ background:none;}
+         .nav ul li a{display:block;width:93px;height:49px;float:left;overflow:hidden; background-position:0px 0px; background-repeat:no-repeat;text-indent:-100000px;}
+         .nav ul li a.now{ background-position:0 -49px;}
+         .nav ul li.nav1 a{ background-image:url(http://xcb.ggg.cn/images/nav_1.jpg);}
+         .nav ul li.nav2 a{ background-image:url(http://xcb.ggg.cn/images/nav_2.jpg);}
+         .nav ul li.nav3 a{ background-image:url(http://xcb.ggg.cn/images/nav_3.jpg);}
+         .nav ul li.nav4 a{ background-image:url(http://xcb.ggg.cn/images/nav_4.jpg);}
+         .nav ul li.nav5 a{ background-image:url(http://xcb.ggg.cn/images/nav_5.jpg);}
+    </style>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<div class="content" style="height:750px;">
+    <ul class="list">
+        <li class="web1">
+            <div class="second">
+                <div><img src="http://xcb.ggg.cn/web/page1/page1_r1_c2.jpg"><img src="http://xcb.ggg.cn/web/page1/page1_r1_c3.jpg"></div>
+                <div><img src="http://xcb.ggg.cn/web/page1/page1_r2_c2.jpg"><img src="http://xcb.ggg.cn/web/page1/page1_r2_c3.jpg"></div>
+                <div><img src="http://xcb.ggg.cn/web/page1/page1_r3_c2.jpg"><img src="http://xcb.ggg.cn/web/page1/page1_r3_c3.jpg"></div>
+                <div><img src="http://xcb.ggg.cn/web/page1/page1_r4_c2.jpg"><img src="http://xcb.ggg.cn/web/page1/page1_r4_c3.jpg"></div>
+                <div><img src="http://xcb.ggg.cn/web/page1/page1_r5_c2.jpg"><img src="http://xcb.ggg.cn/web/page1/page1_r5_c3.jpg"></div>
+                <div><img src="http://xcb.ggg.cn/web/page1/page1_r6_c2.jpg"><img src="http://xcb.ggg.cn/web/page1/page1_r6_c3.jpg"></div>
+            </div>
+            <div class="foot">
+                <div class="nav" id="nav">
+                    <ul>
+                        <li class="nav1"><a href="javascript:void(0)" class="now" index="0" style="background-position: 0px -49px; ">首页</a></li>
+                        <li class="nav2"><a href="javascript:void(0)" index="1" style="background-position: 0px 0px; ">类型</a></li>
+                        <li class="nav3"><a href="javascript:void(0)" index="2" style="background-position: 0px 0px; ">角色</a></li>
+                        <li class="nav4"><a href="javascript:void(0)" index="3" style="background-position: 0px 0px; ">怪物</a></li>
+                        <li class="nav5"><a href="javascript:void(0)" index="4" style="background-position: 0px 0px; ">场景</a></li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="web2">
+            <div class="second">
+                <div><img src="http://xcb.ggg.cn/web/page2/page2_r1_c2.jpg"><img src="http://xcb.ggg.cn/web/page2/page2_r1_c4.jpg"></div>
+                <div><img src="http://xcb.ggg.cn/web/page2/page2_r2_c2.jpg"><img src="http://xcb.ggg.cn/web/page2/page2_r2_c4.jpg"></div>
+                <div><img src="http://xcb.ggg.cn/web/page2/page2_r3_c2.jpg"><img src="http://xcb.ggg.cn/web/page2/page2_r3_c3.jpg"><img src="http://xcb.ggg.cn/web/page2/page2_r3_c5.jpg"></div>
+                <div><img src="http://xcb.ggg.cn/web/page2/page2_r4_c2.jpg"><img src="http://xcb.ggg.cn/web/page2/page2_r4_c4.jpg"></div>
+                <div><img src="http://xcb.ggg.cn/web/page2/page2_r5_c2.jpg"><img src="http://xcb.ggg.cn/web/page2/page2_r5_c4.jpg"></div>
+            </div>
+        </li>
+        <li class="web3">
+            <div class="second">
+                <div class="left"><img src="http://xcb.ggg.cn/web/page3/page3_r1_c2.jpg"><br><img src="http://xcb.ggg.cn/web/page3/page3_r4_c2.jpg"></div>
+                <div class="left"><img src="http://xcb.ggg.cn/web/page3/page3_r1_c3.jpg"><br><img src="http://xcb.ggg.cn/web/page3/page3_r2_c3.jpg"></div>
+                <div class="left"><img src="http://xcb.ggg.cn/web/page3/page3_r1_c4.jpg"><br><img src="http://xcb.ggg.cn/web/page3/page3_r5_c4.jpg"></div>
+                <div class="left"><img src="http://xcb.ggg.cn/web/page3/page3_r1_c5.jpg"><br><img src="http://xcb.ggg.cn/web/page3/page3_r3_c5.jpg"></div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="page-annot">
+    <a class="first" href="###">向上</a><a class="prev" href="###" title="上一页">上一页</a><a class="next" href="###" title="下一页">下一页</a>
+</div>
+<script type="text/javascript">
+
+    (function ($) {
+        var doc = $(document),
+            viewWidth = $(window).width(),
+            viewHeight = $(window).height(),
+            oContent = $('.content'),
+            len = oContent.find('li').length,
+            contHeight = oContent.height(),
+            oPrev = $('.prev'),
+            oNext = $('.next'),
+            num = 0;
+
+        oPrev.mousedown(function(){
+            $(this).css('marginTop', '-5px');
+        });
+        oPrev.mouseup(function(){
+            $(this).css('marginTop', '0');
+            if(!oContent.is(':animated')){
+                oContent.animate({'scrollTop': '-=' + contHeight}, 'slow', 'linear', function(){
+                    if(num < 0){
+                        num = 0;
+                    }
+                    num--;
+                });
+            }
+        });
+
+        oNext.mousedown(function(){
+            $(this).css('marginTop', '5px');
+        });
+        oNext.mouseup(function(){
+            $(this).css('marginTop', '0');
+            if(!oContent.is(':animated')){
+                oContent.animate({'scrollTop': '+=' + contHeight}, 'slow', 'linear', function(){
+                    if(num > len - 2){
+                        num = len - 2;
+                    }
+                    num++;
+                });
+            }
+        });
+
+        doc.mousemove(function (e){
+            if(e.clientY > viewHeight / 2){
+                if(num == len - 1 ){
+                    oNext.fadeOut();
+                } else {
+                    oNext.fadeIn();
+                }
+                oPrev.hide();
+            } else {
+                if(num == 0){
+                    oPrev.fadeOut();
+                } else {
+                    oPrev.fadeIn();
+                }
+                oNext.hide();
+            }
+        });
+
+    }(jQuery));
+    
+    (function($){
+        var links = $('#nav').find('a');
+        links.hover(function(){
+            if($(this).css('backgroundPositionY') == '-49px' && !$(this).hasClass('now')){
+                $(this).css('backgroundPositionY', 0);
+            }
+            if(!$(this).is(':animated') && !$(this).hasClass('now')){
+                $(this).animate({'backgroundPositionY': '-=' + 49}, 150, 'linear');
+            }
+        }, function(){
+            if(!$(this).is(':animated') && !$(this).hasClass('now')){
+                $(this).animate({'backgroundPositionY': '+=' + 49}, 150, 'linear');
+            }
+        });
+    }(jQuery));
+    
+    
+</script>
+</body>
+</html>

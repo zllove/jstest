@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    function getBody(e){
+        e = e || window.event;
+        var tar = e.srcElement || e.target;
+        console.log(tar.parentNode.tagName);
+    }
+
+    function getSrcValue(event) {
+        var obj = event.srcElement ? event.srcElement : event.target;
+        alert(obj.parentNode.tagName)
+    }
+</script>
+<a href="javascript:void(0)" onclick="getBody(event)">baidy</a>
+<br>
+<input type="button" value="test" onclick="getBody(event)">
+
+<a href="javascript:getSrcValue(event)">baidu</a>
+<br />
+<input type="button" value="test" onclick="getSrcValue(event)" />
+</body>
+</html>

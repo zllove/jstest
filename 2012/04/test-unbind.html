@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+</head>
+<body>
+<img id="img1" src="http://img1.cache.netease.com/cnews/2012/4/16/20120416181904757bd.jpg">
+<button id="btn">卸载事件</button>
+<script type="text/javascript">
+    alert('提交成功！');
+//    location.href = 'http://bbs.csdn.net'
+</script>
+<script type="text/javascript">
+    var img = $('#img1');
+    img.click(function(){
+        alert('click');
+    });
+    $('#btn').click(function (){
+        img.unbind('click');
+        alert('已卸载事件');
+    });
+var instance = {
+    name: 'jikey',
+    sayHi: function(){
+        console.log(this.name);
+    }
+};
+instance.sayHi();
+var name = '豪情';
+function sayName(){
+    console.log(this.name);
+}
+sayName();
+</script>
+</body>
+</html>

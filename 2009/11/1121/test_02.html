@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Document</title>
+        <style>
+		asdfasdf
+		</style>
+	</head>
+	<body>
+		<div id="jikey">
+			<div id="a">a</div>
+			<div id="b">b</div>
+			<div id="c">c</div>
+			<p>11111</p>
+			<p>22222</p>
+			<p>33333</p>
+			
+		</div>
+         <script>
+			var jikey = document.getElementById('jikey');
+			//var c = b.parentNode;
+			//alert(c);
+			//c.removeChild(b);
+			
+			/*
+			var b = document.getElementById('b');
+			//var c = document.getElementById('c');
+			var para = document.createElement('p');
+			jikey.replaceChild(para, b)
+			*/
+			var t = document.createTextNode('Text Node!');
+			var d = document.getElementsByTagName('p');
+			/*
+			for(var i=0; i<d.length; i++){
+				d[i].setAttribute('title','This is my title!');
+			}
+			*/
+			if(jikey.hasChildNodes){
+				alert(jikey.childNodes.length);
+			}
+         </script>
+	</body>
+</html>

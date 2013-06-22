@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<h2><a href="http://www.cnblogs.com/jscode/archive/2012/08/31/2665071.html">strsubstring</a></h2>
+<ul id="ul" class="test">
+    <li><a href="#">aaa</a></li>
+    <li><a href="#">aaa</a>
+        <ul>
+            <li><a href="#">bbbb</a></li>
+        </ul>
+    </li>
+</ul>
+<script type="text/javascript">
+    String.prototype.mysubstring = function(start, end){
+        var str = this,
+            res = [];
+        if(!end){
+            end = str.length;
+        }
+        for (var i = start; i < end; i++) {
+             res.push(str.charAt(i));
+        }
+        return res.join('');
+    }
+    var str = 'abcdefgh';
+    var endstr = str.mysubstring(2, 4);
+//    console.log(endstr);
+    function moneyCase(num){
+        var upperArr = ["零","壹","贰","叁","肆","伍","陆","柒","捌","玖"],
+            level = ["","拾","佰","仟","万","拾","佰","仟","亿","拾","佰","仟","万"],
+            end = num.toString().split('').reverse(),
+            res = [];
+        for(var i = end.length - 1; i >= 0; i--){
+            var last = upperArr[end[i]] + level[i];
+            res.push(upperArr[end[i]] + level[i]);
+        }
+        return res.join('');
+    }
+//    console.log(moneyCase(123456789));
+//    console.log(moneyCase(332));
+    moneyCase(123456789);
+    moneyCase(332);
+
+    function getDom(obj){
+        var ch = obj.firstChild,
+            res = [];
+        do{
+            res.push(ch.nodeName);
+            if(ch.childNodes.length){
+                res.push.apply(res, getDom(ch));
+            }
+        } while( ch = ch.nextSibling);
+        return res;
+    }
+//    console.log(getDom(document));
+//    console.log(cls);
+
+    function getDom2(obj){
+        var ch = obj.childNodes;
+        var res = [];
+        for(var i = 0; i<ch.length; i++){
+            res.push(ch[i]);
+            if(ch[i].childNodes.length){
+                res.push.apply(res, getDom2(ch[i]));
+            }
+        }
+        return res;
+    }
+
+    var doms = getDom2(document);
+    for (var j = 0; j < doms.length; j++) {
+        doms[j].className = 'a';
+    }
+//    console.log(getDom2(document));
+
+</script>
+</body>
+</html>

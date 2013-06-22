@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<title></title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="" />
+<style type="text/css">
+*{margin:0;padding:0;}
+dl{width:550px;margin:10px auto;}
+dl dd{padding:8px 0px;}
+dl dd input.txt{width:420px;margin-right:10px;}
+
+</style>
+</head>
+<body>
+<dl id="test1">
+	<dt>单层标签反解析</dt>
+	<dd><input type="text" class="txt" value='div#I.me.she.he[id="info"][title="小web"]' /><input type="button" value="反转" /></dd>
+	<dd><input type="text" class="txt" value='input#Ta.she[type="text"][value="小web"]' /><input type="button" value="反转" /></dd>
+	<dd><input type="text" class="txt" value='div.name{小web}' /><input type="button" value="反转" /></dd>
+	<dd><input type="text" class="txt" value='br' /><input type="button" value="反转" /></dd>
+	<dd><input type="text" class="txt" value='img[src="i.gif"]' /><input type="button" value="反转" /></dd>
+</dl>
+<dl id="test2">
+	<dt>兄弟标签解析转换</dt>
+	<dd><input type="text" class="txt" value='div.her.she[title="王洛微"]+div#I[title="小web"]' /><input type="button" value="反转" /></dd>
+	<dd><input type="text" class="txt" value='input.she[type="text"]+input.i[type="button"]' /><input type="button" value="反转" /></dd>
+	<dd><input type="text" class="txt" value='br+br+br+br' /><input type="button" value="反转" /></dd>
+	<dd><input type="text" class="txt" value='img[src="i.gif"]+img[src="i.gif"]' /><input type="button" value="反转" /></dd>
+</dl>
+<dl id="test3">
+	<dt>复数标签解析转换</dt>
+	<dd><input type="text" class="txt" value='div.me{哇哈哈}*5' /><input type="button" value="反转" /></dd>
+	<dd><input type="text" class="txt" value='input.she[type="text"]*5' /><input type="button" value="反转" /></dd>
+	<dd><input type="text" class="txt" value='br*6' /><input type="button" value="反转" /></dd>
+	<dd><input type="text" class="txt" value='img[src="i.gif"]*3' /><input type="button" value="反转" /></dd>
+</dl>
+<dl id="test4">
+	<dt>层级关系处理--单层无复合链路结构</dt>
+	<dd><input type="text" class="txt" value='div>p>a[href="google"]>strong{谷歌}' /><input type="button" value="反转" /></dd>
+	<dd><input type="text" class="txt" value='div.iMenu>ul>li{菜单哇}*5' /><input type="button" value="反转" /></dd>
+</dl>
+</body>
+<script type="text/javascript">
+var tag=function(X){//标签解析转换
+	var Data;
+	X=X.replace(/([\}|\]|\w])(\{)(.+?)(\}$)/,function(a,B,C,D,E,f,g){Data=D;return B;});//
+    var A=X.split(/\]\[|\[|\]|\>/);//属性分组处理
+    A[0]=A[0].replace(/(#)(\w+(?=(\s|\.|\[|$)))/,' id="$2"');//转换ID
+    A[0]=A[0].replace(/(\.)(.+)/,function(a,B,C,d,e){return ' class="' + C.replace(/\./g," ") + '"';})//转换class
+    var T='<{a}>{d}</{b}>'.replace(/{a}/,A.join(" ")).replace(/{b}/,A[0].split(" ")[0]);//组合生成html完整结构
+    T=T.replace(/(\s>|\s{2}\/>)/,">").replace(/(>{d}<\/)(input|img|br)(>)/," />");//单闭合标签处理
+    return T.replace(/{d}/,function(){return Data?Data:"";});//单闭合标签处理
+}
+var etc=function(S){//加法运算：兄弟关系解析转换
+	if(S){return S.replace(/(.+?)(\+|$)/g,function(a,B,C,d,e){return tag(B);});}
+}
+var ns=function(S){//乘法运算：复数标签解析转换
+	if(S){var N=S.split("*");return ("" + Array(parseInt(N[1])+1)).replace(/,/g,function(){return tag(N[0]);});}
+}
+var BS=function(S){//层级关系处理--单层无复合链路结构
+	var N=S.split(">").reverse();
+	var X=("" + Array(N.length+1)).replace(/,/g,function(a,b){
+		(function(A){
+			return (N[b]=((N[b].indexOf("*")>-1)?ns(A):((N[b].indexOf("+")>-1)?etc(A):tag(A))));
+		})(N[b] + (N[b-1]==void(0)?'':'{' + N[b-1] + '}'));
+	});
+	return N[N.length-1];
+}
+
+
+//测试用脚本
+for(var n=1;n<5;n++){
+	var ls=document.getElementById("test" + n).getElementsByTagName("dd");
+	for(var i=0;i<ls.length;i++){
+		ls[i].onmouseover=function(){
+			var I=this.getElementsByTagName("input");
+			I[1].onclick=function(){
+				//alert(I[0].value);
+				alert((function(A){
+					return ((A.indexOf(">")>-1)?BS(A):((A.indexOf("*")>-1)?ns(A):((A.indexOf("+")>-1)?etc(A):tag(A))));
+					//return BS(A);
+				})(I[0].value));
+			};		
+		}
+	}
+}
+</script>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Document</title>
+		<style>
+			body,ul,li,p{ margin:0; padding:0;}
+			body{ font-size:12px; color:#000;}
+			ul,li{ list-style:none; margin:0 auto;}
+			li{ width:200px; margin:10px auto; border:4px solid #33cccc; background:#d1f4ff; overflow:hidden;}
+			li h3{ text-indent:1em; margin:5px; color:#006;}
+			li p{ margin:8px 0; font-size:14px; color:#039;}
+			li .main{ height:25px; overflow:hidden; padding:0 10px; color:#039;}
+			li .intro{ color:#036; padding:10px; line-height:18px; border-top:1px dotted #366;}
+			li .key{ float:right; cursor:pointer; color:#900; margin-top:0px;}
+			li #main1{ height:330px;}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+	<body>
+	<ul>
+		<li>
+			<div id="main1" class="main">
+				<h3>孤雁儿</h3>
+				<p>世人作梅词，下笔便俗。予试作一篇，乃知前言不妄耳。</p>
+				<p>藤床纸帐朝眠起，<br> 
+				说不尽、无佳思。<br>
+				沈香烟断玉炉寒，<br>
+				伴我情怀如水。<br>
+				笛声三弄，<br>
+				梅心惊破，<br>
+				多少春情意。<br><br>
+				小风疏雨萧萧地，<br>
+				又催下、千行泪。<br>
+				吹箫人去玉楼空，<br> 
+				肠断与谁同倚？
+				一枝折得，<br>
+				人间天上，<br>
+				没个人堪寄。</p>
+			</div>
+			<div class="intro">
+				作者：李清照</br>来源：中国诗词网
+				<span class="key" onclick="fn(this, 1)">折叠</span>
+			</div>
+		</li>
+		<li>
+			<div id="main2" class="main">
+				<h3>孤雁儿</h3>
+				<p>世人作梅词，下笔便俗。予试作一篇，乃知前言不妄耳。</p>
+				<p>藤床纸帐朝眠起，<br> 
+				说不尽、无佳思。<br>
+				沈香烟断玉炉寒，<br>
+				伴我情怀如水。<br>
+				笛声三弄，<br>
+				梅心惊破，<br>
+				多少春情意。<br><br>
+				小风疏雨萧萧地，<br>
+				又催下、千行泪。<br>
+				吹箫人去玉楼空，<br> 
+				肠断与谁同倚？
+				一枝折得，<br>
+				人间天上，<br>
+				没个人堪寄。</p>
+			</div>
+			<div class="intro">
+				作者：李清照</br>来源：中国诗词网
+				<span class="key" onclick="fn(this, 2)">展开</span>
+			</div>
+		</li>
+		<li>
+			<div id="main3" class="main">
+				<h3>孤雁儿</h3>
+				<p>世人作梅词，下笔便俗。予试作一篇，乃知前言不妄耳。</p>
+				<p>藤床纸帐朝眠起，<br> 
+				说不尽、无佳思。<br>
+				沈香烟断玉炉寒，<br>
+				伴我情怀如水。<br>
+				笛声三弄，<br>
+				梅心惊破，<br>
+				多少春情意。<br><br>
+				小风疏雨萧萧地，<br>
+				又催下、千行泪。<br>
+				吹箫人去玉楼空，<br> 
+				肠断与谁同倚？
+				一枝折得，<br>
+				人间天上，<br>
+				没个人堪寄。</p>
+			</div>
+			<div class="intro">
+				作者：李清照</br>来源：中国诗词网
+				<span class="key" onclick="fn(this, 3)">展开</span>
+			</div>
+		</li>
+		<li>
+			<div id="main4" class="main">
+				<h3>孤雁儿</h3>
+				<p>世人作梅词，下笔便俗。予试作一篇，乃知前言不妄耳。</p>
+				<p>藤床纸帐朝眠起，<br> 
+				说不尽、无佳思。<br>
+				沈香烟断玉炉寒，<br>
+				伴我情怀如水。<br>
+				笛声三弄，<br>
+				梅心惊破，<br>
+				多少春情意。<br><br>
+				小风疏雨萧萧地，<br>
+				又催下、千行泪。<br>
+				吹箫人去玉楼空，<br> 
+				肠断与谁同倚？
+				一枝折得，<br>
+				人间天上，<br>
+				没个人堪寄。</p>
+			</div>
+			<div class="intro">
+				作者：李清照</br>来源：中国诗词网
+				<span class="key" onclick="fn(this, 4)">展开</span>
+			</div>
+		</li>
+	</ul>
+	<script>
+		var h = new Array(0, 330, 25, 25, 25);
+		//var h = [0, 330, 25, 25, 25];
+		//var tf = [false, true, false, false, false];
+		var tf = new Array(false, true, false, false, false);
+		var cur = 1;
+		var minheight = 25;
+		var maxheight = 330;
+		
+		function fn(likey, tag){
+			if(tf[tag]){
+				if(h[tag] >= minheight){
+					document.getElementById('main' + tag).style.height = h[tag] + 'px';
+					h[tag] -= 5;
+					setTimeout(function(){fn(likey, tag)}, 1)
+				} else {
+					likey.innerHTML = '展开';
+					tf[tag] = !tf[tag];
+					h[tag] += 5;
+				}
+			} else {
+				if(h[tag] <= maxheight){
+					document.getElementById('main' + tag).style.height = h[tag] + 'px';
+					h[tag] += 5;
+					if(tf[cur]){
+						document.getElementById('main' + cur).style.height = h[cur] + 'px';
+						h[cur] -= 5;
+					}
+					setTimeout(function(){fn(likey, tag)}, 1)
+				} else {
+					likey.innerHTML = '折叠';
+					if(tf[cur]){
+						document.getElementsByTagName('span')[cur - 1].innerHTML = '展开';
+						tf[cur] = !tf[cur];
+						h[cur] += 5;
+					}
+					cur = tag;
+					tf[tag] = !tf[tag];
+					h[tag] -= 5;
+				}
+			}
+		}
+			
+	</script>
+	</body>
+</html>

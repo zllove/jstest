@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test-event</title>
+</head>
+<body>
+    <input type="button" value="click Me" onclick="try{showMessage()}catch(ex){console.log(ex)}">
+    <input type="button" id="myBtn" value="mybtn test">
+    <script type="text/javascript">
+        var myBtn = document.getElementById('myBtn');
+        /*
+        myBtn.onclick = function(event) {
+            console.log(event.currentTarget === this);
+            console.log(event.target === this);
+        };
+        */
+
+        document.body.onclick = function(event) {
+            /*
+            console.log(event.currentTarget === document.body);
+            console.log(event.currentTarget === this);
+            console.log(event.target === myBtn);
+            */
+            console.log(window.event.srcElement === myBtn);
+        };
+
+    </script> 
+</body>
+</html>

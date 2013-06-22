@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-jqvar</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<div id="mydiv">mydiv test</div>
+<script type="text/javascript">
+    
+    var exam = {
+        me: this,
+        show1: function(){
+            alert('show1');
+        },
+        red: {
+            e: function(){
+                return exam;
+            },
+            _parent: exam,
+            show2: function(context){
+                console.log(this.e().show1());
+                this.hide2();
+            },
+            hide2: function(){
+                alert('o.re.hide2');
+            }
+        }
+    };
+    /*
+    exam.red = {
+        show2: function(){
+            alert('red method');
+        },
+        hide: function(){
+            console.log(o.show1);
+            console.log('this', this);
+            alert('red hide method');
+        }
+    };
+    */
+    exam.blue = {
+        show3: function(){
+            alert('show');
+        },
+        hide: function(){
+            alert('blue hide');
+        }
+    }
+//    exam.show();
+//    exam.red.show();sas
+//    exam.red.show2();
+//    exam.blue.hide();
+//    exam.red.show2.call(exam);
+
+    function foo(n){
+        this.name = n;
+    };
+    foo.prototype = {
+        constructor: foo,
+        sayName: function(){
+            alert(this.name);
+        }
+    }
+    foo.say = {
+        name: 'red'
+    };
+    foo.sayName = function(){
+        alert(this.name);
+    }
+    var f = new foo('jikey');
+    f.sayName();
+    foo.sayName();
+    
+
+</script>
+</body>
+</html>

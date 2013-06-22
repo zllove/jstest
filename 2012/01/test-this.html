@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-this</title>
+</head>
+<body>
+<h3><a href="http://www.cnblogs.com/TomXu/archive/2012/01/17/2310479.html">http://www.cnblogs.com/TomXu/archive/2012/01/17/2310479.html</a>
+</h3>
+<script type="text/javascript">
+    /*
+    this.a = 10;
+//    console.log(a);
+    var foo = {x: 10};
+    var bar = {
+        x:20,
+        test: function(){
+            alert(this === bar);
+            alert(this.x);
+//            this = foo;
+//            alert(this.x);
+        }
+    }
+//    bar.test();
+
+    foo.test = bar.test;
+
+    foo.test();
+
+    function foo(){
+        alert(this);
+    }
+
+    foo(); // object window
+    alert(foo === foo.prototype.constructor); // true
+    foo.prototype.constructor(); // object object
+
+    var foo = {
+        bar: function(){
+            alert(this);
+            alert(this === foo);
+        }
+    }
+
+//    foo.bar();
+    var exampleFunc = foo.bar;
+    alert(exampleFunc === foo.bar); // true
+    exampleFunc(); // window false
+
+    function foo(){
+        return this;
+    }
+
+    console.log(foo());
+
+    function foo(){
+        alert(this.bar);
+    }
+    var x = {bar:10};
+    var y = {bar: 20};
+    
+    x.test = foo;
+    y.test = foo;
+    x.test(); // 10
+    y.test(); // 20
+
+    (function(){
+        alert(this); // window
+    })();
+
+    var foo = {
+        bar: function(){
+            alert(this);
+        }
+    }
+
+//    foo.bar();
+//    (foo.bar)();
+//    (foo.bar == foo.bar)();
+
+//    (false || foo.bar)();
+//    (foo.bar, foo.bar)();
+
+    function foo(){
+        function bar(){
+            alert(this);
+        }
+        bar();
+    }
+    foo();
+
+    try{
+        throw function(){
+            alert(this);
+        }
+    } catch(e){
+        e();
+    }
+
+    (function foo(bar){
+        alert(this);
+        !bar && foo(1);
+    })();
+
+    function A(){
+        alert(this); // object
+        this.x = 10;
+    }
+    var a = new A();
+    alert(a.x); // 10
+     */
+
+    var b = 10;
+    function a(c){
+        alert(this.b);
+        alert(c);
+    }
+//    a(20); // 10, 20
+//    a.call({b:20}, 30); // 20, 30
+    a.apply({b:20}, [40]); // 20, 40
+
+
+
+</script>
+
+</body>
+</html>

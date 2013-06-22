@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<a href="#">11</a>
+<a href="#">22</a>
+<a href="#">33</a>
+<ul>
+    <li>one</li>
+    <li style="display:none;">two</li>
+    <li style="display:none;">three</li>
+</ul>
+<script type="text/javascript">
+    var link_a = document.getElementsByTagName('a');
+    var link_li = document.getElementsByTagName('li');
+    for (var i = 0; i < link_a.length; i++) {
+        link_a[i].index = i;
+        link_a[i].onmouseover = function(){
+            for(var j=0; j< link_li.length; j++){
+                link_li[j].style.display = 'none';
+            }
+            link_li[this.index].style.display = 'block';
+        }
+    }
+</script>
+</body>
+</html>

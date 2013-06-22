@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style type="text/css">
+.special{background:#ccc;height:30px;width:30px;margin:10px;}
+</style>
+<script type="text/javascript">
+
+	/*function getBgColor(){
+		var oCSSRules = document.styleSheets[0].cssRules || document.styleSheets[0].rules;
+		alert(oCSSRules[0].style.backgroundColor);
+	}
+	window.onload = function(){
+		var oDiv = document.getElementById('div1');
+		oDiv.outerText = '<p>This is a paragraph!</p>';
+	}
+*/
+	window.onload = function(){
+		var oR1 = document.body.createTextRange();
+		var oR2 = oR1.findText('Hello');
+		alert(oR2);
+		//var oR2 = document.createRange();
+//		var oP1 = document.getElementById('p1');
+//		oR1.selectNode(oP1);
+//		oR2.selectNodeContent(oP1);
+	}
+	
+
+</script>
+
+</head>
+
+<body>
+
+<!--<div class="special" id="div1">111</div>
+<input type="submit" value=" 换色 " onclick="getBgColor()" />-->
+<p id="p1">
+	<b>hello</b>Wrold
+</p>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<!--<a href="#fragment-1" onclick="location.href = 'http://www.sohu.com';return false;">全部会员</a>-->
+<img src="http://www.8090st.com/wp-content/uploads/2012/04/20120406001.jpg" alt="">
+<script type="text/javascript" defer="defer" charset="utf-8">
+    (function (d, t) {
+        var appendScript = function () {
+            var a = d.createElement('script');
+            a.id = 'huaban_share_script';
+            a.async = true;
+            a.setAttribute('charset', 'utf-8');
+            a.src = 'http://huaban.com/js/pinmarklet.js?' + Math.floor(+new Date / 1E7);
+            var s = d.getElementsByTagName(t)[0];
+            s.parentNode.insertBefore(a, s);
+        }
+        if (window.attachEvent) {
+            window.attachEvent('onload', function () {
+                setTimeout(appendScript, 1000);
+            });
+        } else {
+            appendScript();
+        }
+    })(document, 'script');
+</script>
+</body>
+</html>

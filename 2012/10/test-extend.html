@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<h3><a href="http://www.cnblogs.com/zaohe/archive/2012/10/13/2723148.html">extend</a></h3>
+<script type="text/javascript">
+    function A(){
+    }
+    A.prototype = {
+        method1: function(){
+            // A  的一系列操作
+        }
+    };
+    function B(){
+    }
+    var b = new B();
+//    B.prototype = new A();
+    var aobj = new A();
+    B.method1 = function(){
+        aobj.method1.call(this);
+    };
+
+    function extend(subclass, superclass){
+        var superObj = new superclass;
+        subclass.prototype = superObj;
+        superObj.constructor = subclass;
+        subclass.superclass = superObj;
+        return subclass;
+    }
+    extend(B, A);
+    var b1 = new B();
+    console.log(b1.constructor === B);
+    console.log(b1.constructor === b.constructor);
+
+
+</script>
+</body>
+</html>

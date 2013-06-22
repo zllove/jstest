@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-instance</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+
+</head>
+<body>
+<script type="text/javascript">
+    /*
+    var o = {
+        show: function(name){
+            return function(){
+                return this.name = name;
+            }
+        },
+        say: function(){
+            return function(){
+                return this.name;
+            }
+        }
+    };
+    var a = o.show('jikey');
+    var b = o.show('tang');
+    a();
+    b();
+
+//    console.log(a.constructor);
+    console.log();
+    console.log(o.say()());
+    var cache = [];
+    for(var i=0,len=10; i<len; i++){
+        var shortcut = (
+                cache[cache.length] = {i: i},
+                cache[cache.length - 1]
+                );
+    }
+    console.log(cache);
+    console.log(shortcut);
+    var arr = [1,2,3,4];
+    var arrfirst = arr[0-1];
+    console.log(arrfirst);
+
+    function a(name, age){
+        this.name = name;
+        this.age = age;
+    } 
+    for(var i in a){
+        console.log(i);
+    }
+    var cache = [];
+    var len = cache.length;
+    var shortcut = (cache[cache.length] = {}, cache[cache.length - 1]);
+    shortcut.defaults.settings = {
+        name: 'jikey',
+        age: 29
+    }
+    console.log(cache);
+
+    var cache = [];
+    var shortcut = (cache[cache.length] = {}, cache[cache.length - 1]);
+    shortcut.defaults = {
+        name: 'jikey',
+        age: 29
+    }
+    var opts = $.extend( shortcut, { name: 'hqoQing' });
+    console.log(opts);
+    console.log(cache);
+     */
+
+    
+
+
+</script>
+<ul id="nav">
+    <li>111</li>
+    <li>222</li>
+    <li>333</li>
+    <li>444</li>
+</ul>
+<script type="text/javascript">
+    var lis = document.getElementById('nav').getElementsByTagName('li');
+    for(var i=0,len=lis.length; i<len; i++){
+//        clickfn(lis[i], i);
+        lis[i].onclick = function(){
+            alert(i);
+        }
+        /*
+        console.log('1', i);
+        lis[i].onclick = (function(a){
+            console.log('2', a);
+            return function(){
+                alert(a);
+            }
+        })(i);
+        lis[i].i = i;
+        lis[i].onclick = function(){
+            alert(this.i);
+        }
+        */
+    }
+    function clickfn(ele, i){
+        ele.onclick = function(){
+            alert(i);
+        }
+    }
+    function t(){
+        
+    }
+    t.win = 5;
+    var test = (function(t, i){
+        return function(){
+            return t.win;
+        }
+    })(t, 10);
+    console.log(t.win);
+    console.log(test);
+
+    /*
+    var Class1 = (function(){
+        var s_var = 0;
+        return function(){
+            this.getInstanceCount = function(){
+                return s_var;
+            };
+            s_var ++;
+        }
+    })();
+    var cls1 = new Class1();
+    console.log(cls1);
+    var cls2 = new Class1();
+    console.log(cls2);
+    */
+var arr = [1,2,3,4];
+arr.splice(arr.length-2, 2);
+console.log(arr);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+.ui-accordion{ padding:5px; line-height:21px;}
+.ui-accordion-title{ height:35px; line-height:35px; margin-bottom:4px; background:url(../../resources/images/header-bg.png) 0 0 repeat-x;}
+.ui-accordion-title h2{ clear:both;}
+.ui-accordion-title a{display:block;border:1px solid #dbdbdb; background:#fbfbfb;}
+.ui-accordion-title a:hover{text-decoration:none;border:1px solid #fbcb09; background:#fdf5cf;}
+.ui-accordion-title a em{float:left; width:15px; height:15px; margin:10px 0 0 10px; display:inline; overflow:hidden; background:url(../../resources/images/small-icons.png) -37px -16px no-repeat;}
+.ui-accordion-title a.ui-show{  border:1px solid #dcdcdc; background:#fbfbfb;}
+.ui-accordion-title a.ui-show:hover{ border:1px solid #fbcb09; background:#fdf5cf;}
+.ui-accordion-title a.ui-show em{ background-position:-68px -16px;}
+.ui-accordion-outer{ padding:10px; margin-bottom:2px; border:1px solid #dcdcdc;}
+.none{ display:none;}
+.block{ display:block;}

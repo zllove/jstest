@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-csdn-rehref</title>
+</head>
+<body>
+<script type="text/javascript">
+	var str = '<img src="http://www.aaa.com/123.jpg"/>中中中中中 http://www.baidu.com <a href="http://www.china.com">asdfasdf</a>';
+	// var str = '<a href="http://www.china.com">asdfasdf</a>';
+	var end = str.replace(/(<a\s?href=)(.*)>(.*)(<\/a>)/ig, '$1' + '"http://www.baidu.com">http://www.baidu.com$4');
+	// console.log(end);
+
+	function regFoo() {
+		var str = '<img src="http://www.aaa.com/123.jpg"/>中中中中中 http://www.baidu.com <a href="http://www.china.com">asdfasdf</a>';
+		var str2 = '<img src="http://www.aaa.com/123.jpg"/>中中中中中 http://www.baidu.com <a href="http://www.china.com">asdfasdf</a>';
+		// str = str.replace(/(>[^>]*?)(https?:\/\/((?!<)\S)+)/, '$1<a href="$2">$2</a>');
+		str = str.replace(/(>[^>]*?)(https?:\/\/((?!<)\S)+)/, '$1');
+		// var end = str2.replace(/(>[^>]*?)(https?:\/\/((?!<)\S)+)/, '$2');
+		console.log(str);
+		console.log(end);
+	}
+	regFoo();
+</script>	
+</body>
+</html>

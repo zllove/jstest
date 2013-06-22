@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>test-csdn-jqtabfn</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    </script>
+</head>
+
+<body>
+<div class="grid-tab">
+    <a href="1.jsp" class="my">测试1</a>
+    <a href="2.jsp" class="my">测试2</a>
+    <a href="3.jsp" class="my">测试3</a>
+</div>
+
+<div class="box">
+    <div id="data"></div>
+</div>
+<script type="text/javascript">
+    (function ($) {
+        $.fn.myTabs = function (options) {
+            var defaults = {
+                target      :'#data', //数据展示的DIV的ID或者Class
+                currentClass:'current', //当前tab的样式名
+                event       :'click', //触发方式
+                errorMsg    :'Oops! This page is error', //默认错误信息
+            };
+
+            var opts = $.extend({}, defaults, options);
+
+            return this.each(function () {
+                var $this = $(this);
+                var o = $.meta ? $.extend({}, opts, $this.data()) : opts;
+                var url = $this.attr("href");
+                var $target = $(o.target);
+
+                $this.bind(o.event, function (){
+                    $("a." + o.currentClass).removeClass(o.currentClass);
+                    $this.addClass(o.currentClass);
+                    $target.load(url);
+                    return false;
+                });
+            });
+        };
+    })(jQuery);
+
+    $('.grid-tab a').myTabs();
+</script>
+</body>
+</html>

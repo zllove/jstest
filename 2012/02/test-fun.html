@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-fun</title>
+</head>
+<body>
+<a href="http://www.cnblogs.com/TomXu/archive/2012/01/31/2330252.html">汤姆闭包</a>
+<p id="p1" >click on p, alert info. <a onmousedown="getTarget(event)" href="#"><span>this is a</span></a></p>
+<script type="text/javascript">
+    /*
+    function getTarget(event){
+        var e = event || window.event;
+//        var x = e.currentTarget; // a
+        var x = e.target; // span
+//        console.log(x);
+    }
+    (function funVal(){
+        return function(){
+//            alert('return function is called.');
+        }
+    })()();
+
+    (function selfApp(funArg){
+        if(funArg && funArg === selfApp){
+            alert('slefApp');
+            return;
+        }
+        selfApp(selfApp);
+    })();
+
+    function regModes(modes){
+        modes.forEach(regModes, modes);
+    }
+    regModes(['roster', 'accounts', 'groups']);
+
+    function testFn(funArg){
+        funArg(10);
+        funArg(20);
+    }
+    testFn(function (arg){
+        var localVar = 10;
+        alert(arg + localVar);
+    })
+
+    function testFn(){
+        var localVar = 10;
+        function innerFn(innerParam){
+            alert(innerParam + localVar);
+        }
+        return innerFn;
+    }
+    var someFn = testFn();
+    alert(someFn(20));
+    var x = 10;
+    function foo(){
+        alert(x);
+    }
+    (function(funArg){
+        var x = 20;
+        // 变量"x"在(lexical)上下文中静态保存的，在该函数创建的时候就保存了
+        funArg();
+    })(foo);
+
+    var first, second;
+
+    function foo(){
+        var x = 1;
+        first = function(){ return ++x; };
+        second = function(){ return --x; };
+        
+        x = 2;
+        alert(first()); // 3
+    }
+    foo();
+    alert(first()); // 4
+    alert(second()); // 3
+
+    var data = [];
+    for(var k=0; k<3; k++){
+        data[k] = (function(x){
+            return function(){
+                alert(x);
+            }
+        })(k);
+    }
+    console.log(data[0]());
+    console.log(data[1]());
+    console.log(data[2]());
+
+    function getElement(){
+        [1,2,3].forEach(function(element){
+            if(element % 2 == 0){
+                alert('found ' + element);
+                return element;
+            }
+        });
+        return null;
+    }
+    getElement();
+
+    var arr = [1,2,3];
+    var res = arr.map(function(element){
+        return element * 2;
+    });
+    console.log(res);
+
+    (function(){
+        alert([].join.call(arguments, '-+-'));
+    }).apply(this, [1,2,3]);
+
+//    alert(foo);
+    (function foo(){});
+    alert(foo);
+
+    alert(foo);
+    function foo(x){
+       alert(x);
+    }(1);
+    foo(10);
+
+    global = '10';
+    console.log(window.global);
+    console.log(self['global']);
+    console.log(this.global);
+
+    (function foo(){
+        var a,b;
+        a = b = 0;
+        console.log(b);
+    }());
+    console.log(a);
+    console.log(b);
+
+    myname = 'global';
+    function func(){
+        alert(myname); // undefined
+        var myname = 'local';
+        alert(myname); // local
+    }
+    func();
+
+    var man = {
+        hands: 2,
+        legs: 1,
+        heads: 1
+    };
+    if(typeof Object.prototype.clone === 'undefined'){
+        Object.prototype.clone = function(){  }
+    }
+
+    for(var i in man){
+        if(man.hasOwnProperty(i)){
+            console.log(i, ':', man[i]);
+        }
+    }
+
+    function func(){
+        return {
+            name: 'jikey'
+        }
+    }
+    console.log(func());
+
+    var a,b,c;
+    a = 1;b = false; c = 0;
+    a && b && (alert(c = 1));
+    alert(c);
+
+    alert('a' in window);
+    var a;
+
+    function value(){
+        return 1;
+    }
+    var value = 1;
+    alert(typeof value); // function number
+
+    function m(){
+        alert(this === window); // true
+    }
+    m();
+
+    var object = {
+        method: function(){
+            alert(this === object); // true
+        }
+    }
+    object.method();
+
+    function m(){
+        alert(this === window);
+    }
+    m(); // true
+    m.call(document); // false
+
+    function max(arr){
+        var i, m;
+        m = '';
+        for(i = 0; i<arr.length; i++){
+            if(arr[i] > m){
+                m = arr[i];
+            }
+        }
+        return m;
+    }
+
+//    console.log(Math.max.apply(null, [2, 5, 1])); // 1. 找出数字数组中最大的元素（使用Match.max函数）
+//    console.log(max([2,5,1]));
+    var o = {
+        m1: function(){
+            alert(this == o);
+        },
+        m2: function(){
+            
+        }
+    }
+    o.m1();
+     */
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+aa: <input type="text" name="" id="aa">bb:<input type="text" name="" id="bb" disabled="disabled" >
+<script type="text/javascript">
+    function id(){
+        return document.getElementById(arguments[0]) ;
+    }
+    var oA = id('aa');
+    var oB = id('bb');
+    oA.onkeydown = function(){
+        if(oA.value.length > 1){
+            oB.disabled = false;
+        }
+    }
+</script>
+</body>
+</html>

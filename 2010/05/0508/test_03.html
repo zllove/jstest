@@ -1,0 +1,47 @@
+<html>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <head>
+        <script language="javascript">
+            var ie = navigator.appName == "Microsoft Internet Explorer" ? true : false;
+            
+            function keyDown(e){
+                if (!ie) {
+                    var nkey = e.which;
+                    var iekey = '现在是非ie浏览器';
+                    var realkey = String.fromCharCode(e.which);
+                }
+                if (ie) {
+                    var iekey = event.keyCode;
+                    var nkey = '现在是ie浏览器';
+                    var realkey = String.fromCharCode(event.keyCode);
+                    if (event.keyCode == 32) {
+                        realkey = '\' 空格\''
+                    }
+                    if (event.keyCode == 13) {
+                        realkey = '\' 回车\''
+                    }
+                    if (event.keyCode == 27) {
+                        realkey = '\' Esc\''
+                    }
+                    if (event.keyCode == 16) {
+                        realkey = '\' Shift\''
+                    }
+                    if (event.keyCode == 17) {
+                        realkey = '\' Ctrl\''
+                    }
+                    if (event.keyCode == 18) {
+                        realkey = '\' Alt\''
+                    }
+                }
+                alert('ns浏览器中键值:' + nkey + '\n' + 'ie浏览器中键值:' + iekey + '\n' + '实际键为' + realkey);
+            }
+            
+            document.onkeydown = keyDown;
+        </script>
+    </head>
+    <body>
+        <center>
+            <h3>请按任意一个键。。。。</h3>
+        </center>
+    </body>
+</html>

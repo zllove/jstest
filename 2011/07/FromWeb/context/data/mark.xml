@@ -1,0 +1,73 @@
+<root>
+
+	<menu>
+		<ul>
+			<li enabled="false"><img src="images/1.gif" />更换模板</li>
+		</ul>
+		<ul>
+			<li onclick="{alert('您点击我了')}"><img src="images/2.gif" />一个真实的我</li>
+			<li><img src="images/3.gif" />工作与事业</li>
+			<li child="two"><img src="images/4.gif" />学习笔记</li>
+			<li><img src="images/5.gif" />用镜头记录生活</li>
+			<li><img src="images/6.gif" />网页设计作品</li>
+			<li child="one"><img src="images/7.gif" />可以说悄悄话哦</li>
+		</ul>
+		<ul>
+			<li><img src="images/3.gif" />收集各种网络资源</li>
+			<li><img src="images/5.gif" />可以说悄悄话哦</li>
+		</ul>
+	</menu>
+
+	<menu id="one">
+		<ul>
+			<li>更换模板</li>
+		</ul>
+		<ul>
+			<li>一个真实的我</li>
+			<li>工作与事业</li>
+			<li>学习笔记</li>
+			<li>用镜头记录生活</li>
+			<li>网页设计作品</li>
+			<li>可以说悄悄话哦</li>
+		</ul>
+		<ul>
+			<li>收集各种网络资源</li>
+			<li>可以说悄悄话哦</li>
+		</ul>
+	</menu>
+
+	<menu id="two">
+		<ul>
+			<li>更换模板</li>
+		</ul>
+		<ul>
+			<li>一个真实的我</li>
+			<li>工作与事业</li>
+			<li>学习笔记</li>
+			<li>网页设计作品</li>
+			<li>可以说悄悄话哦</li>
+		</ul>
+		<ul>
+			<li child="three">收集各种网络资源</li>
+			<li>可以说悄悄话哦</li>
+		</ul>
+	</menu>
+
+	<menu id="three">
+		<ul>
+			<li>更换模板</li>
+		</ul>
+		<ul>
+			<li>一个真实的我</li>
+			<li>工作与事业</li>
+			<li>学习笔记</li>
+			<li>网页设计作品</li>
+			<li>可以说悄悄话哦</li>
+		</ul>
+		<ul>
+			<li>收集各种网络资源</li>
+			<li>可以说悄悄话哦</li>
+		</ul>
+	</menu>
+
+</root>

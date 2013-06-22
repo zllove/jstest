@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-jq-mouseleave</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+http://blackwuxin.iteye.com/blog/1243489
+<p>不论鼠标指针离开被选元素还是任何子元素，都会触发 mouseout 事件。</p>
+<p>只有在鼠标指针离开被选元素时，才会触发 mouseleave 事件。</p>
+<div class="out" style="background-color:lightgray;padding:20px;width:40%;float:left">
+    <h2 style="background-color:white;">被触发的 Mouseout 事件：<span></span></h2>
+</div>
+<div class="leave" style="background-color:lightgray;padding:20px;width:40%;float:right">
+    <h2 style="background-color:white;">被触发的 Mouseleave 事件：<span></span></h2>
+</div>
+
+<script type="text/javascript">
+    x=0;
+    y=0;
+    $(document).ready(function(){
+        $("div.out").mouseover(function(){
+            $(".out span").text(x+=1);
+        });
+        $("div.leave").mouseenter(function(){
+            $(".leave span").text(y+=1);
+        });
+    });
+
+</script>
+</body>
+</html>

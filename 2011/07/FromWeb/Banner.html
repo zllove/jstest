@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title> new document </title>
+  <meta name="author" content="s_liangchao1s" />
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+  <meta name="keywords" content="浮动对联广告" />
+ </head>
+ <body>
+  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+  <script type="text/javascript">
+  <!--
+	var $ = function(sId){
+		return "string" == typeof(sId) ? document.getElementById(sId) : id;
+	}
+	var Extend = function(distination, source){
+		for(var property in source){
+			distination[property] = source[property];
+		}
+		return distination;
+	}
+	Function.prototype.bind=function(object){
+		var method=this;
+		return function(){
+			 method.apply(object,arguments);
+		}
+	}
+	var Class = {
+		create: function(){
+			return function(){
+				this.initialize.apply(this, arguments);
+			}
+		}
+	}
+
+	var FloatBanner = Class.create();
+	FloatBanner.prototype = {
+		initialize: function(sid, content, top){
+			document.write('<div id='+sid+' style="position:absolute;">'+content+'</div>');		
+			this.oContainer = $(sid);
+			this.top = top;
+			this.oContainer.style.top = top + "px";
+			setInterval(this.Scroll.bind(this), 20);
+		},
+		Scroll: function(){
+			var _doc = navigator.userAgent.toLowerCase().indexOf('webkit') != -1 ? document.body : document.documentElement;
+			this.StartPoint = parseInt(this.oContainer.style.top, 10);
+			this.EndPoint = _doc.scrollTop + this.top;	
+			$('ospan').innerHTML = "图片距页面顶端高度： " +   this.StartPoint + "<br/>"
+			$('ospan').innerHTML += "滚动后的高度 " + this.EndPoint + "<br/>";
+			$('ospan').innerHTML += "滚动条滚动高度 " + document.documentElement.scrollTop + "<br/>";
+			$('ospan').innerHTML += "初始化图片距页面高度：" + this.top + "<br/>";
+			$('ospan').innerHTML += "图片滚动后与目标插值" + Math.abs( this.EndPoint - this.StartPoint );
+			if(this.StartPoint != this.EndPoint){
+				 this.ScrollAmount = Math.ceil( Math.abs( this.EndPoint - this.StartPoint ) / 15 );
+				 this.oContainer.style.top = parseInt(this.oContainer.style.top, 10) + ( ( this.EndPoint<this.StartPoint ) ? -this.ScrollAmount : this.ScrollAmount )+"px";
+			}
+		}
+	}	
+	var fb = new FloatBanner("id1","<img src='http://jzyouth.org.cn/images/float/2009Cherry.gif' /><br/> <span id='ospan' style='font-size:10pt;color:#5E5E5E'></span>",150);
+  //-->
+  </script>
+ 
+ </body>
+</html>

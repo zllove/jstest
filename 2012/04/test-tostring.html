@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-tostring</title>
+</head>
+<body>
+<script type="text/javascript">
+    /*
+    var o = new Object();
+    var a = [];
+    console.log(o.toString());
+    console.log(typeof a);
+    */
+    var oP = Object.prototype,
+        toString = oP.toString;
+    /*
+    console.log(toString.call([123]));
+    console.log(toString.call('123'));
+    console.log(toString.call(/123/));
+    console.log(toString.call(123));
+    console.log(toString.call({a: 123}));
+    console.log(toString.call(undefined));
+    console.log(toString.call(null));
+    */
+    alert(toString.call(null));
+</script>
+</body>
+</html>

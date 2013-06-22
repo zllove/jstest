@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<h2><a href="http://www.cnblogs.com/zyj469470971/archive/2012/02/17/2355890.html">http://www.cnblogs.com/zyj469470971/archive/2012/02/17/2355890.html</a></h2>
+<div>First</div><div>Second</div><div>Third</div><div>Fourth</div>
+<script type="text/javascript">
+    var end = $.grep([0, 1, 2], function(n){
+        return n > 0;
+    });
+//    console.log(end);
+    var arr = [4, 'pete', 8, 'john'];
+    var isin = $.inArray(4, arr);
+//    console.log(isin);
+    var arr = $.makeArray(document.getElementsByTagName('div'));
+//    console.log(arr);
+
+    var mend = $.map([1,2,3], function(n){
+        return n + 2;
+    });
+//    console.log(mend);
+    var mrend = $.merge([1,2,3], ['a', 'b', 'c']);
+//    console.log(mrend);
+    var yearArray = new Array(2009, 2009, 2010, 2010, 2009, 2010);
+    yearArray.sort();
+    var uend = $.unique(yearArray);
+//    console.log(uend);
+    var isAr = $.isArray({});
+    console.log(isAr);
+
+</script>
+</body>
+</html>

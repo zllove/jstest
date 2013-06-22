@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-handEvent</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+asdfasdflk
+<script type="text/javascript">
+    var obj = {
+        handleEvent: function() {
+            alert('body clicked');
+        }
+    };
+//    document.body.addEventListener('click',obj,false);
+    function fn2(){
+        obj.handleEvent = function (){
+            alert('fn2');
+        }
+    }
+    var obj2 = {
+        addEvent: function (el){
+            el.addEventListener('click', this, false);
+        },
+        handleEvent: function(e){
+            alert(e.target);
+        },
+    }
+    obj2.addEvent(document.body);
+
+</script>
+<button onclick="fn2()">change</button>
+
+</body>
+</html>

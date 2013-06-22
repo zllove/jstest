@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>UIScrollImg - Demo</title>
+    <script type="text/javascript" src="../../jquery-1.4.4.min.js"></script>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{font:12px/2 arial; background:#3f3f3f;}
+        ul,li{ list-style:none;}
+        .wrap{ width:850px; padding:10px; margin:30px auto; border:1px solid #ccc; background:#fff; overflow:hidden;}
+        .ui_scroll_wrap{ position:relative; padding:0 56px;}
+        .ui_scroll_content{width:726px; overflow:hidden;}
+        .ui_scroll_leftbtn,.ui_scroll_rightbtn{position:absolute; width:39px; height:80px;top:50px; cursor:pointer; background:url(http://js.fgm.cc/learn/lesson7/img/btn.png) no-repeat 0 0;}
+        .ui_scroll_leftbtn{ left:0px; background-position:0 0;}
+        .ui_scroll_rightbtn{ right:0px; background-position:-39px 0;}
+        .ui_scroll_list{ float:left;}
+        .ui_scroll_list li{ float:left; margin-right:10px;}
+        .ui_scroll_list li img{ border:1px solid #ccc; padding:1px;}
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div id="UIScroll" class="ui_scroll_wrap">
+        <span id="UILeftBtn" class="ui_scroll_leftbtn"></span>
+        <ul class="ui_scroll_list">
+            <li><a href="#"><img src="http://i5.vanclimg.com/users/18/20120426/n3_20120426.jpg" alt=""></a></li>
+            <li><a href="#"><img src="http://i3.vanclimg.com/users/18/20120425/s16_120425.jpg" alt=""></a></li>
+            <li><a href="#"><img src="http://i2.vanclimg.com/users/18/20120420/n13_120422.jpg" alt=""></a></li>
+            <li><a href="#"><img src="http://i2.vanclimg.com/users/18/20120420/n13_120422.jpg" alt=""></a></li>
+            <li><a href="#"><img src="http://i2.vanclimg.com/users/18/20120420/n13_120422.jpg" alt=""></a></li>
+            <li><a href="#"><img src="http://i3.vanclimg.com/users/18/20120420/s11_20120422.jpg" alt=""></a></li>
+            <li><a href="#"><img src="http://i2.vanclimg.com/users/18/20120420/n13_120422.jpg" alt=""></a></li>
+            <li><a href="#"><img src="http://i2.vanclimg.com/users/18/20120420/n13_120422.jpg" alt=""></a></li>
+            <li><a href="#"><img src="http://i2.vanclimg.com/users/18/20120420/n13_120422.jpg" alt=""></a></li>
+            <li><a href="#"><img src="http://i3.vanclimg.com/users/18/20120420/s11_20120422.jpg" alt=""></a></li>
+        </ul>
+        <span id="UIRightBtn" class="ui_scroll_rightbtn"></span>
+    </div>
+
+</div>
+<script type="text/javascript">
+    if (typeof Object.create !== 'function') {
+        Object.create = function (o) {
+            function F() {}
+            F.prototype = o;
+            return new F();
+        };
+    }
+    (function($){
+        $.fn.UIScrollImg = function(options){
+            var scrollImg = {
+                defaults: {
+                    isAuto: true
+                },
+                init: function (el, options){
+                    console.log(el);
+                    this.me = el;
+                    this.opts = $.extend({}, this.defaults, options);
+                    el.wrapInner('<div class="ui_scroll_content"></div>');
+                    var scrollCont = el.find('.ui_scroll_content'),
+                        leftBtn = el.find('#UILeftBtn'),
+                        rightBtn = el.find('#UIRightBtn'),
+                        scrollList = el.find('ul'),
+                        elWidth = el.outerWidth(),
+                        ulWidth = scrollList.outerWidth();
+                    this.subEle = scrollList.find('li');
+                    this.listWidth = scrollList.outerWidth(true);
+                    this.subWidth = this.subEle.outerWidth(true)
+                    this.scrollList = scrollList;
+                    this.totalWidth = this.subWidth * (this.subEle.length);
+                    scrollList.wrap('<div class="ui_scroll_big"></div>');
+                    var bigWrap = scrollList.parent();
+                    var scrollTwo = scrollList.clone().appendTo(bigWrap);
+                    bigWrap.css('width', (this.listWidth * 6));
+                    var isPrev = true;
+                    var isNext = true;
+                    var endLeft = 0;
+                    var endScrollLeft = 0;
+                    var total = this.totalWidth;
+                    function prev(){
+                        if(isPrev){
+                            isPrev = false;
+                            scrollCont.animate({scrollLeft: '+=184'}, 800, 'swing', function(){
+                                if(scrollCont.scrollLeft() >= total){
+                                    scrollCont.scrollLeft(0);
+                                }
+                            });
+                        }
+                        isPrev = true;
+                    }
+                    function next(){
+                        if(isNext){
+//                            console.log(scrollCont.scrollLeft());
+                            if(scrollCont.scrollLeft() == 0){
+                                scrollCont.scrollLeft(total);
+                            }
+                            scrollCont.animate({scrollLeft: '-=184'}, 800, 'swing', function(){
+                                /*
+                                if(scrollCont.scrollLeft() <= 0){
+                                    scrollCont.scrollLeft(0);
+                                }
+                                */
+                            });
+                            console.log(scrollCont.scrollLeft());
+                        }
+                    }
+                    leftBtn.click(function(){
+                        prev();
+                    });
+                    rightBtn.click(function(){
+                        next();
+                    });
+                },
+                // 自动播放
+                play: function (){
+                    var that = this;
+                    var subWidth = this.subWidth;
+                    var totalWidth = this.totalWidth;
+                    var endLeft;
+                    var timer = setTimeout(function(){
+                        that.scrollList.animate({left: '-=' + subWidth}, 800, 'swing', function(){
+                            endLeft = Math.abs(parseInt(that.scrollList.css('left')));
+                            if(endLeft % (totalWidth / 2) == 0){
+                                that.scrollList.css('left', 0);
+                            }
+                        });
+                        that.play();
+                    }, 2000);
+                }
+            };
+            if(this.length < 1){ alert('请绑定正确的根元素!'); }
+            return this.each(function(){
+                scrollImg.init($(this), options);
+            });
+        }
+    })(jQuery);
+    $('#UIScroll').UIScrollImg();
+</script>
+</body>
+</html>

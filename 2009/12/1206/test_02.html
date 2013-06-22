@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Document</title>
+        <style>
+        </style>
+        <script>
+        	/*
+            function veValue(field){
+                if (field.defaultValue == field.value) {
+                    field.value = '';
+                } else if (field.value == '') {
+                    field.value = field.defaultValue;
+                    
+                }
+            }
+            */
+			function veValue(field){
+				field.value = field.value == field.defaultValue ? '' : field.value || field.defaultValue;
+			}
+        </script>
+    </head>
+    <body>
+        <input onfocus="veValue(this)" onblur="veValue(this)" type="text" value="请填写正确的信息" />
+    </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+<div id="div_id">
+    <a href="#">X</a>
+    <a href="#">Y</a>
+    <a href="#">Z</a>
+<div>
+<script type="text/javascript">
+    function foo(){
+        var authors = document.getElementById('div_id').getElementsByTagName('a');
+        for(var i=0,len=authors.length; i<len; i++){
+            authors[i].onclick = function(event){
+                event = event || window.event;
+                if((event.target || event.srcElement).innerHTML == 'Y'){
+                    console.log('我是一个大YY');
+                } else {
+                    console.log('我是一个大XX');
+                }
+            }
+        }
+    }
+    foo();
+</script>
+</body>
+</html>
