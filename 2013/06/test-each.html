@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.10.1.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    var obj = [{name : 'jikey', age : 30}, {name : 'qi', age : 20}];
+    obj.name = 'tang';
+    $.each(obj, function(i, n){
+        if(n.name == 'jikey'){
+            this.name = 'tang';
+        }
+        console.log(i + ':' + n.name);
+    });
+    console.log(obj);
+</script>
+</body>
+</html>
