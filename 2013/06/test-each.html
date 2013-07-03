@@ -6,6 +6,9 @@
     <script type="text/javascript" src="../jquery-1.10.1.js"></script>
 </head>
 <body>
+<div>111</div>
+<div>222</div>
+<div>3333</div>
 <script type="text/javascript">
     var obj = [{name : 'jikey', age : 30}, {name : 'qi', age : 20}];
     obj.name = 'tang';
@@ -16,6 +19,10 @@
         console.log(i + ':' + n.name);
     });
     console.log(obj);
+
+    $.each($('div'), function(i, n){
+        console.log(i + ':' + n);
+    })
 </script>
 </body>
 </html>
