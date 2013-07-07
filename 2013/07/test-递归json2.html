@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<!--http://www.cnblogs.com/windows7/articles/1701051.html-->
+<script type="text/javascript">
+    var json = {
+        'div': {id: 'flower', className: "a1", sub: [
+            {
+                'ul': {id: 'flower1', className: ["a2", "a3"], sub: [
+                    {'li': {num: 3, con: "内容内容内容", fn: {'click': function () {
+                        alert('我是LiLi')
+                    }}}}
+                ]}
+            },
+            {
+                'ul': {id: 'flower4', className: ["a2", "a3"], sub: [
+                    {'li': {num: 3, con: "第2轮了", fn: {'click': function () {
+                        alert('我是LiLi')
+                    }}}}
+                ]}
+            },
+            {
+                'span': {id: 'q', con: "我是span"}
+            }
+        ]}
+    }
+
+    JsonToHtml = {
+        init: function (data, parent) {//jsonDB,父元素
+            for (var attr in data) {
+                if (data[attr]["id"]) {
+                    var num = 1
+                } else {
+                    var num = data[attr]["num"] || 1
+                }//如果存在id,则循环默认为1,因为id不可重复
+                for (var j = 0; j < num; j++) {
+                    var obj = document.createElement(attr);
+                    parent ? parent.appendChild(obj) : document.body.appendChild(obj);//递归时传入父元素,没有则默认从body输出
+                    for (var attr2 in data[attr]) {
+                        var _tempAttr = data[attr][attr2];
+                        switch (attr2) {
+                            case "id":
+                                obj.id = _tempAttr;
+                                break;
+                            case "className": //支持多个class传入~简了点~
+                                if (_tempAttr.length && _tempAttr.pop) {
+                                    for (var k = 0; k < _tempAttr.length; ++k) {
+                                        obj.className = obj.className + " " + _tempAttr[k];
+                                    }
+                                } else {
+                                    obj.className = _tempAttr;
+                                }
+                                break;
+                            case "sub": //如果有子节点则开始递归
+                                for (var i = 0; i < _tempAttr.length; i++) {
+                                    _tempAttr[i].sub ? this.init(_tempAttr[i]) : this.init(_tempAttr[i], obj)
+                                }
+                                break;
+                            case "con"://设置内容,可以生成新的子元素
+                                obj.innerHTML = _tempAttr;
+                                break;
+                            case "num":
+                                break;
+                            case "fn"://绑定方法
+                                for (var fns in _tempAttr) {
+                                    if (window.addEventListener) {
+                                        obj.addEventListener(fns, _tempAttr[fns], false);
+                                    } else {
+                                        if (window.attachEvent) {
+                                            obj.attachEvent("on" + fns, _tempAttr[fns]);
+                                        }
+                                    }
+                                }
+                                break;
+                            default : //设置属性
+                                obj.setAttribute(attr2, _tempAttr);
+                                break;
+                        }
+                    }
+                }
+            }
+            return this;
+        }
+    }
+    JsonToHtml.init(json); //初始化
+</script>
+</body>
+</html>
