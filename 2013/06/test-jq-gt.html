@@ -3,8 +3,24 @@
 <head>
     <meta charset="utf-8"/>
     <title>test</title>
+    <script type="text/javascript" src="../jquery-1.10.1.js"></script>
 </head>
 <body>
-
+<ul id="ul">
+    <li>11</li>
+    <li>22</li>
+    <li>333</li>
+    <li>444</li>
+    <li>555</li>
+    <li>666</li>
+    <li>777</li>
+    <li>888</li>
+</ul>
+<script type="text/javascript">
+    var len = 2;
+    var oLi = $('#ul').find('li:gt(' + len + ')');
+    console.log(oLi);
+//    console.log([document.getElementById('ul'), document.getElementById('ul')]);
+</script>
 </body>
 </html>

@@ -78,6 +78,7 @@
 
             if(current.menulist.length > 0){
                 aLi.append(current.MName).append('<ul></ul>').appendTo(parent);
+                console.log(aLi.children());
                 showAll(current.menulist, aLi.children().eq(0));
             } else {
                 aLi.append(current.MName).appendTo(parent);
