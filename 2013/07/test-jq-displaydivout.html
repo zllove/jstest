@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title></title>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("#divShow").hide();
+
+            $('body').click(function(evt) {
+                if($(evt.target).parents("#divShow").length==0 &&
+                        evt.target.id != "aaa" && evt.target.id != "divShow") {
+                    $('#divShow').hide();
+                }
+            });
+        });
+    </script>
+
+</head>
+<body>
+<a id="aaa" name="aaa" onclick="$('#divShow').show();" href="#">按這裡就顯示Div</a>
+<div id="divShow" name="divShow" style="width: 500px; height: 350px;border-width:2px; border-style:dotted;">
+    <input type="button" id="btnCloseDiv" name="divCloseDiv" value="關閉" onclick="$('#divShow').hide();" />
+    <p>this is a div.</p>
+    <table id="tbl" style="width: 300px; height: 300px; border:#0000FF 1px solid; ">
+        <tr><th>thhhhhhhhhhhhhhh</th></tr>
+        <tr><td>tddddddddddddddd</td></tr>
+    </table>
+</div>
+
+</body>
+</html>
