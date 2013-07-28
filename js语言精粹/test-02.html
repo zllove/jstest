@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    // var rm-a = /a*/match(s);
+    
+    var sum = function(){
+    	var i = 0, sum = 0;
+    	for(i = 0; i < arguments.length; i++){
+    		sum += arguments[i];
+    	}
+    	return sum;
+    }
+
+    // console.log(sum(1,2,3,4,4));
+
+    var add = function(a, b){
+    	if(typeof a !== 'number' && typeof b !== 'number'){
+    		throw {
+    			name : 'TypeError',
+    			message : 'add needs numbers'
+    		}
+    	}
+    	return a + b;
+    }
+
+    var try_it = function(){
+    	try{
+    		add('seven');
+    	} catch (e) {
+    		console.log(e.name + ' : ' + e.message);
+    	}
+    }
+
+    // try_it();
+    
+    // 给类型添加方法
+    Function.prototype.method = function(name, func){
+    	if(!this.prototype[name]){
+            this.prototype[name] = func;
+        }
+    	return this;
+    }
+
+    Number.method('integer', function(){
+    	return Math[this < 0 ? 'ceiling' : 'floor'](this);
+    });
+
+    // console.log(Math['floor'](-3.3));
+    // console.log(Math.floor(-3.3));
+    // console.log((3.3).integer());
+    // document.write((-10/3).integer());
+    // 
+    String.method('trim', function(){
+        return this.replace(/^\s+|\s+$/g, '');
+    });
+
+    // console.log(' neat '.trim());
+
+    var factorial = function(i, a){
+        a = a || 1;
+        if(i < 2){
+            return a;
+        }
+        return factorial(i - 1, a * i);
+    }
+
+    // console.log(factorial(4));
+
+    var myObject = function(){
+        var value = 1;
+        return {
+            increment : function(inc){
+                value += typeof inc === 'number' ? inc : 1;
+            },
+            getValue : function(){
+                return value;
+            }
+        };
+    }();
+    myObject.increment();
+    // console.log(myObject.getValue());
+    
+
+    var quo = function(status){
+        return {
+            get_status : function(){
+                return status;
+            }
+        };
+    }
+
+
+    var myQuo = quo('amazed');
+    // console.log(myQuo.get_status());
+    
+    var fade = function(node){
+        var level = 1;
+        var step = function(){
+            var hex = level.toString(16);
+            node.style.backgroundColor = '#FFFF' + hex + hex;
+            if(level < 15){
+                level += 1;
+                setTimeout(step, 100);
+            }
+        }
+        setTimeout(step, 100);
+    }
+
+    // fade(document.body);
+    // 
+    var fibonacci = function(){
+        var memo = [0, 1];
+        var fib = function(n){
+            var result = memo[n];
+            if(typeof result !== 'number'){
+                result = fib(n - 1) + fib(n - 2);
+                memo[n] = result;
+            }
+            return result;
+        }
+        return fib;
+    }();
+
+    // console.log(fibonacci(4));
+    
+
+</script>
+</body>
+</html>

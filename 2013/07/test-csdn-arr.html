@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title></title>
+</head>
+<body>
+<!--http://bbs.csdn.net/topics/390519757-->
+<div id="test"></div>
+<script type="text/javascript">
+    var a = [
+        ['a1', 'a2'],
+        ['b1', 'b2'],
+        ['c1']
+    ];
+    var r = [];
+
+    for (i = 0; i < a.length; i++) {
+        len = r.length;
+        for (var v in a[i]) r.push([a[i][v]]);
+        for (j = 0; j < len; j++) {
+            for (v in a[i])
+                r.push(r[j].concat(a[i][v]));
+        }
+    }
+    console.log(r);
+    document.getElementById('test').innerHTML = r.join('');
+</script>
+</body>
+</html>
