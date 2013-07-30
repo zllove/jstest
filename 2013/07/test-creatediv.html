@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.10.1.js"></script>
+</head>
+<body>
+<div class="info-timeout">
+    <div class="info-timeout-inner">
+        <div class="info-timeout-icon"></div>
+        <div class="info-time-cont">
+            <div class="info-timeout-main">
+
+            </div>
+            <div class="info-timeout-outtime">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="test"></div>
+<script type="text/javascript">
+    var oParent = $('<div class="info-timeout"></div>'),
+        oBox = '<div class="info-timeout-inner"><div class="info-timeout-icon"></div><div class="info-time-cont"><div class="info-timeout-main"></div></div></div>',
+        oContent = $('<div class="info-timeout-txt"></div>');
+
+    oParent.append(oBox).find('.info-time-cont').append(oContent).end().appendTo('body');
+//    $('#test').html(oParent);
+
+
+</script>
+</body>
+</html>
