@@ -5,31 +5,17 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     <title>test</title>
     <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+    <style type="text/css">
+        .container a{ position:absolute; float:left; width:190px; height:32px; z-index:30; overflow:hidden;}
+        a.sina{ left:120px; top:10px;}
+        a.qq{ left:320px; top:10px;}
+        a.renren{ left:420px; top:10px;}
+    </style>
 </head>
 <body>
-<div class="box active">111</div>
-<div class="box active on">111</div>
-<div class="box">22</div>
-<div class="active"></div>
-<div class="box">333</div>
+<div id="test"></div>
 <script type="text/javascript">
-    /*
-    var active;
-    $('.box').each(function(){
-        if($(this).hasClass('active')){
-            active = $(this);
-        }
-    });
-    console.log(active);
-    */
-    console.log($('.box.active.on'));
-    $.each(obj, function(){
-        topBar = '<div class="img-topbar-wrap itemPic"><ul class="img-topbar-list clearfix"><li><b>时间：</b><i>' + this.visited + '</i></li>' +
-                '<li> <b>用户：</b><i>' + this.user + '</i></li><li><b>标题：</b><i>' + this.title + '</i></li><li><b>病症：</b><i>' + this.conditions + '</i></li></ul></div>';
 
-        topBar += '<div class="itemPic"><div class="pic"><div class="itemsign itemsign-0' + that.getTipsName(this.photos.tips) + '"></div><a class="fancybox" photoId="' + this.photos.photoid + '" rel="item_group" title="" href="' + this.photos.path + '"><img src="' + this.photos.path + '"/></a></div></div>';
-
-    });
 </script>
 </body>
 </html>
