@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+	<style>
+		#tile {
+			position: absolute;
+			left: 100px;
+			top: 100px;
+			background: #999;
+			width: 200px;
+			height: 100px;
+			color: #FFF;
+			font-size: 14px;
+			-webkit-transition: -webkit-transform .1s;
+			transition: transform .1s;
+		}
+		.test {
+			-webkit-transform: perspective(400px) rotateY(5deg);
+			-webkit-transform-origin: left center;
+			transform: perspective(400px) rotateY(5deg);
+			transform-origin: left center;
+		}
+	</style>
+</head>
+<body>
+	<div id="tile">单击我试试</div>
+	<script>
+		tile.onmousedown = function() {
+			this.className = 'test';
+		}
+		tile.onmouseup = function() {
+			this.className = '';
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+    	body{background:#000;}
+    	#c1{background:#fff;}
+
+    </style>
+
+</head>
+<body>
+<canvas id="c1" width="800" height="600"></canvas>
+<script type="text/javascript">
+	var oC = document.getElementById('c1');
+	var gd = oC.getContext('2d');
+
+	var oImg = new Image();
+	oImg.onload = function(){
+		var i = 0;
+		setInterval(function(){
+			gd.clearRect(0, 0, 800, 800);
+
+			gd.drawImage(
+				oImg, 
+				0, i * 60, 60, 60,
+				172, 179, 140, 140
+			);
+
+			i++;
+
+			if(i == 10){ i = 0; }
+		}, 70);
+		
+	}
+
+	oImg.src = 'coinAni2.png';
+
+
+</script>
+</body>
+</html>
