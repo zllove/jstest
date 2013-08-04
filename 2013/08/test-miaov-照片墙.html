@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		body{background:#fff;}
+		#ul1{width:520px;margin:0 auto;}
+		#ul1 li{float:left;width:110px;margin:10px;list-style:none;z-index:1;}
+		#ul1 li img{width:110px;height:110px;}
+	</style>
+</head>
+<body>
+	<ul id="ul1">
+		<li><img src="http://images.vjia.com/220/product/2/2/3/2238650/big/__aw1nmdi=__20130407161342_9601.jpg" alt=""></li>
+		<li><img src="http://images.vjia.com/220/product/3/7/2/3720601/big/__aw1nmdi=__20130428104652_9999.jpg" alt=""></li>
+		<li><img src="http://images.vjia.com/220/product/4/0/3/4037435/big/__aw1nmdi=__20130715143129_9549.jpg" alt=""></li>
+		<li><img src="http://images.vjia.com/220/product/3/7/5/3752902/big/__aw1nmdi=__20130509152811_0150.jpg" alt=""></li>
+		<li><img src="http://images.vjia.com/220/product/3/8/6/3860352/big/__aw1nmdi=__20130527145920_6076.jpg" alt=""></li>
+		<li><img src="http://images.vjia.com/220/product/4/0/3/4031346/big/__aw1nmdi=__20130711144143_9761.jpg" alt=""></li>
+		<li><img src="http://images.vjia.com/220/product/4/1/2/4121794/big/__aw1nmdi=__20130727171858_0712.jpg" alt=""></li>
+		<li><img src="http://images.vjia.com/220/product/3/8/2/3826761/big/__aw1nmdi=__20130514114516_6680.jpg" alt=""></li>
+		<li><img src="http://images.vjia.com/220/product/3/8/5/3859250/big/__aw1nmdi=__20130527133740_0378.jpg" alt=""></li>
+		<li><img src="http://images.vjia.com/220/product/3/8/2/3825352/big/__aw1nmdi=__20130619114623_6466.jpg" alt=""></li>
+		<li><img src="http://images.vjia.com/220/product/3/9/1/3919663/big/__aw1nmdi=__20130619143827_9861.jpg" alt=""></li>
+		<li><img src="http://images.vjia.com/220/product/3/4/4/3449468/big/__aw1nmdi=__20130222112112_2037.jpg" alt=""></li>
+	</ul>	
+	<script type="text/javascript">
+		var oUl = document.getElementById('ul1');
+		var aLi = oUl.getElementsByTagName('li');
+		var i = 0;
+		var minZndex = 2;
+		var arr = [];
+
+		for(i = 0; i < aLi.length; i++){
+			arr[i] = {left : aLi[i].offsetLeft, top : aLi[i].offsetTop};
+		}
+
+		for(i = 0; i < aLi.length; i++){
+			aLi[i].style.position = 'absolute';
+			aLi[i].style.top = arr[i].top + 'px';
+			aLi[i].style.left = arr[i].left + 'px';
+			aLi[i].style.margin = 0;
+			setDrag(aLi[i]);
+		}
+
+		function setDrag(obj){
+		    obj.onmousedown = function(e){
+		    	e = e || event;
+		    	obj.style.zIndex = minZndex++;
+		    	var disX = e.clientX - obj.offsetLeft;
+		    	var disY = e.clientY - obj.offsetTop;
+
+		    	document.onmousemove = function(e){
+		    		e = e || event;
+		    		obj.style.left = e.clientX - disX + 'px';
+		    		obj.style.top = e.clientY - disY + 'px';
+		    	}
+		    	document.onmouseup = function(){
+		    		document.onmousemove = null;
+		    		document.onmouseup = null;
+		    	}
+		    	return false;
+		    }
+		}
+
+	</script>
+</body>
+</html>
