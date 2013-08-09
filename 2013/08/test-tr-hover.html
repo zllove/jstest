@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.min.js"></script>
+    <style type="text/css">
+        body{background: none;}
+        .norm-data-del{ color:#000;}
+        .none{ display:none;}
+    </style>
+</head>
+
+<body>
+<table width="100%" border="1" class="tab">
+    <tr>
+        <td>指标名称</td>
+        <td>数值</td>
+        <td>总量</td>
+        <td>参考数值</td>
+        <td>关联图片</td>
+    </tr>
+    <tr>
+        <td rowspan="2">
+            <a class="norm-data-del none" href="javascript:void(0)">X</a>
+        </td>
+        <td>bb</td>
+        <td>111</td>
+        <td>1122</td>
+        <td rowspan="2">cc</td>
+    </tr>
+    <tr>
+        <td colspan="3">233333</td>
+    </tr>
+    <tr>
+        <td rowspan="2">aa</td>
+        <td>bb</td>
+        <td>111</td>
+        <td>1122</td>
+        <td rowspan="2">cc</td>
+    </tr>
+    <tr>
+        <td colspan="3">233333</td>
+    </tr>
+</table>
+<script type="text/javascript">
+    var timer = null;
+    $('.tab tr').hover(function(){
+        if(timer) clearTimeout(timer);
+        $(this).find('.norm-data-del').stop(true).fadeIn();
+    }, function(){
+        var _this = this;
+        timer = setTimeout(function(){
+            $(_this).parent().find('.norm-data-del').stop(true).fadeOut();
+        }, 200);
+    });
+</script>
+</body>
+</html>
