@@ -44,6 +44,7 @@
 			aLi[i].style.top = arr[i].top + 'px';
 			aLi[i].style.left = arr[i].left + 'px';
 			aLi[i].style.margin = 0;
+			aLi[i].index = i;
 			setDrag(aLi[i]);
 		}
 
@@ -60,21 +61,20 @@
 		    		obj.style.top = e.clientY - disY + 'px';
 
 		    		for(i = 0; i < aLi.length; i++){
-		    			/*
-		    			if(obj == aLi[i]){
-		    				continue;
-		    			}
-		    			*/
-		    			if(obj != aLi[i] && cTest(obj, aLi[i])){
-		    				aLi[i].className = 'on';
-		    			} else {
-		    				aLi[i].className = '';
+		    			aLi[i].className = '';
+		    			var oNear = findNearest(obj);
+		    			if(oNear){
+		    				oNear.className = 'on';
 		    			}
 		    		}
 		    	}
 		    	document.onmouseup = function(){
 		    		document.onmousemove = null;
 		    		document.onmouseup = null;
+
+		    		var oNear = findNearest(obj);
+		    		startMove(obj, arr[oNear.index]);
+		    		startMove(oNear, arr[obj.index]);
 		    	}
 		    	return false;
 		    }
@@ -96,6 +96,33 @@
 		    	return false;
 		    } else {
 		    	return true;
+		    }
+		}
+
+		function getDis(obj1, obj2){
+		    var a = obj1.offsetLeft - obj2.offsetLeft;
+		    var b = obj1.offsetTop - obj2.offsetTop;
+		    return Math.sqrt(a * a + b * b);
+		}
+
+		// 找到最近的一个
+		function findNearest(obj){
+		    var iMin = 999999999;
+		    var iMinIndex = -1;
+		    for(var i = 0; i < aLi.length; i++){
+		    	if(cTest(obj, aLi[i]) && obj != aLi[i]){
+		    		var dis = getDis(obj, aLi[i]);
+		    		if(iMin > dis){
+		    			iMin = dis;
+		    			iMinIndex = i;
+		    		}
+		    	}
+		    }
+
+		    if(iMinIndex == -1){
+		    	return null;
+		    } else {
+		    	return aLi[iMinIndex];
 		    }
 		}
 
