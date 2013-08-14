@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>JS省份四级联动</title>
+</head>
+
+<body>
+<form action="" method="get">
+    <select name="province" id="province">
+        <option value="省份" selected="selected">省份</option>
+    </select> <select name="city" id="city">
+    <option value="城市" selected="selected">市县</option>
+</select> <select name="district" id="district">
+    <option value="县区" selected="selected">区镇</option>
+</select> <select name="town" id="town">
+    <option value="镇乡" selected="selected">镇乡</option>
+</select>
+</form>
+<script type="text/javascript">
+    var province = document.getElementById('province');
+    var city = document.getElementById('city');
+    var district = document.getElementById('district');
+    var town = document.getElementById('town');
+    //以下数组的第一个元素为索引
+    //省市→数组
+    var provinceArr = ['江西省', '福建省'];
+    //省市→县市→数组
+    var cityArr = [
+        ['江西省', '新余市', '南昌市', '景德镇市', '萍乡市', '九江市', '鹰潭市', '赣州市', '吉安市', '宜春市', '抚州市', '上饶市'],
+        ['福建省', '福州市', '厦门市', '莆田市', '三明市', '泉州市', '漳州市', '南平市', '龙岩市', '宁德市'],
+    ];
+    //省市→县市→区县→数组
+    var districtArr = [
+        ['新余市', '渝水区', '分宜县'],
+    ];
+    //省市→县市→区县→镇乡→数组
+    var townArr = [
+        ['渝水区', '下村镇', '九龙山乡', '人和乡', '南安乡', '城北街道', '城南街道', '姚圩镇', '新溪乡', '新钢街道', '欧里镇', '水北镇', '水西镇', '河下镇', '珠珊镇', '界水乡', '罗坊镇', '良山镇', '袁河街道', '观巢镇', '鹄山乡'],
+    ];
+    //生成省份
+    for (var key in provinceArr) {
+        var provinceOption = document.createElement('option');
+        provinceOption.value = provinceOption.text = provinceArr[key];
+        //向省份的select里增加provinceArr<option>省份名</option>
+        //document.getElementById('province').appendChild();IE下不兼容
+        province.options.add(provinceOption);
+    }
+    //生成市县、区县、镇乡
+    //@current为当前选择的select节点，即父类节点
+    //@child为子类点
+    //@childArr为子节点数组
+    function showChild(current, child, childArr) {
+        var currentValue = current.value;
+        var count = childArr.length;
+        //每次切换时,把城市的子option长度设置为1,即清除城市的选择,DOM对象select元素是长度是子option的个数
+        child.length = 1;
+        //切换省份时,把县区长度也设置为1
+        district.length = 1;
+        for (var i = 0; i < count; i++) {
+            //判断所选的值即父类，与当前节点第一个数组元素是否相等
+            if (currentValue == childArr[i][0]) {
+                //不取第一个数组元素,因为第一个是父类，所以j从1开始，而不是0
+                for (var j = 1; j < childArr[i].length; j++) {
+                    var childOption = document.createElement('option');
+                    //ie不支持option对象的value,所以加childOption.text
+                    childOption.value = childOption.text = childArr[i][j];
+                    //上次把市县的id写为cite,导致火狐下的doucment.getElementById('city')的对象为空
+                    //脚本中断执行,即只循环一次,但IE的name可直接做对DOM对象,循环仍继续
+                    child.options.add(childOption);
+                }
+            }
+        }
+    }
+    //省份改变时
+    province.onchange = function () {
+        showChild(province, city, cityArr);
+    }
+    //市县改变时
+    city.onchange = function () {
+        showChild(city, district, districtArr);
+    }
+    //区县改变时
+    district.onchange = function () {
+        showChild(district, town, townArr);
+    }
+</script>
+</body>
+</html>

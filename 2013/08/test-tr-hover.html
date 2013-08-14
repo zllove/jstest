@@ -44,6 +44,7 @@
     </tr>
 </table>
 <script type="text/javascript">
+    /*
     var timer = null;
     $('.tab tr').hover(function(){
         if(timer) clearTimeout(timer);
@@ -53,6 +54,15 @@
         timer = setTimeout(function(){
             $(_this).parent().find('.norm-data-del').stop(true).fadeOut();
         }, 200);
+    });
+    */
+
+    $('.tab').on('mouseenter', 'tr', function(){
+        $(this).find('.norm-data-del').stop(true).fadeIn();
+    });
+
+    $('.tab').on('mouseleave', 'tr', function(){
+        $(this).find('.norm-data-del').stop(true).fadeOut();
     });
 </script>
 </body>
