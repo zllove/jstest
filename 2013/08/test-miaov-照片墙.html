@@ -36,7 +36,7 @@
 		var arr = [];
 
 		for(i = 0; i < aLi.length; i++){
-			arr[i] = {left : aLi[i].offsetLeft, top : aLi[i].offsetTop};
+			arr[i] = {left : aLi[i].offsetLeft, top : aLi[i].offsetTop}; // 记录当前位置，以便后期做交换位置
 		}
 
 		for(i = 0; i < aLi.length; i++){
@@ -44,7 +44,7 @@
 			aLi[i].style.top = arr[i].top + 'px';
 			aLi[i].style.left = arr[i].left + 'px';
 			aLi[i].style.margin = 0;
-			aLi[i].index = i;
+			aLi[i].index = i; // 标记位
 			setDrag(aLi[i]);
 		}
 
@@ -73,8 +73,19 @@
 		    		document.onmouseup = null;
 
 		    		var oNear = findNearest(obj);
-		    		startMove(obj, arr[oNear.index]);
-		    		startMove(oNear, arr[obj.index]);
+		    		if(oNear){ // 如果碰撞到物体
+		    			oNear.className = '';
+
+		    			startMove(obj, arr[oNear.index]);
+			    		startMove(oNear, arr[obj.index]);
+
+			    		var tmp = 0;
+			    		tmp = oNear.index;
+			    		oNear.index = obj.index;
+			    		obj.index = tmp;
+		    		} else { // 如果没有碰撞
+		    			startMove(obj, arr[obj.index]);
+		    		}
 		    	}
 		    	return false;
 		    }
