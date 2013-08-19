@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.10.1.js"></script>
+</head>
+<body>
+<div class="see-ill-opts">
+    <select name="" id="illType">
+        <option value="">病理类型</option>
+    </select>
+    <select name="" id="illFine">
+        <option value="">病理细分</option>
+    </select>
+    <select name="" id="illStages">
+        <option value="">分期</option>
+    </select>
+</div>
+<script type="text/javascript">
+    $('#illType').illCascade({
+        items : [
+            ['非小细胞', '小细胞'],
+            ['非小细胞', '腺癌', '鳞癌', '大细胞癌', '其他非小细胞'],
+            ['小细胞', '小细胞', '混合性癌'],
+            ['非小细胞', 'IA期', 'IB期', 'IIA期', 'IIB期', 'IIIA期', 'IIIB期', 'IV期'],
+            ['局限期', '广泛期']
+        ]
+    });
+
+    (function(win, $){
+        /**
+         * 病症级联
+         * @param {Object} options
+         */
+        $.fn.illCascade = function(options){
+            var defaults = {
+                    },
+                    opts = $.extend({}, defaults, options),
+                    that = $(this),
+                    items = opts.items,
+                    key = null,
+                    option = null,
+                    len = opts.items.length;
+
+            for(key in items[0]){
+                option = document.createElement('option');
+                option.value = option.text = items[0][key];
+                that[0].options.add(option);
+            }
+
+            that.on('change', function(){
+                showChild(this, that.next()[0], items[1]);
+            });
+
+            function showChild(current, child, childArr){
+                var currentVal = current.value,
+                        i = 0,
+                        j = 0;
+
+                for(i = 0; i < childArr.length; i++){
+                    if(currentVal == childArr[1]){
+                        for(j = 1; j < childArr.length; j++){
+                            var childOptions = document.createElement('option');
+                            childOptions.value = childOptions.text = childArr[i][j]
+                            child.options.add(childOptions);
+                        }
+                    }
+                }
+            }
+        }
+    }(window, jQuery));
+</script>
+</body>
+</html>
