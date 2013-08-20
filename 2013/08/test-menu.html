@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+    <title>Farmol.cn</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type="text/css">
+        body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
+        body{font-family:微软雅黑;font-size:16px;height:30px;font-weight:normal;font-style:normal;text-decoration:none;color:#999999;padding-left:5px;}
+        li{list-style:none;}
+        h3{font-family:微软雅黑;font-size:16px;font-weight:normal;font-style:normal;text-decoration:none;color:#333333;}
+        .bold{font-weight:bold;}
+        .inline{display:inline;}
+        .float_left{float:left;}
+        .font_14{font-size:14px;line-height:1.2;}
+        .container{width:100%;min-width:1200px;margin:0 auto;}
+        .header{position:relative;width:100%;height:61px;z-index:1;box-shadow:0 2px 4px rgba(0,0,0,0.3);background-color:#f3f3f3;}
+        .logo_area{margin:0 auto;width:1200px;}
+        .account_info{float:right;margin:30px 10px 0 0;}
+        .navi_process{height:40px;line-height:2.5;background-color:#449934;color:#fff;}
+        .container_box{overflow:hidden;margin:15px auto;box-shadow:0 3px 3px #ddd;border-radius:5px;width:1200px;min-height:650px;border:1px solid #d3d3d3;background-color:#fff;}
+        .container_box .title_bar{height:40px;background-image:-webkit-linear-gradient(top,#fff 0,#f1f1f1 100%);border-bottom:1px solid #d7d7d7;}
+        .container_box .left_bar{height:100%;width:240px;float:left;}
+        .self_info{margin:20px 0 0 20px;display:inline-block;}
+        .home_content{width:552px;min-height:700px;border-left:1px solid #d3d3d3;border-right:1px solid #d3d3d3;float:left;}
+        .footer{height:60px;}
+        img.logo{position:relative;top:15px;}
+        p.title{float:left;margin:8px 0 0 15px;}
+        ul.register_process_container{margin:0 auto;width:1200px;}
+        ul.leftbar_navi{text-align:center;margin-top:20px;}
+        input.inputbox{width:400px;height:40px;margin:10px 0 10px 0;border:1px solid #b3b3b3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);font-size:16px;font-family:"Microsoft Yahei","微软雅黑",Arial,Helvetica,sans-serif;}
+        input.account_center{cursor:pointer;width:61px;height:20px;text-align:center;margin-left:10px;}
+            /*footer内容*/
+        .footer{margin:30px auto;width:1100px;height:30px;font-size:14px;font-weight:bold;color:#b2b2b2;}
+        .self_info_content{float:left;width:141px;margin-left:15px;}
+        p.bonus{margin-top:5px;display:inline-block;width:111px;}
+        p.bonus a{float:left;width:200px;}
+        p.leftbar_navi_title{position:relative;top:10px;color:#333;}
+        p.leftbar_navi_title_current{position:relative;top:10px;color:#fff;}
+        p.footer_left{float:left;}
+        p.footer_right{float:right;font-weight:normal;}
+        p.about_navi{position:relative;top:3px;left:-30px;text-align:center;}
+        a{color:#449934;text-decoration:none;}
+        a.navi_tab{width:135px;text-align:center;float:left;color:#f4f4f4;text-shadow:0 1px 3px #227014;}
+        a.navi_tab:hover{background-color:rgba(255,255,255,0.1);}
+        a.current{background-color:#38712c;}
+        a.button{margin:0 10px 0 10px;position:relative;top:30px;border:1px solid #3d810c;box-shadow:0 1px 1px #aaa;padding:8px 30px;cursor:pointer;text-align:center;border-radius:5px;-webkit-border-radius:5px;background-color:#56a447;background-image:-webkit-linear-gradient(bottom,#56a447 3%,#60b452 97%,#60b452 100%);color:#fff;}
+        a.button:hover{background-color:#4f9841;background-image:-webkit-linear-gradient(top,#5aab4d 0,#4f9841 100%);box-shadow:0 2px 2px #aaa;}
+        a.leftbar_navi_button{height:40px;display:block;border:1px solid #fff;}
+        a.leftbar_navi_button:hover{background-image:-webkit-linear-gradient(bottom,#ededed 3%,#fafafa 97%,#fafafa 100%);border:1px solid #ededed;}
+        a.leftbar_navi_button_current{height:40px;display:block;border:1px solid #fff;background-image:-webkit-linear-gradient(bottom,#65a559 3%,#85c778 97%,#85c778 100%);border:1px solid #65a559;}
+        a.about{color:#999;text-decoration:none;margin:0 15px 0 0;}
+        .menu_body{display:none;}
+        .menu_body a{display:block;color:#006699;background-color:#EFEFEF;padding-left:10px;font-weight:bold;text-decoration:none;}
+        .leftbar_navi{text-align:center;margin-top:20px;}
+        .leftbar_navi_button_current{height:40px;display:block;border:1px solid #fff;background-image:-webkit-linear-gradient(bottom,#65a559 3%,#85c778 97%,#85c778 100%);border:1px solid #65a559;color:#fff;line-height:40px;}
+        .leftbar_navi_button{color:#333333;line-height:40px;height:40px;display:block;border-bottom:1px solid #d3d3d3;background:url(../img/button_u132_selected.png);background-position:-4px;}
+        .menu_body{display:none;}
+        .menu_body a{display:block;color:#006699;background-color:#EFEFEF;padding-left:10px;font-weight:bold;text-decoration:none;}
+        .menu_body a:hover{color:#000000;text-decoration:underline;}
+        .balance{width:195px;height:64px;border:1px solid #e1e1e1;margin:15px 20px 15px 10px;text-align:left;padding-left:15px}
+        .balance h4{font-family:微软雅黑;font-size:14px;font-weight:normal;font-style:normal;text-decoration:none;color:#999999;}
+        .balance p{text-align:left;font-size:28px;color:#FF9797;}
+        .menu_body ul li.activeser{background-position:-3px;background:url(../../img/u114_mouseDown.png);}
+        .menu_body ul li{width:240px;height:36px;display:inline-block;background:url(../img/u114_normal.png);line-height:33px;font-size:14px;background-position:-3px;margin-top:-5;}
+        .menu_body ul li:hover{background-position:-3px;background:url(../img/u114_mouseOver.png);}
+        ;.home_content{width:958px;min-height:700px;border-left:1px solid #d3d3d3;border-right:1px solid #d3d3d3;float:left;}
+        .home_content #body_1{width:898px;margin:15px 20px;}
+        .home_content #body_1 span{background:#f0f0f0;width:902px;height:46px;display:inline-block;}
+        .home_content #body_1 li{width:902px;height:46px;display:inline-block;background:#fff;}
+        .home_content #body_1 span h3{color:#666666;display:inline-block;margin:10px;}
+        .home_content #body_1 span input{width:80px;height:25px;float:right;margin:10px;}
+        #body_1 .dataTittle{width:892px;height:36px;display:inline-block;padding-top:10px;padding-left:10px;}
+        .home_content #body_1 li:hover{background:#f0f0f0;}
+        .home_content #body_1 li p{padding-top:10px;padding-left:10px;color:#333333}
+        .romerms{width:23px;height:23px;background:url(../img/u7_normal.png);display:inline-block;float:right;margin-top:-20px;margin-right:10px;}
+        .home_content div.fb{display:block}
+        .home_content div.fh{display:none}
+        a.leftbar_navi_button.curr{height:40px;display:block;border:1px solid #fff;background-image:-webkit-linear-gradient(bottom,#65a559 3%,#85c778 97%,#85c778 100%);border:1px solid #65a559;}
+        .romerimg{width:23px;height:23px;background:url(../img/u5_normal.png);display:inline-block;float:right;margin-top:-20px;margin-right:10px;}
+        .home_content #body_2{width:898px;margin:15px 20px;}
+        .home_content #body_2 span{background:#f0f0f0;width:902px;height:46px;display:inline-block;}
+        .home_content #body_2 li{width:902px;height:46px;display:inline-block;background:#fff;}
+        .home_content #body_2 span h3{color:#666666;display:inline-block;margin:10px;}
+        .home_content #body_2 span input{width:80px;height:25px;float:right;margin:10px;}
+        #body_2 .dataTittle{width:892px;height:36px;display:inline-block;padding-top:10px;padding-left:10px;}
+        .home_content #body_2 li:hover{background:#f0f0f0;}
+        .home_content #body_2 li p{padding-top:10px;padding-left:10px;color:#333333}
+        .leftbar_navi li{height:42px;border:1px solid #ededed;}
+        .leftbar_navi li:hover{height:42px;background-image:-webkit-linear-gradient(bottom,#ededed 3%,#fafafa 97%,#fafafa 100%);border:1px solid #ededed;}
+        a.about{color:#999;text-decoration:none;margin:0 15px 0 0;}
+        .leftbar_navi li.curr{height:42px;display:block;background-image:-webkit-linear-gradient(bottom,#65a559 3%,#85c778 97%,#85c778 100%);border:1px solid #65a559;resize:none;}
+        img.follow{position:relative;top:3px;margin:0 10px 0 25px;}
+        img.logo{position:relative;top:15px;}
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="logo_area">
+            <img src="img/logo_normal.png" class="logo" alt="自助生态农场" />
+            <div class="account_info">
+                <a href="#">通知(1)</a>张三的农场 | <a href="farmol_home.html">退出</a>
+            </div>
+        </div>
+    </div>
+    <div class="navi_process">
+        <ul class="register_process_container">
+            <li><a href="#" class="navi_tab current">首页</a></li>
+            <li><a href="#" class="navi_tab">农场</a></li>
+            <li><a href="#" class="navi_tab">仓库</a></li>
+            <li><a href="#" class="navi_tab">友邻</a></li>
+            <li><a href="#" class="navi_tab">市场</a></li>
+            <li><a href="#" class="navi_tab">设置</a></li>
+        </ul>
+    </div>
+    <div class="container_box">
+        <div class="title_bar">
+            <p class="title">首页</p>
+        </div>
+        <div class="left_bar">
+            <div class="self_info">
+                <img src="img/avatar.png" class="float_left" alt="个人头像">
+                <div class="self_info_content">
+                    <p class="bold inline">张三</p><input type="submit" class="account_center" value="个人中心">
+                    <p class="bonus font_14">
+                        <a href="#">积分 200</a><br />
+                        <a href="#">余额 ￥2320.00</a>
+                    </p>
+                </div>
+            </div>
+            <a  class="actives leftbar_navi_button current">
+                交易信息
+            </a>
+            <div class="menu_body">
+                <div class="balance">
+                    <h4>当前余额</h4>
+                    <p>￥232.56</p>
+                </div>
+                <ul>
+                    <li>立即充值</li>
+                    <li>提现</li>
+                </ul>
+            </div>
+            <a  class="actives leftbar_navi_button">
+                指令反馈
+            </a>
+            <div class="menu_body">
+                <div class="balance">
+                    <h4>当前余额</h4>
+                    <p>￥232.56</p>
+                </div>
+                <ul>
+                    <li>立即充值</li>
+                    <li>提现</li>
+                </ul>
+            </div>
+        </div>
+        <div class="home_content">
+            <div  class="fb fn" style="background:red">
+                adas
+            </div>
+            <div  class="fh fn" style="background:blue">
+                asdsa
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p class="footer_left">关注我们：<img class="follow" src="img/sina-weibo.png" />新浪微博<img class="follow" src="img/qq.png" />腾讯微博</p>
+        <p class="footer_right">Copyright © Farmol.cn 2013</p>
+        <p class="about_navi">
+            <a class="about" href="#">关于我们</a>
+            <a class="about" href="#">相关政策</a>
+            <a class="about" href="#">生态旅游</a>
+            <a class="about" href="#">联系方式</a>
+            <a class="about" href="#">友情加盟</a>
+        </p>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var num = 0;
+        $(".actives").mouseover(function () {
+            $(this).next("div.menu_body").slideDown(500).siblings("div.menu_body").slideUp("slow");
+        });
+        var act = $(".container_box").find('a.actives');
+        act.on('click', function () {
+            var obj = $(this).parent().nextAll();
+            var index = act.index($(this));
+            $(this).addClass('current').siblings().removeClass('current');
+            obj.find('.fn').eq(index).css('display', 'block').siblings().css('display', 'none');
+        })
+    });
+</script>
+</body>
+</html>
