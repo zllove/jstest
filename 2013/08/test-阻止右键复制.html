@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    function returnRight(){
+        document.onkeydown = function(){
+            if (event.ctrlKey) {
+                return false;
+            }
+        };
+
+        document.oncontextmenu = function(){
+            window.event.returnValue = false;
+        };
+    }
+</script>
+</body>
+</html>
