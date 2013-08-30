@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../jquery.cookie.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    function setCookie(userID) {
+        var oVal = $.cookie(userID);
+        if (oVal && (oVal == "theSecond")) {
+            //这里cookie有值，说明不是第一次登录
+            //不弹出广告图片--不做任何操作
+            alert('我是第二次登录');
+        } else {
+            //这里因为第一次登录，没有记录cookie的值
+            //弹出广告图片
+            alert('我是第一次登录！');
+            $.cookie(userID, "theSecond");
+        }
+    }
+
+    setCookie('jikey')
+</script>
+</body>
+</html>
