@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+    <style type="text/css">
+        div{
+            float:left;
+            overflow:hidden;
+        }
+        #left{
+            width:200px;
+            border:1px solid #ccc;
+            padding:5px 10px;
+        }
+        #right{
+            margin-left:20px;
+            width:200px;
+            border:1px solid red;
+            padding:5px 10px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="left">
+    <input type="text"><br> <input type="text"><br> <input type="text"><br> <input type="text"><br>
+    <input type="text"><br> <input type="text"><br> <input type="text"><br> <input type="text"><br>
+    <input type="text"><br>
+</div>
+<div id="right">
+    <input type="text"><br>
+</div>
+<script type="text/javascript">
+    var inpL = document.getElementById('left').getElementsByTagName('input');
+    var inpR = document.getElementById('right').getElementsByTagName('input')[0];
+    var index = 0;
+    for (var i = 0; i < inpL.length; i++) {
+        inpFun(inpL[i], i);
+    }
+    ;
+    function inpFun(node, eq) {
+        node.eq = eq;
+        node.onfocus = function () {
+            var that = this;
+            index = that.eq;
+            document.body.onkeyup = function () {
+                inpR.value = that.value;
+            };
+        };
+        node.onblur = function () {
+            document.body.onkeyup = undefined;
+        };
+    }
+    ;
+    inpR.onfocus = function () {
+        document.body.onkeyup = function () {
+            inpL[index].value = inpR.value;
+        };
+    };
+    inpR.onblur = function () {
+        document.body.onkeyup = undefined;
+    };
+</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+</head>
+<body>
+<div id="test"></div>
+<script type="text/javascript">
+    function jsonToStr(json) {
+        if (json instanceof Array) { // 如果是数组
+            var tmpArr = [];
+            for (var i = 0; i < json.length; i++) {
+                tmpArr.push(jsonToStr(json[i])); // 递归
+            }
+            return '[' + tmpArr.join(",") + ']'; // 如果json是数组，那么最终会return这个
+        } else if (json instanceof Object) { // 如果是对象
+            var tmpArr = [];
+            for (var n in json) {
+                tmpArr.push('"' + n + '":' + jsonToStr(json[n])); // 递归
+            }
+            return '{' + tmpArr.join(",") + '}'; // 如果json是对象，那么最终会return这个
+        } else if (typeof json == 'string') { // 如果是字符串
+            return '"' + json.replace(/(\\|\")/g, "\\$1").replace(/\n/g, "\\n") + '"'; // 如果json是字符串，就过滤掉斜杠、双引号、换行再返回
+        } else {
+            return json; // 否则就原样返回
+        }
+    }
+
+    var carData = {
+        "'34'": {
+            "name": "A 阿斯顿·马丁",
+            "brand": {
+                "'61'": {
+                    "name": "阿斯顿·马丁",
+                    "pserise": {
+                        "'298'": {
+                            "name": "Rapide",
+                            "import": "2",
+                            "model": {
+                                "'11563'": "Rapide 6.0L S",
+                                "'5290'": "Rapide 6.0L"
+                            }
+                        },
+                        "'299'": {
+                            "name": "V12 Vantage",
+                            "import": "2",
+                            "model": {
+                                "'11446'": "V12 Vantage 6.0L S",
+                                "'8947'": "V12 Vantage 6.0 Roadster",
+                                "'5291'": "V12 Vantage 6.0 Manual Coupe"
+                            }
+                        },
+                        "'629'": {
+                            "name": "V12 Zagato",
+                            "import": "2",
+                            "model": {
+                                "'9037'": "V12 Zagato 6.0L"
+                            }
+                        },
+                        "'300'": {
+                            "name": "V8 Vantage",
+                            "import": "2",
+                            "model": {
+                                "'5292'": "V8 Vantage 4.7 S Coupe",
+                                "'5293'": "V8 Vantage 4.7 S Roadster",
+                                "'5294'": "V8 Vantage 4.7 Sportshift Coupe",
+                                "'5295'": "V8 Vantage 4.7 Sportshift Roadster"
+                            }
+                        },
+                        "'643'": {
+                            "name": "Vanquish",
+                            "import": "2",
+                            "model": {
+                                "'9057'": "Vanquish 6.0 基本型"
+                            }
+                        },
+                        "'301'": {
+                            "name": "Virage",
+                            "import": "2",
+                            "model": {
+                                "'5301'": "Virage 6.0 Coupe",
+                                "'5302'": "Virage 6.0 Volante"
+                            }
+                        },
+                        "'302'": {
+                            "name": "阿斯顿马丁DB9",
+                            "import": "2",
+                            "model": {
+                                "'10244'": "阿斯顿马丁DB9 6.0L Coupe"
+                            }
+                        },
+                        "'303'": {
+                            "name": "阿斯顿马丁DBS",
+                            "import": "2",
+                            "model": {
+                                "'5311'": "阿斯顿马丁DBS 6.0 Touchtronic Coupe",
+                                "'5312'": "阿斯顿马丁DBS 6.0 Manual Volante",
+                                "'5313'": "阿斯顿马丁DBS 6.0 Touchtronic Volante",
+                                "'5314'": "阿斯顿马丁DBS 6.0 Manual Coupe"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+
+    function df(io) {
+        var dd = "<ul>";
+        for (var i in io) {
+            console.log(io[i]);
+            dd += "<li><b>" + i + ":</b> " + (typeof(io[i]) == "object" ? df(io[i]) : io[i]) + "</li>";
+        }
+        dd += "</ul>";
+        return dd;
+    }
+    document.getElementById('test').innerHTML = df(carData);
+    console.log(df(carData));
+
+</script>
+</body>
+</html>
