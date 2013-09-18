@@ -1,29 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <meta charset="utf-8"/>
     <title>test</title>
-    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.1.min.js"></script>
 </head>
 <body>
-<div class="scrolltop-wrap">
-    <div class="scrolltop-list">
-        <div class="scrolltop-wx-img">
-            <div class="scrolltop-wx-title">
-                <h1>微信扫一扫</h1>
-                <a class="scrolltop-wx-close" href="javascript:void(0)">关闭</a>
-            </div>
-            <div class="scrolltop-wx-pic"></div>
-        </div>
-        <a class="scrolltop-wx-call" href="javascript:void(0)"></a>
-        <a class="scrolltop-btn" href="javascript:void(0)"></a>
-    </div>
-</div>
+<ul>
+    <li>11 <span>1111</span></li>
+    <li>22</li>
+    <li>33</li>
+</ul>
 <script type="text/javascript">
-$().on('click',selector, function(){
-    // code
-});
+var oLi = document.getElementsByTagName('li');
+for(var i = 0; i < oLi.length; i++){
+    var oMenu = oLi[i].getElementsByTagName('dl');
+    console.log(oMenu);
+}
 </script>
 </body>
 </html>
