@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <style type="text/css">
+        #head {
+            height: 120px;
+            width: 100%;
+            border: 1px solid red;
+            /*diplay: inline-block;
+            vertical-align: top;*/
+        }
+
+        #head>#headerleft {
+            height: 120px;
+            position:absolute;top: 10px;left: 10px;
+            width: 430px;border: 1px solid green;
+            background-image: url(image/headerleft.gif);
+            background-repeat: no-repeat;
+            background-position: left top;
+        }
+        #head>#headercenter {border: 1px solid blue;
+            height: 120px;margin: 0 460px 0 440px;
+            background-image: url(image/headercenter.gif);
+            background-repeat: repeat-x;
+            background-position: center top;
+        }
+        #head>#headerright {
+            position:absolute;top: 10px;right: 10px;
+            height: 120px;
+            width: 450px;
+            border: 1px solid red;
+            background-image: url(image/headerright.gif);
+            background-repeat: no-repeat;
+            background-position: right top;
+        }
+
+    </style>
+</head>
+<body>
+<div id="head">
+    <div id="headerleft"></div>
+    <div id="headercenter"></div>
+    <div id="headerright"></div>
+</div>
+
+</body>
+</html>

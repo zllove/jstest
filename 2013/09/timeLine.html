@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>时间轴简单实现</title>
+	<script>
+		var TimeLine = function(scope) {
+			// state = -1 等待状态
+			// state = 0 队列闲置状态
+			// state = 1 队列执行中
+			var _state = 0,
+				_queue = [];
+
+			_scope = scope || window;
+
+			function _finish() {
+				if (_state != -1) {
+					var len = _queue.length;
+
+					if (len) {
+						var q = _queue.shift();
+						if (typeof q.delay !== 'undefined') {
+							_state = -1;
+							setTimeout(function() {
+								_state = 1;
+								_finish();
+							}, q.delay);
+						} else {
+							q.fun.apply(q.scope, q.args);
+
+							_queue.length && _finish();
+						}
+					}
+				}
+			}
+
+			return {
+				/**
+				 * 设置执行函数
+				 * @param {Function} fun 要执行的函数
+				 * @param {Array} args 传递的参数
+				 * @param {Object} scope 函数的执行上下文环境
+				 */
+				run : function(fun, args, scope) {
+					if (typeof fun !== 'function') { return this; }
+
+					// 仅有两个参数时：function(fun, scope);
+					if ({}.toString.call(args).toLowerCase() !== '[object array]') {
+						scope = args;
+						args = [];
+					}
+
+					_queue.push({
+						fun   : fun,
+						args  : args,
+						scope : scope || _scope
+					});
+
+					~_state || _finish();
+
+					return this;
+				},
+				/**
+				 * 延迟方法
+				 * @param {Number} time 延迟时间，单位：秒
+				 */
+				wait : function(time) {
+					time = time || 0;
+
+					_queue.push({
+						delay : time * 1000
+					});
+
+					_finish();
+
+					return this;
+				},
+				/**
+				 * 清理队列方法
+				 * @param {Boolean} flag 清理时是否执行队列中剩余的函数，默认false
+				 */
+				clear : function(flag) {
+					if (_queue.length) {
+						var q = _queue.shift();
+						
+						flag && q.fun.apply(scope, args);
+
+						_queue.length && arguments.callee.call(this, flag);
+					}
+					return this;
+				}
+			}
+		};
+
+		var scope = {
+				name : 'Auoong',
+				time : 1
+			},
+			time = function() {
+				var d = new Date();
+				return 'time: ' + d.getMinutes() + ':' + d.getSeconds();
+			};
+
+		// 时间轴测试
+		new TimeLine().run(function() { console.log(time(), 'start'); })
+			.wait(2)
+			.run(function(x) { console.log(time(), x); }, ['running'])
+				.wait(3)
+				.run(function() { console.log(time(), this.name); }, scope)
+					.wait(1)
+					.run(function() { console.log(time(), 'end'); });
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
