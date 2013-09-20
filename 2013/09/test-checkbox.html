@@ -15,9 +15,11 @@
 <script type="text/javascript">
     $('.check').on('click', function(){
         var prevEle = $(this).prevUntil();
-        console.log($(this).attr('checked'));
         if($(this).attr('checked') == 'checked'){
-            prevEle.attr('checked', true);
+            $(this).attr('checked', true);
+            console.log($(this).prev());
+            $(this).prev().attr('checked', true);
+            $(this).prev().prev().attr('checked', true);
         } else {
             prevEle.attr('checked', false);
         }

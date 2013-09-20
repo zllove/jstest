@@ -10,12 +10,87 @@
     <li>22</li>
     <li>33</li>
 </ul>
+<script>
+    function $id(s) {
+        return document.getElementById(s);
+    }
+    var appsl_cfg = function() {
+        function getCookie(name) {
+            var a = document.cookie.match('(?:^| )' + name + '=([^;]*)');
+            return a ? unescape(a[1]) : '';
+        }
+
+        function setCookie(name, value, days) {
+            var s = name + '=' + escape(value);
+            var d = new Date;
+            d.setDate(d.getDate() + days);
+            s += '; expires=' + d.toGMTString();
+            document.cookie = s;
+        }
+        return {
+            get: function() {
+                return (getCookie('appsl') == 2) + 1;
+            },
+            set: function(i) {
+                setCookie('appsl', i, 30);
+            }
+        };
+    } ();
+    function setCity2() {
+        $id('wtd1').style.display = 'none';
+        $id('wtd2').style.display = '';
+        if ($id('ifweather2').src == 'about:blank') $id('ifweather2').src = '/plugins/set_city2.htm';
+    }
+    function syncWeather() {
+        $id('wtd1').innerHTML = '<iframe width="450" height="30" frameborder="0" scrolling="no" src="{qt:indexurl}Ztool/weather/11/index.html" allowtransparency="true" style=" height:30px; padding-top:7px"></iframe>';
+    }
+    var appsl_wth1="";
+    function wrap_sq(n, st) {
+        var d = $id('div_wrap_sq');
+        if (n == 2) {
+            d.className = 'wrap_sqd';
+            $id('appsl').style.display = 'none';
+            $id('appsl2').style.display = 'block';
+            if(appsl_wth1=="")syncWeather();
+            appsl_wth1="1";
+        } else {
+            d.className = 'wrap_sq';
+            $id('appsl2').style.display = 'none';
+            $id('appsl').style.display = 'block';
+        }
+        appsl_cfg.set(n);
+
+    }
+    function showAlarmWindow() {
+        showWindow({
+            title: '设置闹钟',
+            height: 400,
+            width: 455,
+            iframe: '{qt:pageone sys_clock.html}',
+            opacity: 0,
+            onclose: function() {
+                $($('#alert1616_content iframe')[0].contentWindow.$('bgs')).remove();
+            }
+        });
+    }
+
+    document.write('<style>#appsl' + (appsl_cfg.get() == 1 ? 2 : '') + '{display: none}<\/style>');
+</script>
+
 <script type="text/javascript">
 var oLi = document.getElementsByTagName('li');
 for(var i = 0; i < oLi.length; i++){
     var oMenu = oLi[i].getElementsByTagName('dl');
     console.log(oMenu);
 }
+$(function(){
+    wrap_sq(2,1);
+});
+</script>
+
+<script>
+    wrap_sq(appsl_cfg.get());
+    wrap_sq(2,1);
 </script>
 </body>
 </html>
