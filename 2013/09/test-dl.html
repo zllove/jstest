@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        *{padding: 0;margin: 0;}
+        body{font-size: 12px;}
+        ul.nav li { display: inline-block; float: left; padding: 0px  10px; }
+        ul.nav li a { display: block; width: 50px; }
+        .sub-wrap{display: block; position: absolute; top:20px; left: 0px; border: 1px #ccc solid; overflow: hidden; }
+        dl.sub-nav {}
+        dl.sub-nav dd {float: left;width: 120px; padding: 0px 10px; }
+        dl.sub-nav dd a{float: left;width:auto;white-space:nowrap; }
+    </style>
+</head>
+<body>
+<div class="nav-box">
+    <ul class="nav">
+        <li>
+            <a href="###">###1</a>
+            <div class="sub-wrap">
+                <dl class="sub-nav">
+                    <dd><a href="###">####-二级子菜单</a></dd>
+                    <dd><a href="###">####-2</a></dd>
+                </dl>
+            </div>
+        </li>
+        <li>
+            <a href="###">###2</a>
+            <div class="sub-wrap" style="display: none;">
+                <dl class="sub-nav">
+                    <dd><a href="###">####-二级子菜单</a></dd>
+                    <dd><a href="###">####-2</a></dd>
+                </dl>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

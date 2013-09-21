@@ -1,34 +1,141 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" ><!--
+рЩсцй╠╠ёаТобт╜╢╢вВуъЮ╤,вПжьхн╨нр╩н╩т╜╢╢вВуъ,╢ы╫Ьжп╧З╩╔а╙мЬ╫ЬЁл
+Editor:weasle
+http://www.hxcgw.comn 
+Email:weasle@163.com
+QQ:112011531
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-    <link href="css/admin_login.css" rel="stylesheet" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=gb2312"/>
+    <title>╪Р╫ЮTab</title>
+    <style type="text/css">
+        <!--
+        body, div, ul, li{
+            padding:0;
+            text-align:center;
+        }
+        body{
+            font:12px "кнлЕ";
+            text-align:center;
+        }
+        a:link{
+            color:#00F;
+            text-decoration:none;
+        }
+        a:visited{
+            color:#00F;
+            text-decoration:none;
+        }
+        a:hover{
+            color:#c00;
+            text-decoration:underline;
+        }
+        ul{ list-style:none; }
+            /*я║оН©╗1*/
+        #Tab1{
+            width:460px;
+            margin:0px;
+            padding:0px;
+            margin:0 auto; }
+            /*я║оН©╗2*/
+        #Tab2{
+            width:576px;
+            margin:0px;
+            padding:0px;
+            margin:0 auto; }
+            /*╡к╣╔class*/
+        .Menubox{
+            width:100%;
+            background:url(http://www.lanrentuku.com/images/uppic/200801081251340.gif);
+            height:28px;
+            line-height:28px;
+        }
+        .Menubox ul{
+            margin:0px;
+            padding:0px;
+        }
+        .Menubox li{
+            float:left;
+            display:block;
+            cursor:pointer;
+            width:114px;
+            text-align:center;
+            color:#949694;
+            font-weight:bold;
+        }
+        .Menubox li.hover{
+            padding:0px;
+            background:#fff;
+            width:116px;
+            border-left:1px solid #A8C29F;
+            border-top:1px solid #A8C29F;
+            border-right:1px solid #A8C29F;
+            background:url(http://www.lanrentuku.com/images/uppic/200801081249070.gif);
+            color:#739242;
+            font-weight:bold;
+            height:27px;
+            line-height:27px;
+        }
+        .Contentbox{
+            clear:both;
+            margin-top:0px;
+            border:1px solid #A8C29F;
+            border-top:none;
+            height:181px;
+            text-align:center;
+            padding-top:8px;
+        }
+        -->
+    </style>
+    <script>
+        <!--
+        /*╣зр╩жжпнй╫ ╣з╤Чжжпнй╫ ╦Э╩╩отй╬яЫй╫*/
+        function setTab(name, cursel, n) {
+            for (i = 1; i <= n; i++) {
+                var menu = document.getElementById(name + i);
+                var con = document.getElementById("con_" + name + "_" + i);
+                menu.className = i == cursel ? "hover" : "";
+                con.style.display = i == cursel ? "block" : "none";
+            }
+        }
+        //-->
+    </script>
 </head>
 <body>
-<div class="admin_login_wrap">
-    <h1>ГЁ╩Г╩÷Е░█Г╖╟</h1>
-    <div class="adming_login_border">
-        <div class="admin_input">
-            <form action="index.html">
-                <ul class="admin_items">
-                    <li>
-                        <label for="user">Г■╗Ф┬╥Е░█О╪ </label>
-                        <input type="text" name="" id="user" class="admin_input_style" />
-                    </li>
-                    <li>
-                        <label for="pwd">Е╞├Г═│О╪ </label>
-                        <input type="text" name="" id="pwd" class="admin_input_style" />
-                    </li>
-                    <li class="mt5">
-                        <input type="submit" tabindex="3" value="Ф▐░Д╨╓" class="fr admin_btn" />
-                        <span class="fl"><a href="../../demo" tabindex="4">Е©≤Х╝╟Е╞├Г═│О╪÷</a><a class="ml5" tabindex="5" href="../../demo">Х©■Е⌡·И╕√И║╣</a></span>
-                    </li>
-                </ul>
-            </form>
-        </div>
+<br><br>
+<div id="Tab1">
+    <div class="Menubox">
+        <ul>
+            <li id="one1" onclick="setTab('one',1,4)" class="hover">пбне1</li>
+            <li id="one2" onclick="setTab('one',2,4)">пбне2</li>
+            <li id="one3" onclick="setTab('one',3,4)">пбне3</li>
+            <li id="one4" onclick="setTab('one',4,4)">пбне4</li>
+        </ul>
     </div>
-    <p class="admin_copyright">&copy; 2009-2011 Powered by <a href="#" target="_blank">Х╠╙Ф┐┘</a></p>
+    <div class="Contentbox">
+        <div id="con_one_1" class="hover">пбнеап╠М1</div>
+        <div id="con_one_2" style="display:none">пбнеап╠М2</div>
+        <div id="con_one_3" style="display:none">пбнеап╠М3</div>
+        <div id="con_one_4" style="display:none">пбнеап╠М4</div>
+    </div>
+</div>
+<br>
+<div id="Tab2">
+    <div class="Menubox">
+        <ul>
+            <li id="two1" onclick="setTab('two',1,4)" class="hover">пбне1</li>
+            <li id="two2" onclick="setTab('two',2,4)">пбне2</li>
+            <li id="two3" onclick="setTab('two',3,4)">пбне3</li>
+            <li id="two4" onclick="setTab('two',4,4)">пбне4</li>
+        </ul>
+    </div>
+    <div class="Contentbox">
+        <div id="con_two_1">пбнеап╠М1</div>
+        <div id="con_two_2" style="display:none">пбнеап╠М2</div>
+        <div id="con_two_3" style="display:none">пбнеап╠М3</div>
+        <div id="con_two_4" style="display:none">пбнеап╠М4</div>
+    </div>
 </div>
 </body>
 </html>
