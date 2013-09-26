@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Alipay Banner - 合肥网站建设www.an56.net</title>
+    <style type="text/css">
+        .bn-alp{ width:100%; height:400px; position:relative; }
+        .bn-alp ul, .bn-alp li{ margin:0; padding:0; list-style:none; }
+        .bn-alp .box{ height:100%; position:relative; }
+        .bn-alp .box li{ width:100%; height:400px; background-position:50% 50%; background-size:cover; position:absolute; top:0; left:0; z-index:10; }
+        .bn-alp .box li.on{ z-index:99; }
+        .bn-alp .box li img.bg{ display:none; }
+        .bn-alp .box li a.b{ display:block; width:100%; height:100%; }
+        .bn-alp .i{ bottom:5px; left:50%; margin-left:-50px; text-align:center; position:absolute; z-index:100; }
+        .bn-alp .i i{ display:inline-block; margin-right:10px; width:16px; height:16px; background:url(images/ico-bn-alp.png) no-repeat -16px 0; cursor:pointer; }
+        .bn-alp .i i.on{ background-position:0 0; }
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var bn_alp;// 定义动画变量
+            var Time = 3000;// 自动播放间隔时间 毫秒
+            var num = 1000;// 切换图片间隔的时间 毫秒
+            var page = 0;// 定义变量
+            var len = $(".bn-alp .box li").length;// 获取图片的数量
+            $(".bn-alp .box li").each(function () {
+                $(this).css("opacity", 0);
+                $(this).css("background-image", "url(" + $(this).find('img.bg').attr('src') + ")");
+                $(".bn-alp .i").append('<i></i>');
+            });   // 设置全部的图片透明度为0
+            $(".bn-alp .box li:first").css("opacity", 1); // 设置默认第一张图片的透明度为1
+            $(".bn-alp .i i").eq(0).addClass("on");
+            function fun()// 封装
+            {
+                $(".bn-alp .i i").eq(page).addClass("on").siblings('i').removeClass("on");     // 切换小点
+                $(".bn-alp .box li").eq(page).addClass("on").animate({"opacity": 1}, num).siblings('li').removeClass("on").animate({"opacity": 0}, num);// 切换图片
+            }
+
+            function run()// 封装
+            {
+                if (!$(".bn-alp .box li").is(":animated"))// 判断li是否在动画
+                {
+                    if (page == len - 1)// 当图片切换到了最后一张的时候
+                    {
+                        page = 0;  // 把page设置成0 又重新开始播放动画
+                        fun();
+                    } else {// 继续执行下一张
+                        page++;
+                        fun();
+                    }
+                }
+            }
+
+            $(".bn-alp .i i").click(function ()// 点击小点
+            {
+                if (!$(".bn-alp .box li").is(":animated"))// 判断li是否在动画
+                {
+                    var index = $(".bn-alp .i i").index(this);// 获取点击小点的位置
+                    page = index;// 同步于page
+                    fun();
+                }
+            });
+            $(".bn-alp").hover(function ()// 鼠标放上去图片的时候清除动画
+            {
+                clearInterval(bn_alp);
+            },function ()// 鼠标移开图片的时候又开始执行动画
+            {
+                bn_alp = setInterval(run, Time);
+            }).trigger("mouseleave");
+        });
+    </script>
+</head>
+<body>
+<div class="bn-alp">
+    <ul class="box">
+        <li class="on">
+            <a href="" class="b"><img src="https://i.alipayobjects.com/e/201210/1SqQ3MovmW.jpg" class="bg"/></a>
+        </li>
+        <li>
+            <img src="https://i.alipayobjects.com/e/201210/1SqdO0g4BA.jpg" class="bg"/>
+        </li>
+        <li>
+            <img src="https://i.alipayobjects.com/e/201210/1SqZEKwRls.jpg" class="bg"/>
+        </li>
+        <li>
+            <img src="https://i.alipayobjects.com/e/201210/1SppXBk7PB.jpg" class="bg"/>
+        </li>
+    </ul>
+    <div class="i"></div>
+</div>
+</body>
+</html>
