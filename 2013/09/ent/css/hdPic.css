@@ -1,0 +1,198 @@
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote,dl, dt, dd, ul, ol, li, fieldset, form, lengend, button, input, textarea,th, td { margin: 0; padding: 0 }
+body,button, input, select, textarea { font-family: "simSun","Arial Narrow",HELVETICA; font-size:14px; background:#ffffff; -webkit-text-size-adjust:100% }
+h1,h2,h3,h4, h5, h6 { font-size: 100%; font-weight:normal ; font-family:"Microsoft YaHei"}
+address, cite, dfn, em, var,i { font-style: normal }
+code, kbd, pre, samp, tt { font-family: "Courier New", Courier, monospace }
+small { font-size: 12px }
+ul, ol { list-style: none }
+a { outline:none; color:#2e99e6; text-decoration:none }
+a:focus{ outline:0 }
+legend { color: #000 }
+fieldset, img { border: none }
+button, input, select, textarea { font-size: 100% }
+table { border-collapse: collapse; border-spacing:0; width:100%; height:100% }
+img { vertical-align:bottom }
+
+/* global */
+.clearfix { *zoom:1 }.clearfix:after{ content:''; display:table; clear:both }
+.pr { position:relative }.pa { position:absolute }
+.left { float:left } .right { float:right }
+.tl { text-align:left }.tr { text-align:right }.tc { text-align:center }
+.dis { display:block }.undis { display:none }
+
+/*全局设置*/
+html { overflow-y: scroll }
+html,body { background:#fff; width:100% }
+.container { width:100%; overflow:hidden }
+.body { position:relative; z-index:4; min-width:650px; background:#f9f9f9 }
+
+/*移动设备支持*/
+@media screen and (max-device-width: 320px){body{-webkit-text-size-adjust:none;}}
+@media screen and (max-device-width: 480px){body{-webkit-text-size-adjust:none;}}
+@media only screen and (-webkit-min-device-pixel-ratio: 2){body{-webkit-text-size-adjust:none;}}
+
+/*布局*/
+.footer { height:54px; line-height:54px; color:#999; text-align:center; font-size:12px; font-family:Arial;}
+.footer span { padding-right:12px }
+
+/*header*/
+.header {  }
+/* main */
+.main { font-size:12px; color:#000; position:relative; _height:600px }
+.title { height:70px; position:relative; margin:0 92px; z-index:4 }
+.title h1 { color: #000; font:26px/70px "Microsoft YaHei",arial }
+.section {  }
+
+/* sprite*/
+.g-btn-a, .g-btn-a span, .g-btn-a i, .shareList .menu-bd, .g-btn-b i, .g-btn-c, .btn a, .sBtn, .endBtn a { display:inline-block; background:url(http://mat1.gtimg.com/joke/hd2013/images/hd_sprite.png) no-repeat 0 0 }
+
+/*toolBar*/
+.toolBar { position:absolute; right:0; top:19px }
+.toolBar li { float:left; font-size:12px; margin-left:10px; color:#5C5C5C }
+.toolBar li .g-btn-a {  }
+.g-btn-a { height:32px; background-position:-134px -266px; display:inline-block; padding-left:8px; line-height:32px; color:#000 }
+.g-btn-a span { background-position:100% -266px; display:block; _display:inline-block; padding-right:11px }
+.g-btn-a i { float:left; height:32px; width:25px }
+.comment i { background-position:-239px 9px}
+.download i { background-position:-282px 8px }
+.g-btn-a:hover, .shareList .hover { height:32px; background-position:-134px -225px; padding-left:8px; color:#fff }
+.g-btn-a:hover span, .shareList .hover span { background-position:100% -225px; display:inline-block; padding-right:11px; cursor:pointer }
+.comment .g-btn-a:hover i { background-position:-209px 9px}
+.download .g-btn-a:hover i { background-position:-282px -17px }
+.ComentNum { font-family:tahoma; color:#379be9; margin-right:4px }
+.g-btn-a:hover .ComentNum { color:#fff }
+.shareList { position:relative; width:95px }
+.shareList .g-btn-a i { _width:22px }
+.shareList .menu-bd { background-position:0 100%; left:0; top:30px;  position:absolute; z-index:200; width:95px; display:none }
+.shareList li { margin-left:0 }
+.shareList .menu-hd i { background-position:-239px -58px }
+.shareList .menu-hd:hover i, .shareList .hover i { background-position:-209px -58px }
+.shareList .menu-bd li { height:26px; width:92px; line-height:26px }
+.g-btn-b { display:block; color:#fff }
+.g-btn-b:hover { background:#3591d8; color:#fff }
+.g-btn-b i { float:left; width:22px; height:26px }
+.share2sina i { background-position:-209px -93px }
+.share2weibo i { background-position:-209px -115px }
+.share2qq i { background-position:-209px -141px }
+.share2qzone i { background-position:-209px -169px }
+.share2sina .g-btn-b:hover i { background-position:-239px -93px }
+.share2weibo .g-btn-b:hover i { background-position:-239px -115px }
+.share2qq .g-btn-b:hover i { background-position:-239px -141px }
+.share2qzone .g-btn-b:hover i { background-position:-239px -169px }
+.shareList .g-btn-b { padding-left:10px }
+.g-btn-c { display:inline-block; font-size:12px; color:#fff; padding:0 15px 0 4px; background-color:#44a5f0; background-position:-211px -191px; border:1px solid #3797e2; line-height:16px; background-position:-211px -206px; margin:-30px 3px 0 0 }
+.g-btn-c:hover { background-position:-211px -191px }
+.download { position:relative; }
+#downLoadFlash { position:absolute; top:0; left:0; width:90px; height:30px }
+/* Btn */
+
+/*.btnWrap {}
+.btn { position:absolute; top:40% }
+.btn a { display:block; width:60px; height:122px }
+.btnLeft { left:0 }.btnRight { right:0}
+.btnLeft a { background-position:-67px 0}.btnRight a { background-position:0 0 }
+.btnLeft a:hover { background-position:-67px -127px }.btnRight a:hover { background-position:0 -127px }*/
+.btnWrap {}
+.btn { position:absolute; top:40%; visibility:hidden; z-index:9 }
+.btn a { display:block; width:31px; height:61px }
+.btnLeft { left:110px }.btnRight { right:110px}
+.btnLeft a { background-position:-189px -404px} .btnRight a { background-position:-270px -404px }
+
+
+
+/*Main-A*/
+#Main-A { height:100%; margin:0 auto; position:relative; background: url(http://mat1.gtimg.com/news/hd2009fin/ajax-loader.gif) no-repeat center center;  padding:9px 9px 100px; overflow:hidden; z-index:3 }
+#InfoWrap { position:absolute; width:100%; bottom:0; z-index:6 }
+#Info { background:rgba(245, 245, 245, 0.6); filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#B2f5f5f5,endColorstr=#B2f5f5f5); *zoom:1;margin-left:-9px; text-align:left; padding-top:5px}
+#infoNum { position:absolute; left:0; bottom:10px; width:130px; font-family:Georgia, tahoma; font-size:20px; color:#757575; text-align:center } 
+#curNum { font-size:30px; color:#379be9 } #totalNum {}
+#infoTxtWrap { position:relative;  margin:0 75px 0 130px; height:80px; padding:6px 10px 0 0; overflow:hidden }
+#infoCon { position:relative; height:52px; overflow:hidden }
+#infoTxt { font-size:14px; line-height:26px }
+#time_source { font-size:12px; line-height:16px; color:#999; text-align:right; padding-top:6px; margin-right:-5px; position:absolute; bottom:5px; right:3px }
+#time_source span { margin:0 5px }
+
+
+.closedTxt { width:64px; height:21px; overflow:hidden; line-height:22px; border-radius:2px; padding-left:7px; border-style:solid; border-width:1px; position:absolute; top:-18px; right:78px; cursor:pointer; border-color:#dfdfdf; background-color:#fff; color:#000 }
+.closedTxt:hover { border-color:#4785bf; background-color:#47a8f4; color:#fff; }
+.closedTxt i { position:absolute; right:6px; width:0; height:0; font-size:0; line-height:0; border-width:4px; border-style:solid; border-color:#379be9 #fff #fff ; top:8px }
+.closedTxt:hover i {  border-color: #fff #47a8f4 #47a8f4; top:8px }
+
+.t_close {  }
+.t_close i {  }
+.t_open {  }
+.t_open i { top:4px; border-color: #fff #fff #379be9; }
+.t_open:hover i { top:4px; border-color:#47a8f4 #47a8f4 #fff; }
+
+/* Txt scroll */
+#t_scroll_wrap { width:1px; height:500px; position:absolute; right:3px; top:0px; background:#a5a5a5; display:none}
+#t_scroll { width:5px; height:30px; background:#379be9; position:absolute; cursor:pointer; top:0; left:-2px; z-index:3; border-radius:7px}
+
+/* Pic */
+#mouseMask { width:98%; height:100%; position:absolute; top:0; left:0; z-index:5; cursor:pointer; -webkit-user-select:none; -moz-user-select:none; user-select:none; background:url(about:blank)\9  }
+/*.cursor-left{ cursor:url("http://mat1.gtimg.com/www/hd2013/images/cursor_left.cur"), auto }
+.cursor-right{ cursor:url("http://mat1.gtimg.com/www/hd2013/images/cursor_right.cur"), auto }*/
+.cursor-default{ cursor:default }
+#PicSrc { width:100%; height:100% }
+#picWrap { overflow:hidden; z-index:2;/* -webkit-transition: all .1s ease-in; -moz-transition: all .1s ease-in; -0-transition: all .1s ease-in; transition: all .1s ease-in; */ }
+#picWrap img { width:100%; height:100%; background:#000 }
+/*Main-B*/
+#Main-B {width:900px; margin-top:-1px; text-align:left;color:#B4B4B4;font-size:12px;overflow:hidden }
+#Main-B p {line-height:22px;padding-bottom:21px;}
+#Main-B .TimeInfo {float:right;}
+#Main-B .TimeInfo span {padding-right:13px;}
+
+/*Main-C*/
+#Main-C { border:1px solid #dddddd; height:105px;position:relative; background:#fff }
+.smallPic-wrap { position:absolute; right:0 }
+#smallPic-AD { width:238px; position:absolute; left:10;top:27px; height:86px; overflow:hidden }
+.smallPic { overflow:hidden; font-size:12px; color:#fff; position:relative; padding:0 30px; left:0; *zoom:1}
+
+.sBtn { position:absolute; top:-1px; width:30px; height:107px; z-index:3 }
+.sBtnLeft { left:-1px; background-position:-134px 0 }
+.sBtnRight { right:-1px; background-position:-169px 0 }
+.sBtnLeft:hover { left:-1px; background-position:-134px -112px }
+.sBtnRight:hover { right:-1px; background-position:-169px -112px }
+
+.smallPic .SmallWarp { height:99px; padding:6px 0 0 0; overflow:hidden; position:relative; left:0 }
+.smallPic .SmallWarp a.mask { position:absolute;  width:130px; height:89px; background:url(http://mat1.gtimg.com/www/hd2013/images/sMask.png) no-repeat 0 0; overflow:hidden; z-index:1; left:4px }
+.smallPic .SmallWarp ul{position:absolute;z-index:2;left:0;}
+.smallPic .SmallWarp li { float:left; width:130px; height:105px; position:relative; text-align:center; margin:0 0 0 20px }
+.smallPic .SmallWarp li .mask { display:none; width:130px; height:89px; position:absolute; left:0; top:-9px; z-index:1; background:url(http://mat1.gtimg.com/www/hd2013/images/sMask.png) no-repeat 0 0 }
+.smallPic .SmallWarp li div{ width:130px; height:80px ; position:absolute; left:0; top:0; z-index:3; overflow:hidden; margin-top:9px }
+.smallPic .SmallWarp li div a { display:block; width:120px; text-align:center; height:75px; margin:0 auto; overflow:hidden; cursor:pointer; position:relative }
+.smallPic .SmallWarp li div a img { height:75px }
+.smallPic .SmallWarp li a:hover { text-decoration:none }
+.smallPic .SmallWarp li a span { display:none }
+.scrollLine {width:920px;margin:17px auto 0 auto;height:1px;line-height:1px;background:url(http://mat1.gtimg.com/www/hd2011/scrollline.png) no-repeat;overflow:visible;position:relative;clear:both;}
+
+/* temp Style */
+#gaoqing_F_slt_button .a_cover { display:none }
+
+
+/*end*/
+#end { width:858px; height:532px; padding:20px; background:#fff; position:absolute; left:50%; top:50%; margin-left:-450px; margin-top:-280px; border:1px solid #ddd; z-index:998 }
+
+.endMain { width:602px; height:532px; float:left; border-right:1px dashed #ddd }
+.endMain .hd { padding-left:10px } 
+.endMain h2 { font-size:18px; line-height:22px; color:#44a2ea }
+.endMain .bd { padding-top:24px }
+.endMain li { float:left; width:126px; font-size:12px; line-height:22px; margin:0 10px }
+.endMain li img { background:url(http://mat1.gtimg.com/www/hd2013/images/shadowBg.png) right top no-repeat; width:120px; padding-right:6px }
+.endMain li a { color:#000; display:block; height:75px; overflow:hidden }
+.endMain li .lastTxt { margin-top:5px; line-height:18px }
+.endSider { width:235px; float:right; padding-top:17px }
+.endCon { margin-bottom:45px }
+.endCon a { width:112px; height:34px; font-family: "Microsoft YaHei"; font-weight:700; line-height:34px; font-size:14px }
+.endBtn { margin-top:13px }
+.endBtn .btnReplay { background-position:0 -254px; padding-left:40px; width:82px; color:#575757}
+.endBtn .btnReplay:hover { background-position:0 -295px }
+.endBtn .btnEnter { background-position:-189px -304px; text-align:center; color:#fff }
+.endBtn .btnEnter:hover { background-position:-189px -345px }
+.endSider h2 { font-size:20px; color:#333; line-height:28px; height:59px }
+
+#lastAD { width:564px; height:362px; position:absolute; display:none }
+#mask { width:100%; height:100%; position:absolute; top:0; left:0; z-index:9; background:#fff; display:none }
+
+.lastClose { position:absolute; right:8px; top:8px; width:14px; height:14px; background:url(http://mat1.gtimg.com/ent/hd2013/images/lastClose.png) no-repeat; }
+.lastClose:hover { background:url(http://mat1.gtimg.com/ent/hd2013/images/lastClose1.png) no-repeat }/*  |xGv00|d59caa909cbbe815abf99f8a2204dcb0 */
