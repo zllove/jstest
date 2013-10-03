@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style>
+        .dpnone{ display:none;}
+        #nav{
+            position:relative;
+            z-index:999;
+        }
+        #nav_child{
+            width:200px;
+            height:100px;
+            border:2px solid #C1C1C1;
+            background-color:#F90;
+            position:absolute;
+            z-index:10;
+            top:48px;
+        }
+        #nav:hover #nav_child{ display:block;}
+        .first{
+            position:absolute;
+            top: 0;left: 0;
+            display:block;
+            z-index:12;
+            width:100px;
+            height:50px;
+            border-left:2px solid #C1C1C1;
+            border-right:2px solid #C1C1C1;
+            border-top:2px solid #C1C1C1;
+            background-color:#09F;
+        }
+    </style>
+</head>
+
+<body>
+<div id="nav">
+    <a class="first">adc</a>
+    <div id="nav_child" class="dpnone">
+        <a>def</a>
+    </div>
+</div>
+</body>
+</html>
