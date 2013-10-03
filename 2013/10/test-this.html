@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    var o = {
+        path : '/app/assets/',
+        _parse : function(file){
+            var _this = this,
+                end = '';
+            if($.isArray(file)){
+                /*
+                for (var i = 0; i < file.length; i++) {
+                    file[i] = this.path + file[i];
+                };
+                */
+                end = $.map(file,function(f){
+                    return _this.path + f;
+                });
+                return end.join(',');
+            } else {
+                file = _this.path + file;
+            }
+                return file;
+        }
+    };
+
+    console.log(o._parse('log.js'));
+    console.log(o._parse(['java.js','php.js']));
+</script>
+</body>
+</html>
