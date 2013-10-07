@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>css博客</title>
+    <style type="text/css">
+            /* CSS Document */
+        body{background-color:#ebf7ff;margin:0px;padding:0px;text-align:center;}
+        #container{position:relative;margin:1px auto 0px; width:880px;text-align:center;}
+        #globalink{
+            width:880px;height:210px;
+            margin:0px;
+            /*background:url(banner.jpg) no-repeat #ebf7ff;*/
+            background:#660066;
+            font-size:12px;
+        }
+        #globalink ul{
+            list-style-type:none;
+            position:absolute;
+            display:inline;
+            width:417px;
+            left:468px;top:180px;
+            margin:0px;padding:0px;
+        }
+        #globalink li{float:left;text-align:center;}
+        #globalink ul li#one,#globalink ul li#two,#globalink ul li#three{width:57px;}
+        #globalink ul li#four,#globalink ul li#five,#globalink ul li#six{width:78px;}
+        #globalink a:link,#globalink a:visited{color:#FFFFFF;text-decoration:underline;}
+        #globalink a:hover{color:#004c84;text-decoration:none;}
+        #parameter{
+            position:relative;
+            float:right;
+            font-size:12px;
+            width:176px;
+            padding-right:0px;
+            margin:0px;
+            color:#fefefe;
+            background-color:#0084a9;
+        }
+        #parameter div{margin-bottom:15px;}
+        #parameter br{clear:both;display:none;}
+        #parameter a:link{color:#ffffff;text-decoration:none;}
+        #parameter a:visited{color:#eeeeee;text-decoration:none;}
+        #parameter a:hover{color:#000000;text-decoration:none;}
+        #parameter a.author1:link{color:#ccff00;font-size:12px;text-decoration:none;}
+        #parameter a.author1:visited{color:#39d3ff;font-size:12px;text-decoration:none;}
+        #parameter a.author1:hover{color:#FFFF00;font-size:12px;text-decoration:none;}
+        #lhotblog span a,#lrecent span a,#lapply span a{
+            float:right;
+            text-align:right;
+            padding-top:8px;
+            padding-right:5px;
+            margin-bottom:5px;
+        }
+
+
+        #mainsupport{
+            float:left;
+            position:relative;
+            font-size:12px;
+            margin-top:0px;
+            margin-bottom:0px;
+            margin-right:0px;
+        }
+        #footer{
+            clear:both;
+            font-size:12px;
+            text-align:center;
+            color:#226c81;
+            padding-top:20px;
+            padding-bottom:20px;
+            margin:0px;
+            background-color:#ebf7ff;
+        }
+        #parameter h3 span{display:none;}
+        #parameter h3{height:30px;width:176px;padding:0px;margin:0px;}
+        #lstatistics h3{/*background:url(lstatistics.jpg) no-repeat;*/background:#FF0000;}
+        #lhotblog h3{/*background:url(lhotblog.jpg) no-repeat;*/background:#FF0000;}
+        #lrecent h3{/*background:url(lrecent.jpg) no-repeat;*/background:#FF0000;}
+        #lapply h3{/*background:url(lapply.jpg) no-repeat;*/background:#FF0000;}
+        #lstatistics ul,#lhotblog ul,#lrecent ul,#lapply ul{
+            list-style-type:none;
+            padding:10px 0px 0px 0px;
+            margin:0px;
+        }
+        #lstatistics li{text-align:left;padding-left:16px;line-height:17px;background:/*url(arrow1.gif) no-repeat 7px 4px*/ #0000CC;}
+        #lhotblog li{text-align:left;padding-left:14px;line-height:17px;zoom: 1;background:/*url(arrow2.gif) no-repeat 7px 4px*/ #0000CC;}
+        #lrecent li,#lapply li{text-align:left;padding-left:14px;line-height:17px;zoom: 1;background:/*url(arrow3.gif) no-repeat 7px 6px*/ #0000CC;}
+        .clearfix{*zoom:1}
+        .clearfix:after{content:".";height:0;visibility:hidden;display:block;clear:both}
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
+</head>
+
+<body>
+<div id="container">
+    <div id="globalink">
+        <ul>
+            <li id="one"><a href="#">首页</a></li>
+            <li id="two"><a href="#">论坛</a></li>
+            <li id="three"><a href="#">推荐</a></li>
+            <li id="four"><a href="#">最新日志</a></li>
+            <li id="five"><a href="#">最新评论</a></li>
+            <li id="six"><a href="#">尚未登录</a></li>
+        </ul>
+    </div>
+    <div id="parameter">
+        <div id="lstatistics">
+            <h3 class="statistics"><span>样式统计</span></h3>
+            <ul>
+                <li>用户:&nbsp;<b>893</b>&nbsp;人</li>
+                <li>日志:&nbsp;<b>4397</b>&nbsp;个</li>
+                <li>评论:&nbsp;<b>4596</b>&nbsp;篇</li>
+            </ul>
+            <br />
+        </div>
+        <div id="lhotblog">
+            <h3 class="hotblog"><span>热门博客</span></h3>
+            <ul>
+                <li><a href="#">艾萨克</a>&nbsp;&lt;<a class="author1" href="#">isaac</a>&gt;</li>
+                <li><a href="#">詹尼花儿</a>&nbsp;&lt;<a class="author1" href="#">jennifer</a>&gt;</li>
+                <li><a href="#">流 觞</a>&nbsp;&lt;<a class="author1" href="#">shenhuanyan</a>&gt;</li>
+                <li><a href="#">CYBERSPACE</a>&nbsp;&lt;<a class="author1" href="#">cyber</a>&gt;</li>
+                <li><a href="#">小舔一下</a>&nbsp;&lt;<a class="author1" href="#">LifeSucks</a>&gt;</li>
+                <li><a href="#">楚岑·洗心</a>&nbsp;&lt;<a class="author1" href="#">popla</a>&gt;</li>
+                <li><a href="#">小孩儿</a>&nbsp;&lt;<a class="author1" href="#">bazhuazhua</a>&gt;</li>
+                <li><a href="#">未名空间</a>&nbsp;&lt;<a class="author1" href="#">sheva</a>&gt;</li>
+                <li><a href="#">Dark City</a>&nbsp;&lt;<a class="author1" href="#">freax</a>&gt;</li>
+                <li><a href="#">E心E意&amp;36</a>&nbsp;&lt;<a class="author1" href="#">moonbow</a>&gt;</li>
+            </ul>
+            <br />
+            <span class="clearfix"><a href="#">更多</a><a href="#">OPML</a></span>
+        </div>
+        <div id="lrecent">
+            <h3 class="recent"><span>最近更新</span></h3>
+            <ul>
+                <li><a href="#"><span>托波索的小屋</span></a>&nbsp;&lt;<a class="author1" href="#">quixote</a>&gt;</li>
+                <li><a href="#"><span>小孩儿</span></a>&nbsp;&lt;<a class="author1" href="#">bazhuazhua</a>&gt;</li>
+                <li><a href="#"><span>詹尼花儿</span></a>&nbsp;&lt;<a class="author1" href="#">jennifer</a>&gt;</li>
+                <li><a href="#"><span>E心E意&amp;36</span></a>&nbsp;&lt;<a class="author1" href="#">moonbow</a>&gt;</li>
+                <li><a href="#"><span>Beyond Paradise</span></a>&nbsp;&lt;<a class="author1" href="#">sherrielin</a>&gt;</li>
+                <li><a href="#"><span>加州旅馆</span></a>&nbsp;&lt;<a class="author1" href="#">zhanxiongfei</a>&gt;</li>
+                <li><a href="#"><span>星天的博客</span></a>&nbsp;&lt;<a class="author1" href="#">starsky</a>&gt;</li>
+                <li><a href="#"><span>个人文集</span></a>&nbsp;&lt;<a class="author1" href="#">sherry</a>&gt;</li>
+            </ul>
+            <br />
+            <span><a href="#">更多</a><a href="#">OPML</a></span>
+        </div>
+        <div id="lapply">
+            <h3 class="apply"><span>最新申请</span></h3>
+            <ul>
+                <li><a href="#"><span>星天的博客</span></a>&nbsp;&lt;<a class="author1" href="#">starsky</a>&gt;</li>
+                <li><a href="#"><span>蓝空霞彩</span></a>&nbsp;&lt;<a class="author1" href="#">wcylester</a>&gt;</li>
+                <li><a href="#"><span>随 缘</span></a>&nbsp;&lt;<a class="author1" href="#">matata</a>&gt;</li>
+                <li><a href="#"><span>大山的孩子</span></a>&nbsp;&lt;<a class="author1" href="#">tuonene</a>&gt;</li>
+                <li><a href="#"><span>伊的四季</span></a>&nbsp;&lt;<a class="author1" href="#">Ifishamm</a>&gt;</li>
+                <li><a href="#"><span>SONG, original</span></a>&nbsp;&lt;<a class="author1" href="#">song</a>&gt;</li>
+                <li><a href="#"><span>买买提※温和的树</span></a>&nbsp;&lt;<a class="author1" href="#">mimiti</a>&gt;</li>
+            </ul>
+            <br />
+            <span><a href="#">更多</a><a href="#">OPML</a></span>
+        </div>
+    </div>
+    <div id="mainsupport">
+        <div id="recommendblog"></div>
+        <div id="currenttime"></div>
+        <div id="blogsearch"></div>
+        <div id="login"></div>
+        <div id="recommendart"></div>
+        <div id="newnode"></div>
+    </div>
+    <div id="footer">
+        <a href="#" class="article">博客首页</a> |
+        <a href="#" class="article">博客论坛</a> |
+        <a href="#" class="article">用户列表</a> |
+        <a href="#" class="article">自由推荐</a> |
+        <a href="#" class="article">最新日志</a> |
+        <a href="#" class="article">最新评论</a> |
+        <a href="#" class="article">热门排行</a> |
+        <a href="#" class="article">日志搜索</a> |
+        <a href="#" class="article">立即申请</a>
+        <p class="p3">版权所有 &copy;艾萨克</p>
+    </div>
+</div>
+<script type="text/javascript">
+    if (location.pathname === '/welcome' || location.pathname === '/welcome/') {
+        location = '/welcome/edit?html,live';
+    }
+
+    if (window.location.pathname.indexOf('/edit') !== -1) $('a.open').click(function (event) {
+        event.preventDefault();
+        window.top.$('a[href$="' + this.hash + '"]').mousedown().click();
+    });
+
+    var presses = 0;
+
+    var spin = [
+        "Woahohaohaohaahoahaohaohaohaohaoha...",
+        "Nononono...aiiiiiiiiiiiiieeeeeeee....",
+        "Aaaaaaaaaghhhhh...woahwoahwoahwoahwoah...",
+        "You're eeeeeeeeviiiiiiilllllllll....",
+        "Eee...eee...eee...eee...eee...",
+        "Woowoowoowoowoowoowoowoowoo..."
+    ];
+
+    var stop = [
+        "Please... never again.",
+        "I'm so dizzy.",
+        "That's just... cruel.",
+        "Don't you have better things to do?",
+        "I can't feel my toes... oh wait, I don't have any toes!",
+        "This isn't fun anymore.",
+        "...",
+        "I'm going to be sick.",
+        "Uh-oh, I think I just dropped some tables...",
+        "Yep, I think I'm about to SQL-project everywhere...",
+        "SELECT * FROM `stomach`...",
+        "var_dump($result)...",
+        "+_+"
+    ];
+
+    $('#dave').mousedown(function () {
+
+        $('#message').fadeOut(function () {
+            $(this).text(spin[presses % spin.length]);
+            presses = presses + 1;
+        }).fadeIn();
+
+    }).mouseup(function () {
+
+                $('#message').fadeOut(function () {
+                    $(this).text(stop[presses % stop.length]);
+                }).fadeIn();
+
+                if( presses >= stop.length - 1 ) {
+                    $(this).animate({left: '-999px'}, 1000 * 10, function () {
+                        $(this).animate({left: '0'}, 1000 * 4);
+                        presses = 0;
+                    });
+                }
+
+            });
+</script>
+</body>
+</html>
