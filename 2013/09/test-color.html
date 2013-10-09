@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        body{ font-size:55px; font-family:arial;}
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
+</head>
+<body>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<label class="labcolor" for="">aaa</label>
+<script type="text/javascript">
+console.time(1);
+var colors = ['red', 'blue', 'green', 'black'];
+$('.labcolor').each(function(i){
+    $(this).css('color', colors[i%4]);
+});
+console.timeEnd(1);
+
+console.time(2);
+var colors = ['red', 'blue', 'green', 'black'];
+var list = $('div.labcolor');
+for(var k = 0 ,kk = list.length ; k < kk ; k++){
+    list[k].css('color',colors[ k % 4 ]);
+}
+console.timeEnd(2);
+</script>
+</body>
+</html>

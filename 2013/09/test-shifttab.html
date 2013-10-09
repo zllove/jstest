@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+
+<table  id="tb1" width="100%" cellpadding="0" cellspacing="0" border="1">
+    <tr><td>aaa</td><td>bbb</td><td>ccc</td><td>ddd</td></tr>
+</table>
+<script>
+    var tb=document.getElementById('tb1');
+    function add(rowCount){
+        var rs=tb.rows,ii=0,cs=tb.rows[0].cells.length;
+        for(var i=0;i<rowCount;i++){
+            var r=tb.insertRow(-1);
+            for(var j=0;j<cs;j++){
+                r.insertCell(-1).appendChild( cEl('input',{type:'checkbox', i:ii,value:ii,id: 'ch'+ ii++  }  )  );
+            }
+        }
+    }
+    function cEl(tag,attrs){
+        var el=document.createElement(tag);
+        for(var k in attrs) el[k]=attrs[k]
+        return el
+    }
+    add(10);//生成测试数据 
+    /////////////////////////////////////////
+    function getP(el,td){
+        while( el&& el.tagName!= td.toUpperCase()) el= el.parentNode;
+        return el;
+    }
+
+    var actCh,
+            chs=tb.getElementsByTagName('input');
+    tb.onclick=function(evt){
+        evt=window.event||evt;
+        var el=evt.srcElement||evt.target;
+        var ch=getP(el,'td').getElementsByTagName('input')[0];
+
+        if(actCh &&  evt.shiftKey ) selChs(ch)
+
+        actCh&&(actCh.parentNode.bgColor='#ffffff');
+        ch.parentNode.bgColor='#fafaff';
+        actCh=ch;
+
+    }
+    function selChs(ch){
+        var cs=[actCh,ch].sort(function(a,b){ return a.i-b.i})
+        for(var i=cs[0].i;i<=cs[1].i;i++) chs[i].checked= !chs[i].checked;
+    }
+</script>
+
+</body>
+</html>
