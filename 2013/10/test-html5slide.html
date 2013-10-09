@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+    <title></title>
+    <style>
+        #slides{
+            position:absolute;
+            left:0px;
+            top:0px;
+            height:100%;
+            width:100%;
+            overflow:hidden;
+        }
+        .slide{
+            position:absolute;
+            height:600px;
+            width:800px;
+            opacity:0.7;
+            background-color:rgba(0, 128, 196, 0.5) !important;
+            background-color:#ccc;
+            border-radius:10px;
+            left:50%;
+            top:50%;
+            margin-top:-300px;
+            box-shadow:5px 5px 5px rgba(0, 0, 0, 0.5);
+            transition:all 0.25s ease-in-out 0s;
+        }
+        .current{
+            opacity:1;
+            margin-left:-400px;
+        }
+        .future{
+            margin-left:450px;
+            transform: skew(-3deg) scale(0.8);
+            -webkit-transform: skew(-3deg) scale(0.8);
+        }
+        .post{
+            margin-left:-1250px;
+            transform: skew(3deg) scale(0.8);
+            -webkit-transform: skew(3deg) scale(0.8);
+        }
+        .far-future{
+            margin-left:1200px;
+            transition:none;
+        }
+    </style>
+</head>
+<body>
+<!--http://www.cnblogs.com/sooj/archive/2013/06/09/3129327.html-->
+
+<div id="slides">
+    <div class="slide current">1</div>
+    <div class="slide future">2</div>
+    <div class="slide far-future">3</div>
+    <div class="slide far-future">4</div>
+    <div class="slide far-future">5</div>
+    <div class="slide far-future">6</div>
+    <div class="slide far-future">7</div>
+</div>
+
+<script>
+    !function(){
+        var slides = document.getElementById("slides").childNodes;
+        var l = slides.length;
+        function fslide(e){
+            var event = e || window.event;
+            //console.log(event.wheelDelta +"   "+ event.detail);
+            for(var i=0;i<l;i++){
+                if(slides[i].className=="slide current"){
+                    var current_slide = slides[i];
+                    break;
+                }
+            }
+            //var current_slide = document.getElementsByClassName("current")[0]; // getElementsByClassName只有火狐，谷歌等浏览器的较新版本支持
+            if((event.wheelDelta < 0 /*ie,谷歌等浏览器*/ || event.detail > 0 /*firefox*/) && nextel(current_slide)){
+                if(prevel(current_slide)){
+                    prevel(current_slide).className="slide far-future";
+                }
+                current_slide.className="slide post";
+                nextel(current_slide).className="slide current";
+                if(nextel(nextel(current_slide))){
+                    nextel(nextel(current_slide)).className="slide future";
+                }
+            }else if((event.wheelDelta > 0 || event.detail < 0) && prevel(current_slide)){
+                if(nextel(current_slide)){
+                    nextel(current_slide).className="slide far-future";
+                }
+                current_slide.className="slide future";
+                prevel(current_slide).className="slide current";
+                if(prevel(prevel(current_slide))){
+                    prevel(prevel(current_slide)).className="slide post"
+                }
+            }
+        }
+
+
+        document.onmousewheel = fslide; // ie,谷歌等浏览器
+        if(document.addEventListener){
+            document.addEventListener("DOMMouseScroll",fslide,false); // firefox
+        }
+    }();
+    function prevel(el){
+        if(el.previousSibling == null) return null;
+        return el.previousSibling.nodeType == 1 ? el.previousSibling : prevel(el.previousSibling);
+    }
+    function nextel(el){
+        if(el.nextSibling == null) return null;
+        return el.nextSibling.nodeType == 1 ? el.nextSibling : nextel(el.nextSibling);
+    }
+</script>
+</body>
+</html>

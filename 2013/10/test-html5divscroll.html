@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<div id="parent" style="overflow:scroll;">
+    <div id='content'>内容区域</div>
+</div>
+<script type="text/javascript">
+    /**
+     * 这里只实现垂直滚动
+     */
+    var parent = document.getElementById('parent');
+    var content = document.getElementById('content')
+    var startY = 0; // 初始位置
+    var lastY = 0; // 上一次位置
+
+    parent.addEventListener('touchstart', function(e) {
+        lastY = startY = e.touches[0].pageY;
+    });
+    parent.addEventListener('touchmove', function(e) {
+        var nowY = e.touches[0].pageY;
+        var moveY = nowY - lastY;
+        var contentTop = content.style.top.replace('px', '');
+        // 设置top值移动content
+        content.style.top = (parseInt(contentTop) + moveY) + 'px';
+        lastY = nowY;
+
+    });
+    parent.addEventListener('touchend', function(e) {
+        // do touchend
+        var nowY = e.touches[0].pageY;
+        var moveY = nowY - lastY;
+        var contentTop = content.style.top.replace('px', '');
+        // 设置top值移动content
+        content.style.top = (parseInt(contentTop) + moveY) + 'px';
+        lastY = nowY;
+    });
+</script>
+</body>
+</html>
