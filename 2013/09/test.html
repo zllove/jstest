@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    //封装轮播(隐藏全局变量;提升性能)
+(function () {
+    // init
+    var len = $("#show li").length;
+    // 创建点
+    for (var l = 0; l < len; l++) {
+        if (l == 0) {
+            var $focus = $("#hide_point .focus").clone();
+            $("#point_box").append($focus[0]);
+        } else {
+            var $normal = $("#hide_point .normal).clone();
+            $("#point_box").append($normal[0]);
+        }
+    }
+    //图片轮播入口
+    window.onload = function () {
+        // 图片轮播定时函数
+        // 当前位置和下一次要轮播的位置
+        var now, toggle, toggleImg = function (current, next) {
+            now = next; // 把即将轮播的位置记录下来
+            // 圆点切换
+            var $focus = $("#hide_point .focus").clone();
+            var $normal = $("#hide_point .normal").clone();
+            $("#point_box .focus").replaceWith($normal);
+            $("#point_box .normal").eq(next).replaceWith($focus);
+            // 图片切换
+            $("#show li").eq(current).fadeOut(900, "linear");
+            $("#show li").eq(current).css("z-index", "0");
+            $("#show li").eq(next).css("z-index", "1");
+            $("#show li").eq(next).fadeIn(800, "linear");
+            // 下一次的定时处理
+            toggle = setTimeout(function () {
+                toggleImg(next, next >= (len - 1) ? 0 : ++next);
+            }, 4000);
+        };
+        // 点击圆点，触发函数
+        $("#point_box").on("click", ".point", function () {
+            // 获取当前点击的圆点索引
+            var index = $("#point_box .point").index($(this)[0]);
+            if (now == index) {
+                // 如果是当前图片不进行处理
+                return;
+            }
+            // 停止定时函数
+            clearTimeout(toggle);
+            // 触发新的定时函数
+            toggleImg(now, index);
+        });
+        // 初始进入图片轮播
+        toggleImg(-1, 0);
+    };
+})();
+    
+var colors = ['red', 'blue', 'green', 'black'];
+$.each(colors, function(i){
+    $('.labcolor').eq(i).css('color', colors[i]);
+});
+</script>
+</body>
+</html>

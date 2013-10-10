@@ -32,17 +32,17 @@ var TouchSlide = function(a){
 	}
 
 	var slideCell = document.getElementById(opts.slideCell.replace("#",""));
-	if( !slideCell ) return false;
+    if(!slideCell) return false;
 
 	//简单模拟jquery选择器
 	var obj = function(str,parEle){ 
 		str = str.split(" ");
 		var par = [];
-		parEle = parEle||document;
-		var retn = [ parEle ] ;
-		for( var i in str ){ if(str[i].length!=0) par.push(str[i]) } //去掉重复空格
-		for( var i in par ){ 
-			if( retn.length==0 ) return false;
+        parEle = parEle || document;
+        var retn = [ parEle ];
+        for(var i in str){ if(str[i].length != 0) par.push(str[i]) } //去掉重复空格
+        for(var i in par){
+            if(retn.length == 0) return false;
             var _retn = [];
             for(var r in retn){
                 if(par[i][0] == "#") _retn.push(document.getElementById(par[i].replace("#", ""))); else if(par[i][0] == "."){
@@ -56,14 +56,14 @@ var TouchSlide = function(a){
                 } else {
                     var tag = retn[r].getElementsByTagName(par[i]);
                     for(var j = 0; j < tag.length; j++){
-                        _retn.push(tag[j])
+                        _retn.push(tag[j]);
                     }
                 }
             }
 			retn =_retn;
 		}
 		
-		return retn.length==0 || retn[0] == parEle ? false:retn;
+		return retn.length == 0 || retn[0] == parEle ? false : retn;
 	}// obj E
 
 	// 创建包裹层
@@ -85,7 +85,7 @@ var TouchSlide = function(a){
         } else {
             v = getComputedStyle(el, false)[attr];
         }
-        return parseInt(v.replace("px", ""))
+        return parseInt(v.replace("px", ""));
     }
 
 	// class处理
@@ -101,48 +101,45 @@ var TouchSlide = function(a){
 
 	//全局对象
 	var effect = opts.effect;
-	var prevBtn = obj( opts.prevCell,slideCell )[0];
-	var nextBtn = obj( opts.nextCell,slideCell )[0];
-	var pageState = obj( opts.pageStateCell )[0];
-	var conBox = obj( opts.mainCell,slideCell )[0];//内容元素父层对象
+    var prevBtn = obj(opts.prevCell, slideCell)[0];
+    var nextBtn = obj(opts.nextCell, slideCell)[0];
+    var pageState = obj(opts.pageStateCell)[0];
+    var conBox = obj(opts.mainCell, slideCell)[0];//内容元素父层对象
 	if( !conBox ) return false;
-	var conBoxSize= conBox.children.length;
-	var navObj = obj( opts.titCell,slideCell );//导航子元素结合
-	var navObjSize = navObj?navObj.length:conBoxSize;
-	var sLoad=opts.switchLoad;
+    var conBoxSize = conBox.children.length;
+    var navObj = obj(opts.titCell, slideCell);//导航子元素结合
+    var navObjSize = navObj ? navObj.length : conBoxSize;
+    var sLoad = opts.switchLoad;
 	
 	/*字符串转换*/
-	var index=parseInt(opts.defaultIndex);
-	var delayTime=parseInt(opts.delayTime);
-	var interTime=parseInt(opts.interTime);
-	var autoPlay = (opts.autoPlay=="false"||opts.autoPlay==false)?false:true;
-	var autoPage = (opts.autoPage=="false"||opts.autoPage==false)?false:true;
-	var loop = (opts.pnLoop=="false"||opts.pnLoop==false)?false:true;
-	var oldIndex = index;
-	var inter=null;// autoPlay的setInterval
-	var timeout = null; // leftLoop的setTimeout
-	var endTimeout = null;  //translate的setTimeout
-	
-	var startX = 0;
-	var startY = 0;
-	var distX = 0;
-	var distY = 0;
-	var dist = 0; //手指滑动距离
-	var isTouchPad = (/hp-tablet/gi).test(navigator.appVersion);
-	var hasTouch = 'ontouchstart' in window && !isTouchPad;
-	var touchStart = hasTouch ? 'touchstart' : 'mousedown';
-	var touchMove = hasTouch ? 'touchmove' : 'mousemove';
-	var touchEnd = hasTouch ? 'touchend' : 'mouseup';
-	var slideH=0;
-	var slideW=320;// mainCell滑动距离，后面会覆盖
-	var selfW=0;
-	var scrollY ;
+    var index = parseInt(opts.defaultIndex);
+    var delayTime = parseInt(opts.delayTime);
+    var interTime = parseInt(opts.interTime);
+    var autoPlay = (opts.autoPlay == "false" || opts.autoPlay == false) ? false : true;
+    var autoPage = (opts.autoPage == "false" || opts.autoPage == false) ? false : true;
+    var loop = (opts.pnLoop == "false" || opts.pnLoop == false) ? false : true;
+    var oldIndex = index;
+    var inter = null;// autoPlay的setInterval
+    var timeout = null; // leftLoop的setTimeout
+    var endTimeout = null;  //translate的setTimeout
 
-    for(var i = 0; i < navObjSize; i++){
-        navObj[i].style.width = document.body.clientWidth + 'px';
-    }
+    var startX = 0;
+    var startY = 0;
+    var distX = 0;
+    var distY = 0;
+    var dist = 0; //手指滑动距离
+    var isTouchPad = (/hp-tablet/gi).test(navigator.appVersion);
+    var hasTouch = 'ontouchstart' in window && !isTouchPad;
+    var touchStart = hasTouch ? 'touchstart' : 'mousedown';
+    var touchMove = hasTouch ? 'touchmove' : 'mousemove';
+    var touchEnd = hasTouch ? 'touchend' : 'mouseup';
+    var slideH = 0;
+    var slideW = 320;// mainCell滑动距离，后面会覆盖
+    var selfW = 0;
+    var scrollY;
+
 	//处理分页
-    if (navObjSize == 0)navObjSize = conBoxSize;
+    if(navObjSize == 0) navObjSize = conBoxSize;
     if(autoPage){
         navObjSize = conBoxSize;
         navObj = navObj[0];
@@ -163,26 +160,48 @@ var TouchSlide = function(a){
         navObj = navObj.children;//重置navObj
     }
 
+    /*
 	//取最大值
     for (var i = 0; i < conBoxSize; i++) {
         var chi = conBox.children[i];
         var ma = getStyleVal(chi, "marginLeft") + getStyleVal(chi, "marginRight");
         var pa = getStyleVal(chi, "paddingLeft") + getStyleVal(chi, "paddingRight");
-        var chiW = chi.clientWidth - pa;
+        var chiW = screen.availWidth;
+        window.onresize = function(){
+            chiW = screen.availWidth;
+        }
         var chiSW = chi.offsetWidth + ma;
         if (chiW > selfW) {
             selfW = chiW;
-            slideW = chiSW;
+//            slideW = chiSW;
+            slideW = chiW;
         }
     }
+    */
 
-    switch (effect) {
+    var chiW = document.body.clientWidth;
+    selfW = slideW = chiW;
+
+    var touchTimer = null;
+    window.addEventListener('resize', function(){
+        if(touchTimer){ clearTimeout(touchTimer); }
+        var temp = document.getElementsByClassName('tempWrap')[0];
+        if(!temp) return false;
+        touchTimer = setTimeout(function(){
+            chiW = document.body.clientWidth;
+            selfW = slideW = chiW;
+
+            temp.style.width = chiW + 'px';
+        }, 300);
+    }, false);
+
+    switch(effect){
         case "left":
             conBox.style.cssText = "width:" + conBoxSize * slideW + "px;" + "position:relative;overflow:hidden;padding:0;margin:0;";
             for(var i = 0; i < conBoxSize; i++) {
                 conBox.children[i].style.cssText = "float:left;width:" + selfW + "px;"
             }
-            wrap(conBox, '<div class="tempWrap" style="overflow:hidden; position:relative; width:' + slideW + 'px"></div>');
+            wrap(conBox, '<div class="tempWrap" style="overflow:hidden;position:relative;width:' + slideW + 'px"></div>');
             break;
         case "leftLoop":
             conBox.appendChild(conBox.children[0].cloneNode(true));
@@ -197,12 +216,12 @@ var TouchSlide = function(a){
 
 	var doStartFun=function(){ if ( typeof opts.startFun =='function' ){ opts.startFun( index,navObjSize ) } }
 	var doEndFun=function(){ if (  typeof opts.endFun =='function' ){ opts.endFun( index,navObjSize ) } }
-    var doSwitchLoad = function (moving) {
+    var doSwitchLoad = function(moving){
         var curIndex = (effect == "leftLoop" ? index + 1 : index) + moving;
-        var changeImg = function (ind) {
+        var changeImg = function(ind){
             var img = conBox.children[ind].getElementsByTagName("img");
-            for (var i = 0; i < img.length; i++) {
-                if (img[i].getAttribute(sLoad)) {
+            for(var i = 0; i < img.length; i++){
+                if(img[i].getAttribute(sLoad)){
                     img[i].setAttribute("src", img[i].getAttribute(sLoad));
                     img[i].removeAttribute(sLoad);
                 }
@@ -227,6 +246,12 @@ var TouchSlide = function(a){
         }
     }// doSwitchLoad E
 
+    /**
+     * 变换函数
+     * @param dist 距离
+     * @param speed 速度
+     * @param ele 对象
+     */
     var translate = function (dist, speed, ele) {
         if (!!ele) {
             ele = ele.style;
@@ -247,20 +272,20 @@ var TouchSlide = function(a){
 				translate(  (-index*slideW),delayTime ); oldIndex=index; break;
 			case "leftLoop":
 				if( sLoad!=null ){ doSwitchLoad(0) }
-				translate(  -(index+1)*slideW ,delayTime );
+				translate(-(index+1)*slideW ,delayTime );
 				if ( index==-1){
-						timeout= setTimeout( function(){ translate( -navObjSize*slideW ,0 ); }, delayTime );
-						index = navObjSize-1;
+                    timeout= setTimeout( function(){ translate( -navObjSize*slideW ,0 ); }, delayTime );
+                    index = navObjSize-1;
 				}
 				else if( index==navObjSize ){ timeout= setTimeout( function(){ translate( -slideW ,0 ); }, delayTime );
-						index = 0;
+                    index = 0;
 				}
 				oldIndex=index;
 				break;// leftLoop end
 
 		}//switch end
 		doStartFun();
-		endTimeout= setTimeout( function(){ doEndFun() }, delayTime );
+		endTimeout = setTimeout(function(){ doEndFun() }, delayTime);
 
 		//设置className
         for(var i = 0; i < navObjSize; i++){
@@ -290,7 +315,7 @@ var TouchSlide = function(a){
 	
 	//自动播放
 	if (autoPlay) {
-		 inter=setInterval(function(){ index++; doPlay() }, interTime); 
+		 inter = setInterval(function(){ index++; doPlay() }, interTime);
 	}
 
 	//点击事件
@@ -312,7 +337,8 @@ var TouchSlide = function(a){
 
 	//触摸开始函数
 	var tStart = function(e){
-		clearTimeout( timeout );clearTimeout( endTimeout );
+        clearTimeout(timeout);
+        clearTimeout(endTimeout);
 		scrollY = undefined;
 		distX = 0;
 		var point = hasTouch ? e.touches[0] : e;
@@ -337,7 +363,7 @@ var TouchSlide = function(a){
         if (!scrollY) {
             e.preventDefault();
             if (autoPlay) {
-                clearInterval(inter)
+                clearInterval(inter);
             }
             switch (effect) {
                 case "left":
@@ -352,7 +378,7 @@ var TouchSlide = function(a){
             }
 
             if(sLoad != null && Math.abs(distX) > slideW / 3){
-                doSwitchLoad(distX > -0 ? -1 : 1)
+                doSwitchLoad(distX > -0 ? -1 : 1);
             }
         }
 	}
@@ -366,14 +392,13 @@ var TouchSlide = function(a){
                 distX > 0 ? index-- : index++;
             }
             doPlay(true);
-            if (autoPlay) {
+            if(autoPlay){
                 inter = setInterval(function(){
                     index++;
-                    doPlay()
+                    doPlay();
                 }, interTime);
             }
         }
-
         conBox.removeEventListener(touchMove, tMove, false);
         conBox.removeEventListener(touchEnd, tEnd, false);
     }
