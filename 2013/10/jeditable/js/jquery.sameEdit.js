@@ -9,10 +9,17 @@
         var opts = $.extend({}, {
             type : 'text',
             width : 'auto',
-            height : 'auto'
+            height : 'auto',
+            ajaxType : 'GET',
+            ajaxUrl : ''
         }, options);
 
-        console.log(opts.type);
+        return this.each(function(){
+            var that = this;
 
+            that.on('click', function(){
+
+            });
+        });
     }
 }(window, jQuery));
