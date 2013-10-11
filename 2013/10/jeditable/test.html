@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../../jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery.jeditable.js"></script>
+</head>
+<body>
+<div class="edit" id="div_1">Dolor</div>
+<div class="edit2" id="div_2">Dolor</div>
+<div class="edit_area" id="div_2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</div>
+<script type="text/javascript">
+    $('.edit').editable('http://www.example.com/save.php', {
+        id : 'div_1',
+        type      : 'textarea',
+        indicator : 'Saving...',
+        cancel    : 'Cancel',
+        submit    : 'OK',
+        tooltip   : 'Click to edit...'
+    });
+
+    $('#div_1').on('focus', function(){
+        console.log($(this).html());
+    });
+</script>
+</body>
+</html>
