@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>test</title>
+    <title>test-jeditable</title>
     <script type="text/javascript" src="../../jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="js/jquery.jeditable.js"></script>
 </head>
@@ -13,11 +13,13 @@
 <script type="text/javascript">
     $('.edit').editable('http://www.example.com/save.php', {
         id : 'div_1',
-        type      : 'textarea',
+        type      : 'text',
         indicator : 'Saving...',
         cssclass : 'getform',
         cancel    : 'Cancel',
         submit    : 'OK',
+        onsubmit : function(){
+        },
         tooltip   : 'Click to edit...'
     });
 

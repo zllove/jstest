@@ -2,12 +2,11 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>test</title>
+    <title>test-sameform</title>
     <script type="text/javascript" src="../../jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="js/jquery.sameEdit.js"></script>
     <style type="text/css">
-        *{ margin:0; padding:0;}
-        body{font:12px/1.125 Arial,Helvetica,sans-serif;background:#fff;}
+        body{font:14px/1.125 Arial,Helvetica,sans-serif;background:#fff;}
         table{border-collapse:collapse;border-spacing:0;}
         li{list-style:none;}
         fieldset,img{border:0;}
@@ -26,14 +25,27 @@
         .clearfix{display:block;}
         .clear{clear:both;height:0;font:0/0 Arial;visibility:hidden;}
         .none{display:none}
+        .out{ padding:20px; font-size:14px;color:red;}
     </style>
 </head>
 <body>
 <div class="edit" id="div_1">Dolor</div>
 <div class="edit2" id="div_2">Dolor</div>
 <div class="edit_area" id="div_2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</div>
+<div id="out" class="out"></div>
 <script type="text/javascript">
     $('.edit').sameEdit({
+        submit : 'sub',
+        cancel : 'back',
+        onsubmit : function(){
+            alert(111);
+        },
+        callback : function(){
+
+        }
+    });
+
+    $('.edit2').sameEdit({
         type : 'textarea'
     });
 </script>

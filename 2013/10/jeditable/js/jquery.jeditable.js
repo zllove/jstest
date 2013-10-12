@@ -60,6 +60,7 @@
 (function($) {
 
     $.fn.editable = function(target, options) {
+            
         if ('disable' == target) {
             $(this).data('disabled.editable', true);
             return;
@@ -77,7 +78,7 @@
         }
         
         var settings = $.extend({}, $.fn.editable.defaults, {target:target}, options);
-
+        
         /* setup some functions */
         var plugin   = $.editable.types[settings.type].plugin || function() { };
         var submit   = $.editable.types[settings.type].submit || function() { };
@@ -102,7 +103,7 @@
         
         settings.autowidth  = 'auto' == settings.width;
         settings.autoheight = 'auto' == settings.height;
-
+        
         return this.each(function() {
                         
             /* Save this to self because this changes when scope changes. */
@@ -114,15 +115,15 @@
             var savedheight = $(self).height();
 
             /* Save so it can be later used by $.editable('destroy') */
-//            $(this).data('event.editable', settings.event);
-
+            $(this).data('event.editable', settings.event);
+            
             /* If element is empty add something clickable (if requested) */
             if (!$.trim($(this).html())) {
                 $(this).html(settings.placeholder);
             }
-
+            
             $(this).bind(settings.event, function(e) {
-
+                
                 /* Abort if element is disabled. */
                 if (true === $(this).data('disabled.editable')) {
                     return;
@@ -134,10 +135,10 @@
                 }
                 
                 /* Abort if onedit hook returns false. */
-                if(false === onedit.apply(this, [settings, self])){
-                    return;
+                if (false === onedit.apply(this, [settings, self])) {
+                   return;
                 }
-
+                
                 /* Prevent default action and bubbling. */
                 e.preventDefault();
                 e.stopPropagation();
@@ -154,15 +155,18 @@
                     settings.height = savedheight;
                 } else {
                     if (settings.width != 'none') {
-                        settings.width = settings.autowidth ? $(self).width() : settings.width;
+                        settings.width = 
+                            settings.autowidth ? $(self).width()  : settings.width;
                     }
                     if (settings.height != 'none') {
-                        settings.height = settings.autoheight ? $(self).height() : settings.height;
+                        settings.height = 
+                            settings.autoheight ? $(self).height() : settings.height;
                     }
                 }
-
+                
                 /* Remove placeholder text, replace is here because of IE. */
-                if ($(this).html().toLowerCase().replace(/(;|"|\/)/g, '') == settings.placeholder.toLowerCase().replace(/(;|"|\/)/g, '')) {
+                if ($(this).html().toLowerCase().replace(/(;|"|\/)/g, '') == 
+                    settings.placeholder.toLowerCase().replace(/(;|"|\/)/g, '')) {
                         $(this).html('');
                 }
                                 
@@ -186,7 +190,7 @@
                     if ('inherit' == settings.style) {
                         form.attr('style', $(self).attr('style'));
                         /* IE needs the second line or display wont be inherited. */
-                        form.css('display', $(self).css('display'));
+                        form.css('display', $(self).css('display'));                
                     } else {
                         form.attr('style', settings.style);
                     }
@@ -239,7 +243,7 @@
          
                 /* Add created form to self. */
                 $(self).append(form);
-
+         
                 /* Attach 3rd party plugin if requested. */
                 plugin.apply(form, [settings, self]);
 
@@ -287,7 +291,8 @@
                 }
 
                 form.submit(function(e) {
-                    if (t) {
+
+                    if (t) { 
                         clearTimeout(t);
                     }
 
@@ -331,6 +336,7 @@
                               /* Show the saving indicator. */
                               $(self).html(settings.indicator);
                               
+                              console.log(submitdata);
                               /* Defaults for ajaxoptions. */
                               var ajaxoptions = {
                                   type    : 'POST',
@@ -366,6 +372,7 @@
                     return false;
                 });
             });
+            
             /* Privileged methods */
             this.reset = function(form) {
                 /* Prevent calling reset twice when blurring. */
@@ -383,7 +390,7 @@
                         }
                     }                    
                 }
-            };
+            };            
         });
 
     };
