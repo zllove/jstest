@@ -1,0 +1,6 @@
+
+//Javascript标准DOM Range操作(1)
+http://www.never-online.net/blog/article.asp?id=113
+
+//http://www.cnblogs.com/meteoric_cry/archive/2010/10/14/1851093.html
+http://www.cnblogs.com/meteoric_cry/archive/2010/10/14/1851093.html

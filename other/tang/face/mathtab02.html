@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        td{
+            padding:5px;
+            border:1px solid #ccc;
+            text-align:right;
+        }
+    </style>
+</head>
+<body>
+<div id="time"></div>
+<div id="info"></div>
+
+<script type="text/javascript">
+    var EventUtil = {
+        addEvent:function (el, type, fn) {
+            if (window.addEventListener) {
+                el.addEventListener(type, fn, false);
+            } else if (window.attachEvent) {
+                el.attachEvent('on' + type, fn);
+            }
+        },
+        getEvent:function (event) {
+            return event ? event : window.event;
+        },
+        getTarget:function (event) {
+            return event.target || event.srcElement;
+        }
+    };
+
+    function Timer() {
+        this.startTime = (new Date()).getTime();
+    }
+    Timer.prototype.stop = function () {
+        return (new Date()).getTime() - this.startTime;
+    };
+
+    function isNum(n) {
+        for (var i = 0; i < n.length; i++) {
+            if (n.charAt(i) == '.') {
+                return false;
+            }
+        }
+        return !isNaN(n);
+    }
+
+    function getRandom(min, max) {
+        return Math.floor(Math.random() * max) + min;
+    }
+
+    function createColor() {
+        var R, G, B;
+        R = getRandom(0, 255).toString(16);
+        G = getRandom(0, 255).toString(16);
+        B = getRandom(0, 255).toString(16);
+        R = R.length == 2 ? R : '0' + R;
+        G = G.length == 2 ? G : '0' + G;
+        B = B.length == 2 ? B : '0' + B;
+        return '#' + R + G + B;
+    }
+
+    function createTable(row, col) {
+        var time = new Timer();
+        if (!isNum(row) || !isNum(col)) {
+            alert('行数和列数必须是整型数值!');
+            return;
+        }
+        var table, tr, td, body, rand;
+        body = document.getElementsByTagName('body')[0];
+        table = document.createElement('table');
+        for (var i = 0; i < row; i++) {
+            tr = document.createElement('tr');
+            for (var j = 0; j < col; j++) {
+                rand = getRandom(1, 15);
+                td = document.createElement('td');
+                td.innerHTML = rand;
+                td.style.backgroundColor = createColor();
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        }
+        body.appendChild(table);
+        document.getElementById('time').innerHTML = '表格生成时间为：' + (time.stop() / 1000) + '秒。';
+    }
+
+    createTable('100', '100');
+
+    var table = document.getElementsByTagName('table')[0];
+    EventUtil.addEvent(table, 'click', function (event) {
+        var info = document.getElementById('info');
+        event = EventUtil.getEvent(event);
+        var target = EventUtil.getTarget(event);
+        if (target.nodeType == 1 && target.nodeName.toLowerCase() == 'td') {
+            var bg = target.style.backgroundColor;
+            var content = target.firstChild.nodeValue;
+            info.innerHTML = '背景颜色：' + bg + '; 内部数字：' + content + ';';
+        }
+    });
+
+</script>
+</body>
+</html>
