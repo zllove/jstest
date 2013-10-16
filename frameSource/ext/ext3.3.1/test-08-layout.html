@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-08-layout</title>
+    <link rel="stylesheet" href="resources/css/ext-all.css">
+    <script type="text/javascript" src="adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="ext-all.js"></script>
+</head>
+<body>
+<div id="north-div"></div>
+
+<div id="center-div">内容</div>
+
+<div id="south-div">状态栏</div>
+
+<script type="text/javascript">
+    /*
+    var viewport = new Ext.Viewport({
+        layout: 'border',
+        items: [{
+            region: 'north',
+            height: 40,
+            html: '<h1>www.family168.com出品</h1>'
+        }, {
+            region: 'west',
+            width: 100,
+            html: '<p>菜单1</p><p>菜单2</p>'
+        }, {
+            region: 'center',
+            html: '主要内容'
+        }]
+    });
+
+    var viewport = new Ext.Viewport({
+        layout: 'fit',
+        items: [{
+            title: 'panel',
+            html: 'panel'
+        }]
+    });
+
+    var win = new Ext.Window({
+        width: 400,
+        height: 300,
+        layout: 'fit'
+
+    })
+
+    var viewport = new Ext.Viewport({
+        layout: 'border',
+        items: [
+            { region: 'north', html: 'north'},
+            { region: 'west', html: 'west', width: 100, title: 'west', collapsible: true},
+            { region: 'center', html: 'center'}
+        ]
+    });
+    var viewport = new Ext.Viewport({
+        layout: 'border',
+        items: [{
+            region: 'west',
+            id: 'wizcard',
+            width: 200,
+            title: '某某向导',
+            layout: 'card',
+            activeItem: 0,
+            bodyStyle: 'padding:15px',
+            defaults: {
+                border: false
+            },
+            bbar: [{
+                id: 'move-prev',
+                text: '上一步',
+                handler: navHandler.createDelegate(this, [-1]),
+                disabled: true
+            }, '->', {
+                id: 'move-next',
+                text: '下一步',
+                handler: navHandler.createDelegate(this, [1])
+            }],
+            itmes: [{
+                id: 'card-0',
+                html: '<h1>哈哈!</h1> '
+            }]
+        }]
+    })
+
+    var tree = new Ext.tree.TreePanel({
+        el: 'tree'
+    });
+    var root = new Ext.tree.TreeNode({text: '我是根'});
+    tree.setRootNode(root);
+    tree.render();
+    var viewport = new Ext.Viewport({
+        layout: 'border',
+        items: [grid]
+    });
+    var viewport = new Ext.Viewport({
+        layout:'border',
+        items:[{
+                border:false,
+                region:'north',
+                contentEl:'north-div',
+                tbar:tb,
+                height:26
+            }]
+    });
+     */
+
+
+    new Ext.Viewport({
+        layout: 'border',
+        title: 'Ext Layout Browser',
+        items: [{
+            xtype: 'box',
+            region: 'north',
+            applyTo: 'header',
+            height: 30
+        },{
+            layout: 'border',
+            id: 'layout-browser',
+            region:'west',
+            border: false,
+            split:true,
+            margins: '2 0 5 5',
+            width: 275,
+            minSize: 100,
+            maxSize: 500,
+            items: []
+        }],
+        renderTo: Ext.getBody()
+    });
+
+
+</script>
+
+</body>
+</html>

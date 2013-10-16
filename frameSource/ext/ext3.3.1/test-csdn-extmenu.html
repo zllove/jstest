@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test</title>
+    <link rel="stylesheet" href="resources/css/ext-all.css">
+    <script type="text/javascript" src="adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="ext-all.js"></script>
+    <script type="text/javascript" src="examples.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    Ext.menu.TreeItem = Ext.extend(Ext.menu.Adapter, {
+        constructor : function(config) {
+            Ext.menu.TreeItem.superclass.constructor.call(this, config.tree, config);
+            this.tree = this.component;
+            this.addEvents('selectionchange');
+            this.tree.on("render", function(tree) {
+                tree.body.swallowEvent(['click', 'keydown', 'keypress', 'keyup']);
+            });
+            this.tree.getSelectionModel().on("selectionchange", this.onSelect, this);
+        },
+        onSelect : function(tree, sel) {
+            this.fireEvent("select", this, sel, tree);
+        }
+    });
+    /*
+    // custom menu containing a single tree
+    Ext.menu.TreeMenu = Ext.extend(Ext.menu.Menu, {
+        cls : 'x-tree-menu',
+        keyNav : true,
+        hideOnClick : false,
+        plain : true,
+        constructor : function(config) {
+            Ext.menu.TreeMenu.superclass.constructor.call(this, config);
+            this.treeItem = new Ext.menu.TreeItem(config);
+            this.add(this.treeItem);
+            this.tree = this.treeItem.tree;
+            this.tree.on('click', this.onNodeClick, this);
+            this.relayEvents(this.treeItem, ["selectionchange"]);
+        },
+// private
+        beforeDestroy : function() {
+            this.tree.destroy();
+        },
+        onNodeClick : function(node, e) {
+            if (!node.attributes.isFolder) {
+                this.treeItem.handleClick(e);
+            }
+        }
+    });
+    */
+
+</script>
+</body>
+</html>
