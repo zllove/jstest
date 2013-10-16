@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="fn.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    /*
+    Function.method('new', function(){
+        var that = Object.beget(this.prototype);
+        var other = this.apply(that, arguments);
+        return (typeof other === 'object' && other) || that;
+    });
+    */
+
+    var Mammal = function(name){
+        this.name = name;
+    }
+
+    Mammal.prototype.get_name = function(){
+        return this.name;
+    }
+    Mammal.prototype.says = function(){
+        return this.saying || '';
+    }
+
+    var Cat = function(name){
+        this.name = name;
+        this.saying = 'meow';
+    }
+    Cat.prototype = new Mammal();
+
+    Cat.prototype.purr = function(n){
+        var i, s = '';
+        for(var i = 0; i < n; i ++){
+            if(s){
+                s += '-';
+            }
+            s += 'r';
+        }
+        return s;
+    }
+
+    Cat.prototype.get_name = function(){
+        return this.says() + ' ' + this.name + ' ' + this.says();
+    }
+
+    var myCat = new Cat('Henrietta');
+    var says = myCat.says();
+    // var purr = myCat.purr(5);
+    var name = myCat.get_name();
+    // console.log(says);
+    // console.log(purr);
+    // console.log(name);
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+
+    function Rectangle(w, h){
+        this.width = w;
+        this.height = h;
+    }
+
+    Rectangle.prototype.area = function(){
+        return this.width * this.height;
+    }
+
+    var r = new Rectangle(2, 3);
+//    console.log(r.hasOwnProperty('width')); // true hasOwnProperty 区分继承的属性和常规的属性
+//    console.log(r.hasOwnProperty('area')); // false
+
+    String.prototype.endsWidth = function(c){
+        return (c == this.charAt(this.length - 1));
+    }
+
+    var msg = 'hello world';
+    console.log(msg.endsWidth('d'));
+
+</script>
+<div class="a"></div>
+</body>
+</html>

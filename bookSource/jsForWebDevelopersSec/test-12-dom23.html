@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test-dom2-dom3</title>
+    <style>
+        body{background: #fff;}
+        #mydiv{padding: 20px;margin: 20px;position: relative;left: 30px;}
+    </style>
+</head>
+<body>
+    <div id="mydiv"></div>
+<script type="text/javascript">
+    var parentWindow = document.defaultView || document.parentWindow;
+    // console.log(parentWindow);
+
+    var mydiv = document.getElementById('mydiv');
+    mydiv.style.cssText = 'width:25px;height:100px;background-color:red;';
+    console.log(mydiv.style.cssText);
+
+    function getStyle (node) {
+        var computedStyle = '';
+        if (node.currentStyle) {
+            computedStyle = node.currentStyle;
+        }
+        if (document.defaultView && document.defaultView.getComputedStyle) {
+            computedStyle = document.defaultView.getComputedStyle(node, null);
+        };
+        return computedStyle;
+    }
+    // console.log(getStyle(mydiv).backgroundColor);
+
+    function insertRule (sheet, selectorText, cssText, position) {
+        if (sheet.insertRule) {
+            sheet.insertRule(selectorText + '{' + cssText + '}', position);
+        } else if(sheet.addRule){
+            sheet.addRule(selectorText, cssText, position);
+        };
+    }
+
+    // insertRule(document.styleSheets[0], 'body', 'background-color:silver', 0);
+
+    function deleteRule (sheet, index) {
+        if (sheet.deleteRule) {
+            sheet.deleteRule(index);
+        } else{
+            sheet.removeRule(index);
+        };
+    }
+    // deleteRule(document.styleSheets[0], 0);
+
+    function getElementLeft (element) {
+        var actualLeft = element.offsetLeft;
+        var current = element.offsetParent;
+
+        while(current != null){
+            actualLeft += current.offsetLeft;
+            current = current.offsetParent;
+        }
+        return actualLeft;
+    }
+    // console.log(getElementLeft(mydiv));
+    // 
+    
+    function getElementTop (element) {
+        var actualTop = element.offsetTop;
+        var current = element.offsetParent;
+
+        while(current != null){
+            actualTop += current.offsetTop;
+            current = current.offsetParent;
+        }
+        return actualTop;
+    }
+
+    function getViewPort () {
+        if (document.compatMode == 'BackCompat') {
+            return {
+                width: document.body.clientWidth,
+                height: document.body.clientHeight
+            }
+        } else {
+            return {
+                width: document.documentElement.clientWidth,
+                height: document.documentElement.clientHeight
+            }
+        };
+    }
+
+    function getBoundingClientRect (element) {
+        if (typeof arguments.callee.offset != 'number') {
+            var scrollTop = document.documentElement.scrollTop;
+            var temp = document.createElement('div');
+            temp.style.cssText = 'position:absolute;top:0;left:0;';
+            document.body.appendChild(temp);
+            arguments.callee.offset = -temp.getBoundingClientRect().top - scrollTop;
+            document.body.removeChild(temp);
+            temp = null;
+        };
+
+        var rect = element.getBoundingClientRect();
+        var offset = arguments.callee.offset;
+        return {
+            left: rect.left + offset,
+            right: rect.right + offset,
+            top: rect.top + offset,
+            bottom: rect.bottom + offset
+        };
+    }
+
+    // console.log(getBoundingClientRect(mydiv).left);
+    // 
+    
+</script>
+<p id="p1"><b>hello</b>world</p>
+<script type="text/javascript">
+    /*
+    var range1 = document.createRange(),
+        range2 = document.createRange();
+    range1.selectNode(p1);
+    range2.selectNodeContents(p1);
+    */
+
+    var p1 = document.getElementById('p1'),
+        helloNode = p1.firstChild.firstChild,
+        worldNode = p1.lastChild,
+        range = document.createRange();
+
+    range.setStart(helloNode, 2);
+    range.setEnd(worldNode, 3);
+    // range.deleteContents();
+    // var fragment = range.extractContents();
+    // p1.parentNode.appendChild(fragment);
+
+    /*
+    var span = document.createElement('span');
+    span.style.color = 'red';
+    span.appendChild(document.createTextNode('this is span'));
+    range.insertNode(span);
+    */
+    
+    range.selectNode(helloNode);
+
+    var span = document.createElement('span');
+    span.style.backgroundColor = 'yellow';
+    range.surroundContents(span);
+</script>
+<p id="pp1">Paragraph 2</p>
+<p id="pp2">Paragraph 2</p>
+<script type="text/javascript">
+    var range3 = document.body.createTextRange();
+    range3.findText('Hello');
+    range3.pasteHTML('<em>Howdy</em>');
+
+</script>
+
+</body>
+</html>

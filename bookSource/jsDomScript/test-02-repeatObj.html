@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-02-repeatObj</title>
+    <script type="text/javascript" src="js/ADS.js"></script>
+    <script type="text/javascript" src="js/myLogger.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+    /*
+    var Person = {};
+    Person.getName = function(){};
+    Person.getAge = function(){};
+    var employee = {};
+    employee.getTitle = function(){};
+    employee.getSalay = function(){};
+    employee.getName = Person.getName;
+    employee.getAge = Person.getName;
+    var myObject = new Object();
+    var myObject = {};
+    var anotherObject = new myObject();
+    function myConstructor(message){
+        alert(message);
+        this.myMessage = message;
+    }
+    var myObject = new myConstructor('Instanting');
+
+    var myObject = new Object();
+    myObject.name = 'Jeff';
+    myObject.alername = function(){
+        alert(this.name);
+    }
+    myObject.alername();
+
+    var anotherExample = new myObject();
+    anotherExample.alername();
+
+    var myConstructor = function(){};
+    myConstructor.name = 'Jeff';
+    myConstructor.alername = function(){
+        alert(this.name);
+    }
+    myConstructor.alername();
+    var anotherExample = new myConstructor();
+    anotherExample.alername();
+
+    function myConstructor(message){
+        this.myMessage = message;
+
+        // 私有属性
+        var separator = ' - ';
+        var myOwner = this;
+
+        // 私有方法
+        function alertMessage(){
+            alert(myOwner.myMessage); // Hello World
+        }
+        //在实例化时显示信息
+        alertMessage();
+
+        // 特权方法(公有方法)
+        this.appendToMessage = function(string){
+            this.myMessage += separator + string;
+            alertMessage(); // Hello World Jeff.
+        }
+    }
+    // 公有方法
+    myConstructor.prototype.clearMessage = function(string){
+        this.myMessage = '';
+    };
+    // 静态属性
+    myConstructor.name = 'Jeff';
+    // 静态方法
+    myConstructor.alertname = function(){
+        alert(this.name);
+    }
+
+    var myObject = new myConstructor('Hello World!');
+    myObject.appendToMessage('Jeff');
+
+    var myObject = {
+        propertyA: 'valuea',
+        methodA: function(){
+            alert(this.propertyA);
+        }
+    };
+
+    var myObject2 = new Object();
+    myObject2.propertyA = 'valueA';
+    myObject2.methodA = function(){
+        alert(this.propertyA);
+    }
+    console.log(myObject.methodA()); // valuea
+    console.log(myObject2.methodA()); // valueA
+     */
+
+
+
+
+
+</script>
+<p id="example">this is example</p>
+<a href="#">11</a>
+<a href="#">21</a>
+<script type="text/javascript">
+    /*
+    var sound = 'Roar!';
+    function myOrneryBeast(){
+        this.style.color = 'red';
+        alert(sound);
+    }
+    function initPage(){
+        var example = ADS.$('example');
+        example.onclick = myOrneryBeast;
+//        ADS.addEvent(example, 'mouseover', myOrneryBeast);
+    }
+    ADS.addEvent(window, 'load', initPage);
+
+    function doubleCheck(){
+        this.message = 'Are you sure you want to leave?';
+    }
+    doubleCheck.prototype.sayGoodbye = function(){
+        return confirm(this.message);
+    }
+    function initPage(){
+        var clickedLink = new doubleCheck();
+        var links = document.getElementsByTagName('a');
+        for(var i=0; i<links.length; i++){
+            ADS.addEvent(links[i], 'click', ADS.bindFunction(clickedLink, clickedLink.sayGoodbye));
+        }
+    }
+    ADS.addEvent(window, 'load', initPage);
+    var sound = 'Roar!';
+    function myOrneryBeast(){
+        this.style.color = 'red';
+        alert(sound);
+    }
+    try{
+        myOrneryBeast();
+    }catch(theException){
+        alert('Oops ' + theException.name + ',message ' + theException.message);
+    }
+//    myOrneryBeast();
+
+    function initPage(){
+        var example = ADS.$('example');
+        example.onclick = myOrneryBeast;
+//        ADS.addEvent(example, 'mouseover', myOrneryBeast);
+    }
+//    ADS.addEvent(window, 'load', initPage);
+     */
+
+    var w = ADS.getBrowserWindowSize().width;
+    var h = ADS.getBrowserWindowSize().height;
+//    alert(w);
+//    alert(h);
+    ADS.log.writeRaw('This is Raw');
+    ADS.log.header('瞧瞧');
+    ADS.log.write('<div style="color:#f00">瞧瞧！</div>');
+
+</script>
+</body>
+</html>

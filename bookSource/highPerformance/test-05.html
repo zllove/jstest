@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-05</title>
+</head>
+<body>
+<script type="text/javascript">
+	console.time('1');
+	var str = 'i am thirty-five character string.',
+		newstr = '',
+		appends = 500000;
+
+	while(appends --){
+		newstr += str;
+	}
+	console.timeEnd('1');
+
+	console.time('12');
+	var str2 = 'i am thirty-five character string.',
+		strs = [],
+		newstr2 = '',
+		appends2 = 500000;
+
+	while(appends2 --){
+		strs[strs.length] = str;
+	}
+	newstr2 = strs.join('');
+	console.timeEnd('12');
+
+</script>	
+</body>
+</html>

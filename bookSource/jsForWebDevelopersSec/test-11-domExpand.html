@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+        <!-- // <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script> -->
+</head>
+<body>
+    <div id="mydiv" style="height:800px;">mydiv</div>
+    <div class="selected"></div>
+    <script type="text/javascript">
+
+        var body = document.querySelector('body');
+        // console.log(body);
+        var mydiv = document.querySelector('#mydiv');
+        // console.log(mydiv);
+    </script>
+    <div id="test2" class="bd user disabled">...</div>
+    <script type="text/javascript">
+        var test = document.getElementById('test2');
+        var classNames = test.className.split(/\s+/);
+        var pos = -1,
+            i,
+            len;
+
+        for(i=0, len=classNames.length; i<len; i++){
+            if (classNames[i] == 'user') {
+                pos = i;
+                // break;
+            };
+        }
+        // console.log(pos);
+        // console.log(i);
+
+        classNames.splice(pos, 1);
+        test.className = classNames.join(' ');
+
+
+
+    </script>
+    <input type="submit" value="test-focus" id="btn">
+<script type="text/javascript">
+    var btn = document.getElementById('btn');
+    // btn.focus();
+    // console.log(document.hasFocus());
+    // console.log(document.readySate);
+
+    /*
+    if (document.readySate == 'complete') {
+        console.log(1);
+    } else {
+        console.log('no load');
+    }
+
+    if (document.compatMode == 'CSS1Compat') {
+        console.log('Standards mode');
+    } else {
+        console.log('Quirks mode');
+    }
+
+    if (document.head) {
+        console.log('this is head');
+    } else {
+        console.log('no support head');
+    }
+
+
+    var head = document.head || document.getElementsByTagName('head')[0];
+
+    console.log(document.charset);
+    console.log(document.characterSet); // firefox
+    console.log(document.defaultCharset);
+    */
+
+
+</script>
+
+<div id="mydiv" data-appId="12345" data-myname="Nicholas"></div>
+<a href="">111</a>
+<a href="">1112</a>
+<a href="">1113</a>
+    <table id="tab" width="200" border="1">
+        <tr title="1">
+            <td>111</td>
+        </tr>
+    </table>
+    <ul id="ul"></ul>
+<script type="text/javascript">
+    var div = document.getElementById('mydiv');
+    var tab = document.getElementById('tab');
+    /*
+    var appId = div.dataset.appId;
+    var myname = div.dataset.myname;
+    console.log(div);
+    console.log(appId);
+    console.log(myname);
+    // div.innerHTML = '<script>alert("hi");<\/script>';
+    // div.innerHTML = '<div>&nbsp;</div><script>alert("hi");<\/script>';
+    div.innerHTML = '<input type="hidden" /><script>alert("hi");<\/script>';
+    // var link = document.getElementsByTagName('a');
+    var link = document.links;
+    for(var i=0; i<link.length; i++){
+        link[i].onclick = function(){
+            return false;
+        }
+    }
+    $('#tab tr').click(function(){
+        console.log(this.title);
+    });
+
+    var p = document.createElement('p');
+    p.appendChild(document.createTextNode('This is p element'));
+    div.parentNode.replaceChild(p, div);
+    */
+
+    // div.insertAdjacentHTML('beforebegin', '<p>Hello World!</p>');
+    // div.insertAdjacentHTML('afterbegin', '<p>Hello World!</p>');
+    // div.insertAdjacentHTML('beforeend', '<p>Hello World!</p>');
+    // div.insertAdjacentHTML('afterend', '<p>Hello World!</p>');
+    // 
+    var ul = document.getElementById('ul');
+    var values = ['a', 'b', 'c', 'd'];
+    var itemHtml = '';
+    for(var i=0; i<values.length; i++){
+        itemHtml += '<li>' + values[i] + '</li>';
+    }
+    ul.innerHTML = itemHtml;
+
+    // ul.scrollIntoView();
+    // 
+    // console.log(tab.children[0].innerHTML);
+    // console.log(tab.childNodes[0].innerHTML);
+    
+    // console.log(document.documentElement.contains(document.body));
+    
+    function getInnerText(element){
+        return (typeof element.textContent == 'string' ? element.textContent : element.innerText);
+    }
+    // console.log(getInnerText(div));
+
+    function setInnerText(element, val){
+        if (typeof element.textContent == 'string') {
+            element.textContent = val;
+        } else {
+            element.innerText = val;
+        };
+    }
+    setInnerText(div, '我是一个兵');
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function factorial (num) {
+            if (num <=1) {
+                return 1; 
+            } else{
+                return num * factorial( num - 1);
+            };
+        }
+        // console.log(factorial(4));
+
+        function createFunctions(){
+            var result = new Array();
+            for(var i=0; i<10; i++){
+                result[i] = function(num){
+                    return function(){
+                        return num;
+                    }
+                }(i);
+            }
+            return result;
+        }
+
+        console.log(createFunctions());
+
+
+
+
+
+    </script></body>
+</html>

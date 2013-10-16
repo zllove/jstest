@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test-error</title>
+</head>
+<body>
+<script type="text/javascript">
+    console.group('testFinally');
+    function testFinally () {
+        try{
+            return 2;
+        } catch (error) {
+            return 1;
+        } finally {
+            return 0;
+        }
+    }
+    console.log(testFinally());
+    console.groupEnd();
+
+    console.group('throw');
+    /*
+    try {
+        throw 1234
+    } catch (error) {
+        throw 'hello';
+    }
+    throw 1234;
+    throw 'Hello World!'
+    throw true
+    throw {name: 'Javascript'}
+    */
+
+    console.groupEnd();
+
+    console.group('argument');
+    function process(values){
+        if (!(values instanceof Array)) {
+            throw new Error('proessce: Arguements must be an array.');
+        };
+        values.sort();
+        for(var i = 0, len = values.length; i < len; i++){
+            if(values[i] > 5){
+                return values[i];
+            }
+        }
+        return -1;
+    }
+    // console.log(process('123'));
+    console.log(process([8, 9, 19, 7, 6]));
+
+    console.groupEnd();
+
+    console.group('error type');
+    function concat(str1, str2, str3){
+        var result = str1 + str2;
+        if (typeof str3 == 'string') {
+            result += str3;
+        };
+        return result;
+    }
+    console.log(concat('1', 'a', '0'));
+
+    function reverseSotr(values){
+        if(values instanceof Array){
+            values.sort().reverse();
+        }
+        return values;
+    }
+    console.log(reverseSotr([1,3,4,2]));
+    console.groupEnd();
+
+    console.group('log');
+    function log(message){
+        if (typeof console == 'object') {
+            console.log(message);
+        } else {
+            alert(messag);
+        }
+    }
+    log(0);
+
+
+    console.groupEnd();
+
+
+</script>
+    <div>
+        <script type="text/javascript">
+            document.body.appendChild(document.createElement('div'));
+        </script>   
+    </div>
+    <script type="text/javascript">
+        function createUrl(url){
+            var s = '?';
+            for(var i = 0, len = 2500; i < len; i++){
+                s += 'a';
+            }
+            return url + s;
+        }
+        var x = new XMLHttpRequest();
+        x.open('get', createUrl('http://www.somedomain.com'), true);
+        x.send(null);
+    </script>
+</body>
+</html>

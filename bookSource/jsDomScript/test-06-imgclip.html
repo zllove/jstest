@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-06-imgclip</title>
+    <script type="text/javascript" src="js/ADS.js"></script>
+    <script type="text/javascript" src="js/imageEditor2.js"></script>
+    <style type="text/css">
+        /* 添加以下样式，为隐藏表单元素 */
+        form.ADSImageEditorModified *{ position:absolute; left:-2000px;}
+        form.ADSImageEditorModified img{position:inherit; left:auto;}
+    </style>
+</head>
+<body>
+<form class="ADSImageEditor" action="">
+    <img id="imageID" src="http://pc2.gtimg.com/newlabs/images/QQHD720x230.jpg" alt="">
+</form>
+<div>
+    <!--背景幕-->
+</div>
+<div>
+    <!--/单击后弹出的div-->
+    <div></div>
+    <!--/右下角放大缩小拖拽按钮-->
+    <img src="" alt="">
+    <!--/背景图像，此处有两个图像，这是最底的一个-->
+    <div></div>
+    <!--/底层图像上的半透明蒙版-->
+    <div>
+        <!--/裁剪区域-->
+        <img src="" alt="">
+        <!--/裁剪区域变化后要显示的图片区域，也就是裁剪后的图像-->
+        <div>
+            <!--裁剪大小显示区域-->
+        </div>
+        <div>
+            <!--裁剪手柄-->
+        </div>
+        <div>
+            <!--保存手柄-->
+        </div>
+        <div>
+            <!--取消手柄-->
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+ADS.imageEditor.load();
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>test-01-selectorAPI</title>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        td{border-style:solid;border-width:1px; font-size:300%;}
+        td:hover{ background:cyan;}
+        #hoverResult{color:#008000;; font-size:200%;}
+    </style>
+</head>
+<body>
+<section>
+    <table>
+        <tr>
+            <td>a1</td>
+            <td>a2</td>
+            <td>a3</td>
+        </tr>
+        <tr>
+            <td>b1</td>
+            <td>b2</td>
+            <td>b3</td>
+        </tr>
+        <tr>
+            <td>c1</td>
+            <td>c2</td>
+            <td>c3</td>
+        </tr>
+    </table>
+    <div>Focus the button</div>
+    <button type="button" autofocus="autofocus" id="findHover">Find 'td:hover' target.</button>
+    <div id="hoverResult"></div>
+    <script type="text/javascript">
+        document.getElementById('findHover').onclick = function(){
+            var hovered = document.querySelector('td:hover');
+            alert(hovered);
+            if(hovered){
+                document.getElementById('hoverResult').innerHTML = hovered.innerHTML;
+            }
+        }
+    </script>
+
+</section>
+</body>
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>test-ninth-classcrtuProto</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    /*
+    function Rectangle(x, y){
+        this.width = x;
+        this.height = y;
+    }
+    Rectangle.prototype.area = function(){
+        return this.width * this.height;
+    }
+    var r = new Rectangle(2, 4);
+
+    console.log(r.hasOwnProperty('width')); // true
+    console.log(r.hasOwnProperty('area')); // false
+    console.log('area' in r); // true
+    String.prototype.endWith = function(c){
+        return (c == this.charAt(this.length - 1));
+    }
+    console.log('abcdef'.endWith('f'));
+    console.log('abcdef'.endWith('3'));
+
+    if(!Array.prototype.map) {
+        Array.prototype.map = function(f, thisObject){
+            var res = [];
+            for(var len=this.length, i=0; i<len; i++){
+//                res.push(f.call(thisObject, this[i], i, this));
+                res.push(f(this[i]));
+            }
+            return res;
+        }
+    }
+
+    var arr = [2,1,5,6];
+    var obj1 = 'hello!';
+    var arr2 = arr.map(function(x){ return x + 'px'; }, obj1);
+    console.log(arr2);
+
+
+    var arr = [1,2,3,4,5];
+    var obj = 'hello!';
+    arr.forEach(function(e){
+        console.log(e + '--' + this);
+    }, obj);
+
+    function Circle(radius){
+        this.r = radius;
+    }
+    Circle.PI = 3.14159;
+    Circle.prototype.area = function(){
+        return this.r * this.r * Circle.PI;
+    }
+    Circle.max = function(a, b){
+        if(a.r > b.r){
+            return a;
+        } else {
+            return b;
+        }
+    }
+
+    var c = new Circle(1.0);
+    c.r = 2.2;
+    var a = c.area();
+    var x = Math.exp(Circle.PI);
+    var d = new Circle(1.2);
+    var bigger = Circle.max(c, d);
+    console.log(bigger);
+    */
+
+    function Complex(real, imaginary){
+        this.x = real;
+        this.y = imaginary;
+    }
+
+    Complex.sum = function(a, b){
+        return new Complex(a.x + b.x, a.y + b.y);
+    }
+
+    Complex.prototype.equals = function(that){
+        return this.x == that.x && this.y == that.y;
+    }
+
+    Complex.prototype.toString = function(){
+        return '{' + this.x + ', ' + this.y + '}';
+    }
+    Complex.prototype.valueOf = function(){
+        return this.x;
+    }
+
+    /*
+    var a = new Complex(5, 4);
+    var b = new Complex(2, 1);
+    var c = Complex.sum(a, b);
+    var d = a + b;
+    alert('c = ' + c);
+    alert('c = ' + c.toString());
+
+    function Rectangle(w, h){
+        this.width = w;
+        this.height = h;
+    }
+    Rectangle.prototype.area = function(){
+        return this.width * this.height;
+    }
+    function PositionedRectangle(x, y, w, h){
+        Rectangle.call(this, w, h);
+        this.x = x;
+        this.y = y;
+    }
+    PositionedRectangle.prototype = new Rectangle();
+//    delete PositionedRectangle.prototype.width;
+//    delete PositionedRectangle.prototype.height;
+
+    PositionedRectangle.prototype.constructor = PositionedRectangle;
+    PositionedRectangle.prototype.contains = function(x, y){
+        return (x > this.x && x < this.x + this.width && y > this.y && y<this.y + this.height);
+    }
+    */
+
+    /*
+    var r = new PositionedRectangle(2,2,2,2);
+    console.log(r.contains(3,3)); // true
+    console.log(r.area()); // 4
+    console.log(r.x + ', ' + r.y + ', ' + r.width + ', ' + r.height); // 2,2,2,2
+    console.log(r instanceof PositionedRectangle && r instanceof Rectangle && r instanceof Object); // true
+
+    // 给类绑定方法
+    function borrowMethods(brrowFrom, addTo){
+        var from = brrowFrom.prototype;
+        var to = addTo.prototype;
+        for(m in from){
+            if(typeof from[m] != 'function') continue;
+            to[m] = from[m];
+        }
+    }
+
+    function a(){
+        this.name = 'jikey';
+        alert('hello world');
+    }
+    a.prototype.sayHello = function(){
+        alert(this.name);
+    }
+    function b(){}
+    var c = borrowMethods(a, b);
+    console.dir(b);
+
+    function GenericToString(){}
+    GenericToString.prototype.toString = function(){
+        var props = [];
+        for(var name in this){
+            if(!this.hasOwnProperty(name)) continue;
+            var value = this[name];
+            var s = name + ':';
+            switch(typeof value){
+                case 'function':
+                    s += 'function';
+                    break;
+                case 'object':
+                    if(value instanceof Array) s += 'array';
+                    else s += value.toString();
+                    break;
+                default:
+                    s += String(value);
+                    break;
+            }
+            props.push(s);
+        }
+        return '{' + props.join(', ') + '}';
+    }
+
+    function GenericEquals(){}
+    GenericEquals.prototype.equals = function(that){
+        if(this == that) return true;
+        var propsInThat = 0;
+        for(var name in that){
+            propsInThat++;
+            if(this[name] !== that[name]) {
+                return false;
+            }
+        }
+        var propsInThis = 0;
+        for(name in this) {
+            propsInThis++;
+        }
+        if(propsInThis != propsInThat) {
+            return false;
+        }
+        return true;
+    }
+
+    function Rectangle(x, y, w, h){
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+    }
+    Rectangle.prototype.area = function(){
+        return this.w * this.h;
+    };
+
+    borrowMethods(GenericEquals, Rectangle);
+//    borrowMethods(GenericToString, Rectangle);
+
+    var re = new Rectangle(2,2,2,2);
+    var re2 = new Rectangle(2,2,2,2);
+    console.log(re.equals(re2));
+//    console.log(GenericEquals);
+    */
+
+
+
+
+
+</script>
+<script type="text/javascript">
+    /*
+    var d = new Date();
+    var isobj = d instanceof Object;
+    var realobj = d.constructor == Object;
+    console.log(isobj); // true
+    console.log(realobj); // false
+
+    // 扩展的typeof测试
+    function getType(x){
+        if(x == null) {
+            return 'null';
+        }
+        var t = typeof x;
+        if(t != 'object') {
+            return t;
+        }
+        var c = Object.prototype.toString.apply(x);
+        c = c.substring(8, c.length-1);
+        if(c !== 'Object') {
+            return c;
+        }
+        
+        if(x.constructor == Object) {
+            return c;
+        }
+        if('classname' in x.constructor.prototype && typeof x.constructor.prototype.classname == 'string') {
+            return x.constructor.prototype.classname;
+        }
+        return '<unknown type>';
+    }
+
+    console.log(getType([function(){}]));
+
+    // 测试一个对象是否借用了一个类的方法
+    function borrows(o, c){
+        if(o instanceof c){
+            return true;
+        }
+        if(c == Array || c == Boolean || c == Date || c == Error || c == Function || c == Number || c == RegExp || c == String){
+            return undefined;
+        }
+        if(typeof o == 'function'){
+            o = o.prototype;
+        }
+        var proto = c.prototype;
+        for(var p in proto){
+            if(typeof proto[p] != 'function'){
+                continue;
+            }
+            if(o[p] != proto[p]){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // 测试一个对象是否提供了方法
+    function provides(o, c){
+        if(o instanceof c){
+            return true;
+        }
+        if(typeof o == 'function'){
+            o = o.prototype;
+        }
+        if(c == Array || c == Boolean || c == Date || c == Error || c == Function || c == Number || c == RegExp || c == String){
+            return undefined;
+        }
+        var proto = c.prototype;
+        for(var p in proto){
+            if(typeof proto[p] != 'function'){
+                continue;
+            }
+            if(!(p in o)){
+                return false;
+            }
+            if(typeof o[p] != 'function'){
+                return false;
+            }
+            if(o[p].length != proto[p].length){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function Comparable(){}
+    Comparable.prototype.compareTo = function(that){
+        throw 'Comparable compareto is abstract.';
+    }
+
+    function o(){}
+    function p(){}
+
+    if(o.constructor == p.constructor && provides(o, Comparable)){
+        var order = o.compareTo(p);
+    }
+//    console.log(order);
+
+    // 测试类似数组的对象
+    function isArrayLike(x){
+        if(x instanceof Array){
+            return true;
+        }
+        if(!('length' in x)){
+            return false;
+        }
+        if(typeof x.length != 'number'){
+            return false;
+        }
+        if(x.length < 0){
+            return false;
+        }
+        if(x.length > 0){
+            if(!((x.length - 1) in x)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function foo(){
+//        return isArrayLike(arguments);
+        return isArrayLike(1);
+    }
+    console.log(foo());
+     */
+</script>
+<script type="text/javascript">
+    function defineClass(data){
+        var classname = data.name;
+        var superclass = data.extend || Object;
+        var constructor = data.construct || function(){ };
+        var methods = data.methods || {};
+        var statics = data.statics || {};
+        var borrows;
+        var provides;
+        
+        if(!data.borrows){
+            borrows = [];
+        } else if(data.borrows instanceof Array){
+            borrows = data.borrows;
+        } else {
+            borrows = [data.borrows];
+        }
+        
+        if(!(data.provides)){
+            provides = [];
+        } else if(data.provides instanceof Array){
+            provides = data.provides;
+        } else {
+            provides = [data.provides];
+        }
+        
+        var proto = new superclass();
+        for(var p in proto){
+            if(proto.hasOwnProperty(p)){
+                delete proto[p];
+            }
+        }
+        
+        for(var i=0; i<borrows.length; i++){
+            var c = data.borrows[i];
+            borrows[i] = c;
+            for(var p in c.prototype){
+                if(typeof c.prototype[p] != 'function'){
+                    continue;
+                }
+                proto[p] = c.prototype[p];
+            }
+        }
+
+        for(var p in methods){
+            proto[p] = methods[p];
+        }
+
+        proto.constructor = constructor;
+        proto.superclass = superclass;
+        if(classname) {
+            proto.classname = classname;
+        }
+        
+        for(var i=0; i<provides.length; i++){
+            var c = provides[i];
+            for(var p in c.prototype){
+                if(typeof c.prototype[p] != 'function'){
+                    continue;
+                }
+                if(p == 'constructor' || p == 'superclass'){
+                    continue;
+                }
+                if(p in proto && typeof proto[p] == 'function' && proto[p].length == c.prototype[p].length){
+                    continue;
+                }
+                throw new Error('Class' + classname + ' does not provide method ' + c.classname + '.' + p);
+            }
+        }
+
+        constructor.prototype = proto;
+
+        for(var p in statics){
+            constructor[p] = data.statics[p];
+        }
+        return constructor;
+    }
+
+    var Comparable = defineClass({
+        name: 'Comparable',
+        methods: {compareTo: function(that){ throw 'abstract'; }}
+    });
+
+    var GenericEquals = defineClass({
+        name: 'GenericEquals',
+        methods: {
+            equals: function(that){
+                if(this == that){
+                    return true;
+                }
+                var propsInThat = 0;
+                for(var name in that){
+                    propsInThat++;
+                    if(this[name] !== that[name]){
+                        return false;
+                    }
+                }
+                var propsInThis = 0;
+                for(name in this){
+                    propsInThis++;
+                }
+                if(propsInThis != propsInThat){
+                    return false;
+                }
+                return true;
+            }
+        }
+    });
+
+    var Rectangle = defineClass({
+        name: 'Rectangle',
+        construct: function(w, h){ this.width = w; this.height = h; },
+        methods: {
+            area: function(){ return this.width * this.height; },
+            compareTo: function(that){ return this.area() - that.area(); }
+        },
+        provides: Comparable
+    });
+
+    var PositionedRectangle = defineClass({
+        name: 'PositionedRectangle',
+        extend: Rectangle,
+        construct: function(x,y,w,h){
+            this.superclass(w, h);
+            this.x = x;
+            this.y = y;
+        },
+        methods: {
+            isInside: function(x,y){
+                return x>this.x && x < this.x + this.width && y > this.y && y <this.y + this.height;
+            }
+        },
+        statics: {
+            comparator: function(a,b){
+                return a.compareTo(b);
+            }
+        },
+        borrows: [GenericEquals]
+    });
+
+</script>
+
+</body>
+</html>

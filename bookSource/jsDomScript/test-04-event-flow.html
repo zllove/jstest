@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>test-04-event-flow</title>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{ font:12px/23px arial; background:#fff;}
+        #list1{ height:80px;}
+        #list2{ height:20px;}
+        #list3{ position:absolute; top:155px; left:38%;}
+        #list4{ margin-top:10px; height:100px;}
+        #content{ width:500px; margin:0 auto; border:1px solid #ccc;}
+        .checked{ background:#f0f0f0;}
+        ul,li{ list-style:none;}
+        li{ padding-left:5px;}
+        #follow{display:inline;background:#000;color:white;padding:1em;margin:0 auto;}
+
+    </style>
+    <script type="text/javascript" src="js/ADS.js"></script>
+    <script type="text/javascript" src="js/myLogger.js"></script>
+</head>
+<body>
+<h1>Event Flow</h1>
+<div id="content">
+    <ul id="list1">
+        <li>
+            <p>List 1</p>
+            <ul id="list2">
+                <li>
+                    <p>List 2</p>
+                    <ul id="list3">
+                        <li><p>List 3</p></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <ul id="list4">
+        <p>List 4</p>
+    </ul>
+</div>
+<script type="text/javascript">
+    // 修改过的event
+    function modifiedAddEvent(obj, type, fn){
+        if(obj.addEventListener){
+            obj.addEventListener(type, fn, true);
+        } else if(obj.attachEvent){
+            obj['e' + type + fn] = fn;
+            obj[type + fn] = function(){
+                obj['e' + type + fn](window.event);
+            };
+            obj.attachEvent('on' + type, obj[type + fn]);
+        } else {
+            return false;
+        }
+    }
+    var counter = 0;
+    var lists = document.getElementsByTagName('ul');
+    for(var i=0; i<lists.length; i++){
+        modifiedAddEvent(lists[i], 'click', function(){
+            var append = document.createTextNode(' : ' + counter++);
+            this.getElementsByTagName('p')[0].appendChild(append);
+            this.className = 'checked';
+        })
+    }
+
+
+</script>
+<h4>point position</h4>
+<div id="follow">Follow Pointer</div>
+<script type="text/javascript">
+    (function(){
+        var obj = ADS.$('follow');
+        obj.style.position = 'absolute';
+        function eventListener(w3cEvent){
+            var pointer = ADS.getPointerPositionInDocument(w3cEvent);
+            obj.style.left = pointer.x + 'px';
+            obj.style.top = pointer.y + 'px';
+        }
+        ADS.addEvent(document, 'mousemove', eventListener);
+    })();
+
+    (function(){
+        ADS.addEvent(document, 'keydown', function(w3cEvent){
+            var key = ADS.getKeyPressed(w3cEvent);
+            console.log(key.code + ': ' + key.value);
+        });
+    })();
+</script>
+</body>
+</html>
