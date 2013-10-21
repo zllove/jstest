@@ -30,6 +30,7 @@
             items = $('input[type="checkbox"][name="' + set.name + '"]');
 
         T.click(function(){
+            console.log(this.checked);
             items.attr('checked', this.checked);
         });
         
@@ -42,7 +43,8 @@
         var t = $(this);
         $(this).allChose({name : 'userId'});
         $(this).click(function(){
-            t.attr('checked', this.checked);
+            console.log(this.checked);
+//            t.attr('checked', this.checked);
         })
     });
 
