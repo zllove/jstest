@@ -8,13 +8,35 @@
 <body>
 
 <script type="text/javascript">
-    $(document).on('mousewheel', function(e){
-        if(e.wheel > 0){
-            console.log(111);
-        } else {
-            console.log(222);
+    function addEvent(obj, type, fn){
+        if(obj.addEventListener){
+            obj.addEventListener(type, function(){
+                fn.call(obj);
+            }, false);
+        } else if(obj.attachEvent){
+            obj.attachEvent('on' + type, fn);
         }
-    });
+    }
+
+    function onMouseWheel(obj){
+        if($.browser.mozilla){
+            obj.addEventListener('DOMMouseScroll', fn, false);
+        } else {
+            $(obj).on('mousewheel', fn);
+        }
+    }
+    onMouseWheel(document);
+
+    function fn(e){
+        e = e || event;
+        console.log(e.originalEvent.wheelDelta);
+        var bDown = e.detail ? e.detail < 0 : e.wheelDelta > 0;
+        if(bDown){
+            console.log('up');
+        } else {
+            console.log('down');
+        }
+    }
 </script>
 </body>
 </html>

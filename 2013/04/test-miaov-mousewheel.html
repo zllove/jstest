@@ -24,6 +24,8 @@
     function fn(e){
         e = e || event;
         var bDown = e.detail ? e.detail < 0 : e.wheelDelta > 0;
+        console.log('ff', e.detail);
+        console.log('chr,ff', e.wheelDelta);
 
         if(bDown){
             this.style.height = this.offsetHeight + 10 + 'px';
