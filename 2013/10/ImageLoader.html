@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+
+<body>
+<script type="text/javascript">
+/*
+ * Load one image-url
+ * @src: image url
+ * @callback: callback function
+ * @timeout: timeout setting
+ */
+function LoadImage(src, callback, timeout){
+	var img = new Image(),
+	/* timeout */
+	h = setTimeout(function(){
+		/* if timeout, clear image properties */
+		img.onload = img.onerror = null;
+		img.src = '';
+		/* clear timeout handle */
+		clearTimeout(h);
+		/* call callback function, set state 2 */
+		callback(2, src);
+	}, (timeout || 10) * 1000);
+
+	/* load successfully */
+	img.onload = function(){
+		clearTimeout(h);
+		callback(1, src, img.width, img.height, img);
+	}
+	/* request error */
+	img.onerror = function(){
+		clearTimeout(h);
+		callback(0, src);
+		img = null;
+	}
+	/* begin load */
+	img.src = src;
+}
+
+/*
+ * Load a group of images
+ * @obj: the group of image urls
+ * @callback: loading-finished callback function
+ * @timeout: single image-loader timeout setting
+ */
+function LoadImages(obj, callback, timeout){
+	timeout = timeout || 10;
+	/* loading queue, and as the result to return */
+	var queue = {};
+	/* detail results */
+	var ok = [], err = [], tout = [];
+	/* counter */
+	var c = 0;
+	for(var p in obj){
+		++c;
+		(queue[p] = (function(key, url){
+			return function(){
+				/* loading one */
+				LoadImage(url, function(state, src){
+					delete queue[key];
+					/* grouping the urls by state */
+					switch(state){
+						case 0: err.push(src); break;
+						case 1: ok.push(src); queue[key] = src; break;
+						case 2: tout.push(src); break;
+						default: throw 'WAT?!';
+					}
+					--c;
+					/* counter be zero, finished, and callback */
+					if(c < 1) callback(queue, {
+						ok : ok, err : err, timeout : tout
+					});
+				}, timeout)
+			}
+		})(p, obj[p]))();
+	}
+}
+
+
+
+
+
+
+LoadImages({
+	img1 : 'http://pic25.nipic.com/20121210/2481466_114530495000_2.jpg',
+	img2 : 'http://img.hb.aicdn.com/7907f09f8feafc9354799bbe6fedf65c1c1c34423cfbe-uMPphd_fw554',
+	img3 : 'http://pic25.nipic.com/20121210/2481466_114021865000_2.jpg',
+	img4 : 'http://pic25.nipic.com/20121210/2481466_112458788000_2.jpg'
+}, function(result, groups){
+	for(var p in result){
+		var img = new Image();
+		img.id = p;
+		img.src = result[p];
+		img.width = 240;
+		img.height = 180;
+		document.body.appendChild(img);
+	};
+	var s = 'OK:<br/>';
+	for(var i = 0; i < groups.ok.length; i++){
+		s += groups.ok[i] + '<br/>';
+	}
+	s += 'ERROR:<br/>';
+	for(var i = 0; i < groups.err.length; i++){
+		s += groups.err[i] + '<br/>';
+	}
+	s += 'TIMEOUT:<br/>';
+	for(var i = 0; i < groups.timeout.length; i++){
+		s += groups.timeout[i] + '<br/>';
+	}
+	document.body.appendChild(document.createElement('pre')).innerHTML = s;
+}, 3)
+
+
+</script>
+
+</body>
+
+</html>
