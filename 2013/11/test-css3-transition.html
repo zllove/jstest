@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .transitions{ transition:all 0.5s ease-in-out; -webkit-transition:all 0.5s ease-in-out; -moz-transition:all 0.5s ease-in-out; }
+        body{ font-family:Arial; line-height:3ex; }
+        code{ display:inline-block; background:#fafafa; padding:0 1ex; }
+        #toggle{ display:block; padding:10px; margin:10px auto; text-align:center; width:30ex; }
+        #content{ overflow:hidden; margin:10px; border:1px solid #666; background:#efefef; opacity:1; }
+        #content .inner{ padding:10px; overflow:auto; }
+    </style>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<!--http://stackoverflow.com/questions/3149419/can-you-use-css3-to-transition-from-height0-to-the-variable-height-of-content-->
+<div id="content" class="open">
+    <div class="inner">
+        <h3>Smooth CSS Transitions Between <code>height: 0</code> and <code>height: auto</code></h3>
+        <p>A clever workaround is to use <code>max-height</code> instead of
+            <code>height</code>, and set it to something bigger than your content. Problem is the browser uses this value to calculate transition duration. So if you set it to
+            <code>max-height: 1000px</code> but the content is only 100px high, the animation will be 10x too fast.
+        </p>
+        <p>Another option is to measure the content height with JS and transition to that fixed value, but then you have to keep track of the content and manually resize it if it changes.</p>
+        <p>This solution is a hybrid of the two - transition to the measured content height, then set it to
+            <code>max-height: 9999px</code> after the transition for fluid content sizing.
+        </p>
+    </div>
+</div>
+
+<br/>
+
+<button id="toggle">Challenge Accepted!</button>
+
+<script type="text/javascript">
+    var content = $('#content');
+    content.inner = $('#content .inner'); // inner div needed to get size of content when closed
+
+    // css transition callback
+    content.on('transitionEnd webkitTransitionEnd transitionend oTransitionEnd msTransitionEnd', function(e){
+        if(content.hasClass('open')){
+            content.css('max-height', 9999); // try setting this to 'none'... I dare you!
+        }
+    });
+
+    $('#toggle').on('click', function(e){
+        content.toggleClass('open closed');
+        content.contentHeight = content.outerHeight();
+
+        if(content.hasClass('closed')){
+
+            // disable transitions & set max-height to content height
+            content.removeClass('transitions').css('max-height', content.contentHeight);
+            setTimeout(function(){
+
+                // enable & start transition
+                content.addClass('transitions').css({
+                    'max-height' : 0,
+                    'opacity' : 0
+                });
+
+            }, 10); // 10ms timeout is the secret ingredient for disabling/enabling transitions
+            // chrome only needs 1ms but FF needs ~10ms or it chokes on the first animation for some reason
+
+        } else if(content.hasClass('open')){
+
+            content.contentHeight += content.inner.outerHeight(); // if closed, add inner height to content height
+            content.css({
+                'max-height' : content.contentHeight,
+                'opacity' : 1
+            });
+
+        }
+    });
+</script>
+
+</body>
+</html>
