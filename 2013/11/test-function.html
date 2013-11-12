@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    Function.prototype.method = function (name, func) {
+        this.prototype[name] = func;
+        return this;
+    };
+
+    Number.method('integer', function () {
+        return Math[this < 0 ? 'ceil' : 'floor'](this);
+    });
+
+    console.log((-10 / 2).integer());
+
+</script>
+</body>
+</html>

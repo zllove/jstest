@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>CSS3卡牌翻牌效果</title>
+    <script src="http://jsdashi.com/demo/tarot/prefixfree.min.js"></script>
+    <style type="text/css">
+        html{background:#F6F6F1 url("http://jsdashi.com/demo/tarot/bg-content.png")}
+        body,div,span,p,var,em,strong,a,h1,h2,h3,h4,h5,h6,input,textarea,ul,li,img{margin:0;padding:0;font-family:Arial;}
+        .box div{width:200px;height:337px;display:block;position:absolute;top:50px;left:100px;backface-visibility: hidden;}
+        #back{background:url("http://jsdashi.com/demo/tarot/tarot_back.jpg") 0 0 no-repeat;}
+        #front{background:url("http://jsdashi.com/demo/tarot/tarot.jpg") 0 0 no-repeat;}
+        .flip{transform: rotate3d(0,1,0,0deg);transition-duration: 0.4s;}
+        .fliped{transform: rotate3d(0,1,0,-180deg);transition-duration: 0.4s;}
+    </style>
+</head>
+<body>
+<!--http://bbs.aseoe.com/thread-556-1-1.html-->
+<div class="box">
+    <div id="front" class="fliped"></div>
+    <div id="back" class="flip"></div>
+</div>
+</body>
+<script type="text/javascript">
+    var V = function(obj){
+        return document.getElementById(obj);
+    }
+    V("back").onclick = function(){
+        var self = this;
+        self.className = "fliped";
+        V("front").className = "flip";
+
+        setTimeout(function(){
+            V("front").className = "fliped";
+            self.className = "flip";
+        }, 1000);
+    }
+</script>
+</html
