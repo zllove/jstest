@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav" id="menu">
+        <li class="active"><a id="menu01" href="cmnew.php?kecid=pg&communityid=<?php echo $_GET["communityid"]; ?>">我的主页</a></li>
+        <li><a id="menu02" href="#about">课程组员</a></li>
+        <li><a id="menu03" href="papernew.php?pageno=1&kecid=pg&communityid=<?php echo $_GET["communityid"]; ?>">课件资料</a></li>
+        <li><a id="menu04" href="bbsnew.php?kecid=pg&pageno=1&communityid=<?php echo $_GET["communityid"]; ?>">在线论坛</a></li>
+        <li><a id="menu05" href="#contact">管理员</a></li>
+        <li><a id="menu06" href="logout.php">退出</a></li>
+    </ul>
+</div>
+<script type="text/javascript">
+$('#menu a').click(function(){
+    $('#menu li').removeClass("active");
+    if($(this).index() == parseInt(this.id.replace(/\w{4}/, ''))){
+        $(this).parent().addClass('active');
+    }
+    return false;
+});
+</script>
+</body>
+</html>
