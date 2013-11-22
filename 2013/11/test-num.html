@@ -28,7 +28,8 @@
     //'["1|2|", "3|4|", "5|6|", ""]'.replace(/,\s+""/g,'').replace(/\|/g,',').replace(/,"/g,']').replace(/"/g,'[')
 
     var str = "1|2|,3|4|,5|6|,";
-    var arr = str.replace(/\|/g, ',').replace(/,/g, '').split('');
+//    var arr = str.replace(/\|/g, ',').replace(/,/g, '').split('');
+    var arr = str.replace(/\|*,*/g, '').split('');
     var res = [];
 
     for(var i = 0; i < arr.length; i += 2){
