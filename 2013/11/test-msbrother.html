@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    function encodeHTML(str) {
+        return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    }
+
+    // 统计字符串长度，支持中英文
+    function getByteLength(str){
+        var len = 0;
+        for(var i = 0; i < str.length; i++){
+            var c = str.charCodeAt(i);
+            if(c >= 0x001 && c < 0x007e || c >= 0xff60 && c <= 0xff9f){
+                len ++;
+            } else {
+                len += 2;
+            }
+        }
+
+        return len;
+    }
+
+    var d = '中国';
+    var dd = d.replace(/[\u4e00-\u9fa5]/, 'xx');
+
+    // 统计字符串长度，只支持英文
+    function getLen(str){
+        return str.replace(/[\u4e00-\u9fa5]/, 'xx').length;
+    }
+
+
+
+</script>
+</body>
+</html>
