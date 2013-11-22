@@ -9,7 +9,7 @@
 //    var str = "1|2|,3|4|,5|6|,"; //[[1,2],[3,4],[5,6]]
 
 
-/*
+    /*
     String.prototype.dmatch = function(reg1,reg2){
         var arg = this.match(reg1);
 
@@ -27,6 +27,14 @@
     */
     //'["1|2|", "3|4|", "5|6|", ""]'.replace(/,\s+""/g,'').replace(/\|/g,',').replace(/,"/g,']').replace(/"/g,'[')
 
+    var str = "1|2|,3|4|,5|6|,";
+    var arr = str.replace(/\|/g, ',').replace(/,/g, '').split('');
+    var res = [];
+
+    for(var i = 0; i < arr.length; i += 2){
+        res.push([arr[i] - 0, arr[i+1] - 0]);
+    }
+    console.log(res);
 
 
 
