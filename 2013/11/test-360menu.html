@@ -189,10 +189,10 @@
     $(function() {
         $(".nav_area a").hover(
                 function() {
-                    $(this).next("span").animate({ top: "0px"}, 300)
+                    $(this).next("span").stop(true, true).animate({ top: "0px"}, 300)
                 },
                 function() {
-                    $(this).next("span").animate({ top: "30px"}, 300)
+                    $(this).next("span").stop(true, true).animate({ top: "30px"}, 300)
                 }
         );
     });
