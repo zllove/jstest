@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+剩余时间：<strong id="RemainM">0</strong>分<strong id="RemainS">0</strong>
+<script type="text/javascript">
+    var startTime, EndTime, timeout, NowTime, nMS, nM, nS, mind, sours;
+
+    startTime = new Date();
+    EndTime = startTime.getTime() + 8 * 1000;
+    timeout = setInterval(GetRTime, 1000);
+    mind = document.getElementById("RemainM");
+    sours = document.getElementById("RemainS");
+
+    function GetRTime() {
+        NowTime = new Date();
+        nMS = EndTime - NowTime.getTime();
+        nM = Math.floor(nMS / (1000 * 60)) % 60;
+        nS = Math.floor(nMS / 1000) % 60;
+        mind.innerHTML = nM;
+        sours.innerHTML = nS;
+        if (nM === 0 && nS === 0) {
+            if (confirm("重新计时?")) {
+                var retime = new Date();
+                EndTime = retime.getTime() + 15 * 60 * 1000;
+                return true;
+            } else {
+                clearInterval(timeout);
+                return false;
+            }
+        }
+    }
+
+</script>
+</body>
+</html>
