@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    Array.prototype.contains = function(element){
+        for(var i = 0; i < element.length; i++){
+            if(this[i] == element){
+                return true;
+            }
+        }
+        return false;
+    }
+
+//    var sqlList = { name : '1', age : 30};
+    var sqlList = [1,23,4];
+    var res;
+
+for(var i in sqlList){
+    console.log(i);
+//    console.log(sqlList.hasOwnProperty(i));
+    if(sqlList.hasOwnProperty(i)){
+        res = res +sqlList[i];
+        console.log(sqlList[i]);
+    }
+}
+
+</script>
+</body>
+</html>
