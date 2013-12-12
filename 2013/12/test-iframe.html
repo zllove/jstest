@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<iframe id="iframe" src="test.html" frameborder="0"></iframe>
+<script type="text/javascript">
+    window.onload = function(){
+        var iframe = document.getElementById('iframe');
+        console.log(iframe);
+        var btn = iframe.contentWindow.document.getElementById('btn');
+        console.log(btn);
+        var text = iframe.contentWindow.document.getElementById('text');
+        console.log(text);
+        btn.onclick = function(){
+            console.log(text.value);
+        }
+    }
+</script>
+</body>
+</html>
