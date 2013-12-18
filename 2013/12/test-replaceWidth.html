@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<div class="test">我是一个兵</div>
+<div class="container">
+    <div class="inner first">Hello</div>
+    <div class="inner second">And</div>
+    <div class="inner third">Goodbye</div>
+</div>
+<p>Hello</p><p>cruel</p><p>World</p>
+<script type="text/javascript">
+    var d = $('.third').replaceWith($('.test').clone());
+    var a = $("<b>Paragraph. </b>").replaceAll($('.test'));
+    console.log(a);
+</script>
+</body>
+</html>

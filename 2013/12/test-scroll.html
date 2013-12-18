@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>JS Bin</title>
+    <style type="text/css" rel="stylesheet">
+        body{ font-size:12px; font-family:"宋体";margin:0; padding:0;}
+        div,p,ul,li,dl,dd,dt,span,h1,h2,h3,h4,img,input,ol,input,button,select,option,h5,h6{ margin:0; padding:0; list-style:none; border:0;}
+        h1,h2,h3,h4,h5,h6{ font-size:12px; font-weight:normal;}
+        a:link,a:visited{color:#6e6e6e; text-decoration:none;}
+        a:hover{ color:#0c4990;}
+        .clearfix:after {visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
+        .clearfix {display:inline-table;}
+        *html .clearfix{height:1%;}
+        .clearfix{display:block;}
+        .cle{ clear:both;}
+        #move{width:870px; height:112px;margin:50px auto; position:relative; overflow:hidden; border:1px solid #000;}
+        #move ul{ position:absolute;left:0;top:0;}
+        #move li{width:174px;height:112px; margin-right:10px;float:left;background: #f00;}
+    </style>
+
+    <script>
+        window.onload = function() {
+
+            var oDiv = document.getElementById("move");
+            var oUl = oDiv.getElementsByTagName("ul")[0];
+            var aLi = oUl.getElementsByTagName("li");
+
+            oUl.innerHTML = oUl.innerHTML + oUl.innerHTML;
+            oUl.style.width = aLi[0].offsetWidth * aLi.length + "px";
+
+            setInterval(function() {
+
+                if (oUl.offsetLeft < -oUl.offsetWidth / 2) {
+                    oUl.style.left = "0";
+                }
+                oUl.style.left = oUl.offsetLeft - 2 + "px";
+            }, 30);
+
+        }
+
+
+    </script>
+</head>
+<body>
+<div id="move">
+    <ul class="clearfix">
+        <li><img src="images/zg1.jpg" /></li>
+        <li><img src="images/zg2.jpg" /></li>
+        <li><img src="images/zg3.jpg" /></li>
+        <li><img src="images/zg4.jpg" /></li>
+        <li><img src="images/zg5.jpg" /></li>
+    </ul>
+</div>
+</body>
+</html>
