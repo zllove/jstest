@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        * {margin: 0px;padding: 0px;}
+        html {height: 100%;}
+        body {height: 100%;overflow-x: hidden;}
+
+        .div01 {width: 90%;height: 100%;background: #ccc;position: absolute;z-index: 10;left: -90%;}
+        .div02 {width: 100%;height: 100%;background: #fff;position: absolute;z-index: 20;left: 0px;}
+        .div03 {width: 10px;height: 100%;background: #666;position: absolute;z-index: 30;left: 0px;cursor: move;}
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
+    <meta charset=utf-8 />
+    <title>JS Bin</title>
+    <script type="text/javascript">
+        $(function() {
+            $(".div03").on('mousedown', function() {
+                var _width = $(window).width();
+                var _width00 = _width * 0.9;
+                $(document).on("mousemove", function(event1) {
+                    var e = event1 || window.event;
+                    var _x1 = e.pageX;
+                    if (_x1 > _width00) {
+                        _x1 = _width00;
+                    }
+                    if (_x1 < 0) {
+                        _x1 = 0;
+                    }
+                    $(".div01").css('left', -(_width00 - _x1) + 'px');
+                    $(".div02").css('left', _x1 + 'px');
+                    $(".div03").css('left', _x1 + 'px');
+                });
+                $(document).on("mouseup", function(event2) {
+                    var e = event2 || window.event;
+                    var _x2 = e.pageX;
+                    if (_x2 > _width00) {
+                        _x2 = _width00;
+                    }
+                    if (_x2 < 0) {
+                        _x2 = 0;
+                    }
+                    if (_x2 >= (_width / 2)) {
+                        $(".div01").animate({left : 0}, 500);
+                        $(".div02").animate({left : _width00}, 500);
+                        $(".div03").animate({left : _width00}, 500);
+                    }
+                    if (_x2 < (_width / 2)) {
+                        $(".div01").animate({left : -_width00}, 500);
+                        $(".div02").animate({left : 0}, 500);
+                        $(".div03").animate({left : 0}, 500);
+                    }
+                    $(document).off("mousemove");
+                    $(document).off("mouseup");
+                });
+
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="div00">
+    <div class="div01"></div>
+    <div class="div02"></div>
+    <div class="div03"></div>
+</div>
+</body>
+</html>

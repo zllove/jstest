@@ -34,7 +34,7 @@
 <script type="text/javascript">
     var data = {
         list : [
-            {name : ' guokai', show : true},
+            { name : ' guokai', show : true },
             {name : ' benben', show : false},
             {name : ' dierbaby', show : true}
         ],
@@ -56,7 +56,7 @@
 
     var tpl = document.getElementById('tpl').innerHTML;
     var html = juicer(tpl, data);
-//    document.getElementById('test').innerHTML = html;
+    document.getElementById('test').innerHTML = html;
 
     var tpl2 = document.getElementById('tpl2').innerHTML;
     document.getElementById('test2').innerHTML = juicer(tpl2, data2);
