@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="js/highcharts.js"></script>
+    <style type="text/css">
+        #cancer-report-type{ width:200px;}
+    </style>
+</head>
+<body>
+<div id="cancer-report-type"></div>
+<script type="text/javascript">
+    var data = {"gender" : [25, 75], "age" : [0, 0, 4, 10, 55, 5, 4], "diagnosis" : [0, 5, 95]};
+    console.log(data['gender']);
+    var opts = {
+        renderTo        : 'cancer-report-type',
+        height          : 210,
+        legend          : {
+            align         : 'center',
+            floating      : true,
+            borderWidth   : 0,
+            verticalAlign : 'bottom',
+            symbolWidth   : 4,
+            margin : 40,
+            itemStyle     : {
+                fontSize  : '12px',
+                lineHeight: '20px'
+            },
+            labelFormatter: function () {
+                return "" + this.y + "% " + this.name;
+            }
+        },
+        tooltipFormatter: function () {
+            return "<b>" + this.y + "%</b> " + this.point.name + "人";
+        },
+        data            : [
+            {
+                color: '#3fbb38',
+                name : '小细胞',
+                y    : 0
+            },
+            {
+                color: '#6ed868',
+                name : '非小细胞',
+                y    : 5
+            },
+            {
+                color: '#cccccc',
+                name : '其他',
+                y    : 95
+            }
+        ]
+    };
+    renderPieChart(opts);
+
+    function renderPieChart(opts) {
+        if(typeof Highcharts == 'undefined'){
+            return false;
+        }
+        new Highcharts.Chart({
+            chart      : {
+                renderTo: opts.renderTo,
+                height  : opts.height
+            },
+            title      : {
+                text: null
+            },
+            legend     : opts.legend,
+            credits    : {
+                enabled: false
+            },
+            tooltip    : {
+                formatter: opts.tooltipFormatter
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor          : 'pointer',
+                    shadow          : false,
+                    dataLabels      : {
+                        enabled: false
+                    },
+                    showInLegend    : true
+                }
+            },
+            series     : [
+                {
+                    type: 'pie',
+                    data: opts.data
+                }
+            ]
+        });
+    };
+
+</script>
+</body>
+</html>

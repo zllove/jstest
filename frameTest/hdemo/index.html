@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="js/highcharts.js"></script>
+    <!--<script type="text/javascript" src="js/highcharts-all.js"></script>-->
+    <!--<script type="text/javascript" src="js/modules/exporting.js"></script>-->
+    <style type="text/css">
+        #container{ width:165px; height:165px;}
+        #container2{ width:500px;}
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<div id="container2"></div>
+<script type="text/javascript">
+
+    /*
+    var defaults = {
+        renderTo : 'container',
+        height : 200,
+        data : [{
+            color : 'red',
+            name : '小细胞',
+            y : 10
+        }, {
+            color : 'blue',
+            name : '小细胞2',
+            y : 5
+        }, {
+            color : 'green',
+            name : '小细胞3',
+            y : 85
+        }]
+    }
+
+    renderPie(defaults);
+
+    function renderPie(opts){
+        new Highcharts.Chart({
+            chart : {
+                renderTo : opts.renderTo,
+                height : opts.height
+            },
+            title : {
+                text : null
+            },
+            credits    : {
+                enabled: false
+            },
+            series : [{
+                type : 'spline',
+                data : opts.data
+            }]
+        });
+    }
+
+*/
+
+
+
+    $(function(){
+        $('#container').highcharts({
+            colors: ['#fdd6c8', '#faa689', '#f8855d', '#ff632c', '#da4612'],
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: 0,
+                plotShadow: false
+            },
+            credits    : {
+                enabled: false
+            },
+            title: {
+                text: '共30项',
+                align: 'center',
+                verticalAlign: 'middle',
+                y: 50
+            },
+            lengend : {
+                itemStyle     : {
+
+                }
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    dataLabels: {
+                        enabled: true,
+                        distance: -50,
+                        style: {
+                            fontWeight: 'bold',
+                            color: 'white',
+                            textShadow: '0px 1px 2px black'
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: '共30项',
+                innerSize: '60%',
+                data: [
+                    ['未开始<br>8项',   8],
+                    ['进行中<br>7项',   7],
+                    ['完成<br>6项',   6],
+                    ['取消<br>5项',   5],
+                    ['暂停<br>4项',   4]
+                ]
+            }]
+        });
+        $('#container2').highcharts({
+            colors: ['#fdd6c8', '#faa689', '#f8855d', '#ff632c', '#da4612'],
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: 0,
+                plotShadow: false
+            },
+            credits    : {
+                enabled: false
+            },
+            title: {
+                text: '共30项',
+                align: 'center',
+                verticalAlign: 'middle',
+                y: 50
+            },
+            lengend : {
+                itemStyle     : {
+
+                }
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    dataLabels: {
+                        enabled: true,
+                        distance: -50,
+                        style: {
+                            fontWeight: 'bold',
+                            color: 'white',
+                            textShadow: '0px 1px 2px black'
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: '共30项',
+                innerSize: '60%',
+                data: [
+                    ['未开始<br>8项',   8],
+                    ['进行中<br>7项',   7],
+                    ['完成<br>6项',   6],
+                    ['取消<br>5项',   5],
+                    ['暂停<br>4项',   4]
+                ]
+            }]
+        });
+    })
+
+
+
+</script>
+</body>
+</html>
