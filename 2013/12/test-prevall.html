@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<div id="test">
+    <div>11</div>
+    <div>22</div>
+    <div>33</div>
+</div>
+<script type="text/javascript">
+    function prev(elem){
+        do{
+            elem = elem.previousSibling;
+        } while(elem && elem.nodeType != 1);
+        return elem;
+    }
+
+    var test = document.getElementById('test');
+    var aDiv = test.getElementsByTagName('div');
+    var ele = null;
+
+    for(var i = 0, len = aDiv.length; i < len; i++){
+        aDiv[i].onclick = function(){
+            var arr = [];
+
+            ele = prev(this);
+            while(ele){
+                arr.push(ele);
+                ele = prev(ele);
+            }
+            console.log(arr);
+        }
+    }
+</script>
+</body>
+</html>
