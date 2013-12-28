@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <link rel="stylesheet" type="text/css" href="main.css" media="all"/>
+    <style type="text/css">
+        .on{ border:1px solid red;}
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
+</head>
+<body>
+<input type="text" class="user" name="user" id="" tabindex="1"/>
+<input type="text" class="user" name="user" id=""/>
+<input type="text" class="user" name="user" id="" tabindex="2"/>
+<input type="text" class="user" name="user" id=""/>
+<input type="text" class="user" name="user" id="" tabindex="3"/>
+<script type="text/javascript">
+    var lastTabIndex = 3;
+    var user = $('.user');
+    var curIndex = 1;
+    $(document).keydown(function(e){
+        var tabIndex = $('.user').attr('tabindex');
+        var first = user.eq(0);
+
+        if(curIndex > lastTabIndex){
+            curIndex = 0;
+        }
+
+        if(e.which == 39){ // 向右
+            user.removeClass('on');
+            $('[tabindex=' + (curIndex++) + ']').focus().addClass('on');
+        }
+    });
+</script>
+</body>
+</html>

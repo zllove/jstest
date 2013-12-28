@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<!--http://blog.csdn.net/zhsenl/article/details/8497464-->
+<script type="text/javascript">
+    function test(param){
+        if(param){
+            param();
+        }
+    }
+
+    function foo(obj){
+        return function(name, age){
+            console.log(obj.name + ' tang');
+        }
+    }
+
+    var extra = {
+        name : 'jikey',
+        age : 30
+    }
+
+    test(foo(extra));
+</script>
+
+</body>
+</html>

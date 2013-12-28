@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../../jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="js/juicer-min.js"></script>
+</head>
+<body>
+<div id="test"></div>
+<div id="test2">
+
+</div>
+<script id="tpl" type="text/template">
+    <ul>
+        {@each list as it,index}
+        <li>${it.name} (index: ${index})</li>
+        {@/each}
+        {@each blah as it}
+        <li>
+            num1: ${it.num} <br />
+            {@if it.num==3}
+            {@each it.inner as it2}
+            ${it2.time} <br />
+            {@/each}
+            {@/if}
+        </li>
+        {@/each}
+    </ul>
+</script>
+<script id="tpl2" type="text/template">
+    <div class="wName">${name}</div>
+</script>
+<script type="text/javascript">
+    var data = {
+        list : [
+            { name : ' guokai', show : true },
+            {name : ' benben', show : false},
+            {name : ' dierbaby', show : true}
+        ],
+        blah : [
+            {num : 1},
+            {num : 2},
+            {num : 3, inner : [
+                {'time' : '15:00'},
+                {'time' : '16:00'},
+                {'time' : '17:00'},
+                {'time' : '18:00'}
+            ]},
+            {num : 4}
+        ]
+    };
+    var data2 = {
+        name : 'jikey'
+    }
+
+    var tpl = document.getElementById('tpl').innerHTML;
+    document.getElementById('test').innerHTML = juicer(tpl, data);
+
+    var tpl2 = document.getElementById('tpl2').innerHTML;
+    document.getElementById('test2').innerHTML = juicer(tpl2, data2);
+    var w = $('.wName');
+    console.log(w);
+</script>
+</body>
+</html>

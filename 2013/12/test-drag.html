@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>拖拽012</title>
+    <style>
+        #div1{ width:200px; height:200px; background:yellow; position:absolute; }
+    </style>
+    <script>
+        window.onload = function() {
+            new Drag('div1');
+        };
+        var _this = this;
+        this.disX = 0;
+        this.disY = 0;
+        function Drag(id)  //将onload变成构造函数  什么是构造函数
+        {
+            this.oDiv = document.getElementById(id);
+            this.oDiv.onmousedown = function(ev);
+            {
+                _this.fnDown(ev);
+            }
+            ;
+
+        }
+        ;
+        Drag.prototype.fnDown = function(ev) {
+            var _this = this;
+            var oEvent = ev || event;  //什么意思
+            this.disX = oEvent.clientX - this.oDiv.offsetLeft;//实现的功能 是什么  是什么意思
+            this.disY = oEvent.clientY - this.oDiv.offsetTop;
+            document.onmousemove = function() {
+                _this.fnMove(ev);
+            };
+            document.onmouseup = function() {
+                _this.fnUp;
+            };
+        };
+        Drag.prototype.fnMove = function(ev) {
+            var oEvent = ev || event;
+            this.oDiv.style.left = oEvent.clientX - this.disX + 'px';
+            this.oDiv.style.top = oEvent.clientY - this.disY + 'px';
+        };
+        Drag.prototype.fnUp = function(ev) {
+            document.onmousemove = null;
+            document.onmouseup = null;
+        }
+
+    </script>
+</head>
+<body>
+<div id='div1'></div>
+</body>
+</html>
