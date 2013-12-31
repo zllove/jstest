@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .results {
+            color : red;
+            margin-top : 50px;
+        }
+    </style>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<div class="outer tile">
+    < ... various other html here >
+    <div class="cost">
+        <span class="text">Purchase price </span>
+        <small>$</small>5.25
+    </div>
+</div>
+<div class = "results"></div>
+<script type="text/javascript">
+    var a = $('.cost').first().contents().filter(function() {
+        return this.nodeType == 3;
+    });
+    console.log(a);
+    $('.results').text(a.text());
+
+</script>
+</body>
+</html>
