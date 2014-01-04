@@ -8,21 +8,21 @@
 <body>
 <div id="test" class="a aa">111</div>
 <div class="a bb">222</div>
-<div id="test2" class="a cc">111</div>
-<div id="test3" class="a cc">111</div>
-<div id="test4" class="a cc">111</div>
+<div id="test2" class="a cc">333</div>
+<div id="test3" class="a cc">444</div>
+<div id="test4" class="a cc">555</div>
 <script type="text/javascript">
     var arr = new Array(2);
     $('.a').each(function(i, m){
         if(this.id){
             if(this.className.indexOf('aa') != -1){
-                arr[0] = $(this);
+                arr[0] = $(this).text();
             }
             if(m.className.indexOf('bb') != -1){
-                arr[1] = $(this);
+                arr[1] = $(this).text();
             }
             if(m.className.indexOf('cc') != -1){
-                arr.push($(this));
+                arr.push($(this).text());
             }
         }
     })
