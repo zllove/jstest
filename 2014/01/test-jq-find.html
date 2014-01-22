@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<div id="div1">
+    <textarea rows="1" cols="2">A1</textarea>
+    <div>
+        <textarea rows="1" cols="2">b1</textarea>
+    </div>
+    <textarea rows="1" cols="2">A2</textarea>
+    <p>
+        <textarea rows="1" cols="2">c1</textarea>
+    </p>
+</div>
+
+
+<script type="text/javascript">
+    var $a = $('#div1');
+    var $b = $a.find('>textarea');
+    var $c = $a.children('textarea');
+    console.log($b);
+    console.log($c);
+</script>
+
+
+</body>
+</html>
