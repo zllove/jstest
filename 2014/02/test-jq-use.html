@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<h3><a target="_blank" style="color:#666;" href="http://www.open-open.com/news/view/1522776">http://www.open-open.com/news/view/1522776</a></h3>
+<!--<div style="height: 3000px;"></div>-->
+<div style="clear: both;">
+    <div class="col" style="height: 200px;border: 1px solid #ccc;">111</div>
+    <div class="col" style="height:400px;border: 1px solid #ccc;">111</div>
+</div>
+<a href="#top">回到顶部</a>
+<div class="wrap">
+    <img src="http://i2.vanclimg.com/cms/20140121/time3_140121.jpg" alt=""/>
+    <img src="http://i2.vanclimg.com/cms/20140121/man3_140121.jpg" alt=""/>
+    <img src="http://i4.vanclimg.com/cms/20140207/shoes3_140227.jpg" alt=""/>
+</div>
+<script type="text/javascript">
+    $("a[href='#top']").click(function(){
+        $('html,body').animate({ scrollTop : 0}, 'slow');
+        return false;
+    });
+
+    // 等高
+    var maxheight = 0;
+    $('div.col').each(function(){
+        if($(this).height() > maxheight){
+            maxheight = $(this).height();
+        }
+    });
+    $('div.col').height(maxheight);
+
+    // 部分页面局部刷新
+    setInterval(function(){
+        $('#refresh').load(location.href + '#refresh>*', '');
+    }, 10000);
+
+    // 调整图片大小
+    $(window).on('load', function(){
+        $('.wrap img').each(function(){
+            var maxWidth = 250,
+                maxHeight = 220,
+                ratio = 0,
+                width = $(this).width(),
+                height = $(this).height();
+
+            if(width > maxWidth){
+                ratio = maxWidth / width;
+                $(this).css({ width : maxWidth, height : height * ratio });
+                height = height * ratio;
+            }
+
+            if(height > maxHeight){
+                ratio = maxHeight / height;
+                $(this).css({ width : width * ratio, height : maxHeight });
+                width = width * ratio;
+            }
+        });
+    });
+
+    // 自动加载图片
+    var loading = false;
+    $(window).scroll(function(){
+        if($(window).scrollTop() + $(window).height() + 250 >= $(document).height()){
+            if(loading == false){
+                loading = true;
+                $('#loadbar').show();
+                $.get('', function(loaded){
+                    $('body').append(loaded);
+                    $('#loaded_max').val(parseInt($('#loaded_max').val()) + 50);
+                    $('#loadbar').show();
+                    loading = false;
+                });
+            }
+        }
+    });
+
+    $(function(){
+        $('#loaded_max').val(50);
+    });
+
+
+    // 检查图片是否已经加载
+    var imgsrc = 'img/image1.png';
+    $('<img/>').load(function(){
+        alert('img loaded');
+    }).error(function(){
+        alert('error loading img');
+    }).attr('src', imgsrc);
+
+    // 按字母顺序对列表进行排序
+    $(function(){
+        $.fn.sortList = function(){
+            var myList = $(this);
+            var listitems = $('li', myList).get();
+
+            listitems.sort(function(a, b){
+                var compA = $(a).text().toUpperCase();
+                var compB = $(b).text().toLowerCase();
+                return (comA < comB) ? -1 : 1;
+            });
+
+            $.each(listitems, function(i, item){
+                myList.append(item);
+            });
+        }
+
+        $('#demoOne').sortList();
+    });
+
+
+</script>
+</body>
+</html>
