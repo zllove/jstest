@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<!--http://bbs.csdn.net/topics/390685573-->
+<div id="fy" style="margin-left:250px;margin-top:20px">
+    7 条记录 1/2 页
+    <a href="/bang/index.php/user/record/time/20131223/p/2.html">下一页</a>
+    <span class="current">1</span>
+    <a href="/bang/index.php/user/record/time/20131225/p/2.html">2</a>
+    <a href="/bang/index.php/user/record/ti/20131225/pv/2.html">2</a>
+</div>
+<script type="text/javascript">
+    var $a = $('a');
+    var $a_time = $.map($a, function(k) {
+        var pos, str;
+        var h = k.href;
+        if ((pos = h.indexOf('time')) != -1) {
+            str = h.substr(pos + 5, 8);
+            console.log(1, str);
+            return str;
+        }
+    });
+    var $a_p = $.map($a, function(k) {
+        var pos, str;
+        var h = k.href;
+        if ((pos = h.indexOf('/p/')) != -1) {
+            str = h.substr(pos + 3);
+            return str;
+        }
+    });
+
+    console.log($a_time); // ["20131225", "20131225"]
+    console.log($a_p); // ["2.html", "2.html"]
+
+    var arr = [0,1,2];
+    var arr2 = $.map(arr, function(n){
+        return n + 4;
+    });
+    console.log('arr', arr2);
+
+</script>
+</body>
+</html>
