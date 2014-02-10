@@ -4,12 +4,24 @@
     <meta charset="UTF-8">
     <title></title>
     <style type="text/css">
-        .max{max-width:100px;}
-        .nor{width:200px;}
+        ul,li{list-style: none;}
     </style>
 </head>
 <body>
-<img class="max" src="http://i1.vanclimg.com/cms/20140121/time2_140121.jpg" alt=""/>
-<img class="nor" src="http://i1.vanclimg.com/cms/20140121/time2_140121.jpg" alt=""/>
+<ul class="list">
+    <li><input type="text" placeholder="所属门店" /></li>
+    <li><input type="text" placeholder="所属门店" /></li>
+</ul>
+<script type="text/javascript">
+    function checkUser(){
+        $.post("{:U('Index/checkLogin')}",{'email':$('#logname').val(),'pwd':$('#logpwd').val()},function(data){
+            if(data.status==1){
+                window.location="{:U('Main/index')}";
+            }else{
+                $('.check-e').html(data.info).show();
+            }
+        },'json');
+    }
+</script>
 </body>
 </html>
