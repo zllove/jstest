@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    var x = /(\w+)]$/;
+    var s = Object.prototype.toString;
+    function getType ( v ) {
+        return s.call( v ).match( x )[ 1 ];
+    }
+    getType(42);
+</script>
+</body>
+</html>
