@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        #div{position: absolute;width:20px;height: 20px;border: 5px solid #ccc;border-radius:50%;}
+    </style>
+</head>
+<body>
+<div id="div"></div>
+<script type="text/javascript">
+    var div = document.getElementById('div');
+    var angle = 30;
+
+    setInterval(function(){
+        div.style.top = 100 + Math.sin(angle * Math.PI / 180) * 120 + 'px';
+//        div.style.left = 100 + Math.cos(angle * Math.PI / 180) * 120 + 'px';
+        angle += 50;
+    }, 200);
+</script>
+</body>
+</html>
