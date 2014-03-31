@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    var orz = {
+        it: {
+            facebook: {
+                apple: {
+                    google: {
+                        twitter: {}
+                    },
+                    microsoft: {}
+                }
+            }
+        },
+        china: {}
+    };
+
+    function objLength(obj) {
+        var j = 0;
+        for (i in obj) {
+            j++;
+        }
+        return j;
+    }
+
+    function re(ja, num, tree, jn) {
+        if (objLength(ja) == 0) {
+            return;
+        }
+        if ("undefined" == typeof num) {
+            num = 0;
+        }
+        if ("undefined" == typeof tree) {
+            tree = [];
+        }
+        if ("undefined" != typeof jn) {
+            tree.push(jn);
+        }
+        num++;
+        fo(ja, tree, num);
+        function fo(a, b, c) {
+            for (x in a) {
+                if (b.length > 0) {
+                    console.log(c + ": " + b + "," + x);
+                } else {
+                    console.log(c + ": " + x);
+                }
+                re(a[x], c, b, x);
+            }
+        }
+    }
+
+    re(orz);
+</script>
+</body>
+</html>
