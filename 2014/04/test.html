@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    (function () {
+        console.log(this);
+        var $ = this.jQuery;
+
+        this.myExample = function () {
+//            alert(111);
+        };
+
+        console.log(this);
+    }());
+
+
+    myExample();
+
+    var name = 'aaa bbb ccc';
+    var uw=name.replace(/\b\w+\b/g, function(word){
+        return word.substring(0,1).toUpperCase()+word.substring(1);}
+    );
+    console.log(uw);
+</script>
+</body>
+</html>
