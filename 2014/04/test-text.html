@@ -7,7 +7,15 @@
 <body>
 <script type="text/javascript">
     define(["module"], function (c) {
-        var l, g, e = ["Msxml2.XMLHTTP", "Microsoft.XMLHTTP", "Msxml2.XMLHTTP.4.0"], k = /^\s*<\?xml(\s)+version=[\'\"](\d)*.(\d)*[\'\"](\s)*\?>/im, i = /<body[^>]*>\s*([\s\S]+)\s*<\/body>/im, b = typeof location !== "undefined" && location.href, d = b && location.protocol && location.protocol.replace(/\:/, ""), f = b && location.hostname, a = b && (location.port || undefined), j = [], h = (c.config && c.config()) || {};
+        var l,
+            g,
+            e = ["Msxml2.XMLHTTP", "Microsoft.XMLHTTP", "Msxml2.XMLHTTP.4.0"], k = /^\s*<\?xml(\s)+version=[\'\"](\d)*.(\d)*[\'\"](\s)*\?>/im,
+            i = /<body[^>]*>\s*([\s\S]+)\s*<\/body>/im,
+            b = typeof location !== "undefined" && location.href,
+            d = b && location.protocol && location.protocol.replace(/\:/, ""),
+            f = b && location.hostname, a = b && (location.port || undefined),
+            j = [],
+            h = (c.config && c.config()) || {};
 
         l = {
             version : "2.0.5",
