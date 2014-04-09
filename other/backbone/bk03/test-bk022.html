@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="js/libs.js"></script>
+</head>
+<body>
+<a href="http://www.the5fire.com/3-backbone-model.html">http://www.the5fire.com/3-backbone-model.html</a>
+
+<script type="text/javascript">
+    (function($){
+        Man = Backbone.Model.extend({
+            url : 'save',
+            initialize : function(){
+                alert('Hey! you create me!');
+                this.bind('change:name', function(){
+                    var name = this.get('name');
+                    alert('你改变了name的属性为：' + name);
+                });
+            },
+            defaults : {
+                name : '张三',
+                age : 23
+            },
+            aboutme : function(){
+                return '我叫' + this.get('name') + ',今年' + this.get('age') + '岁';
+            },
+            validate : function(attributes){
+                if(attributes.name == ''){
+                    return 'name不能为空';
+                }
+            }
+        });
+
+        var man = new Man();
+        man.set({ name : 'the5fire' });
+        man.save();
+
+
+    }(jQuery))
+</script>
+</body>
+</html>
