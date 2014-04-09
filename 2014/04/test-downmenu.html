@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
+    <style type="text/css">
+        *{margin:0;padding:0;}
+        body{font:12px/normal Arial,Helvetica,sans-serif;}
+        ul,ol{list-style:none;}
+        a img{border:none;}
+        #content{width:600px;height:500px;margin:30px auto;padding:30px;border:1px solid #ccc;}
+        .main_nav{width:404px;height:30px;}
+        .main_nav ul li{float:left;width:100px;height:30px;border-right:1px solid #666;position:relative;}
+        .main_nav ul li a{display:block;height:30px;line-height:30px;text-align:center;background:#333;color:#ccc;text-decoration:none;}
+        .main_nav ul li dl{position:absolute;left:0;top:30px;width:100px;display:none;}
+        .main_nav ul li dl dd{height:31px;}
+        .main_nav ul li dl dd a{display:block;height:30px;line-height:30px;text-align:center;color:white;background:#555;border-bottom:1px solid #666;}
+        .main_nav ul li dl dd a:hover{background:#333;color:#ccc;}
+        .click{margin-top:200px;}
+    </style>
+</head>
+<body>
+<div id="content">
+    <div class="main_nav hover" id="menu">
+        <ul>
+            <li><a class="main_sub" href="javascript:" title="">导航菜单1</a>
+                <dl>
+                    <dd><a href="javascript:" title="">栏目子导航1</a></dd>
+                    <dd><a href="javascript:" title="">栏目子导航1</a></dd>
+                    <dd><a href="javascript:" title="">栏目子导航1</a></dd>
+                    <dd><a href="javascript:" title="">栏目子导航1</a></dd>
+                    <dd><a href="javascript:" title="">栏目子导航1</a></dd>
+                </dl>
+            </li>
+            <li><a class="main_sub" href="javascript:" title="">导航菜单2</a>
+                <dl>
+                    <dd><a href="javascript:" title="">栏目子导航2</a></dd
+                            >
+                    <dd><a href="javascript:" title="">栏目子导航2</a></dd>
+                    <dd><a href="javascript:" title="">栏目子导航2</a></dd>
+                    <dd><a href="javascript:" title="">栏目子导航2</a></dd>
+                    <dd><a href="javascript:" title="">栏目子导航2</a></dd>
+                </dl>
+            </li>
+            <li><a class="main_sub" href="javascript:" title="">导航菜单3</a>
+                <dl>
+                    <dd><a href="javascript:" title="">栏目子导航3</a></dd>
+                    <dd><a href="javascript:" title="">栏目子导航3</a></dd>
+                    <dd><a href="javascript:" title="">栏目子导航3</a></dd>
+                    <dd><a href="javascript:" title="">栏目子导航3</a></dd>
+                    <dd><a href="javascript:" title="">栏目子导航3</a></dd>
+                </dl>
+            </li>
+            <li><a class="main_sub" href="javascript:" title="">导航菜单4</a>
+                <dl>
+                    <dd><a href="javascript:" title="">栏目子导航4</a></dd>
+                    <dd><a href="javascript:" title="">栏目子导航4</a></dd>
+                    <dd><a href="javascript:" title="">栏目子导航4</a></dd>
+                    <dd><a href="javascript:" title="">栏目子导航4</a></dd>
+                    <dd><a href="javascript:" title="">栏目子导航4</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+
+</div>
+<script type="text/javascript">
+    var dl = $('.hover').find('dl'),
+        temp = null;
+
+    $(".hover ul li").click(function(e){
+        dl.hide();
+
+        var curDl = $(this).children("dl");
+
+        if(e.currentTarget == temp){
+            curDl.hide();
+            temp = null;
+        } else {
+            curDl.slideDown(300);
+            temp = this;
+        }
+    });
+
+    $(document).click(function(e){
+        if(e.target.className.indexOf('main_sub') == -1){
+            dl.hide();
+            temp = null;
+        }
+    });
+</script>
+</body>
+</html>
