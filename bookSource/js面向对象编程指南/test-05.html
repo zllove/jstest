@@ -21,6 +21,17 @@
     var man = new Human('Jikey');
     console.log(monkey.isPrototypeOf(man));
     */
+    var monkey = {
+        hair : true,
+        feeds : 'bananas',
+        breethes : 'air'
+    }
+    function Human(name){
+        this.name = name;
+    }
+    Human.prototype = monkey;
+    var george = new Human('George');
+    console.log(monkey.isPrototypeOf(george));
 
 
 

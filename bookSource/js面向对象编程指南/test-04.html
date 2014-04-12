@@ -21,11 +21,211 @@
         return false;
     }
     console.log(typeof new foo());
-     */
+
     var arr = [1, 2, [1, 2]];
     arr.sort();
     var end = arr.join('--');
     console.log(end);
+
+
+    function Hero(name){
+        this.name = name;
+    }
+    var h2 = new Hero('Jikey');
+//    console.log(h2.name);
+//    console.log(h2.constructor);
+    var h3 = new h2.constructor('Tang');
+    console.log(h3.name);
+    console.log(h3);
+
+    function Hero(){
+
+    }
+    var h = new Hero();
+    var o = {};
+    console.log(h instanceof Hero);
+    console.log(h instanceof Object);
+    console.log(o instanceof Object);
+    console.log(o instanceof Hero);
+
+
+    function factory(name){
+        return {
+            name : name
+        };
+    }
+    var o = factory('Jikey');
+    console.log(o.name);
+    console.log(o.constructor);
+
+    function C(){
+        this.a = 1;
+        return {
+            b : 2
+        };
+    }
+    var c = new C();
+    console.log(c.b);
+    console.log(typeof c.a);
+
+    var original = { howmany : 1}
+    var copy = original;
+    console.log(copy.howmany);
+    copy.howmany = 100;
+    console.log(original.howmany);
+
+
+    var foo = { name : 'jikey'}
+    var bar = { name : 'jikey'}
+    console.log(foo === bar);
+    var tar = bar;
+    console.log(tar === bar);
+
+    var arr1 = new Array(1,2,3);
+    var arr2 = new Array(3);
+//    console.log(arr1);
+//    console.log(arr2);
+
+    console.log(arr1.toString());
+    console.log(arr1.valueOf());
+    console.log(arr1.constructor);
+
+    var a = [], o = {};
+    console.log(a.length);
+    console.log(o.length);
+
+    var a = [3,5,1,7,'test'];
+//    console.log(a.push('new'));
+//    console.log(a);
+//    console.log(a.pop(7));
+//    console.log(a);
+
+//    console.log(a.join('is not'));
+
+//    console.log(a.slice(1, 3));
+    console.log(a.splice(1,2));
+    console.log(a);
+
+    function funa(a,b,c,d){
+        return true;
+    }
+    console.log(funa.length);
+
+    function A(){
+        return A.caller;
+    }
+    function B(){
+        return A();
+    }
+    console.log(B());
+
+    var n = Number('12.12');
+    var m = new Number('12.12');
+    console.log(n);
+    console.log(m);
+    console.log(typeof n);
+    console.log(typeof m);
+
+    console.log(Number.MAX_VALUE);
+    console.log(Number.MIN_VALUE);
+    console.log(Number.POSITIVE_INFINITY);
+    console.log(Number.NEGATIVE_INFINITY);
+    console.log(Number.NaN);
+
+    var s = new String('Hello World');
+//    console.log(s.toUpperCase());
+//    console.log(s.toLowerCase());
+
+    console.log(s.slice(1,3));
+    var a = [1,2,3,4];
+    console.log(a.slice(1,3));
+
+    console.log(Math.PI);
+    console.log(Math.SQRT2);
+    console.log(Math.SQRT1_2);
+    console.log(Math.E);
+    console.log(/j.*t/.test('Javascript'));
+    console.log(/j.*t/.test('javascript'));
+
+    console.log(/j.*t/i.exec('Javascript'));
+
+    var s = new String('HelloJavascriptWorld');
+//    console.log(s.match(/a/g));
+//    console.log(s.match(/j.*a/i));
+//    console.log(s.search(/j.*a/i));
+
+//    console.log(s.replace(/[A-Z]/, '我是一个兵'));
+    console.log(s.replace(/([A-Z])/g, '我是一个兵'));
+    var email = 'stoyan@phpied.com';
+    var name = email.replace(/(.*)@./,'$1')
+    console.log(name);
+
+    var s = new String('HelloJavascriptWorld');
+    function replaceCallback(match){
+        return '_' + match.toLowerCase();
+    }
+    var e = s.replace(/[A-Z]/g, replaceCallback);
+//    console.log(e);
+
+    var callback = function(){
+        glob = arguments;
+        return arguments[1] + ' at ' + arguments[2] + ' dot ' + arguments[3];
+    }
+    var re = /(.*)@(.*)\.(.*)/;
+    console.log('stoyan@phpied.com'.replace(re, callback));
+
+    try{
+        iDontExit();
+    } catch(e) {
+        console.log(e.name + ': ' + e.message);
+    } finally {
+        console.log('Finally');
+    }
+
+    mybeExists = function(){
+        return 0;
+    }
+    try {
+        var total = mybeExists();
+        if(total == 0){
+//            throw new Error('Division by zero!');
+            throw {
+                name : 'jikey',
+                message : 'OMG!'
+            }
+        } else {
+            alert(50/total);
+        }
+    } catch(e) {
+        alert(e.name + ' : ' + e.message);
+    } finally {
+        alert('Finally');
+    }
+
+    function F(){
+        function C(){
+            return this;
+        }
+        return C();
+    }
+    var o = new F();
+    console.log(o);
+
+
+    function F(){
+        this.a = 1;
+        return false;
+    }
+
+    console.log(typeof F());
+    console.log(typeof new F());
+    var c = [3,4,[1,2],['a','b',[1,2]]];
+    c.sort();
+    var d = c.join('--');
+    console.log(c);
+    console.log(d);
+    console.log([1,2,3].join('-='));
+    */
 
 
 
