@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("input").click(function(){
+                $("span").each(function(i, n){
+                    $(n).animate({fontSize:"50px"},1000, function(){
+
+                    });
+                });
+                /*
+                $("span").animate({fontSize:"50px"},1000,function(){
+                    $(this).animate({fontSize:"20px"},10000);
+                });
+                */
+            });
+        });
+    </script>
+</head>
+<body>
+<input type="button" value="Start"><br/>
+<span>H</span> <span>e</span> <span>l</span> <span>l</span> <span>o</span> <span>,</span> <span>W</span> <span>o</span> <span>r</span> <span>l</span> <span>d</span> <span>!</span>
+</body>
+</html>

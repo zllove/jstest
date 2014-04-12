@@ -1,31 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-    <meta charset="utf-8"/>
-    <title>test</title>
-    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+    <meta charset="UTF-8">
+    <title>sss</title>
 </head>
 <body>
+<div id="test"></div>
+<div id="foo"></div>
 <script type="text/javascript">
-    (function () {
-        console.log(this);
-        var $ = this.jQuery;
+    $(document).ready(function () {
+        //幻灯片
+        var j = 1;
+        var MyTime = false;
+        var fot = 200;//当前图片消失时间
+        var fin = 300;//新图片呈现时间
+        var amt = 300;//三角标志滑动时间
+        var speed = 3000;//自动播放间隔
+        var maxpic = 4;//切换图片个数
+        $("#ppt").find("li").each(function (i) {
+            $("#ppt").find("li").eq(i).mouseover(function () {
+                var cur = $("#mpc").find("div:visible").prevAll().length;
+                if (i !== cur) {
+                    j = i;
+                    $("#mpc").find("div:visible").fadeOut(fot, function () {
+                        $("#mpc").find("div").eq(i).fadeIn(fin);
+                    });
+                    $("#tri").animate({"top" : i * 87 + "px"}, amt, current(this, "li"));
+                    $("#ppt").find("dl:visible").slideUp(fot, function () {
+                        $("#ppt").find("dl").eq(i).slideDown(fin);
+                    });
+                }
+            })
+        })
+        //标记当前
+        function current(ele, tag) {
+            $(ele).addClass("cur").siblings(tag).removeClass("cur");
+        }
 
-        this.myExample = function () {
-//            alert(111);
-        };
+        //自动播放 不需要的话可以删除这一段
+        $('#imgnav').hover(function () {
+            if (MyTime) {
+                clearInterval(MyTime);
+            }
+        }, function () {
+            MyTime = setInterval(function () {
+                $("#ppt").find("li").eq(j).mouseover();
+                j++;
+                if (j == maxpic) {
+                    j = 0;
+                }
+            }, speed);
+        });
+        //自动开始
+        var MyTime = setInterval(function () {
+            $("#ppt").find("li").eq(j).mouseover();
+            j++;
+            if (j == maxpic) {
+                j = 0;
+            }
+        }, speed);
 
-        console.log(this);
-    }());
-
-
-    myExample();
-
-    var name = 'aaa bbb ccc';
-    var uw=name.replace(/\b\w+\b/g, function(word){
-        return word.substring(0,1).toUpperCase()+word.substring(1);}
-    );
-    console.log(uw);
+    })
 </script>
 </body>
 </html>
