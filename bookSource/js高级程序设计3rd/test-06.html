@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    /*
+    var book = {
+        _year : 2004,
+        edition : 1
+    }
+    var o = Object.defineProperty(book, 'year', {
+        get : function (){
+            return this._year;
+        },
+        set : function(value){
+            if(value > 2004){
+                this._year = value;
+            }
+        }
+    });
+
+    book.year = 2005;
+    console.log(book);
+    function person(name,age,job){
+        var o = new Object();
+        o.name = name;
+        o.age = age;
+        o.job = job;
+        o.say = function(){
+            console.log(this.name);
+        }
+        return o;
+    }
+    var person1 = new person('jikey', 29, 'software enginneer');
+    var person2 = new person('tang', 30, 'software enginneer');
+    person1.say();
+    person2.say();
+    function Person(name,age,job){
+        this.name = name;
+        this.age = age;
+        this.job = job;
+        this.say = function(){
+            console.log(this.name);
+        }
+    }
+    Person.prototype = {
+        say : function (){
+            alert(11);
+        }
+    }
+    var p = new Person('jikey', 32, 'software engineer');
+    console.log(p instanceof Person);
+    console.log(p instanceof Object);
+    console.log(p.constructor);
+    function Person(name,age,job){
+    }
+    Person.prototype.name = 'Jikey';
+    Person.prototype.age = 32;
+    Person.prototype.sayName = function(){
+        console.log(this.name);
+    }
+
+    var person1 = new Person()
+    person1.name1 = 'tang';
+    person1.sayName();
+
+    var person2 = new Person();
+    person2.sayName();
+//    console.log(person1.sayName == person2.sayName);
+//    console.log(person1.hasOwnProperty('name1'));
+//    console.log('name' in person1);
+
+    function hasPrototypeProperty(obj, name){
+        return !obj.hasOwnProperty(name) && (name in obj);
+    }
+    console.log(hasPrototypeProperty(person1, 'name'));
+    var o = {
+        toString : function(){
+            return 'my object';
+        }
+    }
+    for(var prop in o){
+        if(prop == 'toString'){
+            console.log('to string');
+        }
+    }
+    function Person(){
+
+    }
+    Person.prototype.name = 'jikey';
+    Person.prototype.age = 30;
+    Person.prototype.say = function(){
+        console.log(this.age);
+    }
+    var keys = Object.keys(Person);
+    console.log(keys);
+    var p1 = new Person();
+    p1.nage = 'Pop';
+    p1.age = 32;
+    console.log(Object.keys(p1));
+    console.log(Object.getOwnPropertyNames(Person.prototype));
+    function Person(){}
+    var p = new Person();
+    Person.prototype = {
+        name : 'jikey',
+        age : 29,
+        sayName : function(){
+            console.log(this.name);
+        }
+    }
+    p.sayName();
+    String.prototype.startsWith = function(text){
+        return this.indexOf(text) == 0;
+    }
+    var msg = 'Hello world';
+    console.log(msg.startsWith('Hello'));
+    function Person(){}
+    Person.prototype = {
+        name : ['jikey'],
+        sayName : function(){
+            console.log(this.name);
+        }
+    }
+    var p1 = new Person();
+    var p2 = new Person();
+    p1.name.push('tang');
+    console.log(p1.sayName());
+    console.log(p2.sayName());
+    function Person(name, age){
+        this.name = name;
+        this.age = age;
+        this.friends = ['jikey'];
+    }
+    Person.prototype = {
+        constructor : Person,
+        sayName : function (){
+            console.log(this.friends);
+        }
+    }
+    var p1 = new Person();
+    var p2 = new Person();
+    p1.friends.push('tang');
+    console.log(p1.sayName());
+    console.log(p2.sayName());
+    function SuperType(name){
+        this.name = name;
+        this.colors = ['red','blue','green'];
+    }
+    SuperType.prototype.sayName = function (){
+        console.log(this.name+' hello');
+    }
+    function SubType(name, age){
+        SuperType.call(this, name, age);
+        this.age = age;
+    }
+    SubType.prototype = new SuperType();
+    SubType.prototype.sayName = function(){
+        console.log(this.name);
+    }
+    var intance1 = new SubType('jikey',32);
+    intance1.colors.push('black');
+    intance1.constructor.prototype.sayName.call(intance1);
+//    intance1.sayName();
+
+    var intance2 = new SubType('tang',30);
+    console.log(intance2.colors);
+    intance2.sayName();
+//    intance2.sayName();
+
+    var person = {
+        name : 'jikey',
+        friends : ['red','green']
+    }
+//    var p1 = extend(person);
+    var p1 = Object.create(person);
+    p1.name = 'tang';
+    p1.friends.push('black');
+
+    var p2 = Object.create(person);
+    p2.name = 'tang';
+    p2.friends.push('blue');
+
+    console.log(person.friends);
+    */
+
+    function object(o){
+        function F(){};
+        F.prototype=o;
+        return new F();
+    }
+
+    function inheritPrototype(subType, superType){
+        var prototype = object(superType.prototype);
+        prototype.constructor = subType;
+        subType.prototype = prototype;
+    }
+
+    function SuperType(name){
+        this.name = name;
+        this.colors = ['red','blue','green'];
+    }
+    SuperType.prototype.sayName1 = function (){
+        console.log(this.name+' hello');
+    }
+    function SubType(name, age){
+        SuperType.call(this, name, age);
+        this.age = age;
+    }
+
+    inheritPrototype(SubType, SuperType);
+
+    SubType.prototype.sayName = function(){
+        console.log(this.name);
+    }
+    var sub = new SubType('jikey',30);
+    sub.sayName1();
+
+</script>
+</body>
+</html>
