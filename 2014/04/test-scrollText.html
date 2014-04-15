@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>豪情--文字滚动</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <style type="text/css">
+        body,ul,li,p,div,table,td{margin:0;padding:0;font-size:12px;}
+        #scroll_text{width:260px;height:auto;padding:6px 10px;overflow:hidden;border:1px solid #ccc;background:#efefef;white-space:nowrap;}
+        .container{width:auto;height:auto;float:left;padding:0 5px;overflow:hidden;}
+        .container a{margin-right:10px;}
+        .scroll_wrap{ width:1300px;}
+        a{color:#00007F;text-decoration:none;}
+        a:hover{color:#bd0a01;text-decoration:underline;}
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        var id = function(id) {
+                return document.getElementById(id);
+            },
+            box,container,sub,newdiv;
+
+        function init(){
+            box = id('scroll_text');
+            container = id('scroll_container');
+            sub = id('subcontainer');
+            newdiv = id('container2');
+            newdiv.innerHTML = sub.innerHTML;
+            autoScroll();
+
+            $(box).hover(function(){
+                clearInterval(timer)
+            }, autoScroll);
+        }
+
+        function autoScroll(){
+            timer = setInterval(scrollFn, 30);
+        }
+
+        function scrollFn(){
+            if(newdiv.offsetWidth <= box.scrollLeft){
+                box.scrollLeft -= container.offsetWidth;
+            } else {
+                box.scrollLeft++;
+            }
+        }
+
+        $(function(){
+            init();
+        });
+    </script></head>
+<body>
+<div id="scroll_text">
+    <div id="scroll_container" class="scroll_wrap">
+        <div id="subcontainer" class="container">
+            <a href="#">·多国为炒作房地产热降温 严格限制外国人买卖</a>
+            <a href="#">·多国为炒作房地产热降温 严格限制外国人买卖</a>
+        </div>
+        <div id="container2" class="container"></div>
+    </div>
+</div>
+</body>
+</html>
