@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<div id="test">test content</div>
+<div id="test2">test content</div>
+<script type="text/javascript">
+    (function(win){
+        var $ = function(selector, context){
+            return new $.fn.init(selector, context);
+        }
+        $.fn = $.prototype = {
+            splice : [].splice,
+            init : function(selector, context){
+                if(selector.indexOf('#') == 0){
+                    this.length = 0;
+                    return this.setArray(this.makeArray(document.getElementById(selector.slice(1))));
+                }
+            },
+            setArray : function(els) {
+                this.length = 0;//设置length以及重排索引
+                Array.prototype.push.apply(this, els);
+                return this;
+            },
+            makeArray : function(arr) {//把传入参数变成数组
+                var ret = [];
+                if( arr != null ){
+                    var i = arr.length;
+                    //单个元素，但window, string、 function有 'length'的属性，加其它的判断
+                    if( i == null || arr.split || arr.setInterval || arr.call ){
+                        ret[0] = arr;
+                    }else{
+                        try{
+                            ret = Array.prototype.slice.call(arr);
+                        }catch(e){
+                            while(i) ret[--i] = arr[i];//Clone数组
+                        }
+                    }
+                }
+                return ret;
+            },
+            show : function(){
+                console.log('show method');
+            },
+            hide : function(){
+                console.log('hide');
+            }
+
+        }
+
+        win.Hogo = $;
+
+        // 因为$.prototype = $.fn，所以使用new操作符调用init构造函数后返回的实例对象共享$原型的方法
+        Hogo.prototype.init.prototype = Hogo.prototype;
+//        Hogo.fn.init.prototype = Hogo.fn;
+    }(window));
+
+    console.log(Hogo('#test'));
+    Hogo('#test').show('haha');
+
+</script>
+</body>
+</html>
