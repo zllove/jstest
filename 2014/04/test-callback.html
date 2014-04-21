@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    var arr = [];
+    var arr2 = [2,3];
+    var arr3 = [].concat('arr2');
+    console.log(arr2);//2,3
+    console.log(arr3);//['arr2']
+    function fireCallback(callback, args, target){
+        if($.isFunction(callback)){
+            (args && $.isArray(args)) || (args = [].concat(args));
+            return callback.apply(target || window, args);
+        }
+    }
+
+    function say(name){
+        console.log(name);
+    }
+    fireCallback(say, 'jikey');
+</script>
+</body>
+</html>
