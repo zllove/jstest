@@ -1,66 +1,26 @@
 <!doctype html>
-<html>
+<html lang="en-US">
 <head>
     <meta charset="UTF-8">
-    <title>sss</title>
+    <title></title>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{background: #fff;}
+        .a{ height:200px; padding:50px; margin:150px; border:20px solid #ccc;}
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
 </head>
 <body>
-<div id="test"></div>
-<div id="foo"></div>
+<div class="a">111</div>
+s
 <script type="text/javascript">
-    $(document).ready(function () {
-        //幻灯片
-        var j = 1;
-        var MyTime = false;
-        var fot = 200;//当前图片消失时间
-        var fin = 300;//新图片呈现时间
-        var amt = 300;//三角标志滑动时间
-        var speed = 3000;//自动播放间隔
-        var maxpic = 4;//切换图片个数
-        $("#ppt").find("li").each(function (i) {
-            $("#ppt").find("li").eq(i).mouseover(function () {
-                var cur = $("#mpc").find("div:visible").prevAll().length;
-                if (i !== cur) {
-                    j = i;
-                    $("#mpc").find("div:visible").fadeOut(fot, function () {
-                        $("#mpc").find("div").eq(i).fadeIn(fin);
-                    });
-                    $("#tri").animate({"top" : i * 87 + "px"}, amt, current(this, "li"));
-                    $("#ppt").find("dl:visible").slideUp(fot, function () {
-                        $("#ppt").find("dl").eq(i).slideDown(fin);
-                    });
-                }
-            })
-        })
-        //标记当前
-        function current(ele, tag) {
-            $(ele).addClass("cur").siblings(tag).removeClass("cur");
+    for (var i=0; i<4;i++){
+        if(i == s){
+            document.getElementById('list_'+i).className='newstyle'; //更改新的样式
         }
-
-        //自动播放 不需要的话可以删除这一段
-        $('#imgnav').hover(function () {
-            if (MyTime) {
-                clearInterval(MyTime);
-            }
-        }, function () {
-            MyTime = setInterval(function () {
-                $("#ppt").find("li").eq(j).mouseover();
-                j++;
-                if (j == maxpic) {
-                    j = 0;
-                }
-            }, speed);
-        });
-        //自动开始
-        var MyTime = setInterval(function () {
-            $("#ppt").find("li").eq(j).mouseover();
-            j++;
-            if (j == maxpic) {
-                j = 0;
-            }
-        }, speed);
-
-    })
+        else{
+            document.getElementById('list_'+i).className='oldstyle'; //还原样式
+        }
+    }
 </script>
 </body>
-</html>
