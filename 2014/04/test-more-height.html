@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{background: #fff;}
+        .a{ height:200px; padding:50px; margin:150px; border:20px solid #ccc;}
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
+</head>
+<body>
+<div class="a">111</div>
+s
+<script type="text/javascript">
+    var height = $('.a').height();
+    var height2 = $('.a').outerHeight();
+    var height3 = $('.a').outerHeight(true);
+    var height4 = $('.a').innerHeight();
+    console.log(height); // height
+    console.log(height2); // padding+height+border
+    console.log(height3); // margin+padding+height
+    console.log(height4); // padding+height
+</script>
+</body>
