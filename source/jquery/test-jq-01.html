@@ -17,6 +17,7 @@
     var div = $('#test');
 //    var html = div.html();
 //    var div = $('.div');
+    /*
     $.extend({
         say : function(){
             console.log('say');
@@ -25,6 +26,62 @@
             console.log('hello');
         }
     });
+
+    $.extend({
+        say : function(){
+            console.log('say');
+        },
+        hello : function(){
+            console.log('hello');
+        }
+    }, {
+        sayName : function(){
+            console.log('sayname');
+        }
+    });
+
+    $.extend({}, {
+        name : "Tom",
+        age : 21
+    }, {
+        name : "Jerry",
+        sex : "Boy"
+    });
+
+    $.extend({
+        hello:function(){alert('hello');}
+    });
+
+    $.extend({net:{}});
+
+    $.extend($.net,{
+        hello:function(){alert('hello');}
+    });
+    console.log($.net);
+
+    var result = $.extend(false, {
+        name : "John",
+        location : {
+            city : "Boston",
+            county : "USA"
+        }
+    }, {
+        last : "Resig",
+        location : {
+            state : "MA",
+            county : "China"
+        }
+    });
+
+    console.log(result);
+    */
+
+    $.fn.extend({
+        hello:function(){alert('hello');}
+    });
+
+
+
 </script>
 </body>
 </html>
