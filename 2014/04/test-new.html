@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    var Dog = function(name, age){
+        this.name = name;
+        this.age = age;
+    }
+
+    Dog.prototype = {
+        constructor : Dog,
+        sayName : function(){
+            console.log(this.name);
+        }
+    }
+
+//    var dog1 = Dog('jikey', 4);
+//    Dog('jikey', 4);
+//    console.log(this.name == window.name); // true
+//    console.log(this.name); // jikey
+//    console.log(this.age); // 4
+//    dog1.sayName();
+
+    var dog2 = new Dog('tang', 5);
+    dog2.sayName();
+    Dog.sayAge();
+
+    var dog3 = new Dog('csdn', 10);
+    dog3.sayName();
+</script>
+</body>
+</html>

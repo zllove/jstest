@@ -20,7 +20,6 @@
 
     var man = new Human('Jikey');
     console.log(monkey.isPrototypeOf(man));
-    */
     var monkey = {
         hair : true,
         feeds : 'bananas',
@@ -33,6 +32,66 @@
     var george = new Human('George');
     console.log(monkey.isPrototypeOf(george));
 
+    var monkey = {
+        feeds : 'bananas',
+        breathes : 'air'
+    }
+    function Human(){
+
+    }
+    Human.prototype = monkey;
+
+    var dev = new Human();
+    dev.feeds = 'pizza';
+    dev.hacks = 'Javascript';
+//    console.log(dev.hacks);
+    dev.constructor = Human;
+//    console.log(typeof dev.constructor.prototype);
+//    console.log(dev.breathes);
+
+//    console.dir(dev.__proto__);
+//    console.log(dev.constructor.prototype);
+
+    String.prototype.reverse = function(){
+        return Array.prototype.reverse.apply(this.split('')).join('');
+    }
+    console.log('jikey'.reverse());
+     */
+
+
+    function Dog(){
+        this.tail = true;
+    }
+    var benji = new Dog();
+    var rusty = new Dog();
+    Dog.prototype.say = function(){
+        return 'Woof';
+    }
+//    console.log(benji.say());
+//    console.log(rusty.say());
+//    console.log(benji.constructor);
+//    console.log(rusty.constructor);
+
+//    console.log(benji.constructor.prototype.constructor);
+//    console.log(typeof benji.constructor.prototype.tail);
+
+    Dog.prototype = {
+//        constructor:Dog,
+        paws : 4,
+        hair : true
+    }
+//    console.log(typeof benji.paws);
+//    console.log(benji.say());
+//    console.log(typeof benji.__proto__.say);
+//    console.log(typeof benji.__proto__.paws);
+
+    var lucy = new Dog();
+//    console.log(lucy);
+//    console.log(lucy.say);
+//    console.log(lucy.constructor);
+//    console.log(benji.constructor);
+
+    console.log(typeof lucy.constructor.prototype.paws);
 
 
 </script>

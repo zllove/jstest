@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+http://www.cnblogs.com/Ivangel/p/3681312.html
+<script>
+    function Person()
+    {
+        this.name = '张三';
+        this.id = function (){ alert('身份证') };
+    }
+    Person.prototype.say = function (){ alert('说话'); }
+
+    var P1 = new Person();
+    var P2 = new Person();
+
+    /*
+    console.log(P1);
+    console.log(P2);
+    console.log(P1.name === P2.name);    //true
+    console.log(P1.id === P2.id);    //false
+    console.log(P1.say === P2.say);    //true
+    */
+    console.log(P1);
+    P1.say();
+
+</script>
+</body>
+</html>

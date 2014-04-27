@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        #test{margin: 100px 200px;}
+    </style>
+</head>
+<body>
+<div id="test">我是test</div>
+<script type="text/javascript">
+    function loadJs(code){
+        var js = document.createElement('script');
+        js.type = 'text/javascript';
+        try {
+            js.appendChild(document.createTextNode(js));
+        } catch(e) {
+            js.text = code;
+        }
+        document.body.appendChild(js);
+    }
+
+    function loadCss(url){
+        var link = document.createElement('link');
+        link.href = url;
+        link.type = 'text/css';
+        link.rel = 'stylesheet';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    }
+
+    function loadStyle(css){
+        var style = document.createElement('style');
+        style.type = 'text/css';
+        // 这防止在IE中报错
+        try {
+            style.appendChild(document.createTextNode(css));
+        } catch(e) {
+            style.styleSheet.cssText = css;
+        }
+        document.getElementsByTagName('head')[0].appendChild(style);
+    }
+
+//    loadJs('function a(){}');
+//    loadStyle('.a{margin:0;}')
+
+    var head = document.head;
+//    alert(head);
+    var charset = document.charset;
+//    alert(charset);
+
+    var mode = document.documentMode;
+//    alert(mode);
+
+    function getInnerText(ele){
+        return (typeof ele.textContent == 'string' ? ele.textContent : ele.innerText);
+    }
+
+    function setInnerText(ele, txt){
+        if(typeof ele.textContent == 'string'){
+            ele.textContent = txt;
+        } else {
+            ele.innerText = txt;
+        }
+    }
+    setInnerText(document.getElementById('test'), '你才是test');
+
+    function getViewport(){
+        if(document.compatMode == 'BackCompat'){
+            return {
+                width : document.body.clientWidth,
+                height : document.body.clientHeight
+            }
+        } else {
+            return {
+                width : document.documentElement.clientWidth,
+                height : document.documentElement.clientHeight
+            }
+        }
+    }
+
+    function getElementLeft(ele){
+        var actualLeft = ele.offsetLeft;
+        var current = ele.offsetParent;
+
+        while(current != null){
+            actualLeft += current.offsetLeft;
+            current = current.offsetParent;
+        }
+
+        return actualLeft;
+    }
+
+    function getElementTop(ele){
+        var actualTop = ele.offsetTop;
+        var current = ele.offsetParent;
+
+        while(current != null){
+            actualTop += current.offsetTop;
+            current = current.offsetParent;
+        }
+
+        return actualTop;
+    }
+
+    function getBoundingClientRect(ele){
+        var scrollTop = document.documentElement.scrollTop;
+        var scrollLeft = document.documentElement.scrollLeft;
+        if(ele.getBoundingClientRect){
+            if(typeof arguments.callee.offset != 'number'){
+                var temp = document.createElement('div');
+                temp.style.cssText = 'position:absolute;top:0;left:0';
+                document.body.appendChild(temp);
+                arguments.callee.offset = -temp.getBoundingClientRect().top -scrollTop;
+                document.body.removeChild(temp);
+                temp = null
+            }
+            var rect = ele.getBoundingClientRect();
+            var offset = arguments.callee.offset;
+            return {
+                left : rect.left + offset,
+                right : rect.right + offset,
+                top : rect.top + offset,
+                bottom : rect.bottom + offset
+            }
+        } else {
+            var actualLeft = getElementLeft(ele);
+            var actualTop = getElementTop(ele);
+            return {
+                left : actualLeft - scrollLeft,
+                right : actualLeft + ele.offsetWidth - scrollLeft,
+                top : actualTop - scrollTop,
+                bottom : actualTop + ele.offsetHeight - scrollTop
+            }
+        }
+    }
+
+    console.log(getBoundingClientRect(document.getElementById('test')));
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

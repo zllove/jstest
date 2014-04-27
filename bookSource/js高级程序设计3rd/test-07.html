@@ -39,8 +39,8 @@
     console.log(obj.publicMethod());
     console.log(obj);
      */
-    function getQueryStringArgs(){
-        var qs = location.search.length > 0 ? location.search.substring(1) : '',
+    function getQueryStringArgs(q){
+        var qs = q.split('?')[1] || (location.search.length > 0 ? location.search.substring(1) : ''),
             args = {},
             items = qs.length ? qs.split('&') : [],
             item = null,
@@ -59,7 +59,7 @@
         }
         return args;
     }
-
+    getQueryStringArgs();
 
 
 </script>
