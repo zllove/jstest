@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<a href="http://bbs.csdn.net/topics/390767276">http://bbs.csdn.net/topics/390767276</a>
+<table cellpadding="0" cellspacing="0" border="1" width="400" onclick="t();">
+    <tr>
+        <td except="1">不触发事件</td>
+        <td>触发事件</td>
+        <td>触发事件</td>
+    </tr>
+    <tr>
+        <td>触发事件</td>
+        <td except="1">不触发事件</td>
+        <td>触发事件</td>
+    </tr>
+</table>
+<script type="text/javascript">
+    function t(){
+        console.log(t.arguments[0]);
+        var e = t.caller.arguments[0] || window.event;
+        var target = e.target || e.srcElement;
+        if(target.getAttribute('except') != 1){
+            alert(111);
+        }
+    }
+</script>
+</body>
+</html>
