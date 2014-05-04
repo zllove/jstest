@@ -1,0 +1,89 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+@media print{
+	.info,.noprint{
+		display:none;
+	}
+	.next{
+		page-break-after:always;
+	}
+}
+.noview{
+	display:none;
+}
+</style>
+
+<script>
+window['print']=function(data){
+	
+	if('undefined'==typeof data.length){
+		alert('数据格式不合法！');
+	}
+	var 
+	div=document.getElementsByTagName('div'),
+	len=div.length,
+	template=(function(div,len){
+		for(var i=0;i<len;i++){
+			if('template'==div[i].className){
+				return div[i];
+			}
+		}
+		alert('未检测到模版！');
+	})(div,len),
+	body=document.getElementsByTagName('body')[0];
+	
+	var len=data.length;
+	for(var i=0;i<len;i++){
+		(function(i){
+			var new_div=template.cloneNode(true),
+			data_this=data[i];
+			
+			for(var e in data_this){
+				
+				var str=new_div.innerHTML.split('{{'+e+'}}').join(data_this[e]);
+				new_div.innerHTML=str;
+			}
+			
+			new_div.className='next';
+			body.appendChild(new_div);
+		})(i);
+	}
+	
+	template.className='noprint noview';
+};
+</script>
+</head>
+<body>
+<div class="info" style="border:2px black solid">
+<h2>使用说明：<input value="点击隐藏说明" type="button" 
+onclick="(function(dom){dom.parentNode.parentNode.style.display='none';})(this);"/></h2>
+一、文件末尾有一对script标签，在里面打入<p>
+&nbsp;&nbsp;&nbsp;&nbsp;<code style="background-color:yellow;">var data=数据源;print(data);</code><p/>
+二、data的格式是[键值对1,键值对2,键值对3。。。。。。];<p/>
+三、如data=[{"商品名":"充气娃娃","库存":"100件"},{"商品名":"a女特工","库存":"250只"}];<p/>
+</div>
+
+<!--下面是一个模版-->
+<div class="template">
+<div>标题</div>
+<table width="200px">
+<tbody>
+<tr><td>商品名</td><td>库存</td></tr>
+<tr><td>{{商品名}}</td><td>{{库存}}</td></tr>
+</tbody>
+</table>
+<br/>
+</div>
+<!--哈哈-->
+
+
+</body>
+<script>
+var data=[{"商品名":"充气娃娃","库存":"100件"},{"商品名":"a女特工","库存":"250只"}];
+print(data);
+</script>
+</html>
