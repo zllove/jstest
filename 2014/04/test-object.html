@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    function setName(obj){
+        obj.name="Nicholas";
+        console.log(obj);
+        obj = [];
+        obj['name'] = 'Greg';
+//        obj=new Object();
+//        obj.name="Greg";
+        console.log(obj);
+    }
+    var person=new Object();
+    setName(person);
+    console.log(person.name);
+</script>
+</body>
+</html>
