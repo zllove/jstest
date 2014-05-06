@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+
+        #summary .dt {
+            font-family: simsun
+        }
+        #summary {
+
+            width: 452px;height: 100px;
+            padding: 10px 0
+        }
+        #summary li {
+            padding: 6px 0;
+            overflow: hidden;
+            *zoom:1;
+            clear: both
+        }
+        #summary-price .dd {
+            line-height: 12px;
+            *line-height:18px
+        }
+        #summary-price {
+            /*height: 18px;*/
+            overflow: hidden
+        }
+        #summary-price .p-price img {
+            margin-left: -4px
+        }
+        #summary-price .p-price {
+            color: #000;
+            /*font-size: 32px;*/
+        }
+        #choose {
+            border-top: 1px dotted #ddd;
+            padding-top: 10px
+        }
+        #choose li {
+            overflow: hidden;
+            padding: 5px 0
+        }
+        #choose #choose-noresult {
+            padding-left: 10px
+        }
+        #choose a {
+            display: block;
+            white-space: nowrap;
+            text-decoration: none
+        }
+        #choose .dt {
+            width: 71px
+        }
+        #choose .dd {
+            overflow: hidden
+        }
+
+        #choose .item {
+            float: left;
+            margin: 2px 8px 2px 0
+        }
+        #choose .item img {
+            float: left
+        }
+        #choose .item a:link, #choose .item a:visited {
+            border: 1px solid #ccc;
+            padding: 3px 5px;
+        }
+        #choose .item a:hover, #choose .item a:active, #choose .selected a:link, #choose .selected a:visited {
+            border: 1px solid #e4393c;
+            padding: 3px 5px;
+        }
+        #choose .selected, #choose .disabled {
+            position: relative;
+            zoom: 1
+        }
+        #choose .disabled i {
+            display: none
+        }
+        #choose #choose-color .disabled a {
+            border: 1px dashed #ccc;
+            padding: 3px 5px;
+        }
+        #choose .selected b {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 12px;
+            height: 12px;
+            overflow: hidden;
+            background-position: -202px -224px
+        }
+        #choose-color .dt {
+            margin-top: 8px
+        }
+        #choose-color .dd a {
+            float: left
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+
+</head>
+<body>
+<ul id="summary">
+    <li id="summary-price">
+        <div class="dt">价&nbsp;&nbsp;&nbsp;&nbsp;格：</div>
+        <div class="dd">
+            <strong id="marketprice" class="p-price">￥9400.00</strong>
+        </div>
+    </li>
+</ul>
+<ul id="choose">
+    <li id="choose-color">
+        <div class="dt">颜色分类：</div>
+        <div class="dd">
+            <div title="图片样色" value="1" s="1" class="item selected" style="margin-top:8px"><b></b>
+                <a specvid="4857" specid="1" id="Aobj_1_4857" href="javascript:void(0);">图片样色</a>
+            </div>
+        </div>
+    </li>
+    <li id="choose-color">
+        <div class="dt">床垫尺寸：</div>
+        <div class="dd">
+            <div title="1800*2000*380" value="76" s="76" class="item selected" style="margin-top:8px"><b></b>
+                <a specvid="5631" specid="21" id="Aobj_21_5631" href="javascript:void(0);">1800*2000*380</a>
+            </div>
+            <div title="1500*1900*380" value="77" s="77" class="item" style="margin-top:8px"><b></b>
+                <a specvid="5632" specid="21" id="Aobj_21_5632" href="javascript:void(0);">1500*1900*380</a>
+            </div>
+            <div title="1200*1900*380" value="78" s="78" class="item" style="margin-top:8px"><b></b>
+                <a specvid="5633" specid="21" id="Aobj_21_5633" href="javascript:void(0);">1200*1900*380</a>
+            </div>
+            <div title="900*1900*380" value="79" s="79" class="item" style="margin-top:8px"><b></b>
+                <a specvid="5634" specid="21" id="Aobj_21_5634" href="javascript:void(0);">900*1900*380</a>
+            </div>
+        </div>
+    </li>
+    <li style="display:none" id="choose-price">
+        <sku w="0.00" v="0.00" q="9999" mk="￥9400.00" s6="0" s5="0" s4="0" s3="0" s2="76" s1="1" data-id="5297" default="true"></sku>
+        <sku w="0.00" v="0.00" q="9999" mk="￥8300.00" s6="0" s5="0" s4="0" s3="0" s2="77" s1="1" data-id="5298"></sku>
+        <sku w="0.00" v="0.00" q="9999" mk="￥7540.00" s6="0" s5="0" s4="0" s3="0" s2="78" s1="1" data-id="5299"></sku>
+        <sku w="0.00" v="0.00" q="9999" mk="￥6680.00" s6="0" s5="0" s4="0" s3="0" s2="79" s1="1" data-id="5300"></sku>
+    </li>
+
+
+
+</ul>
+<script type="text/javascript">
+    $(function () {
+    document.createElement('sku');
+
+        $("#choose li").each(function () {
+            if ($(this).attr("id") == "choose-version" || $(this).attr("id") == "choose-color") {
+                d = $(this).find(".item");
+                d.click(function () {
+                    if ($(this).find("img").length > 0) {
+                        var e = $(this).find("img");
+                        t = e.attr("src");
+
+                        $("#spec-n1 img").eq(0).attr({
+                            src: t.replace("/n5/", "/n1/"),
+                            jqimg: t.replace("/n5/", "/n0/")
+                        });
+                    }
+
+                    $(this).parent().find(".item").removeClass("selected");
+
+                    $(this).addClass("selected");
+                    ajax_spec();
+                });
+            }
+
+        });
+
+
+    });
+
+
+
+
+    $("#marketprice").html($("#choose-price [default='true']").attr("mk"));
+
+
+    function ajax_spec() {
+
+        i = 1;
+        s = "";
+        $("#choose li .selected").each(function () {
+            s += "[s" + i + "="+"'" + $(this).attr("s")+"'" + "]";
+            i++;
+        });
+//        alert(s);
+        console.log($("#choose-price sku"+s));
+        alert($("#choose-price sku"+s).attr('mk'));
+        $("#marketprice").html($("#choose-price sku"+s).attr("mk"));
+        //$("#marketprice").html($("#choose-price sku" + s).attr("mk"));
+    }
+
+
+</script>
+
+</body>
+</html>

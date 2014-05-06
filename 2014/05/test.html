@@ -3,8 +3,20 @@
 <head>
     <meta charset="utf-8"/>
     <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
 </head>
 <body>
-
+<div id="div"></div>
+<table id="tab">
+    <tr>
+        <td>111</td>
+    </tr>
+</table>
+<script type="text/javascript">
+    var div = $('#div');
+    console.log($.nodeName(document.getElementById('div'), 'div'));
+    var tab = $('#tab')[0].nodeName;
+    console.log(tab);
+</script>
 </body>
 </html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<div>
+    <span>Shadow</span> |No Shadow
+</div>
+<div id="test"></div>
+<script type="text/javascript">
+    var element = document.getElementsByTagName('span')[0];
+    var t1 = element.cloneNode(false); //不复制子节点
+    var t2 = element.cloneNode(true); //copy all
+
+    var test = document.getElementById('test');
+    test.appendChild(t2)
+    console.log(t1);
+    console.log(t2);
+
+</script>
+</body>
+</html>
