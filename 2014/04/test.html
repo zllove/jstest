@@ -1,26 +1,31 @@
 <!doctype html>
-<html lang="en-US">
+<html>
 <head>
     <meta charset="UTF-8">
     <title></title>
     <style type="text/css">
-        *{ margin:0; padding:0;}
-        body{background: #fff;}
-        .a{ height:200px; padding:50px; margin:150px; border:20px solid #ccc;}
+        *{ margin:0; padding:0; }
+        body{ background:#fff; }
+        .a{ height:200px; padding:50px; margin:150px; border:20px solid #ccc; }
     </style>
-    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
 </head>
 <body>
 <div class="a">111</div>
 s
 <script type="text/javascript">
-    for (var i=0; i<4;i++){
-        if(i == s){
-            document.getElementById('list_'+i).className='newstyle'; //更改新的样式
-        }
-        else{
-            document.getElementById('list_'+i).className='oldstyle'; //还原样式
-        }
+    var a = false, b;
+    if(!a){
+        b = 'bb';
+    } else {
+        b = undefined;
     }
+    /*
+    if(a){
+        b = 'bb';
+    }
+    */
+//    a || (b = 'bb');
+    console.log(b);
 </script>
 </body>
