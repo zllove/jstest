@@ -1,13 +1,8 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> 8d6cc423a06570d621b8db06ec87d9bd200785b7
 <!doctype html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>test</title>
-<<<<<<< HEAD
     <!--<script type="text/javascript" src="js/jquery-1.1.js"></script>-->
     <!--<script type="text/javascript" src="js/jquery-1.3.2.js"></script>-->
     <!--<script type="text/javascript" src="js/jquery-1.4.4.js"></script>-->
@@ -40,57 +35,6 @@
 
     callbacks.fire('jikey');
 
-
-
-
-
-
-=======
-    <!--<script type="text/javascript" src="js/jquery-1.1.js"></script>--><!--<script type="text/javascript" src="js/jquery-1.3.2.js"></script>--><!--<script type="text/javascript" src="js/jquery-1.4.4.js"></script>--><!--<script type="text/javascript" src="js/jquery-1.8.3.js"></script>--><!--<script type="text/javascript" src="js/jquery-1.10.1.js"></script>-->
-    <script type="text/javascript" src="js/jquery-1.11.0.js"></script>
-    <!--<script type="text/javascript" src="js/jquery-migrate-1.2.1.js"></script>--><!--<script type="text/javascript" src="js/jquery-2.1.0.js"></script>--><!--<script type="text/javascript" src="js/cyer.js"></script>--><!--<script type="text/javascript" src="js/zepto.js"></script>-->
-    <style>
-        div{ margin:3px; width:40px; height:40px;
-            position:absolute; left:0px; top:30px;
-            background:green; display:none; }
-        div.newcolor{ background:blue; }
-        span{ color:red; }
-    </style>
-</head>
-<body>
-<button id="show">Show Length of Queue</button>
-<span></span>
-<div></div>
-<script type="text/javascript">
-    /*
-     $("#show").click(function () {
-     $("div").queue(function () {
-     $(this).addClass("newcolor");
-     $(this).dequeue();
-     });
-     });
-     */
-
-    $('#show').queue('slide', [function () {
-        console.log('11');
-        _takeOne();
-    }, function () {
-        console.log(22);
-        _takeOne();
-    }, function () {
-        console.log(33);
-        _takeOne();
-    }, function () {
-        $('.six').delay(300).animate({top : '+=290px'}, 500, _takeOne);
-    } ]);
-
-    var _takeOne = function () {
-        //取出第一个函数,并执行它
-        $('#show').dequeue('slide');
-    };
-    //初始执行第一个函数
-    _takeOne();
->>>>>>> 8d6cc423a06570d621b8db06ec87d9bd200785b7
 </script>
 </body>
 </html>
