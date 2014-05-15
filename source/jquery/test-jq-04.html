@@ -24,6 +24,12 @@
 <script type="text/javascript">
     $('#test').animate({ width : '100px'}, 'slow');
 
+    $("#test").queue(function () {
+        $(this).addClass("newcolor");
+        $(this).dequeue();
+    });
+
+
 
 
 
