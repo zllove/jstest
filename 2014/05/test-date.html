@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    var str = ['年','月','日'], index = 0;
+    var d = '2014-05-26'.replace(/(-|$)/g, function (a) {
+        return str[ index++ ];
+    });
+    console.log(d);
+</script>
+</body>
+</html>
