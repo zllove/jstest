@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    function foo(str){
+        return str.search('-')>-1 && (str = str.replace(/-(\w)/,function(a,b){return b.toUpperCase();}));
+    }
+
+    console.log(foo('-webkit-box'));
+
+//    var str = "border-left-color";
+    var str = "-web-kit";
+    function camelize(s) {
+        return s.replace(/-[a-z]/gi,function (c,d) {
+            return c.charAt(1).toUpperCase();
+        });
+    }
+    console.log(camelize(str));
+
+
+</script>
+</body>
+</html>
