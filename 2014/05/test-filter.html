@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<ul>
+    <li><strong>list</strong> item 1 - one strong tag</li>
+    <li>
+        <strong>list</strong> item
+        <strong>2</strong>
+        - two
+        <span>strong tags</span>
+    </li>
+    <li>list item 3</li>
+    <li>list item 4</li>
+    <li>list item 5</li>
+    <li>list item 6</li>
+</ul>
+
+<script>
+    $('li').filter(function(index) {
+        return $('strong',this).length == 1;
+    }).css('background-color', 'red');
+</script>
+
+</body>
+</html>

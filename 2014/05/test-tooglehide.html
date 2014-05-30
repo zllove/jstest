@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+http://bbs.csdn.net/topics/390780303
+<table>
+    <tr class="id">
+        <td style="text-align:center">大菜单</td>
+    </tr>
+    <tr class="test" style="display:none;">
+        <td style="text-align:center">111111</td>
+    </tr>
+    <tr class="test" style="display:none;">
+        <td style="text-align:center">222222</td>
+    </tr>
+    <tr class="test" style="display:none;">
+        <td style="text-align:center">333333</td>
+    </tr>
+    <!--循环结束--><!--循环开始    N个这样的循环-->
+    <tr class="id">
+        <td style="text-align:center">大菜单222</td>
+    </tr>
+    <tr class="test" style="display:none;">
+        <td style="text-align:center">111111</td>
+    </tr>
+    <tr class="test" style="display:none;">
+        <td style="text-align:center">222222</td>
+    </tr>
+    <tr class="test" style="display:none;">
+        <td style="text-align:center">333333</td>
+    </tr>
+    <tr class="id">
+        <td style="text-align:center">大菜单3333</td>
+    </tr>
+    <tr class="test" style="display:none;">
+        <td style="text-align:center">111111</td>
+    </tr>
+    <tr class="test" style="display:none;">
+        <td style="text-align:center">222222</td>
+    </tr>
+    <tr class="test" style="display:none;">
+        <td style="text-align:center">333333</td>
+    </tr>
+</table>
+<script type="text/javascript">
+    $(function () {
+        var tr;
+        $('tr.id').click(function () {
+            $(tr).nextUntil('.id')[tr == this ? 'toggle' : 'hide']();
+            if (tr != this) $(this).nextUntil('.id').show();
+            tr = this;
+        });
+    });
+</script>
+</body>
+</html>

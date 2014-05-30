@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>who</title>
+</head>
+<body>
+<div style="z-index:-1; position:absolute; width:480px; height:400px; left:20px;
+ top:250px;  background-color:#d5e0ef; color:#d5e0ef;
+font-size:10px; cursor:default; border:1px solid #00629d;" id="divFloat">
+
+
+    <div onmousedown="drag(event,this)" onmousemove="dragPro(event);" onmouseup="StopDrag(this);" id="divTitle" style="background-color:#d5e0ef; height:20px; color:#00629d; font-size:9pt; z-index:1;"></div>
+
+
+</div>
+<script>
+    var ox, oy, nx, ny, dy, dx;
+    var oDrag = "";
+
+    function drag(e, obj){
+        var e = e ? e : event;
+        var mouseD = document.all ? 1 : 0;
+
+
+        if(e.button == mouseD){
+            oDrag = obj.parentNode;
+            //alert(oDrag.id);
+            ox = e.clientX;
+            oy = e.clientY;
+            obj.style.cursor = "move";
+
+            if(obj.setCapture)
+                obj.setCapture(); else if(window.captureEvents)
+                window.captureEvents(Event.MOUSEMOVE | Event.MOUSEUP);
+        }
+
+    }
+
+    function dragPro(e){
+
+        if(oDrag != ""){
+            var e = e ? e : event;
+            dx = parseInt(oDrag.style.left);
+            dy = parseInt(oDrag.style.top);
+            nx = e.clientX;
+            ny = e.clientY;
+            oDrag.style.left = (dx + (nx - ox)) + "px";
+            oDrag.style.top = (dy + (ny - oy)) + "px";
+            ox = nx;
+            oy = ny;
+        }
+    }
+
+    function StopDrag(obj){
+        if(obj.releaseCapture){
+            obj.releaseCapture();
+        } else if(window.captureEvents){
+            window.captureEvents(Event.MOUSEMOVE | Event.MOUSEUP);
+        }
+        oDrag = "";
+    }
+</script>
+</body>
+</html>

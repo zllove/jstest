@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    function aaa(callback){
+        setTimeout(function(){
+            callback(5);
+        }, 1000);
+    }
+
+    function done(value){
+        console.log(value);
+    }
+    
+    aaa(function(value){
+        done(value);
+    });
+    
+</script>
+</body>
+</html>
