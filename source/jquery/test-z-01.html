@@ -7,13 +7,20 @@
     <script type="text/javascript" src="js/zepto-1.3.js"></script>
 </head>
 <body>
-<div class="a1">111</div>
-<div class="a">222</div>
-<div class="a">333</div>
+<div class="a1" style="box-shadow: 0 0 5px #858585;">111</div>
 <script type="text/javascript">
     $('.a1').each(function(){
         console.log($(this).html());
     });
+
+    $.extend(Zepto, {
+        init : function(){
+            console.log('init');
+        }
+    });
+
+    $('.a').append('<p>ewerw</p>');
+    $('<p>ewerw</p>').appendTo('.a');
 </script>
 </body>
 </html>
