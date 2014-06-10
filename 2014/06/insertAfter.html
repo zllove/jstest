@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<table class="tab" width="500" border="1">
+    <tr>
+        <td>111</td>
+        <td><input class="up" type="button" value="up"/><input class="down" type="button" value="down"/></td>
+    </tr>
+    <tr>
+        <td>222</td>
+        <td><input class="up" type="button" value="up"/><input class="down" type="button" value="down"/></td>
+    </tr>
+    <tr>
+        <td>333</td>
+        <td><input class="up" type="button" value="up"/><input class="down" type="button" value="down"/></td>
+    </tr>
+    <tr>
+        <td>444</td>
+        <td><input class="up" type="button" value="up"/><input class="down" type="button" value="down"/></td>
+    </tr>
+</table>
+<script type="text/javascript">
+    /*
+    $('.up').on('click', function(){
+        var tr = $(this).closest('tr');
+        tr.insertBefore(tr.prev());
+    });
+
+    $('.down').on('click', function(){
+        var tr = $(this).closest('tr');
+        tr.insertAfter(tr.next());
+    });
+    */
+
+    $.fn.changeRow = function(dir, callback){
+        var tr;
+
+        $(this).on('click', function(){
+            tr = $(this).closest('tr');
+
+            if(dir == 'up'){
+                if(tr.prev().length > 0){
+                    tr.insertBefore(tr.prev());
+                } else {
+                    alert('已到顶部');
+                }
+            } else {
+                if(tr.next().length > 0){
+                    tr.insertAfter(tr.next());
+                } else {
+                    alert('已到底部');
+                }
+            }
+
+            callback && callback(tr, this);
+        });
+    }
+
+    $('.up').changeRow('up', function(tr, up){
+        tr.attr('data-id', 222);
+    });
+
+
+</script>
+</body>
+</html>

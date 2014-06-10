@@ -7,7 +7,9 @@
     <script type="text/javascript" src="js/zepto-1.3.js"></script>
 </head>
 <body>
-<div class="a1" style="box-shadow: 0 0 5px #858585;">111</div>
+<div class="a" style="border: 1px solid #ccc;">
+    <i>111</i><i>222</i><i>333</i>
+</div>
 <style type="text/css">
     img{vertical-align:top;}
 </style>
@@ -27,6 +29,10 @@
 //    $('.a').append('<p>ewerw</p>');
     $('.a').css({ width : '200px', height : '300px'});
 //    $('<p>ewerw</p>').appendTo('.a');
+
+    var c = $('.a').children();
+    console.log(c);
+
 </script>
 </body>
 </html>
