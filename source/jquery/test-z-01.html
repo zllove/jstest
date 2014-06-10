@@ -13,7 +13,9 @@
 <style type="text/css">
     img{vertical-align:top;}
 </style>
-<div class="a">11122</div>
+<div id="a" class="a">1111</div>
+<div class="a">2222</div>
+<div class="a">3333</div>
 <script type="text/javascript">
     $('.a1').each(function(){
         console.log($(this).html());
@@ -27,11 +29,14 @@
 
     // [ 'after', 'prepend', 'before', 'append' ]
 //    $('.a').append('<p>ewerw</p>');
-    $('.a').css({ width : '200px', height : '300px'});
+//    $('.a').css({ width : '200px', height : '300px'});
 //    $('<p>ewerw</p>').appendTo('.a');
 
-    var c = $('.a').children();
-    console.log(c);
+//    var c = $('.a').children();
+//    var d = $('.a').eq(1).next();
+    var d = $('#a').next();
+    console.log(d);
+    console.log(d);
 
 </script>
 </body>
