@@ -16,6 +16,8 @@
 <div id="a" class="a">1111</div>
 <div class="a">2222</div>
 <div class="a">3333</div>
+<div id="b">bbbb</div>
+<input id="btn" type="submit" value="btn"/>
 <script type="text/javascript">
     $('.a1').each(function(){
         console.log($(this).html());
@@ -34,10 +36,14 @@
 
 //    var c = $('.a').children();
 //    var d = $('.a').eq(1).next();
-    var d = $('#a').next();
-    console.log(d);
-    console.log(d);
+//    var d = $('#a').next();
+//    var d = $('#a').prepend($('#b'));
+//    var d = $('#a').width();
+//    console.log(d);
 
+    $('#btn').on('click', function(){
+        console.log('111');
+    });
 </script>
 </body>
 </html>
