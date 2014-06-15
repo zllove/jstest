@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "utf-8" />
+    <title>表格样式</title>
+    <style type = "text/css">
+        *{ margin:0; padding:0;}
+        #fieldset{
+            width:300px;
+            margin:50px;
+            padding:0;
+            background:RGB(205,204,204);
+            font-family:宋体,verdana,arial,helvertica,sans-serif;
+            text-align:center;
+            border:1px solid red;
+        }
+        h2{
+            font-size:29px;
+            color:rgb(255,255,255);
+            margin:0;
+            padding:10px;
+            position:relative;
+            top:-30px;
+            width:173px;
+            text-align:center;
+            background:url(../images/h2_bg.gif) no-repeat;
+            font-family:宋体,verdana,arial,helvertica,sans-serif;
+        }
+
+        textarea{
+            width:190px;
+            height:165px;
+            border:0px solid #fff;
+            background:url(../images/textarea_bg.gif) no-repeat;
+            padding:4px 8px;
+            margin:3px;
+        }
+        .submit{
+            border:0px solid #fff;
+            width:81px;
+            height:28px;
+            margin:3px auto 10px auto;
+            border:1px solid black;
+        }
+        .lab{
+            float:left;
+            width:70px;
+            text-align:right;
+            margin-top:8px;
+            text-transform:uppercase;
+            font-size:14px;
+            font-family:宋体,verdana,arial,helvertica,sans-serif;
+            color:rgb(102,102,102);
+            border:1px solid red;
+        }
+        .textfield{
+            width:200px;
+            border:0px solid #fff;
+            padding:3px 8px;
+            margin:3px;
+            background:url(../images/textfield_bg.gif) no-repeat;
+            color:rgb(255,0,255);
+        }
+        ul,li{list-style: none;}
+        .list li{ clear:both; overflow:hidden;}
+    </style>
+</head>
+
+
+<body>
+<form id = "fieldset" action = "default.asp" method = "post">
+    <h2>联系表单</h2>
+    <ul class="list">
+        <li>
+            <label class="lab" for = "name">姓名 </label>
+            <input name = "name"  id = "name" class = "textfield" />
+        </li>
+        <li>
+            <label class="lab" for = "email">email</label>
+            <input name = "email" id = "email" class = "textfield" />
+        </li>
+        <li>
+            <label class="lab" for = "website">网址</label>
+            <input name = "website" class = "textfield" id = "website" value = "http://"/>
+        </li>
+        <li>
+            <label class="lab" for = "comment">反馈</label>
+            <textarea name = "comment" id = "comment" class = "textarea" rows = 15 cols = 30></textarea>
+        </li>
+        <li>
+            <label class="lab" for = "">&nbsp;</label>
+            <input type= "submit" value = "提交" name = "submit" class ="submit" />
+        </li>
+    </ul>
+</form>
+</body>
+</html>
