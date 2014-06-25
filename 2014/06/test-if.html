@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link id="css1" type="text/css" rel="stylesheet" href="1.css"/>
+    <title>无标题文档</title>
+    <script>
+        window.onload = function(){
+            var obtn = document.getElementById('btn1');
+            var ocss = document.getElementById('css1');
+            obtn.onclick = function(){
+                if(ocss.href.indexOf('1.css') > 0){
+                    ocss.href = '2.css';
+                } else {
+                    ocss.href = '1.css';
+                }
+            }
+        }
+    </script>
+</head>
+file:///desktop/1.css
+<body>
+<input id="btn1" type="button" value="按钮"/>
+</body>
+</html>
