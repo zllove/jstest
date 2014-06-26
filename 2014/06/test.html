@@ -5,10 +5,29 @@
     <title></title>
 </head>
 <body>
+<form name="myform" action="" method="get">
+    <a id="send" href="javascript:void(0)">提交</a>
+</form>
 <script type="text/javascript">
-    var str='background:url(http://xxxxxxx.html)<div>sdfsdfdf</div>background:url(http://1111.html)';
-    var end = str.match(/url\((.*?)\)/g);
-    console.log(end);
+    function foo(){
+        return true;
+    }
+
+    function bar(){
+        console.log('bar');
+    }
+    if(foo){
+        bar();
+    }
+
+    function too(arg,callback){
+        console.log(+arg + 1);
+        callback();
+    }
+
+    too(3, function(){
+        console.log('too');
+    });
 </script>
 </body>
 </html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<a href="http://www.cnblogs.com/hustskyking/p/principle-of-javascript-template.html">tmp</a>
+<div id="test"></div>
+<script type="text/javascript">
+    function tpl(tpl, data){
+        return tpl.replace(/<%([^%>]+)?%>/g, function(s0, s1){
+            return data[s1];
+        });
+    }
+    var str = 'Hei, my name is <%name%>, and I\'m <%info.age%> years old.';
+    var data = {
+        "name" : "Barret Lee",
+        "info" : "20"
+        };
+
+    document.getElementById('test').innerHTML = tpl(str, data);
+
+</script>
+</body>
+</html>
