@@ -1,10 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .a{background:url(img.png) no-repeat 50%}
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
 </head>
 <body>
+<<<<<<< Updated upstream
 <form name="myform" action="" method="get">
     <a id="send" href="javascript:void(0)">提交</a>
 </form>
@@ -28,6 +33,16 @@
     too(3, function(){
         console.log('too');
     });
+=======
+<div class="a">22</div>
+<div id="top">111</div>
+<div class="a">33</div>
+<div class="a">44</div>
+<div class="a">55</div>
+<script type="text/javascript">
+    var d=$('body *:not("#top")');
+    console.log(d);
+>>>>>>> Stashed changes
 </script>
 </body>
 </html>
