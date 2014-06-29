@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .on{background: #f00;}
+        .none{ display:none;}
+    </style>
+</head>
+<body>
+<input type="submit" value="111"/><input type="submit" value="222"/><input type="submit" value="33"/>
+<div>aaa</div>
+<div class="none">bbb</div>
+<div class="none">ccc</div>
+<script type="text/javascript">
+    window.onload=function (){
+        var obtn=document.getElementsByTagName('input');
+        var odiv=document.getElementsByTagName('div');
+        for(var i=0;i<obtn.length;i++){
+            obtn[i].index = i;
+            obtn[i].onclick=function(){
+                for(var i=0;i<obtn.length;i++){
+                    obtn[i].className='';
+                    odiv[i].style.display='none';
+                };
+                this.className='on';
+                odiv[this.index].style.display='block';
+            };
+        } ;
+    };
+</script>
+</body>
+</html>

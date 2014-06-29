@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<a href="http://www.chaozh.com/techniques-from-simple-javascript-templating/">tpl</a>
+<script type="text/javascript">
+    // Simple JavaScript Templating
+    // John Resig - http://ejohn.org/ - MIT Licensed
+    (function(){
+        var cache = {};
+        // tmpl解析函数，参数str通常为模板tag的id，参数data为传入的数据
+        this.tmpl = function tmpl(str, data){
+            //首先判断传入str第一个字符是否为非单词字符，\W等价于[^A-Za-z0-9_]，注意判断条件取反
+            var fn = !/\W/.test(str) ? //为真，说明开头字符为单词字符，即str表示id，则首先查找缓存中的模板函数
+                    cache[str] = cache[str] || //未缓存则并取出模板中的内容运行tmpl解析函数，由于未传入data参数，故返回模板函数指针进行缓存
+                            tmpl(document.getElementById(str).innerHTML) :
+
+                // 为假，说明开头字符为非单词字符，即str表示模板内容，则创建相应的模板函数fn对象
+                    new Function("obj", //fn接受一个参数obj，实质即data
+                            //函数内容，p为需要显示的内容以数组形式保存，内部函数print即调用p的push方法将所有参数压入（该函数用法不明）
+                            "var p=[],print=function(){p.push.apply(p,arguments);};" +
+
+                                //使用with关键字，将参数obj即data带入到执行环境中，这样模板中的变量即可使用
+                                    "with(obj){p.push('" + // 在创建fn函数对象时即将str模板内容转换为完全的js代码，
+                                // 例子：<i class='a'><%=user.id%></i>
+                                    str// 先清除各种换行符以方便后面作为替代符号进行使用
+                                            .replace(/[\r\t\n]/g, " ")// 将模板开头标志替换为缩进符，
+                                        // 例子：<i class='a'>\t=user.id%></i>
+                                            .split("<%").join("\t")// 模板中非脚本部分（即html标签）中的单引号替换为换行符，其中$1即正则中小括号能匹配的内容
+                                        // 例子：<i class=\ra\r>\t=user.id%></i>
+                                            .replace(/((^|%>)[^\t]*)'/g, "$1\r")// 将模板中直接显示的变量提取出来，用单引号与逗号进行分隔,由于字符串使用单引号，故而上一步需要记录
+                                        // 例子：<i class=\ra\r>',user.id,'</i>
+                                            .replace(/\t=(.*?)%>/g, "',$1,'")// 将代替模板开头标志的缩进符替换为push调用结束，注意例子中的\t在上一步已被删去
+                                            .split("\t").join("');")// 将模板结束标志替换为p.push调用开始，意为模板标志之间的html标签即以字符串的形式压入p数组
+                                        // 注意例子中的%>也在显示变量那步被删除
+                                            .split("%>").join("p.push('")// 还原模板中原有字符串部分的单引号
+                                        // 例子：<i class=\\'t\\'>',user.id,'</i>
+                                            .split("\r").join("\\'")
+                                // fn函数返回最终拼接的字符串,p.push('<i class=\\'t\\'>',user.id,'</i>');，注意push方法是可以压入多个元素的
+                                    + "');}return p.join('');");
+
+            //如果传入data，则返回运行模板函数后的最终结果，否则返回模板函数fn指针
+            return data ? fn(data) : fn;
+        };
+    })();
+</script>
+</body>
+</html>
