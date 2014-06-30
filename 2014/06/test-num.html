@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .text{ height:30px; line-height:30px; padding:2px;border:1px solid #ccc;}
+        .text:focus,.on{ border:1px solid #008000;}
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
+</head>
+<body>
+<input class="text" type="text" value=""/>
+<script type="text/javascript">
+    $('input[type="text"]').focus(function(){
+        $(this).addClass('on');
+    });
+    $('input[type="text"]').blur(function(){
+        $(this).removeClass('on');
+    });
+</script>
+</body>
+</html>
