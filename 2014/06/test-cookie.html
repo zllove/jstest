@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+<input type="text" name="" id="text"/> <input id="btn" type="submit" value="set-cookie"/>
+<div id="div"></div>
+<script type="text/javascript">
+    $('#btn').click(function(){
+        var v = $('#text').val();
+        addCookie('value',v,1);
+//        document.cookie = 'value=' + v + ';expires=' + (1 * 24 * 3600 * 1000); //  一天后失效
+        $('#div').html(getCookie('value'));
+    });
+    function addCookie(objName,objValue,objHours){//添加cookie
+        var str = objName + "=" + escape(objValue);
+        if(objHours > 0){//为0时不设定过期时间，浏览器关闭时cookie自动消失
+            var date = new Date();
+            var ms = objHours*3600*1000;
+            date.setTime(date.getTime() + ms);
+            str += "; expires=" + date.toGMTString();
+        }
+        document.cookie = str;
+        alert("添加cookie成功");
+    }
+
+    function getCookie(objName){//获取指定名称的cookie的值
+        var arrStr = document.cookie.split("; ");
+        for(var i = 0;i < arrStr.length;i ++){
+            var temp = arrStr[i].split("=");
+            if(temp[0] == objName) return unescape(temp[1]);
+        }
+    }
+</script>
+</body>
+</html>

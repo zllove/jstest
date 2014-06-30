@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        #div{ border:1px solid #ccc; width:200px;}
+        #div2{background: #f00;}
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+<div id="div">111</div>
+<div id="div2">其实我是警察！</div>
+<script type="text/javascript">
+    $('#div').click(function(){
+        $(this).css({
+            width : function(index, value){
+                $('#div2').hide();
+                return parseInt(value) * 2;
+            }
+        })
+    });
+</script>
+</body>
+</html>
