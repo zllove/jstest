@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
+</head>
+<body>
+<input name="user_id" class="input-text" id="userId" type="text">
+<input name="user_password" class="input-text" id="userPassword" autocomplete="off" type="password">
+<script type="text/javascript">
+    var str = 'http://127.0.0.1/test/test.html?userid=qwe123&userpw=123qwe';
+    // var str = window.location.search;
+    function getQueryStringArgs(q){
+        var qs = q.split('?')[1] || (location.search.length > 0 ? location.search.substring(1) : ''),
+                args = {},
+                items = qs.length ? qs.split('&') : [],
+                item = null,
+                name = null,
+                value = null,
+                i = 0,
+                len = items.length;
+
+        for(i = 0; i < len; i++){
+            item = items[i].split('=');
+            name = decodeURIComponent(item[0]);
+            value = decodeURIComponent(item[1]);
+            if(name.length){
+                args[name] = value;
+            }
+        }
+        return args;
+    }
+    var r = getQueryStringArgs(str);
+    $('#userId').val(r.userid);
+    $('#userPassword').val(r.userpw);
+</script>
+</body>
+</html>
