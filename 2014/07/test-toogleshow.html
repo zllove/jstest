@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        #b{ display:none;}
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
+</head>
+<body>
+<div class="a">aaa</div>
+<div class="a">aaa222</div>
+<div id="b">bbb</div>
+<script type="text/javascript">
+    $.fn.toggleShow = function(sub, callback){
+        var tmp = null;
+
+        $(this).on('click', function(){
+            if(tmp != this){
+                sub.show();
+            } else {
+                sub.toggle();
+            }
+            tmp = this;
+            callback && callback();
+        })
+    }
+
+    $('.a').toggleShow($('#b'));
+</script>
+</body>
+</html>
