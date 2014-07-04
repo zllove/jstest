@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .a{ border:1px dashed #ccc;}
+    </style>
+</head>
+<body>
+<a href="https://gist.github.com/jikeytang/c5cd68071c310c7fedfa">gist</a>
+<script type="text/javascript">
+    /*
+    (function(qq){
+        var arr = qq.split(''),re=[];
+        while(arr.length){
+            re = re.concat(arr.splice(0,1));
+            arr = arr.concat(arr.splice(0,1));
+        }
+        console.log(re.join(''));
+    })('123456');
+    */
+var str='123456';
+var arr1=[];
+var arr2=[];
+for (var i=0; i<str.length; i++){
+    if(i%2){
+        arr2.push(str.charAt(i));
+    }else{
+        arr1.push(str.charAt(i));
+    }
+}
+alert(arr1.concat(arr2).join(''));
+</script>
+</body>
+</html>

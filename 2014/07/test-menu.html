@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    $(document).ready(function(e) {
+        $('.hx-il-dlx').mousemove(function()
+        {
+            //$('li.third-item').next().css('background-color', 'red');
+            $('.hx-ild-dt', $(this)).next().css('display','block');
+        });
+        $('.hx-il-dlx').mouseout(function(){
+            $('.hx-ild-dt', $(this)).next().css('display','none');
+        })
+
+
+    });
+
+</script>
+<div class="hx-inpu-tj">
+    <div class="hx-itxt left">
+        <dl class="hx-il-dlx">
+            <dt class="hx-ild-dt"><img src="images/temp/tes11.jpg" width="195" height="195" alt="图片" longdesc="http://www.hx110.com" /></dt>
+            <dd class="hx-ild-dd">
+                <p>最近<em>7195</em>人已购买</p>
+                <p>
+                    使用感受(21) <span class="icon  icon-star3"> </span><span class="icon  icon-star3"> </span><span class="icon  icon-star3"> </span>
+                    <span class="icon  icon-star2"> </span><span class="icon icon-star"> </span>
+                </p>
+
+            </dd>
+        </dl>
+        <dl class="hx-il-dlx">
+            <dt class="hx-ild-dt"><img src="images/temp/tes11.jpg" width="195" height="195" alt="图片" longdesc="http://www.hx110.com" /></dt>
+            <dd class="hx-ild-dd">
+                <p>最近<em>7195</em>人已购买</p>
+                <p>
+                    使用感受(21) <span class="icon  icon-star3"> </span><span class="icon  icon-star3"> </span><span class="icon  icon-star3"> </span>
+                    <span class="icon  icon-star2"> </span><span class="icon icon-star"> </span>
+                </p>
+            </dd>
+        </dl>
+    </div>
+</div>
+</body>
+</html>

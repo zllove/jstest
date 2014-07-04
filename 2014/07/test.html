@@ -3,17 +3,25 @@
 <head>
     <meta charset="utf-8"/>
     <title>test</title>
+    <style type="text/css">
+        .a span{ color:#ff0000;}
+        .a em{ color:#0000ff;}
+        .b{ color:#008000;}
+        .b span{ color:orange;}
+        .b span em{ color:#1e90ff;}
+    </style>
 </head>
 <body>
-<p>
+<p class="a">
     <span>测试</span>
     紧跟
     <em>前面</em>
     的"测试"
 </p>
-<p>
-    <span>
-        <em></em>
+<p class="b">
+    测试
+    <span>里面
+        <em>最里面</em>
     </span>
 </p>
 </body>
