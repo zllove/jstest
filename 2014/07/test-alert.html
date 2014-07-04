@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title></title>
+    <link rel="stylesheet" href="jquery.mobile.custom.structure.css"/>
+    <style type="text/css">
+        *{
+            margin: 0px;
+            padding:0px;
+        }
+        .back{
+            background:url("img/P1.jpg");
+            background-size:100% ;
+            background-repeat:no-repeat;
+
+        }
+        img{
+            display: block;
+            width:100%;
+            height:100%;
+
+        }
+        .pos{
+            position: absolute;
+            top: 0px;
+            left:0px;
+        }
+    </style>
+    <script src="js/jquery.js"></script>
+    <script src="jquery.mobile.custom.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            setInterval(function(){
+                if($(".light").css("opacity")==0){
+                    $(".light").animate({opacity:1},1000)
+                }else{
+                    $(".light").animate({opacity:0},1000)
+                }
+            },1001)
+        })
+
+    </script>
+</head>
+<body>
+<div class="back">
+    <img class="light" id="bg" src="img/P1-light.jpg" style="width:100%;height:100%;" alt=""/>
+    <canvas id="cvs" class='pos'  width="1200px" height="700px" style="z-index:2;" />
+    /<img src="123.jpg" id="tulip" style="display:none;">
+    <script></script>
+    <script>
+        var image=document.getElementById("tulip");
+        var mydiv = document.getElementById('bg');
+
+        //alert(111)
+
+        // var width = window.getComputedStyle(mydiv , null)['width'];
+
+        //alert('firefox:' + width);
+        alert(111);
+
+
+        image.onload=function(){
+            var cvs = document.getElementById("cvs"),
+                    ctx = cvs.getContext("2d");
+            // ctx.globalAlpha = 0.6;
+            ctx.drawImage(image, 0, 0,cvs.width,cvs.height);
+        }
+        // image.src = "123.jpg";
+        //image.src = "123.jpg";
+        //ctx.fillStyle = "#999";
+        //ctx.fillRect(0,0,cvs.width,cvs.height);
+
+        //event
+        //document.getElementById("bg").onmousemove = function(){
+        //    return false;
+        // };
+        /* //设置透明通道和覆盖方式
+         ctx = cvs.getContext("2d");
+         ctx.fillStyle = "white";
+         ctx.globalAlpha = 1;
+         ctx.globalCompositeOperation = "destination-out";
+         document.addEventListener("touchmove", function(e) {
+
+         e.preventDefault();
+
+         }, false);
+         document.addEventListener('touchmove',function(ev){
+         // if(ev.which==1){
+         var x = ev.touches[0].clientX,
+         y = ev.touches[0].clientY;
+         ctx.beginPath();
+         ctx.arc(x,y,30,0,Math.PI*2);
+         ctx.closePath();
+         ctx.fill();
+         // }
+         },false)*/
+
+    </script>
+</div>
+</body>
+</html>

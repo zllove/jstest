@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<a href="http://bbs.csdn.net/topics/390826958">json合并</a>
+<script type="text/javascript">
+    var s = [
+        {"name" : "tom", "level" : 5, "hobby" : "play"},
+        {"name" : "tom", "level" : 3, "hobby" : "eee"},
+        {"name" : "jack", "level" : 7, "hobby" : "play"},
+        {"name" : "jack", "level" : 77, "hobby" : "plttay"}
+    ];
+    sumData(s);
+    function sumData(data) {
+
+        var ds = {};
+        for (var i in data) {
+            if (ds[data[i]["name"]] == null) {
+                ds[data[i]["name"]] = data[i];
+            } else {
+                ds[data[i]["name"]]["level"] = ds[data[i]["name"]]["level"] + data[i]["level"];
+                ds[data[i]["name"]]["hobby"] = ds[data[i]["name"]]["hobby"] + "," + data[i]["hobby"];
+            }
+        }
+        alert(JSON.stringify(ds));
+        var s = beanToAaary(ds);
+        alert(JSON.stringify(s));
+        return s;
+    }
+
+    function beanToAaary(be) {
+        var array = [];
+        for (var i in be)
+            array.push(be[i]);
+
+        return array;
+
+    }
+</script>
+</body>
+</html>
