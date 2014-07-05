@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        #ilv1{ position:absolute; display:none; width:300px; height:200px; margin:-100px 0 0 -150px; border:1px solid #ccc;}
+    </style>
+</head>
+<body>
+<div id="ilv1"></div>
+<script type="text/javascript">
+    function show(){
+        var ilv1Div = document.getElementById("ilv1");
+        var centerDiv = document.getElementById("centerBg");
+        var ilv1Left = (document.documentElement.clientWidth - ilv1Div.clientWidth) / 2 + "px";
+        var ilv1Top = (document.documentElement.clientHeight - ilv1Div.clientHeight) / 2 + "px";
+        ilv1Div.style.display = 'block';
+        ilv1Div.style.left = ilv1Left;
+        ilv1Div.style.top = ilv1Top;
+
+    }
+    setTimeout(function(){
+        show();
+    },1000);
+    window.onresize=show;
+</script>
+</body>
+</html>
