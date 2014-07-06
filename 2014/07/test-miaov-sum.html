@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<input type="text" name="" id="txt1"/>
+<input type="text" name="" id="txt2"/>
+<input type="button" name="" id="btn1" value="求和" />
+<script type="text/javascript">
+    var txt1 = document.getElementById('txt1');
+    var txt2 = document.getElementById('txt2');
+    var btn1 = document.getElementById('btn1');
+    btn1.onclick = function (){
+        var n1 = parseInt(txt1.value);
+        var n2 = parseInt(txt2.value);
+        if(isNaN(n1)){
+            console.log('输入的第一个值有问题');
+        } else if(isNaN(n2)){
+            console.log('输入的第二个值有问题');
+        } else {
+            console.log(n1 + n2);
+        }
+    }
+</script>
+</body>
+</html>
