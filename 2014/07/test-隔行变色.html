@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .even{background: #ccc;}
+    </style>
+</head>
+<body>
+<table id="tab">
+    <tr>
+        <td>111</td>
+        <td>111</td>
+    </tr>
+    <tr>
+        <td>111</td>
+        <td>111</td>
+    </tr>
+    <tr>
+        <td>111</td>
+        <td>111</td>
+    </tr>
+</table>
+<table id="tab2">
+    <tr>
+        <td>111</td>
+        <td>111</td>
+    </tr>
+    <tr>
+        <td>111</td>
+        <td>111</td>
+    </tr>
+    <tr>
+        <td>111</td>
+        <td>111</td>
+    </tr>
+    <tr>
+        <td>111</td>
+        <td>111</td>
+    </tr>
+    <tr>
+        <td>111</td>
+        <td>111</td>
+    </tr>
+</table>
+<script type="text/javascript">
+    function setCls(tb){
+        var aLi = tb.getElementsByTagName('tr');
+        for(var i = 0; i < aLi.length; i++){
+            if(i %2 == 0){
+                aLi[i].className = 'even';
+            } else {
+                aLi[i].className = '';
+            }
+        }
+    }
+
+    function setTab(){
+        var tabs = document.getElementsByTagName('table');
+        for(var i = 0; i < tabs.length; i++){
+            setCls(tabs[i]);
+        }
+    }
+
+    setTab();
+</script>
+</body>
+</html>

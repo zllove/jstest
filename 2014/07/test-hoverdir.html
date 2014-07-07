@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    !function ($, b) {
+        "use strict";
+        $.HoverDir = function (b, c) {
+            this.$el = $(c), this._init(b)
+        }, $.HoverDir.defaults = {
+            speed : 300,
+            easing : "ease",
+            hoverDelay : 0,
+            inverse : !1
+        }, $.HoverDir.prototype = {
+            _init : function (b) {
+                this.options = $.extend(!0, {}, $.HoverDir.defaults, b), this.transitionProp = "all " + this.options.speed + "ms " + this.options.easing, this.support = Modernizr.csstransitions, this._loadEvents()
+            },
+            _loadEvents : function () {
+                var b = this;
+                this.$el.on("mouseenter.hoverdir, mouseleave.hoverdir", function (c) {
+                    var d = $(this), e = d.find("div"), f = b._getDir(d, {
+                        x : c.pageX,
+                        y : c.pageY
+                    }), g = b._getStyle(f);
+                    "mouseenter" === c.type ? (e.hide().css(g.from), clearTimeout(b.tmhover), b.tmhover = setTimeout(function () {
+                        e.show(0, function () {
+                            var c = $(this);
+                            b.support && c.css("transition", b.transitionProp), b._applyAnimation(c, g.to, b.options.speed)
+                        })
+                    }, b.options.hoverDelay)) : (b.support && e.css("transition", b.transitionProp), clearTimeout(b.tmhover), b._applyAnimation(e, g.from, b.options.speed))
+                })
+            },
+            _getDir : function ($, b) {
+                var c = $.width(), d = $.height(), e = (b.x - $.offset().left - c / 2) * (c > d ? d / c : 1), f = (b.y - $.offset().top - d / 2) * (d > c ? c / d : 1), g = Math.round((Math.atan2(f, e) * (180 / Math.PI) + 180) / 90 + 3) % 4;
+                return g
+            },
+            _getStyle : function ($) {
+                var b, c, d = {
+                    left : "0px",
+                    top : "-100%"
+                }, e = {
+                    left : "0px",
+                    top : "100%"
+                }, f = {
+                    left : "-100%",
+                    top : "0px"
+                }, g = {
+                    left : "100%",
+                    top : "0px"
+                }, h = {
+                    top : "0px"
+                }, i = {
+                    left : "0px"
+                };
+                switch ($) {
+                    case 0:
+                        b = this.options.inverse ? e : d, c = h;
+                        break;
+                    case 1:
+                        b = this.options.inverse ? f : g, c = i;
+                        break;
+                    case 2:
+                        b = this.options.inverse ? d : e, c = h;
+                        break;
+                    case 3:
+                        b = this.options.inverse ? g : f, c = i
+                }
+                return {
+                    from : b,
+                    to : c
+                }
+            },
+            _applyAnimation : function (b, c, d) {
+                $.fn.applyStyle = this.support ? $.fn.css : $.fn.animate, b.stop().applyStyle(c, $.extend(!0, [], {
+                    duration : d + "ms"
+                }))
+            }
+        };
+        var c = function ($) {
+            b.console && b.console.error($)
+        };
+        $.fn.hoverdir = function (b) {
+            var d, e = $.data(this, "hoverdir");
+            return "string" == typeof b ? (d = Array.prototype.slice.call(arguments, 1), this.each(function () {
+                return e ? $.isFunction(e[b]) && "_" !== b.charAt(0) ? (e[b].apply(e, d), void 0) : (c("no such method '" + b + "' for hoverdir instance"), void 0) : (c("cannot call methods on hoverdir prior to initialization; attempted to call method '" + b + "'"), void 0)
+            })) : this.each(function () {
+                e ? e._init() : e = $.data(this, "hoverdir", new $.HoverDir(b, this))
+            }), e
+        }
+    }(jQuery, window)
+</script>
+</body>
+</html>

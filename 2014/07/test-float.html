@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<div id="img" style="position:absolute;z-index:9999;">
+<a href="#none" target="_blank"><img border=0 src="http://y2.ifengimg.com/2014/07/07/13523459.jpg" width="190" height="40"></a>
+</div>
+<script>
+    var xPos = document.body.clientWidth - 20;
+    var yPos = document.body.clientHeight / 2;
+    var step = 1;
+    var delay = 5;
+    var height = 0;
+    var Hoffset = 0;
+    var Woffset = 0;
+    var yon = 0;
+    var xon = 0;
+    var pause = true;
+    var interval;
+    document.getElementById('img').style.top = yPos;
+    function changePos() {
+        width = document.documentElement.clientWidth || document.body.clientWidth;
+        height = document.documentElement.clientHeight || document.body.clientHeight;
+        Hoffset = img.offsetHeight;
+        Woffset = img.offsetWidth;
+        img.style.left = xPos + document.body.scrollLeft + 'px';
+        img.style.top = yPos + document.body.scrollTop + 'px';
+        if (yon) {
+            yPos = yPos + step;
+        } else {
+            yPos = yPos - step;
+        }
+        if (yPos < 0) {
+            yon = 1;
+            yPos = 0;
+        }
+        if (yPos >= (height - Hoffset)) {
+            yon = 0;
+            yPos = (height - Hoffset);
+        }
+        if (xon) {
+            xPos = xPos + step;
+        } else {
+            xPos = xPos - step;
+        }
+        if (xPos < 0) {
+            xon = 1;
+            xPos = 0;
+        }
+        if (xPos >= (width - Woffset)) {
+            xon = 0;
+            xPos = (width - Woffset);
+        }
+    }
+    function start() {
+        img.visibility = "visible";
+        interval = setInterval(changePos, delay);
+    }
+    start();
+    img.onmouseover = function() {
+        clearInterval(interval);
+        interval = null;
+    }
+    img.onmouseout = function() {
+        interval = setInterval(changePos, delay);
+    }
+</script>
+</body>
+</html>
