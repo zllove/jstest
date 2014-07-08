@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+    <style>
+        div {float:left; margin:10px;}
+        #div1 {width:50px; height:50px; background:red;}
+        #div2 {width:250px; height:180px; background:#CCC; display:none;}
+    </style>
+    <script>
+    </script>
+</head>
+
+<body>
+<div id="div1"></div>
+<div id="div2"></div>
+<script type="text/javascript">
+    var div1 = document.getElementById('div1');
+    var div2 = document.getElementById('div2');
+    var timer = null;
+    div2.onmouseover = div1.onmouseover = function(){
+        clearTimeout(timer);
+        div2.style.display = 'block';
+    }
+    div2.onmouseout = div1.onmouseout = function(){
+        timer = setTimeout(function(){
+            div2.style.display = 'none';
+        }, 500);
+    }
+</script>
+</body>
+</html>
