@@ -2,7 +2,12 @@ seajs.config({
     base : './js/',
     alias : {
         'jquery' : 'jquery-1.3.2'
+//        'plugins' : 'plugins'
     }
 });
 
-seajs.use('home');
+define('team', function(require){
+    require('plugins')();
+    $('a').ari();
+});
+seajs.use('team');
