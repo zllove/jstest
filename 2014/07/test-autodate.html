@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<dov id="div"></dov>
+<script type="text/javascript">
+
+    function toDouble(n){
+        return n < 10 ? '0' + n : n;
+    }
+    function trick(){
+        var d = new Date();
+        var str = d.getFullYear() + '年' + toDouble(d.getMonth() + 1) + '月' + toDouble(d.getDate()) + '日' + toDouble(d.getHours()) + '点' +
+        toDouble(d.getMinutes()) + '分' + toDouble(d.getSeconds()) + '秒';
+        document.getElementById('div').innerHTML = str;
+    }
+    trick();
+    setInterval(trick, 1000);
+</script>
+</body>
+</html>
