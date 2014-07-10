@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+<input type="text" name="" id="name"/>
+<input type="text" name="" id="age"/> <input id="btn" type="button" value="增加"/>
+<table id="tab">
+    <tr>
+        <td>序号</td>
+        <td>姓名</td>
+        <td>年龄</td>
+        <td>操作</td>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td>jikey</td>
+        <td>30</td>
+        <td><a href="javascript:;">删除</a></td>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td>jikey</td>
+        <td>30</td>
+        <td><a href="javascript:;">删除</a></td>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td>jikey</td>
+        <td>30</td>
+        <td><a href="javascript:;">删除</a></td>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td>jikey</td>
+        <td>30</td>
+        <td><a href="javascript:;">删除</a></td>
+    </tr>
+</table>
+<script type="text/javascript">
+    var name = document.getElementById('name');
+    var age = document.getElementById('age');
+    var btn = document.getElementById('btn');
+    var tab = document.getElementById('tab');
+    btn.onclick = function(){
+        var tr = document.createElement('tr');
+        var td = document.createElement('td');
+        td.innerHTML = tab.tBodies[0].rows.length++;
+        tr.appendChild(td);
+
+        var td = document.createElement('td');
+        td.innerHTML = name.value;
+        tr.appendChild(td);
+
+        var td = document.createElement('td');
+        td.innerHTML = age.value;
+        tr.appendChild(td);
+
+        tab.tBodies[0].appendChild(tr);
+    }
+
+</script>
+</body>
+</html>
