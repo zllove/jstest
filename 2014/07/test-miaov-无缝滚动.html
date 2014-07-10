@@ -29,8 +29,7 @@
     var ul = document.getElementById('ul');
     var li = ul.getElementsByTagName('li');
     var a = document.getElementsByTagName('a');
-    var speed = -2;
-    var timer = null;
+    var speed = -4;
     ul.innerHTML += ul.innerHTML;
     ul.style.width = (li[0].offsetWidth + 10) * li.length + 'px';
 
@@ -46,7 +45,7 @@
         ul.style.left = ul.offsetLeft + speed + 'px';
     }
 
-    timer = setInterval(move, 30);
+    var timer = setInterval(move, 30);
 
     ul.onmouseover = function(){
         clearInterval(timer);
@@ -55,10 +54,10 @@
         timer = setInterval(move, 30);
     }
     a[0].onclick = function(){
-        speed = -2;
+        speed = -4;
     }
     a[1].onclick = function(){
-        speed = 2;
+        speed = 4;
     }
 
 </script>
