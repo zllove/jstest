@@ -47,10 +47,11 @@
     var age = document.getElementById('age');
     var btn = document.getElementById('btn');
     var tab = document.getElementById('tab');
+    var id = tab.tBodies[0].rows.length;
     btn.onclick = function(){
         var tr = document.createElement('tr');
         var td = document.createElement('td');
-        td.innerHTML = tab.tBodies[0].rows.length++;
+        td.innerHTML = id++;
         tr.appendChild(td);
 
         var td = document.createElement('td');
@@ -60,6 +61,15 @@
         var td = document.createElement('td');
         td.innerHTML = age.value;
         tr.appendChild(td);
+
+        var td = document.createElement('td');
+        td.innerHTML = '<a href="javascript:;">删除</a>';
+        tr.appendChild(td);
+
+        var a = td.getElementsByTagName('a')[0];
+        a.onclick = function(){
+            tab.tBodies[0].removeChild(this.parentNode.parentNode);
+        }
 
         tab.tBodies[0].appendChild(tr);
     }
