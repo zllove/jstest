@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        #div{ position:absolute; width:100px; height:100px;background: #f00;}
+    </style>
+</head>
+<body>
+<input id="btn" type="button" value="startMove" onclick="startMove()"/>
+<div id="div"></div>
+<script type="text/javascript">
+    var timer = null;
+    function startMove(){
+        var div = document.getElementById('div')
+        timer = setInterval(function(){
+            if(div.offsetLeft > 300){
+                clearInterval(timer);
+            } else {
+                div.style.left = div.offsetLeft + 10 + 'px'
+            }
+        }, 30);
+    }
+</script>
+</body>
+</html>

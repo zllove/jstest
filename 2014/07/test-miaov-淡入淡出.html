@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        #div{ width:200px; height:200px;background: #f00;filter:alpha(opacity:30);opacity:0.3;}
+    </style>
+</head>
+<body>
+<div id="div"></div>
+<script type="text/javascript">
+    var timer = null
+    var alpha = 30
+    function startMove(target){
+        var div = document.getElementById('div')
+        clearInterval(timer)
+        timer = setInterval(function(){
+            var speed = 0
+            if(alpha < target){
+                speed = 10
+            } else {
+                speed = -10
+            }
+            if(alpha == target){
+                clearInterval(timer)
+            } else {
+                alpha += speed
+                div.style.filter = 'alpha(opacity:' + alpha + ')'
+                div.style.opacity = alpha / 100
+            }
+        },30)
+    }
+
+    var div = document.getElementById('div')
+    div.onmouseover = function(){
+        startMove(100)
+    }
+    div.onmouseout = function(){
+        startMove(30)
+    }
+</script>
+</body>
+</html>
