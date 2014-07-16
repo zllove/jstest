@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        div{ width:200px; height:200px; float:left;background: #f00; margin:10px; border:10px solid #ccc;}
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<div id="div2"></div>
+<div id="div3"></div>
+<span></span>
+<script type="text/javascript">
+    function getStyle(obj, name){
+        if(obj.currentStyle){
+            return obj.currentStyle[name];
+        } else {
+            return getComputedStyle(obj, false)[name];
+        }
+    }
+
+    var div = document.getElementsByTagName('div')
+    var span = document.getElementsByTagName('span')[0]
+    for(var i = 0; i < div.length; i++){
+        div[i].onmouseover = function(){
+            startMove2(this, 400)
+        }
+        div[i].onmouseout = function(){
+            startMove2(this, 200)
+        }
+    }
+
+    function startMove(obj, target){
+        clearInterval(obj.timer)
+        obj.timer = setInterval(function(){
+            var cur = parseInt(getStyle(obj, 'width'))
+            var speed = (target - cur) / 8
+            speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed)
+
+            if(target == cur){
+                clearInterval(obj.timer)
+            } else {
+                obj.style.width = cur + speed + 'px'
+            }
+        }, 30)
+    }
+    function startMove2(obj, target){
+        clearInterval(obj.timer)
+        obj.timer = setInterval(function(){
+            var cur = parseInt(getStyle(obj, 'height'))
+            var speed = (target - cur) / 8
+            speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed)
+
+            if(target == cur){
+                clearInterval(obj.timer)
+            } else {
+                obj.style.height = cur + speed + 'px'
+            }
+        }, 30)
+    }
+</script>
+</body>
+</html>
