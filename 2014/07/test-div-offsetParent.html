@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        .b{ border:1px solid #f00;}
+        .b div{ margin-left:20px; border:1px solid #ccc; height:130px;}
+        #a{ margin-left:100px;}
+    </style>
+</head>
+<body>
+<a href="http://www.cnblogs.com/xiaohui108/archive/2011/05/27/2059991.html">offsetParent </a>
+<p>offsetParent:是指元素最近的定位（relative,absolute）祖先元素，如果没有祖先元素是定位的话，会指向body元素</p>
+<p>作用：元素的偏移量（offsetLeft,offsetTop）就是以这个祖先元素为参考点的</p>
+<div class="b" style="position:relative;">
+    <div>bbb</div>
+    <div id="a">aaa</div>
+</div>
+<script type="text/javascript">
+    var a = document.getElementById('a')
+//    var b = a.offsetParent
+//    var c = a.offsetLeft;
+//    console.log(b);
+//    console.log(c);
+
+    function offsetLeft(obj){
+        var left = obj.offsetLeft;
+        var parent = obj.offsetParent;
+        while(parent != null){
+            left += parent.offsetLeft;
+            parent = parent.offsetParent;
+        }
+        return left;
+    }
+
+    var d = offsetLeft(a)
+    console.log(d);
+</script>
+</body>
+</html>
