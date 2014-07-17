@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        #div1{ width:200px; height:200px;background: #f00; position:absolute;}
+    </style>
+    <script type="text/javascript">
+        function getPos(e){
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+            var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft
+
+            return { x : scrollLeft + e.clientX, y : scrollTop + e.clientY };
+        }
+        document.onmousemove = function(ev){
+            ev = ev || event
+
+            var div = document.getElementById('div1')
+            var pos = getPos(ev);
+            div.style.left = pos.x + 'px'
+            div.style.top = pos.y + 'px'
+        }
+    </script>
+</head>
+<body style="height: 2000px;">
+<div id="div1"></div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        .current{ background-color:#aecdee }
+    </style>
+</head>
+<body>
+<input id="input" type="text">
+<ul id="ul">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+    <li>10</li>
+</ul>
+<div id="test"></div>
+<div id="test2"></div>
+<script type="text/javascript">
+    function $(id){
+        return typeof id === "string" ? document.getElementById(id) : id;
+    }
+    (function(){
+        var input = $("input");
+        var list = $("ul").getElementsByTagName("li");
+        var index = -1;
+        var time;
+        var flag = true;
+
+        function sIndex(){
+            index = index >= 9 ? -1 : index + 1;
+            return index;
+        }
+
+        document.onkeydown = function(e){
+            if(flag){
+                e = e || window.event;
+                var tmpTime = new Date;
+                var fn = function(x){
+                    if(x){
+                        flag = true;
+                        return false;
+                    }
+                    if(e.keyCode == 40){
+                        sIndex();
+                        for(var i = 0, len = list.length; i < len; i++){
+                            list[i].className = i == index ? "current" : "";
+                        }
+                    }
+
+                }
+                if(time && tmpTime - time < 100){ //100 ms
+                    setTimeout(function(){
+                        fn(true);
+                    }, 500);
+                    flag = false;
+                } else {
+                    fn();
+                }
+                time = tmpTime;
+            }
+        };
+    })();
+</script>
+</body>
+</html>
+
