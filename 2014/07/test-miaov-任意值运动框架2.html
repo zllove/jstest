@@ -4,11 +4,13 @@
     <meta charset="utf-8"/>
     <title>test</title>
     <style type="text/css">
-        div{ width:200px; height:200px; float:left;background: #f00; margin:10px;filter:alpha(opacity:30);opacity:0.3}
+        div{ width:200px; height:200px; float:left;background: #f00; margin:10px; border:10px solid #ccc;color: #fff;}
     </style>
 </head>
 <body>
 <div id="div1"></div>
+<div id="div2"></div>
+<div id="div3">我是一个兵</div>
 <span></span>
 <script type="text/javascript">
     function getStyle(obj, name){
@@ -27,29 +29,33 @@
         startMove(this, 'width', 200)
     }
 
+    var div2 = document.getElementById('div2')
+    div2.onmouseover = function(){
+        startMove(this, 'height', 400)
+    }
+    div2.onmouseout = function(){
+        startMove(this, 'height', 200)
+    }
+
+    var div3 = document.getElementById('div3')
+    div3.onmouseover = function(){
+        startMove(this, 'fontSize', 40)
+    }
+    div3.onmouseout = function(){
+        startMove(this, 'fontSize', 14)
+    }
 
     function startMove(obj, attr, target){
         clearInterval(obj.timer)
         obj.timer = setInterval(function(){
-            var cur = 0
-            if(attr == 'opacity'){
-                cur = Math.round(parseFloat(getStyle(obj, attr)) * 100);
-            } else {
-                cur = parseInt(getStyle(obj, attr))
-            }
+            var cur = parseInt(getStyle(obj, attr))
             var speed = (target - cur) / 8
             speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed)
 
             if(target == cur){
                 clearInterval(obj.timer)
             } else {
-                if(attr == 'opacity'){
-                    obj.style.filter = 'alpha(opacity:' + (cur + speed) + ')'
-                    obj.style.opacity = (cur + speed) / 100
-                } else {
-                    obj.style[attr] = cur + speed + 'px'
-                }
-
+                obj.style[attr] = cur + speed + 'px'
             }
         }, 30)
     }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html onclick="alert('html')">
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        div{ padding:100px;}
+    </style>
+</head>
+<body onclick="alert('body')">
+<div style="background: #ccc;" onclick="alert(this.style.background)">
+    <div style="background: green;" onclick="alert(this.style.background)">
+        <div style="background:red;" onclick="alert(this.style.background)"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    document.onclick = function(){
+        alert('document');
+    }
+</script>
+</body>
+</html>
