@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+<input type="text" name="" id="txt1"/>
+<script type="text/javascript">
+    var txt = document.getElementById('txt1')
+    txt.onkeydown = function(e){
+        e = e || event
+//        alert(e.keyCode);
+        //  不是退格，左键，非数字  不等于这些键就进去
+        if(e.keyCode != 8 && e.keyCode != 37  && (e.keyCode < 48 || e.keyCode > 57)){
+            console.log(2222);
+            return false;
+        }
+    }
+</script>
+</body>
+</html>
