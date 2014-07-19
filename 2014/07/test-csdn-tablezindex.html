@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        .tab{border-collapse:collapse; border:1px solid #ccc;}
+        .tab td{ height:30px; border:1px solid #ccc; padding:3px;}
+        .super .parent{ position:relative;height:58px; overflow:visible; }
+        .super .sub{ position:absolute;background: #f5e6c2; border:1px solid #f09134;box-shadow:1px 1px 1px 1px #f0f0f0}
+        .parent{z-index:2; height:30px; line-height:30px; background:#ccc;overflow: hidden;}
+        .sub{z-index:100; width:300px; background:#f1f4f6}
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+<div style="height:300px">
+    <table id="tab" class="tab" border="1" style=" width:300px;border:1px solid black">
+        <tr>
+            <td width="200" height="30">
+                <div class="parent">
+                    <div class="sub">
+                        <p>锁了门 关了窗 息了灯</p>
+                        <p>闭了眼 什么正走掉</p>
+                        <p>看不见 听不着 想不成</p>
+                        <p>摸不到 两个人的依靠</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="parent">
+                    <div class="sub">
+                        <p>漫漫长夜里 未来日子里</p>
+                        <p>亲爱的你别为我哭泣</p>
+                        <p>前方的路虽然太凄迷</p>
+                        <p>请在笑容里为我祝福</p>
+                        <p>虽然迎著风 虽然下著雨</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="parent">
+                    <div class="sub">
+                        <p>轻轻的我将离开你</p>
+                        <p>请将眼角的泪拭去</p>
+                        <p>漫漫长夜里 未来日子里</p>
+                        <p>亲爱的你别为我哭泣</p>
+                        <p>前方的路虽然太凄迷</p>
+                        <p>请在笑容里为我祝福</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="parent">
+                    <div class="sub">
+                        <p>你要保重你自己</p>
+                        <p>你问我何时归故里</p>
+                        <p>我也轻声地问自己</p>
+                        <p>不是在此时 不知在何时</p>
+                        <p>我想大约会是在冬季</p>
+                        <p>不是在此时 不知在何时</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="parent">
+                    <div class="sub">
+                        <p>前方的路虽然太凄迷</p>
+                        <p>请在笑容里为我祝福</p>
+                        <p>虽然迎著风 虽然下著雨</p>
+                        <p>我在风雨之中念著你</p>
+                        <p>没有你的日子里</p>
+                        <p>我会更加珍惜自己</p>
+                        <p>没有我的岁月里</p>
+                        <p>你要保重你自己</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="parent">
+                    <div class="sub">
+                        <p>多么熟悉的声音</p>
+                        <p>陪我多少年风和雨</p>
+                        <p>从来不需要想起</p>
+                        <p>永远也不会忘记</p>
+                        <p>没有天哪有地</p>
+                        <p>没有地哪有家</p>
+                        <p>没有家哪有你</p>
+                        <p>没有你哪有我</p>
+                        <p>假如你不曾养育我</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<script type="text/javascript">
+    $('#tab tr').hover(function(){
+        $(this).addClass('super');
+    }, function(){
+        $(this).removeClass('super');
+    })
+</script>
+</body>
+</html>
