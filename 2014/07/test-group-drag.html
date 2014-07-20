@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JS Bin</title>
+    <style tyep="text/css">
+        * { margin: 0; padding: 0; }
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            cursor: move;
+        }
+    </style>
+    <script type="text/javascript">
+        var base = {
+            getId: function (id) {
+                return document.getElementById(id);
+            },
+            addEvent: function (element, type, fn) {
+                if (element.addEventListener) {
+                    element.addEventListener(type, fn, false);
+                }
+                else if (element.attachEvent) {
+                    element.attachEvent("on" + type, fn);
+                }
+                else {
+                    element["on" + type] = fn;
+                }
+            },
+            removeEvent: function (element, type, fn) {
+                if (element.removeEventListener) {
+                    element.removeEventListener(type, fn, false);
+                }
+                else if (element.detachEvent) {
+                    element.detachEvent("on" + type, fn);
+                }
+                else {
+                    element["on" + type] = null;
+                }
+            },
+            unDefaultEvent: function (event) {
+                if (event && event.preventDefault) {
+                    event.preventDefault();
+                }
+                else {
+                    event.returnValue = false;
+                }
+            }
+        }
+
+        window.onload = function() {
+            function Tuozhuai(opt) {
+                return this.init.apply(this, arguments);
+            }
+            Tuozhuai.prototype = {
+                constructor: Tuozhuai,
+                disX : 0,
+                disY : 0,
+                down : function(ev){
+                    var _this = this;
+                    this.moveHandle = function (event) {
+                        _this.move(event);
+                    };
+
+                    this.upHandle = function () {
+                        _this.up();
+                    };
+
+                    var ev = ev || window.event;
+                    this.disX = ev.clientX - this.div.offsetLeft;
+                    this.disY = ev.clientY - this.div.offsetTop;
+
+                    base.addEvent(document, 'mousemove', this.moveHandle);
+                    base.addEvent(document, 'mouseup', this.upHandle);
+                    return false;
+                },
+                move : function(ev){
+                    var ev = ev || window.event;
+                    this.div.style.left = ev.clientX - this.disX + 'px';
+                    this.div.style.top = ev.clientY - this.disY + 'px';
+                },
+                up : function(ev){
+                    base.removeEvent(document, 'mousemove', this.move);
+                    base.removeEvent(document, 'mouseup', this.up);
+                },
+                init: function(opt, ev) {
+                    this.div = document.getElementById(opt.div);
+                    this.tanchuang(opt);
+                },
+                tanchuang: function(opt, ev) {
+                    var _this = this;
+                    this.downHandle = function (event) {
+                        _this.down(event);
+                    };
+
+                    base.addEvent(this.div, 'mousedown', this.downHandle);
+                }
+            }
+            var bin = new Tuozhuai({
+                div: "div1"
+            });
+        };
+    </script>
+</head>
+<body>
+<div id="div1"></div>
+</body>
+</html>
