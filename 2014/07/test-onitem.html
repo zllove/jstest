@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<input id="main" type="text" value="test"/>
+<script type="text/javascript">
+    function addEvent(obj, evt, fn){
+        if(obj.addEventListener){
+            obj.addEventListener(evt, fn, false);
+        } else if(obj.attachEvent) {
+            obj.attachEvent('on' + evt, fn);
+        }
+    }
+
+    var obj=document.getElementById("main");
+    var items=['click','keypress'];
+    for(var i=0;i<items.length;i++){
+        (function(i){
+            return function(){
+                var itemm=items[i];
+                addEvent(obj, itemm, function(){
+                    alert('thanks for you ' + itemm);
+                });
+            }();
+        }(i));
+    }
+</script>
+</body>
+</html>

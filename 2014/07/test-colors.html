@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<div id="div1">我是单独的div</div>
+<div>【埃森哲（中国）有限公司】Java高级开发工程师（电商项目）</div>
+<div>【上海贝锐信息科技有限公司】web测试工程师</div>
+<div>【en-japan（en申才）】Android & iOS攻城狮子和狮王</div>
+<div>【南宁数海网络公司】广西南宁招C#.net程序员【安投融（北京）网络科技有限公司】文案</div>
+<script type="text/javascript">
+    function randomVal(val) {
+        return Math.floor(Math.random() * (val + 1));
+    }
+
+    function randomcolor() {
+        var r = randomVal(255).toString(16);
+        if (r.length < 2) r = "0" + r;
+        var g = randomVal(255).toString(16);
+        if (g.length < 2) g = "0" + g;
+        var b = randomVal(255).toString(16);
+        if (b.length < 2) b = "0" + b;
+        return "#" + r + g + b;
+    }
+
+    document.getElementById('div1').style.color = randomcolor();
+    var div = document.getElementsByTagName('div')
+    for(var i=0; i < div.length; i++){
+        div[i].style.color = randomcolor();
+    }
+
+</script>
+</body>
+</html>
