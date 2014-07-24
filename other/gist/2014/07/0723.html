@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    /*
+    var timer = null,
+            counter = 1;
+    var fn = function(a){
+//        clearTimeout(timer);
+        counter = counter*a;
+        console.log(counter);
+//        timer = setTimeout(function(){
+//            console.log(counter);
+//            counter = 1;
+//        },10)
+        return arguments.callee;
+    };
+    fn(2)(2)(4);
+    */
+
+    var r = 1;
+    function fn(a) {
+        r *= a;
+        return fn;
+    }
+
+    fn.toString = function() {
+        return r;
+    }
+
+    console.log(fn(1)(2)(3)(4)(5))
+</script>
+</body>
+</html>
