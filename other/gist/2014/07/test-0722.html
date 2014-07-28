@@ -12,7 +12,18 @@
         count=count.toString(2).slice(1);
         return count+num.toString()
     }
+    function cc2(num, count){
+        var a =
+        return (1 << count).toString(2).slice(1) + num;
+    }
+
+    function pad(num, count){
+//        return count > 0 ? Array(count+1).join('0') + num : num;
+        return (count > 0 ? Array(count+1).join('0') : '') + num;
+    }
     console.log(cc(3,5));
+    console.log(cc(3,50));
+    console.log(pad(3, 4));
 
 </script>
 </body>
