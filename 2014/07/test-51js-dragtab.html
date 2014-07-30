@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="UTF-8">
+<head>
+    <title>JavaScript Google IG Drag Demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+    <meta http-equiv="Content-Language" content="zh-cn"/>
+    <style type="text/css">
+
+        .col_div{
+            float:left; width:700px; height:auto; color:#fff; margin-left:10px; text-align:center; padding:0px; text-align:center
+        }
+        .drag_div{
+            margin:1px auto; border:1px solid #1b243d; padding:0px; float:left; border:solid 1px black;
+        }
+        .modbox{
+            border:1px solid #1b243d; padding:0px; float:left; width:80px; height:80px; margin:1px auto;
+        }
+        .drag_header{
+            font-weight:bold; height:80px; width:80px; padding:0px; margin:0px; border:solid 0px red; text-align:center; line-height:80px;
+        }
+        .no_drag{ height:0px; overflow:hidden; padding:0; border:0; }
+    </style>
+</head>
+
+<body>
+
+
+<div id="col_1" class="col_div">
+    <!-- 用 JavaScript 绘制 5 个 div -->
+    <script type="text/javascript">
+        for(var i = 0; i < 64; i++){
+            document.write('<div id="drag_' + i + '" class="drag_div" style="background:#F50;"><div id="drag_' + i + '_h" class="drag_header"> #' + i + '</div></div>');
+        }
+    </script>
+</div>
+
+
+<script type="text/javascript">
+    dragDrop = {
+
+        absPos : function(node){
+            var x = y = 0;
+            do{
+                x += node.offsetLeft;
+                y += node.offsetTop;
+            } while(node = node.offsetParent);
+            return {
+                'x' : x,
+                'y' : y
+            };
+        },
+        isIntersect : function(x, y, node){
+            var m = this.absPos(node), xx = m.x, yy = m.y;
+            return !(x < xx || y < yy || x > (xx + node.offsetWidth) || y > (yy + node.offsetHeight));
+        },
+        drag : function(hander, ini){
+            var def = {dir : 'xy', minIndex : 1, end : String, isMove : true};
+            ini = ini || {};
+            for(var key in ini)def[key] = ini[key];
+            ini = def;
+
+            var dragObj = moveObj = ini.win || hander;
+            var $me = moveObj;
+            if(ini.isMove) moveObj.style.position = "absolute";
+            hander.onmousedown = function(e){
+                this.style.cursor = ini.cursour || "move";
+                if(ini.box != undefined){
+                    var rect = document.createElement('DIV')
+                            , pos = dragDrop.absPos($me);
+                    rect.style.cssText = 'top:' + pos.y + ';left:' + pos.x + ';border:dashed 1px #666;' + 'height:' + $me.offsetHeight + 'px;' + 'width:' + $me.offsetWidth + 'px;background:none;position:absolute;' + ini.box;
+                    var pos = dragDrop.absPos(dragObj);
+                    rect.style.top = pos.y + 'px';
+                    rect.style.left = pos.x + 'px';
+                    moveObj = document.body.appendChild(rect);
+                    moveObj.innerHTML = dragObj.innerHTML;
+                }
+                e = window.event || e;
+                this.prevOverObj_x = e.clientX;
+                this.prevOverObj_y = e.clientY;
+                this.x = e.clientX - moveObj.offsetLeft;
+                this.y = e.clientY - moveObj.offsetTop;
+                document.title = [dragObj.offsetLeft, this.x, this.y]
+                moveObj.style.zIndex = (dragDrop.zIndex ? dragDrop.zIndex++ : dragDrop.zIndex = 1) + ini.minIndex;
+                if(document.all){
+                    hander.onlosecapture = dragStop;
+                    e.cancelBubble = true;
+                    hander.setCapture();
+                } else {
+                    window.onblur = dragStop;
+                    e.stopPropagation()
+                }
+
+                dragDrop.onBegin.call(dragObj, moveObj);
+                /* my Event */
+
+                document.onmousemove = function(e){
+                    e = e || window.event;
+                    var $x = undefined, $D = document, $W = window;
+                    var x = e.clientX - hander.x, y = e.clientY - hander.y;
+
+                    if($x != ini.left)x = Math.max(x, ini.left);
+                    if($x != ini.top)y = Math.max(y, ini.top);
+                    if($x != ini.right)x = Math.min(x, ini.right - dragObj.offsetWidth);
+                    if($x != ini.bottom)y = Math.min(y, ini.bottom - dragObj.offsetHeight);
+                    if(ini.dir.indexOf('x') != -1)moveObj.style.left = x + "px";
+                    if(ini.dir.indexOf('y') != -1)moveObj.style.top = y + "px";
+
+                    if($D.all){
+                        hander.setCapture();
+                        e.cancelBubble = true;
+                    } else {
+                        window.onblur = dragStop;
+                        e.stopPropagation()
+                    }
+                    $W.getSelection && $W.getSelection().removeAllRanges();
+                    dragDrop.onDrag.call(dragObj, moveObj, e.clientX, e.clientY);
+                    /* my Event */
+                };
+
+                function dragStop(e){
+                    var $D = document;
+                    e = window.event || e;
+                    $D.onmousemove = $D.onmouseup = null;
+                    if($D.all){
+                        hander.onlosecapture = null;
+                        hander.releaseCapture();
+                    } else {
+                        window.onblur = null
+                    }
+                    if(ini.box != undefined){
+                        if(ini.isMove){
+                            $me.style.left = parseInt(moveObj.style.left) + 'px';
+                            $me.style.top = parseInt(moveObj.style.top) + 'px';
+                        }
+                        $D.body.removeChild(rect);
+                    }
+                    dragDrop.onDrop.call(dragObj);
+                    /* my Event */
+                };
+
+                document.onmouseup = dragStop;
+            };
+            return this;
+        },
+        onIntersect : function(){
+        },
+        onDrag : function(){
+        },
+        onBegin : function(){
+        },
+        onDrop : function(){
+        },
+        U : {prevOverObj : null}
+
+    };
+
+    dragDrop.onDrag = function(mover, x, y){
+        for(var i = 0; i < divs.length; i++){
+            if(dragDrop.isIntersect(x, y, divs[i])){
+                dragDrop.onIntersect.call(this, divs[i]);
+                break;
+            }
+        }
+    };
+
+    dragDrop.onBegin = function(){
+        this.style.visibility = 'hidden';
+    }
+
+    dragDrop.onDrop = function(){
+        var __this = this, i = 0;
+        this.style.visibility = 'visible';
+        dragDrop.U1.style.background = '#F50';
+        if(this == dragDrop.U1)return;
+        var pos = dragDrop.U1.nextSibling;
+        if(pos == this){
+            this.parentNode.insertBefore(this, dragDrop.U1);
+        } else {
+            this.parentNode.insertBefore(dragDrop.U1, this);
+            this.parentNode.insertBefore(this, pos);
+        }
+        (function(){
+            dragDrop.U1.style.background = __this.style.background = ['#F50', '#FFFF33'][i % 2];
+            if(i++ < 4)setTimeout(arguments.callee, 100)
+        })();
+    }
+
+    dragDrop.onIntersect = function(overObj){
+        if(dragDrop.U1)
+            dragDrop.U1.style.background = '#F50';
+        if(overObj !== this){
+            overObj.style.background = '#33CC00';
+        }
+        dragDrop.U1 = overObj;
+    };
+
+    window.onload = function(){
+        shell = document.getElementById("col_1");
+        alldiv = shell.getElementsByTagName('DIV');
+        divs = [];
+        for(var i = 0; i < alldiv.length; i++){
+            if(alldiv[i].className == 'drag_div')divs.push(alldiv[i])
+        }
+        g = dragDrop.absPos(shell);
+        g2 = g.x + shell.offsetWidth - 45;
+        g3 = g.y + shell.offsetHeight;
+        for(var i = 0; i < divs.length; i++){
+            dragDrop.drag(divs[i], {
+                box : 'background:#eee;filter:alpha(opacity=80);opacity:0.8',
+                cursour : 'pointer',
+                isMove : 0,
+                left : g.x,
+                top : g.y,
+                right : g2,
+                bottom : g3
+            });
+        }
+    }
+</script>
+</body>
+</html>

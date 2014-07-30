@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    function go(a){
+        var temp = parseInt(a).toString(2);
+        if(temp.indexOf(1)==temp.lastIndexOf(1)&&temp.indexOf(1)==0){
+            return a;
+        }else{
+            var ceil = parseInt(Math.pow(10,temp.length),2),
+                    floor = ceil/2;
+            return (ceil-a)>(a-floor)?floor:ceil;
+        }
+    }
+//    console.log(go(3));
+
+    function a(number){
+        var n = Math.pow(2, number.toString(2).length -1);
+        if(n === number){
+            return number;
+        } else {
+            return 2*n;
+        }
+//        return   n === number ? number : 2*n; 8421 101
+    }
+    for(var i=1; i<9; i++){
+        (function(i){
+//            console.log('a',a(i));
+        }(i))
+    }
+    console.log(a(1)); //1
+    console.log(a(2)); //2
+    console.log(a(3)); //4
+    console.log(a(4)); //4
+    console.log(a(5)); //8
+    console.log(a(6)); //8
+    console.log(a(7)); //8
+    console.log(a(9)); //16
+//    console.log(b(8));
+</script>
+</body>
+</html>
