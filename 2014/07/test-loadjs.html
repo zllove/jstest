@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    function createJs(code){
+        var s = document.createElement('script');
+        s.type = 'text/script';
+        try{
+            s.appendChild(document.createTextNode(code));
+        } catch(e) {
+            s.text = code;
+        }
+        document.body.appendChild(s);
+    }
+
+    createJs('var a=1;')
+</script>
+</body>
+</html>
