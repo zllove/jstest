@@ -1,0 +1,193 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+</head>
+<style>
+    .aaaa ul {
+        height: 25px;
+        line-height: 25px;
+        overflow: hidden;
+        width: 350px;
+    }
+    #block {
+        padding-right: 5px;
+        padding-left: 5px;
+        clear: both;
+        overflow: hidden;
+        border: 1px solid #dfdfdf;
+        width: 300px;
+    }
+    .htabs {
+        overflow: hidden;
+        clear: both;
+        margin-top: 3px;
+        padding: 3px 2px 0 0;
+    }
+    .htabs li {
+        float: left;
+        margin-top: 4px;
+        overflow: hidden;
+    }
+    .tabs .bullet {
+        border-right: 1px solid #e00;
+        color: #d00;
+        font-weight: 400;
+        margin: 0px 4px 4px 0;
+        padding-right: 4px;
+        clear: right;
+        display: block;
+        float: left;
+        height: 17px;
+        overflow: hidden;
+        text-align: right;
+        width: 10px;
+    }
+    .tabs {
+        margin-top: 2px;
+        overflow: hidden;
+    }
+    .tabs li {
+        background-color: #CDE9DB;
+        clear: both;
+        margin: 4px 0;
+        padding: 5px;
+    }
+    .tabs li a:hover {
+        padding-left: 1px;
+    }
+    .select {
+        color: #d00;
+    }
+</style>
+<body>
+<div class="aaaa">
+    <ul id="rolltxt">
+        <li><a href="#">习近平阐述新型亚洲安全观</a></li>
+        <li><a href="#">锤子手机砸出争议：粉丝惊喜 旁观者看衰</a></li>
+    </ul>
+</div>
+<script>
+    function extractNodes(pNode){
+        if(pNode.nodeType == 3)return null;
+        var node,nodes = new Array();
+        for(var i=0;node= pNode.childNodes[i];i++){
+            if(node.nodeType == 1)nodes.push(node);
+        }
+        return nodes;
+    }
+    var obj=document.getElementById("rolltxt");
+    for(i=0;i<4;i++){
+        obj.appendChild(extractNodes(obj)[i].cloneNode(true));
+    }
+    settime=0;
+    var t=setInterval(rolltxt,50);
+    function rolltxt(){
+        if(obj.scrollTop % (obj.clientHeight) ==0){
+            settime+=1;
+            if(settime==50){
+                obj.scrollTop+=1;
+                settime=0;
+            }
+        }else{
+            obj.scrollTop+=1;
+            if(obj.scrollTop==(obj.scrollHeight-obj.clientHeight)){
+                obj.scrollTop=0;
+            }
+        }
+    }
+    obj.onmouseover=function(){clearInterval(t)}
+    obj.onmouseout=function(){t=setInterval(rolltxt,50)}
+</script>
+
+<!--TAB-->
+
+<script type="text/javascript" src="http://www.codefans.net/ajaxjs/jquery-1.6.2.min.js"></script>
+<script type="text/javascript">
+    //数组来存储我们的标签id
+    var tabs = [];
+    //索引数组
+    var ind = 0;
+    var inter;
+    //改变当前选项卡_标题选项卡并突出
+    function change(stringref){
+        //隐藏其他标签
+        $('.tab:not(#' + stringref + ')').hide();
+        //显示正确的标签,IE6 bug
+        if ($.browser.msie && $.browser.version.substr(0,3) == "6.0")
+            $('.tab#' + stringref).show();
+        else
+            $('.tab#' + stringref).fadeIn();
+        //从先前的选项卡标题明显突出
+        $('.htabs a:not(#' + stringref + 't)').removeClass('select');
+        $('.htabs a[href=#' + stringref + ']').addClass('select');
+    }
+    function next(){
+        //改变显示下一个选项卡
+        change(tabs[ind++]);
+        //如果是最后一个选项卡,明确该指数
+        if(ind >= tabs.length)
+            ind = 0;
+    }
+    $(document).ready(function(){
+        //所有的标签都存储在数组中
+        $(".tab").map(function(){
+            tabs[ind++] = $(this).attr("id");
+        })
+        //设置索引的下一个元素
+        ind = 1;
+        //初始化标签,显示当前选项卡
+        $(".tab:not(:first)").hide();
+        $(".tab:first").show();
+        //突出当前选项卡标题
+        $('#' + tabs[0] + 't').addClass('select');
+        //处理程序点击选项卡
+        $(".htabs a").click(function(){
+
+            //如果点击选项卡,停止旋转
+            clearInterval(inter);
+            //点击存储引用选项卡
+            stringref = $(this).attr("href").split('#')[1];
+            //显示引用选项卡
+            change(stringref);
+            return false;
+        });
+        //开始旋转选项卡
+        inter = setInterval("next()", 4000);
+    });
+</script>
+<div id="block">
+    <ul class="htabs">
+        <li>
+            <h2><a href="#design" id="designt">素材1</a></h2>
+        </li>
+        <li>
+            <h2><a href="#development" id="developmentt">素材2</a></h2>
+        </li>
+    </ul>
+    <div class="tabs">
+        <div class="tab" id="design">
+            <ul>
+                <li><span class="bullet">1</span><a href="/">中级车</a></li>
+                <li><span class="bullet">2</span><a href="/">免费字体</a></li>
+                <li><span class="bullet">3</span><a href="/">绘画素材</a></li>
+                <li><span class="bullet">4</span><a href="/">网格系统</a></li>
+            </ul>
+        </div>
+        <div class="tab" id="development">
+            <ul>
+                <li><span class="bullet">1</span><a href="/">jQuery滚动</a></li>
+                <li><span class="bullet">2</span><a href="/">WordPress插件</a></li>
+                <li><span class="bullet">3</span><a href="/">jQuery菜单</a></li>
+                <li><span class="bullet">4</span><a href="/">网站开发</a></li>
+                <li><span class="bullet">5</span><a href="/">内容管理系统</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
