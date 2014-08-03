@@ -1,13 +1,36 @@
 <!doctype html>
-<html lang="en-US">
+<html>
 <head>
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
-<div>
-    <div style='background-color:#e0e;width:100px;height:100px;float: left;'> </div>
-    <div style='background-color:#e0e;width:100px;height:100px;float: left;'></div>
-</div>
+<div id="div"></div>
+<script type="text/javascript">
+    function pad(num, count) {
+        console.time(1);
+        var s = String(num/Math.pow(10, count)).split('.').pop();
+        console.timeEnd(1);
+        console.log(s);
+        return s;
+    }
+    document.getElementById('div').innerHTML = pad(12, 8);
+
+    function c(num){
+        if(num.indexOf('e') != -1){
+            var s = num.slice(0,1);
+            var e = num.slice(2);
+            var last = s + s * Math.pow(10, e);
+            return last;
+        }
+    }
+    function pad2(num, count) {
+        num = String(num);
+        len = num.length;
+        return len > count ? num.slice(-count) : new Array(count-len+1).join('0') + num ;
+    }
+    console.log(pad2(12, 3));
+
+</script>
 </body>
 </html>
