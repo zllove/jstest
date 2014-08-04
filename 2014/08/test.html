@@ -1,50 +1,24 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="ru">
+<!doctype html>
+<html lang="en-US">
 <head>
+    <meta charset="UTF-8">
     <title></title>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <style type="text/css">
-        button{
-            width:100px;
-            height:35px;
-        }
-        input {
-            height:35px;
-        }
-    </style>
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded',function(){
-            var descContent = "init value";
-            var delay=function(){
-                setTimeout(function(){delay()},4000);
-                console.log(descContent);
-            setTimeout(function(){delay()},4000);
-        });
-
-
-
-    </script>
-
 
 </head>
 <body>
-
+<ul id="ul">
+    <li>111</li>
+    <li class="one">222</li>
+    <li>333</li>
+</ul>
 <script type="text/javascript">
-    function calc(){
-        var data=document.f.n.value;
-        alert(data);
-        //  如何更新 descContent 的值
+    var ul = document.getElementById('ul')
+    var li = ul.getElementsByTagName('li')
+    for(var i=0; i<li.length; i++){
+        if(li[i].className.indexOf('one') != -1){
+            console.log(li[i]);
+        }
     }
-
 </script>
-
-
-<form action="" name='f' >
-    <br><input type="" name='v' >
-    <br><input type="" name='n' >
-</form>
-<button onclick="calc()"    >refresh   </button>
-
-
 </body>
 </html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .areapicker{
+            background:#fcfdfd; border:1px solid #a6c9e2; padding:0.2em 0.2em 0; display:none; position:absolute; z-index:1; border-radius:4px;
+        }
+    </style>
+</head>
+<body>
+<input class="selector" name="name2" type="text" value="1"/>
+<input class="selector2" name="name3" type="text" value="2"/>
+<input class="selector3" name="name4" type="text" value="3"/>
+<button id="close">close</button>
+<button id="open">open</button>
+</body>
+<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
+<script>
+    (function ($) {
+        $.fx.speeds._default = 200;
+        var Areapicker = function (element, options, x, y) {
+            this.element = element;
+            this.x = x;
+            this.y = y;
+            this.container = null;
+            this.options = $.extend({}, $.fn.areapicker.defaults, options);
+        };
+        Areapicker.prototype = {
+            constructor: Areapicker,
+            init       : function () {
+                var styles = {'width': this.options.width, 'height': this.options.height, 'left': this.x, 'top': this.y};
+                this.container = $('<div class="areapicker"></div>');
+                this.container.insertAfter(this.element);
+                this.container.css(styles);
+                var that = this;
+                this.container.on('click.wzy', function (e) {
+                    e.stopPropagation();
+                    var $_target = $(e.target);
+                    if ($_target.is('.close')) that.close();
+                });
+                this.options.open.on('click', function (e) {
+                    e.stopPropagation();
+                    that.open();
+                });
+                $(document).on('click', this.options.close, function (e) {
+                    e.stopPropagation();
+                    that.close();
+                });
+                /*
+                this.element.on('click.wzy', function (e) {
+                    e.stopPropagation();
+                    that.open();
+                });
+                $(document).on('click.wzy', function (e) {
+                    e.stopPropagation();
+                    that.close();
+                });
+                */
+            },
+            close      : function () {
+                this.container.hide();
+            },
+            open       : function () {
+                if (this.container.is(':visible')) {
+                    return false;
+                } else {
+                    $('.areapicker').hide();
+                    this.container.fadeIn();
+                }
+            }
+        };
+        $.fn.areapicker = function (option) {
+            return this.each(function () {
+                var x = this.offsetLeft;
+                var y = this.offsetTop + this.offsetHeight;
+                var $this = $(this);
+                var inst = new Areapicker($this, option, x, y);
+                //var method;
+                if (typeof option === 'object') {
+                    return inst.init();
+                } else if (typeof option == 'string') {
+                    return inst[option]();
+                } else {
+                    alert('no method');
+                    return this;
+                }
+            })
+        };
+        $.fn.areapicker.Constructor = Areapicker;
+        //defaults
+        $.fn.areapicker.defaults = {
+            width : 'auto',
+            height: 'auto'
+            //data  : null,//data: {"key":"value"}
+        };
+    })(jQuery);
+    $(function () {
+        $('.selector3,.selector2').areapicker({
+            width: 300,
+            height:100,
+            open : $('#open'),
+            close : '#close'
+        });
+        $('#close').click(function (e) {
+        });
+        $('#open').click(function (e) {
+        })
+    });
+</script>
+</html>
