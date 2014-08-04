@@ -1,33 +1,21 @@
-/**
- * @author: 豪情
- * @see: <a href="mailto:jikeytang@gmail.com">豪情</a>
- * @time: 8/4/14
- * @info:
- */
-function ajax(url, success, fail){
-    // 1. 创建连接
+function my_ajax(url, success, fail){
     var ajax = null;
     if(window.XMLHttpRequest){
-        ajax = new XMLHttpRequest()
+        ajax = new XMLHttpRequest();
     } else {
         ajax = new ActiveXObject('Microsoft.XMLHTTP');
     }
 
-    // 2. 连接服务器
-    ajax.open('get', url, true)
-
-    // 3. 发送请求
+    ajax.open('get', url, true);
     ajax.send(null);
 
-    // 4. 接受请求
     ajax.onreadystatechange = function(){
         if(ajax.readyState == 4){
             if(ajax.status == 200){
                 success(ajax.responseText);
-            } else { // fail
+            } else {
                 fail && fail(ajax.status);
             }
         }
     }
-
 }
