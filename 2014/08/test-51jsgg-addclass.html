@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<base href="http://bbs.51js.com/">
+<body>
+双击移动子项<hr/>
+</body>
+<script type="text/javascript">
+    /*
+     动态添加样式表的规则
+     */
+    iCSS={add:function(css){
+        var D=document,$=D.createElement('style');
+        $.setAttribute("type","text/css");
+        $.styleSheet&&($.styleSheet.cssText=css)||
+        $.appendChild(D.createTextNode(css));
+        D.getElementsByTagName('head')[0].appendChild($);
+    }};
+    iCSS.add("\
+        .dhoooListBox,.dhoooListBox li{margin:0;padding:0;list-style-type:none;font-size:12px;cursor:default}\
+        .dhoooListBox{border:1px solid #aaa;width:180px;background:#eee;height:200px;overflow:auto;float:left}\
+        .dhoooListBox li{margin:5px;line-height:24px;background:url(images/smilies/time.gif) no-repeat 0 60%;padding-left:25px;color:#555;}\
+        .dhoooListBox li.selected{background-color:#FFCC33}\
+");
+    /*
+     listBox类
+     */
+    iListBox=function(){
+        this.box=this.ui('UL','',document.body);
+        this.box.className="dhoooListBox";
+        this.box.style.marginRight="10px";
+    };
+    iListBox.prototype={
+        ui:function (type,style,parent){
+            var X=document.createElement(type);
+            X.style.cssText=style;
+            parent&&parent.appendChild(X);
+            return X;
+        }
+        ,add:function(text){
+            var I=text,dhooo=this;
+            if(typeof I=="string"){
+                I=this.ui('LI','',this.box);
+                I.innerHTML=text;
+            }else{
+                this.box.appendChild(I);
+            }
+            I.onmouseover=function(){this.className="selected"};
+            I.onmouseout=function(){this.className=""}
+            I.ondblclick=function(){this.className="";dhooo.toBox.add(this)};
+            return this;
+        }
+    }
+    list=new iListBox;
+    list.add('QQ号码价值评定')
+            .add('QQ号码被盗如何申诉')
+            .add('QQ号码安全保护常识')
+            .add('怎样识别QQ盗号陷阱？')
+            .add('QQ号码被盗如何申诉')
+            .add('QQ号码安全保护常识')
+            .add('怎样识别QQ盗号陷阱？')
+            .add('QQ号码安全指南');
+    list2=new iListBox;
+    list.toBox=list2;
+    list2.toBox=list;
+</script>
+
+</body>
+</html>

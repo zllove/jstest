@@ -1,0 +1,190 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title> 平视 </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- saved from url=(0011)about:blank -->
+    <base href="http://imgqun.qq.com/cgi-bin/" />
+    <style>
+        html,body{background:#990000;margin:0px; }
+        #pics_3d{
+            position:absolute;
+            height:300px;
+            width:100%;
+            background:#000;
+            top:120px;
+            border-bottom:20px solid #420000;
+            border-top:20px solid #420000;
+        }
+        img{
+            position:absolute;
+            background:#eee;
+            left:0;top:0;
+            border:5px solid #00CCFF;
+
+        }
+    </style>
+</head>
+
+<body>
+<div id="pics_3d">
+    <img src="img?uuid=20e6588bec6957ea8e3f58b8113c89090e" />
+    <img src="img?uuid=200d71c0fc235042d82fb09f25554ce27d" />
+    <img src="img?uuid=20bf076bc8588e0faa3338c845b01578b9" />
+    <img src="img?uuid=20aea017f449ff050494403780a3f06098" />
+    <img src="img?uuid=20f5eef05895ef4894eb8e44db754ce44b" />
+    <img src="img?uuid=200d71c0fc235042d82fb09f25554ce27d" />
+    <img src="img?uuid=20bf076bc8588e0faa3338c845b01578b9" />
+</div>
+</body>
+<script >
+
+    /*
+     旋转子项类声明
+     */
+    Item=function(UI){
+
+        this.angle=0;
+        this.UI=UI;
+        this.update();
+
+    };
+    Item.ini={/*类静态属性(椭圆轨迹参数)*/
+
+        axle_w:400,/* 半宽 */
+        axle_h:10,/* 半高(视角高) */
+        cen_x:500,/* 中心x */
+        cen_y:260/* 中心y */
+
+    };
+    Item.prototype.update=function(){/* 按角度刷新UI */
+
+        var J=this.UI.style,C=Item.ini,W=C.axle_w        ,H=C.axle_h,X=C.cen_x,Y=C.cen_y;
+        var angle=this.angle/180*Math.PI;/* 角度转弧度 */
+        var left=Math.cos(angle)*W+X;
+        var top=Math.sin(angle)*H+Y;
+        var A=this.angle>270?this.angle-360:this.angle;
+        var size=360-Math.abs(90-A)*3;/* 设置大小 */
+        this.UI.width=Math.max(size,120);/* 下限 */
+        var opacity=Math.max(10,size-180);/* 设置透明度 */
+        J.filter='alpha(opacity='+opacity+')';
+        J.opacity=opacity/100;
+        J.left=(left-this.UI.offsetWidth/2)+'px';/* 设置位置 */
+        top=(top-this.UI.offsetHeight)+'px';
+        J.top=top;
+        J.zIndex=parseInt(size*100);/* 设置Z序 */
+
+    };
+
+    /*
+     菜单管理器
+     */
+
+    Nav_3D={
+
+        items:[],
+        dir:1,
+        index:0,
+        hover:false,
+
+        add:function(item){
+            this.items.push(item);
+            item.index=this.items.length-1;
+            item.UI.onclick=function (){
+                var J=item.angle,M=Nav_3D;
+                if(M.uping)return;
+                if(J==90){
+                    return alert('goto new url..')
+                };
+                M.wheel_90(item);
+                M.index=item.index;
+            };
+            item.UI.onmouseover=function (){
+                if(item.angle==90){
+                    Nav_3D.hover=true;
+                    clearTimeout(Nav_3D.autoTimer);
+                };
+            };
+            item.UI.onmouseout=function (){
+                if(item.angle==90){
+                    Nav_3D.hover=false;
+                    Nav_3D.auto();
+                };
+            };
+            return this;
+        },
+
+        wheel_90:function(hot){/* 把目标旋转到90度 */
+            if(this.uping)return;
+            this.uping=true;
+            var This=this;
+            this.timer=setInterval(function (){
+                clearTimeout(This.autoTimer);/* 清除自动 */
+                var A=hot.angle;
+                This.dir=A<270&&A>90?-1:1;/* 确定旋转方向 */
+                if(A==90){/* 旋转到指定位置时结束 */
+                    clearInterval(This.timer);
+                    This.uping=false;
+                    This.onEnd(hot);/* 自定义事件 */
+                }
+                if(A>270)A-=360;
+                var set=Math.ceil(Math.abs((90-A)*0.1));/* 缓冲 */
+                for (var i=0;i<This.items.length;i++ ) {
+                    var J=This.items[i];
+                    J.angle+= (set*This.dir);/* 角度自增 */
+                    J.update();
+                    if(J.angle>360)J.angle-=360;
+                    if(J.angle<0)J.angle +=360;
+                };
+            },15);
+        },
+
+        ready:function(){/* 自动设置初始角度 */
+            var J=this.items,step=parseInt(360/J.length);
+            for (var i=0;i<J.length;i++) {J[i].angle=i*step+90;}
+            this.wheel_90(this.items[0]);/* 把第一个项目转到90度 */
+            Nav_3D.prevHot=this.items[0].UI;
+            Nav_3D.setHot();
+        },
+
+        setHot:function(isHot){/* 设置焦点样式 */
+            if(!this.prevHot)return;
+            with(this.prevHot.style){
+                borderColor=isHot!==false?'#CC0000':'#00CCFF';
+                cursor=isHot!==false?'default':"pointer";
+            };
+            return this;
+        },
+
+        auto:function(){/* 自动轮转 */
+            this.index--;
+            if(this.index<0)this.index=this.items.length-1;
+            var J=this.items[this.index];
+            this.setHot(false).prevHot=J.UI;
+            this.setHot();
+            this.wheel_90(J);
+        },
+
+        onEnd:function(hot){
+            if(this.hover){
+                return setTimeout(function(){Nav_3D.onEnd();},100);
+            }
+            this.autoTimer=setTimeout(function(){Nav_3D.auto();},1500);
+        }
+
+    };
+
+    /*
+     Apply
+     */
+
+    var imgs=document.getElementById("pics_3d").getElementsByTagName("IMG");
+    for (var i=0;i<imgs.length;i++ ) {
+        Nav_3D.add(new Item(imgs[i]))
+    }
+    Nav_3D.ready();
+
+</script>
+</html>
+

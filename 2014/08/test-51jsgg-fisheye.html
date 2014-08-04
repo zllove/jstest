@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <base href="http://group.store.qq.com/http_imgload.cgi?/"/>
+    <style>
+        html, body{ height:100%; }
+        img{ border:none; }
+        #fx_fishEye{ position:absolute; left:0; bottom:0; background:url(rurl4_b=784ef77f0f8aa232c580c211ace21c646797094e619844d309cd2497573537b7748c4ab4f8704cadfe4c88b77d3b017b5e7307cc8f1fa83c5b7476dacdaf29723d06f5eef5235ea1d1d5fb5685e8db68054004c2751316fce55f34f5de3a60e2ba70d319c8a571b99a5fbca68f1dd26ea5d0eb68) repeat-x; }
+        #fx_fishEye a{ position:absolute; display:block; float:left; text-decoration:none; font-size:12px; width:100px; bottom:0 }
+        #fx_fishEye a:hover{ cursor:pointer; }
+        #fx_fishEye a span{ display:block; position:absolute; left:0; top:-20px; color:#333; visibility:hidden; font-weight:bold; font-family:Arial; font-size:15px; text-align:center; width:100%; }
+        #fx_fishEye a:hover span{ visibility:visible }
+        #fx_fishEye img{ width:100%; }
+        #loading{ font-family:Arial; font-size:12px; color:#fff; background:#009900; padding:15px; }
+    </style>
+    <script>
+        var Pro = {
+            fixPNG : function(blankGif, range){ // For IE6.0
+                if(!(window.ActiveXObject && (!window.XMLHttpRequest)))return this;
+                var images = document.body.getElementsByTagName('img'), png;
+                for(var i = 0; i < images.length; ++i){
+                    var img = images[i];
+                    png = img.src;
+                    //if(!/\.png\s*$/i.test(png))return;
+                    img.src = blankGif || 'rurl4_b=784ef77f0f8aa232c580c211ace21c6405e9e7d3318b3bfc3506d47b7051b010df3bee36625058cf8161d398bc4e55bf04f443fc344cead5643e19fd6a2448963ab58835893a4970cf58efb27e091817c09567fdb37c5a086cda1c0bbd7a49fd20659e7cc114a06a2f0a14695ddba0aa4105cc58';
+                    img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + png + "',sizingMethod='scale)";
+                }
+            },
+            doCenter : function(){
+                var win_w = document.body.clientWidth;
+                var l = Math.round((win_w - this.width) / 2, 10);
+                this.box.style.left = l + 'px';
+            },
+            doSize : function(_x, _y){
+                if(_x){
+                    var x = _x - this.box.offsetLeft, c = document.body.clientHeight;
+                    var z = 220 - ((_y > (c - 100)) ? 100 : (c - _y));
+                    if(_y < (c - 180))_x = false;
+                }
+                var unit = 180 / Math.min(500, this.box.offsetWidth);
+                var size = function(_x, _w){
+                    var A = Math.round(90 - (x - _x - _w + 10) * unit);
+                    A = Math.max(0, Math.min(180, A)) / 180 * Math.PI;
+                    return Math.max(Math.round(Math.sin(A) * z), this.min);
+                };
+                for(var i = 0, left = 0, prev = 0; i < this.icos.length; ++i){
+                    var _1 = this.icos[i];
+                    _1.style.left = left + 'px';
+                    _1.style.width = (_x ? size.call(this, left, prev * 0.6) : this.min) + 'px';
+                    prev = _1.offsetWidth;
+                    left += prev;
+                }
+                this.box.style.width = left + 'px';
+                this.width = left;
+            },
+            init : function(ini){
+                var pro = this;
+                this.min = ini.min || 36;
+                this.box = document.getElementById(ini.box);
+                this.icos = this.box.getElementsByTagName("A");
+                this.fixPNG();
+                document.getElementById("loading").style.display = 'none';
+                this.box.style.display = '';
+                this.box.style.height = this.min + 10 + 'px';
+                this.doSize();
+                this.doCenter();
+                document.onmousemove = function(e){
+                    clearTimeout(pro.fxTimer);
+                    var e = e || event, x = e.clientX, y = e.clientY;
+                    pro.fxTimer = setTimeout(function(){
+                        pro.doSize(x, y)
+                    }, 3);
+                };
+            }
+        };
+        window.onload = function(){
+            Pro.init({box : 'fx_fishEye'})
+        };
+    </script>
+</head>
+<body>
+<span id="loading">loading....</span>
+<div id="fx_fishEye" style="display:none">
+    <a href="javascript:void(0)" title=""><img src="rurl4_b=784ef77f0f8aa232c580c211ace21c644876044f38a7b4f93c1aeea60bf2b2b726977773cb9ae32514be195e273b9d0b19fba3ed9142009e8c39ce9a1194af419d962dc4439171781f7c0863d20eb076deefe9a1c5e076164e7a65c934cb728b6550332b75e79f41d30404dc0da9002031c84827"/><span>calendar</span></a>
+    <a href="javascript:void(0)" title=""><img src="rurl4_b=784ef77f0f8aa232c580c211ace21c642a004b90753c88a2fbef844ef23dbb93fab84f63a9c27ead7b4e2fcc7208b0e72140aeae3f60acdc830225e0da63fd47325f83b70b0e37a89f72ebc0cab16740715ca1096e9bc99a6725c6a36785f950d1d21cc1738645d19fa3af4ad2be39166946e283"/><span>email</span></a>
+    <a href="javascript:void(0)" title=""><img src="rurl4_b=784ef77f0f8aa232c580c211ace21c64156802bce2d03b2058e741dd92417085a02c092f94deb8dbe90b96ce2d10ae374a732d5235a2bd2fbb2c01ddd19b41f6e740385e13783ea5d2192c12cdd4b9e7b6d9cd016cdf073805b0a2b0d93bbb7481b36a61b31fcecc20aeb4e8d62205bb5b4308df"/><span>history</span></a>
+    <a href="javascript:void(0)" title=""><img src="rurl4_b=784ef77f0f8aa232c580c211ace21c64bc8afa08a831b7e34f06e8235aa390043fbd13a7e3c4e07a8486096a836a02a0640d321887b346f22ff01ab452cf77193c69bf95fa139f0fcdd92d0b764b8106d49439ebc1a39f2ac6a7701ed0231bfb2ba3a9658824818d0b2927b56a3158287af68c55"/><span>home</span></a>
+    <a href="javascript:void(0)" title=""><img src="rurl4_b=784ef77f0f8aa232c580c211ace21c64937f425a53b1334e3377732dcb0bc662c52ea428be29a161dcdc1b1336081986faeaeb574c562f5f98cca7941f3fcf01364652ae4eeee1823e1816335b7e803724dcacaa3b3a758acdbeb1a2e260a20f50cd5ddf316cb37c851e3d4e0f791b48e72c205d"/><span>link</span></a>
+    <a href="javascript:void(0)" title=""><img src="rurl4_b=784ef77f0f8aa232c580c211ace21c6409b8b46365ecab871b6bedd92e00dfed7108469f6886b38e345f87f3b124e027adbc75a64523117ec4f3bebdb19e3ab23ff69af2e9f4bb2f71e8a0f3265fe18f4f47a50972b869e1ea7fdabe471fc7b467409f188266fa9cde1dcec1122ed1e68e3bc6ce"/><span>music</span></a>
+    <a href="javascript:void(0)" title=""><img src="rurl4_b=784ef77f0f8aa232c580c211ace21c64e71424a7677910b1cdb752c8cf6a9dcc90e3b37b9ca4905d5470a51508800886dfda85eec0fd7353989787f1905b9c5b59bc6d7e71a28d3638bd79ec73d4b5b46bd55392c15f5c9664080d66263910b977bd4d6837587b2bece486b65d0aad4165e99a9d"/><span>portfolio</span></a>
+    <a href="javascript:void(0)" title=""><img src="rurl4_b=784ef77f0f8aa232c580c211ace21c64d71352da1b4e47fd6bf45ee3278ffd72c2a8e9dd0b4f9456253b3413e76383e33660d902f0797cb972de8d69919f7b7219fe6449af25b584e167f3d2f2a9813e286cd949688a6975334a37eb4f1ea70a67cfc6c9c195b1d017f003f47b3630cd008d7860"/><span>rss2</span></a>
+    <a href="javascript:void(0)" title=""><img src="rurl4_b=784ef77f0f8aa232c580c211ace21c64e514a59f6291d1dc2d395e9856f67f2b0d032b21ca40ce175c1b8651d857c55022bb143db7f6ddbd473b6223a6de03ebda06c6122ff5a322800b71279cf25b34dc70d141eac8169f2f522b05140eaf651939fe3bcdc35a72646e39a697518c134d070467"/><span>rss</span></a>
+    <a href="javascript:void(0)" title=""><img src="rurl4_b=784ef77f0f8aa232c580c211ace21c64937f425a53b1334e3377732dcb0bc662c52ea428be29a161dcdc1b1336081986faeaeb574c562f5f98cca7941f3fcf01364652ae4eeee1823e1816335b7e803724dcacaa3b3a758acdbeb1a2e260a20f50cd5ddf316cb37c851e3d4e0f791b48e72c205d"/><span>video</span></a>
+    <a href="javascript:void(0)" title=""><img src="rurl4_b=784ef77f0f8aa232c580c211ace21c64bc8afa08a831b7e34f06e8235aa390043fbd13a7e3c4e07a8486096a836a02a0640d321887b346f22ff01ab452cf77193c69bf95fa139f0fcdd92d0b764b8106d49439ebc1a39f2ac6a7701ed0231bfb2ba3a9658824818d0b2927b56a3158287af68c55"/><span>calendar</span></a>
+    <a href="javascript:void(0)" title=""><img src="rurl4_b=784ef77f0f8aa232c580c211ace21c642a004b90753c88a2fbef844ef23dbb93fab84f63a9c27ead7b4e2fcc7208b0e72140aeae3f60acdc830225e0da63fd47325f83b70b0e37a89f72ebc0cab16740715ca1096e9bc99a6725c6a36785f950d1d21cc1738645d19fa3af4ad2be39166946e283"/><span>email</span></a>
+    <a href="javascript:void(0)" title=""><img src="rurl4_b=784ef77f0f8aa232c580c211ace21c64e71424a7677910b1cdb752c8cf6a9dcc90e3b37b9ca4905d5470a51508800886dfda85eec0fd7353989787f1905b9c5b59bc6d7e71a28d3638bd79ec73d4b5b46bd55392c15f5c9664080d66263910b977bd4d6837587b2bece486b65d0aad4165e99a9d"/><span>history</span></a>
+    <a href="javascript:void(0)" title=""><img src="rurl4_b=784ef77f0f8aa232c580c211ace21c64e514a59f6291d1dc2d395e9856f67f2b0d032b21ca40ce175c1b8651d857c55022bb143db7f6ddbd473b6223a6de03ebda06c6122ff5a322800b71279cf25b34dc70d141eac8169f2f522b05140eaf651939fe3bcdc35a72646e39a697518c134d070467"/><span>home</span></a>
+</div>
+</body>
+</html>
+

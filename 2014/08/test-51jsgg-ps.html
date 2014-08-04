@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title> window风格的拾色器 </title>
+    <base href="http://52mfx.com/links/">
+    <style>
+        html, body{ margin:0; font-size:12px; }
+        #pscolor_win{ border:1px solid #666; width:213px; overflow:hidden; position:absolute; left:100px; top:100px; background:#D4D0C8; display:none; }
+        #psc_preview{ height:20px; width:82px; background:#F00;; float:left; display:inline; margin:5px; margin-bottom:0; border:1px inset #fff; }
+        #psc_new{ height:100%; width:50%; background:red; }
+        #psc_value{ height:18px; width:82px; border:1px solid #aaa; vertical-align:middle; display:block; float:left; margin:5px 5px 0 0; }
+        #color_out{ display:block; width:20px; height:20px; background:url(win_color_out.gif) no-repeat 50% 50%; margin:5px 0 0 0; float:left; }
+        #color_out:hover{ border:1px solid #999; border-left-color:#fff; border-top-color:#fff; }
+        #psc_range{ position:relative; width:180px; height:100px; border:1px inset #fff; margin:5px; overflow:hidden; background:url(w_color_hs.jpg) no-repeat; float:left; display:inline; }
+        #b_mask{ position:absolute; left:0; top:0; width:10px; height:100px; background:url(win_black_mask.png) no-repeat; _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://52mfx.com/links/win_black_mask.png', sizingMethod='scale'); }
+        #psc_slider{ margin:5px 0; width:18px; height:100px; position:relative; float:left; }
+        #colorbg{ border:1px inset #fff; margin:0 auto; width:9px; height:100%; background:red; position:relative; }
+        #psc_cursor{ display:block; width:11px; height:11px; background:url(win_select_pos.gif) no-repeat; font-size:12px; overflow:hidden; position:absolute; right:-2px; top:-2px; }
+        #psc_mark{ display:block; width:42px; height:9px; background:url(win_color_pos.gif) no-repeat 14px 0; position:absolute; left:0; top:0; }
+        .clear{ clear:both; font-size:0; height:0; overflow:hidden }
+    </style>
+</head>
+
+<body>
+<br/><br/><br/><br/><br/><br/><br/>
+<h1>简单的仿window的颜色设置器</h1>
+<hr/>
+<br/> &nbsp;&nbsp;&nbsp; 背景颜色 <input type="text" name="" id="b1"/> &nbsp;&nbsp;&nbsp; 文本颜色
+<input type="text" name="" id="b2"/>
+</body>
+<script>
+    function dragMap(opts){//定义一个拖动类,以实时捕捉映射坐标值
+        this.map = document.getElementById(opts.map);
+        this.mover = document.getElementById(opts.mover);
+        this.x = 1;
+        this.y = 0;
+        this.drag(opts.dir.indexOf('x') + 1, opts.dir.indexOf('y') + 1);
+    }
+    ;
+    dragMap.prototype = {
+        getPos : function(el){//取得标签页面坐标
+            var x = 0, y = 0;
+            while(el){
+                x += el.offsetLeft;
+                y += el.offsetTop;
+                el = el.offsetParent
+            }
+            ;
+            return {x : x, y : y}
+        },
+        getMapPos : function(x, y){//取得子标签相对拖动容器的坐标
+            var mp = this.getPos(this.map);
+            x = Math.max(0, x - mp.x - 7);
+            y = Math.max(0, y - mp.y - 7);
+            return {x : x, y : y}
+        },//保证安全取值范围
+        cut : function(a, b){
+            return Math.min(b, Math.max(-4, a))
+        },
+        drag : function(_x, _y){//拖动方法
+            var me = this, d = document, w = window;
+            this.map.onmousedown = function(e){
+                e = e || event;
+                var x = e.clientX, y = e.clientY;
+                var pos = me.getMapPos(x, y);
+                if(_x)me.mover.style.left = pos.x + 'px';
+                if(_y)me.mover.style.top = pos.y + 'px';
+                me.x = pos.x / 180;
+                me.y = pos.y / 100;
+                me.onchange();
+                d.onmousemove = function(e){
+                    e = e || event;
+                    var dx = me.cut(pos.x + e.clientX - x, 176);
+                    var dy = me.cut(pos.y + e.clientY - y, 96);
+                    if(_x)me.mover.style.left = dx + 'px';
+                    if(_y)me.mover.style.top = dy + 'px';
+                    me.x = (dx + 4) / 180;
+                    me.y = (dy + 4) / 100;
+                    me.onchange();
+                    w.getSelection ? w.getSelection().removeAllRanges() : d.selection.empty();
+                };
+                d.onmouseup = function(){
+                    d.onmousemove = null
+                }
+            }
+        },
+        onchange : function(){
+        }
+    };
+    colorSelector = {//单例拾色器对象
+        build : function(){//建造HTML
+            this.win = document.createElement("DIV");
+            this.win.id = "pscolor_win";
+            this.win.innerHTML = '<div id="psc_preview"><div id="psc_new"></div></div><input type="text" id="psc_value" value="#FF0000" readonly /><a href="javascript:void 0" title="点击添加" id="color_out"></a><div id="psc_range"><span id="psc_cursor"></span></div><div id="psc_slider"><span id="psc_mark"></span><div id="colorbg"><div id="b_mask"></div></div></div><div class="clear"></div>';
+            document.body.appendChild(this.win)
+        },
+        hsb2hex : function(H, S, B){//HSB转HEX
+            if(B == 0){
+                return '#000000'
+            }
+            ;
+            H %= 360, S /= 100, B /= 100, H /= 60;
+            var i = Math.floor(H), f = H - i, p = B * (1 - S), q = B * (1 - (S * f)), t = B * (1 - (S * (1 - f)));
+            var g = [
+                [B, t, p],
+                [q, B, p],
+                [p, B, t],
+                [p, q, B],
+                [t, p, B],
+                [B, p, q]
+            ][i];
+            for(i = g.length; i--;)g[i] = ('0' + Math.round(g[i] * 255).toString(16)).slice(-2);
+            return '#' + g.join('').toUpperCase()
+        },
+        show : function(x, y){//定位显示面板
+            var V = this.win.style;
+            V.left = x + 'px';
+            V.top = y + 'px';
+            V.display = 'block';
+        },
+        hide : function(){
+            this.win.style.display = 'none';
+            return this
+        },
+        bind : function(el){//绑定输入框
+            el = document.getElementById(el);
+            var me = this, h = el.offsetHeight + 1;
+            el.onfocus = function(e){
+                var pos = me.pos(this);
+                me.binder = this;
+                me.show(pos.x, pos.y + h);
+            };
+            el.onclick = function(e){
+                me.stop(e || window.event)
+            };
+            this.addEvent(document, 'click', function(){
+                me.hide()
+            });
+            return this
+        },
+        addEvent : function(el, type, fn){//多次添加事件
+            el.attachEvent ? el.attachEvent('on' + type, function(){
+                fn.call(el)
+            }) : el.addEventListener(type, fn, false);
+        },
+        stop : function(_e){//取消冒泡
+            _e.stopPropagation ? _e.stopPropagation() : (_e.cancelBubble = true)
+        },
+        init : function(){
+            var d = document, me = this;
+            this.build();
+            this.old = "#f00";
+            try{
+                d.execCommand("BackgroundImageCache", false, true)
+            } catch (e) {
+            }
+            ;//IE6-bug
+            this.area = new dragMap({map : "psc_range", mover : "psc_cursor", dir : 'xy'});
+            this.slider = new dragMap({map : "psc_slider", mover : "psc_mark", dir : 'y'});
+            this.win = d.getElementById("pscolor_win");
+            this.view = d.getElementById("colorbg");
+            this.box = d.getElementById("psc_preview");
+            this.newColor = d.getElementById("psc_new");
+            this.input = d.getElementById("psc_value");
+            this.out = d.getElementById("color_out");
+            this.pos = this.area.getPos;//引用拖动对象的取页面坐标方法共用
+            this.area.onchange = this.slider.onchange = function(){//两个拖动对象的事件定制
+                var h = me.area.x * 360, s = (1 - me.area.y) * 100, b = 100;
+                me.view.style.background = me.hsb2hex(h, s, b);//设置右侧色带的背景色
+                b = (1 - me.slider.y) * 100;//设置上面文本框的值和预览框的背景
+                me.input.value = me.newColor.style.background = me.old = me.hsb2hex(h, s, b);
+            };
+            this.win.onclick = function(e){
+                me.stop(e || window.event)
+            };//取消面板冒泡
+            this.win.ondblclick = this.out.onclick = function(){
+                me.hide().onclick(me.input.value);
+                me.box.style.background = me.old;
+            };//输出按钮事件转发
+            return this;
+        },
+        onclick : function(x){//添加选定色彩事件,可以自已添加其它响应.
+            this.binder.value = x;
+            this.binder.style.background = x;
+            document.body.style[this.binder.id == 'b1' ? 'background' : 'color'] = x;
+        }
+    };
+    colorSelector.init().bind('b1').bind('b2');
+</script>
+</html>
+

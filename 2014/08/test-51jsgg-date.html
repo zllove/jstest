@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<style>
+
+    #iCalendar{ border:1px solid #1F62BE; width:210px; _width:190px; position:absolute; font-family:Arial; background:#F0F9FF; left:-500px; overflow:hidden; }
+    #iCalendar_body{ border-top:7px solid #208DDE; _height:170px; padding:0 5px; background:#F0F9FF }
+    #iCalendar iframe{ position:absolute;; z-index:-1; top:0; left:0; background:#F0F9FF }
+    #iCalendar a, #iCalendar b{ display:block; float:left; zoom:1; width:20px; height:16px; line-height:16px; padding:2px;
+        background:#F0F9FF; font-size:12px; text-align:center; color:#333; font-family:Arial;
+        text-decoration:none; margin:0px 2px;
+    }
+    #iCalendar b{ background:none; }
+    #iCalendar a:hover{ background:#FE8B1A; color:#fff; font-weight:bold }
+    #iCalendar .btn{ cursor:pointer; width:18px; }
+    #iCalendar #dateCap{ width:80px; color:#900; }
+    p{ padding:20px; }
+</style>
+<body>
+<p>
+<div id="iCalendar" tabIndex='-1' title='点击面板空白处关闭'>
+    <iframe id="iCalendar_mask" src="" frameBorder=0></iframe>
+    <div id="iCalendar_body"></div>
+</div>
+<input type="text" id="i_1"/> <input type="text" id="i_2"/><br/>
+<select id=""><option value="" selected="selected">dhooo.com</option></select>
+</p>
+</body>
+<script>
+    Date.prototype.fDay = function(){
+        var $ = new Date(this);
+        $.setDate(1);
+        return $.getDay()
+    };
+    Date.prototype.dCount = function(){
+        var $1 = new Date(this), $2 = new Date(this);
+        $1.setDate(1);
+        $2.setDate(1);
+        $2.setMonth($2.getMonth() + 1);
+        return ($2 - $1) / 86400000;
+    };
+    (CLD = {init : function(){
+        this.$ = new Date;
+        this.update();
+        iCalendar.onclick = function(){
+            iCalendar.style.display = "none";
+        };
+        return this
+    }, update : function(y, m){
+        var uiList = [], week = '日一二三四五六'.split(''), $ = this.$, fn = function(a, b){
+            return '<b class="btn" onclick="CLD.update(' + a + ')">' + b + '</b>'
+        };
+        y && $.setYear($.getFullYear() + y);
+        m && $.setMonth($.getMonth() + m);
+        var Y = $.getFullYear(), M = $.getMonth() + 1, D = $.getDate();
+        for(var i = 0; i < week.length; i++)uiList.push('<b>' + week[i] + '</b>');
+        for(i = 0; i < $.fDay(); i++)        uiList.push('<b>&nbsp;</b>');
+        for(i = 0; i < $.dCount(); i++)uiList.push('<a href="javascript:CLD.set(' + Y + ',' + M + ',' + (i + 1) + ')">' + (i + 1) + '</a>');
+        iCalendar_body.innerHTML = fn('-1,null', '&lt;&lt;') + fn('null,-1', '&lt;') + '<b id="dateCap">' + Y + '年' + M + '月</b>' + fn('null,1', '&gt') + fn('1,null', '&gt;&gt;') + uiList.join('');
+        if(this.$$)this.$$.focus();
+        iCalendar_mask.width = iCalendar_body.offsetWidth - 2;
+        iCalendar_mask.height = iCalendar_body.offsetHeight;
+    }, showTo : function(v){
+        for(var pos = {x : 0, y : 0}, $ = v; v; v = v.offsetParent){
+            pos.x += v.offsetLeft;
+            pos.y += v.offsetTop
+        }
+        ;
+        document.title = [pos.x, pos.y]
+        with(iCalendar.style){
+            left = pos.x + "px";
+            top = (pos.y + $.offsetHeight) + "px";
+            display = ""
+        }
+    }, bind : function(x){
+        x.onfocus = function(){
+            CLD.$$ = this;
+            CLD.showTo(this)
+        };
+        return this;
+    }, set : function(y, m, d){
+        if(CLD.$$){
+            CLD.$$.value = y + '-' + m + '-' + d;
+            iCalendar.style.display = "none";
+        }
+    }
+    }).init().bind(i_1).bind(i_2)
+</script>
+
+</body>
+</html>

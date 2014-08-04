@@ -1,0 +1,168 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title> jay_web_code </title>
+    <base href="http://imgqun.qq.com/cgi-bin/" />
+    <style type="text/css">
+        #win{
+            position:absolute;
+            width:771px;
+            height:559px;
+            left:50%;margin-left:-385px;
+            top:50%;margin-top:-280px;
+        }
+        #info{
+            height:16px;
+            line-height:16px;
+            font-size:12px;
+            padding:0px 10px;
+            position:absolute;
+            left:0;bottom:5px;
+            font-family:Arial;
+        }
+        #picList{
+            position:absolute;
+            right:5px;top:115px;
+            width:120px;
+            height:420px;
+            overflow:auto;
+            text-align:center;
+        }
+        #picList img{
+            border:1px solid #666;
+            padding:2px;
+            margin:10px 0;
+            cursor:pointer;
+        }
+        #picShow{
+            width:631px;
+            height:416px;
+            overflow:auto;
+            position:absolute;
+            left:6px;top:120px;
+        }
+
+        #step{
+            position:absolute;
+            width:100px;
+            font-size:10px;
+            height:12px;
+            left:400px;bottom:6px;
+        }
+
+    </style>
+</head>
+
+<body>
+<div id="win">
+    <div id="picList"></div>
+    <div id="picShow">
+        <img src="" id="pic_show" style='display:none'>
+    </div>
+    <div id="info"></div>
+    <div id="step"></div>
+</div>
+<script>
+
+    /*
+     begin
+     */
+
+    Jay_loadImg=function (){
+
+        this.pos=0;/* 进度 */
+        this.count=0;/* 图片总数 */
+        this.clip=[];/* 图片地址夹 */
+        this.last='';/* 最后一个图片地址,显示用 */
+
+    };
+    Jay_loadImg.prototype={/* 一个小小的图片轮流加载器 */
+
+        add:function(url){this.clip.push(url);this.count++;return this;},/* 添加一个地址 */
+        load:function(){
+            var J=this.clip.pop();/* 弹出一个准备下载的地址 */
+            if(J==undefined)return this.end();/* 全部完成-回调 */
+            var img=new Image(),Root=this;
+            this.last=img.src=J;
+            this.pos++;/* 计数器累加 */
+            this.ready(J);/* 单张图片准备下载-回调 */
+            img.onerror=function(){this.error=true;};/* 下载错误也算成功 */
+            (function(){
+                if(img.complete||img.error){
+                    Root.onload(J);/* 成功-回调 */
+                    return Root.load();/* 下载下一张 */
+                }
+                setTimeout(arguments.callee,100);/* 100毫秒后再测试 */
+            })();
+        },
+        ready:Array,onload:Array,end:Array/* 空回调函数占位符,皆传入一个当时src参数 */
+
+    };
+
+    /*
+     -------------------------------- Apply ----------------------------------------
+     */
+
+    var win=document.getElementById("win");
+    var info=document.getElementById("info");
+    var show=document.getElementById("show");
+    var picList=document.getElementById("picList");
+    var pic_show=document.getElementById("pic_show");
+    var step=document.getElementById("step");
+
+    var bgLoad=new Jay_loadImg;//用来下载界面背景
+    var Jay=new Jay_loadImg;//用来下载图片
+
+    /* 每次下载前显示状态 */
+    Jay.ready=function(src){
+        info.innerHTML='正在打开图片 '+src+'... ('+this.pos+'/'+this.count+')';
+        step.style.width=parseInt(this.pos/this.count*100)+'px';//刷新进度条
+    };
+
+    /* 每张图片下载完则添加到显示框中 */
+    Jay.onload=function(src){
+        var J=document.createElement('IMG');
+        J.src=src;
+        J.title=src.replace(/.*?([^\/]+$)/,'$1')+'\n'+J.width+'x'+J.height;
+        J.width=100;
+        J.height=60;
+        J.onclick=function (){
+            pic_show.style.display='';
+            info.innerHTML=pic_show.src=this.src;
+        }
+        picList.appendChild(J);
+    };
+
+    /* 全部下载完后 */
+    Jay.end=function (){
+        info.innerHTML=this.pos+'张图片全部下载完毕!';
+        setTimeout('step.style.width="0px";',200);//清除进度条
+        pic_show.style.display='';
+        pic_show.src=this.last;/* 显示最后一张图片 */
+    };
+
+
+    Jay
+            .add('img?uuid=20f5eef05895ef4894eb8e44db754ce44b')
+            .add('img?uuid=20aea017f449ff050494403780a3f06098')
+            .add('img?uuid=20bf076bc8588e0faa3338c845b01578b9')
+            .add('img?uuid=204a9b3a909c62cdc30625ab29c6ae7548')//gif
+            .add('img?uuid=20c121f445de7a8874541ef58b4147c0e4')//gif
+            .add('img?uuid=200c3f920f042ffb6eff953fc27f6d568f')
+            .add('img?uuid=209489090683b8676f1fbe02ec3a766a5f');
+
+    bgLoad.end=function (){//加载完背景应用到界面
+        win.style.background="url(img?uuid=2016b229c087fdd66d1f18aa155e93a0ab) no-repeat";
+        step.style.background="url(img?uuid=20633c7f8df6befb10f6de5b50a3ad829a) repeat-x";
+        Jay.load();//开始加载内容图片
+    };
+
+    bgLoad.add('img?uuid=2016b229c087fdd66d1f18aa155e93a0ab')
+            .add('img?uuid=20633c7f8df6befb10f6de5b50a3ad829a').load();//程序入口
+
+
+</script>
+</body>
+</html>

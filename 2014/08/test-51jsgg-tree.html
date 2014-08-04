@@ -1,0 +1,184 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title> XML to Tree </title>
+    <base href="http://dhooo.com/demo/">
+    <style>
+        dd,dl,dt{padding:0;margin:0;border:none;font-size:12px;}
+        .dhooo_tree{width:360px;height:500px;border:2px inset;overflow:auto;font-size:12px;}
+        img{vertical-align:middle;}
+        dt{white-space:nowrap;}
+        a{color:#333;text-decoration:none;}
+        a:hover{color:#0033CC;text-decoration:underline;}
+    </style>
+</head>
+
+<body>
+<div class="dhooo_tree" id="dhooo_tree"></div>
+<span id="show" style="font-size:12px;color:red"></span>
+</body>
+<script type="text/javascript">
+    /*
+     声明 XML2Tree 类
+     */
+    XML2Tree=function(ini){
+        var $=document, _this=this,$$='documentElement';
+        this.getTitle=ini.getTitle||String;
+        this.click=ini.click||String;
+        this.box=ini.shell.big?$.getElementById(ini.shell):ini.shell;
+        this.box.innerHTML=ini.loading||"loading...";
+        /* 异步下载Xml (chrome不能创建XMLDOC,使用Ajax构造) */
+        this.xml=!!$.all?(new ActiveXObject('Microsoft.XMLDOM')):(new XMLHttpRequest());
+        this.xml.onreadystatechange=function (){
+            if(_this.xml.readyState==4){
+                _this.box.innerHTML='';
+                _this.addSub($.all?_this.xml[$$]:_this.xml.responseXML[$$],_this.box)
+            }
+        }
+        if(!!$.all){this.xml.async=true;this.xml.load(ini.url)}
+        else{this.xml.open("GET",ini.url,true);this.xml.send(null)};
+    }
+    /*
+     共享接口
+     */
+    XML2Tree.prototype={
+        folder:function (node){
+            var UI=function(_){return document.createElement(_)}
+                    ,caption=UI('DT'),shell=UI('DL'),body=UI('DD'),$=XML2Tree.ini;
+            shell.appendChild(caption);
+            shell.appendChild(body);
+            var folderIco=this.selectIco($.folder,$.node,XML2Tree.hasChild(node));
+            caption.innerHTML=this.getLineIco(node)+this.getHasIco(node)
+                    +folderIco+'<a href="javascript:void(0)"><span>'
+                    +this.getTitle.call(node)+'</span></a>';
+            caption.mapNode=node;
+            return {'shell':shell,'caption':caption};
+        }
+        ,addSub:function (node,shell){
+            if(node==null)return;
+            var nodes=node.childNodes,_tree=this;
+            for (var i=0;i<nodes.length;i++ ) {
+                if(nodes[i].nodeType!=1)continue;/* for FF find textNode */
+                var _=this.folder(nodes[i]);
+                shell.appendChild(_.shell);
+                _.caption.onclick=function (e){
+                    var $=XML2Tree,childShell=$.next(this);
+                    if(this.mapNode){
+                        var wrap=this.parentNode.getElementsByTagName('DD')[0];
+                        if(XML2Tree.hasChild(this.mapNode)){
+                            _tree.addSub(this.mapNode,wrap);
+                            $.toggle(this,true)
+                        };
+                        this.mapNode=null;
+                    }else{
+                        if(!childShell)return;
+                        if(XML2Tree.hasChild(childShell)){
+                            var hide=childShell.style.display=='none';
+                            childShell.style.display=hide?'':'none';
+                            $.toggle(this,hide);
+                        };
+                    };
+                    e=e||window.event;
+                    var sE=e.srcElement||e.target;
+                    if(sE.tagName.toUpperCase()=='SPAN'){
+                        var title=sE.innerHTML;
+                        if(!XML2Tree.hasChild(childShell)){
+                            _tree.click.call(sE,title,false);/* 叶节点单击, this 重置为 span */
+                        }else{
+                            _tree.click.call(childShell,title,true);/* 文件夹节点单击, this 重置为 子节点的壳DD */
+                        }
+                    }
+                };
+            };
+        }
+        ,getLineIco:function (node){
+            var icos=[],root=node.ownerDocument;
+            if(!root)return null;
+            node=node.parentNode;
+            while(node.parentNode!=root){
+                var $=XML2Tree,img=this.selectIco($.ini.line,$.ini.empty,!!$.next(node));
+                icos=[img].concat(icos);
+                node=node.parentNode;
+            }
+            return icos.join('');
+        }
+        ,getHasIco:function (node){
+            var last=!!XML2Tree.next(node),$=XML2Tree.ini;
+            return XML2Tree.hasChild(node)?
+                    this.selectIco($.plus,$.plusBottom,last):
+                    this.selectIco($.join,$.joinBottom,last)
+        }
+        ,selectIco:function(_1,_2,bool){return '<img src="'+(bool?_1:_2)+'" />'}
+    };
+    /*
+     静态接口
+     */
+    XML2Tree.ini={
+        root: 'treeview/base.gif',
+        folder: 'treeview/folder.gif',
+        folderOpen: 'treeview/folderopen.gif',
+        node: 'treeview/page.gif',
+        empty: 'treeview/empty.gif',
+        line: 'treeview/line.gif',
+        join: 'treeview/join.gif',
+        joinBottom: 'treeview/joinbottom.gif',
+        plus: 'treeview/plus.gif',
+        plusBottom: 'treeview/plusbottom.gif',
+        minus: 'treeview/minus.gif',
+        minusBottom: 'treeview/minusbottom.gif',
+        nlPlus: 'treeview/nolines_plus.gif',
+        nlMinus: 'treeview/nolines_minus.gif'
+    };
+    /* 图标预载 */
+    XML2Tree.prevLoad=function (){
+        for (var key in this.ini){
+            var $=new Image();
+            $.src=this.ini[key];
+        }
+    };
+    XML2Tree.next=function(node){
+        var $=node,_='nextSibling';
+        for($=$[_];$;$=$[_]){if($.nodeType==1){return $}};
+        return null;
+    };
+    XML2Tree.hasChild=function (node){
+        var $=node.childNodes;
+        for (var i=0;i<$.length;i++ )
+            if($[i].nodeType==1)return true;
+        return false;
+    };
+    XML2Tree.toggle=function(node,isOpen){
+        var imgs=node.getElementsByTagName('IMG')
+                ,f=imgs.length-1,$=XML2Tree.ini;
+        imgs[f].src=isOpen?$.folderOpen:$.folder;
+        if(this.next(node.parentNode)){
+            imgs[f-1].src=isOpen?$.minus:$.plus;
+        }else{
+            imgs[f-1].src=isOpen?$.minusBottom:$.plusBottom;
+        }
+    };
+    /*
+     生成实例树
+     参数:
+     url: xml 地址
+     shell: 树容器
+     loading: 下载中的效果html
+     getTitle: 标题来源属性操作 this 重置为 xml node
+     chick: 节点或者叶节点的单击事件(可得到参数title,isFolder与重置后的this)
+     */
+    XML2Tree.prevLoad();
+    tree=new XML2Tree({
+        url:'http://bbs.51js.com/rss.php?auth=btXfcHM2O96P%2BjQ28hA5nTAnO5S%2Fvn4',
+        shell:'dhooo_tree',
+        loading:'<p style="margin-left:10px"><img src="images/load1.gif" /> loading...<p>',
+        //getTitle:function(){return this.getAttribute('n')},
+        getTitle:function(){
+            return this.firstChild.nodeValue||'无标题';
+        },
+        click:function(title,isFolder){
+            document.getElementById('show').innerHTML=title
+        }
+    });
+</script>
+</html>

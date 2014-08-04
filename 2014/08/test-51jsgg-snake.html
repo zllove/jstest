@@ -1,0 +1,141 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <base href="http://bbs.51js.com/">
+    <style>
+        html,body{background:#0D0A15; color:#aaa;font-size:12px;margin:0;padding:0;overflow:hidden;  }
+        #dhooo{float:left;margin-left:140px }
+        table{border-collapse:collapse;border:3px solid #3F7581;border-top:20px solid #3F7581; background:#002667; }
+        td{width:22px;height:22px;overflow:hidden;font-size:5px;border:1px solid #3F7581; }
+        .snake{background:#FF9900;}
+        .food{background:url(images/smilies/lol.gif) no-repeat 1px 1px; }
+        #count{color:red;font-size:20px; }
+    </style>
+</head>
+
+<body>
+<div id="dhooo">
+    您的成绩: <span id="count">0</span> ( 空格键开始与暂停 )
+    <br/><br/>
+    <div id="iWin"></div>
+</div>
+</body>
+<script>
+    snake={
+        /*
+         生成基础表格,设置方向键事件,生成蛇的身体
+         */
+        init:function(win,x,y){
+            this.win=win;this.x=x;this.y=y;
+            var w=document.getElementById(win);
+            this.setMap(w,x,y);
+            var $=document.getElementById('iMap').rows;
+            for (var i=0,map=[];i<$.length;i++ ){
+                map[i]=[];
+                for (var j=0;j<$[i].cells.length;j++)
+                    map[i][j]=$[i].cells[j];
+            }
+            this.map=map;
+            window.onkeydown=document.body.onkeydown=function (e){
+                with(snake.ini.dir){
+                    switch ((window.event||e).keyCode){
+                        case 37:        if(x==1)return;y=0;x=-1;break;
+                        case 38:        if(y==1)return;y=-1;x=0;break;
+                        case 39:        if(x==-1)return;y=0;x=1;break;
+                        case 40:        if(y==-1)return;y=1;x=0;break;
+                        case 32:        snake.ini.stop=!snake.ini.stop;
+                    }
+                }
+            };
+            this.setBody();this.move();
+        }
+        /*
+         生成基础表格
+         */
+        ,setMap:function(win,x,y){
+            for (var i=0, html=[];i<y;i++ ) {
+                for (var j=0,tmp=[];j<x;j++ )
+                    tmp.push('<td>&nbsp;</td>');
+                html.push('<tr>'+tmp.join('')+'</tr>');
+            }
+            win.innerHTML='<table cellspacing="1" cellpadding="0" id="iMap">'+html.join('')+'</table>';
+        }
+        /*
+         生成蛇的初始身体
+         */
+        ,setBody:function(){
+            var y=parseInt(this.map.length/2)        ,_x=parseInt((this.map[0].length-this.ini.len)/2);
+            this.body=[];
+            for (var i=0;i<this.ini.len;i++ ){
+                var x=this.map[y][i+_x];
+                this.body.push(x);
+                x.className=this.ini.css;
+            }
+        }
+        /*
+         定时移动
+         */
+        ,move:function(){
+            this.setFood();
+            var o=this.getNext();
+            if(o){
+                if(!this.ini.stop){
+                    if(this.ini.food==o){
+                        this.ini.food=null;
+                        document.getElementById("count").innerHTML=(++this.ini.sum)*10;
+                    }else{this.body.shift().className='';}
+                    this.body.push(o);
+                    o.className=this.ini.css;
+                }
+                document.title=this.ini.stop;
+                setTimeout(function(){        snake.move();},snake.ini.speed);
+            }else{
+                alert('祝无忧的朋友们2009年新年快乐，万事如意！');
+                window.location.reload();
+            }
+        }
+        /*
+         探测下一个位置
+         */
+        ,getNext:function (){
+            var e=this.body[this.body.length-1],y=e.parentNode.rowIndex,x=e.cellIndex;
+            try{
+                var n=this.map[y+this.ini.dir.y][x+this.ini.dir.x];
+                if(this.isBody(n))return null;
+                return n;
+            }catch(e){return null;}
+        }
+        /*
+         放置食物
+         */
+        ,setFood:function (){
+            if(this.ini.food!=null)return;
+            do{/* 寻找非蛇身以外的位置 */
+                var y=Math.ceil(Math.random()*(this.map.length-1));
+                var x=Math.ceil(Math.random()*(this.map[0].length-1));
+                var f=this.map[y][x];
+            }while(this.isBody(f));
+            f.className=this.ini.fcss;
+            this.ini.food=f;
+        }
+        /*
+         测试是否碰到自身
+         */
+        ,isBody:function(x){
+            for (var i=0,b=false;i<this.body.length;i++ )
+                if(x==this.body[i])return true;
+            return false;
+        }
+        /*
+         系统参数
+         */
+        ,ini:{dir:{x:1,y:0},speed:180        ,css:'snake'        ,fcss:'food',len:5,food:null,sum:0,stop:true}
+    }
+    /*
+     初始化游戏,设置表格大小
+     */
+    snake.init('iWin',20,20);
+</script>
+</html>
+

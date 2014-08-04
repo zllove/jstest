@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title> google-eye </title>
+    <base href="http://looou.com/images/outref/">
+    <style>
+        #eye{ position:absolute; left:400px; top:200px; }
+        #eye-left{ background:url(eye-y.gif) no-repeat; width:117px; height:117px; float:left; }
+        #eye-right{ background:url(eye-r.gif) no-repeat; width:117px; height:117px; float:left; }
+        #eye img{ position:absolute; }
+    </style>
+</head>
+<body>
+<div id="eye">
+    <div id="eye-left"><img src="pupil.gif" border=0 alt="" title=""></div>
+    <div id="eye-right"><img src="pupil.gif" border=0 alt="" title=""></div>
+</div>
+</body>
+<script>
+    var MouseEye = function(panel, left, right){
+        var panel = $('eye'), left = $$('IMG', 'eye-left')[0], right = $$('IMG', 'eye-right')[0];
+        var pos = {x : parseInt(css(panel).left) || 0, y : parseInt(css(panel).top) || 0};
+        document.onmousemove = function(e){
+            e = e || event;
+            var x = e.clientX, y = e.clientY;
+            setPos(left, x, y, 51, 51, 36);
+            setPos(right, x, y, 171, 51, 36);
+        };
+        function $(id){
+            return typeof(id) == 'string' ? document.getElementById(id) : id
+        };
+        function $$(tag, id){
+            return ($(id) || document).getElementsByTagName(tag)
+        };
+        function css(el){
+            return el.currentStyle || document.defaultView.getComputedStyle(el, null)
+        };
+        function getPos(p1, p2, offX, offY, r){
+            var a = Math.abs(p1.x - p2.x), b = Math.abs(p1.y - p2.y);
+            if(a < 30 && b < 30){
+                return {x : p2.x - pos.x - 7, y : p2.y - pos.y - 7}
+            }
+            var A = Math.atan(a / b);
+            var f1 = p1.x > p2.x ? -1 : 1;
+            var f2 = p1.y > p2.y ? -1 : 1;
+            return {x : Math.sin(A) * r * f1 + offX, y : Math.cos(A) * r * f2 + offY};
+        };
+        function setPos(el, x, y, offX, offY, r){
+            var xy = getPos({x : offX + pos.x, y : offY + pos.y}, {x : x, y : y}, offX, offY, r);
+            el.style.left = xy.x + 'px';
+            el.style.top = xy.y + 'px';
+        };
+    };
+    MouseEye();
+</script>
+</html>
+

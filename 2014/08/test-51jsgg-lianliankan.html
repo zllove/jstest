@@ -1,0 +1,185 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title> 连连看 </title>
+    <base href="http://dhooo.com/web/">
+    <style>
+        body,html{background:#fff; height:100%l;margin:0px;  }
+        #shell{margin-top:50px;}
+        table{border-collapse:collapse;border:5px solid #BEAA35;background:url(llkbg.gif) repeat; }
+        td{width:48px;height:48px;cursor:pointer;background:url(elements.gif) no-repeat; }
+        .p0{background-position:-7px -7px;}
+        .p1{background-position:-71px -7px;}
+        .p2{background-position:-135px -7px;}
+        .p3{background-position:-199px -7px;}
+        .p4{background-position:-263px -7px;}
+        .p5{background-position:-327px -7px;}
+        .p6{background-position:-391px -7px;}
+        .p7{background-position: -455px -7px;}
+        .p8{background-position: -519px -7px;}
+        .p9,
+        .null{background:none;cursor:default}
+        td div{height:100%;width:100%;}
+        td.in div{height:40px;width:40px;border:4px dashed #993300;}
+        td.select div{height:40px;width:40px;border:4px solid #C00;}
+        .status{text-align:center;color:#990000;margin-top:10px;line-height:60px;  }
+        span{padding:0 20px;font-size:16px;font-weight:bold}
+        #time strong{background:#000;color:red;padding:2px;border:4px solid #999;font-family:Arial;}
+    </style>
+</head>
+
+<body>
+
+<div id="shell"></div>
+<div class="status"><span id="time">时间 <strong>00:00</strong></span> <span id="step">成绩: 0</span></div>
+<div id="swf"></div><bgsound  src="dear.mp3" LOOP=-1 />
+</body>
+<script>
+
+    /*
+     连连看实例
+     */
+    LLK={
+        /*
+         初始化, 构造新的网格, 重置计时与计步器,绑定图格点击事件
+         */
+        init:function (){
+            this.createGrid().step=this.useTime=0;
+            clearInterval(this.timer);
+            alert('游戏开始了，你只有两分钟的时间哦，请接受挑战吧！')
+            this.timer=setInterval(function(){
+                var D=120-(LLK.useTime++);/* 累加时间并格式化显示 */
+                document.getElementById("time").innerHTML='时间: <strong>'
+                        +('0'+parseInt(D/60)).slice(-2)+':'
+                        +('0'+D%60).slice(-2)+'</strong>';
+                if(D==0)return LLK.init(alert('下次要多加油哦!'));
+            },1000);
+            this.cells=document.getElementById("shell").getElementsByTagName("TD");
+            for (var i=0;i<this.cells.length;i++ ){/* 依次绑定事件 */
+                var $=this.cells[i];
+                $.onclick=function (){LLK.bind(this)}
+                if($.className!='null'){
+                    $.onmouseover=function (){this.className+=' in';}
+                    $.onmouseout=function (){this.className=this.className.replace(/in/ig,'');}
+                }
+            }
+        }
+        /*
+         随机创建打散的网格
+         */
+        ,createGrid:function(){
+            var css='p0,p1,p2,p3,p4,p5,p6,p7'.split(','),cssed=[],_css;
+            for (var i=0, html=[];i<8;i++ ) {
+                for (var j=0,tmp=[];j<14;j++ ){
+                    if(i>3){/* 保证图片两两配对 */
+                        _css=cssed.splice(parseInt(Math.random()*cssed.length),1);
+                    }else{
+                        _css=css[parseInt(Math.random()*css.length)];
+                        cssed.push(_css);
+                    }
+                    tmp.push('<td class="'+_css+'"><div>&nbsp;</div></td>');
+                }
+                html.push('<tr>'+tmp.join('')+'</tr>');
+            }
+            document.getElementById("shell").innerHTML=
+                    '<table cellspacing="0" align="center" cellpadding="0" id="iMap">'+html.join('')+'</table>';
+            this.map=document.getElementById("iMap").rows;
+            return this;
+        }
+        /*
+         网格点击消除正确的连接
+         */
+        ,bind:function (td){
+            if(td.className=='null'||td.lock||td==this.A)return;
+            td.className+=' select';
+            if(!this.A){return this.A=td;}
+            this.B=td;
+            if(this.check()){this.fx();}
+            this.A=this.B=null;
+        }
+        /*
+         检查是否可消除
+         */
+        ,check:function (){
+            this.A.className=this.A.className.replace(/select|in/ig,'');
+            this.B.className=this.B.className.replace(/select|in/ig,'');
+            if(this.A.className.slice(0,2)!=this.B.className.slice(0,2))return false;
+            var can=true,x1=this.A.cellIndex,y1=this.A.parentNode.rowIndex
+                    ,x2=this.B.cellIndex,y2=this.B.parentNode.rowIndex;
+            if( (Math.abs(x1-x2)==1&&y1==y2)||(Math.abs(y1-y2)==1&&x1==x2))return true;
+            //if((x1==x2&& (x1==0||x1==13))||(y1==y2&& (y1==0||y1==7))) return true;
+            if(this.isBeeline(x1,y1,x2,y2)||this.is90(x1,y1,x2,y2)||this.isZ(x1,y1,x2,y2)||this.isZ(x2,y2,x1,y1)) return true;
+        }
+        ,isBeeline:function(x1,y1,x2,y2){/* 直连 */
+            if(y1==y2){/* 水平直连 */
+                var d=(x1-x2)<0?'nextSibling':'previousSibling',tmp=this.map[y1].cells[x1][d],end=this.map[y2].cells[x2];
+                while (tmp!=end){
+                    if(!tmp||tmp.className!='null')return false;
+                    tmp=tmp[d];
+                }
+                return true;
+            };
+            if(x1==x2){/* 垂直直连 */
+                var d=(y1-y2)<0?1:-1,y=y1+d,tmp=this.map[y].cells[x1],end=this.map[y2].cells[x2];
+                while (tmp!=end){
+                    if(!tmp||tmp.className!='null')return false;
+                    y=y+d;
+                    tmp=this.map[y].cells[x1];
+                }
+                return true;
+            }
+        }
+        ,is90:function (x1,y1,x2,y2){/* 直角连 */
+            if(this.map[y2].cells[x1].className=='null'&&this.isBeeline(x1,y1,x1,y2)&&this.isBeeline(x2,y2,x1,y2))
+                return true;/* 左上直角连 */
+            if(this.map[y1].cells[x2].className=='null'&&this.isBeeline(x1,y1,x2,y1)&&this.isBeeline(x2,y2,x2,y1))
+                return true;/* 右下直角连 */
+        }
+        ,isZ:function (x1,y1,x2,y2){/* N/Z形连 */
+            var x=x1,y=y1,tmp;
+            for (var i=-1;i<2;i+=2 ){
+                var e=(i==-1)?0:7;
+                for(y=y1+i;y!=e;y=y+i){
+                    if(y<0||y>7||this.map[y].cells[x].className!='null')break;
+                    if(this.is90(x,y,x2,y2))return true;
+                }
+            }
+            for (y=y1,i=-1;i<2;i+=2 ){
+                var e=(i==-1)?0:13;
+                for(x=x1+i;x!=e;x=x+i){
+                    if(x<0||x>13||this.map[y].cells[x].className!='null')break;
+                    if(this.is90(x,y,x2,y2))return true;
+                }
+            }
+        }
+        /*
+         消除附加效果
+         */
+        ,fx:function (){
+            var A=this.A,B=this.B,fxIdx=0;
+            /*var swf='clear.swf';//有点卡，所以注释掉了音效与透明
+             document.getElementById("swf").innerHTML='<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="23" height="12" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0"><param name="quality" value="high" /><param name="wmode" value="transparent" /><param name="movie" value="'+swf+'" /><embed src="'+swf+'" quality="high" width="23" height="12" flashvars="" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash"></embed></object>';*/
+            A.onmouseover=A.onmouseout=B.onmouseover=B.onmouseout=null;
+            document.getElementById("step").innerHTML="成绩: "+(++this.step)*10;
+            if(this.step>=56){return this.init(alert('你真棒,恭喜发财,春节快乐!'))};
+            A.lock=B.lock=!function(){
+                B.style.cssText=A.style.cssText=fxIdx%2?'background:none;':'';//'filter:alpha(opacity=50);opacity:0.5';
+                (++fxIdx<4)&&setTimeout(arguments.callee,100)||(A.className=B.className='null');
+            }();
+        }
+    }
+
+    /*
+     启动游戏
+     */
+
+    LLK.init();
+
+    /*
+     强制IE缓存图片
+     */
+    document.execCommand("BackgroundImageCache", false, true);
+
+</script>
+</html>

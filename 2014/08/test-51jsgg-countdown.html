@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<style>
+    table{
+        border-collapse:collapse; border:2px solid outset;
+        background:#F0EFE2;
+        padding:10px;
+        font-size:14px; font-family:Arial;
+    }
+    img{ vertical-align:middle; margin:0px; }
+    #ad{ background:#016CA4; }
+    th{
+        background:#35528E url([img]http://www.dhooo.com/web/images/caption.jpg[/img]) repeat-y 100% 0;
+        color:#fff; padding:10px;
+        margin:1px;
+    }
+    #web, #locale{
+        border:2px solid inset; background:#000;
+        color:#00FFFF; font-weight:bold;
+    }
+    #diff{ color:red }
+</style>
+<body>
+<table border=0 cellspacing="3" cellpadding="5" align=center>
+    <th colspan='4' align="left">
+        <div><span style="color:#FFCC33">◆ </span>爱无忧，爱果果，爱JavaScript</div>
+        </caption>
+        <tr>
+            <td colspan='4' id="ad" align=right>
+                <img src="http://img.alimama.cn/a/2008-10-26/109733430002081026005231.gif" align=right></td>
+        </tr>
+        <tr>
+            <td rowspan='4' style="width:10px;overflow:hidden;backgound:url()">
+                <img src="http://bbs.51js.com/images/avatars/16.gif" border=0 align=right></td>
+            <td><img src="http://bbs.51js.com/images/smilies/time.gif"/> 无忧服务器的时间：</td>
+            <td id='web'>
+                <div>loading...</div>
+            </td>
+        </tr>
+        <tr>
+            <td><img src="http://bbs.51js.com/images/smilies/time.gif"/> 大哥您本地的时间:</td>
+            <td id="locale">loading...</td>
+        </tr>
+        <tr>
+            <td>离2010年还有</td>
+            <td id="ooxx">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>伪标准时差</td>
+            <td id="diff">&nbsp;</td>
+        </tr>
+</table>
+</body>
+<script type="text/javascript">
+    $ = function(id){
+        return document.getElementById(id)
+    }
+    if(document.all){
+        window.XMLHttpRequest = function(){
+            var $ = ['Microsoft.XMLHTTP', 'Msxml2.XMLHTTP'];
+            for(var i = 0; i < $.length; i++){
+                try{
+                    return new ActiveXObject($[i])
+                } catch (e) {
+                }
+            }
+            ;
+        };
+    }
+    webDate = function(fn){
+        var QQ = new XMLHttpRequest();
+        QQ.onreadystatechange = function(){
+            QQ.readyState == 4 && (fn(new Date(QQ.getResponseHeader('Date'))))
+        };
+        QQ.open('HEAD', '/?_=' + (-new Date));
+        QQ.send(null);
+    }
+    window.time = new Date();
+    targetTime = new Date('2010/1/1');
+    time2String = function(t){
+        with(t)return [getFullYear(), '年'
+            , ('0' + (getMonth() + 1)).slice(-2), '月'
+            , ('0' + getDate()).slice(-2), '日 '
+            , ('0' + getHours()).slice(-2), ': '
+            , ('0' + getMinutes()).slice(-2), ': '
+            , ('0' + getSeconds()).slice(-2)].join('')
+    }
+    int2time = function(m){
+        m -= (D = parseInt(m / 86400000)) * 86400000;
+        m -= (H = parseInt(m / 3600000)) * 3600000;
+        S = parseInt((m -= (M = parseInt(m / 60000)) * 60000) / 1000);
+        return D + '天' + H + '小时' + M + '分' + S + '秒'
+    }
+    setInterval(function(){
+        webDate(function(webTime){
+            $('web').innerHTML = time2String(time = webTime);
+        })
+        $('locale').innerHTML = time2String(new Date);
+        $('diff').innerHTML = Math.abs(new Date() - time - 1000) + '毫秒'
+        $('ooxx').innerHTML = int2time(targetTime - time);
+    }, 1000)
+
+</script></html>
+
+</body>
+</html>

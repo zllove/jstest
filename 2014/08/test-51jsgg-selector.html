@@ -1,0 +1,338 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title> ldh_web_editor </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <link href="mfx.css" rel="stylesheet" type="text/css">
+    <script src="mfx.js"></script>
+    <style>
+        td{ font-size:12px; width:100px }
+        td div{ color:red; }
+        td span{ color:blue; }
+        td.google{ background:#CCCC00; }
+        pre{ font-family:Arial; font-size:12px; color:#333; }
+    </style>
+    <script>
+        /*
+         begin
+         */
+        find = (function(){
+            var GUID = +new Date;
+
+            function $GetArray(list){
+                if(list == null || list == undefined) return [];
+                if(list instanceof Array) return list;
+                if(((!list.item) && (!list.callee)) || list == window) return
+                ;
+                for(var i = 0, tmp = [], L = list.length; i < L; ++i){
+                    tmp.push(list);
+                }
+                ;
+                return tmp;
+            };
+            function $GetGuid(el){
+                return el.guid ? el.guid : (el.guid = ++GUID);
+            };
+            function $Trim(str){
+                return str.replace(/^\s*|\s*$/g, '');
+            };
+            function $FindGroup(query, owner, each){
+                if(/,/.test(query)){
+                    var group = query.replace(/(^\s*,)|(,?\s*,$)|^.*(?=#[^#]+$)/g, '').split(','), gel = [];
+                    for(var i = 0; i < group.length; ++i){
+                        gel = gel.concat($FindGroup(group, owner));
+                    }
+                    ;
+                    var only = {}, only2 = [];
+                    for(var i = 0; i < gel.length; ++i){
+                        var guid = $GetGuid(gel);
+                        if(only[guid] == undefined){
+                            only[guid] = true;
+                            only2.push(gel);
+                            each && each.call(gel, i, gel);
+                        }
+                        ;
+                    }
+                    ;
+                    return only2;
+                }
+                ;
+                var flag = $Trim(query.replace(/\s*([\+\>\~])\s*/ig, ' $1')).split(/\s+/), save = [];
+                if(typeof owner == 'string'){
+                    owner = $FindGroup(owner, document);
+                }
+                ;
+                owner = $GetArray(owner);
+                if(owner.length == 0) return [];
+                for(var i = 0; i < owner.length; ++i){
+                    var els = $Select(flag[0], owner);
+                    save = save.concat(els);
+                }
+                ;
+                if(flag[1]){
+                    save = $FindGroup(flag.slice(1).join(' '), save);
+                }
+                ;
+                return save;
+            };
+            function $Select(mark, owner, filter){
+                var tmp = [], isId = /^#([^#]+)$/, isClass = /^\.([\w\-]+)$/, isFormElement = /^:([a-z]+)$/, isTag = /^\w+$|^\*$/, isSibling = /^([\+~])([\.\:])?([\w\-]+)$/, isChild = /^>(\.)?([\w\-]+)$/, isFilter = /^((?:[\.\:]?[\w\-]+)|\*)([\.\:][\w\-]+)$/;
+                if(isId.test(mark)){
+                    tmp = document.getElementById(mark.match(isId)[1]);
+                    return tmp ? [tmp] : [];
+                } else if(isClass.test(mark)){
+                    var check = new RegExp('(^|\\s)' + mark.match(isClass)[1] + '(?=\\s|$)');
+                    var nodes = filter || owner.getElementsByTagName("*");
+                    for(var i = 0; i < nodes.length; ++i){
+                        check.test(nodes.className) && tmp.push(nodes)
+                    }
+                    ;
+                    return tmp;
+                } else if(isFormElement.test(mark)){
+                    var check = new RegExp('^' + mark.match(isFormElement)[1] + '$', 'i');
+                    var nodes = filter || owner.getElementsByTagName("*");
+                    for(var i = 0; i < nodes.length; ++i){
+                        check.test(nodes.type) && tmp.push(nodes)
+                    }
+                    ;
+                    return tmp;
+                } else if(isTag.test(mark)){
+                    return $GetArray(owner.getElementsByTagName(mark));
+                } else if(isSibling.test(mark)){
+                    var tag = mark.match(isSibling), op = tag[1] == '~' ? 'previousSibling' : 'nextSibling', check = tag[2] == '.' ? ['className', new RegExp('(^|\\s)' + tag[3] + '(?=\\s|$)')] : tag[2] == ':' ? ['type', new RegExp('^' + tag[3] + '$', 'i')] : ['nodeName', new RegExp('^' + tag[3] + '$', 'i')];
+                    var el = $Sibling(owner, op, function(){
+                                check[1].test(this[check[0]]) && tmp.push(this);
+                            });
+                    return tmp;
+                } else if(isChild.test(mark)){
+                    var tag = mark.match(isChild), check = tag[1] == '.' ? ['className', new RegExp('(^|\\s)' + tag[2] + '(?=\\s|$)')] : ['nodeName', new RegExp('^' + tag[2] + '$', 'i')];
+                    var chs = owner.childNodes;
+                    for(var i = 0; i < chs.length; ++i){
+                        var tel = chs;
+                        check[1].test(tel[check[0]]) && tmp.push(tel);
+                    }
+                    ;
+                    return tmp;
+                } else if(isFilter.test(mark)){
+                    mark = mark.match(isFilter);
+                    return $Select(mark[2], null, $Select(mark[1], owner));
+                }
+                ;
+                return [];
+            };
+            function $Sibling(el, dir, each){
+                each = each || function(){
+                    return false;
+                };
+                for(var i = 0; ; ++i){
+                    el = el[dir];
+                    if(el == null || el == document.body) break;
+                    if(el.nodeType != 1) continue;
+                    if(false === each.call(el, i)) break;
+                }
+                ;
+                return el;
+            };
+            function $main(query, owner, each){
+                if(!query) return [];
+                owner = owner == undefined ? document : owner;
+                if(typeof owner == 'function'){
+                    each = owner;
+                    owner = document;
+                }
+                ;
+                if(typeof query != 'string'){
+                    var els = $GetArray(query);
+                    if(each){
+                        for(var i = 0; i < els.length; ++i){
+                            each.call(els, i, els)
+                        }
+                    }
+                    ;
+                    return els;
+                }
+                ;
+                query = $Trim(query) + ',';
+                return $FindGroup(query, owner, each);
+            };
+            $main.trim = $Trim;
+            $main.getArray = $GetArray;
+            $main.getGuid = $GetGuid;
+            return $main;
+        })();
+
+        /*
+         end
+         */
+
+    </script>
+</head>
+<body>
+<table border=1>
+    <tr>
+        <td>我是表格</td>
+        <td>我是表格</td>
+        <td>我是表格</td>
+        <td>我是表格</td>
+        <td>我是表格</td>
+    </tr>
+    <tr>
+        <td><span>我是表格</span></td>
+        <td>
+            <div>我是表格</div>
+        </td>
+        <td>我是表格</td>
+        <td class="google">我是表格</td>
+        <td>我是表格</td>
+    </tr>
+    <tr>
+        <td><span>我是表格</span></td>
+        <td>
+            <div>我是表格</div>
+        </td>
+        <td class="findback">我找我后面的td</td>
+        <td class="google">我是表格</td>
+        <td>我是表格</td>
+    </tr>
+    <tr>
+        <td><span>我是表格</span></td>
+        <td>
+            <div>我是表格</div>
+        </td>
+        <td>我是表格</td>
+        <td class="google">我是表格</td>
+        <td>我是表格</td>
+    </tr>
+    <tr>
+        <td><input type="radio"/></td>
+        <td>
+            <div>我是表格</div>
+        </td>
+        <td>我是表格</td>
+        <td class="google"><input type="radio"/></td>
+        <td>我是表格</td>
+    </tr>
+</table>
+<input type="radio" id=""/><input type="checkbox" id=""/> <input type="radio" id=""/><input type="checkbox" id=""/>
+<input type="radio" id=""/><span>我是span</span><input type="checkbox" id=""/>
+<input type="radio" id=""/><input type="checkbox" id=""/><br>
+<button id="odd">奇行着色</button>
+<button id="oddCol">奇列着色</button>
+<button id="findNext">我找我后面的td</button>
+<button id="findallradio">选中所有radio=':radio'</button>
+<button id="findradio">选中td中的radio='td :radio'</button>
+<br>
+<button id="findradiobackcheck">选中span后面的复选框='span+:checkbox'</button>
+<br>
+<button id="find2">选中所有的span和表格中第一层div='span,td>div'</button>
+<br>
+<pre>
+调用方法:
+find(css选择符，父css选择符，遍历函数);
+返回标准数组;
+例：
+1. 后代选择符
+find('td span','table');//选出所有table中所有td中的所有span;
+2. 子选择符
+find('td>div');//选出所有td下面的子div;
+3. 类选择符
+find("td .google");
+4. 标签选择符
+find('table span');
+5. 兄长选择符
+find(".google~p");//选出类名为google前面的所有同级p标签
+6. 弟节点选择符
+find("#odd+.goolge");//选出ID为odd的后面所有同级类名为google的标签
+7. 联合选择符
+find("p,div span,.google+.mod");//选出所有的p和所有div下面的span和.google后面的.mod;
+8. 表单控件选择符
+find('.google:text');//选出所有类名为google的文本域
+9. 其它任意的组合,不支持属性选择与奇偶、内容文本等选择，不过可以在后面的遍历函数中轻松处理:
+find('#mfx tr',function(i,arr){
+        if(i%2){
+                this.innerHTML='我是奇行';
+        }
+})
+</pre>
+</body>
+<script>
+    // 奇行着色
+    find('#odd')[0].onclick = function(){
+        find('tr', function(i){
+            if(i % 2){
+                this.style.background = '#FF00FF';
+            }
+        })
+    };
+    // 奇列着色
+    find('#oddCol')[0].onclick = function(){
+        find('td', function(){
+            if(this.cellIndex % 2){
+                this.style.background = '#FF3300';
+            }
+        })
+    };
+    // 弟选择符
+    find('#findNext')[0].onclick = function(){
+        find('.findback+td', function(){
+            this.style.background = '#999';
+        })
+    };
+    find('#findradio')[0].onclick = function(){
+        find('td :radio', function(){
+            this.checked = !this.checked;
+        })
+    };
+
+    find('#findallradio')[0].onclick = function(){
+        find(':radio', function(){
+            this.checked = !this.checked;
+        })
+    };
+
+    find('#findradiobackcheck')[0].onclick = function(){
+        find('span+:checkbox', function(){
+            this.checked = !this.checked;
+        })
+    };
+    find('#find2')[0].onclick = function(){
+        find('span,td>div', function(){
+            this.innerHTML = '找到了啊';
+        })
+    };
+</script>
+<p>简单的写了个选择器...</p>
+<p>调用方法:</p>
+<p>find(css选择符，父css选择符，遍历函数);</p>
+<p>返回标准数组;</p>
+<p>例：</p>
+<p>1. 后代选择符</p>
+<p>find('td span','table');//选出所有table中所有td中的所有span;</p>
+<p>2. 子选择符</p>
+<p>find('td>div');//选出所有td下面的子div;</p>
+<p>3. 类选择符</p>
+<p>find("p .google",".view,div>p+.google");</p>
+<p>4. 标签选择符</p>
+<p>find('table span');</p>
+<p>5. 兄长选择符</p>
+<p>find(".google~p");//选出类名为google前面的所有同级p标签</p>
+<p>6. 弟节点选择符</p>
+<p>find("#odd+.goolge");//选出ID为odd的后面所有同级类名为google的标签</p>
+<p>7.父节点选择符</p>
+<p>find('p
+<div
+');</p>
+<p>8.任意选择符 *</p>
+<p>find('.cool> *');</p>
+<p>9. 联合选择符</p>
+<p>find("p,div span,.google+.mod");//选出所有的p和所有div下面的span和.google后面的.mod;</p>
+<p>10. 表单控件选择符</p>
+<p>find('.google:text');//选出所有类名为google的文本域</p>
+<p>11. 其它任意的组合,不支持属性选择与奇偶、内容文本等选择，不过可以在后面的遍历函数中轻松处理:</p>
+<p>find('#mfx tr',function(i,arr){</p>
+<p>if(i%2){</p>
+<p>this.innerHTML='我是奇行';</p>
+<p>}</p>
+<p>})</p>
+</html>
+

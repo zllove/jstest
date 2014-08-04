@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title> 颜色输入组件 </title>
+    <meta charset="utf-8"/>
+    <base href="http://imgqun.qq.com/cgi-bin/"/>
+    <style>
+        body{ font-size:12px; font-family:Arial; }
+        input{ border:1px solid #aaa }
+        #colorPanel{ width:170px; _width:175px; text-align:center; border:1px solid #666; background:#E7DFE7 url(img?uuid=206a914914c31cc60545db8cd3ff9c4e6f) no-repeat 97% 6%; font-size:12px; position:absolute; display:none; z-index:999 }
+        .colorTitle{ text-align:left; margin:5px 5px 0 5px; zoom:1 }
+        #colorView{ width:70px; height:20px; background:#000; border:1px solid #000; float:left; margin-right:4px; cursor:pointer; }
+        #colorValue{ padding:4px 0 0 4px; float:left; width:55px; border:1px solid #7B9EBD; height:16px; }
+        #colorCell{ margin:0 auto; padding:5px; clear:both; }
+        #colorTable table{ border-collapse:collapse; }
+        #colorTable table td{ border:1px solid #000; height:8px; width:8px; overflow:hidden; font-size:1px; cursor:pointer; }
+    </style>
+</head>
+<body>
+<br/> <br/> <br/> <br/>
+<h1>简单的颜色设置器</h1>
+设置背景颜色: <input type="text" name="" id="bb"/> 设置文本颜色: <input type="text" name="" id="bb2"/>
+</body>
+<script>
+    ColorPanel = {
+        init : function(){
+            return this.create().cellEvent()
+        },//初始化
+        $ : function(x){
+            return typeof x == 'string' ? document.getElementById(x) : x
+        },
+        create : function(){//创建所有HTML
+            this.win = document.createElement("DIV");
+            this.win.id = "colorPanel";
+            var m = '00,33,66,99,CC,FF'.split(','), a, b, c, d, e, f, x, y, z, T = !!document.attachEvent ? '&nbsp;' : '';//谷歌会撑开表格
+            Html = ['<div class="colorTitle"><div id="colorView" title="#000000"></div><input type="text" id="colorValue" value="#000000" /></div><div id="colorCell"><table cellspacing="0" cellpadding="0" id="colorTable"><tr>'];
+            for(x = 0; x < 6; ++x){//按规律生成颜色单元格
+                Html.push('<td><table cellspacing="0" cellpadding="0">');
+                for(y = 0, a = m[x]; y < 6; ++y){
+                    Html.push('<tr>');
+                    for(z = 0, c = m[y]; z < 6; ++z){
+                        b = m[z];
+                        d = z == 5 && x != 2 && x != 5 ? ';border-right:none;' : '';
+                        e = y == 5 && x < 3 ? ';border-bottom:none' : '';
+                        f = '#' + a + b + c;
+                        Html.push('<td style="background:' + f + d + e + '" title="' + f + '">' + T + '</td>');
+                    }
+                    ;
+                    Html.push('</tr>')
+                }
+                ;
+                Html.push('</table></td>');
+                if(m[x] == '66')Html.push('</tr><tr>')
+            }
+            ;
+            Html.push('</tr></table></div>');
+            this.win.innerHTML = Html.join('');
+            document.body.appendChild(this.win);
+            return this
+        },
+        cellEvent : function(){//为色块添加事件
+            var me = this, o = {box : 'colorCell', view : 'colorView', input : 'colorValue'};
+            this.win.onclick = function(e){
+                me.stop(e || window.event)
+            };
+            for(var Id in o){
+                this[Id] = this.$(o[Id])
+            }
+            ;
+            var tds = this.box.getElementsByTagName("TD");
+            for(var i = 0; i < tds.length; ++i){
+                o = tds[i];
+                if(!o.title)continue;
+                o.onclick = function(){
+                    me.hide().onclick(this.getAttribute('title'))
+                };
+                o.onmouseover = function(){
+                    me.input.value = me.view.style.background = me.view.title = this.getAttribute('title');
+                }
+            }
+            ;
+            this.input.onkeyup = function(e){
+                var key = (e || event).keyCode;
+                if(/[\x2E-\xff]/.test(String.fromCharCode(key)))
+                    this.value = '#' + this.value.replace(/^#?(.{0,6}).*$/i, '$1').replace(/[^\da-f]/ig, 'f');
+                if(/^#?([\da-f]{3}|[\da-f]{6})$/i.test(this.value)){
+                    var color = ('#' + this.value.replace(/#/g, '').replace(/^(.)(.)(.)$/, '$1$1$2$2$3$3')).toUpperCase();
+                    me.view.style.background = me.view.title = color;
+                    if(key == 13)return me.hide().onclick(this.value = color);
+                }
+            };
+            this.view.onclick = function(){
+                me.hide().onclick(this.title)
+            }
+            return this;
+        },
+        pos : function(el){//取元素位置
+            var x = 0, y = 0;
+            while(el){
+                x += el.offsetLeft;
+                y += el.offsetTop;
+                el = el.offsetParent
+            }
+            ;
+            return {x : x, y : y}
+        },
+        show : function(x, y){//定位显示面板
+            var V = this.win.style;
+            V.left = x + 'px';
+            V.top = y + 'px';
+            V.display = 'block';
+        },
+        hide : function(){
+            this.win.style.display = 'none';
+            return this
+        },
+        bind : function(el){//绑定输入框
+            el = this.$(el);
+            var me = this, h = el.offsetHeight + 1;
+            el.onfocus = function(e){
+                var pos = me.pos(this);
+                me.binder = this;
+                me.show(pos.x, pos.y + h);
+            };
+            el.onclick = function(e){
+                me.stop(e || window.event)
+            };
+            this.addEvent(document, 'click', function(){
+                me.hide()
+            });
+            return this;
+        },
+        addEvent : function(el, type, fn){//多次添加事件
+            el.attachEvent ? el.attachEvent('on' + type, function(){
+                fn.call(el)
+            }) : el.addEventListener(type, fn, false);
+        },
+        stop : function(_e){//取消冒泡
+            _e.stopPropagation ? _e.stopPropagation() : (_e.cancelBubble = true);
+        },
+        onclick : function(x){//色块点击事件,可以自已添加其它响应.
+            this.binder.value = x;
+            this.binder.style.background = x;
+            document.body.style[this.binder.id == 'bb' ? 'background' : 'color'] = x;
+        }
+    };
+    ColorPanel.init().bind("bb").bind("bb2");
+</script>
+</html>

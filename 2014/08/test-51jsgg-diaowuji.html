@@ -1,0 +1,150 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title> dance </title>
+    <base href="http://dhooo.com/web/">
+    <style>
+        body,html{        background:#000011;        text-align:center;overflow:hidden;}
+        #gameWin{
+            background:#eee url(bq27184010.gif) no-repeat 50% 50%;
+            border:10px solid #666;
+            width:400px;height:500px;
+            margin:0px auto;position:relative;
+            text-align:left;
+        }
+        #hotArea{overflow:hidden;zoom:1}
+        #hotArea span{
+            background:url(checkarea.gif) no-repeat 0 0;
+            height:80px;width:78px;
+            display:block;
+            float:left;
+            margin-left:12px;
+        }
+        #hotArea #ref37{background-position:0 0}
+        #hotArea #ref38{background-position:-72px 0}
+        #hotArea #ref40{background-position:-144px 0}
+        #hotArea #ref39{background-position:-216px 0}
+        #arowlist{
+            border:1px solid #666;margin:0px;padding:0px;
+            height:500px;        list-style-type:none;
+            overflow:hidden;text-align:left;
+            position:absolute;left:0;top:0;width:100%;
+            z-index:98;
+        }
+        #arowlist li{background:url(arowll.gif) no-repeat ;height:62px;width:62px;}
+        #arowlist .begin{height:500px;background:none;  }
+        #arowlist .A37{background-position:0 0 ;margin-left:25px;}
+        #arowlist .A38{background-position: 0 -120px;margin-left:115px;}
+        #arowlist .A39{background-position: 0 -60px;margin-left:295px;}
+        #arowlist .A40{background-position: 0 -180px;margin-left:210px;}
+        #success{
+            background:#ddd;display:;
+            border:1px solid #990000; list-style-type:none;
+            border-top:10px solid #900;
+            width:200px;height:100px;padding:10px; text-align:center;
+            position:absolute;left:50px;top:180px;
+            filter:alpha(opacity=80);opacity:0.8;z-index:100;
+        }
+        #success li{line-height:30px;font-size:12px;}
+        #txt{
+            font-size:50px;font-family:Impact;
+            color:red;margin-top:20px;
+            text-align:center;font-weight:bold;
+            position:relative;z-index:99;
+        }
+        .txt{
+            font-size:20px;font-family:'黑体';
+            color:red;
+        }
+        #number{
+            font-size:40px;font-family:Impact;
+            color:#003399;position:absolute;
+            bottom:0;left:20px;
+        }
+    </style>
+</head>
+
+<body>
+<bgsound src="d2.mid" loop="-1">
+    <div id="gameWin">
+        <div id="hotArea">
+            <span id="ref37"></span><span id="ref38"></span><span id="ref40"></span><span id="ref39"></span>
+        </div>
+        <ul id="arowlist"></ul>
+        <ul id="success">
+            <li id="info">游戏方法: 在移动的箭头到达上方剪头的时候按下对应方向键</li>
+            <li><button id="rePlay"> 开始游戏 </button></li>
+        </ul>
+        <div id="txt">Ready</div><div id="number">18000</div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    $=function (x){return document.getElementById(x)};
+    Dance={
+        init:function (){
+            this.sum=this.hit=this.ed=$('arowlist').scrollTop=0;
+            $('number').innerHTML='Dance waiting ...';
+            for (var i=0,html=[];i<100;i++){html.push('<li class="A'+(Math.floor(Math.random()*4)+37)+'"></li>')};
+            $('arowlist').innerHTML='<li class="begin"></li>'+html.join('')+'<li class="begin"></li>';
+            this.list=$('arowlist').getElementsByTagName("LI");
+            window.onkeydown=document.body.onkeydown=function (e){
+                var k=(window.event||e).keyCode;
+                if(!Dance.X||!/^(37|38|39|40)$/.test(k))return;
+                var left=[0,-72,-216,-144][k-37];
+                $('txt').style.textAlign="left";
+                if(Dance.X.className.indexOf(k)!=-1){
+                    Dance.addHit(Dance.X);
+                    Dance.X.style.background='none';
+                    $("ref"+k).style.backgroundPosition=left+'px -70px';
+                    $("txt").innerHTML="Good !";
+                }else{
+                    $("ref"+k).style.backgroundPosition=left+'px 100%';
+                    $("txt").innerHTML="Miss ...";
+                    $('txt').style.color='#FFCC00';
+                }
+                $('txt').style.left=parseInt(Math.random()*200)+'px';
+                $('txt').style.top=parseInt(Math.random()*200)+'px';
+                Dance.sum++;
+            };
+            window.onkeyup=document.body.onkeyup=function (e){
+                var refs=$('hotArea').getElementsByTagName("SPAN");
+                for (var i=0;i<refs.length;i++ ) {refs[i].removeAttribute('style');}
+                $("txt").innerHTML=$('txt').style.color='';
+            }
+            return this;
+        }
+        ,addHit:function(x){
+            if(!x.hited){
+                x.hited=        this.hit++;
+                $('number').innerHTML=this.hit*1000+18000;
+            }
+        }
+        ,up:function (){
+            (function (){
+                $('arowlist').scrollTop+=5;
+                var i=parseInt((arowlist.scrollTop-500)/62+2);
+                if(i>=Dance.list.length)return Dance.end();
+                if(i>0){Dance.X=Dance.list[i]}
+                Dance.ed=i;
+                setTimeout(arguments.callee,10);
+            })()
+        }
+        ,end:function (){
+            Dance.X=null;
+            var s=parseInt(this.hit/this.ed*100);
+            var txt=s<60?'你要加油喽!':(s<70?'还有两下子嘛!':(s<80?'你太棒了!':'你帅呆了!'));
+            $('info').innerHTML="命中率:"+(parseInt(this.hit/this.sum*100)||0)+'% &nbsp; 有效率:'+s+'%<div  class="txt">'+txt+'</div>';
+            $('success').style.display='block';
+            $("txt").innerHTML="Ready";
+            $('txt').style.cssText='';
+            window.onkeyup=document.body.onkeyup=window.onkeydown=document.body.onkeydown=null;
+        }
+    }
+    $('rePlay').onclick=function (){
+        Dance.init().up();
+        $('success').style.display='none';
+    }
+</script>
+</html>
