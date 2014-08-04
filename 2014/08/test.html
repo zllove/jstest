@@ -3,33 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
 </head>
 <body>
 <div id="div"></div>
 <script type="text/javascript">
-    function pad(num, count) {
-        console.time(1);
-        var s = String(num/Math.pow(10, count)).split('.').pop();
-        console.timeEnd(1);
-        console.log(s);
-        return s;
-    }
-    document.getElementById('div').innerHTML = pad(12, 8);
+    (function() {
 
-    function c(num){
-        if(num.indexOf('e') != -1){
-            var s = num.slice(0,1);
-            var e = num.slice(2);
-            var last = s + s * Math.pow(10, e);
-            return last;
+        var matched, browser;
+
+        // Use of jQuery.browser is frowned upon.
+        // More details: http://api.jquery.com/jQuery.browser
+        // jQuery.uaMatch maintained for back-compat
+        jQuery.uaMatch = function( ua ) {
+            ua = ua.toLowerCase();
+
+            var match = /(chrome)[ \/]([\w.]+)/.exec( ua ) ||
+                    /(webkit)[ \/]([\w.]+)/.exec( ua ) ||
+                    /(opera)(?:.*version|)[ \/]([\w.]+)/.exec( ua ) ||
+                    /(msie) ([\w.]+)/.exec( ua ) ||
+                    ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec( ua ) ||
+                    [];
+
+            return {
+                browser: match[ 1 ] || "",
+                version: match[ 2 ] || "0"
+            };
+        };
+
+        matched = jQuery.uaMatch( navigator.userAgent );
+        browser = {};
+
+        if ( matched.browser ) {
+            browser[ matched.browser ] = true;
+            browser.version = matched.version;
         }
-    }
-    function pad2(num, count) {
-        num = String(num);
-        len = num.length;
-        return len > count ? num.slice(-count) : new Array(count-len+1).join('0') + num ;
-    }
-    console.log(pad2(12, 3));
+
+        // Chrome is Webkit, but Webkit is also Safari.
+        if ( browser.chrome ) {
+            browser.webkit = true;
+        } else if ( browser.webkit ) {
+            browser.safari = true;
+        }
+
+        jQuery.browser = browser;
+
+        jQuery.sub = function() {
+            function jQuerySub( selector, context ) {
+                return new jQuerySub.fn.init( selector, context );
+            }
+            jQuery.extend( true, jQuerySub, this );
+            jQuerySub.superclass = this;
+            jQuerySub.fn = jQuerySub.prototype = this();
+            jQuerySub.fn.constructor = jQuerySub;
+            jQuerySub.sub = this.sub;
+            jQuerySub.fn.init = function init( selector, context ) {
+                if ( context && context instanceof jQuery && !(context instanceof jQuerySub) ) {
+                    context = jQuerySub( context );
+                }
+
+                return jQuery.fn.init.call( this, selector, context, rootjQuerySub );
+            };
+            jQuerySub.fn.init.prototype = jQuerySub.fn;
+            var rootjQuerySub = jQuerySub(document);
+            return jQuerySub;
+        };
+
+    })();
+
+    console.log($.browser.mozilla);
 
 </script>
 </body>
