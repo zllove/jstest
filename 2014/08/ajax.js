@@ -6,26 +6,26 @@
  */
 function ajax(url, success, fail){
     // 1. 创建连接
-    var ajax = null;
+    var xhr = null;
     if(window.XMLHttpRequest){
-        ajax = new XMLHttpRequest()
+        xhr = new XMLHttpRequest()
     } else {
-        ajax = new ActiveXObject('Microsoft.XMLHTTP');
+        xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
 
     // 2. 连接服务器
-    ajax.open('get', url, true)
+    xhr.open('get', url, true)
 
     // 3. 发送请求
-    ajax.send(null);
+    xhr.send(null);
 
     // 4. 接受请求
-    ajax.onreadystatechange = function(){
-        if(ajax.readyState == 4){
-            if(ajax.status == 200){
-                success(ajax.responseText);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4){
+            if(xhr.status == 200){
+                success(xhr.responseText);
             } else { // fail
-                fail && fail(ajax.status);
+                fail && fail(xhr.status);
             }
         }
     }

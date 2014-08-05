@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script>
+    function InterFace(name,method){
+        if(arguments.length!=2){
+
+        }
+        this.name=name;
+        this.method=[];
+        for(var i=0;i<method.length;i++){
+            if(typeof method[i]!="String"){
+
+            }
+            this.method.push(method[i]);
+        }
+        return this.method;
+    }
+    InterFace.ensureImplements=function(object){
+        if(arguments.length<2){
+            alert("参数少于2个");
+            return false;
+        }
+        for(var i= 1,len=arguments.length;i<len;++i){
+            var InterFaceName=arguments[i];
+            if(InterFaceName.constructor!=InterFaceName) {
+                alert("不是自己的构造函数");
+                return false;
+            }
+            for(var j=0;j<InterFaceName.length;j++){
+                var method=InterFaceName[j];
+                if(!object[method]||typeof object[method]!="function"){
+
+                }
+
+
+            }
+        }
+
+    }
+    function extend(subClass,supClass){
+        var F=function(){};
+        F.prototype=supClass.prototype;
+        subClass.prototype=new F();
+        subClass.prototype.constructor=subClass;
+        subClass.prototype.supclass=supClass.prototype;
+        if(supClass.prototype.constructor==Object.prototype.constructor){
+            supClass.prototype.constructor=supClass;
+        }
+    }
+    var Composite=new InterFace('Composite',['add','remove','getChild']);
+    var GalleryItem=new InterFace('GalleryItem',['hide','show']);
+    var DynamicGally=function(id){
+        this.children=[];
+        this.element=document.createElement('div');
+        this.element.id=id;
+        this.element.className='sss';
+    }
+
+    DynamicGally.prototype={
+        add: function (child) {
+            InterFace.ensureImplements(child,Composite,GalleryItem);
+            this.children.push(child);
+            this.element.appendChild(child.getElement());
+        },
+        remove: function (child) {
+            for(var node,i=0;node=getChild(i);i++){
+                if(node==child){
+                    this.children.splice(i,1);
+                }
+            }
+            this.element.remove(child);
+
+        },
+        getChild:function(i){
+            return this.children[i];
+        },
+        hide: function () {
+            for(var node,i=0;node=this.getChild(i);i++){
+                node.hide();
+            }
+            this.element.style.display='none';
+        },
+        show: function () {
+            this.element.style.display='block';
+            for(var node,i=0;node=this.getChild(i);i++){
+                node.show();
+            }
+        },
+        getElement: function () {
+            return this.element;
+        }
+    }
+    var GalleryImage= function (src) {
+        this.element=document.createElement('img');
+        this.element.className="sd";
+        this.element.src=src;
+    }
+    GalleryImage.prototype={
+        add:function(){},
+        remove:function(){},
+        getChild:function(){},
+        getElement: function () {
+            return this.element;
+        },
+        hide: function () {
+            this.element.style.display="none";
+        },
+        show:function(){
+            this.element.style.display="";
+        }
+    }
+
+    var topGally=new DynamicGally('test');
+    topGally.add(new GalleryImage("http://www.e-mei.com.cn/im_news/images/ecimg8.jpg"));
+    topGally.show();
+    console.log(topGally);
+
+
+</script>
+</body>
+</html>
+</body>
+</html>
