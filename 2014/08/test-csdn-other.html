@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <style type="text/css">
+        #msg{width:180px;border:1px solid #009933;height:150px;display:none;background:#ffffff;position:absolute;}
+        #btn{width:182px;height:35px;line-height:35px;background:#009933;position:absolute;top:350px;left:300px;}
+    </style>
+</head>
+<body>
+<div id="msg">1</div>
+<div id="btn">2</div>
+<script type="text/javascript">
+    document.onclick = function (e) {
+        e = e || event;
+        var btn = document.getElementById("btn");
+        var msg = document.getElementById("msg");
+        var target = e.target || e.srcElement;
+        if (target !== btn && target !== msg) {
+            msg.style.display = "none";
+        } else {
+            msg.style.top = (btn.offsetTop - 160) + "px";
+            msg.style.left = btn.offsetLeft + "px";
+            msg.style.display = "block";
+        }
+    }
+</script>
+</div>
+</body>
+</html>
