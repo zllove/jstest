@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        #div{ position:absolute;background: #f00; width:200px; height:200px;}
+        #div2{ position:absolute;background:blue; top:200px; width:200px; height:200px;}
+    </style>
+</head>
+<body>
+<div id="div"></div>
+<div id="div2"></div>
+<script type="text/javascript">
+    function Drag(id){
+        this.disX = 0
+        this.disY = 0
+        var _this = this
+        if(id){
+            this.obj = document.getElementById(id)
+            this.obj.onmousedown = function(e){
+                _this.down(e)
+            }
+        }
+
+    }
+    Drag.prototype = {
+        down : function(e){
+            var e = e || event
+            var _this = this
+            this.disX = e.clientX - this.obj.offsetLeft
+            this.disY = e.clientY - this.obj.offsetTop
+            document.onmousemove = function(e){
+                _this.move(e)
+            }
+            document.onmouseup = function(){
+                _this.up()
+            }
+            return false;
+        },
+        move : function(e){
+            var e = e || event
+            var t = e.clientY - this.disY
+            var l = e.clientX - this.disX
+            this.obj.style.top = t + 'px'
+            this.obj.style.left = l + 'px'
+        },
+        up : function(){
+            document.onmousemove = null
+            document.onmouseup = null
+        }
+    }
+
+    function LimitDrag(id){
+        Drag.call(this, id)
+    }
+    LimitDrag.prototype = new Drag()
+    LimitDrag.prototype.move = function(e){
+        var e = e || event
+        var t = e.clientY - this.disY
+        var l = e.clientX - this.disX
+        if(l < 0){
+            l = 0
+        } else if(l > document.documentElement.clientWidth - this.obj.clientWidth){
+            l = document.documentElement.clientWidth - this.obj.clientWidth
+        }
+        this.obj.style.top = t + 'px'
+        this.obj.style.left = l + 'px'
+    }
+    new Drag('div')
+    new LimitDrag('div2')
+</script>
+</body>
+</html>
