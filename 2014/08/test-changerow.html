@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
+</head>
+<body>
+<table>
+    <tr>
+        <td>1</td>
+        <td>
+            <input type="button" class="btn up" value="上移"/>
+            <input type="button" class="btn down" value="下移"/>
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>
+            <input type="button" class="btn up" value="上移"/>
+            <input type="button" class="btn down" value="下移"/>
+        </td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>
+            <input type="button" class="btn up" value="上移"/>
+            <input type="button" class="btn down" value="下移"/>
+        </td>
+    </tr>
+</table>
+<script type="text/javascript">
+    /**
+     * 切换tr
+     * @param dir 方向
+     * @param callback 回调
+     */
+    $.fn.changeRow = function(dir, callback){
+        var tr;
+
+        $(this).on('click', function(){
+            tr = $(this).closest('tr');
+
+            switch(dir){
+                case 'up' :
+                    if(tr.prev().length > 0 && tr.index() != 1){
+                        tr.insertBefore(tr.prev());
+                    } else {
+                        alert('已到顶部');
+                        return;
+                    }
+                    break;
+                case 'down' :
+                    if(tr.next().length > 0){
+                        tr.insertAfter(tr.next());
+                    } else {
+                        alert('已到底部');
+                        return;
+                    }
+                    break;
+                case 'top' :
+                    tr.insertBefore($(this).closest('tbody').find('tr').first().next());
+                    break;
+            }
+
+
+            callback && callback(tr, this);
+        });
+    }
+
+    $('.up').changeRow('up', function(tr, up){
+        tr.attr('data-id', 222);
+    });
+
+    $('.down').changeRow('down', function(tr, up){
+        tr.attr('data-id', 222);
+    });
+
+    $('.top').changeRow('top', function(tr, up){
+        tr.attr('data-id', 222);
+    });
+
+</script>
+</body>
+</html>
