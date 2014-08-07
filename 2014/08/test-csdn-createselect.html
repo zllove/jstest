@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<a href="elixir.html">elixirs</a>
+<script type="text/javascript">
+//    var arr =xmlHttp.responseText;
+//    var myobj=eval(arr);
+    var myobj = [{ ClassId : 1, ClassStr : 'jikey'}, { ClassId : 2, ClassStr : 'tony'}, { ClassId : 3, ClassStr : 'make'}];
+
+    var select = document.createElement('select');
+    var option = null;
+    for(var i=0;i<myobj.length;i++){
+//        alert(myobj[i].ClassId);
+//        alert(myobj[i].ClassStr);
+        option=createSelect(myobj[i].ClassId, myobj[i].ClassStr);
+        select.appendChild(option);
+    }
+    document.body.appendChild(select);
+
+    function createSelect(v, txt){
+        var option = document.createElement('option');
+        option.value = v;
+        option.text = txt;
+        return option;
+    }
+</script>
+</body>
+</html>
