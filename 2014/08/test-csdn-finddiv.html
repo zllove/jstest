@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+<div class="tabs">
+    <ul class="tabs-nav" >
+        <li>111</li>
+        <li>222</li>
+        <li>333</li>
+    </ul>
+    <div class="tabs-con" ><!--就是想获取这个div -->
+        <div>其他div</div>
+        <p>11111111111111111</p>
+    </div>
+    <div class="tabs-con">
+        <div>其他div</div>
+        <p>222222222222</p>
+    </div>
+    <div class="tabs-con">
+        <div>其他div</div>
+        <p>3333333333333</p>
+    </div>
+</div>
+<script type="text/javascript">
+    var o = $('.tabs').find('.tabs-con').eq(0);
+    console.log(o);
+</script>
+</body>
+</html>
