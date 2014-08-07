@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+    <style type="text/css">
+        .mydiv{ border:1px solid #ccc; background:#f0f0f0; }
+    </style>
+</head>
+<body>
+<div class="mydiv">一将功成万姑库，他日血染半边天</div>
+<script type="text/javascript">
+    $.fn.center = function(){
+        var win = $(window);
+        this.css('position', 'absolute');
+        this.css('top', (win.height() - this.height())/2 + win.scrollTop() + 'px');
+        this.css('left', (win.width() - this.width())/2 + win.scrollLeft() + 'px');
+        return this;
+    }
+    $('.mydiv').center();
+</script>
+</body>
+</html>
