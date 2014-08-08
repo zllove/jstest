@@ -1,0 +1,320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+    <title>树</title>
+    <style type="text/css">
+        html, body{
+            font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;
+            font-size:12px;
+        }
+    </style>
+<body>
+<br/> <br/>
+</body>
+</html>
+<script language="JavaScript">
+//    alert("最近很热闹啊!祝福大家2008年都写快乐代码~~~嘎嘎!");
+    var com = {};
+    com.fox = {};
+    com.fox.swing = {};
+    com.fox.swing.JEvent = function(){
+        this.addEventHandler = function(e, f){
+            if(!this[e]){
+                this[e] = [];
+            } else {
+                if(this[e].constructor != Array){
+                    return false;
+                }
+            }
+            this[e].push(f);
+        }
+        this.removeEventHandler = function(e, n){
+        }
+        this.runEventHandler = function(e){
+            if(!this[e]) return;
+            for(var i = 0; i < this[e].length; i++){
+                this[e][i]();
+            }
+        }
+    }
+    com.fox.swing.JElement = function(p, e){
+        var o = document.createElement(e);
+        o.show = function(){
+            o.style.display = "inline";
+        }
+        o.hide = function(){
+            o.style.display = "none";
+        }
+        com.fox.swing.JEvent.call(o);
+        p.appendChild(o);
+        return o;
+    }
+    com.fox.swing.JBox = function(p, c){
+        var o = new com.fox.swing.JElement(p, "div");
+        c.call(o);
+        return o;
+    }
+    com.fox.swing.JImage = function(p){
+        var o = new Image();
+        com.fox.swing.JEvent.call(o);
+        p.appendChild(o);
+        return o;
+    }
+    com.fox.swing.JTree = function(){
+        /**
+         *@ JTree version 1.0
+         *@ made by John
+         */
+        var _tree = this;
+        this._json = {
+        };
+        this._skin = "http://www.wscript.cn/demo/script/javascript/tree/images/";
+        this._images = {
+            EMPTY : "empty.gif"
+        };
+        /**
+         *辅助类
+         */
+        var Node = function(){
+            var _node = this;
+            var Element = function(){
+                var _element = this;
+                this._fill = new com.fox.swing.JElement(this, "span");
+                this._line = new com.fox.swing.JImage(this);
+                this._icon = new com.fox.swing.JImage(this);
+                this._text = new com.fox.swing.JElement(this, "span");
+                with(this.style){
+                    height = "18px";
+                    border = "0px dotted #ff0000";
+                    whiteSpace = "nowrap";
+                }
+                ;
+                this._line.style.verticalAlign = "middle";
+                this._icon.style.verticalAlign = "middle";
+                this._text.style.cursor = "default";
+            }
+            var List = function(){
+                this._items = [];
+                this.style.display = "inline";
+                this.style.border = "0px solid #000000";
+            }
+            this._element = new com.fox.swing.JBox(this, Element);
+            this._list = new com.fox.swing.JBox(this, List);
+            /*
+             this.addEventHandler("RUN",
+             function ()
+             {
+             _node._list.style.display == "none" ?
+             _node.showList() :
+             _node.hideList();
+             });
+             */
+            this.showList = function(){
+                this._list.show();
+            }
+            this.hideList = function(){
+                this._list.hide();
+            }
+        }
+        //初始化
+        this._root = new com.fox.swing.JBox(this, Node);
+        //类方法
+        this.create = function(){
+            this.getNodeByJSON(this._root, this._json, "0");
+            this.hideAllNode();
+            this.setRoot();
+        }
+        this.showAllNode = function(){
+            this.setAllNodeDisplay(this._root, true);
+        }
+        this.hideAllNode = function(){
+            this.setAllNodeDisplay(this._root, false);
+        }
+        this.setRoot = function(){
+            this._root.showList();
+            this._root._element._line.src = _tree._skin + "nolines_minus.gif";
+        }
+        this.setAllNodeDisplay = function(node, flag){
+            flag ? node.showList() : node.hideList();
+            if(node._list._items && node._list._items.constructor == Array){
+                for(var i = 0; i < node._list._items.length; i++){
+                    arguments.callee(node._list._items[i], flag);
+                }
+            }
+        }
+        this.getNodeByJSON = function(p, json, level){
+            var node;
+            var a = level.split("");
+            p == _tree._root ? node = _tree._root : node = new com.fox.swing.JBox(p, Node);
+            p == _tree._root ? "" : p._items.push(node);
+            if(node == _tree._root){
+                node._element._icon.src = _tree._skin + "base.gif";
+                if(json.list && json.list.constructor == Array){
+                    if(json.list.length > 0){
+                        node._element._line.src = _tree._skin + "nolines_plus.gif";
+                        node.addEventHandler("RUN", function(){
+                                    node._list.style.display == "none" ? node.showList() : node.hideList();
+                                    node._list.style.display == "none" ? node._element._line.src = _tree._skin + "nolines_plus.gif" : node._element._line.src = _tree._skin + "nolines_minus.gif";
+                                });
+                        node._element._line.onclick = node._element._icon.onclick = node._element._text.onclick = function(e){
+                            node.runEventHandler("RUN");
+                        }
+                    } else {
+                        //                                        node._element._line.src = _tree._skin + "base.gif";
+                    }
+                } else {
+                }
+            } else {
+                node._element._icon.src = _tree._skin + "folderopen.gif";
+                if(json.list && json.list.constructor == Array){
+                    if(json.list.length > 0){
+                        a[a.length - 1] == 1 ? node._element._line.src = _tree._skin + "plus.gif" : node._element._line.src = _tree._skin + "minus.gif";
+                        node.addEventHandler("RUN", function(){
+                                    node._list.style.display == "none" ? node.showList() : node.hideList();
+                                    node._list.style.display == "none" ? node._element._line.src = _tree._skin + "plus.gif" : node._element._line.src = _tree._skin + "minus.gif";
+                                });
+                        node._element._line.onclick = node._element._icon.onclick = node._element._text.onclick = function(e){
+                            node.runEventHandler("RUN");
+                        }
+                    } else {
+                        a[a.length - 1] == 1 ? node._element._line.src = _tree._skin + "join.gif" : node._element._line.src = _tree._skin + "joinbottom.gif";
+                    }
+                } else {
+                    node._element._icon.src = _tree._skin + "page.gif";
+                    a[a.length - 1] == 1 ? node._element._line.src = _tree._skin + "join.gif" : node._element._line.src = _tree._skin + "joinbottom.gif";
+                    node._element._icon.onclick = node._element._text.onclick = function(e){
+                        _tree.runEventHandler("RUN");
+                    }
+                }
+            }
+            for(var loop = 0; loop < a.length - 1; loop++){
+                var img = new Image();
+                img.style.verticalAlign = "middle";
+                a[loop] == 1 ? img.src = _tree._skin + "line.gif" : img.src = _tree._skin + "empty.gif";
+                node._element._fill.appendChild(img);
+            }
+            node._element._text.innerHTML = json.name + a[a.length - 1];
+            if(json.list && json.list.constructor == Array){
+                for(var i = 0; i < json.list.length; i++){
+                    i == json.list.length - 1 ? arguments.callee(node._list, json.list[i], level + "0") : arguments.callee(node._list, json.list[i], level + "1");
+                }
+            }
+        }
+    }
+    var tree = new com.fox.swing.JBox(document.body, com.fox.swing.JTree);
+    tree._json = {
+        name : "西水爱大家V1.0(群:嘎嘎~~)",
+        list : [
+            {
+                name : "我的游戏",
+                list : [
+                    {name : "叶子", arguments : 1},
+                    {name : "叶子", arguments : 1},
+                    {name : "叶子", arguments : 1},
+                    {name : "叶子", arguments : 1}
+                ]
+            },
+            {
+                name : "棋类游戏",
+                list : [
+                ]
+            },
+            {
+                name : "牌类游戏",
+                list : [
+                    {
+                        name : "斗地主",
+                        list : [
+                            {
+                                name : "房间-联合国",
+                                list : [
+                                    {
+                                        name : "座位",
+                                        list : [
+                                            {
+                                                name : "玩家",
+                                                list : [
+                                                    {name : "属性1", arguments : 1},
+                                                    {name : "属性2", arguments : 1},
+                                                    {name : "属性3", arguments : 1}
+                                                ]
+                                            },
+                                            {name : "玩家", arguments : 1},
+                                            {name : "玩家", arguments : 1},
+                                            {name : "玩家", arguments : 1},
+                                            {name : "玩家", arguments : 1}
+                                        ]
+                                    },
+                                    {name : "叶子", arguments : 1},
+                                    {name : "叶子", arguments : 1}
+                                ]
+                            },
+                            {name : "房间-美帝国", list : []},
+                            {name : "房间-小日本", list : []}
+                        ]
+                    },
+                    {name : "叶子", arguments : 1},
+                    {name : "叶子", arguments : 1},
+                    {name : "叶子", arguments : 1}
+                ]
+            },
+            {
+                name : "休闲游戏",
+                list : [
+                    {name : "叶子", arguments : 1},
+                    {name : "叶子", arguments : 1},
+                    {name : "叶子", arguments : 1},
+                    {name : "叶子", arguments : 1}
+                ]
+            },
+            {name : "其他游戏", list : []}
+        ]
+    };
+    tree.create();
+    tree.addEventHandler("RUN", function(){
+                alert("外部动态添加事件处理：我没有高工资！");
+            });
+    tree.addEventHandler("RUN", function(){
+                alert("外部动态添加事件处理：我又不年轻！");
+            });
+    tree.addEventHandler("RUN", function(){
+                alert("外部动态添加事件处理：MS的东西用不起！");
+            });
+    tree.addEventHandler("RUN", function(){
+                alert("外部动态添加事件处理：只有智力更生！");
+            });
+    tree.addEventHandler("RUN", function(){
+                alert("如何动态添加使用？tree.addEventHandler('RUN',function(){...})");
+            });
+    with(tree.style){
+        width = "234px";
+        height = "400px";
+        overflow = "auto";
+        border = "1px solid #000000";
+    }
+    ;
+    //alert(tree.innerHTML);
+    com.fox.swing.JTreePane = function(){
+        this.openAll = new com.fox.swing.JElement(this, "button");
+        this.closeAll = new com.fox.swing.JElement(this, "button");
+        this.covert = new com.fox.swing.JElement(this, "button");
+        this.openAll.innerHTML = "打开所有";
+        this.closeAll.innerHTML = "关闭所有";
+        this.covert.innerHTML = "转换菜单";
+    }
+    var treePane = new com.fox.swing.JBox(document.body, com.fox.swing.JTreePane);
+    treePane.appendChild(tree);
+    treePane.style.border = "1px solid #3366cc";
+    treePane.style.overflow = "auto";
+    treePane.style.position = "absolute";
+    treePane.style.left = "200px";
+    treePane.openAll.onclick = function(e){
+        tree.showAllNode();
+    }
+    treePane.closeAll.onclick = function(e){
+        tree.hideAllNode();
+    }
+    document.write("debug:success!");
+    alert("debug:success!");
+</script>
