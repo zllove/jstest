@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<textarea name="" id="txt1" cols="30" rows="10"></textarea> <br/>
+<input id="btn" type="button" value="replace"/><br/>
+<textarea name="" id="txt2" cols="30" rows="10"></textarea>
+<script type="text/javascript">
+    var txt1 = document.getElementById('txt1')
+    var txt2 = document.getElementById('txt2')
+    var btn = document.getElementById('btn')
+    btn.onclick = function(){
+        var re = /北京|淘宝/g;
+        txt2.value = txt1.value.replace(re, '****');
+    }
+</script>
+</body>
+</html>
