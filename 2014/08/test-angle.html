@@ -1,0 +1,38 @@
+
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .wrap{ position:relative; width:500px; height:500px; border:1px solid #ccc;}
+        .a{ position:absolute;bottom:0;left: 0; width:10px; height:10px;background: #f00;}
+        .b{ position:absolute;top: 300px; left:150px;width:10px; height:10px;background: #ccc;}
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <div class="a"></div>
+    <div class="b"></div>
+</div>
+<script type="text/javascript">
+    function getAngle(x1, y1, x2, y2) {
+        // 直角的边长
+        var x = Math.abs(x1 - x2);
+        var y = Math.abs(y1 - y2);
+        // 斜边长
+        var z = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+        // 余弦
+        var cos = y / z;
+        // 弧度
+        var radina = Math.acos(cos);
+        // 角度
+        var angle = 180 / (Math.PI / radina);
+        return angle;
+    }
+    var angle = getAngle(0, 0, 300, 150);
+    console.log(angle);
+</script>
+</body>
+</html>

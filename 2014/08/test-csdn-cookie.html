@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="text" name="" id="txt"/>
+<input id="btn" type="button" value="test"/>
+<script type="text/javascript">
+    document.getElementById('btn').onclick = function(){
+        var d = new Date();
+        d.setDate(d.getDate() + 10);
+        document.cookie = 'value=' + document.getElementById('txt').value + ';expires=' + d;
+        console.log(document.cookie);
+    }
+</script>
+</body>
+</html>
