@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    var str = '123abdf234adfad32423badf890'
+    function find(str){
+        var temp = ''
+        var arr = []
+        for(var i=0; i<str.length; i++){
+            var s = str.charAt(i)
+            if(s <= '9' && s >= '0'){
+                temp += s
+            } else {
+                if(temp){
+                    arr.push(temp)
+                    temp = ''
+                }
+            }
+        }
+
+        if(temp){
+            arr.push(temp)
+            temp = ''
+        }
+
+        return arr;
+    }
+    console.log(find(str));
+</script>
+</body>
+</html>
