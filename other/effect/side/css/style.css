@@ -1,0 +1,17 @@
+@charset "utf-8";
+*{margin:0;padding:0;list-style-type:none;}
+a,img{border:0;}
+body{font:12px/180% Arial, Helvetica, sans-serifl "新宋体";}
+
+/* flash */
+.flash{width:980px;height:393px;overflow:hidden;margin:0 auto;clear:both;position:relative;padding:0px 10px;}
+.flash .prev, .flash .next{ position:absolute; top:50%; margin-top:-25px;color: #fff; font-size:50px; font-weight:bold;z-index:169; text-decoration:none;}
+.flash .prev{left: 0;}
+.flash .next{right: 0;}
+.flash .items{width:980px;height:393px;display:none;}
+.flash img{width:980px;height:393px;}
+.flash_bar{width:520px;padding-left:470px;z-index:69;height:30px;overflow:hidden;position:absolute;padding-top:13px!important;padding-top:12px;bottom:0px;left:0px;background:url(../images/tg_flashbar.png) no-repeat 10px 0px;text-align:center;}
+.flash_bar .dq{display:block;float:left;width:8px;height:8px;margin:5px 5px;cursor:pointer;background:url(../images/tg_flash_p.png) no-repeat 0px 0px;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/tg_flash_p.png" ,sizingMethod="crop");}
+.flash_bar .no{display:block;float:left;width:8px;height:8px;margin:5px 5px;cursor:pointer;background:url(../images/tg_flash_p2.png) no-repeat 0px 0px;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/tg_flash_p2.png" ,sizingMethod="crop");}
+.flashBg{height:393px;overflow:hidden;width:100%;clear:both;margin:0;padding:0;}
+.flashLine{background:url(../images/touming.png) repeat-x center bottom;height:393px;width:100%;clear:both;}
