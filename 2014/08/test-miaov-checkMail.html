@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="text" name="" id="txt"/><input id="btn" type="button" value="check"/>
+<script type="text/javascript">
+    var txt = document.getElementById('txt')
+    var btn = document.getElementById('btn')
+    btn.onclick = function(){
+        // 字母，数字，下划线@字母数字.字母
+        var re = /^\w+@[a-z0-9]+\.[a-z]+$/i;
+        if(re.test(txt.value)){
+            alert('合法的邮件');
+        } else {
+            alert('你丫写错了');
+        }
+    }
+</script>
+</body>
+</html>
