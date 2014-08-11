@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    var str = ' 123456abc ';
+    console.log('(' + trim(str) + ')');
+
+    function trim(str){
+        var re = /^\s+|\s+$/g
+        return str.replace(re, '')
+    }
+
+
+</script>
+</body>
+</html>
