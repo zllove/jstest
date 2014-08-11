@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="js/util.js"></script>
+</head>
+<body>
+<input type="search" placeholder="我是一个兵" />
+<input type="search" name="我是一个兵" />
+<div id="test">test1</div>
+<script type="text/javascript">
+//    ggg.base.supportHTML5();
+//    document.cookie = 'username=jikey';
+    function setCookie(c_name, value, expiredays) {
+        var exdate = new Date();
+        exdate.setDate(exdate.getDate() + expiredays);
+        document.cookie = c_name + "=" + escape(value) + ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString());
+        console.log(exdate.toGMTString());
+    }
+    setCookie('username', 'Darren', 30);
+
+
+
+</script>
+</body>
+</html>
