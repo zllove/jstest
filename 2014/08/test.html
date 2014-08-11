@@ -3,22 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-
 </head>
 <body>
-<ul id="ul">
-    <li>111</li>
-    <li class="one">222</li>
-    <li>333</li>
-</ul>
 <script type="text/javascript">
-    var ul = document.getElementById('ul')
-    var li = ul.getElementsByTagName('li')
-    for(var i=0; i<li.length; i++){
-        if(li[i].className.indexOf('one') != -1){
-            console.log(li[i]);
-        }
+    var one =$(window);
+    var winWidth;
+    var winHeight;
+    var scrollLeft;
+    var scrollTop;
+
+    var left = 0;
+    var top = 0;
+    var oneBox = $("#s1");
+    var boxLeft;
+    var boxTop;
+    $('#s1').hide();
+    function box()
+    {
+        winWidth= one.width();
+        winHeight = one.height();
+
+        scrollLeft = one.scrollLeft();
+        scrollTop = one.scrollTop();
+
+        boxLeft = oneBox.outerWidth();
+        boxTop = oneBox.outerHeight();
+
+        left= scrollLeft+(winWidth-boxLeft)/2;
+        Top= scrollTop+(winHeight-boxTop)/2;
     }
+    function show(){
+        oneBox.animate({"left":left+"px","top":Top+"px"},0).show();
+    }
+    $("#btn").click(function(){
+        box();
+        show();
+        $("#s1").show();
+    });
+    $("#btn2").click(function(){
+        oneBox.hide();
+        $("#s1").hide();
+
+    });
+    one.resize(function(){
+        box();
+        if(oneBox.is(":animated")){
+            box().stop(ture);
+        }
+        show();
+    });
+
 </script>
 </body>
 </html>
