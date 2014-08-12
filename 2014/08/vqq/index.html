@@ -54,7 +54,7 @@
 		</li>
 	</ul>
 	<div class="mark"></div>
-
+    var alpha = 0
 	<ul id="text_list">
 		<li><h2 class="show"><a href="#">《武则天秘史》[至22集]姐姐与皇上偷情，媚娘抓奸在床...</a></h2></li>
 		<li><h2><a href="#">《无底洞》金钱、美女、权利、复仇等欲望让人不可自拔...</a></h2></li>
@@ -110,9 +110,32 @@
             }
             icoList[this.index].className = 'active'
             txtList[this.index].getElementsByTagName('h2')[0].className = 'show'
-            picList[this.index].style.filter = 'alpha(opacity=100)'
-            picList[this.index].style.opacity = 1
+//            picList[this.index].style.filter = 'alpha(opacity=100)'
+//            picList[this.index].style.opacity = 1
+            startMove(picList[this.index], 100)
         }
+    }
+
+
+    function startMove(obj, target){
+        var speed = 0
+        var alpha = 0
+
+        clearInterval(obj.timer)
+        obj.timer = setInterval(function(){
+            if(alpha < target){
+                speed = 10
+            } else {
+                speed = -10
+            }
+            if(target == alpha){
+                clearInterval(obj.timer)
+            } else {
+                alpha += speed
+                obj.style.filter = 'alpha(opacity=' + alpha + ')'
+                obj.style.opacity = alpha / 100
+            }
+        }, 30);
     }
 
 </script>
