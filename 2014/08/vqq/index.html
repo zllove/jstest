@@ -93,6 +93,27 @@
 	<a href="#" id="btn_next" class="btn showBtn"></a>
 </div>
 <script type="text/javascript">
+    var picList = document.getElementById('pic_list').getElementsByTagName('li')
+    var txtList = document.getElementById('text_list').getElementsByTagName('li')
+    var icoList = document.getElementById('ico_list').getElementsByTagName('li')
+    var prev = document.getElementById('btn_prev')
+    var next = document.getElementById('btn_next')
+
+    for(var i = 0; i < icoList.length; i++){
+        icoList[i].index = i
+        icoList[i].onclick = function(){
+            for(i = 0; i < icoList.length; i++){
+                icoList[i].className = ''
+                txtList[i].getElementsByTagName('h2')[0].className = ''
+                picList[i].style.filter = 'alpha(opacity=0)'
+                picList[i].style.opacity = 0
+            }
+            icoList[this.index].className = 'active'
+            txtList[this.index].getElementsByTagName('h2')[0].className = 'show'
+            picList[this.index].style.filter = 'alpha(opacity=100)'
+            picList[this.index].style.opacity = 1
+        }
+    }
 
 </script>
 </body>
