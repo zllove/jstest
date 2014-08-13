@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    var re = /<td[^>]*>([\s\S]+?)<\/td>/
+    var str = '<td><a href="">sdfasdfsdf</a></td>';
+    var str2 = 'adf123132adfdsf';
+    console.log(str.match(re));
+    console.log(RegExp.$1);
+    var re2 = /(\d+)(\w)/;
+    console.log(re2.test(str2));
+    console.log(RegExp.$1);
+</script>
+</body>
+</html>
