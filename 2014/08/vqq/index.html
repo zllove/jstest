@@ -4,7 +4,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>妙味课堂--js视频解答</title>
 <link href="css/miaov.css" rel="stylesheet" />
-<!--<script src="js/miaov.js"></script>-->
 </head>
 
 <body>
@@ -105,25 +104,38 @@
     prev.onclick = function(){
         if(nowIco > 0){
             nowIco--;
-            act(icoUlList, 'left', icoList[0].offsetWidth * nowIco);
+            ico_scroll();
         }
+            console.log('prev', nowIco);
         /*
+        if(nowIco == 0){
+            nowIco = 7;
+            nowIco--;
+            ico_scroll();
+        }
+
         if(nowIco == -7){
             nowIco = 0;
+         ico_scroll();
         }
         */
     }
 
     next.onclick = function(){
-        /*
-        if(nowIco == 0){
-            nowIco = -7;
-        }
-        */
-        if(nowIco < icoList - 7){
+            console.log('now', nowIco);
+//        if(nowIco == 7){
+////            nowIco = 0;
+//            nowIco++;
+//            ico_scroll();
+//        }
+        if(nowIco < icoList.length - 7){
             nowIco++;
-            act(icoUlList, 'left', icoList[0].offsetWidth * nowIco);
+            ico_scroll();
         }
+//        if(nowIco == 0){
+//            nowIco = -7;
+//            ico_scroll();
+//        }
     }
 
     for(var i = 0; i < icoList.length; i++){
@@ -155,14 +167,16 @@
         if(now >= icoList.length){
             now = 0;
         }
-        console.log('now', now);
-        console.log('nowIco', nowIco);
         if(now < nowIco){ // '当自动播放超过范围时，拉会'
             nowIco = now;
-        } else if(now > nowIco - 7){
+        } else if(now >= nowIco + 7){
             nowIco = now - 6
         }
         tab();
+        ico_scroll();
+    }
+    function ico_scroll(){
+        act(icoUlList, 'left', -icoList[0].offsetWidth * nowIco);
     }
 
     // '自动播放'
