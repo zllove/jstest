@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<input id="btn" type="button" value="test"/>
+<ul id="div1"></ul>
+<div id="div2"></div>
+<script type="text/javascript">
+    function appendHtml(obj, json, type){
+        var frag = '', type = type || '动态';
+        $.each(json, function(){
+            frag += '<li><i>' + type + '</i><a title="' + this.text + '" href="' + this.link + '">' + this.text + '</a></li>';
+        });
+        return $(frag).appendTo(obj);
+    }
+    var news = [
+        { "link" : "http://www.baidu.com", "text" : "我是一个兵"},
+        { "link" : "http://www.baidu.com", "text" : "昨日，南京青奥村训练馆篮球场边，习近平对队员和教练说"},
+        { "link" : "http://www.baidu.com", "text" : "作为东道主，中国组成了本届青奥会规模最大的代表团"},
+        { "link" : "http://www.baidu.com", "text" : "青奥会是国际奥委会名誉主席罗格倡导建立的"}
+    ]
+    appendHtml('#div1', news);
+</script>
+</body>
+</html>
