@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Document</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <style>
+        *{margin:0;padding:0}
+        li{list-style:none}
+        .div{width:300px;margin:0 auto;border:1px solid #066}
+        .div_head{width:300px;height:35px;border-bottom:1px solid #066}
+        .div_head li{width:95px;height:35px;display:inline-block;border-right:1px solid #066;line-height:35px;text-align:center}
+        .div_head li.active{background:#00BCF3;color:#FFF}
+        .div_head li:last-child{border-right:0}
+        .div_menu{width:300px;border-top:0}
+        .div_xia{width:300px;border-top:1px solid #066;text-align:center;padding:10px 0}
+        .div_xia a{width:100px;height:30px;display:block;text-align:center;line-height:30px;background:#3CC;color:#FFF;cursor:pointer}
+        .div_menu .div_menu_item{width:300px;height:100px;text-align:center;display:none}
+        .div_menu_item li{width:300px;height:30px;line-height:30px;display:inline-block;position:relative;border:1px solid #999}
+        .div_menu_item li.on{background:#9C6}
+        .div_menu_item .m_i{width:10px;height:10px;position:absolute;right:10px;top:10px;background:#00BCF3}
+    </style>
+</head>
+<body>
+<div class="div">
+    <div class="div_head">
+        <ul>
+            <li class="active">点击1</li>
+            <li>点击2</li>
+            <li>点击3</li>
+        </ul>
+    </div>
+    <div class="div_menu">
+        <div class="div_menu_item" style="display:block;">
+            <ul>
+                <li class="on">
+                    <a>111111111<i class="m_i"></i>
+                    </a>
+                </li>
+                <li>
+                    <a>222222222<i></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="div_menu_item">
+            <ul>
+                <li class="on">
+                    <a>3333333333<i class="m_i"></i>
+                    </a>
+                </li>
+                <li>
+                    <a>4444444444<i></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="div_menu_item">
+            <ul>
+                <li class="on">
+                    <a>555555555555<i class="m_i"></i>
+                    </a>
+                </li>
+                <li>
+                    <a>66666666<i></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="div_xia">
+        <a id="reset" href="javascript:;">重置效果</a>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $(function(){
+        $('.div_head li').on('click', function(){
+            tab(this);
+        });
+        $('.div_menu_item li').on('click', function(){
+            $(this).addClass('on').siblings().removeClass('on');
+            $(this).find('a').find('i').addClass('m_i').parent().parent().siblings().find('a').find('i').removeClass('m_i');
+        });
+        function tab(li){
+            $(li).addClass('active').siblings().removeClass('active');
+
+            var index = $('.div_head li').index(li);
+            $('.div_menu > div').eq(index).show().siblings().hide();
+        }
+        $('#reset').click(function(){
+            $('.div_head li').eq(0).trigger('click');
+        });
+    });
+</script>
+</html>

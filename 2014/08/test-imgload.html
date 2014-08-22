@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<a href="http://3g.weimob.com/3g/?from=timeline&isappinstalled=0">link</a>
+<script type="text/javascript">
+    var imgLoad = (function() {
+        return function(url, callback, errorCb) {
+            var img = new Image();
+
+            img.src = url;
+
+            if (img.complete) {
+                callback.call(img);
+                return;
+            };
+
+            img.onload = function() {
+                callback.call(this);
+                img = img.onload = img.onerror = null;
+            };
+
+            img.onerror = errorCb || function() {};
+        }
+    })();
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .a{vertical-align:middle;}
+    </style>
+</head>
+<body>
+<div id="div"></div>
+<script type="text/javascript">
+    var a = 1;
+    var b = {
+        a: 2,
+        b: function() {
+            alert(this.a);
+        }(),
+        f: this.f = function() {
+            alert(this.a);
+        }
+    };
+    function f() {
+        alert(3);
+    }
+    f();
+    b.f();
+    (b.f)();
+    (0, b.f)();
+
+    // 1，1，2，2，1
+
+</script>
+</body>
+</html>

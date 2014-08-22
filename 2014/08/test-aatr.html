@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div class="fwe" id="div" style="width:30px;height:40px;" > </div>
+<div id="div2"></div>
+<script>
+    var div = document.getElementById('div');
+    var div2 = document.getElementById('div2');
+    var text = div.style.cssText;
+    var only = text.split(';');
+    for(var i=0; i<only.length; i++){
+        var val = only[i].split(':');
+        var v1 = val[0].replace(/^\s+/, '');
+        var v2 = val[1].replace(/^\s+/, '');
+        div2.setAttribute(v1 + 'sx', v2);
+    }
+    console.log(div.style.cssText);
+    console.log(div2);
+</script>
+</body>
+</html>
