@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+$.post('/api/v1/VeriCodes/Send', {"Cellphone" : 15221835391, "Type" : "10"}, function(d){
+    console.log(d);
+});
+$.post('/api/v1/VeriCodes/Verify', {"Cellphone" : 15221835391,"Code":"648677", "Type" : "10"}, function(d){
+    console.log(d);
+});
+$.post('/api/v1/User/SignUp', {"Token" : "c6a54dae64fa4c5cad4a0147d55d63d1","Code":"648677", "Type" : "10"}, function(d){
+    console.log(d);
+});
+$.post('/api/v1/User/CheckCellphone?cellphone=15221835391', function(d){
+    console.log(d);
+});
+$.get('/api/v1/User/CheckCellphone',{"cellphone" : 15221835391} function(d){
+    console.log(d);
+});
+</script>
+</body>
+</html>
