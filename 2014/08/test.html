@@ -1,57 +1,24 @@
 <!doctype html>
-<html lang="en-US">
+<html>
 <head>
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
+<div id="div"></div>
 <script type="text/javascript">
-    var one =$(window);
-    var winWidth;
-    var winHeight;
-    var scrollLeft;
-    var scrollTop;
-
-    var left = 0;
-    var top = 0;
-    var oneBox = $("#s1");
-    var boxLeft;
-    var boxTop;
-    $('#s1').hide();
-    function box()
-    {
-        winWidth= one.width();
-        winHeight = one.height();
-
-        scrollLeft = one.scrollLeft();
-        scrollTop = one.scrollTop();
-
-        boxLeft = oneBox.outerWidth();
-        boxTop = oneBox.outerHeight();
-
-        left= scrollLeft+(winWidth-boxLeft)/2;
-        Top= scrollTop+(winHeight-boxTop)/2;
+    var str = '<div id="div2">' +
+            '<p>我是一个兵</p>' +
+            '</div>';
+    var div = document.getElementById('div');
+    if(str.length > 0){
+        div.innerHTML = str;
     }
-    function show(){
-        oneBox.animate({"left":left+"px","top":Top+"px"},0).show();
-    }
-    $("#btn").click(function(){
-        box();
-        show();
-        $("#s1").show();
-    });
-    $("#btn2").click(function(){
-        oneBox.hide();
-        $("#s1").hide();
 
-    });
-    one.resize(function(){
-        box();
-        if(oneBox.is(":animated")){
-            box().stop(ture);
-        }
-        show();
-    });
+    var code = document.createElement('script');
+    code.src = 'http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js';
+    document.body.insertBefore(code, div.nextSibling);
+
 
 </script>
 </body>

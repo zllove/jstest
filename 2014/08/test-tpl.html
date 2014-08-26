@@ -7,19 +7,15 @@
 <body>
 
 <script type="text/javascript">
-    var id = [1,2,3,4];
-    var sup = div('sup');
-    for(var i=0;i<4; i++){
-        sup.appendChild(div(id[i]));
-    }
-    document.body.appendChild(sup);
-
-    function div(id){
-        var d = document.createElement('div');
-        d.id = 'div' + id;
-        return d;
-    }
-
+var tpl = function(html, data){
+    return html.replace(/{{(.*?)}}/g, function($1, $2){
+        return data[$2];
+    });
+}
+var html = {
+    list : '<dl class="ui-select-list">{{options}}</dl>'
+}
+var t = tpl(html.list, { options : 'd' });
 </script>
 </body>
 </html>
