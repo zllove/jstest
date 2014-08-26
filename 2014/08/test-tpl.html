@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script type="text/javascript">
+    var id = [1,2,3,4];
+    var sup = div('sup');
+    for(var i=0;i<4; i++){
+        sup.appendChild(div(id[i]));
+    }
+    document.body.appendChild(sup);
+
+    function div(id){
+        var d = document.createElement('div');
+        d.id = 'div' + id;
+        return d;
+    }
+
+</script>
+</body>
+</html>

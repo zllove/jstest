@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        @media screen and (max-width:800px) {
+            #div{ color:#f00;}
+        }
+    </style>
+    <!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <script src="hide.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="div">this test div</div>
+<script type="text/javascript">
+    function hideDiv(){
+        var browserWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        var div = document.getElementById("div");
+        if(browserWidth < 800){
+            div.style.display = "none";
+        } else {
+            div.style.display = "block";
+        }
+    }
+
+    var timer = null;
+    window.onresize = function(){
+        timer && clearTimeout(timer);
+
+        setTimeout(function(){
+            hideDiv();
+        }, 200);
+    }
+
+    hideDiv();
+</script>
+</body>
+</html>
