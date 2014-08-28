@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#content{
+			position: absolute;
+		}
+		#wrap{
+			position: absolute;
+			width:350px;
+			height:50px;
+			left:300px;
+			top:0px;
+		}
+		.panel div{
+			overflow: hidden;
+		}
+		.panel {
+			margin: 0 auto;
+			position: absolute;
+			top:50px;
+			border:1px solid gray;
+			/*旋转样式*/
+			-moz-transform-style: preserve-3d;
+			-webkit-transform-style: preserve-3d;
+			transform-style: preserve-3d;
+			/*动画时长*/
+			-moz-transition: 1.7s;
+			-webkit-transition: 1.7s;
+			transition: 1.7s;
+			-moz-animation: pulse 2s infinite;
+			-webkit-animation: pulse 2s infinite;
+			animation: pulse 2s infinite;
+			/* 水平垂直位移 */
+			-webkit-transform-origin: 10% 100%;
+			-moz-transform-origin: 10% 100%;
+			-ms-transform-origin: 10% 100%;
+			-o-transform-origin: 10% 100%;
+			transform-origin: 10% 100%;
+
+			-moz-transform:perspective(900px) rotateY(0) ;
+			-webkit-transform:perspective(900px) rotateY(0deg);
+			transform:perspective(900px) rotateY(0deg);
+		}
+
+		.flipped{
+			-moz-transform:perspective(900px) rotateX(-180deg);
+			-webkit-transform:perspective(900px) rotateX(-180deg);
+			transform:perspective(900px) rotateX(-180deg);
+		}
+		.panel .front{
+			-moz-transform:rotateY(0deg);
+			-webkit-transform:rotateY(0deg);
+			transform:rotateY(0deg);
+			-moz-backface-visibility: hidden;
+			-webkit-backface-visibility: hidden;
+			backface-visibility: hidden;
+		}
+		.panel .back{
+			-moz-transform:rotateX(-180deg);
+			-webkit-transform:rotateX(-180deg);
+			transform:rotateX(-180deg);
+			-moz-backface-visibility: hidden;
+			-webkit-backface-visibility: hidden;
+			backface-visibility: hidden;
+		}
+		.panel div{
+			position: absolute;
+			top: 0px;
+			left:0px;
+			width:100%;
+			height:100%;
+		}
+	</style>
+
+	<script type="text/javascript" src="jquery.js"></script>
+	<script>
+	var frontImage = "1.jpg",backImage = "2.jpg";//图片路径
+	var pieceCount = 20;//分块数
+	var w = 350,h = 500;//图片宽高
+
+	$(function(){
+		var pieceHeight = h/pieceCount;
+		var $content = $("#content").css({
+			width : w,
+			height : h
+		});
+		var html = [],$panel,pieceTop;
+		for(var i=0;i<pieceCount;i++){
+			pieceTop = pieceHeight*i;
+			$panel = $("<div class='panel'></div>").css({
+				width :w+"px",
+				height : pieceHeight+"px",
+				left:"0px",
+				top :pieceTop+"px"
+			}).attr("id","panel-"+i);
+			$panel.append($('<div class="front"></div>').css({
+				width :w+"px",
+				height : pieceHeight+"px",
+				'background-image': 'url("'+frontImage+'")',
+				'background-position':'0px -'+pieceTop+'px'
+			}));
+			$panel.append($('<div class="back"></div>').css({
+				width :w+"px",
+				height : pieceHeight+"px",
+				'background-image': 'url("'+backImage+'")',
+				'background-position':'0px -'+pieceTop+'px'
+			}));
+			$content.append($panel);
+		}
+	});
+
+	//旋转角度
+	var rotate = 0;
+	function go(){
+		_go(0,rotate-=180);
+	}
+	function _go(index,rotate){
+		$("#panel-"+index++).css({
+			'-webkit-transform':'perspective(900px) rotateX('+rotate+'deg) '+((rotate%360==0)?"":"translateY(100%)")
+		});
+		if(index<pieceCount){
+			setTimeout(function(){
+				_go(index,rotate);
+			},200);
+		}
+	}
+	</script>
+</head>
+<body>
+	<button onclick="go();">GO</button>
+	<div id="content"></div>
+</body>
+</html>
