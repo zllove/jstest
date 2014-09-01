@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JS Bin</title>
+    <style>
+        body{
+            background : #fff;
+        }
+        div{
+            border:1px solid #000;position : absolute;
+        width : 100px;
+        height : 100px;
+        top : 10px;
+        bottom : 10px;
+        left : 10px;
+        right : 10px;
+        background : red;
+        }
+    </style>
+</head>
+<body>
+<script>
+    function getKnunmber(A,B,k){
+        var n = 0;
+        var lena = A.length;
+        var lenb = B.length;
+
+        for(var i=0; i<lena; i++){
+            for(var j=0; j<lenb; j++){
+                if(A[i] == B[j]){
+                    if(n == k){
+                        return  A[i];
+                    }else{
+                        n++;
+                        break
+                    }
+
+                }
+            }
+        }
+    }
+    var A = [3,4,5,6,7,8,9];
+    var B = [12,10,8,6,4];
+    var n = getKnunmber(A,B,);
+    console.log(n)
+
+</script>
+</body>
+</html>
