@@ -12,11 +12,11 @@
 <script type="text/javascript">
     window.onload = function() {
         function addEvent(obj, type, fn){
-            if(obj.addEventListener){
+            if(obj.addEventListener){ // chrome, firefox
                 obj.addEventListener(type, function(){
                     fn.call(obj);
                 }, false);
-            } else if(obj.attachEvent){
+            } else if(obj.attachEvent){ // ie
                 obj.attachEvent('on' + type, fn);
             }
         }

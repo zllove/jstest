@@ -28,19 +28,18 @@
     </tr>
 </table>
 <script  type="text/javascript">
-    var a=document.getElementById("imo");
-    var txt=document.getElementById("baoxiao");
-    a.onchange = function(e){
-        e = e || event;
-        var target = e.target || e.srcElement;
-        if(target.value == 'check'){
-            txt.className = 'disabled';
-            txt.disabled = true;
-        } else {
-            txt.className = '';
-            txt.disabled = false;
-        }
-    }
+this.doc.on("click", "#its li", function(c) {
+    var d = b(this).addClass("current").attr("data-id");
+    b(this).siblings(".current").removeClass("current");
+    var e = a.wrap.find('[order-id="' + d + '"]'),
+            f = e.offset().top,
+            g = 1e3 * (Math.abs(f - a.win.scrollTop()) / a.scrollspeed);
+    a.isScrolling = !0, a.hb.animate({
+        scrollTop: f
+    }, g, function() {
+        a.isScrolling = !1
+    }), c.preventDefault()
+});
 </script>
 </body>
 </html>
