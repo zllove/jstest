@@ -1,45 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
-    <title>test</title>
-    <style type="text/css">
-        input{ line-height:30px;}
-        .disabled{ border:1px solid #ccc; background: #f1f1f1;}
-    </style>
+    <meta charset="utf-8">
+    <title>JS Bin</title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>-->
+
 </head>
 <body>
-<table>
-    <tr>
-        <td>
-            <select name="paym" id="imo">
-                <option value="money" selected>aaa</option>
-                <option value="check" >yyy</option>
-                <option value="card">xxx</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <th height="10%" width="10%" align="center" bgcolor="#1a60a8" style="border:1px solid #000000;">
-            <font color="#FFFFFF"><b>bbb</b></font></th>
-        <td>
-            <input type="text" id="baoxiao"  maxlength="10" />
-        </td>
-    </tr>
-</table>
-<script  type="text/javascript">
-this.doc.on("click", "#its li", function(c) {
-    var d = b(this).addClass("current").attr("data-id");
-    b(this).siblings(".current").removeClass("current");
-    var e = a.wrap.find('[order-id="' + d + '"]'),
-            f = e.offset().top,
-            g = 1e3 * (Math.abs(f - a.win.scrollTop()) / a.scrollspeed);
-    a.isScrolling = !0, a.hb.animate({
-        scrollTop: f
-    }, g, function() {
-        a.isScrolling = !1
-    }), c.preventDefault()
-});
+<body style="margin:0; padding:0;">
+<div id="div" style="margin: 100px;width:300px; height:300px; border:1px solid blue;position: relative;">
+    <div id="inner" style="width:550px; height:150px; border:1px solid red"></div>
+</div>
+<div id="div2" style="width:1500px; height:1000px; border:1px solid; position:relative; top:20px;"></div>
+<script type="text/javascript">
+oUsername1.onblur=function(){
+    ajax('get','guestbook/index.php','m=index&a=verifyUserName&username='+this.value,function(data){
+        //alert(data);
+        var d=JSON.parse(data);
+        if(d.code == 2){
+            alert(d.message);
+        } if(d.code == 1){
+            alert(d.message);
+        } else {
+            oVerfiymessage.innerHTML= d.message;
+        }
+    });
+};
+
 </script>
+</body>
 </body>
 </html>
