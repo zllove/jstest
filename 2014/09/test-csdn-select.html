@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<span id="select">
+    <select name="a"></select>
+    <select name="b"></select>
+    <select name="c"></select>
+</span>
+<script type="text/javascript">
+    var arr = ["","AA","BB","CC"],select = document.getElementById("select").getElementsByTagName("select");
+    for(var i = select.length;i--;){
+        select[i].original ="";//记录原始值
+        select[i].onchange = (function(n){
+            return function(){
+                var v = this.value,ori = this.original;
+                for(var l=select.length;l--;){
+                    if(l != n){
+                        var sel = select[l],m=null;a=!0;
+                        for(var k =sel.options.length;k--;){
+                            v && sel.options[k].value == v &&(m = k);//是否删除
+                            sel.options[k].value == ori &&(a=!1);//是否添加
+                        }
+                        a && sel.add(new Option(ori,ori));
+                        m !== null &&  sel.options.remove(m);
+                    }
+                }
+                this.original = v;
+            }
+        })(i);
+        for(var a = 0;a < arr.length;a++){
+            select[i].add(new Option(arr[a],arr[a]));
+        }
+    }
+</script>
+</body>
+</html>
