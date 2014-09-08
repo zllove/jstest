@@ -5,11 +5,29 @@
     <title>test</title>
 </head>
 <body>
-<script>
-var a = document.getElementById('test');
-a.onclick = function(){
-    alert(11);
-}
-</script>
+<div class="main-promo">
+    <div class="switch-items">
+        <div data-index="0" class="switch-item first-item">
+            聚蟹客 中秋好礼            </div>
+        <div data-index="1" class="switch-item">
+            赚网 相思惠明月            </div>
+        <div data-index="2" class="switch-item active-switch-item">
+            草莓网 彩妆大促            </div>
+        <div data-index="3" class="switch-item">
+            中秋送礼 浓情促销            </div>
+    </div>
+    <a data-index="0" href="http://weigou.baidu.com/promo/juxieke" target="_blank" class="main-item" style="display: none;">
+        <img src="http://bs.baidu.com/weigou-baidu-com/63c6f7a3e95ec7386a016eb97ed8767a.jpg">
+    </a>
+    <a style="display: none;" data-index="1" href="http://weigou.baidu.com/promo/zhuanqianshangcheng" target="_blank" class="main-item">
+        <img src="http://bs.baidu.com/weigou-baidu-com/99488382a3d4f681082cd863303cc1cd.jpg">
+    </a>
+    <a style="display: block;" data-index="2" href="http://weigou.baidu.com/promo/caomeiwang" target="_blank" class="main-item">
+        <img src="http://bs.baidu.com/weigou-baidu-com/0fef48edb71dd44f06566ba2fab1750f.jpg">
+    </a>
+    <a style="display: none;" data-index="3" href="http://weigou.baidu.com/promo/weigouzhongqiu" target="_blank" class="main-item">
+        <img src="http://bs.baidu.com/weigou-baidu-com/26bf91aa9214049e24c1ffdacf6a3712.jpg">
+    </a>
+</div>
 </body>
 </html>
