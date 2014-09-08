@@ -1,34 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>JS Bin</title>
-    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
-    <!--<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>-->
-
+    <meta charset="UTF-8">
+    <title>test</title>
 </head>
 <body>
-<body style="margin:0; padding:0;">
-<div id="div" style="margin: 100px;width:300px; height:300px; border:1px solid blue;position: relative;">
-    <div id="inner" style="width:550px; height:150px; border:1px solid red"></div>
-</div>
-<div id="div2" style="width:1500px; height:1000px; border:1px solid; position:relative; top:20px;"></div>
-<script type="text/javascript">
-oUsername1.onblur=function(){
-    ajax('get','guestbook/index.php','m=index&a=verifyUserName&username='+this.value,function(data){
-        //alert(data);
-        var d=JSON.parse(data);
-        if(d.code == 2){
-            alert(d.message);
-        } if(d.code == 1){
-            alert(d.message);
-        } else {
-            oVerfiymessage.innerHTML= d.message;
-        }
-    });
-};
-
+<script>
+var a = document.getElementById('test');
+a.onclick = function(){
+    alert(11);
+}
 </script>
-</body>
 </body>
 </html>
