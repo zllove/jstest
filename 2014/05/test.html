@@ -1,424 +1,208 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <title>test</title>
-    <style>
-  .mp-news-hot-wrap{padding:0 10px;border-bottom:1px dashed #999}
-.mp-news a:hover{color:#ff7a01;text-decoration:underline}
-.mp-news .hot-title,.mp-news h2{font-size:20px;height:30px;line-height:30px}
-.mp-news .news-sub-title{display:inline-block;*display:inline;*zoom:1;margin-top:4px;height:18px;line-height:18px;padding:0 5px;font-size:14px;color:#999;text-align:center;overflow:hidden}
-.mp-news .news-list-hor{color:#999;font-size:14px;height:16px;line-height:16px;vertical-align:top}
-.mp-news .news-list-hor .line{margin:0 5px}
-.mp-news .news-list-ver li{position:relative;margin-top:14px;font-size:14px;line-height:16px;vertical-align:middle}
-.mp-news .news-list-ver li .time{position:absolute;top:0;right:0;color:#999}
-.mp-news .news-list-ver li .news-item{margin-left:12px}
-.mp-news .news-list-ver .arrow-gray{position:absolute;top:8px;left:0;border-width:5px;border-color:transparent;_border-color:#fff;border-left-color:#ddd}
-.mp-news .news-row{position:relative;padding:10px 0;border-bottom:1px dashed #d3d3d3;vertical-align:middle;font-size:14px}
-.mp-news .news-row .time{position:absolute;top:18px;right:15px;color:#999}
-.mp-news .news-description{font-size:14px;margin-top:4px;color:#999}
-.mp-news-gap-b{padding-bottom:10px}
-.mp-banner{height:290px;margin-bottom:35px;background:#252525 url(../img/banner-bg.jpg?version=10280) center 0 no-repeat}
-.mp-banner-game-ct{position:absolute;top:30px;left:0;width:10000px}
-.mp-banner-game{position:relative;float:left;width:237px;height:234px;margin-right:10px}
-.reversal:hover .mp-banner-game-back{height:234px;z-index:2}
-.mp-banner-game-back,.mp-banner-game-front,.mp-banner-game-overlay{position:absolute;width:237px;height:234px;top:0;left:0}
-.reversal .mp-banner-game-overlay{background:#000;-moz-opacity:.7;opacity:.7;filter:alpha(opacity=70);z-index:-1}
-.mp-banner-game-front{background:#fff;_overflow:hidden}
-.mp-banner-game-back{color:#fff;z-index:0;-webkit-transition:.3s;-moz-transition:.3s;-ms-transition:.3s;-o-transition:.3s;transition:.3s;height:0;overflow:hidden}
-.mp-banner-game-back .mp-btn-start{position:absolute;left:42px;bottom:12px;width:150px;height:42px;line-height:42px;background:#ff7a01;text-align:center}
-.mp-banner-game .show{z-index:2;height:234px}
-.mp-banner-game-link{position:absolute;top:0;left:0;width:100%;height:234px;border-radius:5px;z-index:9;background:url(../img/transparent.gif);text-indent:-9999px;overflow:hidden;text-align:left}
-.mp-banner-game-header{position:relative;height:36px;line-height:36px}
-.mp-banner-game-header-center{text-align:center}
-.mp-banner-game-header-flash{height:26px;line-height:26px;text-align:center}
-.mp-banner-flash{width:216px;height:190px;margin:0 auto}
-.mp-banner-flash embed{vertical-align:top}
-.mp-banner-game-header-center span{font-size:18px}
-.mp-banner-game-header-flash span{font-size:16px}
-.mp-banner-game-header-center em,.mp-banner-game-header-flash em{font-style:normal;color:red}
-.mp-banner-game-img{display:block;border:0}
-.mp-banner-game-name{padding-left:10px;font-size:16px;color:#333}
-.mp-banner-game-type{position:absolute;top:0;right:0;height:36px;line-height:36px;font-size:13px;color:#6c6c6c;padding-right:.75em}
-.mp-banner-game-footer{height:35px;line-height:35px;font-size:13px;color:#6c6c6c;width:237px}
-.mp-banner-game-footer-flash{height:18px;line-height:18px;font-size:13px;color:#6c6c6c;width:237px}
-.mp-banner-game-footer-center{color:#000;text-align:center}
-.mp-banner-game-footer-center em{font-style:normal;color:red}
-.mp-banner-game-footer2{height:71px;padding-left:10px;font-size:13px;background:#e4e4e4;width:227px}
-.mp-banner-game-footer2 h3{padding-top:10px;font-size:18px;height:20px;line-height:20px;color:#000;margin-bottom:10px}
-.mp-banner-game-footer2 .platform,.mp-banner-game-footer2 .role{height:16px;line-height:16px;font-size:14px}
-.mp-banner-game-footer2 .role{color:#ff7a01;margin-right:10px}
-.mp-banner-game-footer2 .platform{color:#999}
-.mp-banner-game-back-name{height:18px;padding:36px 15px 10px;line-height:1;font-size:18px}
-.mp-banner-game-back-description{padding:0 15px;line-height:1.2;font-size:15px}
-.mp-banner-game-top{position:absolute;bottom:30px;right:10px;width:70px;height:70px}
-.mp-banner-game-top1{background:url(../img/weekly.png) 0 -2px no-repeat}
-.mp-banner-game-top2{background:url(../img/weekly.png) no-repeat 0 -73px}
-.mp-banner-game-top3{background:url(../img/weekly.png) no-repeat 0 -146px}
-.mp-slide{position:relative;width:100%;height:290px;min-width:1000px;overflow:hidden}
-.mp-slide-content{position:absolute;left:0;top:0;width:100%;height:290px}
-.mp-slide-content ul{height:290px}
-.mp-slide-content ul li{display:block;position:absolute;left:0;top:0;width:100%;height:290px;background-position:50% 0;overflow:hidden}
-.mp-banner-game-wrap{position:relative;width:980px;margin:0 auto;height:290px;overflow:hidden}
-.mp-banner-game-wrap .mp-banner-game-inner{position:relative;width:980px;height:290px;overflow:hidden}
-.mp-slide-link{position:absolute;left:0;top:0;width:100%;height:290px;background:url(../img/transparent.gif);z-index:10}
-.mp-banner-pager{position:relative;width:980px;margin:0 auto;font-size:0}
-.mp-banner-pager-next,.mp-banner-pager-prev{position:absolute;top:-180px;width:32px;height:62px;cursor:pointer;z-index:100}
-.mp-banner-pager-prev{left:-62px;background:url(../img/banner-arrow.png?v=10320) no-repeat -10px -87px}
-.mp-banner-pager-next{right:-62px;background:url(../img/banner-arrow.png?v=10320) no-repeat -10px -20px}
-.mp-game-pager{text-align:right;height:32px}
-.mp-game-pager a{display:inline-block;height:30px;line-height:30px;border:1px solid #d5d5d5;padding:0 12px;margin-right:10px;background-color:#fff;font-size:14px;text-align:center;cursor:pointer;font-family:arial;vertical-align:top;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none}
-.mp-game-pager .mp-game-pager-current{background-color:#ff7a01;border:0;cursor:default;color:#fff}
-.mp-game-pager .mp-game-pager-ellipsis{border:0;background-color:transparent;cursor:text}
-.mp-game-pager .mp-game-pager-next{margin-right:0}
-.ie6 .mp-game-pager a,.ie6 .mp-game-pager a:hover{color:#666}
-.ie6 .mp-game-pager .mp-game-pager-current{color:#fff}
-.mp-gamerank-list3{background:#fff}
-.mp-gamerank-list3 .list-item{position:relative;padding:7px 0;border-bottom:1px solid #dcdcdc;vertical-align:middle}
-.mp-gamerank-list3 .list-item .number{position:absolute;top:8px;left:8px;display:block;width:22px;height:22px;line-height:22px;background:#bdbdbd;text-align:center;color:#fff}
-.mp-gamerank-list3 .list-item .brief{padding-left:40px}
-.mp-gamerank-list3 .list-item .brief .name{height:22px;line-height:22px;font-size:14px}
-.mp-gamerank-list3 .list-item .brief .arrow{position:absolute;top:6px;right:3px}
-.mp-gamerank-list3 .list-item .brief .download-btn{position:absolute;top:8px;right:8px;width:38px;height:18px;line-height:18px;font-size:13px;text-align:center}
-.mp-gamerank-list3 .list-item .brief .time{position:absolute;top:12px;left:5px}
-.mp-gamerank-list3 .list-item .detail{position:relative;display:none;margin:10px 0 0 8px}
-.mp-gamerank-list3 .list-item .detail .pic{float:left;width:101px;height:86px}
-.mp-gamerank-list3 .list-item .detail .pic-shouyou{float:left;margin-left:34px;width:64px;height:64px;-webkit-border-radius:7px;-moz-border-radius:7px;border-radius:7px}
-.mp-gamerank-list3 .list-item .detail .txt-wrap{padding:20px 0 0 10px;zoom:1;overflow:hidden}
-.mp-gamerank-list3 .list-item .detail .txt-wrap-shouyou{padding-top:5px}
-.mp-gamerank-list3 .list-item .detail .name{height:17px;line-height:17px;font-size:13px;color:#333}
-.mp-gamerank-list3 .list-item .detail .platform{height:28px;line-height:28px;font-size:13px;color:#999}
-.mp-gamerank-list3 .list-item .detail .start-btn{display:block;width:66px;height:19px;line-height:19px;font-size:13px}
-.mp-gamerank-list3 .list-item .detail .star-wrap{margin:12px 0 3px}
-.mp-gamerank-list3 .list-item .detail .downloads{color:#999;height:17px;line-height:17px}
-.mp-gamerank-list3 .list-item .detail .size{margin:2px 0;color:#333;font-size:13px}
-.mp-gamerank-list3 .list-item .detail .download-btn{width:38px;height:18px;line-height:18px;font-size:13px;text-align:center}
-.mp-gamerank-list3 .list-item .detail .popular,.mp-gamerank-list3 .list-item .detail .type{height:19px;line-height:19px;color:#999}
-.mp-gamerank-list3 .second .number{background:#d08846}
-.mp-gamerank-list3 .third .number{background:#997c61}
-.mp-gamerank-list3 .list-item-0 .number,.mp-gamerank-list3 .list-item-1 .number{background:#d08846}
-.mp-gamerank-list3 .list-item-2 .number{background:#997c61}
-.mp-gamerank-list3 .item-hover .number{background:#ff7a01}
-.mp-gamerank-list3 .item-hover .detail{display:block}
-.mp-gamerank-expect{border:1px solid #dcdcdc;border-top:0;border-bottom:0}
-.mp-gamerank-expect table{width:100%;height:35px;background:#f2f2f2}
-.mp-gamerank-expect td{padding:0 10px}
-.mp-gamerank-expect .list-item .detail{margin-left:40px}
-.mp-gamerank-expect .list-item .detail .txt-wrap{padding-top:7px}
-.mp-gamerank-expect .ticket{position:absolute;left:127px;top:13px}
-.mp-gamerank-expect .pic-wangyou{float:left;width:77px;height:64px}
-.mp-gamerank-expect .info{line-height:20px}
-.mp-gamerank-porker table{height:25px;background:#f2f2f2}
-.mp-gamerank-porker td{text-align:center}
-.mp-gamerank-porker .ticket{position:absolute;right:36px;top:20px}
-.mp-gamerank-porker .mp-icon-arrow-fair{background-position:-74px -75px}
-.mp-gamerank-porker .list-item{padding:13px 0}
-.mp-gamerank-porker .list-item .brief .arrow{top:14px}
-.mp-gamerank-porker .list-item .number{top:13px}
-.mp-gamerank-porker .list-item .detail{margin-left:40px}
-.mp-gamerank-porker .list-item .detail .txt-wrap{padding:30px 0 0 10px}
-.mp-gamerank-porker .list-item .detail .star-wrap{margin:7px 0 0}
-.mp-gamerank-porker .pic-porker{float:left;width:64px;height:64px}
-.mp-mod-meitu{margin-top:10px}
-.mp-mod-meitu .pic-list{position:relative;height:385px;margin-top:16px}
-.mp-mod-meitu .pic-list .pic-item{position:absolute;display:block;zoom:1;overflow:hidden}
-.mp-mod-meitu .pic-list .pic-item img{display:block}
-.mp-mod-meitu .pic-list .order0,.mp-mod-meitu .pic-list .order1{width:242px;height:150px}
-.mp-mod-meitu .pic-list .order2,.mp-mod-meitu .pic-list .order3{width:242px;height:304px}
-.mp-mod-meitu .pic-list .order4,.mp-mod-meitu .pic-list .order5,.mp-mod-meitu .pic-list .order6,.mp-mod-meitu .pic-list .order7{width:118px;height:150px}
-.mp-mod-meitu .pic-list .txt-item{position:absolute;left:0;bottom:0;height:30px;line-height:30px;font-size:14px;zoom:1}
-.mp-mod-meitu .pic-list .txt-item:hover{text-decoration:underline;color:#ff7a01}
-.mp-slide-meitu{position:relative;width:980px;margin:0 auto;height:322px;overflow:hidden}
-.mp-slide-meitu .mp-slide-inner{position:relative;height:320px}
-.mp-slide-meitu .mp-slide-item{position:relative;float:left;width:980px;height:322px}
-.mp-slide-meitu-page{position:relative}
-.mp-slide-meitu-next,.mp-slide-meitu-prev{position:absolute;top:-205px;display:block;width:65px;height:65px;background:url(../img/banner-arrow.png?v=10220) no-repeat;cursor:pointer;z-index:100;visibility:hidden}
-.mp-slide-meitu-prev{left:10px;background-position:0 -225px}
-.mp-slide-meitu-next{right:10px;background-position:0 -160px}
-.hover .mp-slide-meitu-next,.hover .mp-slide-meitu-prev{visibility:visible}
-.header-box{border:1px solid #d3d3d3;border-bottom:0}
-.header-box .iconfont{float:left;margin:18px 10px 0;font-size:20px;color:#a9a9a9}
-.header-box .mp-icon{float:left;margin-right:5px}
-.header-box .title{font-size:15px;width:118px;height:58px;line-height:58px}
-.header-box .tab-list .item{vertical-align:middle;background:#e8e8e8;border-bottom:1px solid #d3d3d3;border-right:1px solid #d3d3d3}
-.header-box .tab-list .active{background:#fff;border-right-color:#fff}
-.header-box .tab-list .active .iconfont{color:#ff7a01}
-.header-box .tab-list .active .android{color:#77c14f}
-.header-box .tab-list .active .ios{color:#333}
-.header-box .tab-list .active .ios-offical{color:#cacaca}
-.header-box .hot-list-wrap{height:235px;padding-left:25px;overflow:hidden;zoom:1}
-.header-box .hot-list-wrap,.header-box .new-box{border-bottom:1px solid #d3d3d3}
-.header-box .hot-list li{float:left}
-.header-box .hot-list a{display:block;width:90px;margin-top:21px;color:#333;text-align:center}
-.header-box .hot-list a:hover{text-decoration:underline;color:#ff7a01}
-.header-box .hot-list img{display:block;margin:0 auto;width:64px;height:64px;-webkit-border-radius:7px;-moz-border-radius:7px;border-radius:7px}
-.header-box .hot-list .name{height:20px;line-height:20px;margin-top:4px;font-size:14px}
-.header-box .new-box{height:38px;line-height:38px;overflow:hidden}
-.header-box .new-box .item,.header-box .new-box .title{float:left;_zoom:1}
-.header-box .new-box .title{height:27px;line-height:27px;margin:5px 0;border-right:1px solid #d3d3d3}
-.header-box .new-box .item a{padding:0 11px;color:#15348e;border-right:1px solid #d3d3d3}
-.header-box .new-box .item a:hover{text-decoration:underline;color:#ff7a01}
-.header-box .new-box-type .item a{padding:0 23px}
-.slide-box{position:relative}
-.slide-box img{display:block}
-.slide-box .overlay{position:absolute;left:0;bottom:0;width:300px;height:227px;background:url(../img/overlay-black.png) repeat-x;z-index:1;_bottom:10px}
-.slide-box .next,.slide-box .prev{position:absolute;bottom:10px;_bottom:22px;width:15px;height:62px;cursor:pointer;z-index:100;text-indent:-9999px;overflow:hidden;text-align:left}
-.slide-box .next{right:6px;background:url(../img/banner-arrow.png?v=10320) no-repeat -27px -20px}
-.slide-box .prev{left:6px;background:url(../img/banner-arrow.png?v=10320) no-repeat -10px -87px}
-.slide-box .mp-btn-disable{display:none}
-.mp-slide-list{position:relative;width:100%;height:485px;zoom:1;overflow:hidden}
-.mp-slide-list .panel{height:485px;overflow:hidden;vertical-align:middle}
-.mp-slide-list .panel img{width:300px;height:485px}
-.mp-slide-txt .txt .title,.mp-slide-txt .txt .title-sub{position:absolute;width:300px;color:#fff;text-align:center;z-index:200;overflow:hidden}
-.mp-slide-txt .txt .title-sub:hover,.mp-slide-txt .txt .title:hover{color:#ff7a01}
-.mp-slide-txt .txt .title{top:350px;font-size:22px;height:25px;line-height:25px}
-.mp-slide-txt .txt .title-sub{top:380px;font-size:16px;height:18px;line-height:18px}
-.mp-carousel{position:absolute;left:27px;bottom:12px;_bottom:24px;z-index:100;width:245px;overflow:hidden;height:58px}
-.mp-nav-list{width:1000px;height:58px}
-.mp-nav-list .item{float:left;border:1px solid #fff;margin-right:7px}
-.mp-nav-list .item img{width:54px;height:54px}
-.mp-nav-list .active{border-color:#ff7a01}
-.mp-banner-slide{position:relative;width:980px;margin:0 auto;height:280px;*height:310px;*zoom:1;z-index:1;-webkit-user-select:none;-ms-user-select:none;-moz-user-select:none;user-select:none}
-.mp-banner-slide .banner-next,.mp-banner-slide .banner-prev{position:absolute;left:-26px;top:50%;width:52px;height:52px;margin-top:-26px;background:url(../img/shouyou/btn.png) no-repeat;cursor:pointer;z-index:400}
-.mp-banner-slide .banner-next{right:0;left:auto;background-position:right 0}
-.mp-banner-slide .mp-banner-list{position:relative;width:100%;height:240px;margin:30px 0 20px;*zoom:1;z-index:1}
-.mp-banner-slide .mp-banner-list .item{position:absolute;box-shadow:0 5px 4px rgba(0,0,0,.3)}
-.mp-banner-slide .mp-banner-list .item img{width:100%;height:100%;-webkit-border-radius:8px;-moz-border-radius:8px;border-radius:8px}
-.mp-banner-slide .mp-banner-list .item span{position:absolute;bottom:0;left:0;height:30px;line-height:30px;font-size:16px}
-.mp-banner-slide .mp-banner-list .banner0{left:0;top:48px;height:160px;width:240px;z-index:92}
-.mp-banner-slide .mp-banner-list .banner1{top:24px;left:98px;height:200px;width:360px;z-index:96}
-.mp-banner-slide .mp-banner-list .banner2{top:0;left:235px;width:550px;height:240px;z-index:100}
-.mp-banner-slide .mp-banner-list .banner3{left:540px;top:24px;height:200px;width:360px;z-index:96}
-.mp-banner-slide .mp-banner-list .banner4{left:735px;top:48px;height:160px;width:240px;z-index:92}
-.mp-banner-slide .mp-banner-dots{text-align:center}
-.mp-banner-slide .mp-banner-dots .dot{background:#c3c3c3;width:10px;height:10px;margin:0 5px;display:inline-block;cursor:pointer;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px}
-.mp-banner-slide .mp-banner-dots .dot-active{background:#FF7A01}
-.video-mod{position:relative;padding:0 18px}
-.video-mod .name{height:46px;line-height:46px;font-size:18px}
-.video-mod .video-list-wrap{width:520px;height:134px;margin:32px auto 15px;overflow:hidden}
-.video-mod .video-list{width:1000px}
-.video-mod .video-list li{position:relative;float:left;width:164px;margin-right:15px}
-.video-mod .video-list li img{display:block;width:164px;height:92px}
-.video-mod .video-list .mask{visibility:hidden;position:absolute;top:0;left:0;width:100%;height:92px;background:#000;opacity:.5;filter:alpha(opacity=50)}
-.video-mod .video-list .icon{visibility:hidden;position:absolute;display:block;top:46px;left:50%;width:42px;height:42px;margin:-21px 0 0 -21px;background:url(../img/video-icon.png) 0 0 no-repeat;_background:0 0}
-.video-mod .video-list .intro{color:#165bb9;line-height:18px;margin-top:3px}
-.video-mod .video-list .active .icon,.video-mod .video-list .active .mask{visibility:visible}
-.video-mod .video-next,.video-mod .video-prev{position:absolute;bottom:50px;width:32px;height:62px;cursor:pointer;z-index:100;text-indent:-9999px;overflow:hidden;text-align:left}
-.video-mod .video-next{right:20px;background:url(../img/banner-arrow.png?v=10320) no-repeat -10px -20px}
-.video-mod .video-prev{left:20px;background:url(../img/banner-arrow.png?v=10320) no-repeat -10px -87px}
-.video-mod .mp-btn-disable{display:none}
-.mp-shouyou-gift{margin-bottom:15px}
-.mp-shouyou-gift .shouyou-test{padding-top:10px}
-.mp-shouyou-gift .shouyou-test .title{margin:0 9px;height:19px;line-height:19px;background:#e1e1e1}
-.mp-shouyou-gift .shouyou-test .download,.mp-shouyou-gift .shouyou-test .time{width:50px;text-align:center}
-.mp-shouyou-gift .shouyou-test .status{display:block;text-align:center}
-.mp-shouyou-gift .shouyou-list .col{float:left}
-.mp-shouyou-gift .shouyou-list li{position:relative;height:41px}
-.mp-shouyou-gift .shouyou-list li img{width:40px;height:40px}
-.mp-shouyou-gift .shouyou-list li .os{position:absolute;right:9px;top:11px;text-align:right}
-.mp-shouyou-gift .shouyou-list .iconfont{font-size:16px}
-.mp-shouyou-gift .shouyou-list .android{color:#77c14f}
-.mp-shouyou-gift .shouyou-list .ios{color:#ff7a01}
-.mp-shouyou-gift .gift-send{padding-top:5px}
-.mp-shouyou-gift .gift-send .list-item{padding-bottom:6px}
-.app-platform .mp-box-head{background:#fff}
-.app-platform li{padding:8px 0;height:42px}
-.app-platform li img{width:42px;height:42px}
-.app-platform .download-btn{float:right;width:43px;height:21px;line-height:21px;margin-top:15px}
-.shouyou-nav{position:relative;height:48px;border:1px solid #e6e6e6;background:#f0f0f0;z-index:2}
-.shouyou-nav .wrap{margin:0 auto;width:980px}
-.shouyou-nav ul li{width:121px;height:48px;font:16px/48px "微软雅黑";border-right:1px solid #e6e6e6;float:left;position:relative;z-index:100;text-align:center}
-.shouyou-nav i{font-size:20px;padding-right:5px}
-.shouyou-nav a{display:block}
-.shouyou-nav .active{cursor:default}
-.shouyou-nav .active,.shouyou-nav a:hover{background:#ff7a01;color:#fff}
-.shouyou-nav-small{height:30px}
-.shouyou-nav-small ul{margin-left:130px}
-.shouyou-nav-small ul li{width:100px;height:30px;line-height:30px;font-size:14px}
-.mp-grid-container{margin-top:5px}
-.ad-box,.mp-con{margin-bottom:5px}
-.ad-box img{display:block}
-.mp-con .inner{padding:0 10px}
-.mp-con .sub-title-wrap{text-align:center}
-.mp-con1 .slide{height:485px}
-.mp-con1 .mp-news .news-item{margin-top:13px}
-.mp-con1 .hot-title{_width:370px;text-align:center}
-.mp-con2 .list-wrap{padding-top:12px;font-size:14px}
-.mp-con2 .xinyou{width:270px;overflow:hidden}
-.mp-con2 .list{margin-right:-18px}
-.mp-con2 .list li{float:left;width:125px;height:115px;margin-right:18px;padding-bottom:12px}
-.mp-con2 .list li img{width:100%;height:70px}
-.mp-con2 .list li h5{height:20px;line-height:20px;color:#333}
-.mp-con2 .big-img{position:relative;margin-bottom:17px;height:110px;overflow:hidden}
-.mp-con2 .big-img img{position:relative;width:100%;height:110px;display:block;-webkit-transform:scale(1,1);-moz-transform:scale(1,1);-ms-transform:scale(1,1);-o-transform:scale(1,1);transform:scale(1,1);-webkit-transition:.5s;-moz-transition:.5s;-ms-transition:.5s;-o-transition:.5s;transition:.5s}
-.mp-con2 .big-img h5{position:absolute;left:0;bottom:0;height:24px;line-height:24px;text-align:center}
-.mp-con2 .big-img:hover img{-webkit-transform:scale(2,1.5);-moz-transform:scale(2,1.5);-ms-transform:scale(2,1.5);-o-transform:scale(2,1.5);transform:scale(2,1.5)}
-.mp-con2 .hot-wrap{padding:5px 0 0 10px;height:268px}
-.mp-con2 .hot-wrap .word{float:left;height:24px;line-height:24px;margin:5px;padding:5px;color:#fff}
-.mp-con2 .hot-wrap .word0{background:#8cd5e7}
-.mp-con2 .hot-wrap .word1{background:#cc98b7}
-.mp-con2 .hot-wrap .word2{background:#dcba80}
-.mp-con2 .hot-wrap .word3{background:#90cb93}
-.mp-con2 .hot-wrap .word4{background:#8490a8}
-.mp-con2 .hot-wrap .word5{background:#876879}
-.mp-con2 .hot-wrap .word6{background:#f6ac82}
-.mp-con2 .hot-wrap .word7{background:#bababa}
-.mp-con2 .hot-wrap .word8{background:#ff8d9d}
-.mp-con2 .hot-wrap .word9{background:#568d8e}
-.mp-con2 .hot-wrap .word10{background:#9b8977}
-.mp-con2 .hot-wrap .word11{background:#adb98e}
-.mp-con2 .hot-wrap .word12{background:#a85a5a}
-.mp-con2 .hot-wrap .word13{background:#838383}
-.mp-con2 .cloud-wrap{position:relative}
-.mp-con2 .cloud-wrap .j-tab-cnt{position:absolute;left:0;top:40px;z-index:1}
-.mp-con2 .cloud-wrap .active{z-index:10}
-.mp-con3 .con3-head .mp-box-head-tab{width:125px;border-right:1px solid #d3d3d3}
-.mp-article-list{padding:8px 21px 0;margin-bottom:-1px;_margin-bottom:0}
-.mp-article-list li{height:64px;padding:18px 0 17px;border-bottom:1px dotted #d3d3d3}
-.mp-article-list .pic{width:64px}
-.mp-article-list .cnt{font-size:14px}
-.mp-article-list .cnt .title{float:left;margin-right:8px;height:18px;line-height:18px;color:#333}
-.mp-article-list .cnt .star{float:left;margin-top:3px}
-.mp-article-list .cnt .type{float:right;color:#999}
-.mp-article-list .cnt .info{line-height:22px;font-size:14px;color:#999}
-.mp-article-list .cnt2{padding-right:28px}
-.mp-article-list .btn-download{float:right;padding-bottom:9px;width:62px;text-align:center}
-.mp-article-list .btn-download .arrow{height:25px;font-size:23px;padding-top:10px}
-.mp-article-list .btn-download:hover .arrow{-webkit-animation:toTopFromBottom .3s forwards;-moz-animation:toTopFromBottom .3s forwards;-ms-animation:toTopFromBottom .3s forwards;-o-animation:toTopFromBottom .3s forwards;animation:toTopFromBottom .3s forwards}
-.mp-con2 .android-hot{margin-bottom:10px}
-.mp-con2 .mp-news .news-item{margin-top:13px}
-.mp-con4 .iconfont{margin-right:10px}
-.mp-con4 .inner{padding:13px 0 0 14px}
-.mp-con4 .list-wrap{width:951px;margin:14px 0 0;overflow:hidden}
-.mp-con4 .game-list{margin-right:-22px;padding:14px 0 0 14px}
-.mp-con4 .game-list .item{float:left;width:170px;height:84px;margin:14px 21px 0 0}
-.mp-con4 .game-list h5{font-size:14px;height:20px;line-height:20px;margin-bottom:5px}
-.mp-con4 .game-list .btn-download{width:78px;margin-top:5px;height:18px;line-height:18px;background:#f0f0f0;border:1px solid #cfcfcf;color:#000}
-.mp-con4 .game-list .btn-download:hover{background:#ff7a01;border-color:#d45f00;color:#fff;filter:none}
-.mp-ad1 img{display:block;width:100%;height:306px}
-.mp-game-pager{margin:0 32px 0 0;padding-bottom:20px}
-.mp-side-couplet,.mp-side-media{position:fixed;_position:absolute;left:50%;z-index:3000;display:none}
-.mp-side-couplet img,.mp-side-media img{width:200px;display:block}
-.mp-side-couplet em,.mp-side-media em{padding-right:10px;color:#ff7a01;font-size:16px;font-style:normal}
-.mp-side-couplet .close,.mp-side-media .close{position:absolute;left:0;top:0;background:#333;height:24px;line-height:24px;color:#fff;cursor:pointer}
-.mp-side-couplet{top:460px}
-.mp-side-couplet .close{border:1px solid #000;width:75px;text-align:center}
-.couplet-left,.media-left{margin-left:-710px}
-.couplet-right,.media-right{margin-left:510px}
-.mp-side-media{top:800px}
-.mp-side-media .close{width:100%;text-indent:10px}
-.mp-side-media .close em{float:right}
-.media-fixed-rb{top:auto;right:0;bottom:0;left:auto}
-.media-fixed-rb img{width:310px}
-.fixed-left-small,.fixed-right-small{position:absolute;display:block}
-.fixed-left-small{margin-left:0;left:0}
-.fixed-right-small{margin-left:0;left:auto;right:0}
-.weibo-box{padding:17px 11px 15px;border:1px solid #d3d3d3;border-top:0;color:#333}
-.weibo-box .icon-box{width:44px;text-align:center;font-size:36px;color:#fff}
-.weibo-box .mp-media{float:left;border:1px solid #d3d3d3;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px}
-.weibo-item{width:131px;height:55px;background:#f2f2f2;font-size:14px}
-.weibo-item .icon-box{height:55px;line-height:55px}
-.weibo-item .title{height:26px;line-height:26px}
-.weibo-item .btn-flow{height:22px;line-height:22px;width:70px;border:1px solid #d3d3d3;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;background-image:-webkit-gradient(linear,left top,left bottom,from(#fff),to(#f0f0f0));background-image:-webkit-linear-gradient(top,#fff,#f0f0f0);background-image:-moz-linear-gradient(top,#fff,#f0f0f0);background-image:-o-linear-gradient(top,#fff,#f0f0f0);background-image:linear-gradient(to bottom,#fff,#f0f0f0);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.Gradient(startColorstr='#ffffffff',endColorstr='#fff0f0f0',GradientType=0)}
-.sina{margin-right:10px}
-.sina .icon-box{background:#cf3a44}
-.sina .btn-flow{color:#cf3a44}
-.tt .icon-box{background:#3d93c4}
-.tt .btn-flow{color:#3d93c4}
-.wechat-box{height:170px;margin-top:13px;width:100%}
-.wechat-box .icon-box{background:#72b750;height:170px;line-height:170px}
-.wechat-box .title{height:46px;line-height:46px;font-size:22px}
-.wechat-box .qcode{width:110px;height:108px;float:left}
-.wechat-box .desc{padding:5px 13px 0 0;font-size:14px;line-height:25px}
-.zhidao-grid{padding-left:10px}
-.zhidao-form{height:38px;background:#f2f2f2;padding:9px 16px 0}
-.zhidao-form .input{float:left;padding:2px 5px;height:20px;line-height:20px;width:290px;border:1px solid #d3d3d3}
-.zhidao-form .btn-submit{float:right;width:46px;height:26px;background-image:-webkit-gradient(linear,left top,left bottom,from(#555),to(#191919));background-image:-webkit-linear-gradient(top,#555,#191919);background-image:-moz-linear-gradient(top,#555,#191919);background-image:-o-linear-gradient(top,#555,#191919);background-image:linear-gradient(to bottom,#555,#191919);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.Gradient(startColorstr='#ff555555',endColorstr='#ff191919',GradientType=0)}
-.zhidao-list{padding:15px 16px 8px}
-.zhidao-list li{position:relative;height:29px;line-height:29px;font-size:14px}
-.zhidao-list i{position:absolute;left:-15px;top:0;color:#d3d3d3;font-size:10px}
-.good-content{height:273px;overflow:hidden;border:1px solid #dcdcdc}
-.good-content ul{margin-top:1px}
-.good-content .mp-list-item{padding:0;border-bottom:1px dashed #15348e}
-.good-content a{display:block;padding:10px 9px;height:18px;line-height:18px;color:#15348e}
-.good-content a:hover{background:#f3f3f3}
-.gift-box{width:298px;overflow:hidden;border-bottom:1px solid #d3d3d3}
-.gift-box .gift-panel{height:64px;margin:18px 0 0 15px}
-.gift-box .name{font-size:14px;margin-top:5px}
-.gift-box .btn-get{margin-top:15px;height:24px;line-height:24px;width:50px}
-.gift-box .gift-slide-box{position:relative;width:10000px;height:246px}
-.gift-box .panel{float:left;width:298px}
-.gift-box .slide-trigger-box{width:100px;margin:0 auto}
-.gift-box .slide-trigger-box li{float:left;font-size:22px;cursor:pointer;margin:0 5px}
-.gift-box .slide-trigger-box .mp-active{color:#ff7a01}
-.gift{height:708px;_height:728px;position:relative}
-.gift .mp-loading{border:0;background:#fff}
-.gift .gift-list{padding:20px 0 0 20px}
-.gift .gift-list .gift-panel{float:left;position:relative;overflow:hidden;width:324px;_width:314px;height:74px;margin:0 20px 30px 0}
-.gift .gift-list .img{margin-right:15px}
-.gift .gift-list .img img{height:72px;width:72px}
-.gift .gift-list .name{display:block;width:100%;white-space:nowrap;word-wrap:normal;overflow:hidden;text-overflow:ellipsis;font-size:18px;line-height:24px}
-.gift .gift-list .time{margin-top:4px;height:13px;white-space:nowrap;word-wrap:normal;overflow:hidden;text-overflow:ellipsis;font-size:13px;color:#aaa}
-.gift .gift-list .meta{margin-top:8px;line-height:24px}
-.gift .gift-list .btn-get{height:22px;width:60px}
-.gift .gift-list .link{margin-left:12px;text-decoration:underline;vertical-align:middle;font-size:14px;color:#FF7A01}
-.gift .mp-game-pager{position:absolute;right:0;bottom:0}
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        .img{float:left;width:80px;height:80px;padding:5px}
+.brand-body .small-unit .img img{width:80px;height:80px}
+.brand-body .small-unit .right{float:left;overflow:hidden;margin-top:5px;width:129px}
+.brand-body .small-unit .right .title,.brand-body .small-unit .right .sub-title{font-size:12px;height:15px}
+.brand-body .brands{overflow:hidden;width:239px}
+.brand-body .brands a{width:119px;height:54px;float:left;border-right:1px solid #e8e7ec;border-bottom:1px solid #e8e7ec;display:block;overflow:hidden}
+.brand-body .brands a img{width:119px;height:54px}
+.brand-body .brands a.odd-row{height:55px}
+.brand-body .brands a.even-col{border-right:0}
+.promotions-wrapper{width:952px;margin:0 auto;padding-left:249px;position:relative}
+.promotions-wrapper .ui-menu{position:absolute;display:block;left:0;top:0}
+.promotions-wrapper .main-promo{width:711px;height:342px;position:relative;float:left}
+.promotions-wrapper .main-promo .switch-items{height:36px;position:absolute;left:0;bottom:0;width:711px;overflow:hidden;z-index:1}
+.main-promo .switch-item{width:157px;height:36px;padding:0 10px;text-align:center;line-height:36px;margin-left:1px;color:white;cursor:pointer;float:left;font-size:12px;overflow:hidden;background:black;background:rgba(0,0,0,0.7);filter:alpha(opacity=70);-ms-filter:"alpha(opacity=70)"}
+.main-promo .first-item{margin-left:0}
+.main-promo .active-switch-item{background:red;background:rgba(255,0,0,0.7);filter:alpha(opacity=70);-ms-filter:"alpha(opacity=70)"}
+.main-promo .main-item{position:absolute;left:0;top:0;width:711px;height:342px}
+.main-promo .main-item img{width:711px;height:342px}
+.right-banners{width:241px;height:342px;overflow:hidden;float:left}
+.right-banners .right-banner{width:239px;height:195px;overflow:hidden;display:block;border:1px solid #ececec}
+.right-banners .right-banner img{width:239px;height:195px}
+.right-banners .announce{width:209px;height:114px;border:1px solid #ececec;border-top:0;background-color:#f7f7f7;padding:15px}
+.right-banners .announce h2{font-size:14px;font-weight:bold;float:left;margin-bottom:10px}
+.right-banners .announce ul li{list-style:disc inside;margin-left:5px;font-size:12px;margin-bottom:10px;width:204px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.right-banners .announce .red-announce{color:#d3010a}
+.main-img{float:left;width:952px;height:252px;margin-top:8px}
+.main-img .left-img{width:199px;height:252px;display:block;float:left;overflow:hidden}
+.main-img .left-img img{width:199px;height:252px}
+.main-img .middle-img{width:512px;height:251px;float:left;border-bottom:1px solid #e8e7ec}
+.main-img .middle-img .middle-img-upper{display:block;float:left;width:256px;height:127px;overflow:hidden}
+.main-img .middle-img .middle-img-upper img{width:256px;height:127px}
+.main-img .middle-img .hot-item{float:left;width:150px;height:84px;padding:20px 10px;border-right:1px dashed #e8e7ec;position:relative}
+.main-img .middle-img .last-hot-item{border-right:0}
+.main-img .middle-img .hot-item .product-hot-tag,.main-img .middle-img .hot-item .product-sale-tag{width:48px;height:48px;position:absolute;top:6px;left:31px;background:url('http://bs.baidu.com/weigou-baidu-com/83363281c71075eee3b662677a16147c.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/83363281c71075eee3b662677a16147c.png')}
+.main-img .middle-img .hot-item .product-hot-tag{background:url('http://bs.baidu.com/weigou-baidu-com/cb1300f3f57b0a5e392ffafeeb06160a.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/cb1300f3f57b0a5e392ffafeeb06160a.png')}
+.main-img .middle-img .hot-item .hot-link{width:70px;height:70px;margin:5px 5px 0 0;float:left;display:block}
+.main-img .middle-img .hot-item .hot-link img{width:70px;height:70px}
+.main-img .middle-img .hot-item .hot-right{float:left;width:75px;margin-top:5px}
+.main-img .middle-img .hot-item .hot-right .title{font-size:12px;height:43px;overflow:hidden;margin-bottom:15px;display:block}
+.main-img .middle-img .hot-item .hot-right .price{color:#d3010a;font-size:12px}
+.main-img .right-img{width:241px;height:252px;display:block;float:left;overflow:hidden;position:relative;background:url('http://bs.baidu.com/weigou-baidu-com/bb88f3cb84bbbac0db5ef8dd3f2f6411.png') no-repeat}
+.main-img .right-img a.charge{position:absolute;left:11px;top:10px;display:block;color:#999;font-size:12px;text-align:center;width:90px;padding-left:15px;height:60px;line-height:60px}
+.main-img .right-img a.charge:hover{color:#d22636;text-decoration:none}
+.main-img .right-img a.charge-2{left:126px}
+.main-img .right-img a.charge-3{top:80px}
+.main-img .right-img a.charge-4{top:80px;left:126px}
+.main-img .img-link{display:block;width:220px;height:94px;position:absolute;top:150px;left:10px}
+.section-header .section-link{font-size:12px;color:#333;margin-top:17px;padding:0 15px;border-left:1px solid #333;float:right;display:block;text-align:center}
+.section-header .section-link-first{border-left:0}
+.section-header .section-link-last{padding-right:0}
+.food-section .section-logo{background-position:0 0}
+.cosmetic-section .section-logo{background-position:0 -36px}
+.baby-section .section-logo{background-position:0 -72px}
+.home-section .section-logo{background-position:0 -108px}
+.book-section .section-logo{background-position:0 -144px}
+.phone-section .section-logo{background-position:0 -180px}
+.computer-section .section-logo{background-position:0 -216px}
+.elec-section .section-logo{background-position:0 -252px}
+.adult-section .section-logo{background-position:0 -288px}
+.tuan-section .section-logo{background:url('http://bs.baidu.com/weigou-baidu-com/d8efc98149412fc4d23e46140ef2cad9.png') no-repeat;width:118px;height:35px;margin-bottom:5px}
+.tuan-link{color:#333}
+.tuan-big{display:block;float:left;width:478px;height:221px;border:1px solid #e8e7ec;overflow:hidden}
+.tuan-small-wrapper{width:239px;height:221px;border:1px solid #e8e7ec;border-left:0;float:left}
+.tuan-small{width:239px;height:110px;display:block;border-bottom:1px solid #e8e7ec;overflow:hidden}
+.last-tuan-small{border-bottom:0}
+.baby-section .middle-unit{padding:20px;width:199px;height:181px;position:relative;font-family:"Microsoft YaHei";font-size:14px}
+.baby-big-title{height:16px;width:199px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.baby-big-sub-title{height:16px;color:#a4a4a4;width:199px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;margin-top:7px}
+.baby-big-categories{position:absolute;width:120px;overflow:hidden;z-index:1;left:20px;bottom:10px;height:106px}
+.baby-big-categories .baby-big-category{margin-bottom:12px;width:120px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;display:block;font-size:12px}
+.baby-big-categories .baby-big-category-short{width:60px;float:left}
+.baby-big-img{position:absolute;right:0;bottom:0;width:153px;height:153px;display:block;z-index:0}
+.baby-big-img-link{position:absolute;right:0;bottom:0;width:99px;height:153px;display:block;z-index:2;background:#000;opacity:0;filter:alpha(opacity=0)}
+.baby-section .right a{display:block;overflow:hidden}
+.baby-section .unit .sub-title{margin-bottom:12px;margin-top:5px}
+.baby-section .baby-small-title{float:left;width:55px;margin-right:5px}
+.baby-section .middle-unit{position:relative}
+.baby-section .baby-logo{position:absolute;right:0;top:0;width:32px;height:32px}
+.middle-unit .middle-da{width:239px;height:221px}
+.big-unit .big-da{width:239px;height:332px}
+.main-section .section-body .brand-body .no-padding-middle-unit{padding:0;width:239px;height:221px}
+.main-section .section-body .brand-body .no-padding-middle-unit .product-hot-tag,.main-section .section-body .brand-body .no-padding-middle-unit .product-sale-tag{width:72px;height:72px;position:absolute;top:42px;right:12px;background:url('http://bs.baidu.com/weigou-baidu-com/f6b8ad3ec99153733ce02c792a82dbbd.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/f6b8ad3ec99153733ce02c792a82dbbd.png')}
+.main-section .section-body .brand-body .no-padding-middle-unit .product-hot-tag{background:url('http://bs.baidu.com/weigou-baidu-com/f0280a572e386165d791df10d8be910c.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/f0280a572e386165d791df10d8be910c.png')}
+.main-section .section-body .brand-body .no-padding-big-unit{padding:0;width:239px;height:332px}
+.main-section .section-body .brand-body .no-padding-big-unit .product-hot-tag,.main-section .section-body .brand-body .no-padding-big-unit .product-sale-tag{width:72px;height:72px;position:absolute;top:73px;right:12px;background:url('http://bs.baidu.com/weigou-baidu-com/f6b8ad3ec99153733ce02c792a82dbbd.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/f6b8ad3ec99153733ce02c792a82dbbd.png')}
+.main-section .section-body .brand-body .no-padding-big-unit .product-hot-tag{background:url('http://bs.baidu.com/weigou-baidu-com/f0280a572e386165d791df10d8be910c.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/f0280a572e386165d791df10d8be910c.png')}
+.navigator{height:40px;background:#d22636;font-size:14px;min-width:1200px}
+.navigator-inner{width:1200px;margin:0 auto}
+.navigator-items{height:40px;font-weight:bold}
+.navigator-items .navigator-item{color:#fff;line-height:40px}
+.navigator-items a.navigator-item{text-decoration:none}
+.navigator-items .nav-img{float:right;width:200px;height:40px}
+.all-cate{height:40px;font-weight:bold;background:#c2202f;position:relative;z-index:121}
+.all-cate .navigator-item{position:absolute}
+.all-cate .all-cate-arrow{background:url('http://bs.baidu.com/weigou-baidu-com/37f8b716d552113655cfd19665bb2830.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/37f8b716d552113655cfd19665bb2830.png');width:11px;height:6px;position:absolute;top:17px;right:20px;-webkit-transition:all 200ms ease-in-out 0s;-moz-transition:all 200ms ease-in-out 0s;-o-transition:all 200ms ease-in-out 0s;-ms-transition:all 200ms ease-in-out 0s}
+.all-cate:hover .all-cate-arrow{-webkit-transform:rotate(180deg);-moz-transform:rotate(180deg);-o-transform:rotate(180deg);-ms-transform:rotate(180deg);*display:none}
+.navigator-item{position:relative;z-index:1000;text-align:center}
+.navigator-item .tag{width:31px;height:17px;position:absolute;top:-10px;left:76px}
+.navigator-item .new{background:url('http://bs.baidu.com/weigou-baidu-com/9d2e9765b02ce389efdb9a1ff6e6bfe5.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/9d2e9765b02ce389efdb9a1ff6e6bfe5.png')}
+.navigator-item .hot{background:url('http://bs.baidu.com/weigou-baidu-com/405cc170fc7bac28bcf5013d1bb8e50a.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/405cc170fc7bac28bcf5013d1bb8e50a.png')}
+.navigator .selected,.navigator-item:hover{background:#af1925;z-index:1}
+.ui-menu{position:absolute;font-size:12px;color:#333;top:40px;font-weight:normal;display:none}
+.topic_index .ui-menu{display:block}
+.widget-menu{z-index:2000}
+.ui-menu-main{background-color:#ebebeb;border-radius:0 0 10px 10px}
+.widget-menu .ui-menu-main{background-color:#fff}
+.ui-menu-body{padding:0 1px;line-height:23px}
+.ui-menu-body ul{border:2px solid #bb0f11;border-top:0;border-radius:0 0 10px 10px}
+.widget-menu .ui-menu-body ul{width:236px;margin-left:-1px;background-color:#fff;z-index:10}
+.ui-menu-item{display:block;zoom:1;height:60px;overflow:hidden;position:relative}
+.widget-menu .ui-menu-item{height:30px;padding:2px}
+.last-ui-menu-item{border-radius:0 0 10px 10px}
+.widget-menu .ui-menu-item-expand{height:52px;background-color:#fffdfe;padding:0;border:1px solid #dadada;margin:1px}
+.ui-menu-item-expand-entrance{background:url(http://bs.baidu.com/weigou-baidu-com/8558c5fc64976a754c5015a62527935a.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://bs.baidu.com/weigou-baidu-com/8558c5fc64976a754c5015a62527935a.png',sizingMethod='scale');position:absolute;right:10px;top:13px;height:12px;width:10px;overflow:hidden}
+.widget-menu .ui-menu-item-expand-entrance{background:url('http://bs.baidu.com/weigou-baidu-com/9c1df518a67d4f1d38a3f8beb6cb00b4.gif');width:7px;height:10px}
+.widget-menu .ui-menu-item-expand .ui-menu-item-expand-entrance{background:url('http://bs.baidu.com/weigou-baidu-com/9c9bee73bb3518898ee9ce06609e3faa.gif')}
+.ui-menu-item h3{color:#333;overflow:hidden;height:20px;line-height:20px;font-size:14px;padding-left:10px;margin-top:5px}
+.ui-menu-tinysub{margin:6px 10px 0}
+.widget-menu .ui-menu-tinysub{display:none}
+.widget-menu .ui-menu-item-expand .ui-menu-tinysub{display:block;margin:2px 10px 4px}
+.ui-menu-item b{float:left;width:16px;height:16px;background:#000;margin-top:2px}
+.ui-menu-item h3 span{float:left;line-height:20px;margin-left:10px;font-weight:bold;font-size:12px}
+.ui-menu-header-wrapper{position:relative;float:left}
+.ui-menu-header-text{margin-left:0!important}
+.ui-menu-tiny-a-wrapper{position:relative;margin-right:7px}
+.ui-menu-tiny-a{display:inline-block;color:#989898;line-height:23px}
+.ui-menu-tiny-a-bold{font-weight:bold}
+.ui-menu-header-wrapper a{color:#333}
+.ui-item-hover{background:#d22636;color:#fff;margin-left:-1px;margin-right:-1px;padding-left:1px;padding-right:1px}
+.widget-menu .ui-item-hover{background:inherit;color:#333;border:1px solid #d22636;border-right:0;box-shadow:-1px 2px #e3e3e3;z-index:11}
+.widget-menu .ui-item-hover a{color:#989898}
+.widget-menu .ui-item-hover h3,.widget-menu .ui-item-hover h3 a{color:#333}
+.ui-item-hover h3,.ui-item-hover a{color:#fff}
+.ui-item-hover .ui-menu-item-expand-entrance{display:none}
+.widget-menu .ui-item-hover .ui-menu-item-expand-entrance{display:block}
+.ui-menu-sub{overflow:hidden;width:0;position:absolute;top:0;left:236px;z-index:10;background:#fff}
+.ui-sub-item{display:none;border:1px solid #d22636;zoom:1}
+.sub-item-show{display:block}
+.sub-section{overflow:hidden;border-top:1px solid #eee;margin:0 30px;width:582px}
+.sub-section-first{border-top:0}
+.sub-section-title{float:left;font-weight:bold;width:82px;line-height:20px;margin:20px 0;position:relative;text-align:center}
+.sub-section-title a{color:#d22636}
+.sub-section-body-wrapper{overflow:hidden;float:left;width:500px;padding-top:20px;margin-bottom:15px}
+.sub-section-body{float:left;line-height:20px;margin:4px 0 0 -4px;_margin-top:2px}
+.sub-link-wrapper{margin-bottom:12px;*padding-bottom:12px;*margin-bottom:0;float:left;white-space:nowrap}
+.sub-link-a-wrapper{float:left;position:relative;margin:0 6px}
+.sub-seperator{float:left;width:1px;height:12px;_height:14px;overflow:hidden;background:#ccc}
+.sub-link{color:#000;float:left;height:12px;line-height:12px;*height:14px;*line-height:14px;white-space:nowrap}
+.menu-tag{position:absolute;right:-19px;top:-12px;z-index:2}
+.menu-tag-text{color:#fff;height:12px;line-height:12px;overflow:hidden;padding:0 1px;background:#d22535;font-family:simsun}
+.menu-tag-line{height:1px;overflow:hidden}
+.menu-tag-2px{width:2px;background:#d22535}
+.menu-tag-1px{width:1px;background:#d22535}
+.ui-menu-header b{background:url('http://bs.baidu.com/weigou-baidu-com/210491fd835ab78d626611b0621fbae7.png');width:17px;height:17px}
+.ui-menu-header-0 b{background-position:-1px 0}
+.widget-menu .ui-menu-item-expand .ui-menu-header-0 b{background-position:-20px 0}
+.ui-menu-header-1 b{background-position:-1px -17px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-1 b{background-position:-20px -17px}
+.ui-menu-header-2 b{background-position:-1px -34px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-2 b{background-position:-20px -34px}
+.ui-menu-header-3 b{background-position:-1px -51px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-3 b{background-position:-20px -51px}
+.ui-menu-header-4 b{background-position:-1px -68px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-4 b{background-position:-20px -68px}
+.ui-menu-header-5 b{background-position:-1px -85px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-5 b{background-position:-20px -85px}
+.ui-menu-header-6 b{background-position:-1px -102px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-6 b{background-position:-20px -102px}
+.ui-menu-header-7 b{background-position:-1px -119px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-7 b{background-position:-20px -119px}
+.ui-menu-header-8 b{background-position:-1px -136px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-8 b{background-position:-20px -136px}
+.ui-menu-header-9 b{background-position:-1px -153px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-9 b{background-position:-20px -153px}
+.ui-menu-header-10 b{background-position:-1px -170px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-10 b{background-position:-20px -170px}
+.ui-menu-header-11 b{background-position:-1px -187px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-11 b{background-position:-20px -187px}
+.ui-menu-header-12 b{background-position:-1px -204px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-12 b{background-position:-20px -204px}
+.ui-menu-header-13 b{background-position:-1px -221px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-13 b{background-position:-20px -221px}
+.ui-menu-header-14 b{background-position:-1px -238px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-14 b{background-position:-20px -238px}
+.ui-menu-header-15 b{background-position:-1px -255px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-15 b{background-position:-20px -255px}
+.ui-menu-header-16 b{background-position:-1px -272px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-16 b{background-position:-20px -272px}
+.sub-section-title .menu-tag{top:-8px}
+.menu-tag-NEW .menu-tag-text{background:#71bd63}
+.menu-tag-NEW .menu-tag-2px{background:#71bd63}
+.menu-tag-NEW .menu-tag-1px{background:#71bd63}
+.ui-item-hover .menu-tag-text{background:#FFF;color:#d22636}
+.ui-item-hover .menu-tag-2px{background:#FFF}
+.ui-item-hover .menu-tag-1px{background:#FFF}
+.protection-logo{background:url('http://bs.baidu.com/weigou-baidu-com/protect_logo.jpg') no-repeat;width:102px;height:40px;display:block;color:transparent;float:right}
     </style>
-    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
 </head>
 <body>
-<div id="div"></div>
-<ul>
-    <li>1111</li>
-</ul>
-<div id="test"></div>
-<table width="10">
-
-</table>
-<input id="btn" type="button" value="test-button"/>
-<script type="text/javascript">
-    function setDrag(handler){
-        var me      = this,
-                startX  = 0,
-                startY  = 0,
-                lastX   = 0,
-                lastY   = 0,
-                box     = this.ele, // handler.parentNode
-                width   = viewSize.width,
-                height  = viewSize.height,
-                drag    = {
-                    down: function(e){
-                        e                    = hogo.getEvent(e);
-                        handler.style.cursor = 'move';
-                        startX               = e.clientX - parseInt(box.style.left);
-                        startY               = e.clientY - parseInt(box.style.top);
-                        this.setCapture && this.setCapture(); // IE 下防止拖动过快丢失对象
-                        addEvent(document, 'mousemove', drag.move);
-                        addEvent(document, 'mouseup', drag.up);
-                        return false; // 防止在 chrome 下滚屏，并丢失 cursor:move 样式
-                    },
-                    move: function(e){
-                        e                 = hogo.getEvent(e);
-                        stopPropagation(e);
-                        lastX             = e.clientX - startX;
-                        lastY             = e.clientY - startY;
-                        lastX             = Math.max(0, Math.min(width - box.clientWidth - 19, lastX));
-                        lastY             = Math.max(0, Math.min(height - box.clientHeight - 2, lastY));
-                        box.style.top     = lastY + 'px';
-                        box.style.left    = lastX + 'px';
-                        window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty(); // 取消选择文本
-                    },
-                    up: function(){
-                        handler.style.cursor = 'auto';
-                        removeEvent(document, 'mousemove', drag.move);
-                        removeEvent(document, 'mouseup', drag.up);
-                        handler.releaseCapture && handler.releaseCapture(); // 防止拖动过快丢失对象
-                    }
-                };
-        addEvent(handler, 'mousedown', drag.down);
-    }
-
-</script>
-
+    
 </body>
 </html>
