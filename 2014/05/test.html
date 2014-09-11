@@ -4,202 +4,133 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <style type="text/css">
-        .img{float:left;width:80px;height:80px;padding:5px}
-.brand-body .small-unit .img img{width:80px;height:80px}
-.brand-body .small-unit .right{float:left;overflow:hidden;margin-top:5px;width:129px}
-.brand-body .small-unit .right .title,.brand-body .small-unit .right .sub-title{font-size:12px;height:15px}
-.brand-body .brands{overflow:hidden;width:239px}
-.brand-body .brands a{width:119px;height:54px;float:left;border-right:1px solid #e8e7ec;border-bottom:1px solid #e8e7ec;display:block;overflow:hidden}
-.brand-body .brands a img{width:119px;height:54px}
-.brand-body .brands a.odd-row{height:55px}
-.brand-body .brands a.even-col{border-right:0}
-.promotions-wrapper{width:952px;margin:0 auto;padding-left:249px;position:relative}
-.promotions-wrapper .ui-menu{position:absolute;display:block;left:0;top:0}
-.promotions-wrapper .main-promo{width:711px;height:342px;position:relative;float:left}
-.promotions-wrapper .main-promo .switch-items{height:36px;position:absolute;left:0;bottom:0;width:711px;overflow:hidden;z-index:1}
-.main-promo .switch-item{width:157px;height:36px;padding:0 10px;text-align:center;line-height:36px;margin-left:1px;color:white;cursor:pointer;float:left;font-size:12px;overflow:hidden;background:black;background:rgba(0,0,0,0.7);filter:alpha(opacity=70);-ms-filter:"alpha(opacity=70)"}
-.main-promo .first-item{margin-left:0}
-.main-promo .active-switch-item{background:red;background:rgba(255,0,0,0.7);filter:alpha(opacity=70);-ms-filter:"alpha(opacity=70)"}
-.main-promo .main-item{position:absolute;left:0;top:0;width:711px;height:342px}
-.main-promo .main-item img{width:711px;height:342px}
-.right-banners{width:241px;height:342px;overflow:hidden;float:left}
-.right-banners .right-banner{width:239px;height:195px;overflow:hidden;display:block;border:1px solid #ececec}
-.right-banners .right-banner img{width:239px;height:195px}
-.right-banners .announce{width:209px;height:114px;border:1px solid #ececec;border-top:0;background-color:#f7f7f7;padding:15px}
-.right-banners .announce h2{font-size:14px;font-weight:bold;float:left;margin-bottom:10px}
-.right-banners .announce ul li{list-style:disc inside;margin-left:5px;font-size:12px;margin-bottom:10px;width:204px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.right-banners .announce .red-announce{color:#d3010a}
-.main-img{float:left;width:952px;height:252px;margin-top:8px}
-.main-img .left-img{width:199px;height:252px;display:block;float:left;overflow:hidden}
-.main-img .left-img img{width:199px;height:252px}
-.main-img .middle-img{width:512px;height:251px;float:left;border-bottom:1px solid #e8e7ec}
-.main-img .middle-img .middle-img-upper{display:block;float:left;width:256px;height:127px;overflow:hidden}
-.main-img .middle-img .middle-img-upper img{width:256px;height:127px}
-.main-img .middle-img .hot-item{float:left;width:150px;height:84px;padding:20px 10px;border-right:1px dashed #e8e7ec;position:relative}
-.main-img .middle-img .last-hot-item{border-right:0}
-.main-img .middle-img .hot-item .product-hot-tag,.main-img .middle-img .hot-item .product-sale-tag{width:48px;height:48px;position:absolute;top:6px;left:31px;background:url('http://bs.baidu.com/weigou-baidu-com/83363281c71075eee3b662677a16147c.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/83363281c71075eee3b662677a16147c.png')}
-.main-img .middle-img .hot-item .product-hot-tag{background:url('http://bs.baidu.com/weigou-baidu-com/cb1300f3f57b0a5e392ffafeeb06160a.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/cb1300f3f57b0a5e392ffafeeb06160a.png')}
-.main-img .middle-img .hot-item .hot-link{width:70px;height:70px;margin:5px 5px 0 0;float:left;display:block}
-.main-img .middle-img .hot-item .hot-link img{width:70px;height:70px}
-.main-img .middle-img .hot-item .hot-right{float:left;width:75px;margin-top:5px}
-.main-img .middle-img .hot-item .hot-right .title{font-size:12px;height:43px;overflow:hidden;margin-bottom:15px;display:block}
-.main-img .middle-img .hot-item .hot-right .price{color:#d3010a;font-size:12px}
-.main-img .right-img{width:241px;height:252px;display:block;float:left;overflow:hidden;position:relative;background:url('http://bs.baidu.com/weigou-baidu-com/bb88f3cb84bbbac0db5ef8dd3f2f6411.png') no-repeat}
-.main-img .right-img a.charge{position:absolute;left:11px;top:10px;display:block;color:#999;font-size:12px;text-align:center;width:90px;padding-left:15px;height:60px;line-height:60px}
-.main-img .right-img a.charge:hover{color:#d22636;text-decoration:none}
-.main-img .right-img a.charge-2{left:126px}
-.main-img .right-img a.charge-3{top:80px}
-.main-img .right-img a.charge-4{top:80px;left:126px}
-.main-img .img-link{display:block;width:220px;height:94px;position:absolute;top:150px;left:10px}
-.section-header .section-link{font-size:12px;color:#333;margin-top:17px;padding:0 15px;border-left:1px solid #333;float:right;display:block;text-align:center}
-.section-header .section-link-first{border-left:0}
-.section-header .section-link-last{padding-right:0}
-.food-section .section-logo{background-position:0 0}
-.cosmetic-section .section-logo{background-position:0 -36px}
-.baby-section .section-logo{background-position:0 -72px}
-.home-section .section-logo{background-position:0 -108px}
-.book-section .section-logo{background-position:0 -144px}
-.phone-section .section-logo{background-position:0 -180px}
-.computer-section .section-logo{background-position:0 -216px}
-.elec-section .section-logo{background-position:0 -252px}
-.adult-section .section-logo{background-position:0 -288px}
-.tuan-section .section-logo{background:url('http://bs.baidu.com/weigou-baidu-com/d8efc98149412fc4d23e46140ef2cad9.png') no-repeat;width:118px;height:35px;margin-bottom:5px}
-.tuan-link{color:#333}
-.tuan-big{display:block;float:left;width:478px;height:221px;border:1px solid #e8e7ec;overflow:hidden}
-.tuan-small-wrapper{width:239px;height:221px;border:1px solid #e8e7ec;border-left:0;float:left}
-.tuan-small{width:239px;height:110px;display:block;border-bottom:1px solid #e8e7ec;overflow:hidden}
-.last-tuan-small{border-bottom:0}
-.baby-section .middle-unit{padding:20px;width:199px;height:181px;position:relative;font-family:"Microsoft YaHei";font-size:14px}
-.baby-big-title{height:16px;width:199px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
-.baby-big-sub-title{height:16px;color:#a4a4a4;width:199px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;margin-top:7px}
-.baby-big-categories{position:absolute;width:120px;overflow:hidden;z-index:1;left:20px;bottom:10px;height:106px}
-.baby-big-categories .baby-big-category{margin-bottom:12px;width:120px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;display:block;font-size:12px}
-.baby-big-categories .baby-big-category-short{width:60px;float:left}
-.baby-big-img{position:absolute;right:0;bottom:0;width:153px;height:153px;display:block;z-index:0}
-.baby-big-img-link{position:absolute;right:0;bottom:0;width:99px;height:153px;display:block;z-index:2;background:#000;opacity:0;filter:alpha(opacity=0)}
-.baby-section .right a{display:block;overflow:hidden}
-.baby-section .unit .sub-title{margin-bottom:12px;margin-top:5px}
-.baby-section .baby-small-title{float:left;width:55px;margin-right:5px}
-.baby-section .middle-unit{position:relative}
-.baby-section .baby-logo{position:absolute;right:0;top:0;width:32px;height:32px}
-.middle-unit .middle-da{width:239px;height:221px}
-.big-unit .big-da{width:239px;height:332px}
-.main-section .section-body .brand-body .no-padding-middle-unit{padding:0;width:239px;height:221px}
-.main-section .section-body .brand-body .no-padding-middle-unit .product-hot-tag,.main-section .section-body .brand-body .no-padding-middle-unit .product-sale-tag{width:72px;height:72px;position:absolute;top:42px;right:12px;background:url('http://bs.baidu.com/weigou-baidu-com/f6b8ad3ec99153733ce02c792a82dbbd.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/f6b8ad3ec99153733ce02c792a82dbbd.png')}
-.main-section .section-body .brand-body .no-padding-middle-unit .product-hot-tag{background:url('http://bs.baidu.com/weigou-baidu-com/f0280a572e386165d791df10d8be910c.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/f0280a572e386165d791df10d8be910c.png')}
-.main-section .section-body .brand-body .no-padding-big-unit{padding:0;width:239px;height:332px}
-.main-section .section-body .brand-body .no-padding-big-unit .product-hot-tag,.main-section .section-body .brand-body .no-padding-big-unit .product-sale-tag{width:72px;height:72px;position:absolute;top:73px;right:12px;background:url('http://bs.baidu.com/weigou-baidu-com/f6b8ad3ec99153733ce02c792a82dbbd.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/f6b8ad3ec99153733ce02c792a82dbbd.png')}
-.main-section .section-body .brand-body .no-padding-big-unit .product-hot-tag{background:url('http://bs.baidu.com/weigou-baidu-com/f0280a572e386165d791df10d8be910c.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/f0280a572e386165d791df10d8be910c.png')}
-.navigator{height:40px;background:#d22636;font-size:14px;min-width:1200px}
-.navigator-inner{width:1200px;margin:0 auto}
-.navigator-items{height:40px;font-weight:bold}
-.navigator-items .navigator-item{color:#fff;line-height:40px}
-.navigator-items a.navigator-item{text-decoration:none}
-.navigator-items .nav-img{float:right;width:200px;height:40px}
-.all-cate{height:40px;font-weight:bold;background:#c2202f;position:relative;z-index:121}
-.all-cate .navigator-item{position:absolute}
-.all-cate .all-cate-arrow{background:url('http://bs.baidu.com/weigou-baidu-com/37f8b716d552113655cfd19665bb2830.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/37f8b716d552113655cfd19665bb2830.png');width:11px;height:6px;position:absolute;top:17px;right:20px;-webkit-transition:all 200ms ease-in-out 0s;-moz-transition:all 200ms ease-in-out 0s;-o-transition:all 200ms ease-in-out 0s;-ms-transition:all 200ms ease-in-out 0s}
-.all-cate:hover .all-cate-arrow{-webkit-transform:rotate(180deg);-moz-transform:rotate(180deg);-o-transform:rotate(180deg);-ms-transform:rotate(180deg);*display:none}
-.navigator-item{position:relative;z-index:1000;text-align:center}
-.navigator-item .tag{width:31px;height:17px;position:absolute;top:-10px;left:76px}
-.navigator-item .new{background:url('http://bs.baidu.com/weigou-baidu-com/9d2e9765b02ce389efdb9a1ff6e6bfe5.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/9d2e9765b02ce389efdb9a1ff6e6bfe5.png')}
-.navigator-item .hot{background:url('http://bs.baidu.com/weigou-baidu-com/405cc170fc7bac28bcf5013d1bb8e50a.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/405cc170fc7bac28bcf5013d1bb8e50a.png')}
-.navigator .selected,.navigator-item:hover{background:#af1925;z-index:1}
-.ui-menu{position:absolute;font-size:12px;color:#333;top:40px;font-weight:normal;display:none}
-.topic_index .ui-menu{display:block}
-.widget-menu{z-index:2000}
-.ui-menu-main{background-color:#ebebeb;border-radius:0 0 10px 10px}
-.widget-menu .ui-menu-main{background-color:#fff}
-.ui-menu-body{padding:0 1px;line-height:23px}
-.ui-menu-body ul{border:2px solid #bb0f11;border-top:0;border-radius:0 0 10px 10px}
-.widget-menu .ui-menu-body ul{width:236px;margin-left:-1px;background-color:#fff;z-index:10}
-.ui-menu-item{display:block;zoom:1;height:60px;overflow:hidden;position:relative}
-.widget-menu .ui-menu-item{height:30px;padding:2px}
-.last-ui-menu-item{border-radius:0 0 10px 10px}
-.widget-menu .ui-menu-item-expand{height:52px;background-color:#fffdfe;padding:0;border:1px solid #dadada;margin:1px}
-.ui-menu-item-expand-entrance{background:url(http://bs.baidu.com/weigou-baidu-com/8558c5fc64976a754c5015a62527935a.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://bs.baidu.com/weigou-baidu-com/8558c5fc64976a754c5015a62527935a.png',sizingMethod='scale');position:absolute;right:10px;top:13px;height:12px;width:10px;overflow:hidden}
-.widget-menu .ui-menu-item-expand-entrance{background:url('http://bs.baidu.com/weigou-baidu-com/9c1df518a67d4f1d38a3f8beb6cb00b4.gif');width:7px;height:10px}
-.widget-menu .ui-menu-item-expand .ui-menu-item-expand-entrance{background:url('http://bs.baidu.com/weigou-baidu-com/9c9bee73bb3518898ee9ce06609e3faa.gif')}
-.ui-menu-item h3{color:#333;overflow:hidden;height:20px;line-height:20px;font-size:14px;padding-left:10px;margin-top:5px}
-.ui-menu-tinysub{margin:6px 10px 0}
-.widget-menu .ui-menu-tinysub{display:none}
-.widget-menu .ui-menu-item-expand .ui-menu-tinysub{display:block;margin:2px 10px 4px}
-.ui-menu-item b{float:left;width:16px;height:16px;background:#000;margin-top:2px}
-.ui-menu-item h3 span{float:left;line-height:20px;margin-left:10px;font-weight:bold;font-size:12px}
-.ui-menu-header-wrapper{position:relative;float:left}
-.ui-menu-header-text{margin-left:0!important}
-.ui-menu-tiny-a-wrapper{position:relative;margin-right:7px}
-.ui-menu-tiny-a{display:inline-block;color:#989898;line-height:23px}
-.ui-menu-tiny-a-bold{font-weight:bold}
-.ui-menu-header-wrapper a{color:#333}
-.ui-item-hover{background:#d22636;color:#fff;margin-left:-1px;margin-right:-1px;padding-left:1px;padding-right:1px}
-.widget-menu .ui-item-hover{background:inherit;color:#333;border:1px solid #d22636;border-right:0;box-shadow:-1px 2px #e3e3e3;z-index:11}
-.widget-menu .ui-item-hover a{color:#989898}
-.widget-menu .ui-item-hover h3,.widget-menu .ui-item-hover h3 a{color:#333}
-.ui-item-hover h3,.ui-item-hover a{color:#fff}
-.ui-item-hover .ui-menu-item-expand-entrance{display:none}
-.widget-menu .ui-item-hover .ui-menu-item-expand-entrance{display:block}
-.ui-menu-sub{overflow:hidden;width:0;position:absolute;top:0;left:236px;z-index:10;background:#fff}
-.ui-sub-item{display:none;border:1px solid #d22636;zoom:1}
-.sub-item-show{display:block}
-.sub-section{overflow:hidden;border-top:1px solid #eee;margin:0 30px;width:582px}
-.sub-section-first{border-top:0}
-.sub-section-title{float:left;font-weight:bold;width:82px;line-height:20px;margin:20px 0;position:relative;text-align:center}
-.sub-section-title a{color:#d22636}
-.sub-section-body-wrapper{overflow:hidden;float:left;width:500px;padding-top:20px;margin-bottom:15px}
-.sub-section-body{float:left;line-height:20px;margin:4px 0 0 -4px;_margin-top:2px}
-.sub-link-wrapper{margin-bottom:12px;*padding-bottom:12px;*margin-bottom:0;float:left;white-space:nowrap}
-.sub-link-a-wrapper{float:left;position:relative;margin:0 6px}
-.sub-seperator{float:left;width:1px;height:12px;_height:14px;overflow:hidden;background:#ccc}
-.sub-link{color:#000;float:left;height:12px;line-height:12px;*height:14px;*line-height:14px;white-space:nowrap}
-.menu-tag{position:absolute;right:-19px;top:-12px;z-index:2}
-.menu-tag-text{color:#fff;height:12px;line-height:12px;overflow:hidden;padding:0 1px;background:#d22535;font-family:simsun}
-.menu-tag-line{height:1px;overflow:hidden}
-.menu-tag-2px{width:2px;background:#d22535}
-.menu-tag-1px{width:1px;background:#d22535}
-.ui-menu-header b{background:url('http://bs.baidu.com/weigou-baidu-com/210491fd835ab78d626611b0621fbae7.png');width:17px;height:17px}
-.ui-menu-header-0 b{background-position:-1px 0}
-.widget-menu .ui-menu-item-expand .ui-menu-header-0 b{background-position:-20px 0}
-.ui-menu-header-1 b{background-position:-1px -17px}
-.widget-menu .ui-menu-item-expand .ui-menu-header-1 b{background-position:-20px -17px}
-.ui-menu-header-2 b{background-position:-1px -34px}
-.widget-menu .ui-menu-item-expand .ui-menu-header-2 b{background-position:-20px -34px}
-.ui-menu-header-3 b{background-position:-1px -51px}
-.widget-menu .ui-menu-item-expand .ui-menu-header-3 b{background-position:-20px -51px}
-.ui-menu-header-4 b{background-position:-1px -68px}
-.widget-menu .ui-menu-item-expand .ui-menu-header-4 b{background-position:-20px -68px}
-.ui-menu-header-5 b{background-position:-1px -85px}
-.widget-menu .ui-menu-item-expand .ui-menu-header-5 b{background-position:-20px -85px}
-.ui-menu-header-6 b{background-position:-1px -102px}
-.widget-menu .ui-menu-item-expand .ui-menu-header-6 b{background-position:-20px -102px}
-.ui-menu-header-7 b{background-position:-1px -119px}
-.widget-menu .ui-menu-item-expand .ui-menu-header-7 b{background-position:-20px -119px}
-.ui-menu-header-8 b{background-position:-1px -136px}
-.widget-menu .ui-menu-item-expand .ui-menu-header-8 b{background-position:-20px -136px}
-.ui-menu-header-9 b{background-position:-1px -153px}
-.widget-menu .ui-menu-item-expand .ui-menu-header-9 b{background-position:-20px -153px}
-.ui-menu-header-10 b{background-position:-1px -170px}
-.widget-menu .ui-menu-item-expand .ui-menu-header-10 b{background-position:-20px -170px}
-.ui-menu-header-11 b{background-position:-1px -187px}
-.widget-menu .ui-menu-item-expand .ui-menu-header-11 b{background-position:-20px -187px}
-.ui-menu-header-12 b{background-position:-1px -204px}
-.widget-menu .ui-menu-item-expand .ui-menu-header-12 b{background-position:-20px -204px}
-.ui-menu-header-13 b{background-position:-1px -221px}
-.widget-menu .ui-menu-item-expand .ui-menu-header-13 b{background-position:-20px -221px}
-.ui-menu-header-14 b{background-position:-1px -238px}
-.widget-menu .ui-menu-item-expand .ui-menu-header-14 b{background-position:-20px -238px}
-.ui-menu-header-15 b{background-position:-1px -255px}
-.widget-menu .ui-menu-item-expand .ui-menu-header-15 b{background-position:-20px -255px}
-.ui-menu-header-16 b{background-position:-1px -272px}
-.widget-menu .ui-menu-item-expand .ui-menu-header-16 b{background-position:-20px -272px}
-.sub-section-title .menu-tag{top:-8px}
-.menu-tag-NEW .menu-tag-text{background:#71bd63}
-.menu-tag-NEW .menu-tag-2px{background:#71bd63}
-.menu-tag-NEW .menu-tag-1px{background:#71bd63}
-.ui-item-hover .menu-tag-text{background:#FFF;color:#d22636}
-.ui-item-hover .menu-tag-2px{background:#FFF}
-.ui-item-hover .menu-tag-1px{background:#FFF}
-.protection-logo{background:url('http://bs.baidu.com/weigou-baidu-com/protect_logo.jpg') no-repeat;width:102px;height:40px;display:block;color:transparent;float:right}
+        body{background-color:#fff;min-width:1150px}
+.carousel{margin-left:0px}
+.container.homepage-container{width:auto;background-color:#F9F9F9;position:relative;padding-left:0px;padding-right:0px;top:-20px}
+.homepage-header-container{width:auto;margin-left:0px !important;margin-right:0px !important;background-color:#F9F9F9;position:relative}
+.homepage-users-container{width:1000px;margin-left:auto;margin-right:auto;background-color:#F9F9F9;position:relative;top:-60px;margin-top:80px}
+.homepage-users-container-btn.btn-score{position:relative;left:40%;margin-top:30px}
+.homepage-bottom-container{position:relative;width:auto;background-color:#FFFFFF;height:320px;top:3%}
+.homepage-introduct-container{width:1000px;margin-left:auto;margin-right:auto;background-color:#FFFFFF}
+.left.carousel-control{overflow:hidden}
+.left.carousel-control:hover{opacity:0.9}
+.right.carousel-control{}
+.right.carousel-control:hover{opacity:0.9}
+.carousel-control .glyphicon-chevron-left,.carousel-control .glyphicon-chevron-right{position:absolute;top:30%;font-size:70px;width:56px;margin-left:-28px}
+.ie8 .carousel-control .glyphicon-chevron-left,.ie8 .carousel-control .glyphicon-chevron-right{height:100%;top:0;line-height:400px}
+.ie9 .carousel-control .glyphicon-chevron-left,.ie9 .carousel-control .glyphicon-chevron-right{height:100%;top:0;display:table}
+.glyphicon-chevron-left:before{content:"<"}
+.ie9 .glyphicon-chevron-left:before,.ie9 .glyphicon-chevron-right:before{height:100%;display:table-cell;vertical-align:middle}
+.glyphicon-chevron-right:before{content:">"}
+.carousel-indicators li{border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px}
+.home-img{background-image:url('../img/index.png');background-repeat:no-repeat}
+.search{margin-left:auto;margin-right:auto;position:relative;height:200px;width:100%;background-color:#00b7ee}
+#test{background-image:url('../img/test.jpg');background-repeat:no-repeat;width:980px;height:100%;margin:0 auto}
+.search .search-wrapper{width:600px;margin:0 auto}
+.search .serach-title{font-size:32px;color:#fff;margin:0 auto;padding-top:30px;text-align:center;position:relative;z-index:3;cursor:pointer}
+.search .serach-content{font-size:20px;color:#fff;margin:0 auto;padding-top:15px;padding-bottom:20px;text-align:center;position:relative;z-index:3;cursor:pointer}
+.search .arrow{width:32px;height:17px;background-image:url('../img/arrow.png');position:absolute;left:50%;top:38%;z-index:10;cursor:pointer}
+.search .search-wrapper:hover .serach-title{}
+.search .search-wrapper:hover .serach-content{}
+.search .search-wrapper:hover .arrow{background-image:url('../img/index/arrow-hover.png')}
+.home-scan{height:60px;width:700px;background-color:#fff;border:5px solid #0280a6;border-radius:42px;margin:0 auto;position:relative;z-index:3}
+.home-scan-background{background-image:url('../img/homepage-serch.jpg');height:100%;width:531px;margin:0 auto;top:-173px;position:relative;z-index:2}
+.btn-scan{background-image:url("../img/index.png");background-position:-65px -115px;background-color:transparent;border:0;position:relative;width:140px;height:50px;float:right;top:2px;left:-2px;cursor:pointer}
+.btn-scan:hover{background-position:-65px -65px}
+.btn-score{background-image:url("../img/btn-banner.png");background-color:transparent;border:0;position:absolute;width:202px;height:50px}
+.btn-score-0{background-position:-18px -20px;top:66%;left:0;outline-width:0px}
+.btn-score-0:hover{background-position:-18px -90px;outline-width:0px}
+.btn-score-0:active{background-position:-18px -160px;outline-width:0px}
+.btn-score-1{background-position:-18px -20px;top:66%;left:0;outline-width:0px}
+.btn-score-1:hover{background-position:-18px -90px;outline-width:0px}
+.btn-score-1:active{background-position:-18px -160px;outline-width:0px}
+.btn-score-2{background-position:-18px -20px;top:60.5%;left:48%;outline-width:0px}
+.btn-score-2:hover{background-position:-18px -90px;outline-width:0px}
+.btn-score-2:active{background-position:-18px -160px;outline-width:0px}
+.btn-score-0:visited{outline-width:0px}
+.btn-score-1:visited{outline-width:0px}
+.btn-score-2:visited{outline-width:0px}
+.homepage-banner{width:100%;height:350px}
+.homepage-banner .homepage-banner-wrapper{margin:0 auto;width:980px;position:relative;height:350px}
+.homepage-banner-bg-0{background:url(../img/banner-detail-1.jpg) no-repeat;position:relative;width:980px;height:350px}
+.homepage-banner-context-0{position:absolute;top:33%;right:5%;float:right;z-index:99}
+.homepage-banner-context-0 .homepage-banner-title-0{color:#223344;font-size:32px;margin-bottom:20px}
+.homepage-banner-context-0 .homepage-banner-content-0{color:#999;font-size:20px;margin:5px 0}
+.homepage-banner-context-0 .homepage-banner-tip-0{color:#8fc31f;font-size:15px;margin-top:63px;margin-left:15px}
+.homepage-banner-bg-1{width:980px;height:350px;background:url(../img/banner-detail-2.jpg) no-repeat;margin:0 auto;position:relative}
+.homepage-banner-context-1{position:absolute;top:30%;bottom:auto;left:1%;right:auto;float:left;z-index:99}
+.homepage-banner-context-1 .homepage-banner-title-1{color:#223344;font-size:32px;margin-bottom:20px}
+.homepage-banner-context-1 .homepage-banner-content-1{color:#999;font-size:20px;margin:5px 0}
+.homepage-banner-context-1 .homepage-banner-tip-1{color:#8fc31f;font-size:15px;margin-top:32px}
+.homepage-banner > img{display:block;margin:0 auto}
+.homepage-banner-context-2{}
+.homepage-banner-bg-2{width:500px;margin:0 auto}
+.homepage-banner-context-2 .homepage-banner-title-2{color:#223344;font-size:32px;text-align:center;padding-top:45px}
+.homepage-banner-context-2 .homepage-banner-content-2{color:#999999;font-size:20px;text-align:center;padding-top:20px}
+.homepage-banner-bg-2 .homepage-banner-info-title{text-align:center;color:#8fc31f;font-size:16px;padding-top:35px}
+.homepage-banner-bg-2 ul{list-style:none;height:165px;margin-top:24px}
+.homepage-banner-bg-2 ul li{background:url(../img/homepage-message.png) no-repeat;width:96px;height:96px;float:left}
+.homepage-banner-bg-2 ul li + li{margin-left:105px}
+.homepage-banner-bg-2 ul li.alert-by-wechat{}
+.homepage-banner-bg-2 ul li.alert-by-sms{background-position:-102px 0px}
+.homepage-banner-bg-2 ul li.alert-by-email{background-position:-205px 0px}
+.input-scan{width:504px;height:49px;position:relative;float:left;margin:0px 0px 0px 26px;font-size:18px;border:0}
+.input-scan:focus{outline-width:0px}
+.home-scan.home-img > input:focus{border:0}
+.users-title{position:relative;font-size:32px;color:#223344;margin-bottom:20px;top:0;background-color:transparent;padding-top:40px;width:100%;text-align:center}
+.users-content{position:relative;font-size:20px;color:#999;margin-bottom:20px;top:0;background-color:transparent;width:100%;text-align:center}
+.users-select{}
+.users-item{background-color:#FFFFFF;width:180px;height:90px;position:relative;margin-right:20px;float:left}
+.users-logo{background-color:transparent;max-height:50px;width:auto;max-width:130px;margin-left:10px}
+.users-name{float:left;font-size:13px;color:#333;position:relative;margin-left:10px}
+.users-stars{background-image:url(../img/score.png);background-repeat:no-repeat;width:106px;height:15px;position:relative;margin-left:10px;margin-top:20px}
+.users-stars.stars1{background-position:0px -1px}
+.users-stars.stars2{background-position:0px -17px}
+.users-stars.stars3{background-position:0px -33px}
+.users-stars.stars4{background-position:0px -49px}
+.users-stars.stars5{background-position:0px -65px}
+.users-stars.stars6{background-position:0px -81px}
+.users-stars.stars7{background-position:0px -97px}
+.users-stars.stars8{background-position:0px -113px}
+.users-stars.stars9{background-position:0px -129px}
+.users-stars.stars10{background-position:0px -145px}
+.users-score{color:#f39700;width:35px;height:32px;position:relative;float:right;left:-22px;top:-20px;text-align:center;font-size:20px}
+.bottom-title{color:#666;font-size:20px;padding-top:50px;padding-bottom:20px}
+.img-introduct{height:65px;width:60px;float:left;background-color:#00B7EE}
+.bottom-month{font-size:13px;color:#fff;text-align:center}
+.bottom-day{font-size:24px;color:#666;width:50px;height:36px;margin:0 auto;background-color:#fff;text-align:center;border-radius:3px;line-height:35px}
+.img-introduct.img-introduct-eye{background-position:0px 0px}
+.img-introduct.img-introduct-bd{background-position:-65px 0px}
+.img-introduct.img-introduct-360{background-position:-130px 0px}
+.img-introduct.img-introduct-alert{background-position:-195px 0px}
+.title-introduct{font-size:15px;color:#333;position:relative;left:20px}
+.desp-introduct{font-size:13px;color:#999;position:relative;float:right;width:195px}
+.item-introduct{width:275px;margin-right:65px;height:100px}
+.item-introduct.left{float:left}
+.item-introduct.right{float:right}
+.panel-introduct{width:680px;float:left;background-color:#FFFFFF}
+.panel-notice{background-color:#FFFFFF;float:right;width:320px}
+.icon-notice.home-img{height:24px;width:4px;background-position:-260px 0px;position:relative;float:left}
+.bottom-FAQ .bottom-FAQ-left{width:81px;height:81px;background-color:#00B7EE;color:#fff;font-size:24px;text-align:center;line-height:81px;float:left}
+.bottom-FAQ .bottom-FAQ-right{width:198px;height:81px;background-color:#fff;float:left;padding:10px 10px;border:1px solid #e9e9e9;border-left:0px;overflow:hidden;text-overflow:ellipsis}
+.item-notice{cursor:pointer;display:block}
+.content-notice{font-size:13px;color:#89a;position:relative;width:170px;height:20px;left:10px;margin-top:6px;overflow:hidden;text-overflow:ellipsis;line-height:14px}
+.content-notice:hover{color:#00b7ee}
+.wechat{width:320px;height:70px;background:url('../img/index/weixin.jpg') no-repeat;margin-top:16px;background-size:contain}
+.wechat-info{margin-left:78px}
+.wechat-title{color:#223344;font-size:15px;line-height:40px}
+.wechat-content{color:#999;font-size:13px}
+.weibo{width:80%;line-height:46px;color:#ACC1DC;margin-top:6px}
+#weibo-bg{width:140px;height:33px;background-position:0 12px;background-image:url(../img/weibo.png);background-repeat:no-repeat;display:block;text-indent:70px;float:left}
+.weibo-person{color:#666;margin-left:10px;display:block}
+.carousel-control .icon-next,.carousel-control .icon-prev{position:absolute;top:50%;font-size:100px}
+.box-banner-0{background:url('../img/banner-bg00.jpg') no-repeat;width:100%;height:470px;overflow:hidden;position:relative;background-position:50% 50%}
+.box-banner-1{background:url('../img/banner-bg01.jpg') no-repeat;width:100%;height:470px;overflow:hidden;position:relative;background-position:50% 50%}
+.box-banner-2{background:url('../img/banner-bg02.jpg') no-repeat;width:100%;height:470px;overflow:hidden;position:relative;background-position:50% 50%}
+.box-banner-3{background:url('../img/banner-bg03.jpg') no-repeat;width:100%;height:470px;overflow:hidden;position:relative;background-position:50% 50%}
+.banner-img{width:980px;height:400px}
+@media screen and (min-height:993px){.box-banner-0,.box-banner-1,.box-banner-2,.box-banner-3{height:725px}
+}.carousel-control{cursor:pointer}
     </style>
 </head>
 <body>
