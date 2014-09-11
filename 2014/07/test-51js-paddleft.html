@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<a href="http://bbs.51js.com/forum.php?mod=viewthread&tid=85137&extra=page%3D1%26filter%3Dtypeid%26typeid%3D8">位数不够前面补0的问题</a>
+<script type="text/javascript">
+    function padLeft(str, len){
+        if(str.length >= len){
+            return str;
+        } else {
+            return padLeft('0' + str, len);
+        }
+    }
+
+//    console.log(padLeft('3', 4));
+    
+    function padd(num, n){
+        if(num < Math.pow(10, n-1)){
+            return new Array(n-(''+num).length+1).join('0') + num;
+        } else {
+            return num;
+        }
+//        return num < Math.pow(10, n-1) ? new Array(n-(''+num).length+1).join('0') + num : num;
+    }
+
+//    console.log(padd('3', 4));
+
+
+    function pad(num, n) {
+        //return (Array(n).join(0)+num).slice(-n);
+        return new Array(Math.abs((''+num).length-(n+1))).join(0)+num;
+    }
+    for (var i = 0; i < 150; i++)
+        document.write(pad(i, 10), '<br>');
+
+
+</script>
+</body>
+</html>

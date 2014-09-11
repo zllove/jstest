@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    客服果果=function (id,_top,_left){
+        var me=id.charAt?document.getElementById(id):id, d1=document.body, d2=document.documentElement;
+        d1.style.height=d2.style.height='100%';me.style.top=_top?_top+'px':0;me.style[(_left>0?'left':'right')]=_left?Math.abs(_left)+'px':0;
+        me.style.position='absolute';
+        setInterval(function (){me.style.top=parseInt(me.style.top)+(Math.max(d1.scrollTop,d2.scrollTop)+_top-parseInt(me.style.top))*0.1+'px';},10+parseInt(Math.random()*20));
+        return arguments.callee;
+    };
+    window.onload=function (){
+        客服果果
+        ('demo1',100,10)
+                ('demo2',50,-10)
+                ('demo3',200,200)
+                ('demo4',150,400)
+                ('demo5',250,300)
+                ('demo6',350,600)
+        var 如果还想要就自己随便加哇哈哈
+    }
+</script>
+<body>
+<div style="height:5000px"></div>
+<img src="http://pcclear.com/home2/images/event/patchup_bnr_down.gif" id="demo1" />
+<img src="http://pcclear.com/home2/images/event/patchup_bnr_down.gif" id="demo2" />
+<img src="http://pcclear.com/home2/images/event/patchup_bnr_down.gif" id="demo3" />
+<img src="http://pcclear.com/home2/images/event/patchup_bnr_down.gif" id="demo4" />
+<img src="http://pcclear.com/home2/images/event/patchup_bnr_down.gif" id="demo5" />
+<img src="http://pcclear.com/home2/images/event/patchup_bnr_down.gif" id="demo6" />
+</body>
+
+</body>
+</html>

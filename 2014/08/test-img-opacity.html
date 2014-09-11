@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<img style="opacity:0;" src="http://www.33lc.com/soft/UploadPic/2010-4/20104191135344807.jpg" id="img" alt=""/>
+<script type="text/javascript">
+    var img = document.getElementById('img')
+    img.onmouseover = function(){
+        startMove(this, 100)
+    }
+    img.onmouseout = function(){
+        startMove(this, 0)
+    }
+    var alpha = 0
+    function startMove(obj, target){
+        var speed = 0
+
+        clearInterval(obj.timer)
+        obj.timer = setInterval(function(){
+            if(alpha < target){
+                speed = 10
+            } else {
+                speed = -10
+            }
+            if(target == alpha){
+                clearInterval(obj.timer)
+            } else {
+                alpha += speed
+                obj.style.filter = 'alpha(opacity=' + alpha + ')'
+                obj.style.opacity = alpha / 100
+            }
+        }, 30);
+    }
+</script>
+</body>
+</html>

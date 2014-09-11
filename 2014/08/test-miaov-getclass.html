@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<ul id="ul">
+    <li class="box1">111</li>
+    <li>222</li>
+    <li class="box1box2">333</li>
+    <li class="box1 box2">444</li>
+</ul>
+<script type="text/javascript">
+    function getClass(parent, name){
+        var ele = parent.getElementsByTagName('*')
+        var arr = []
+        var reg = new RegExp('\\b' + name + '\\b')
+        for(var i=0; i<ele.length; i++){
+            if(reg.test(ele[i].className)){
+                arr.push(ele[i])
+            }
+        }
+        return arr;
+    }
+
+    var ul = document.getElementById('ul')
+    var li = getClass(ul, 'box1')
+    for(var i=0; i<li.length; i++){
+        li[i].style.background = '#f00'
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
+</head>
+<body>
+<table id="tb">
+    <tr id=r><td id=d>111</td><td><input type=text id=t value=111222></td></tr>
+</table>
+<script type="text/javascript">
+    var tr = $("#tb tr").eq(0).clone();
+    el = tr.appendTo("#tb");
+    $id = '_1';
+    $(el).attr('id', $(el).attr('td') + $id);//这里有点问题
+    $(el).find('[id]').each(function() {
+        $(this).attr('id', $(this).attr('id') + $id)
+    });
+    alert($('#tb').html()); //看一下
+</script>
+</body>
+</html>

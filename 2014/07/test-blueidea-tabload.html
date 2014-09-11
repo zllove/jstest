@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .none{ display:none;}
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
+</head>
+<body>
+<input class="btn" type="button" value="选项卡1"/>
+<input class="btn" type="button" value="选项卡2"/>
+<input class="btn" type="button" value="选项卡2"/>
+<div class="div">111</div>
+<div class="div none"><img class="loadimg" src="http://www.ggg.cn/images/common/bg-dashed.png" data-original="http://static.ggg.cn/market/recommendation/screens/000/742/742/20120514163103/1.jpg" alt=""/></div>
+<div class="div none"><img class="loadimg" src="http://www.ggg.cn/images/common/bg-dashed.png" width="240" data-original="http://static.ggg.cn/topic/946/screens/0.jpg" alt=""/></div>
+<script type="text/javascript">
+    $('.btn').on('click', function(){
+        var idx = $(this).index();
+        $('.div').hide()
+        $('.div').eq(idx).show(0, function(){
+            var img = $(this).find('.loadimg'),
+                ori = img.data('original');
+            if(ori && ori.length > 0){
+                img[0].src = ori;
+                img.removeData('original');
+            }
+        });
+    });
+</script>
+</body>
+</html>

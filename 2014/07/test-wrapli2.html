@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+    <style type="text/css">
+        ul{ background:#f00; background:#0f0; padding:20px; margin:20px; }
+        ul li{ list-style:none; }
+        ul li{ background:#ddd; }
+        ul li:nth-child(even){ background:#efefef; }
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+</head>
+
+<body style="background:white;  font-size:18px">
+<div id="div"></div>
+<li>1111</li>
+<li>2111</li>
+<li>3111</li>
+<li>4111</li>
+<li>5111</li>
+<li>6111</li>
+<li>7111</li>
+<li>8111</li>
+<li>9111</li>
+<li>5111</li>
+<li>6111</li>
+<li>7111</li>
+<li>5111</li>
+<li>6111</li>
+<li>7111</li>
+<li>8111</li>
+<li>9111</li>
+<li>10111</li>
+<li>5111</li>
+<li>6111</li>
+<li>7111</li>
+<li>8111</li>
+<li>9111</li>
+<li>10111</li>
+<li>8111</li>
+<li>9111</li>
+<li>10111</li>
+<li>10111</li>
+<li>1111</li>
+<li>1211</li>
+<li>1311</li>
+<script type="text/javascript">
+    $('li:lt(6)').wrapAll('<ul></ul>');
+    $('li').slice(6,12).wrapAll('<ul></ul>');
+    $('li').slice(12,17).wrapAll('<ul></ul>');
+</script>
+</body>
+</html>

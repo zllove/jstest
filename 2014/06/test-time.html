@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <meta charset="utf8">
+
+</head>
+<body>
+<script>
+    function maxDay(tObj) {
+        var r = tObj.setDate(31);
+        var reustDate = tObj.getDate();
+        var trueDate = 31 - reustDate;
+        if (trueDate === 0) {
+            trueDate = 31;
+        }
+        return trueDate;
+    }
+    function atvice(cDay, nums) {
+        this.cDay = cDay;
+        this.nums = nums;
+    }
+    var d = new Date();
+    var curDay = d.getDate();
+    var maxDay = maxDay(d);
+    var c = [];
+    var a = new atvice(25, 2);
+    c.push(a);
+    for (var i = 1; i <= maxDay; i++) {
+        if (i === curDay) {
+            document.write("<font color='red'>" + i + "</font>&nbsp&nbsp");
+        } else if (c.length > 0) {
+
+            var cL = c.length;
+            for (var j = 0; j < cL; j++) {
+                document.write(c[j].cDay + "=" + c[j].nums + "<br>");
+                delete c[j];
+                break;
+
+            }
+
+        } else {
+            document.write(i + "&nbsp&nbsp");
+        }
+        if (i % 7 === 0) {
+            document.write("<br>");
+        }
+    }
+
+</script>
+</body>
+</html>

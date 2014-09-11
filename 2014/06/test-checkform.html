@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <link rel="stylesheet" type="text/css" href="http://iconfont.cn/assets/application-7fe01c67f0bffcd30bd1ca90c54c3c2f.css" media="all"/>
+    <style type="text/css">
+        .wrap{ width:350px;border:1px solid #ccc;}
+        .wrap *{ display:inline-block;}
+        .text{width: 90%; border:none;}
+        .icon{ width:16px; height:16px; background:url(https://passport.jd.com/new/misc/skin/df/i/login-all-bg.png) -373px -111px no-repeat;}
+        .ok{ background-position:0 -241px;}
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
+</head>
+<body>
+<div id="wrap" class="wrap"><input type="text" class="text" name="" id=""/><span class="icon"></span></div>
+<script type="text/javascript">
+    function isEmail(val){
+        return /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(val);
+    }
+
+    $('.text').keyup(function(){
+        var el = $(this).next();
+        if(isEmail($(this).val())){
+            el.addClass('ok');
+        } else {
+            el.removeClass('ok');
+        }
+    });
+</script>
+</body>
+</html>

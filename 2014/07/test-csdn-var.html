@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    var gongSi = {
+        uuid : "",
+        name : ""
+    };
+
+    function getDb() {
+        var list = new Array();
+        gongSi.uuid = '1';
+        gongSi.name = 'Fields';
+        list.push(gongSi)
+        list.push({ uuid : '1', name : 'jikey'})
+        list.push({ uuid : '2', name : 'jikey2'})
+        return list;
+    }
+
+    function infoList() {
+        var list = new Array();
+        list = getDb();
+
+        if (list.length > 0) {
+            for (var i = 0; i < list.length; i++) {
+                alert(list[i].name);//出错，这里怎么取值？
+            }
+        }
+    }
+
+    infoList()
+</script>
+</body>
+</html>

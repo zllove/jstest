@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+</head>
+<style>
+
+</style>
+
+<body>
+
+在注销事件前后 请滚动一下鼠标滚轮
+
+<br/><br/>
+<div id="text">
+
+</div>
+
+<button onClick="win01.refreshWin(false)">点击注销滚轮事件</button>
+
+<script>
+    var mousewheel = (function(){
+        var types = ['DOMMouseScroll', 'mousewheel'];
+
+        fixedEvent = function(e){
+            e.wheel = (e.wheelDelta ? e.wheelDelta : -e.detail) > 0 ? 1 : -1;// 通过事件判断鼠标滚轮反向，1是向上，-1是向下
+            e.wheelDir = e.wheel > 0 ? 'up' : 'down';    //这个只是描述 e.wheel的值和滚轮方向的关系
+            return e;
+        };
+
+        return{//返回mousewheel的方法
+            on : function(el, fn, preventDefault){ //mousewheel对象的on方法， el触发mousewheel事件对象，fn触发后执行函数，preventDefault是否阻止默认行为：滚轮的网页滚动效果
+                if(typeof preventDefault != 'boolean'){ //如果传入的实参preventDefault不是布尔值
+                    preventDefault = true; //初始化为true
+                }
+
+                var fixedFn = function(e){ //阻止默认行为函数
+                    e = fixedEvent(e || window.event); // 兼容写法， 返回的e用来判断滚轮方向
+                    if(preventDefault){ // 如果需要阻止默认行为
+                        if(e.preventDefault){    //firefox
+                            e.preventDefault();
+                        } else {
+                            e.returnValue = false; //ie
+                        }
+                    }
+                    ;
+
+                    fn.call(el, e); //el事件对象调用fn函数，参数为e; 注意fn中使用e.wheel去判断鼠标滚轮事件
+                }, wheelHash = el.wheelHash; //把包含fixedFn函数的 el.wheelHash属性 赋值给 wheelHash
+
+                if(!wheelHash){  //判断函数是否存在 wheelHash 对象
+                    wheelHsah = {};
+                    wheelHash[fn] = fixedFn;  //wheelHash对象的属性fn为阻止默认行为函数
+                    el.wheelHash = wheelHash;  //把wheelHash对象赋值给el的wheelHash属性  wheelHash[fn] == el.wheelHash[fn]
+                } else {
+                    if(wheelHash[fn]) return; //如果存在 wheelHash 且 wheelHash中有 fixedFn 那么返回
+                    wheelHash[fn] = fixedFn;  //如果没有， 就把fixedFn赋值给wheelHash.fn
+                }
+                ;
+
+                if(document.addEventListener){  //firefox
+                    var i = types.length;
+                    while(i--){  //循环滚轮事件 数组
+                        el.addEventListener(types[i], fixedFn, false);    //firefox el监听滚轮事件，执行取消默认行为
+                    }
+                } else {  //ie
+                    el.attachEvent('onmousewheel', fixedFn);     // ie 监听事件， 处理函数fixedFn
+                }
+            },
+            //mousewheel中的on方法作用: 让元素监听事件，且处理是否执行默认行为。并且保存事件的阻止默认行为函数fixedFn到对象el.wheelHash属性中，
+
+            un : function(el, fn){
+                if(!el.wheelHash) return;  //如果对象不存在wheelHash, 直接跳出(没效果了)；
+                var wheelHash = el.wheelHash;
+                if(document.removeEventListener){  //firefox
+                    var i = types.length;
+                    while(i--){
+                        el.removeEventListener(types[i], wheelHsah[fn], false);  //删除监听事件，执行取消默认行为
+                    }
+                } else { //ie
+                    el.detachEvent('onmousewheel', wheelHash[fn]);
+                }
+                delete wheelHash[fn]; //删除 默认行为函数
+            }
+        }
+    })();
+
+
+    //定义滚轮事件
+    // var myWheel = function(e){
+    // console.log(e.wheelDir);
+    // }
+    //添加滚轮事件
+    // mouseWheel.on(element, myWheel);
+    //删除滚轮事件
+    // mouseWheel.un(element, myWheel);
+
+    var text = document.getElementById('text');
+    var EventUtil = {
+        //事件处理程序
+        addHandler: function (element, type, handler) {
+            if (element.addEventListener) {
+                element.addEventListener(type, handler, false);
+            } else if (element.attachEvent) {
+                element.attachEvent("on" + type, handler);
+            } else {
+                element["on" + type] = handler;
+            }
+        },
+        removeHandler: function (element, type, handler) {
+            if (element.removeEventListener) {
+                element.removeEventListener(type, handler);
+            } else if (element.detachEvent) {
+                element.detachEvent("on" + type, handler);
+            } else {
+                element["on" + type] = null;
+            }
+        },
+        getWheelDelta : function(event){
+            if(event.wheelDelta){//ff以外的浏览器
+                return (window.opera && window.opera.version() < 9.5 ? -event.wheelDelta : event.wheelDelta);
+            } else {
+                return -event.detail * 40;
+            }//ff
+        }
+        //移除事件处理程序
+    }
+
+
+    function WinScroll(){
+        this.refreshWin();
+    }
+
+    WinScroll.prototype = {
+
+        constructor : 'WinScroll',
+
+        triggerFun : function(b){
+            var thisWin = this
+            if(b == false){
+//                mousewheel.un(document, handleMouseWheel);
+                EventUtil.removeHandler(document, 'mousewheel', handleMouseWheel);//ie
+                //                EventUtil.removeHandler(document, 'DOMMouseScroll', handleMouseWheel);//ff
+            } else {
+//                mousewheel.on(document, handleMouseWheel);
+                EventUtil.addHandler(document, 'mousewheel', handleMouseWheel);//ie
+                //                EventUtil.addHandler(document, 'DOMMouseScroll', handleMouseWheel);//ff
+            }
+            //滚轮事件
+            function handleMouseWheel(e){
+                text.innerHTML = text.innerHTML + ' w'
+            }
+        },
+        refreshWin : function(b){
+            if(b == false){
+                this.triggerFun(false);
+            } else {
+                this.triggerFun();
+            }
+        }
+
+    }
+
+    //调用
+    var win01 = new WinScroll();
+
+
+
+</script>
+
+</body>
+</html>

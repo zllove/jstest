@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('#aa').click(function(){
+                var nn=10;
+                function show(){
+                    nn=nn-1;
+                    if(nn!==0){
+                        $('.cc').off().val(nn)
+
+                    }else{
+                        clearInterval(set)
+                        $('.cc').attr('id','aa')
+                    }
+                }
+                var set=setInterval(show,1000);// 注意函数名没有引号和括弧！
+
+            })
+        });
+    </script>
+</head>
+<body>
+<input type="button" value="aa" id="aa" class="cc">
+</body>
+</html>

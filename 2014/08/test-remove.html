@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset='utf-8'/>
+    <title>删除操作demo</title>
+    <link rel="stylesheet" type="text/css" href="">
+    <script type="text/javascript" src="jquery-1.8.0.min.js"></script>
+    <style type="text/css">
+    </style>
+
+</head>
+<body>
+<button>add</button>
+<button id="edit">edit</button>
+<button id="del">del</button>
+<div id="table-wrap"></div>
+<div id="edit-form" style="margin:0 auto;"></div>
+<script type="text/javascript">
+    /**
+     以下的js全都是只处理页面的（即前端处理。）
+     **/
+    var jsonData = [
+        {"firstName":"Brett1","lastName":"McLaughlin1","email":"163"},
+        {"firstName":"Brett2","lastName":"McLaughlin2","email":"126"},
+        {"firstName":"Brett3","lastName":"McLaughlin3","email":"gmail"},
+        {"firstName":"Brett4","lastName":"McLaughlin4","email":"qq"},
+        {"firstName":"Brett5","lastName":"McLaughlin5","email":"126"},
+        {"firstName":"Brett6","lastName":"McLaughlin6","email":"host"},
+        {"firstName":"Brett7","lastName":"McLaughlin7","email":"yahoo"},
+        {"firstName":"Brett8","lastName":"McLaughlin8","email":"163"},
+        {"firstName":"Brett9","lastName":"McLaughlin9","email":"sina"}
+    ];
+    //var oldData = null;
+    var currTr = null;
+    showTable(jsonData);
+    /*document.getElementById('edit').onclick = function(){
+     if(oldData){
+     showEdit(oldData);
+     }else{
+     alert('请选择一条数据');
+     }
+     };*/
+    document.getElementById('del').onclick = function(){//给del按钮绑定一个点击事件。
+        if(currTr){//判断是否选择了一条数据
+            if(confirm("确定要删除？")){
+                del(currTr);//执行删除
+                currTr = null;
+            }
+        }else{
+            alert('请选择一条数据');
+        }
+    };
+    function showTable(data){//画表格
+        var tableHtml = '';
+        tableHtml += '<table border=1 style="width:100%;table-layout:fixed;">';
+        tableHtml += '<tr style="background:#ccc;"><td>change</td><td>firstName</td><td>lastName</td><td>email</td></tr>';
+        for (var i = 0; i < data.length; i++) {
+            tableHtml += '<tr><td><input type="radio" name="radio" /></td><td>' + data[i].firstName + '</td><td>' + data[i].lastName + '</td><td>' + data[i].email + '</td></tr>';
+        };
+        tableHtml += '</table>';
+        document.getElementById('table-wrap').innerHTML = tableHtml;
+        $('input[type="radio"]').each(function(index, el) {//单选框点击的时候做以下处理
+            $(this).click(function(event) {
+                oldData = jsonData[index];
+                currTr = $(this);//将已选择的复选框获取
+            });
+        });
+    }
+    /*function showEdit(data){
+     var tableHtml = '';
+     tableHtml += '<table style="width:400px;">';
+     tableHtml += '<tr><td>firstName:</td><td><input type="text" value="' + data.firstName + '"/></td></tr><tr><td>lastName:</td><td><input type="text" value="' + data.lastName + '"/></td></tr><tr><td>email:</td><td><input type="text" value="' + data.email + '"/></td></tr>';
+     tableHtml += '</table>';
+     document.getElementById('edit-form').innerHTML = tableHtml;
+     }*/
+    function del(obj){//处理删除，obj为获取到的被点击的复选框
+        obj.parents('tr').remove();
+    }
+</script>
+</body>
+</html>

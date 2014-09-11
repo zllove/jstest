@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+    <style type="text/css">
+
+        .view{
+            width:400px;
+            height:400px;
+            position:relative;
+            margin-left:1px;
+            float:left;
+        }
+        #move{
+            position:absolute;
+            top:0px;
+            left:0px;
+            z-index:10;
+            border:1px solid #ccc;
+            overflow:hidden;
+        }
+
+        /*移动块的大小*/
+        #moveblock{
+            position:absolute;
+            display:none;
+            width:200px; /*本应该为小图片的宽度除以倍数*/
+            height:200px; /*本应该为小图片的高度除以倍数*/
+            background-color:yellow;
+            filter:alpha(opacity=40); /* IE */
+            opacity:-moz-opacity : 0.4; /* 老版Mozilla */
+            opacity:-khtml-opacity : 0.4; /* 老版Safari */
+            opacity:0.4;
+            z-index:10;
+            cursor:move;
+        }
+
+        #show{
+            width:390px;
+            height:390px;
+            position:absolute;
+            top:0px;
+            left:410px;
+            border:1px solid #ccc;
+            z-index:20;
+            overflow:hidden;
+            display:none;
+        }
+
+        #show img{
+            position:absolute;
+            top:0;
+            left:0;
+        }
+    </style>
+</head>
+<body>
+<!-- 放大镜开始 -->
+<div class="view">
+    <div id="move" class="ShowPictureBox">
+        <img src="http://dummyimage.com/390x390/000/fff" width="390" height="390">
+        <div id="moveblock"></div>
+    </div>
+    <div id="show" class="ShowBigPictureBox">
+        <img src="http://dummyimage.com/390x390/000/fff" width="800" height="800">
+    </div>
+</div>
+<!-- 放大镜end -->
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        move();
+
+    });
+
+    // 放大镜
+    function move(){
+        $('.view #move').hover(
+
+                function(){
+                    $('.view #moveblock').show();
+                    $('.view #show').show();
+                }, function(){
+                    $('.view #show').hide();
+                    $('.view #moveblock').hide();
+                });
+
+
+        $('.view #move').mousemove(function(event){
+
+
+            // 图片距离页面的距离
+            var box_left = $(this).offset();
+
+
+            var page_x = event.pageX;//鼠标指针的X坐标
+
+            // alert(box_left.top);
+            var m_left = event.pageX - box_left.left;
+            var m_top = event.pageY - box_left.top;
+
+            //计算色块区域位置
+            var harlf_x = $("#moveblock").width() / 2;
+            var harlf_y = $("#moveblock").height() / 2;
+
+
+            var a_left = m_left - harlf_x;
+            var a_top = m_top - harlf_y;
+
+
+            var max_l = $("#move").width() - $("#moveblock").width();
+            var max_t = $("#move").height() - $("#moveblock").height();
+
+            //左侧距离小于0
+            if(a_left < 0)
+                a_left = 0;
+            //左侧距离大于225-边框占的宽度
+            if(a_left > max_l)
+                a_left = max_l;
+
+            //顶部距离小于0
+            if(a_top < 0)
+                a_top = 0;
+            //顶部距离大于225-边框占的宽度
+
+            if(a_top > max_t)
+                a_top = max_t;
+
+            //赋值色块区域位置
+            $('.view #moveblock').css({'left' : a_left + 'px', 'top' : a_top + 'px'});
+
+
+            //右边区域
+
+            //计算图片位置
+
+            // 计算倍数
+            var num_big = $("#show img").width();
+            var num_small = $("#move img").width();
+
+            var num = num_big / num_small;
+
+            // alert(num);
+
+
+            var r_left = a_left * -num;
+            var r_top = a_top * -num;
+
+            // var test = 173*-2;
+            // alert(test);
+
+            //赋值图片位置
+            $('.view #show img').css({'left' : r_left + 'px', 'top' : r_top + 'px'});
+
+
+            //为了精准，可以重新赋值移动色块的大小
+            $('#moveblock').css({
+                width : num_small / num,
+                height : num_small / num
+            });
+
+        });
+
+
+    }
+</script>
+</body>
+</html>

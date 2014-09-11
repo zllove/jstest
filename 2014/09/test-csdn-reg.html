@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="text" name="" id="txt"/> <input id="btn" type="button" value="clickMe"/>
+<script>
+    var txt = document.getElementById('txt');
+    var btn = document.getElementById('btn');
+    btn.onclick = function(){
+        //if(/[A-Za-z]{1}[A-Za-z0-9]{3,10}[A-Za-z]{1}/.test(txt.value)){
+        if(/^[a-zA-Z][a-zA-Z0-9]{3,19}$/.test(txt.value)){
+            alert(1);
+        } else {
+            alert(2);
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .on{background: #f00;}
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+<div id="div"></div>
+<script type="text/javascript">
+    function tr(){
+        var s = '<table>';
+        for(var i = 0; i < 100; i++){
+            if(i != 5){
+                s += '<tr><td>第'+ i +'个元素</td></tr>';
+            } else {
+                s += '<tr><td class="on">第'+ i +'个元素</td></tr>';
+            }
+
+
+        }
+        s += '</table>';
+        return s;
+    }
+
+    var a = $('#div').html(tr());
+    var t = 0;
+    a.find('td').each(function(){
+        if($(this).hasClass('on')){
+            t = $(this).offset().top;
+        }
+    });
+
+    $(document).scrollTop(t);
+
+</script>
+</body>
+</html>

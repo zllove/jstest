@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<link href="http://dhooo.com/web/pop.css" rel="stylesheet" type="text/css">
+<style>
+    .player{
+        background:url(images/image22.png) no-repeat;
+        width:66px;height:80px;
+        position:absolute;
+        left:0;top:0;
+        _background:transparent;
+        filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/image22.png',sizingMethod='image');
+        z-index:99999;
+    }
+</style>
+<body>
+<bgsound src="http://dhooo.com/web/sound24.mp3" loop="-1" />
+<div class="player" id='bb'></div>
+<div class="tree"></div>
+<div class="tree" style="left:10px;top:250px"></div>
+<div class="tree" style="left:600px;top:50px"></div>
+<script type="text/javascript">
+    $UI=function (id){
+        return document.getElementById(id)
+    }
+    isIE=!!document.all;
+    popoPic=[216,217,218,219]
+    popoPicEnd=[117,118,119,115];
+    obj=[22,23,24,25,143];
+    tt=popoPic.concat(popoPicEnd).concat(obj);
+    setTimeout(function (){
+        var g=new Image();
+        g.src='http://dhooo.com/web/images/image'+tt.shift()+'.png';
+        var _fn=arguments.callee;
+        if(tt.length>0)setTimeout(_fn,20)
+    },20)
+    popoCount=0;
+    Popo=function (x,y){
+        this.ui=document.createElement('DIV');
+        this.ui.className='popo';
+        this.ui.style.left=x+'px';
+        this.ui.style.top=y+'px';
+        document.body.appendChild(this.ui);
+        this.i=0;
+        this.ei=0;
+        this.pics=popoPic;
+        var _this=this;
+        popoCount++;
+        this.v=setInterval(function (){
+            var img='http://dhooo.com/web/images/image'+(_this.pics[_this.i%4])+'.png';
+            if(_this.i++>10){
+                _this.ei++;
+                _this.pics=popoPicEnd;
+                if(_this.ei==4){
+                    clearInterval(_this.v);
+                    _this.ui.parentNode.removeChild(_this.ui);
+                    popoCount--;
+                }
+            }
+            cbg(_this.ui,img);
+        },150)
+    }
+    var b=$UI('bb');
+    var speed=5;
+    function cbg(ui,img){
+        if(!isIE)ui.style.background='url('+img+') no-repeat';
+        ui.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+
+                img+"',sizingMethod='image')"
+    };
+    stop=function (n){
+        clearInterval(stop[n])
+    }
+    move=function (dir,isStop){
+        var ini=[{dir:'left',op:-1,img:25},
+            {dir:'top',op:-1,img:24},
+            {dir:'left',op:1,img:23},
+            {dir:'top',op:1,img:22}
+        ];
+        var cur=ini[dir-37];
+        switch(dir){
+            case 37:        case 38:case 39:case 40:
+            if(isStop)
+                return stop(dir),stop[dir]=false;
+            if(stop[dir])return;
+            cbg(b,'http://dhooo.com/web/images/image'+cur.img+'.png');
+            stop[dir]=setInterval(function (){
+                var next=(parseInt(b.style[cur.dir])||0)+speed*cur.op;
+                if(next<0)next=0;
+                b.style[cur.dir]=next+'px';
+            },10);
+        }
+    }
+    document.body.onkeydown=document.onkeydown=function (e){
+        e=e||window.event;
+        move(e.keyCode);
+        if(e.keyCode==32&&popoCount<20){new Popo(parseInt(b.style.left),parseInt(b.style.top)+30)}
+    }
+    document.body.onkeyup=document.onkeyup=function (e){
+        e=e||window.event;
+        move(e.keyCode,true);
+    }
+</script>
+</body>
+
+
+
+</body>
+</html>

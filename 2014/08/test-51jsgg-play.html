@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title> 扫雷</title>
+    <base href="http://dhooo.com/web/images/"/>
+    <style>
+        body{ text-align:center; background:#eee; font-size:12px; }
+        table{
+            border:3px inset; background:#C0C0C0;
+            border-collapse:collapse;
+        }
+        td{ width:30px; height:30px; font-size:16px; border:1px solid #808080; overflow:hidden; color:#0000FF; font-weight:bold; font-family:Arial; }
+        .miner{ background:url(miner.gif) no-repeat 50% 50%; }
+        td.cur{ background:#FF0000 url(miner.gif) no-repeat 50% 50%; }
+        td.hot{ background:url(b.gif) no-repeat; }
+        td.n1{ color:#0000FF; }
+        td.n2{ color:#008000; }
+        td.n3{ color:#FF0000; }
+        td.n4{ color:#000080; }
+        td button{ display:block; width:30px; height:30px; }
+        #win{
+            border:2px outset;
+            background:#C0C0C0;
+            float:left;
+            padding:10px;
+        }
+
+        #ctrl{ text-align:left; margin-top:10px; }
+    </style>
+</head>
+<body>
+<div id="win">
+    <div id="miner"></div>
+    <div id="ctrl">
+        <button onclick="MinerPlay.reset()"> 再来一次</button>
+    </div>
+    <span id="countPan"></span>
+</div>
+</body>
+<script type="text/javascript">
+    (new Image()).src = "\htt\p://dhooo.com/web/images/miner.gif";
+    $ = function(id){
+        return document.getElementById(id)
+    }
+    FOR = function($, fn){
+        for(var _ = 0; _ < $.length; _++)fn.call($[_], _, $);
+        return $
+    };
+    MinerPlay = {
+        map : {
+            init : function(w, h, count){
+                var _ = 0, $ = FOR(new Array(h), function(i, o){
+                    o[i] = FOR(new Array(w), function(i, o){
+                        o[i] = 0
+                    })
+                });
+                do{
+                    $[parseInt(Math.random() * h)][parseInt(Math.random() * w)] = 1;
+                } while(++_ < count);
+                this.Pan = $;
+                this.w = w;
+                this.h = h;
+                this.count = count;
+                return MinerPlay;
+            }, round : function(x, y){
+                var c = 0;
+                FOR(MinerPlay.data, function(){
+                    var _x = x + this[0], _y = y + this[1];
+                    if(_x > -1 && _x < (MinerPlay.map.w) && _y > -1 && _y < (MinerPlay.map.h) && MinerPlay.map.Pan[_y][_x] == 1){
+                        c++
+                    }
+                })
+                return c;
+            }
+        }, init : function(w, h, count){
+            this.opened = 0;
+            this.data = [
+                [-1, -1],
+                [0, -1],
+                [1, -1],
+                [-1, 0],
+                [1, 0],
+                [-1, 1],
+                [0, 1],
+                [1, 1]
+            ];
+            this.map.init(w, h, count).createUI(w, h).bind();
+        }, bind : function(){
+            this.UI = $('mineTable');
+            FOR(this.UI.rows, function(h){
+                FOR(this.cells, function(w){
+                    this.onclick = function(){
+                        var _this = this;
+                        setTimeout(function(){
+                            MinerPlay.openCurrent(_this.cellIndex, _this.parentNode.rowIndex)
+                        }, 1);
+                    }
+                })
+            });
+            return this;
+        }, openCurrent : function(x, y){
+            var c = MinerPlay.map.Pan[y][x];
+            if(c == 0){
+                var n = MinerPlay.map.round(x, y);
+                if(n == 0){
+                    MinerPlay.count(MinerPlay.UI.rows[y].cells[x]);
+                    MinerPlay.UI.rows[y].cells[x].innerHTML = '&nbsp;';
+                    return MinerPlay.openRound(x, y);
+                }
+                var $ = MinerPlay.UI.rows[y].cells[x];
+                MinerPlay.count($);
+                $.innerHTML = MinerPlay.map.round(x, y);
+                $.className = 'n' + MinerPlay.map.round(x, y);
+            } else {
+                MinerPlay.openAllMiner();
+                MinerPlay.UI.rows[y].cells[x].className = "cur";
+                alert(' 祝您下次好运 !');
+                MinerPlay.reset();
+            }
+        }, openRound : function(x, y){
+            FOR(this.data, function(){
+                var _x = x + this[0], _y = y + this[1];
+                if(_x > -1 && _x < (MinerPlay.map.w) && _y > -1 && _y < (MinerPlay.map.h) && MinerPlay.UI.rows[_y].cells[_x].innerHTML != '&nbsp;'){
+                    MinerPlay.openCurrent(_x, _y)
+                }
+            })
+        }, count : function(td){
+            if(/button/i.test(td.innerHTML))        MinerPlay.opened++;
+            if(MinerPlay.opened == MinerPlay.map.w * MinerPlay.map.h - MinerPlay.map.count)
+                alert((MinerPlay.reset(), 'you are win !'));
+        }, openAllMiner : function(){
+            FOR(MinerPlay.UI.rows, function(h){
+                FOR(this.cells, function(w){
+                    if(MinerPlay.map.Pan[h][w] == 1){
+                        var $ = MinerPlay.UI.rows[h].cells[w];
+                        $.onclick = null;
+                        $.innerHTML = '&nbsp;'
+                        $.className += " miner";
+                    }
+                })
+            })
+        }, createUI : function(w, h){
+            for(var i = 0, _ = []; i++ < h;){
+                for(var j = 0, tr = []; j++ < w;)
+                    tr.push('<td><button>&nbsp;</button></td>')
+                _.push('<tr>' + tr.join('') + '</tr>')
+            }
+            $('miner').innerHTML = this.html = '<table id="mineTable">' + _.join('') + '</table>';
+            return MinerPlay;
+        }, reset : function(){
+            with(this.map)init(w, h, count);
+            $('miner').innerHTML = this.html;
+            this.bind().opened = 0;
+        }
+    }
+    MinerPlay.init(12, 12, 20);
+</script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<input id="btn" type="submit" value="插入"/>
+<form action="">
+    <table id="glhdtable" width="500" border="1">
+        <tr>
+            <th>111</th>
+            <th>111</th>
+            <th>111</th>
+            <th>111</th>
+            <th>111</th>
+        </tr>
+    </table>
+</form>
+<script type="text/javascript">
+    var btn = document.getElementById('btn')
+    var table = document.getElementById('glhdtable');
+    var hdlength = 3;
+    btn.onclick = function(){
+        for(var i = 0; i < hdlength; i++){
+            var tr = document.createElement('tr')
+            var td1 = document.createElement('td');
+            td1.innerHTML = '<input type="checkbox" value="1" onclick="ccb()" id="glhdcheckbox2" name="glhdcheckbox2">';
+            tr.appendChild(td1);
+
+            var td2 = document.createElement('td');
+            tr.appendChild(td2);
+            var td3 = document.createElement('td');
+            tr.appendChild(td3);
+            var td4 = document.createElement('td');
+            tr.appendChild(td4);
+            var td5 = document.createElement('td');
+            tr.appendChild(td5);
+            table.tBodies[0].appendChild(tr);
+        }
+    }
+
+    function ccb(){
+        console.log(11);
+    }
+</script>
+</body>
+</html>

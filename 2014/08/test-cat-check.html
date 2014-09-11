@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+<input type="text" name="" id="username"/><input type="text" name="" id="password"/>
+<input id="btn" type="submit" value="check"/>
+<script type="text/javascript">
+    function checkName(){
+        var name = $('#username'),
+            v = name.val();
+        if(!v){
+            alert('请输入完整的用户名');
+            return false;
+        } else {
+            return v;
+        }
+    }
+    function checkPwd(){
+        var pwd = $('#password'),
+            v = pwd.val();
+        if(!v){
+            alert('请输入完整的密码');
+            return false;
+        } else {
+            return v;
+        }
+    }
+    function bindCheck(){
+        var name = checkName();
+        if(name == false) { return false; }
+        var pwd = checkPwd();
+        if(pwd == false) { return false; }
+        return {
+            name : name,
+            pwd : pwd
+        };
+    }
+    $('#btn').click(function(){
+        var data = bindCheck();
+        if(data){
+            // $.ajax({})
+        }
+    })
+</script>
+</body>
+</html>

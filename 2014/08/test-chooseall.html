@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
+</head>
+<body>
+<div class="a">
+    <input class="allChoose" type="checkbox" name="" id=""/>选择全部 <br/>
+    <input type="checkbox" name="address" id=""/>中国
+    <input type="checkbox" name="address" id=""/>上海
+    <input type="checkbox" name="address" id=""/>北京
+</div>
+<script type="text/javascript">
+    $.fn.allChoose = function(opt){
+        var T = $(this),
+            set = $.extend({
+                name : ''
+            }, opt || {}),
+            items = $('input[type="checkbox"][name="' + set.name + '"]');
+
+        T.click(function(){
+            items.prop('checked', this.checked);
+        });
+
+        items.click(function(){
+            T.prop('checked', items.not(':checked').length === 0);
+        });
+    }
+    $('.allChoose').allChoose({ name : 'address' });
+</script>
+</body>
+</html>

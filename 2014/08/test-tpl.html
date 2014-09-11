@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script type="text/javascript">
+var tpl = function(html, data){
+    return html.replace(/{{(.*?)}}/g, function($1, $2){
+        return data[$2];
+    });
+}
+var html = {
+    list : '<dl class="ui-select-list">{{options}}</dl>'
+}
+var t = tpl(html.list, { options : 'd' });
+</script>
+</body>
+</html>

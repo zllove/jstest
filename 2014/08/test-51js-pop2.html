@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title> CODE.JS.CN </title>
+    <meta charset="UTF-8">
+    <style>
+        .info{ font-size:16px; padding:20px; color:#0080C0; }
+        .info li{ margin-top:10px; }
+    </style>
+</head>
+
+<body>
+<ol class="info">
+    <li>在JS代码中嵌入alert进行无堵塞弹出数据。<br>alert(10,20,30,'...')</li>
+    <li>双击内容区清空。</li>
+    <li>编辑框可以输入js语句，表达式运行，输入变量名察看变量值。<br/>"100/20%30+(100>>2)"<br/>"document.body.innerHTML"<br/>"i"</li>
+    <li>仅用于IE进行简单的调试。</li>
+</ol>
+</body>
+<script>
+    function alert(){
+        var doc = document;
+        if(!('debugAlert' in window)){
+            doc.body.style.margin = 0;
+            var win = doc.createElement('DIV');
+            win.index = 0;
+            win.style.cssText = 'position:fixed;_position:absolute;bottom:0;right:0;z-index:9;width:100%;border-top:1px solid #808080;border-bottom:1px solid #808080;color:#333;font:12px/1.5 verdana;background:#ddd';
+            var title = doc.createElement('DIV');
+            title.style.cssText = "padding:4px 10px;border-top:2px solid #fff;border-bottom:1px solid #999;background:#D2CEC6;";
+            var CMDHtml = "<input type='text' onkeydown='if(event.keyCode==13)try{alert(eval(this.value))}catch(e){alert(\"Error Expression.\")}finally{this.value=\"\"}' size=32 style='vertical-align:middle;padding-left:3px;border:1px solid #888;float:right' />";
+            title.innerHTML = CMDHtml + "<u style='color:#FF0080;margin-top:-5px'>DEBUG</u>Alert 2010 <sup>Bast</sup> ";
+            var list = doc.createElement('ol');
+            list.style.cssText = "height:200px;overflow:auto;border-top:1px solid #666;margin:0;padding:0 0 0 50px";
+            debugAlert = doc.body.appendChild(win);
+            win.appendChild(title);
+            win.list = win.appendChild(list);
+            list.appendChild(doc.createTextNode('\t'));
+            list.ondblclick = function(){
+                win.list.innerHTML = ''
+            };
+        }
+        ;
+        var opt = doc.createElement('li'), view = doc.createElement('div');
+        opt.style.cssText = "background:" + ((debugAlert.index++) % 2 ? '#fff' : '#f5f5f5') + ";padding:4px;margin:0;";
+        view.style.cssText = "color:#080;padding-left:20px";
+        view.innerText = [].slice.call(arguments).join('\n');
+        opt.appendChild(doc.createTextNode((new Date).toString().match(/\d+:\d+:\d+/)))
+        opt.appendChild(view);
+        debugAlert.list.insertBefore(opt, debugAlert.list.firstChild)
+    }
+    ;
+    var o = document.body;
+    for(var k in o){
+        if(/^on/.test(k))alert('Event> ', k);
+    }
+    ;
+</script>
+</html>

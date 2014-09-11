@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{font:14px/3 arial;}
+        .wrap{ width:500px;margin: 30px auto;}
+        .wrap h3{ font-size:16px;}
+        .wrap p{background: #f1f1f1;}
+        .wrap p:nth-child(2n){background: #eaeaea;}
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <h3>主题：[ ]</h3>
+    <p>选项<span class="num">一</span>：[ ]</p>
+    <p>选项<span class="num">二</span>：[ ] <a class="del" href="javascript:;">[删除选项]</a></p>
+    <p>选项<span class="num">三</span>：[ ] <a class="add" href="javascript:;">[增加选项]</a></p>
+</div>
+<script type="text/javascript">
+    var a = ['一','二','三','四','五','六','七','八','九','十'];
+    $('.wrap').on('click', '.del', function(){
+        $(this).closest('p').remove();
+        update();
+    });
+    $('.wrap').on('click', '.add', function(){
+        var num = $('.num').last();
+        var idx = $.inArray(num.html(), a);
+        var str = '<p>选项<span class="num">' + a[idx+1] + '</span>：[ ] <a class="add" href="javascript:;">[增加选项]</a></p>';
+        $(this).closest('div').append(str);
+        $(this).replaceWith('<a class="del" href="javascript:;">[删除选项]</a>');
+    });
+
+    function update(obj, num){
+        var num = $('.num');
+        num.each(function(i){
+            $(this).html(a[i]);
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    var Scroller = function(){
+        var d=document,T,pC,sC,sCheight,pCheight,timer,timer2,IE=!!d.all
+                ,extend = function(s,t){
+                    for(var p in s){
+                        t[p] = s[p];
+                    }
+                    return t;
+                }
+                ,$=function(id){return d.getElementById(id)}
+                ,opt = {
+                    step:1,
+                    time:30,
+                    w:'up',
+                    ph:1,
+                    pt:1000
+                }
+                ,addEvent = function(t){
+                    if(IE){
+                        t.attachEvent("onmouseover",this.end);
+                        t.attachEvent("onmouseout",this.begin);
+                    }else{
+                        t.addEventListener("mouseover",this.end,false);
+                        t.addEventListener("mouseout",this.begin,false);
+                    }
+                };
+        return {
+            init:function(parentContainer,subContainer,option){
+                pC = $(parentContainer);
+                sC = $(subContainer);
+                opt = extend(option||{},opt);
+                sCheight = sC.offsetHeight;
+                pCheight = pC.offsetHeight;
+                pC.appendChild(sC.cloneNode(true));
+                addEvent.call(this,pC);
+                return T=this;
+            },
+            begin:function(){
+                timer = setInterval(function(){
+                    var pCscroll = pC.scrollTop,w=opt.w=='up';
+                    if(w){
+                        pCscroll>=(sCheight*2-pCheight)&&(pCscroll -=sCheight)
+                    }else{
+                        pCscroll<=0&&(pCscroll +=sCheight)
+                    }
+                    pC.scrollTop = pCscroll + (w?1:-1)*opt.step;
+                    if(pC.scrollTop%opt.ph==0){
+                        T.end();
+                        timer2 = setTimeout(function(){T.begin.call(T)},opt.pt);
+                    }
+                },opt.time)
+            },
+            end:function(){
+                clearInterval(timer);
+                clearInterval(timer2);
+            }
+
+        }
+    }()
+
+    window.onload = function(){
+        Scroller.init("idScroller", "idScrollMid",{ph:25,w:'down',time:20}).begin();
+    }
+</script>
+<style>
+    #idScroller *{margin:0px; padding:0px;}
+    #idScroller{line-height:25px;width:500px; height:50px;overflow:hidden;border:1px solid #000000;}
+    #idScrollMid ul{width:100%;clear:both;}
+    #idScrollMid li{width:50%;float:left;list-style:none;}
+
+</style>
+<div id="idScroller">
+    <div id="idScrollMid" >
+        <ul>
+            <li><a href="http://shundebk.cn/">111111111111111111111</a></li>
+            <li><a href="http://shundebk.cn/">211111111111111111111</a></li>
+            <li><a href="http://shundebk.cn/">311111111111111111111</a></li>
+            <li><a href="http://shundebk.cn/">411111111111111111111</a></li>
+            <li><a href="http://shundebk.cn/">511111111111111111111</a></li>
+            <li><a href="http://shundebk.cn/">611111111111111111111</a></li>
+        </ul>
+        <div style="clear:both;"></div>
+    </div>
+
+
+</div>
+</body>
+</html>

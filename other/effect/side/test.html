@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
+
+</head>
+<body>
+<div id="flashBg">
+    <div class="flashLine">
+        <div class="flash">
+            <a class="prev" href="javascript:;">&lt;</a>
+            <a class="next" href="javascript:;">&gt;</a>
+            <a href="http://www.17sucai.com/" target="_blank" class="items" style="display: block;" name="#0b0b0b"><img src="images/16sucai_01.jpg" width="980" height="393"></a>
+            <a href="http://www.17sucai.com/" target="_blank" class="items"  name="#194982"><img src="images/16sucai_02.jpg" width="980" height="393"></a>
+            <a href="http://www.17sucai.com/" target="_blank" class="items"  name="#04304b"><img src="images/16sucai_03.jpg" width="980" height="393"></a>
+            <div id="flash_sub" class="flash_bar">
+                <div class="dq"></div>
+                <div class="no"></div>
+                <div class="no"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    (function($){
+        $.fn.fullBanner = function(options){
+            var defaults = {
+                    prev : '.prev',
+                    next : '.next',
+                    links : null,
+                    bar : null
+                },
+                config = $.extend(defaults, options),
+                that = this,
+                links = that.find(config.links),
+                bar = that.find(config.bar),
+                prev = that.find(config.prev),
+                next = that.find(config.next),
+                len = links.length,
+                on = 'dq',
+                no = 'no',
+                timer = null,
+                currentIndex = 0;
+
+            return that.each(function(){
+                that.css('background-color', links.eq(0).attr('name'));
+
+                function change(i){
+                    currentIndex = i;
+                    for(var j = 0; j < len; j++){
+                        if(j == i){
+                            links.eq(j).fadeIn("normal");
+                            links.eq(j).show();
+                            bar.eq(j).removeClass().addClass(on);
+                            that.css('background-color', links.eq(j).attr("name"));
+                        } else {
+                            links.eq(j).hide();
+                            bar.eq(j).removeClass().addClass(no);
+                        }
+                    }
+                }
+
+                function startAm() {
+                    timer = setInterval(timer_tick, 3000);
+                }
+                function stopAm() {
+                    clearInterval(timer);
+                }
+                function timer_tick() {
+                    currentIndex = currentIndex >= (len - 1) ? 0 : currentIndex + 1;
+                    change(currentIndex);
+                }
+                bar.click(function(){
+                    change($(this).index());
+                });
+                that.mouseover(function(){
+                    stopAm();
+                }).mouseout(function(){
+                    startAm();
+                });
+                next.click(function(){
+                    currentIndex = currentIndex >= (len - 1) ? 0 : currentIndex + 1;
+                    change(currentIndex);
+                });
+                prev.click(function(){
+                    currentIndex = currentIndex <= 0 ? (len - 1) : currentIndex - 1;
+                    change(currentIndex);
+                });
+                startAm();
+            });
+        }
+    }(jQuery));
+    $('#flashBg').fullBanner({
+        links : '.items',
+        bar : '.flash_bar div'
+    });
+    /*
+    var currentindex = 1;
+    var timerID = null;
+    $("#flashBg").css("background-color", $("#flash1").attr("name"));
+    function changeflash(i) {
+        currentindex = i;
+        for (var j = 1; j <= 3; j++) {
+            if (j == i) {
+                $("#flash" + j).fadeIn("normal");
+                $("#flash" + j).show();
+                $("#f" + j).removeClass().addClass("dq");
+                $("#flashBg").css("background-color", $("#flash" + j).attr("name"));
+            } else {
+                $("#flash" + j).hide();
+                $("#f" + j).removeClass().addClass("no");
+            }
+        }
+    }
+    function startAm() {
+        timerID = setInterval(timer_tick, 3000);
+    }
+    function stopAm() {
+        clearInterval(timerID);
+    }
+    function timer_tick() {
+        currentindex = currentindex >= 3 ? 1 : currentindex + 1;
+        changeflash(currentindex);
+    }
+    $(function () {
+        $(".flash_bar div").mouseover(function () {
+            stopAm();
+        }).mouseout(function () {
+            startAm();
+        });
+        startAm();
+    });
+    */
+
+</script>
+</body>
+</html>

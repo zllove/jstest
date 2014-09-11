@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <style type="text/css">
+        html, body{ padding:0px; margin:0px; width:100%; height:100% }
+    </style>
+</head>
+<body>
+<div id="show" style="width:500px;height: 500px;border: 1px solid #ccc;position: absolute;top:20px;left:50%;margin-left: -250px;"></div>
+</body>
+
+<script type="text/javascript">
+    var yidianji = 0;
+    function init() {
+        var count = 10;
+        var lei = new Array();
+        for (var i = 0; i < count; i++) {
+            var sj = (Math.ceil(Math.random() * 100));
+            var falg = true;
+            for (var j = 0; j < lei.length; j++) {
+                if (sj == lei[j]) {
+                    falg = false;
+                }
+            }
+            if (falg) {
+                lei[i] = sj;
+            } else {
+                falg = true;
+                i--;
+            }
+        }
+        var html = "";
+        var isFlag = true;
+        for (var i = 0; i < 100; i++) {
+            for (var j = 0; j < lei.length; j++) {
+                if (lei[j] == i) {
+                    html += '<div id="lei_' + i + '" style="font-size:16px;text-align: center;width: 48px;height: 48px;background-color:#ccc;float: left;border: 1px solid #000" onclick="openLei(0,this,' + i + ')"><span id="bs_' + i + '" style="display:none;">0</span></div>';
+                    isFlag = false;
+                }
+            }
+            if (isFlag) {
+                html += '<div id="lei_' + i + '" style="font-size:16px;text-align: center;width: 48px;height: 48px;background-color:#ccc;float: left;border: 1px solid #000" onclick="openLei(1,this,' + i + ')"><span id="bs_' + i + '" style="display:none;">1</span></div>';
+            } else {
+                isFlag = true;
+            }
+        }
+        document.getElementById("show").innerHTML = html;
+    }
+
+    function openLei(status, obj, id) {
+        if (status == 0) {
+            obj.style.backgroundColor = "red";
+            alert("爆炸了你已经输了,重头再来");
+            init();
+        } else {
+            var leishu = shaomiao(id);
+            var html = obj.innerHTML;
+            obj.innerHTML = html + leishu;
+            obj.style.backgroundColor = "#FFFF99";
+            obj.onclick = null;
+            yidianji++;
+            if (yidianji >= 90) {
+                alert("你就是个逗b，这么无聊的东西，你能玩过去");
+            }
+        }
+    }
+
+    function shaomiao(id) {
+        var num = [Number(id - 1), Number(id - 10 - 1), Number(id + 10 - 1)];
+        var leishu = 0;
+        var shaoMiaoFlag = true;
+        id = String(id);
+        if (id.substring(id.length - 1, id.length) == "0") {
+            for (var i = 0; i < num.length; i++) {
+                for (var j = 1; j < 3; j++) {
+                    if (document.getElementById("bs_" + (num[i] + j)) != null) {
+                        if (document.getElementById("bs_" + (num[i] + j)).innerHTML == "0") {
+                            leishu++;
+                        }
+                    }
+                }
+            }
+            shaoMiaoFlag = false;
+        }
+        if (id.substring(id.length - 1, id.length) == "9") {
+            for (var i = 0; i < num.length; i++) {
+                for (var j = 0; j < 2; j++) {
+                    if (document.getElementById("bs_" + (num[i] + j)) != null) {
+                        if (document.getElementById("bs_" + (num[i] + j)).innerHTML == "0") {
+                            leishu++;
+                        }
+                    }
+                }
+            }
+            shaoMiaoFlag = false;
+        }
+        if (shaoMiaoFlag) {
+            for (var i = 0; i < num.length; i++) {
+                for (var j = 0; j < 3; j++) {
+                    if (document.getElementById("bs_" + (num[i] + j)) != null) {
+                        if (document.getElementById("bs_" + (num[i] + j)).innerHTML == "0") {
+                            leishu++;
+                        }
+                    }
+                }
+            }
+        }
+
+        return leishu;
+    }
+    window.onload = init;
+</script>
+</html>

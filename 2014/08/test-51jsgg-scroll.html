@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<style>
+    #google1,#google2,#google3,#google4{border:2px solid #06c;border-left-width:20px;
+        width:230px;height:40px;margin:10px 0;font-size:12px;
+        padding-left:20px;overflow:hidden;font-family:Arial;
+        background:#B7D6E6;
+    }
+    ul{margin:0px;padding:0px;list-style-type:none;}
+    li{line-height:20px; color:#06C;}
+</style>
+<body>
+<div id="google1">
+    <ul id="dhooo1">
+        <li>有没有那么一首歌</li>
+        <li>会让你突然想起我</li>
+        <li>让你欢喜也让你忧</li>
+        <li>这么一个我</li>
+        <li>我现在唱的这首歌</li>
+        <li>若是让你想起了我</li>
+        <li>涌上来的若是寂寞</li>
+        <li>我想知道为什么</li>
+        <li><span style="color:red">爱无忧，爱果果，爱JavaScript</span></li>
+        <li>www.dhooo.com</li>
+    </ul>
+</div>
+<div id="google2">
+    <ul id="dhooo2">
+        <li>有没有那么一首歌</li>
+        <li>会让你突然想起我</li>
+        <li>让你欢喜也让你忧</li>
+        <li>这么一个我</li>
+        <li>我现在唱的这首歌</li>
+        <li>若是让你想起了我</li>
+        <li>涌上来的若是寂寞</li>
+        <li>我想知道为什么</li>
+        <li><span style="color:red">爱无忧，爱果果，爱JavaScript</span></li>
+        <li>www.dhooo.com</li>
+    </ul>
+</div>
+<div id="google3">
+    <ul id="dhooo3">
+        <li>有没有那么一首歌</li>
+        <li>会让你突然想起我</li>
+        <li>让你欢喜也让你忧</li>
+        <li>这么一个我</li>
+        <li>我现在唱的这首歌</li>
+        <li>若是让你想起了我</li>
+        <li>涌上来的若是寂寞</li>
+        <li>我想知道为什么</li>
+        <li><span style="color:red">爱无忧，爱果果，爱JavaScript</span></li>
+        <li>www.dhooo.com</li>
+    </ul>
+</div>
+<div id="google4">
+    <ul id="dhooo4">
+        <li>有没有那么一首歌</li>
+        <li>会让你突然想起我</li>
+        <li>让你欢喜也让你忧</li>
+        <li>这么一个我</li>
+        <li>我现在唱的这首歌</li>
+        <li>若是让你想起了我</li>
+        <li>涌上来的若是寂寞</li>
+        <li>我想知道为什么</li>
+        <li><span style="color:red">爱无忧，爱果果，爱JavaScript</span></li>
+        <li>www.dhooo.com</li>
+    </ul>
+</div>
+</body>
+<script >
+    scroll=function(A,B,C,D,E,F){
+        var $=function (id){return document.getElementById(id)},Y=+!!F;
+        (A=$(A)).appendChild((B=$(B)).cloneNode(true));
+        (function (){
+            var m=A.scrollTop%C?(E||0):D;
+            A.scrollTop=[0,B.offsetHeight][Y]==A.scrollTop?[B.offsetHeight-1,1][Y]:(A.scrollTop+[-1,1][Y]);
+            setTimeout(arguments.callee,m);
+        })()
+        return arguments.callee;
+    }
+
+    scroll
+    ('google1','dhooo1',40,1000,10,1)
+            ('google2','dhooo2',40,1000,10)
+            ('google3','dhooo3',40,1,10)
+            ('google4','dhooo4',40,1,10,1)
+
+</script>
+
+</body>
+</html>

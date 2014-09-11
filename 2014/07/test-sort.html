@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        a{ display:block;}
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <a href="#" data-id="3">33</a>
+    <a href="#" data-id="2">22</a>
+    <a href="#" data-id="9">99</a>
+    <a href="#" data-id="1">11</a>
+</div>
+<script type="text/javascript">
+    var arr = [1,9,2,3];
+    var res = [];
+    var a = $('.wrap a');
+    a.each(function(i, m){
+        var id = $(this).data('id');
+        res[$.inArray(id, arr)] = this;
+    });
+    $('.wrap').append(res);
+
+</script>
+</body>
+</html>

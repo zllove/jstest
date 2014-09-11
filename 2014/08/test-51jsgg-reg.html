@@ -1,0 +1,435 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title> WebRegExp 1.0 - 客服果果 [ 无忧版 ] </title>
+    <meta charset="UTF-8">
+    <base href="http://www.dhooo.com/web/"/>
+    <style type="text/css">
+        body{ background:#2B3C53; }
+        *{ font-size:12px; }
+        #win{
+            width:900px; font-size:12px;
+            position:absolute; left:0; top:0;
+            background:#F1F0EA;
+            border:2px outset; color:#000;
+            -moz-border-top-colors:#d4d0c8 white;
+            -moz-border-left-colors:#d4d0c8 white;
+            -moz-border-right-colors:#404040 #808080;
+            -moz-border-bottom-colors:#404040 #808080;
+        }
+        h4{
+            background:#35528E url(images/caption.jpg) repeat-y 100% 0;
+            margin:1px; padding:5px; cursor:default;
+            color:#fff; font-size:14px; font-family:Arial;
+        }
+        h4 div{
+            background:url(images/ico.gif) no-repeat 2px 0;
+            padding-left:25px;
+        }
+        #about{ text-decoration:none; color:#000; padding:2px }
+        .menu{ line-height:20px; padding:0px 10px }
+        .line{
+            font-size:1px; line-height:1px;
+            background:#fff; margin:0 2px; height:1px;
+            overflow:hidden; border-top:1px solid #ACA899;
+        }
+        .ad{
+            background:#FF7B00 url(images/regexp_ad.gif) no-repeat 50% 50%;
+            height:60px; position:relative;
+        }
+        .ibody{ margin:5px; }
+        .left{
+            width:250px; height:100%;
+            float:left; text-align:center;
+        }
+        .btnWrap{ padding:5px 0; }
+        button{ + margin-left : 2 px; padding:0px; }
+        #tabBtns a{
+            color:#000; text-decoration:none;
+            display:block; float:left; margin-right:1px;
+            width:47px; height:20px; line-height:20px;
+            background:#fff url(images/tab.gif) no-repeat 0 0;
+        }
+        .list_wrap{ margin:5px; }
+        #tabBtns{ z-index:10; border:0px solid #aaa; }
+        #tabBtns a:hover{
+            background:url(images/tab.gif) no-repeat 0 -21px;
+        }
+        #tabBtns a.hot, #tabBtns a.hot:hover{
+            background:url(images/tab.gif) no-repeat 0 100%;
+            width:52px; height:20px; position:relative; bottom:-1px;
+        }
+        .list_option{
+            background:#fff; margin:0px; padding:0px;
+            border:1px solid #919B9C; display:none;
+        }
+        #list_match.list_option{ display:block; }
+        .right{ width:636px; float:right; }
+        .clear{ clear:both; font-size:0px; overflow:hidden; height:0px; }
+        #colorText, textarea{
+            margin:5px auto; height:100px;
+            overflow:auto; border:1px solid inset;
+        }
+        #colorText{ background:#fff; text-align:left; word-wrap:break-word; overflow:hidden; }
+        #regexpText{ width:236px }
+        #replaceText{ height:30px; }
+        #regexpText{ height:60px; }
+        #replaceText, #targetText, #resultText{ width:620px }
+        #targetText{ height:200px; background:#ddd; color:#000; }
+        #resultText{ height:60px; color:#0099FF }
+        select{ width:216px; height:170px; margin:0px; padding:0px; margin-top:10px; }
+        fieldset{ text-align:center; padding:0; margin:10px 0 0 0 }
+        legend{ margin-left:10px; color:#000; }
+    </style>
+
+</head>
+
+<body>
+<div id="win">
+    <h4>
+        <div id="caption">WebRegExp 1.0 - 客服果果 [ 无忧版 ]</div>
+    </h4>
+    <div class="menu"><a href="javascript:void(0)" id="about" onclick="alert('感谢使用WebRegExp 1.0')">关于(<u>A</u>)</a>
+    </div>
+    <div class="line"></div>
+    <div class="ad"></div>
+    <div class="ibody">
+        <div class="left">
+            <fieldset>
+                <legend>正则式输入</legend>
+                <textarea id="regexpText"><[^>]+></textarea>
+                <div class="btnWrap">
+                    <button id="doOut">输出</button>
+                    <button id="doTrim">剔除</button>
+                    <button id="doReplace">替换</button>
+                    <button id="doNext">查找下一个</button>
+                    <button id="doFind">列表</button>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>模式匹配</legend>
+                <label for="isI"><input type="checkbox" id="isI" m="i"/>忽略大小写</label>
+                <label for="isM"><input type="checkbox" id="isM" m="m"/>多行模式</label>
+                <label for="isG"><input type="checkbox" id="isG" m="g" checked/>全局模式</label>
+            </fieldset>
+            <fieldset class="">
+                <legend>常用正则式</legend>
+                <div class="list_wrap">
+                    <div id="tabBtns">
+                        <a href="javascript:void(0)" title="">验证</a>
+                        <a href="javascript:void(0)" title="" class="hot">提取</a>
+                        <a href="javascript:void(0)" title="">剔除</a>
+                        <div class="clear"></div>
+                    </div>
+                    <div id="all_list">
+                        <div class="list_option" id="list_check">
+                            <select id="exps1" size="2"></select>
+                        </div>
+                        <div class="list_option" id="list_match">
+                            <select id="exps2" size="2"></select>
+                        </div>
+                        <div class="list_option" id="list_trim">
+                            <select id="exps3" size="2"></select>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="right">
+            <fieldset>
+                <legend>测试文本</legend>
+                <textarea id="targetText">
+                    <!-- testText-->
+                    <table cellspacing="0" cellpadding="4" width="100%" align="center" class="t_row">
+                        <tr style="height: 100%">
+                            <td width="18%" valign="top" class="t_user"><a name="pid575004"></a> <a name="newpost"></a>
+                                <a href="space.php?uid=94039" target="_blank" class="bold">客服果果</a> <br>
+                                <div class="smalltxt">
+                                    爬虫<br> <img src="images/default/star_level2.gif" alt="Rank: 2"/><br> <br>
+                                    <table width="95%" border="0" cellspacing="0" cellpadding="0" style="table-layout: fixed; overflow: hidden">
+                                        <tr>
+                                            <td align="center">
+                                                <div class="avatar" style="width: 70">
+                                                    <img src="images/avatars/16.gif" width="70" height="80" border="0" alt=""/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <!-- testText end-->
+                </textarea>
+            </fieldset>
+            <fieldset>
+                <legend>替换文本</legend>
+                <textarea id="replaceText">dhooo</textarea>
+            </fieldset>
+            <fieldset>
+                <legend id="reInfo">查找结果</legend>
+                <textarea id="resultText"></textarea>
+            </fieldset>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<script>
+    ldh = {
+        ex : function(main, ex){
+            for(var k in (ex || {}))main[k] = ex[k];
+            return main
+        }, each : function(list, fn){
+            for(var i = 0; i < list.length; i++)fn.call(list[i], i, list)
+        }, chk : function $chk(obj){
+            return !!(obj || obj === 0)
+        }, find : function(selector, box){
+            if(typeof(selector) != 'string')return selector;
+            if(selector.charAt(0) == '.')return (function(className, box){
+                var list = [];
+                ldh.each(ldh.find('*', box), function(i){
+                    if(this.className.indexOf(className) != -1)list.push(this)
+                })
+                return list;
+            })(selector.replace('.', ''), ldh.find(box));
+            if(selector.charAt(0) == '#')return document.getElementById(selector.replace('#', ''));
+            return (ldh.find(box) || document).getElementsByTagName(selector);
+        }
+    };
+
+    ldh.ex(ldh, {
+        drag : function(hander, ini){
+            ini = ldh.ex({win : false, dir : 'xy'}, ini);
+            var mover = ini.win || hander;
+            mover.style.position = "absolute";
+            hander.onmousedown = function(e){
+                e = window.event || e;
+                this.x = e.clientX - mover.offsetLeft;
+                this.y = e.clientY - mover.offsetTop;
+                if(document.all){
+                    hander.onlosecapture = dragStop;
+                    hander.setCapture();
+                } else {
+                    window.onblur = dragStop;
+                }
+                document.onmousemove = function(e){
+                    e = window.event || e;
+                    var x = e.clientX - hander.x, y = e.clientY - hander.y;
+                    ldh.chk(ini.left) && (x = Math.max(x, ini.left));
+                    ldh.chk(ini.top) && (y = Math.max(y, ini.top));
+                    ldh.chk(ini.right) && (x = Math.min(x, ini.right));
+                    ldh.chk(ini.bottom) && (y = Math.min(y, ini.bottom));
+                    if(ini.dir.indexOf('x') != -1)mover.style.left = x + "px";
+                    if(ini.dir.indexOf('y') != -1)mover.style.top = y + "px";
+                    if(document.all){
+                        hander.setCapture();
+                        e.cancelBubble = true;
+                    } else {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                    window.getSelection && window.getSelection().removeAllRanges();
+                };
+                function dragStop(){
+                    document.onmousemove = document.onmouseup = null;
+                    if(document.all){
+                        hander.onlosecapture = null;
+                        hander.releaseCapture();
+                    } else {
+                        window.onblur = null
+                    }
+                }
+
+                document.onmouseup = dragStop;
+            };
+        }
+    })
+    $ = ldh.find;
+    var Attr = function(key, value){
+        return value ? (this.setAttribute(key, value), this) : this.getAttribute(key)
+    };
+    var commad = function(){
+    }, prevPos = 0, resultList = [];
+    ldh.each(ldh.find('INPUT'), function(){
+        this.onclick = applySearch
+    })
+    function applySearch(){
+        var mode = '', re, beginTime = new Date;
+        ldh.each(ldh.find('INPUT'), function(){
+            if(this.checked)mode += Attr.call(this, 'm')
+        });
+        if($('#regexpText').value == ''){
+            re = null
+        } else {
+            try{
+                re = new RegExp($('#regexpText').value, mode)
+            } catch (e) {
+                re = null
+            }
+        }
+        var mArr = String($('#targetText').value).match(re);
+        $('#resultText').value = '';
+        if(!(mArr instanceof Array))mArr = [];
+        resultList = mArr;
+        var time = '共耗时 <strong style="color:#009900">' + (new Date - beginTime) + "</strong> 毫秒"
+        command(mArr, re, mode, time);
+    }
+    if(document.all){
+        var rngTarget = $('#targetText').createTextRange(), firstRng = rngTarget.getBookmark();
+    }
+    function findText(text){
+        if(!text)return;
+        rngTarget.collapse(true);
+        if(rngTarget.findText(text)){
+            rngTarget.select();
+            rngTarget.collapse(false);
+        } else {
+            rngTarget.moveStart('character', -$('#targetText').value.length);
+        }
+    }
+    ;
+    (function(){
+        $('#regexpText').onchange = function(){
+            resultList = [];
+        }
+        $('#exps1').onchange = $('#exps2').onchange = $('#exps3').onchange = function(){
+            $('#regexpText').value = this.value;
+            resultList = []
+        };
+        ($('#doFind').onclick = function(){
+            command = function(mArr, a, b, c){
+                $('#reInfo').innerHTML = '查找结果(共找到 <strong style="color:red">' + mArr.length + '</strong> 个匹配,' + c + ')';
+                if(mArr.length == 0)return $('#resultText').value = '没有找到匹配项';
+                var txt = [];
+                ldh.each(mArr, function(i){
+                    txt.push((i + 1) + '. ' + this + '\n')
+                });
+                $('#resultText').value = txt.join('');
+            };
+            applySearch();
+        })();
+        $('#doReplace').onclick = function(){
+            command = function(mArr, re, b, c){
+                $('#resultText').value = $('#targetText').value.replace(re, $('#replaceText').value);
+                $('#reInfo').innerHTML = '已替换 <strong style="color:red">' + mArr.length + '</strong> 个匹配项 (' + c + ')'
+            }
+            applySearch();
+        };
+        $('#doTrim').onclick = function(){
+            command = function(mArr, re, b, c){
+                $('#resultText').value = $('#targetText').value.replace(re, '');
+                $('#reInfo').innerHTML = '已剔除 <strong style="color:red">' + mArr.length + '</strong> 个匹配项 (' + c + ')'
+            }
+            applySearch();
+        };
+        $('#doOut').onclick = function(){
+            command = function(mArr, re, mode, c){
+                $('#resultText').value = $('#targetText').value.replace(re, '');
+                $('#reInfo').innerHTML = 'JavaScript代码 (' + c + ')';
+                if(mArr.length == 0)return $('#resultText').value = '由于没有任何匹配项，所以未能输出正则表达式!';
+                mode = mode ? ',"' + mode + '"' : '';
+                var txt = $('#regexpText').value.replace(/\\/g, '\\\\')
+                $('#resultText').value = 'myRegExp=new RegExp("' + txt + '"' + mode + ');';
+            }
+            applySearch();
+        };
+        $('#doNext').onclick = function(){
+            if(resultList.length == 0){
+                applySearch()
+            }
+            var m = resultList.shift()
+            findText(m);
+            $('#resultText').value = m ? m : '没有找到匹配项';
+        }
+        ldh.each($('A', '#tabBtns'), function(i){
+            this.index = i;
+            this.onkeydown = blur;
+            this.onclick = function(){
+                var List = $('DIV', '#all_list');
+                var Btns = $('A', '#tabBtns');
+                ldh.each(Btns, function(){
+                    this.className = ''
+                });
+                this.className = 'hot';
+                ldh.each(List, function(){
+                    this.style.display = 'none'
+                });
+                List[this.index].style.display = 'block';
+            }
+        });
+        ldh.each([
+            {text : '合法帐号', value : '^[a-zA-Z][a-zA-Z0-9_]{4,15}$'        }
+            ,
+            {text : '图片文件', value : '.*(.jpg|.jpeg|.gif|.png)$'}
+            ,
+            {text : 'E-mail', value : '^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$'}
+            ,
+            {text : '身份证', value : '^\\d{15}|\\d{18}$'}
+            ,
+            {text : 'QQ号', value : '^[1-9]*[1-9][0-9]*$'}
+            ,
+            {text : '全中文', value : '^[\\u4e00-\\u9fa5]+$'}
+            ,
+            {text : '手机号码', value : '^13\\d{9}|15[89]\\d{8}|189\\d{8}$'}
+            ,
+            {text : '固定电话', value : '^((\\d{3}|\\d{4})-?)?(\\d{8}|\\d{7})$'}
+            ,
+            {text : '邮政编码', value : '^[1-9]{1}(\\d+){5}$'}
+            ,
+            {text : 'URL', value : 'http:\/\/([\\w-]+\\.)+[\\w-]+(\/\\[\\w- .\/?%&=\\]*)?'}
+            ,
+            {text : 'IP地址', value : '^(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])$'}
+            ,
+            {text : '数字', value : '^[+|-]?\\d*\\.?\\d*$'}
+            ,
+            {text : '正整数', value : '^[1-9]\\d*$'}
+            ,
+            {text : '负整数', value : '^-[1-9]\\d*$'}
+            ,
+            {text : '任意整数', value : '^-?[1-9]\\d*$'}
+            ,
+            {text : '正浮点数', value : '^[1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*$'}
+            ,
+            {text : '负浮点数', value : '^-([1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*)$'}
+            ,
+            {text : '任意浮点数', value : '^-?([1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*|0?\\.0+|0)$'}
+            ,
+            {text : '英文字母', value : '^[A-Za-z]+$'}
+            ,
+            {text : '小写英文字母', value : '^[a-z]+$'}
+            ,
+            {text : '大写英文字母', value : '^[A-Z]+$'}
+        ], function(){
+            var O = $('#exps1').options;
+            O[O.length] = new Option(this.text, this.value)
+        });
+        ldh.each([
+            {text : 'img标签', value : '<img[^>]+>'        }
+            ,
+            {text : '链接', value : '<a[^>]+>(.*?)<\\/a>'}
+            ,
+            {text : '图片地址', value : '(s|S)(r|R)(c|C) *= *(\\\'|\\\")?(\\w|\\\\|\\/|\\.|:)+(\\4)'}
+            ,
+            {text : '链接地址', value : 'href=(\\"|\\\'|)([^\\"\\\'<>]+)(\\1)'}
+            ,
+            {text : '中文字符', value : '[\\u4e00-\\u9fa5]'}
+            ,
+            {text : '双字节字符', value : '[^\\x00-\\xff]'}
+            ,
+            {text : '文件名', value : '([^\\\/]*?)(?:\\.\\w+)$'}
+        ], function(){
+            var O = $('#exps2').options;
+            O[O.length] = new Option(this.text, this.value)
+        });
+        ldh.each([
+            {text : '空行', value : '\\n[\\s| ]*\\r'}
+            ,
+            {text : 'HTML标签', value : '<[^>]+>'}
+            ,
+            {text : '首尾空格', value : '(^\\s*)|(\\s*$)'}
+        ], function(){
+            var O = $('#exps3').options;
+            O[O.length] = new Option(this.text, this.value)
+        });
+        if(!document.all)$('#doNext').disabled = true;
+        ldh.drag(ldh.find('#caption'), {win : ldh.find('#win'), left : 0, top : 0});
+    })()
+</script>
+</body>
+</html>

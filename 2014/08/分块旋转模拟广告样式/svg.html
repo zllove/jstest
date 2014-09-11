@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<style type="text/css"></style>
+</head>
+<body>
+	<svg style="width:1000px;height:800px;">
+		<g transform="translate(150,50)">
+			<path d="M100,550L-40,180Q100,30 240,180L100,550" stroke="orange"
+			stroke-width="3" fill="white" />
+			<circle cx="100" cy="300" r="10" stroke="orange"
+			stroke-width="1" fill="orange" >
+				<animate attributeName="cy" attributeType="XML" repeatCount = "indefinite"
+             begin="0s" dur="1s" end="3s" fill="freeze" from="300" to="50" />
+				<animate attributeName="opacity" attributeType="XML" repeatCount = "indefinite"
+             begin="0s" dur="1s" end="3s" fill="freeze" from="1.0" to="0" />
+			</circle>
+			<circle cx="100" cy="350" r="15" stroke="orange"
+			stroke-width="1" fill="orange" >
+				<animate attributeName="cy" attributeType="XML" repeatCount = "indefinite"
+             begin="0s" dur="1s" fill="freeze" from="350" to="100" />
+				<animate attributeName="opacity" attributeType="XML" repeatCount = "indefinite"
+             begin="0s" dur="1s" fill="freeze" from="1.0" to="0" />
+			</circle>
+			<circle cx="100" cy="400" r="20" stroke="orange"
+			stroke-width="1" fill="orange" >
+				<animate attributeName="cy" attributeType="XML" repeatCount = "indefinite"
+             begin="0s" dur="1s" fill="freeze" from="400" to="150" />
+				<animate attributeName="opacity" attributeType="XML" repeatCount = "indefinite"
+             begin="0s" dur="1s" fill="freeze" from="1.0" to="0" />
+			</circle>
+
+			<path d="M300,300C500,0 700,600 900,300" stroke="orange"
+			stroke-width="3" fill="white">
+				<animate attributeName="d" attributeType="XML" repeatCount = "indefinite"
+             begin="0s" dur="1s" fill="freeze" from="M300,300C500,0 700,600 900,300" to="M300,300C700,600 500,0  900,300" />
+			</path>
+		</g>
+
+	</svg>
+</body>
+</html>

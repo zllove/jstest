@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    function pad(num, count) {
+        console.time(1);
+        var s = String(num/Math.pow(10, count)).split('.').pop();
+        console.timeEnd(1);
+        console.log(s);
+        return s;
+    }
+    document.getElementById('div').innerHTML = pad(12, 8);
+
+    targetStr='xxx';toStr=new Array(mixedLen-targetStr.length).join(0)+targetStr;console.lon(toStr);
+
+    (23).split("").reverse().join("")+"00").match(/\d{3}/).join("").split("").reverse().join("")
+</script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+</head>
+<style type="text/css">
+    *{font-size:14px}
+    button{margin:3px}
+</style>
+<script type="text/javascript">
+
+    var mytable = null;
+    window.onload = function() {
+        mytable = new CTable("tbl", 10);
+    };
+    Array.prototype.each = function(f) {
+        for (var i = 0; i < this.length; i++) f(this[i], i, this)
+    };
+    function $A(arrayLike) {
+        for (var i = 0,
+                     ret = []; i < arrayLike.length; i++) ret.push(arrayLike[i]);
+        return ret
+    }
+
+    function CTable(id, rows) {
+        this.tbl = typeof(id) == "string" ? document.getElementById(id) : id;
+    }
+
+    CTable.prototype = {
+        up: function() { //上移所选tr
+            var self = this;
+            var upOne = function(tr) { //上移1个tr
+                if (tr.rowIndex > 0){
+                    self.swapTr(tr, self.tbl.rows[tr.rowIndex - 1]);
+                    self.getChkBox(tr).checked = true;
+                }
+            };
+            var arr = $A(self.tbl.rows).reverse() ;
+            if (arr.length > 0 && self.getChkBox(arr[arr.length - 1]).checked) {
+                for (var i = arr.length - 1; i >= 0; i--) {
+                    if (self.getChkBox(arr[i]).checked) {
+                        arr.pop()
+                    } else {
+                        break
+                    }
+                }
+            }
+            arr.reverse().each(function(tr) {
+                if (self.getChkBox(tr).checked) upOne(tr)
+            });
+        },
+        down: function() { //向下移动
+            var self = this;
+            var downOne = function(tr) {
+                if (tr.rowIndex < self.tbl.rows.length - 1) {
+                    self.swapTr(tr, self.tbl.rows[tr.rowIndex + 1]);
+                    self.getChkBox(tr).checked = true;
+                }
+            };
+            var arr = $A(self.tbl.rows) ;
+            if (arr.length > 0 && self.getChkBox(arr[arr.length - 1]).checked) {
+                for (var i = arr.length - 1; i >= 0; i--) {
+                    if (self.getChkBox(arr[i]).checked) {
+                        arr.pop()
+                    } else {
+                        break
+                    }
+                }
+            }
+            arr.reverse().each(function(tr) {
+                if (self.getChkBox(tr).checked) downOne(tr)
+            });
+        },
+
+        top: function() { //置顶
+            var self = this;
+            var topOne = function(tr,idx) {
+                if (tr.rowIndex > 0){
+                    var tBody = tr.parentNode;
+                    tBody.insertBefore(tr,self.tbl.rows[idx]);
+                    self.getChkBox(tr).checked = true;
+                }
+            };
+
+            var arr = $A(self.tbl.rows).reverse() ;
+            if (arr.length > 0 && self.getChkBox(arr[arr.length - 1]).checked) {
+                for (var i = arr.length - 1; i >= 0; i--) {
+                    if (self.getChkBox(arr[i]).checked) {
+                        arr.pop()
+                    } else {
+                        break
+                    }
+                }
+            }
+
+            readyTr = [];
+
+            arr.reverse().each(function(tr) {
+
+                if (self.getChkBox(tr).checked){
+                    readyTr.push(tr);
+                }
+            });
+
+            readyTr.each(function(tr,idx){
+                topOne(tr,idx);
+            });
+        },
+        bottom:function(){ //置底
+            var self = this;
+            var bottomOne = function(tr,idx) {
+                if (tr.rowIndex < rowsLen){
+                    var tBody = tr.parentNode;
+                    var newTr = tBody.insertRow(idx);
+                    tBody.replaceChild(tr,newTr);
+                    self.getChkBox(tr).checked = true;
+                }
+            };
+
+            var arr = $A(self.tbl.rows).reverse() ;
+            var rowsLen = arr.length-1;
+
+            readyTr = [];
+
+            arr.reverse().each(function(tr) {
+
+                if (self.getChkBox(tr).checked){
+                    readyTr.push(tr);
+                }
+            });
+
+            readyTr.each(function(tr,idx){
+                bottomOne(tr,rowsLen+1);
+            });
+        },
+        swapTr: function(tr1, tr2) { //交换tr1和tr2的位置
+            var target = (tr1.rowIndex < tr2.rowIndex) ? tr2.nextSibling: tr2;
+            var tBody = tr1.parentNode;
+            tBody.replaceChild(tr2, tr1);
+            tBody.insertBefore(tr1, target);
+        },
+        getChkBox: function(tr) { //从tr得到 checkbox对象
+            return tr.cells[0].firstChild
+        }
+    }
+</script>
+
+</head>
+<body>
+<button  onClick="javascript:mytable.up()">上移选定行</button>
+<button  onClick="javascript:mytable.down()">下移选定行</button>
+<button  onClick="javascript:mytable.top()">置顶选定行</button>
+<button  onClick="javascript:mytable.bottom()">置底选定行</button>
+<table width="100%">
+    <tbody>
+    <tr>
+        <td valign="top">
+            <table width="80%" border="" id="tbl">
+                <tbody>
+                <tr><td width="35"><input type="checkbox"></td><td>34</td><td>50</td></tr>
+                <tr><td width="35"><input type="checkbox"></td><td>59</td><td>8</td></tr>
+                <tr><td width="35"><input type="checkbox"></td><td>14</td><td>50</td></tr>
+                <tr><td width="35"><input type="checkbox"></td><td>29</td><td>12</td></tr>
+                <tr><td width="35"><input type="checkbox"></td><td>4</td><td>13</td></tr>
+                <tr><td width="35"><input type="checkbox"></td><td>32</td><td>48</td></tr>
+                <tr><td width="35"><input type="checkbox"></td><td>48</td><td>9</td></tr>
+                <tr><td width="35"><input type="checkbox"></td><td>62</td><td>22</td></tr>
+                <tr><td width="35"><input type="checkbox"></td><td>21</td><td>11</td></tr>
+                <tr><td width="35"><input type="checkbox"></td><td>68</td><td>84</td></tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<a href="http://www.cnblogs.com/hustskyking/p/principle-of-javascript-template.html">tmp</a>
+<script type="text/javascript">
+    function tpl(str, data){
+        return str.replace(/{{(.*?)}}/g, function ($1, $2) {
+            return data[$2];
+        });
+    }
+    var selectboxHtml = '<div class="QPUI-selectbox" hidefocus="true" tabindex="-1" style="{{style}}">'+
+            '<div class="QPUI-selectbox-inner" data-value="{{value}}">{{textContent}}</div>'+
+            '<i class="QPUI-selectbox-icon"></i>'+
+            '</div>';
+    var d=tpl(selectboxHtml, {
+        style: 'width:30px;height:80px;',
+        textContent: '我是一个兵',
+        value: '333'
+    });
+    console.log(d);
+</script>
+</body>
+</html>

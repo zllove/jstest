@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .cat p{background-image:url(/static/images/page/index.png);background-position:0 0;background-repeat:no-repeat;height:120px;padding-top:29px;}
+        .cat p em{color:#898989;font-size:62px;font-style:normal; font-family:arial;padding:0 66px 0 16px;_padding:0 66px 0 18px;}
+    </style>
+
+</head>
+<body>
+<div class="cat">
+    <p id="timeout"><em>00</em><em>00</em><em>00</em></p>
+</div>
+
+<script type="text/javascript">
+    (function() {
+        var _sss = new Date(2014, 8 - 1, 18, 10, 18).getTime() - new Date('2014/8/17 15:23:07').getTime();
+        var sss = Math.floor(_sss / 1000);
+        var el = document.getElementById('timeout');
+        var to2 = function(s) { return s < 10 ? '0' + s : s; };
+        var getTimeObject = function() {
+            sss--;
+            var hour = Math.floor(sss / 3600);
+            var hour_s = sss % 3600;
+            var minute = Math.floor(hour_s / 60);
+            var seconds = hour_s % 60;
+            return { h: to2(hour), m: to2(minute), s: to2(seconds) };
+        };
+        var id = setInterval(timer, 1000);
+
+        function timer() {
+            var o = getTimeObject();
+            var str = '<em>' + o.h + '</em><em>' + o.m + '</em><em>' + o.s + '</em>';
+            el.innerHTML = str;
+        }
+        timer();
+    }());
+</script>
+
+</body>
+</html>

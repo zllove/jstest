@@ -14,14 +14,10 @@
     <a href="">扫一扫</a>
 </div>
 <script type="text/javascript">
-    $(function() {
-        var arr1 = $(".nav a");
-        var arr2 = [];
-        var num = 0;
-        arr1.each(function(i, val) {
-            $(this).attr("zIndex", ++num);
-        })
-    });
+    var ue = navigator.userAgent;
+    if(ue.test(/\webkit\/)){
+        document.getElementById('link').href = '';
+    }
 </script>
 </body>
 </html>

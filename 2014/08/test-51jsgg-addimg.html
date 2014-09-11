@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title> 拼图游戏 </title>
+    <base href="http://dhooo.com/web/">
+    <style>
+        body, html{ background:#660000; }
+        table{ border-collapse:collapse; border:5px solid #990000; background:#996600; }
+        td{ width:150px; height:150px; background:url(splitPic.jpg) no-repeat; cursor:pointer }
+        .p0{ background:#fff; cursor:default; }
+        .p1{ background-position:-150px 0; }
+        .p2{ background-position:-300px 0; }
+        .p3{ background-position:0 -150px; }
+        .p4{ background-position:-150px -150px; }
+        .p5{ background-position:-300px -150px; }
+        .p6{ background-position:0 -300px; }
+        .p7{ background-position:-150px -300px; }
+        .p8{ background-position:-300px -300px; }
+        .status{ text-align:center; color:#FFFF33; margin-top:10px; }
+        span{ padding:20px; font-size:16px; font-weight:bold }
+    </style>
+</head>
+
+<body>
+<div id="shell"></div>
+<div class="status"><span id="time">时间 00:00</span> <span id="step">步数: 0</span></div>
+</body>
+<script>
+
+    /*
+     拼图直接实例
+     */
+    speller = {
+        /*
+         初始化, 构造新的网格, 重置计时与计步器,绑定图格点击事件
+         */
+        init : function(){
+            this.createGrid().step = this.useTime = 0;
+            clearInterval(this.timer);
+            this.timer = setInterval(function(){
+                speller.useTime++;
+                /* 累加时间并格式化显示 */
+                document.getElementById("time").innerHTML = '时间: ' + ('0' + parseInt(speller.useTime / 60)).slice(-2) + ':' + ('0' + speller.useTime % 60).slice(-2);
+            }, 1000);
+            this.cells = this.map.getElementsByTagName("TD");
+            for(var i = 0; i < this.cells.length; i++)/* 依次绑定事件 */
+                this.cells[i].onclick = function(){
+                    speller.bind(this)
+                }
+        },
+        /*
+         随机创建打散的网格
+         */
+        createGrid : function(){
+            var css = 'p0,p1,p2,p3,p4,p5,p6,p7,p8'.split(',');
+            for(var i = 0, html = []; i < 3; i++){
+                for(var j = 0, tmp = []; j < 3; j++)
+                    tmp.push('<td class="' + css.splice(parseInt(Math.random() * css.length), 1) + '">&nbsp;</td>');
+                html.push('<tr>' + tmp.join('') + '</tr>');
+            }
+            document.getElementById("shell").innerHTML = '<table cellspacing="10" align="center" cellpadding="0" id="iMap">' + html.join('') + '</table>';
+            this.map = document.getElementById("iMap");
+            return this;
+        },
+        /*
+         网格点击事件处理
+         */
+        bind : function(td){
+            if(td.className == 'p0')return;
+            /* 如果点击的是空白网格，则忽视 */
+            function V(x){
+                return x > -1 && x < 3
+            };
+            var x = td.cellIndex, y = td.parentNode.rowIndex, $ = this.map.rows
+                    , $$ = [
+                        V(y - 1) && $[y - 1].cells[x]
+                        , V(x + 1) && $[y].cells[x + 1]
+                        , V(y + 1) && $[y + 1].cells[x]
+                        , V(x - 1) && $[y].cells[x - 1]
+                    ];
+            for(var i = 0; i < $$.length; i++)/* 测试是否可以移动网格 */
+                if($$[i] && $$[i].className == 'p0')
+                    return this.move(td, $$[i]);
+        },
+        /*
+         移动网格
+         */
+        move : function(td, next){
+            next.className = td.className;
+            td.className = 'p0';
+            /* 交换两个网格的CSS类 */
+            document.getElementById("step").innerHTML = '步数: ' + (++this.step);
+            if(this.check())/* 如果完成则重新开始 */
+                this.init(alert('你真棒!'));
+        },
+        /*
+         检测是否完成拼图
+         */
+        check : function(){
+            for(var i = 0; i < this.cells.length; i++)
+                if(this.cells[i].className != 'p' + i)return false;
+            return true;
+        }
+    }
+
+    /*
+     启动游戏
+     */
+
+    speller.init();
+
+    /*
+     强制IE缓存图片
+     */
+    document.execCommand("BackgroundImageCache", false, true);
+
+</script>
+</html>
+

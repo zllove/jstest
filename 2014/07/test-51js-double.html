@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title> new document </title>
+    <script>
+        var Calendar = {
+            calendar: null,
+            targetElement: null,
+            selfElement: null,
+            currDate: null,
+            format: "YYYY-MM-DD",
+            createBody: function() {
+                if (this.calendar == null) {
+                    var oDiv = document.createElement("div");
+                    oDiv.onselectstart = function() {
+                        return false
+                    };
+                    oDiv.ondragstart = function() {
+                        return false
+                    };
+                    oDiv.oncontextmenu = function() {
+                        return false
+                    };
+                    oDiv.style.cssText = "-moz-user-select:none;position:absolute;width:300px;height:152px;border:solid 1px #A6A4AC;background:#fff";
+                    document.body.appendChild(oDiv);
+                    return oDiv;
+                }
+
+                return this.calendar;
+            },
+            createDateTable: function(dte) {
+                var ArrWeek = new Array('日', '一', '二', '三', '四', '五', '六');
+                //var ArrWeek = new Array('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
+                var selfMonth = new Date(dte.getFullYear(), dte.getMonth(), 1);
+                selfMonth.setDate(selfMonth.getDate() - selfMonth.getDay());
+                var oTable = document.createElement("table");
+                oTable.cellSpacing = "0";
+                oTable.cellpadding = "0";
+                for (var iRow = 0; iRow < 7; iRow++) {
+                    var oTr = oTable.insertRow( - 1);
+                    if (iRow == 0) oTr.style.backgroundColor = "#BAE464";
+                    for (var iCell = 0; iCell < 7; iCell++) {
+                        var oTd = oTr.insertCell( - 1);
+                        with(oTd) {
+                            style.cssText = "width:22px;height:15px;font:9pt Tahoma;text-align:center;";
+                            if ((iCell == 0) || (iCell == 6)) style.color = '#990000';
+                            if (iRow == 0) {
+                                innerHTML = ArrWeek[iCell];
+                            } else {
+                                style.cursor = "pointer";
+                                innerHTML = selfMonth.getDate();
+                                title = this.formatDate(selfMonth, this.format);
+                                if (!this.isMonthEquals(selfMonth, dte)) {
+                                    style.color = '#CCCCCC';
+                                } else {
+                                    if (this.isDayEquals(selfMonth, new Date())) {
+                                        style.backgroundColor = '#A486E3';
+                                    } else if (this.isDayEquals(selfMonth, this.currDate)) {
+                                        style.backgroundColor = '#FFD2A6';
+                                    } else {
+                                        onmouseover = function(evt) {
+                                            var et = evt ? evt.target: event.srcElement;
+                                            if (et.tagName == "TD") et.style.backgroundColor = "#EFEFEF";
+                                        };
+                                        onmouseout = function(evt) {
+                                            var et = evt ? evt.target: event.srcElement;
+                                            if (et.tagName == "TD") et.style.backgroundColor = '';
+                                        };
+                                    }
+                                    onclick = function() {
+                                        Calendar.setValue(this.title);
+                                    }
+
+                                }
+                                selfMonth.setDate(selfMonth.getDate() + 1);
+                            }
+                        }
+
+                    }
+                }
+                return oTable;
+            },
+            create: function() {
+                this.calendar.innerHTML = '<iframe src="javascript:false;" style="width:100%;height:100%;top:0px;left:0px;position:absolute;visibility:inherit;z-index:-1;"></iframe>';
+                var oTab = document.createElement("table");
+                oTab.style.cssText = "font:9pt Tahoma;text-align:center;height:130px;width:300px";
+                oTab.border = 0;
+                oTab.cellSpacing = "0";
+                oTab.cellpadding = "0";
+                var oTr = oTab.insertRow( - 1);
+                oTr.style.backgroundColor = "#EFEFEF";
+
+                var oTd_Mon_Left = oTr.insertCell( - 1);
+                var oTd_Mon_Right = oTr.insertCell( - 1);
+
+                /*------------------------------------------------------------------------*/
+                var oTr = oTab.insertRow( - 1);
+                oTr.style.cssText = "font:9pt Webdings;";
+                var oTdLeft = oTr.insertCell( - 1);
+                oTd_Mon_Left.innerHTML = "<a href='javascript:void(0)' onclick='Calendar.nextMonth(-13)' title='Last Year'>|◄</a> ";
+                oTd_Mon_Left.innerHTML += "<a href='javascript:void(0)' onclick='Calendar.nextMonth(-2)' title='Last Month'>◄</a> ";
+                oTd_Mon_Left.innerHTML += this.formatDate(this.currDate, "YYYY-OO");
+
+                oTdLeft.appendChild(this.createDateTable(this.currDate));
+                var oTdRight = oTr.insertCell( - 1);
+                var secMonth = new Date(this.currDate.setMonth(this.currDate.getMonth() + 1));
+
+                oTd_Mon_Right.innerHTML = this.formatDate(secMonth, "YYYY-OO");
+                oTd_Mon_Right.innerHTML += " <a href='javascript:void(0)' onclick='Calendar.nextMonth(0)' title='Mext Month'>►</a> ";
+                oTd_Mon_Right.innerHTML += " <a href='javascript:void(0)' onclick='Calendar.nextMonth(11)' title='Next Year'>►|</a>";
+                oTdRight.appendChild(this.createDateTable(secMonth));
+                this.calendar.appendChild(oTab);
+            },
+            Bind: function(evt, config) {
+                this.selfElement = evt.target ? evt.target: evt.srcElement;
+                if (typeof(config) != 'undefined') {
+                    this.targetElement = typeof(config.target) == 'undefined' ? this.selfElement: config.target;
+                    this.format = typeof(config.format) == 'undefined' ? this.format: config.format;
+                } else {
+                    this.format = "YYYY-MM-DD";
+                    this.targetElement = this.selfElement;
+                }
+
+                this.calendar = this.createBody();
+                //当前日期
+                var defDate = this.isDate(this.targetElement.value);
+                this.currDate = defDate ? defDate: new Date();
+                this.show();
+            },
+            show: function() {
+                this.create();
+                var Rect = this.getPosition(this.selfElement);
+                this.calendar.style.left = (Rect.L) + "px";
+                this.calendar.style.top = (Rect.T + Rect.H) + "px";
+                this.calendar.style.display = '';
+            },
+            hidden: function() {
+                this.calendar.style.display = 'none';
+            },
+            nextMonth: function(val) {
+                //当前日期
+                this.currDate = new Date(this.currDate.setMonth(this.currDate.getMonth() + val));
+                this.create();
+            },
+            setValue: function(val) {
+                this.targetElement.value = val;
+                this.hidden();
+            },
+            formatDate: function(date, str) { //格式化日期
+                //var MonName = new Array('January','February','March','April','May','June','July','August','September','October','November','December');
+                var MonName = new Array('一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月');
+                var sMon = date.getMonth() + 1;
+                sMon = (sMon > 9) ? sMon.toString() : ("0" + sMon.toString());
+                var sDay = date.getDate();
+                sDay = (sDay > 9) ? sDay.toString() : ("0" + sDay.toString());
+                var sYear = date.getYear();
+                sYear = (sYear > 9) ? sYear.toString() : ("0" + sYear.toString());
+
+                str = str.replace("YYYY", date.getFullYear());
+                str = str.replace("MM", sMon);
+                str = str.replace("DD", sDay);
+                str = str.replace("YY", sYear);
+                str = str.replace("M", date.getMonth() + 1);
+                str = str.replace("D", date.getDate());
+                str = str.replace("OO", MonName[date.getMonth()]);
+                return str;
+            },
+            isDate: function(str) { //判断是否日期()
+                if (str == null) return false;
+                var exp = /^(\d{1,4})(-|\/|\.)(\d{1,2})\2(\d{1,2})$/;
+                var r = str.match(exp);
+                if (r == null) return false;
+                var d = new Date(r[1], r[3] - 1, r[4]);
+
+                var flg = (d.getFullYear() == parseInt(r[1], 10) && (d.getMonth() + 1) == parseInt(r[3], 10) && d.getDate() == parseInt(r[4], 10))
+
+                return flg ? d: false;
+            },
+            /****************************************************************************/
+            isMonthEquals: function(date1, date2) { ///是否同一个月
+                return date1.getMonth() == date2.getMonth() && date1.getFullYear() == date2.getFullYear();
+            },
+            isDayEquals: function(date1, date2) { ///是否同一天
+                return this.isMonthEquals(date1, date2) && date1.getDate() == date2.getDate();
+            },
+            getPosition: function(obj) {
+                var WW = obj.offsetWidth;
+                var HH = obj.offsetHeight;
+
+                var TT = 0;
+                var LL = 0;
+                do {
+                    TT += obj.offsetTop;
+                    LL += obj.offsetLeft;
+                    obj = obj.offsetParent;
+                } while ( obj != window . document . body ) return {
+                    L: LL,
+                    T: TT,
+                    H: HH,
+                    W: WW
+                };
+            }
+        }
+    </script>
+    <script>
+        //alert(Calendar.isDate("2010-09-26"));
+        var sdate = new Date();
+    </script>
+</head>
+<body>
+<a href="http://bbs.51js.com/forum.php?mod=viewthread&tid=87756&extra=page%3D2%26filter%3Dtypeid%26typeid%3D8">双日历</a>
+<input type="text" id="testTip1" onclick="Calendar.Bind(event,{format:'YYYY.MM.DD',target:testTip2});"/>handle
+<br/>
+<br/>
+<input type="text" id="testTip2" onclick="Calendar.Bind(event,{format:'YYYY/MM/DD',target:testTip2});"/>
+<br/>
+<br/>
+<input type="button" value="" onclick="Calendar.Bind(event,{format:'YYYY/MM/DD',target:testTip1});">
+<br/>
+<br/>
+<input type="text" id="testTip" onclick="Calendar.Bind(event);"/>
+<br/>
+<select name="Xingzi" id="Xingzi">
+    <option value="" selected>-性质-</option>
+    <option value="1">合资</option>
+    <option value="2">美资</option>
+</select>
+</body>
+</html>

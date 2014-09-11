@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script language="javaScript">
+        function check() {
+            var lm = document.form1.lm.value;
+            var lm1 = document.form1.lm1.value;
+            var lm2 = document.form1.lm2.value;
+            if(lm1 == 0 || lm == 0 || lm2 == 0){
+                alert('请选择栏目');
+                return false;
+            } else {
+                if(lm == lm1 || lm == lm2 || lm1 == lm2){
+                    alert('该栏目已选择');
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+            /*
+            if ((lm == lm1 || lm == lm2 || lm1 == lm2) && ()) {
+                alert('该栏目已选择');
+                return false;
+            } else {
+                return true;
+            }
+            */
+        }
+    </script>
+</head>
+
+<body>
+
+<form name="form1" method="post" action="addnewt.asp" onsubmit="return check()" >
+    <select name="lm"  style="width:120px;" ID="lm"  >
+        <option value="0" selected="true">——请选择——</option>
+        <option value="1" >1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+    </select>
+    <input   type="button"   name="btn"   onclick="hidslt()"   value=增加第二栏目   >
+    <select name="lm1"  style="width:120px; display:block" ID="lm1"  >
+        <option value="0" selected="true">——请选择——</option>
+        <option value="1" >1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+    </select>
+    <input   type="button"   name="btn1"   onclick="hidslt1()"   value="增加第三栏目"  style="display:none"  >
+    <select name="lm2"  style="width:120px; display:block" ID="lm2" >
+        <option value="0" selected="true">——请选择——</option>
+        <option value="1" >1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+    </select>
+
+    <br />
+    <input name="edit" type="submit"  value="保 存"  />
+    <input type="reset"  value="重置">
+</form>
+</body>
+</html>

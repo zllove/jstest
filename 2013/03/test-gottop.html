@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     <title>回到顶部 - 豪情</title>
@@ -22,7 +22,8 @@
     (function(){
         function viewSize(){
             var doc = document,
-                    de = doc.documentElement;
+                de = doc.documentElement;
+
             return {
                 'width': (window.innerWidth || (de && de.clientWidth) || doc.body.clientWidth),
                 'height': (window.innerHeight || (de && de.clientHeight) || doc.body.clientHeight)

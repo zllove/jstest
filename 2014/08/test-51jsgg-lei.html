@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title> 纯JS+CSS的液晶数码显示板效果 </title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" text="no-cache"/>
+    <meta name="description" text="商务网站!"/>
+    <meta name="keywords" text="联盟"/>
+    <link rel="icon" href="http://pics.paipai.com/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="http://pics.paipai.com/favicon.ico" type="image/x-icon"/>
+    <style type="text/css">
+        body{ background:#660000; color:#aaa; }
+        #win{
+            background:#343434;
+            width:570px;
+            border:5px solid #999;
+        }
+        .EShowPan{
+            background:#000;
+            margin:5px; padding:10px;
+            overflow:hidden; float:left;
+            border:3px solid #666;
+        }
+        .EShowPan li{ float:left; margin-right:3px; color:#B8B7BD; font-family:'黑体'; font-size:22px; list-style-type:none }
+        .EShowPan li div{
+            width:10px; height:10px;
+            border:2px solid #000;
+            overflow:hidden; font-size:0px;
+            position:relative;
+        }
+    </style>
+</head>
+
+<body>
+纯JS+CSS的液晶数码彩显板效果<br/><br/>
+
+<div id="win">
+    <ul id="ETimer1" class="EShowPan"></ul>
+    <div style="clear:both"></div>
+    <ul id="ETimer2" class="EShowPan"></ul>
+    <div style="clear:both"></div>
+    <ul id="EData" class="EShowPan"></ul>
+    <div style="clear:both"></div>
+    <ul id="EClockFull" class="EShowPan"></ul>
+    <ul id="ECount" class="EShowPan" style="width:240px"></ul>
+
+    <div style="clear:both"></div>
+</div>
+<script language="javascript">
+    /*
+     数码显示板类
+     */
+    ENumber = function(ini){
+        this.ex = function(o, x){
+            for(var k in x)o[k] = x[k];
+            return o
+        };
+        this.text = ini.text || '';
+        this.color = ini.color || 'red';
+        this.size = ini.size || '';
+        this.shell = ini.UL.big ? document.getElementById(ini.UL) : ini.UL;
+        this.init();
+    }
+    /*
+     公共接口
+     */
+    ENumber.prototype = {
+        init : function(){
+            this.map = '11010111,01000100,11100011,11100110,01110100,10110110,10110111,11000100,11110111,11110100'.split(',');
+            this.createUI();
+        }, createUI : function(){
+            for(var i = 0; i < this.text.length; i++)
+                this.createChar(this.text.charAt(i));
+        }, createChar : function(char){
+            var d = document, $ = 'createElement'
+                    , $$ = 'appendChild', charShell = d[$]('LI')
+                    , head = d[$]('DIV'), foot = d[$]('DIV')
+                    , x = String(this.map[char])
+                    , dir = ['Top', 'Right', 'Bottom', 'Left']
+                    , def = {background : this.color, top : '9px', height : '3px', width : '3px'}
+                    , offset = '3px'
+                    , size = 2;
+            if(this.size == 'big'){
+                def = {background : this.color, top : '9px', height : '8px', width : '8px'};
+                offset = '15px';
+                charShell.style.marginRight = '5px';
+            }
+            switch(char){
+                case ':':
+                    this.ex(foot.style, def);
+                    this.ex(head.style, def);
+                    head.style.top = offset;
+                    foot.style.top = parseInt(offset) * 2 + 'px';
+                    break;
+                case '.':
+                    this.ex(foot.style, def);
+                    head.style.width = offset;
+                    break;
+                case '-':
+                    this.ex(foot.style, {background : this.color, top : '-4px', height : '2px'});
+                    break;
+                default:
+                    if(this.size == 'big'){
+                        size = 7;
+                        this.ex(head.style, {width : '20px', height : '20px'})
+                        this.ex(foot.style, {width : '20px', height : '20px'})
+                    }
+                    if(/\d/.test(char)){
+                        for(var i = 0; i < x.length; i++){
+                            (i < 4 ? head : foot).style['border' + dir[i % 4]] = size + "px solid " + (x.charAt(i) == '1' ? this.color : '#000');
+                        }
+                        ;
+                    } else {
+                        charShell.innerHTML = '<span style="position:relative;top:8px">' + char + '</span>';
+                        return this.shell[$$](charShell);
+                    }
+            }
+            charShell[$$](head);
+            charShell[$$](foot);
+            this.shell[$$](charShell);
+        }, update : function(newString){
+            while(this.shell.firstChild)
+                this.shell.removeChild(this.shell.firstChild);
+            this.text = newString;
+            this.init();
+        }
+    }
+    /*
+     扩展Date的模板
+     */
+    Date.prototype.show = function(x){
+        var f0 = function(x, n){
+            return ('0000' + x).slice(-(n || 2))
+        }
+        with(this)
+            var $ = {
+                'y' : getFullYear(), 'M+' : f0(getMonth() + 1), 'd+' : f0(getDate()), 'h+' : f0(getHours()), 'm+' : f0(getMinutes()), 's+' : f0(getSeconds()), 'S+' : f0(getMilliseconds(), 3), 'w+' : '日一二三四五六'.charAt(getDay())
+            };
+        if(/y{4,}/i.test(x)){
+            x = x.replace(/y{4,}/, $['y'])
+        } else {
+            x = x.replace(/y+/, f0($['yyyy']))
+        }
+        for(var re in $){
+            x = x.replace(new RegExp(re), $[re])
+        }
+        return x;
+    }
+    /*
+     创建4个显示板
+     */
+    vivi0 = new ENumber({UL : 'ETimer1', color : '#FF00FF', text : ''});
+    vivi1 = new ENumber({UL : 'ETimer2', color : '#FF1913', text : '', size : 'big'});
+    vivi2 = new ENumber({UL : 'EData', color : '#FF9900', text : ''});
+    vivi3 = new ENumber({UL : 'EClockFull', color : '#00FF00', text : ''});
+    vivi4 = new ENumber({UL : 'ECount', color : '#0033FF', text : ''});
+    /*
+     定时更新显示内容
+     */
+    setInterval(function(){
+        vivi0.update(new Date().show('北京时间hh小时mm分ss秒'));
+        vivi1.update(new Date().show('秒表计时hh:mm:ss:S'));
+        vivi2.update(new Date().show('yyyy-MM-dd'));
+        vivi3.update(new Date().show('yyyy年MM月dd日 hh:mm:ss'));
+        vivi4.update(String(+new Date() / 1000));
+    }, 300)
+</script>
+</body>
+</html>
+

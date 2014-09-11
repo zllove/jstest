@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    var myobj1 = [{ ClassId : 0, ClassStr : '--请选择--'}, { ClassId : 11, ClassStr : 'jikey'}, { ClassId : 21, ClassStr : 'tony'}, { ClassId : 31, ClassStr : 'make'}];
+    var myobj2 = [{ ClassId : 0, ClassStr : '--请选择--'}, { ClassId : 12, ClassStr : 'jikey2'}, { ClassId : 22, ClassStr : 'tony2'}, { ClassId : 32, ClassStr : 'make2'}];
+    var myobj3 = [{ ClassId : 0, ClassStr : '--请选择--'}, { ClassId : 13, ClassStr : 'jikey3'}, { ClassId : 23, ClassStr : 'tony3'}, { ClassId : 33, ClassStr : 'make3'}];
+    var select1 = create(myobj1);
+    var select2 = create(myobj2);
+    var select3 = create(myobj3);
+
+    append(select1);
+
+    select1.onchange = function(){
+        if(this.value == 11){
+            append(select2);
+        }
+    }
+
+    select2.onchange = function(){
+        if(this.value == 12){
+            append(select3);
+        }
+    }
+
+    function create(myobj){
+        var select = document.createElement('select');
+        select.options.length = 0;
+        for(var i=0;i<myobj.length;i++){
+            select.options.add(new Option(myobj[i].ClassStr, myobj[i].ClassId))
+        }
+        return select;
+    }
+
+    function append(obj){
+        document.body.appendChild(obj);
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        .wrap{ position:relative; width:800px; height:160px;margin:40px auto; border:1px solid #ccc; overflow:hidden;}
+        .ul{ position:absolute;top: 40px;left: 0;background: #f00;}
+        .ul li{ float:left; width:190px; height:120px; line-height:120px; margin-right:10px; text-align:center;background: #f1f1f1;list-style:none;}
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <a href="javascript:;">向左走</a>
+    <a href="javascript:;">向右走</a>
+    <ul id="ul" class="ul" style="left:-800px">
+        <li>11</li>
+        <li>22</li>
+        <li>33</li>
+        <li>44</li>
+    </ul>
+</div>
+<div class="wrap">
+    <p>offsetLeft: <span id="div1"></span></p>
+    <p>offsetWidth: <span id="div2"></span></p>
+</div>
+<script type="text/javascript">
+    var ul = document.getElementById('ul');
+    var li = ul.getElementsByTagName('li');
+    var a = document.getElementsByTagName('a');
+    var speed = -4;
+    ul.innerHTML += ul.innerHTML;
+    ul.style.width = (li[0].offsetWidth + 10) * li.length + 'px';
+
+    function move(){
+        document.getElementById('div1').innerHTML = ul.offsetLeft;
+        document.getElementById('div2').innerHTML = ul.offsetWidth;
+        if(ul.offsetLeft < -ul.offsetWidth / 2){
+            ul.style.left = 0;
+        }
+        if(ul.offsetLeft > 0){
+            ul.style.left = -ul.offsetWidth / 2 + 'px';
+        }
+        ul.style.left = ul.offsetLeft + speed + 'px';
+    }
+
+    var timer = setInterval(move, 30);
+
+    ul.onmouseover = function(){
+        clearInterval(timer);
+    }
+    ul.onmouseout = function(){
+        timer = setInterval(move, 30);
+    }
+    a[0].onclick = function(){
+        speed = -4;
+    }
+    a[1].onclick = function(){
+        speed = 4;
+    }
+
+</script>
+</body>
+</html>

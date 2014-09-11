@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #div{ position:absolute;left: 0;background: #f00; width:200px; height:200px;}
+    </style>
+</head>
+<body>
+<img style="opacity:0;" src="http://www.33lc.com/soft/UploadPic/2010-4/20104191135344807.jpg" id="img" alt=""/> <br/>
+<input id="btn" type="submit" value="test"/>
+<div id="div" style="left: 0;"></div>
+<script type="text/javascript">
+    function act(obj, attr, target){
+        var speed = 0
+        var alpha = 0
+        clearInterval(obj.timer)
+        obj.timer = setInterval(function(){
+            if(attr == 'opacity'){
+                if(alpha < target){
+                    speed = 10
+                } else {
+                    speed = -10
+                }
+            } else {
+                alpha = parseInt(obj.style.left)
+                speed = (target - alpha) / 8
+                speed = (speed > 0 ? Math.ceil(speed) : Math.floor(speed));
+            }
+            if(target == alpha){
+                clearInterval(obj.timer)
+            } else {
+                alpha += speed
+                if(attr == 'opacity'){
+                    obj.style.filter = 'alpha(opacity=' + alpha + ')'
+                    obj.style.opacity = alpha / 100
+                } else {
+                    obj.style[attr] = alpha + 'px'
+                }
+            }
+        }, 80);
+    }
+
+    var btn = document.getElementById('btn')
+    var div = document.getElementById('div')
+    var img = document.getElementById('img')
+    btn.onclick = function(){
+        act(div, 'left', 200)
+//        act(img, 'opacity', 200)
+    }
+    img.onmouseover = function(){
+        act(img, 'opacity', 200)
+    }
+    img.onmouseout = function(){
+        act(img, 'opacity', 0)
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <style>
+        body,div{margin: 0;padding: 0;}
+        #wrap{width: 200px;height: 200px;border: 1px solid black;margin: 30px auto;perspective:800px;-webkit-perspective:800px;}
+        #box{position: relative;transform:preserve-3d;-webkit-transform:preserve-3d;transition:3s all;-webkit-transition:3s all;}
+        #front{width: 100px;height: 100px;background: #ccc;position: absolute;top: 0;left: 0;}
+        #back{width: 100px;height: 100px;background: #c2c;position: absolute;top: 0;left: 0;
+            transform:translateZ(-200px);
+            -webkit-transform:translateZ(-200px);
+            transform:rotateY(180deg);
+            -webkit-transform:rotateY(180deg);
+        }
+        #wrap:hover #box{transform:rotateY(180deg);-webkit-transform:rotateY(180deg);}
+    </style>
+    <script>
+    </script>
+    <title>CSS3 3D 转换</title>
+</head>
+<body class="html">
+<div id="wrap">
+    <div id="box">
+        <div id="front">1</div>
+        <div id="back">2</div>
+    </div>
+</div>
+</body>
+</html>

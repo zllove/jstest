@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dome</title>
+    <style type="text/css">
+        *{margin:0;padding:0;}
+        body{font-size:12px;background:#B4B4B4;}
+        li{list-style:none;}
+        .div{float:left;width:200px;}
+        .div li{float:left;width:200px;margin:10px;}
+        .div li a{width:200px;height:30px;line-height:30px;text-align:center;background:#FFF;display:inline-block;color:#333;}
+        .div li a.active{background:#00BCF3;color:#FFF;}
+        .div li a.active_1{background:#CCC;}
+        .div_c{width:200px;border:1px solid #00BCF3;background:#CCC;float:left;display:none;}
+    </style>
+
+<body>
+<div id="div" class="div">
+    <ul>
+        <li>
+            <a class="link" id="btn1" href="javascript:;">1111111</a>
+            <div id="div_c1" class="div_c" style="display:none;">
+                <div style="padding:20px 0;">
+                    规范是梵蒂冈松岛枫哥史蒂芬给收腹带噶松规范是梵蒂冈松岛枫哥史蒂芬给收腹带噶松岛枫规范是梵蒂冈松岛枫哥史蒂芬给收腹带噶松岛枫规范是梵蒂冈松岛枫哥史蒂芬给收腹带噶松岛枫规范是梵蒂冈松岛枫哥史蒂芬给收腹带噶松岛枫岛枫
+                </div>
+
+            </div>
+        </li>
+        <li>
+            <a class="link" id="btn2" href="javascript:;">1111111</a>
+            <div id="div_c2" class="div_c" style="display:none;">
+                <div style="padding:20px 0;">
+                    规范是梵蒂冈松岛枫哥史蒂芬给收腹带噶松规范是梵蒂冈松岛枫哥史蒂芬给收腹带噶松岛枫规范是梵蒂冈松岛枫哥史蒂芬给收腹带噶松岛枫规范是梵蒂冈松岛枫哥史蒂芬给收腹带噶松岛枫规范是梵蒂冈松岛枫哥史蒂芬给收腹带噶松岛枫岛枫
+                </div>
+            </div>
+        </li>
+        <li>
+            <a class="link" id="btn3" href="javascript:;">1111111</a>
+            <div id="div_c3" class="div_c" style="display:none;">
+                <div style="padding:20px 0;">
+                    规范是梵蒂冈松岛枫哥史蒂芬给收腹带噶松规范是梵蒂冈松岛枫哥史蒂芬给收腹带噶松岛枫规范是梵蒂冈松岛枫哥史蒂芬给收腹带噶松岛枫规范是梵蒂冈松岛枫哥史蒂芬给收腹带噶松岛枫规范是梵蒂冈松岛枫哥史蒂芬给收腹带噶松岛枫岛枫
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+<script type="text/javascript">
+    function getByClass(oParent, cls){
+        if(document.getElementsByClassName){
+            return (oParent || document).getElementsByClassName(cls);
+        } else {
+            oParent = oParent || document;
+            var res = [],
+                child = null,
+                reg   = new RegExp('(^|\\s)' + cls + '(\\s|$)', 'i');
+            for(var i = 0, len = oParent.all.length; i < len; i ++){
+                child = oParent.all[i];
+                if(reg.test(child.className)){
+                    res.push(child);
+                }
+            }
+            return res;
+        }
+    }
+
+    var div = document.getElementById('div'),
+        link = getByClass(div, 'link'),
+        sub = getByClass(div, 'div_c');
+
+    for(var i=0; i < link.length; i++){
+        link[i].index = i;
+        link[i].onclick = function(){
+            for(var j=0; j<link.length; j++){
+                sub[j].style.display = 'none';
+            }
+            sub[this.index].style.display = 'block';
+            this.style.display = 'block';
+        }
+    }
+
+</script>
+</html>

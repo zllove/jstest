@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    //about moving picture
+    //fundamental class of moving picture
+    function PicObj(inputX, inputY){
+        if(arguments.length < 2 && arguments[0] == undefined){
+            this.picX = Math.random() * (document.body.clientWidth - 180);
+            this.picY = Math.random() * (document.body.clientHeight - 180);
+        } else {
+            this.picX = inputX;
+            this.picY = inputY;
+        }
+
+        this.directX = 2 * Math.round(Math.random()) - 1;//generate the stochastic number from {1,-1}
+        this.directY = 2 * Math.round(Math.random()) - 1;
+        this.speed = 3;
+
+        var picdiv = document.createElement("div");
+        picdiv.style.top = this.picY + "px";//determined the style of document
+        picdiv.style.left = this.picX + "px";
+        picdiv.style.position = "absolute";
+        picdiv.style.width = "100px";
+        picdiv.style.backgroundColor = "#f00";
+        picdiv.style.height = "100px";
+        document.body.appendChild(picdiv);
+
+        //attach the Event Listener
+        setDrag(picdiv);
+
+
+        this.lineMove = function(){
+            this.picX += this.directX * this.speed;
+            this.picY += this.directY * this.speed;
+
+            picdiv.style.top = this.picY + "px";//make the change
+            picdiv.style.left = this.picX + "px";
+
+            //the rule on the boundary
+            if(this.picX + picdiv.offsetWidth >= document.body.clientWidth || this.picX <= 0){
+                this.directX = -this.directX;
+            }//offsetWidth能返回对象的实际宽度，而width属性需事先给定
+            if(this.picY + picdiv.offsetHeight >= document.body.clientHeight || this.picY <= 0){
+                this.directY = -this.directY;
+            }
+
+            //alert(picdiv.style.top);
+
+        }
+
+        this.randMove = function(){
+            this.directX = 2 * Math.round(Math.random()) - 1;//generate the stochastic number from {1,-1}.
+            this.directY = 2 * Math.round(Math.random()) - 1;
+
+            this.picX += this.directX * this.speed;
+            this.picY += this.directY * this.speed;
+
+            picdiv.style.top = this.picY + "px";//make the change
+            picdiv.style.left = this.picX + "px";
+
+            //the rule on the boundary
+            if(this.picX + picdiv.offsetWidth >= document.body.clientWidth || this.picX <= 0){
+                this.directX = -this.directX;
+            }
+            if(this.picY + picdiv.offsetHeight >= document.body.clientHeight || this.picY <= 0){
+                this.directY = -this.directY;
+            }
+        }
+    }
+
+    //the interface to generate the moving picture.
+    var timer = null;
+    function takeAction(){
+        window.joke = new PicObj();
+        //joke.lineMove();
+//        setInterval(joke.lineMove, 20);
+        timer = setInterval("window.joke.lineMove()",20);
+    }
+
+    //initialization
+
+    function init_web(){
+        takeAction();
+    }
+
+
+    //function for liberating labors
+    function $(d){
+        return document.getElementById(d);
+    }
+
+    function setDrag(handler){//make the target be 'dragable'- -
+        var startX = 0,
+                startY = 0,
+                lastX = 0,
+                lastY = 0,
+                width = document.body.clientWidth,
+                height = document.body.clientHeight,
+                drag = {
+                    down : function(e){
+                        timer && clearInterval(timer);
+                        e = e || window.event; //hogo.getEvent(e);?
+                        handler.style.cursor = 'move';
+                        startX = e.clientX - parseInt(handler.style.left);
+                        startY = e.clientY - parseInt(handler.style.top);
+                        this.setCapture && this.setCapture(); // IE 下防止拖动过快丢失对象
+                        addEvent(document, 'mousemove', drag.move);
+                        addEvent(document, 'mouseup', drag.up);
+                        return false; // 防止在 chrome 下滚屏，并丢失 cursor:move 样式
+                    },
+                    move : function(e){
+                        e = e || window.event//hogo.getEvent(e);?
+                        //e.stopPropagation();//防止事件向上冒泡；
+                        lastX = e.clientX - startX;
+                        lastY = e.clientY - startY;
+//                        lastX = Math.max(0, Math.min(width - handler.clientWidth, lastX));
+//                        lastY = Math.max(0, Math.min(height - handler.clientHeight, lastY));
+                        handler.style.top = lastY + 'px';
+                        handler.style.left = lastX + 'px';
+                        window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty(); // 取消选择文本
+                    },
+                    up : function(){
+                        handler.style.cursor = 'auto';
+                        removeEvent(document, 'mousemove', drag.move);
+                        removeEvent(document, 'mouseup', drag.up);
+                        handler.releaseCapture && handler.releaseCapture(); // 防止拖动过快丢失对象
+
+                        timer = setInterval("window.joke.lineMove()",20);
+                    }
+                };
+        addEvent(handler, 'mousedown', drag.down);
+    }
+
+    function addEvent(el, name, fn){
+        if(el.addEventListener) return el.addEventListener(name, fn, false);//在火狐中会执行这一句
+        return el.attachEvent('on' + name, fn);//在ie中执行这一句
+    }
+
+    function removeEvent(el, name, fn){
+        if(el.removeEventListener) return el.removeEventListener(name, fn, false);//在火狐中会执行这一句
+        return el.detachEvent('on' + name, fn);//在ie中执行这一句
+    }
+
+    window.onload = init_web;
+</script>
+</body>
+</html>

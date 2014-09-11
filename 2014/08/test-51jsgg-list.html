@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title> new document </title>
+    <meta charset="utf-8"/>
+    <base href="http://dhooo.com/demo/">
+    <style>
+        body{ font-size:12px; font-family:Arial; margin:0px; }
+        img{ border:none; }
+        #iListView{ background:#fff; }
+        #iListView div{
+            margin:2px 10px; border:0px solid red;
+            width:150px; height:50px; float:left;
+            overflow:hidden; background:#fff;
+        }
+        #iListView div img, #iListView div p{ border:none; float:left; }
+        #iListView div p{ line-height:50px; }
+        #iToolbar{ background:#D4D0C7; padding:5px 0px; border-bottom:1px solid #888; line-height:20px; }
+        #iToolbar a{ border:1px #D4D0C7 solid }
+        #iToolbar a:hover{ border:1px outset #fff }
+    </style>
+</head>
+
+<body>
+<div id="iToolbar">
+    <a href="javascript:void(0)" title="向上" onclick="tree.toParent()"><img src="toParent.jpg" align="absmiddle" hspace="10"/></a> 爱无忧, 爱果果, 爱JavaScript !
+</div>
+<div id="iListView"></div>
+</body>
+<script type="text/javascript">
+    XML2View = function(ini){
+        XML2View.prevLoad();
+        var $ = document, _this = this, $$ = 'documentElement';
+        this.getTitle = ini.getTitle || String;
+        this.box = ini.shell.big ? $.getElementById(ini.shell) : ini.shell;
+        this.box.innerHTML = "正在下载，请稍候...";
+        this.xml = !!$.all ? (new ActiveXObject('Microsoft.XMLDOM')) : (new XMLHttpRequest());
+        this.xml.onreadystatechange = function(){
+            if(_this.xml.readyState == 4){
+                _this.box.innerHTML = '';
+                _this.currentNode = $.all ? _this.xml[$$] : _this.xml.responseXML[$$];
+                _this.addSub(_this.currentNode, _this.box)
+            }
+        }
+        if(!!$.all){
+            this.xml.async = true;
+            this.xml.load(ini.url)
+        } else {
+            this.xml.open("GET", ini.url, true);
+            this.xml.send(null)
+        }
+        ;
+    }
+    XML2View.prototype = {
+        folder : function(node){
+            var UI = function(_){
+                        return document.createElement(_)
+                    }
+                    , ico = UI('IMG'), shell = UI('DIV'), body = UI('p'), $ = XML2View.ini;
+            this.box.appendChild(shell);
+            with(shell){
+                appendChild(ico);
+                appendChild(body);
+                setAttribute('tabIndex', '-1');
+            }
+            ico.src = XML2View.hasChild(node) ? $.folder : $.file;
+            shell.mapNode = node;
+            var str = this.getTitle.call(node);
+            shell.title = str;
+            drag(shell);
+            body.innerHTML = '<span>' + str + '</span>';
+            return shell;
+        }, addSub : function(node){
+            if(node == null)return;
+            XML2View.clear(this.box);
+            var nodes = node.childNodes, _this = this;
+            for(var i = 0; i < nodes.length; i++){
+                if(nodes[i].nodeType != 1)continue;
+                var $ = this.folder(nodes[i]);
+                if(XML2View.hasChild(nodes[i])){
+                    $.ondblclick = function(e){
+                        _this.currentNode = this.mapNode;
+                        if(XML2View.hasChild(this)){
+                            _this.addSub(_this.currentNode)
+                        }
+                        ;
+                    };
+                    $.onfocus = function(){
+                        XML2View.toggle.call(this, 'folderFocus.jpg', '#0A246A', '#fff')
+                    }
+                    $.onblur = function(){
+                        XML2View.toggle.call(this, 'folder.jpg', '', '#000')
+                    }
+                } else {
+                    $.ondblclick = function(){
+                        alert('您还不是果果的好友!暂时看不到内容!')
+                    }
+                }
+            }
+            ;
+        }, toParent : function(){
+            var $ = this.currentNode = this.currentNode.parentNode;
+            if($ && $.tagName){
+                this.addSub(this.currentNode, this.box)
+            }
+        }
+    };
+    XML2View.ini = {folder : 'folder.jpg', file : 'file.jpg'};
+    XML2View.prevLoad = function(){
+        for(var key in this.ini){
+            new Image().src = this.ini[key]
+        }
+    };
+    XML2View.toggle = function(ico, bg, fcolor){
+        this.getElementsByTagName("img")[0].src = ico;
+        with(this.getElementsByTagName("span")[0].style){
+            background = bg;
+            color = fcolor;
+        }
+    }
+    XML2View.hasChild = function(node){
+        var $ = node.childNodes;
+        for(var i = 0; i < $.length; i++)
+            if($[i].nodeType == 1)return true;
+        return false;
+    };
+    XML2View.clear = function(node){
+        var $ = node;
+        while(node = $.firstChild){
+            node.title = node.mapNode = node.onfocus = node.onblur = node.ondblclick = null;
+            $.removeChild(node)
+        }
+    }
+    tree = new XML2View({
+        url : 'http://bbs.51js.com/rss.php?auth=btXfcHM2O96P%2BjQ28hA5nTAnO5S%2Fvn4', shell : 'iListView',
+        getTitle : function(){
+            var b = this.getElementsByTagName('title')[0]
+            return b && b.firstChild.nodeValue || this.firstChild.nodeValue || '无忧贴子';
+        }
+    });
+    var index = 100;
+    function drag(hander, ini){
+        var Ex = function(main, ex){
+            for(var k in (ex || {}))main[k] = ex[k];
+            return main
+        };
+        ini = Ex({win : false, cursor : "default", end : String, moveing : function(x, y, h){
+            this.style.left = x + "px";
+            this.style.top = y + "px";
+        }, start : String}, ini);
+        var mover = ini.win || hander;
+        hander.style.cursor = ini.cursor;
+        var imgs = mover.getElementsByTagName("IMG");
+        for(var i = 0; i < imgs.length; i++)imgs[i].onmousedown = function(){
+            return false
+        };
+        hander.onmousedown = function(e){
+            e = window.event || e;
+            //mover.style.filter='alpha(opacity=50)'
+            mover.focus();
+            mover.style.zIndex = index++;
+            mover.style.position = "relative";
+            if(this.x !== undefined){
+                this.x = e.clientX - (parseInt(mover.style.left) || 0);
+                this.y = e.clientY - (parseInt(mover.style.top) || 0);
+            } else {
+                this.x = e.clientX;
+                this.y = e.clientY;
+            }
+            if(document.all){
+                hander.onlosecapture = dragStop;
+                hander.setCapture();
+            } else {
+                window.onblur = dragStop
+            }
+            ;
+            document.onmousemove = function(e){
+                e = window.event || e;
+                var x = e.clientX - hander.x, y = e.clientY - hander.y;
+                ini.moveing.call(mover, x, y, hander);
+                if(document.all){
+                    hander.setCapture();
+                    e.cancelBubble = true;
+                    e.returnValue = false
+                } else {
+                    e.preventDefault();
+                    e.stopPropagation()
+                }
+                window.getSelection && window.getSelection().removeAllRanges();
+            };
+            document.onmouseup = dragStop;
+        };
+        function dragStop(){
+            document.onmousemove = document.onmouseup = null;
+            if(document.all){
+                hander.onlosecapture = null;
+                hander.releaseCapture();
+            } else {
+                window.onblur = null
+            }
+            hander.x = hander.y = mover.style.filter = null;
+        }
+    }
+</script>
+</html>

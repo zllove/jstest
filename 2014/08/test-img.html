@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+
+<div id="datu">
+    <img src="http://dummyimage.com/100x200/c00" alt=""/>
+    <img src="http://dummyimage.com/100x200/f00" alt=""/>
+    <img src="http://dummyimage.com/100x200/ccc" alt=""/>
+    <img src="http://dummyimage.com/100x200/c00" alt=""/>
+</div>
+<div id="tu"></div>
+<div id="su"></div>
+<script type="text/javascript">
+    var container = $("#datu");
+    var len=container.find('img').length;
+    var img=container.find('img');
+    var div=$("#tu");
+    var ul=$("<ul></ul>");
+    var div2=$("#su");
+    var ul2=$("<ul></ul>");
+    for(var i=1;i<len;i++){
+        var li=$("<li/>");
+        var lis=li.append(img.clone());
+        ul.append(lis);
+    }
+
+</script>
+</body>
+</html>

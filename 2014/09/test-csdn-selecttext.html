@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<a href="http://www.zhangxinxu.com/wordpress/2011/04/js-range-html%E6%96%87%E6%A1%A3%E6%96%87%E5%AD%97%E5%86%85%E5%AE%B9%E9%80%89%E4%B8%AD%E3%80%81%E5%BA%93%E5%8F%8A%E5%BA%94%E7%94%A8%E4%BB%8B%E7%BB%8D/">select</a>
+<p>4月13日消息，据台湾媒体报道，32岁的孙燕姿(Sng Ee Tze)和后天将满34岁的荷兰籍印度尼西亚男友纳迪姆(Nadim Van Der Ros)交往5年，曾说过"有空就结婚"的她，果然趁着宣传期尾声，于3月31日在新加坡登记注册了！昨消息传开，她未否认，仅说会选择适当时间公布喜讯，所属"美妙音乐"则表示她个性低调，婚礼只会邀请双方亲友，也不会透露细节，但据新加坡可靠消息指出，婚宴订在5月初。</p>
+<input type="text" name="" value="和后天将满34岁的荷兰籍印度尼西亚男友纳迪姆" id="txt"/> <br/>
+<button id="btn">选中一些文字，然后点击本按钮</button>
+<script type="text/javascript">
+    var btn = document.getElementById('btn');
+    var txt = document.getElementById('txt');
+    txt.onblur = function(){
+        var selection,
+            text;
+        if(window.getSelection){
+            selection = window.getSelection();
+        } else if(document.selection){
+            selection = document.selection.createRange().text;
+        }
+        alert(text);
+    }
+
+</script>
+</body>
+</html>

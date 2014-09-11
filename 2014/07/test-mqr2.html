@@ -1,0 +1,71 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>文字列表无缝向上滚动JavaScript代码</title>
+    <style>
+        *{margin:0px;padding:0px;border:0px;}
+        body{font-size:12px}
+        a{ text-decoration:none;}
+        .h30{ height:50px; overflow:hidden;}
+        .demo{ border:1px solid #ccc;}
+        .demo1{height:auto;text-align:left;}
+        .demo2{height:auto;text-align:left;}
+        .demo1 li{list-style-type:none;height:22px; clear:both; overflow:hidden;text-align:left;text-indent:15px;}
+        .demo1 li a{ margin-right:10px; float:left; width:230px;}
+        .demo2 li{list-style-type:none;height:22px;text-align:left;text-indent:15px;}
+    </style>
+</head>
+<body>
+<div id="demo" class="demo" style="overflow:hidden;height:80px;width:580px;">
+    <ul id="demo1" class="demo1">
+        <li><a href="/soft/4085.shtml" target="_blank">仿QQ菜单管理器左侧菜单</a><a href="/soft/4085.shtml" target="_blank">仿QQ菜单管理器左侧菜单</a></li>
+        <li><a href="/soft/5884.shtml" target="_blank">多层嵌套的一个层展开</a><a href="/soft/5884.shtml" target="_blank">多层嵌套的一个层展开</a></li>
+        <li><a href="/soft/1852.shtml" target="_blank">《Java2核心技术卷2:高级特性》第7版</a><a href="/soft/1852.shtml" target="_blank">《Java2核心技术卷2:高级特性》第7版</a></li>
+        <li><a href="/soft/1286.shtml" target="_blank">CSS、HTML教程打包下载 (CHM)</a><a href="/soft/1286.shtml" target="_blank">CSS、HTML教程打包下载 (CHM)</a></li>
+        <li><a href="/soft/4216.shtml" target="_blank">《C++ Primer》中文第四版 chm</a><a href="/soft/4216.shtml" target="_blank">《C++ Primer》中文第四版 chm</a></li>
+        <li><a href="/soft/3388.shtml" target="_blank">C++工资管理系统(Access)</a><a href="/soft/3388.shtml" target="_blank">C++工资管理系统(Access)</a></li>
+        <li><a href="/soft/2009.shtml" target="_blank">非常牛的左侧栏JS折叠菜单</a><a href="/soft/2009.shtml" target="_blank">非常牛的左侧栏JS折叠菜单</a></li>
+    </ul>
+    <ul id="demo2" class="demo1"></ul>
+</div>
+<div class="h30"></div>
+<div id="foo" class="demo" style="overflow:hidden;height:80px;width:280px;">
+    <ul id="foo1" class="demo1">
+        <li><a href="/soft/4085.shtml" target="_blank">XP Menu 仿QQ菜单管理器左侧菜单</a></li><li><a href="/soft/5884.shtml" target="_blank">多层嵌套的一个层展开</a></li><li><a href="/soft/1852.shtml" target="_blank">《Java2核心技术卷2:高级特性》第7版</a></li><li><a href="/soft/1286.shtml" target="_blank">CSS、HTML教程打包下载 (CHM)</a></li><li><a href="/soft/4216.shtml" target="_blank">《C++ Primer》中文第四版 chm</a></li><li><a href="/soft/3388.shtml" target="_blank">C++工资管理系统(Access)</a></li><li><a href="/soft/2009.shtml" target="_blank">非常牛的左侧栏JS折叠菜单</a></li>
+    </ul>
+    <ul id="foo2" class="demo2"></ul>
+</div>
+<div class="h30"></div>
+<div id="bar" class="demo" style="overflow:hidden;height:80px;width:280px;">
+    <ul id="bar1" class="demo1">
+        <li><a href="/soft/4085.shtml" target="_blank">XP Menu 仿QQ菜单管理器左侧菜单</a></li><li><a href="/soft/5884.shtml" target="_blank">多层嵌套的一个层展开</a></li><li><a href="/soft/1852.shtml" target="_blank">《Java2核心技术卷2:高级特性》第7版</a></li><li><a href="/soft/1286.shtml" target="_blank">CSS、HTML教程打包下载 (CHM)</a></li><li><a href="/soft/4216.shtml" target="_blank">《C++ Primer》中文第四版 chm</a></li><li><a href="/soft/3388.shtml" target="_blank">C++工资管理系统(Access)</a></li><li><a href="/soft/2009.shtml" target="_blank">非常牛的左侧栏JS折叠菜单</a></li>
+    </ul>
+    <ul id="bar2" class="demo2"></ul>
+</div>
+<script>
+    function mar(demo, demo1, demo2){
+        var speed=40
+        var demo=document.getElementById(demo);
+        var demo2=document.getElementById(demo2);
+        var demo1=document.getElementById(demo1);
+        demo2.innerHTML=demo1.innerHTML
+        function Marquee(){
+            if(demo2.offsetHeight<=demo.scrollTop)
+                demo.scrollTop-=demo1.offsetHeight
+            else{
+                demo.scrollTop++
+            }
+        }
+        var MyMar=setInterval(Marquee,speed)
+        demo.onmouseover=function() {clearInterval(MyMar)}
+        demo.onmouseout=function() {MyMar=setInterval(Marquee,speed)}
+    }
+
+    mar('demo', 'demo1', 'demo2');
+//    mar('foo', 'foo1', 'foo2');
+//    mar('bar', 'bar1', 'bar2');
+</script>
+</body>
+</html>

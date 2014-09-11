@@ -1,0 +1,470 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title> new document </title>
+    <meta charset="utf-8"/>
+    <base href="http://dhooo.com/uos/" />
+    <style>
+        body,html{
+            margin:0;height:100%;
+            background:#101729;
+        }
+        #ctrlBar{
+            background:#D4D0C8;
+            border-bottom:1px solid #000;
+        }
+        #toolBar,#mainMenu{
+            border-bottom:1px solid #808080;
+            border-top:1px solid #fff;
+            line-height:20px;
+            height:22px;
+        }
+        #mainMenu{
+            padding:0px 20px;
+        }
+        #mainMenu a{
+            font-size:12px;
+            text-decoration:none;
+            color:#000;
+            font-family:Arial;
+            border:1px solid #D4D0C8;
+            padding:1px 7px;
+        }
+        #mainMenu a:hover{
+            border:1px solid #808080;
+            border-top:1px solid #fff;
+            border-left:1px solid #fff;
+        }
+
+        #mainMenu a.select,#mainMenu a.select:hover{
+            border:1px solid #fff;
+            border-top:1px solid #808080;
+            border-left:1px solid #808080;
+        }
+
+        .popUpMenu{
+            margin:0;padding:0;list-style-type:none;
+            position:absolute;float:left;
+            border:2px outset #fff;
+            _width:150px;min-width:150px;
+            white-space:wrap;
+            padding:1px;
+            font-size:12px;
+            background:#D4D0C8;
+            visibility:hidden;
+        }
+        .popUpMenu li{
+            position:relative;
+
+        }
+        .popUpMenu li.splitLine{
+            background:#aaa;
+            height:1px;
+            overflow:hidden;
+            font-size:0;
+            line-height:1px;
+            border-bottom:1px solid #fff;
+            margin:1px 2px 2px ;
+        }
+
+        .popUpMenu li a,.popUpMenu li.disabled span{
+            color:#000;text-decoration:none;
+            display:block;zoom:1;
+            line-height:20px;
+            text-indent:24px;
+            width:150px;
+        }
+
+        .popUpMenu li.disabled span{
+            color:#999;
+            cursor:default;
+        }
+
+        .popUpMenu li a.toSub{
+            background:url(menu/hassub.gif) no-repeat 100% 50%;
+        }
+
+        .popUpMenu li span{
+            display:block;
+            width:100%;
+            background-position:2% 50%;
+            background-repeat:no-repeat;
+        }
+
+        .popUpMenu li a:hover,.popUpMenu li.open a{
+            background-color:#0A246A;
+            color:#fff; cursor:pointer;
+        }
+
+        #iBody{
+            font-size:16px;
+            font-family:Arial;
+            color:#00CCFF;
+            padding:10px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="ctrlBar">
+    <div id="mainMenu">
+        <a href="javascript:void 0;" id='mFile'>文件</a>
+        <a href="javascript:void 0;" id="mEdit">编辑</a>
+        <a href="javascript:void 0;" id="mView">视图</a>
+        <a href="javascript:void 0;" id="mTool">工具</a>
+        <a href="javascript:void 0;" id="mBrower">浏览器</a>
+        <a href="javascript:void 0;" id="mHelp">帮助</a>
+    </div>
+    <div id="toolBar"></div>
+</div>
+<div id="iBody" >
+    <p style="color:#FF9900;font-size:18px;font-family:'黑体'">光辉岁月</p>
+    <p style="color:#eee;font-size:14px">歌手:Beyongd</p>
+    钟声响起归家的信号<br/>在他生命里<br/>仿佛带点唏嘘<br/>黑色肌肤给他的意义<br/>是一 生奉献<br/>哭泣斗争中<br/>命运把拥有变做失去<br/>疲倦的双眼带着期望<br/>今天只有残留的躯壳<br/>迎接光辉岁月<br/>风雨中抱紧自由<br/>一生经过彷徨的挣扎<br/>自信可改变未来<br/>问谁又能做到<br/>可否不分肤色的界线<br/>在这土地里<br/>不分你我高低<br/>缤纷五彩射出的美丽<br/>是因它没有分开每种色彩<br/>年月把拥有变做失去<br/>疲倦的双眼带着期望<br/>今天只有残留的躯壳<br/>迎接光辉岁月<br/>风雨中抱紧自由<br/>一生经过彷徨的挣扎<br/>自信可改变未来<br/>问谁又能做到
+</div>
+</body>
+<script>
+
+    /*
+     menuAdmin
+     */
+
+    var menuAdmin={
+        list:Array(),
+        active:false,
+        add:function(owner,menu){
+            owner=typeof owner=='string'?document.getElementById(owner):owner;
+            if(!owner)return this;
+            var $=this,d=document;
+            owner.onclick=function(e){
+                e=e||window.event;
+                var src=e.srcElement||e.target;
+                $.active=true;
+                for (var i=0;i<$.list.length;i++){
+                    var o=$.list[i];
+                    o.menu.hide();/* hide other menu */
+                    o.owner.className='';
+                    if(src==o.owner){
+                        var pos=popUpMenu.prototype.absPos(this);
+                        o.menu.popUp(pos.x,pos.y+this.offsetHeight+1);
+                    };
+
+                }
+                this.className='select';
+                this.blur();
+                if(e.stopPropagation){
+                    e.stopPropagation();
+                }else{
+                    e.cancelBubble=true;
+                };
+            };
+            owner.onmouseover=function (e){
+                if($.active){
+                    this.onclick(e);
+                }
+            }
+            return this.list.push({'owner':owner,'menu':menu}),this;
+        },
+        init:function (){
+            var $=this,d=document;
+            if(window.ActiveXObject){d.execCommand("BackgroundImageCache", false, true);};
+            d.onclick=function (){
+                for (var i=0;i<$.list.length;i++){
+                    var o=$.list[i];
+                    o.owner.className='';
+                    o.menu.hide();/* hide other menu */
+                };
+                $.active=false;
+            }
+            return $;
+        }
+    };
+
+    /*
+     popUpMenu
+     */
+
+    var popUpMenu=function(data,parent,root){/* 弹出菜单类 */
+        if(!root)root=this;/* save top menu's hander */
+        var ul=this.MUI('UL',null,'popUpMenu'),$=this,oldEvent=function(){};
+        $.UI=ul;
+        for (var i=0;i<data.length;i++ ) {/* insert all items */
+            var v=data[i],li=this.MUI('LI',ul,v.disabled?'disabled':false);
+            li.onmouseover=function (){/* hide all sibling's subMenu */
+                var lis=this.parentNode.getElementsByTagName('LI');
+                for (var i=0;i<lis.length;i++ ){
+                    var J=lis[i];
+                    if(J!=this){/* clear hasSub item bg */
+                        J.className=='open'&&(        J.className='');
+                        J.subMenu&&(J.subMenu.hide());
+                    }
+                };
+            };
+            if(v.radio!=undefined){/* if item like radio */
+                li.setAttribute('radio',v.radio);
+                if(v.selected==true&&!this.hasOnlyRadio){/* only first radio selected */
+                    v.ico=this.radioIco;
+                    this.hasOnlyRadio=true;
+                }
+            }
+            if(v.selected!=undefined&&v.radio==undefined){/* if item like checkbox */
+                li.setAttribute('selected',v.selected);
+                if(v.selected)v.ico=$.selectIco;
+            };
+            if(v.line){li.className='splitLine';}
+            else{
+                if(v.disabled){
+                    this.MUI('SPAN',li,(v.sub?'toSub':false),v.text,v.ico);
+                }else{
+                    this.MUI('SPAN',this.MUI('A',li,(v.sub?'toSub':false)),false,v.text,v.ico);
+                }
+            };
+            if(!v.sub){
+                if(typeof v.cmd!='function'){
+                    v.cmd=this.cmd;
+                };
+                if(!v.disabled){
+                    if(v.radio){/* is radio group */
+                        li.onclick=(function (v){return function(){
+                            root.hide();
+                            var allLi=this.parentNode.getElementsByTagName("LI"),rdo=this.getAttribute('radio');
+                            for (var i=0;i<allLi.length;i++ ){/* each group */
+                                var J=allLi[i];
+                                if(rdo!=J.getAttribute('radio'))continue;
+                                var J2=J.getElementsByTagName("SPAN");
+                                if(J2!=null){
+                                    J2[0].style.backgroundImage=(J==this)?
+                                            'url('+$.radioIco+')':'';
+                                };
+                            }
+                            v.cmd(rdo,this);/* input group name and li */
+                        }
+                        })(v);
+                    }else{/* is checkbox or normal */
+                        li.onclick=(function (v){return function(){
+                            root.hide();
+                            var J=null;/* normal */
+                            if(this.getAttribute('selected')!=undefined){/* if item can select */
+                                J=this.getAttribute('selected')==true;
+                                this.setAttribute('selected',!J);
+                                this.getElementsByTagName("SPAN")[0].style.backgroundImage=!J?
+                                        'url('+$.selectIco+')':'';
+                            }
+                            v.cmd(J,this);/* input selected and li */
+                        }
+                        })(v);
+                    }
+                }
+            }else{
+                li.onclick=function (e){/* cancel bubble */
+                    e=e||window.event;
+                    if(e.stopPropagation){e.stopPropagation();}
+                    else{e.cancelBubble=true;};
+                };
+                new popUpMenu(v.sub,li,root);/* insert sub menu */
+            };
+        };
+        if(parent){/* set parent event */
+            if(typeof parent.onmouseover=='function'){oldEvent=parent.onmouseover;};
+            parent.onmouseover=function (e){
+                oldEvent.call(this);
+                this.className='open';
+                var pos=$.absPos(this),x=(pos.x+this.offsetWidth-2),y=pos.y+5;
+                $.show(x,y,this);
+            };
+            parent.onmouseout=function(){this.hideTimer=setTimeout(function(){$.hide();},20);};
+            /* sub over event */
+            parent.getElementsByTagName("SPAN")[0].onmouseover=
+                    this.UI.onmouseover=function(){clearTimeout(parent.hideTimer);        };
+            parent.subMenu=this;/* bind sub */
+        }
+    };
+    popUpMenu.prototype={/* 弹出菜单类扩展 */
+        absPos:function(J){
+            var x=y=0;
+            do        {x+=J.offsetLeft;y+=J.offsetTop;}
+            while(J=J.offsetParent);
+            return {        'x':x,'y':y};
+        }
+        ,popUp:function (x,y){this.show(x,y);}
+        ,MUI:function(type,parent,css,text,ico){
+            var d=document,ui=(parent||d.body).appendChild(d.createElement(type));
+            if(css)ui.className=css;
+            if(text)ui.innerHTML=text;
+            if(type.toUpperCase()=='A')ui.setAttribute('href','javascript:void(0)');
+            if(ico)ui.style.backgroundImage='url('+ico+')';
+            return ui;
+        }
+        ,show:function (x,y,parent){
+            this.hide();/* on reClick neet hide all sub */
+            var w=this.UI.offsetWidth        ,h=this.UI.offsetHeight,db=document.body
+                    ,dw=db.clientWidth,dh=db.clientHeight;
+            if(h+y>dh){/* y overflow */
+                y-=h;if(parent){y+=parent.offsetHeight;};
+            }else{if(parent){y-=10;}};
+            if(w+x>dw){/* x overflow */
+                x-=w;if(parent){x-=parent.offsetWidth-10;};
+            }else{if(parent){x+=5;};}
+            var J=this.UI.style;
+            J.visibility!='visible'&&(J.visibility='visible');J.top=y+'px';J.left=x+'px';
+        }
+        ,hide:function (){
+            var J=this.UI.style,items=this.UI.getElementsByTagName('LI');
+            J.visibility!='hidden'&&(J.visibility='hidden');
+            for (var i=0;i<items.length;i++ ){/* clear hasSub item bg */
+                var J=items[i];
+                J.className=='open'&&(J.className='');
+                J.subMenu&&J.subMenu.hide();
+            };
+        }
+        ,cmd:function(){/* default eventHander */
+            alert('轻轻的你点了"'+this.text+'"\n证明你爱无忧，爱果果，爱JavaScript!')
+        }
+        ,radioIco:'fix.gif'
+        ,selectIco:'selected.gif'
+    };
+
+    /*
+     data
+     */
+
+
+    var file=[
+        {text:'新建',ico:'copy.gif',sub:[
+            {text:'标准文本',selected:true},
+            {text:'HTML网页'},
+            {text:'16进制文档'},
+            {line:true},
+            {text:'PHP脚本',ico:'more.gif'},
+            {text:'JavaScript'},
+            {text:'其它'}
+        ]},
+        {text:'打开...',ico:'open.gif'},
+        {text:'关闭'},
+        {text:'全部关闭'},
+        {line:true},
+        {text:'保存',ico:'disk.gif'},
+        {text:'全部保存',disabled:true},
+        {text:'另存为...',disabled:true},
+        {line:true},
+        {text:'打印'},
+        {text:'打印设置...'},
+        {line:true},
+        {text:'退出'}
+    ];
+
+
+    var edit=[
+        {text:'撤消'},
+        {text:'重做',disabled:true},
+        {line:true},
+        {text:'剪切',disabled:true},
+        {text:'复制',disabled:true},
+        {text:'粘贴',disabled:true},
+        {text:'格式',ico:'add.gif',sub:[
+            {text:'标准文本'},
+            {text:'HTML网页'},
+            {text:'16进制文档'},
+            {line:true},
+            {text:'PHP脚本',ico:'more.gif'},
+            {text:'JavaScript'},
+            {text:'其它'}
+        ]},
+        {line:true},
+        {text:'计算字数与单词数目',disabled:true},
+        {text:'允许虚拟空格'}
+    ];
+
+    var view=[
+        {text:'工具栏/视图',ico:'align.gif',sub:[
+            {text:'工具栏'},
+            {text:'用户工具栏'},
+            {text:'HTML工具栏'},
+            {text:'状态'},
+            {line:true},
+            {text:'文档选择器...'},
+            {text:'转到输出窗口'}
+        ]},
+        {line:true},
+        {text:'屏幕字体'},
+        {text:'打印机字体',disabled:true},
+        {line:true},
+        {text:'标尺',disabled:true},
+        {text:'行号',disabled:true},
+        {text:'代码折叠器',disabled:true},
+        {line:true},
+        {text:'全屏显示',disabled:true},
+        {text:'用户界面',sub:[
+            {text:'英文',radio:'alignType',selected:true},
+            {text:'中文',radio:'alignType'}
+        ]}
+    ];
+
+    var tool=[
+        {text:'首选项...',ico:'clear.gif'},
+        {text:'设置目录',disabled:true},
+        {line:true},
+        {text:'拼写检查',sub:[
+            {text:'文档'},
+            {text:'从当前位置'},
+            {text:'当前所选内容',disabled:true},
+            {text:'当前单词'}
+        ]},
+        {text:'录制'},
+        {text:'排序...',disabled:true},
+        {line:true},
+        {text:'全屏显示',disabled:true},
+        {text:'用户工具组',sub:[
+            {text:'组1',radio:'alignType',selected:true},
+            {text:'组2',radio:'alignType'}
+        ]}
+    ];
+
+    var brower=[
+        {text:'编辑源文件...'},
+        {line:true},
+        {text:'后退',disabled:true},
+        {text:'前进',disabled:true},
+        {text:'停止',disabled:true},
+        {text:'刷新',disabled:true},
+        {line:true},
+        {text:'字体',sub:[
+            {text:'最大'},
+            {text:'较大'},
+            {text:'中',disabled:true},
+            {text:'小'}
+        ]},
+        {line:true},
+        {text:'主页',ico:'desk.gif'},
+        {text:'搜索...',disabled:true},
+        {text:'收藏夹',disabled:true},
+        {line:true},
+        {text:'选项'}
+    ];
+
+    var help=[
+        {text:'帮助主题'},
+        {text:'上下文帮助',ico:'sheet.gif'},
+        {line:true},
+        {text:'反馈与支持'},
+        {text:'检查最新版本',disabled:true},
+        {line:true},
+        {text:'关于果果'}
+    ];
+
+    /*
+     apply
+     */
+
+    var _=function(data){return new popUpMenu(data);};
+
+    menuAdmin.init()
+            .add('mFile',_(file))
+            .add('mEdit',_(edit))
+            .add('mView',_(view))
+            .add('mTool',_(tool))
+            .add('mBrower',_(brower))
+            .add('mHelp',_(help));
+
+</script>
+</html>

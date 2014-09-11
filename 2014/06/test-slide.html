@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <style type="text/css">
+        *{
+            margin:0px;
+            padding:0px;
+        }
+        ul,li{list-style:none;}
+        #fu{
+            width:500px;
+            height:300px;
+            border:red 1px solid;
+            position: relative;
+        }
+        #num{
+            position:absolute;
+            right:0px;
+            bottom: 0px;;
+        }
+        #num a{
+            display:block;
+            float:left;
+            width:20px;
+            border: 1px red solid;
+            text-decoration: none;;
+        }
+        #lun li{ position:absolute;left: 0;top: 0;}
+        #lun li img{ width:500px; height:300px;}
+    </style>
+</head>
+<body>
+<div id="fu">
+    <ul id="lun">
+        <li><img src="http://pic1.win4000.com/wallpaper/d/4fceae14904d7.jpg" alt=""/></li>
+        <li><img src="http://pic1.win4000.com/wallpaper/4/4fceae15aa560.jpg" alt=""/></li>
+        <li><img src="http://pic1.win4000.com/wallpaper/9/4fceae1ada3e0.jpg" alt=""/></li>
+        <li><img src="http://pic1.win4000.com/wallpaper/c/4fceae1e53532.jpg" alt=""/></li>
+    </ul>
+    <div id="num"><a href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a></div>
+</div>
+<script type="text/javascript">
+    /**
+     * Created by lenovo on 14-6-13.
+     */
+    $(function(){
+        var i = 0, j, attr = [],
+            slide = $('#lun'),
+            li = slide.find('li'),
+            img = slide.find('img');
+
+        li.hide().eq(0).show();
+
+        function showandhide(){
+            console.log(li[i]);
+            li.eq(i).show(2000, function(){
+                li.eq(i++).show().css("z-index", "-1").siblings().hide().css("z-index", "0");
+
+                if(i == 4) i = 0;
+            });
+        }
+
+        function lunbo(){
+            return setInterval(function(){
+                showandhide();
+            }, 2500);
+        }
+
+        var test = lunbo();
+        // clearInterval(test);
+        $("#num a").click(function(){
+            // alert(test);
+            li[i].stop(true, true);
+            clearInterval(test);
+            //alert($(this).text());
+            i = $(this).text() - 1;
+            showandhide(i);
+            $("#lun")[0].onmouseout = function(){
+                test = lunbo();
+                $("#lun")[0].onmouseout = null;
+            }
+        });
+
+
+    });
+
+
+</script>
+</body>
+</html>

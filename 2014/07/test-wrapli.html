@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+    <style type="text/css">
+        ul{background: #f00;}
+        ul li{list-style:none;}
+        ul li{background: #ddd;}
+        ul li:nth-child(even){background: #efefef;}
+        .none{ display:none;}
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+</head>
+
+<body style="font-size:18px">
+<div id="div"></div>
+<script type="text/javascript">
+    var str = '';
+    for(var i = 0; i < 50; i++){
+        str += '<li>' + i + '</li>';
+    }
+
+    $('#div').html(str).find('li').slice(0,6).wrapAll('<ul></ul>').end()
+            .slice(6,12).wrapAll('<ul></ul>').end()
+            .slice(12,17).wrapAll('<ul></ul>').end()
+            .slice(17).wrapAll('<ul></ul>');
+</script>
+</body>
+</html>

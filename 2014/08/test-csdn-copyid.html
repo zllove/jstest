@@ -1,0 +1,32 @@
+
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
+</head>
+<body>
+<table id="tb">
+    <tr id="tr1">
+        <td>111</td>
+        <td><input id="abc" type="text" /><span id="test">111</span></td>
+    </tr>
+    <tr id="tr2">
+        <td>111</td>
+        <td>111222</td>
+    </tr>
+</table>
+<input type="button" value="clone" id="btn"/>
+<script type="text/javascript">
+    var n = 0;
+    $('#btn').click(function(){
+        var first = $("#tb tr").eq(0);
+        var tr = first.html().replace(/(id=".*?)"/g, '$1_' + n + '"');
+        tr = '<tr id="' + (first[0].id.slice(0, -1) + '_' + n) + '">' + tr + '</tr>'
+        $('#tb').append(tr);
+        n++;
+    });
+</script>
+</body>
+</html>

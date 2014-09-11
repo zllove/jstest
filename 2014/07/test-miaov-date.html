@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .div span{ display:inline-block; border:1px solid #ccc; width:30px; text-align:center; height:30px; line-height:30px;}
+    </style>
+</head>
+<body>
+<div class="div">
+    <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+    <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+</div>
+<script type="text/javascript">
+    function toDouble(n){
+        return n < 10 ? '0' + n : n;
+    }
+
+    var span = document.querySelectorAll('span');
+    console.log(span);
+    function trick(){
+        var d = new Date();
+        var str = toDouble(d.getFullYear()) + '年' + toDouble(d.getMonth() + 1) + '月' + toDouble(d.getDate()) + '日' + toDouble(d.getHours()) + '点' +
+                toDouble(d.getMinutes()) + '分' + toDouble(d.getSeconds()) + '秒';
+
+        for(var i = 0; i < span.length; i++){
+            span[i].innerHTML = str.charAt(i);
+        }
+    }
+    setInterval(trick, 1000);
+    trick();
+
+</script>
+</body>
+</html>

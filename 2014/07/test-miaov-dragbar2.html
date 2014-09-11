@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        #parent{ position:relative; width:600px; height:20px;margin: 0 auto; background:#ccc;}
+        #bar{ position:absolute;top: 0;left: 0; width:20px; height:20px;background: #f00;}
+        #div2{ position:relative; width:400px; height:300px; border:1px solid #ccc; overflow:hidden;}
+        #div3{ position:absolute;top: 0;left: 0; padding:10px;}
+    </style>
+</head>
+<body>
+<div id="parent">
+    <div id="bar"></div>
+</div>
+<div id="div2">
+    <div id="div3">
+        中国（China），位于东亚，是一个以华夏文明为主体、中华文化为基础，以汉族为主要民族的统一多民族国家，通用汉语。中国疆域内的各个民族统称为中华民族，龙是中华民族的象征。
+        中国是世界四大文明古国之一，有着悠久的历史，距今约5000年前，以中原地区为中心开始出现聚落组织进而成国家和朝代，后历经多次演变和朝代更迭，持续时间较长的朝代有夏、商、周、汉、晋、唐、宋、元、明、清等。中原王朝历史上不断与北方游牧民族交往、征战，众多民族融合成为中华民族。20世纪初辛亥革命后，中国的君主政体退出历史舞台，取而代之的是共和政体。1949年中华人民共和国成立后，在中国大陆建立了人民代表大会制度的政体。中国有着多彩的民俗文化，传统艺术形式有诗词、戏曲、书法和国画等，春节、元宵、清明、端午、中秋、重阳等是中国重要的传统节日。
+        中国，又以“华夏”、“中华”、“中夏”、“诸夏”、“诸华”、“神州”等的
+        华夷之辨
+        华夷之辨
+        代称出现。“夏”，在商、周以前有夏；“华”，是指华丽、兴旺；也有说上古华、夏同音，本一字。“中国有礼仪之大，故称夏；有服章之美，谓之华。”[1] 华是指汉服，夏指行周礼的大国，而“华夏”的意思就是“身穿华裳的礼仪之邦”。
+        而汉语“中国”一词，最早指天下的“中心”——黄河流域黄河中下游的中原河洛地带，中国以外称为四夷。在汉人心目中，其直接统治地区是为中国本土，其周围四夷均为臣属之地，所谓“天子有道，守在四夷”。[2] 中国是居天地之中者曰中国，四夷是居天地之偏者。[3] 汉代始建蛮夷邱，南北朝建“四夷馆”。明朝四夷馆，内分八馆，曰鞑靼、女真、西番、西天、回回、百夷、高昌、缅甸等等。[4] 满清统治中国以来，传统中华帝国作为天下中心的默认就渐渐被打破了。
+    </div>
+</div>
+<script type="text/javascript">
+    var parent = document.getElementById('parent')
+    var div = document.getElementById('bar')
+    var div2 = document.getElementById('div2')
+    var div3 = document.getElementById('div3')
+
+    document.onmousedown = function(e){
+        var e = e || event
+        disX = e.clientX - div.offsetLeft
+        disY = e.clientY - div.offsetTop
+        document.onmousemove = function(e){
+            var e = e || event
+            var l = e.clientX - disX
+            if(l < 0){
+                l = 0
+            } else if(l > parent.clientWidth - div.offsetWidth){
+                l = parent.clientWidth - div.offsetWidth
+            }
+            div.style.left = l + 'px'
+            var scale = l / (parent.clientWidth - div.offsetWidth)
+            div3.style.top = -(div3.offsetHeight - div2.offsetHeight) * scale + 'px'
+        }
+        document.onmouseup = function(e){
+            document.onmousemove = null
+            document.onmouseup = null
+        }
+        return false;
+    }
+</script>
+</body>
+</html>

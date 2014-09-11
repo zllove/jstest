@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="[dom 增删改查]" />
+    <title>dom 增删改查</title>
+</head>
+<body>
+<div id="test">
+    <p>我是一个太死特</p>
+</div>
+<div id="move">
+    <p>我是一个木无</p>
+</div>
+<div id="news"></div>
+<div id="del">
+    <p>del1</p>
+    <p>del2</p>
+</div>
+<div id="update">
+    <p>update1</p>
+    <p>update2</p>
+</div>
+<div id="after">
+    <p>我是after div</p>
+</div>
+<div id="before">
+    <p>我是before div</p>
+</div>
+<div id="wrap">
+    <p>我是wrap div</p>
+</div>
+<div id="unwrap">
+    <p>我是unwrap div</p>
+</div>
+<script type="text/javascript">
+    // create || append
+    var div = document.createElement('div');
+    div.innerHTML = '我是一个第阿位';
+    document.body.appendChild(div);
+    document.getElementById('test').appendChild(div.cloneNode(true));
+
+    // del
+    var del = document.getElementById('del')
+    del.removeChild(del.children[0]);
+
+    // update
+    var update = document.getElementById('update');
+    update.replaceChild(div.cloneNode(true), update.children[0]);
+
+    // select
+    var select = document.getElementById('test');
+    console.log(select);
+    var select2 = document.querySelectorAll('#test'); // nodelist
+    console.log(select2);
+    var select3 = document.querySelector('#test');
+    console.log(select3);
+
+    // move
+    var move = document.getElementById('move');
+    var news = document.getElementById('news');
+    news.appendChild(move);
+
+    // prepend
+    var preDiv = document.createElement('div');
+    preDiv.innerHTML = '我是prepend div';
+    document.body.insertBefore(preDiv, document.body.firstChild);
+
+    // after
+    var afterDiv = document.createElement('div');
+    afterDiv.innerHTML = '我是after后的div';
+    var after = document.getElementById('after');
+    after.parentNode.insertBefore(afterDiv, after.nextSibling);
+
+    // before
+    var beforeDiv = document.createElement('div');
+    beforeDiv.innerHTML = '我是before后的div';
+    var before = document.getElementById('before');
+    before.parentNode.insertBefore(beforeDiv, before.previousSibling);
+
+    // wrap
+    var wrap = document.getElementById('wrap');
+    if(wrap.outerHTML){
+        wrap.outerHTML = '<div id="super">' + wrap.outerHTML + '</div>';
+    } else {
+        var tmp = document.createElement('div');
+        tmp.id = 'super';
+        tmp.appendChild(wrap.cloneNode(true));
+        wrap.parentNode.replaceChild(tmp, wrap);
+    }
+
+    // unwrap
+    var unwrap = document.getElementById('unwrap');
+    unwrap.innerHTML = unwrap.children[0].innerHTML;
+
+</script>
+</body>
+</html>

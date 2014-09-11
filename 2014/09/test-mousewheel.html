@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #div{ width:1000px; height:2000px;background: #f1f1f1;}
+    </style>
+</head>
+<body>
+<!--//-->
+<div id="div" style="height: 2000px;"></div>
+<script type="text/javascript">
+    window.onload = function() {
+        function addEvent(obj, type, fn){
+            if(obj.addEventListener){ // chrome, firefox
+                obj.addEventListener(type, function(){
+                    fn.call(obj);
+                }, false);
+            } else if(obj.attachEvent){ // ie
+                obj.attachEvent('on' + type, fn);
+            }
+        }
+
+        onMouseWheel(document.getElementById('div'));
+        function onMouseWheel(obj){
+            addEvent(obj, 'mousewheel', fn); // ie, chrome
+            obj.addEventListener('DOMMouseScroll', fn, false); // ff
+        }
+
+        function fn(e){
+            e = e || event;
+            if(e.preventDefault){
+                e.preventDefault();
+            } else {
+                e.returnValue = false;
+            }
+            return false;
+        }
+    };
+
+
+</script>
+</body>
+</html>

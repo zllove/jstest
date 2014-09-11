@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+<input type="text" maxlength="1" onkeyup="if(this.value!='B'&&this.value!='P')this.value=''"/>
+<input type="text" name="" id="txt"/>
+<script type="text/javascript">
+    $('#txt').blur(function(){
+        var v = $(this).val();
+        if(/^[BP]+$/.test(v)){
+            alert('输入正确');
+        } else {
+            alert('请输入正确的文本！');
+        }
+    })
+</script>
+</body>
+</html>

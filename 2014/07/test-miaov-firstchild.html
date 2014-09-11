@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<ul id="ul">
+    <li>111</li>
+    <li>222</li>
+    <li>333</li>
+</ul>
+<script type="text/javascript">
+    var ul = document.getElementById('ul');
+    if(ul.firstElementChild){
+        ul.firstElementChild.style.background = 'red';
+    } else {
+        ul.firstChild.style.background = 'red';
+    }
+</script>
+</body>
+</html>

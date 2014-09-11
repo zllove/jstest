@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        #imgBox
+        {
+            width: 200px;
+            height: 200px;
+            background: red;
+            overflow: hidden;
+            margin: auto;
+            position: relative;
+        }
+        #imgMain
+        {
+            position: relative;
+            top: -200px;
+        }
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
+    <script>
+        $(function(){
+            var event;
+            if($.browser.mozilla){
+                event = "DOMMouseScroll";
+            } else {
+                event = "mousewheel";
+            }
+            $("#divBlock").bind(event, function(e){
+                var e = e.originalEvent;
+                var newWidth;
+                var newHeight;
+                var newLeft;
+                var newTop;
+                var overHeight = $("#divBlock").height();
+                if(e.detail > 0 || e.wheelDelta < 0){
+                    newWidth = $("#imgMain").width() - 20;
+                    newHeight = $("#imgMain").height() - 20;
+                    newLeft = $("#imgMain").position().left + 10;
+                    newTop = $("#imgMain").position().top + 10 - overHeight;
+                } else {
+                    newWidth = $("#imgMain").width() + 20;
+                    newHeight = $("#imgMain").height() + 20;
+                    newLeft = $("#imgMain").position().left - 10;
+                    newTop = $("#imgMain").position().top - 10 - overHeight;
+                }
+                $("#imgMain").css({ left : newLeft + "px", top : newTop + "px" });
+                $("#imgMain").width(newWidth);
+                $("#imgMain").height(newHeight);
+            });
+            $("#divBlock").bind("mousedown", function(e){
+                var xo = e.pageX;
+                var yo = e.pageY;
+                var imgLeft = $("#imgMain").position().left;
+                var imgTop = $("#imgMain").position().top;
+                var overHeight = $("#divBlock").height();
+                $("#divBlock").bind("mousemove", function(e){
+                    window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+                    var x = e.pageX;
+                    var y = e.pageY;
+                    var bX = $("#imgBox").offset().left;
+                    var bY = $("#imgBox").offset().top;
+                    $("#imgMain").css("left", x - bX - (xo - bX) + imgLeft);
+                    $("#imgMain").css("top", y - bY - (yo - bY) - overHeight + imgTop);
+                });
+            });
+            $("#divBlock").bind("mouseup mouseout", function(){
+                $("#divBlock").unbind("mousemove");
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="imgBox">
+    <div style="width: 200px; height: 200px; cursor: pointer; position: relative; left: 0;
+            top: 0; filter: alpha(opacity=0); opacity: 0; -moz-opacity: 0; background: blue;
+            z-index: 999;" id="divBlock">
+    </div>
+    <img src="http://material.mediav.com/galileo/20140711/47ab6c0342b3d7321738fc868571183c.jpg" width="200" height="200" alt="" id="imgMain" />
+</div>
+</body>
+</html>

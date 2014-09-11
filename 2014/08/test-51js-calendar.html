@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<style>
+    #rl{ cursor:pointer; border:1px #0000FF solid; position:absolute; width:145px; font-family:Arial; background:#F0F6FF; height:157; text-align:center; font-size:12px; }
+    #rl a, #rl b{ float:left; width:20px; line-height:20px; color:#000; text-decoration:none; }
+    #rl b{ background:#DEEBFF; }
+    #rl a:hover{ background:#227AFF; }
+    #rl .cur{ background:#FF9900; color:#fff; font-weight:bold; }
+    #rl .cay{ width:35px; }
+    #rl .btn{ color:#0000ff; font-weight:bold; }
+    #rl .tit{ width:60px; color:#ff0000; }
+</style>
+<script type="text/javascript">
+    function $(i){
+        return document.getElementById(i)
+    }
+    var CL = {
+        init : function(v){
+            this.add(v)
+            this.N = new Date;
+            this.v = v;
+            this.set(0, this.N.getMonth());
+            this.showTo();
+            rl.ondblclick = function(){
+                rl.style.display = "none";
+            };
+        },
+        hid : function(){
+            rl.style.display = "none";
+        },
+        showTo : function(){
+            v = this.v;
+            for(var pos = {x : 0, y : 0}, N = v; v; v = v.offsetParent){
+                pos.x += v.offsetLeft;
+                pos.y += v.offsetTop
+            }
+            document.title = [pos.x, pos.y]
+            with($("rl").style){
+                left = pos.x + "px";
+                top = (pos.y + N.offsetHeight) + "px";
+                display = ""
+            }
+        },
+        add : function(Obj){
+            if(!$("rl")){
+                var div = document.createElement("DIV");
+                div.id = "rl";
+                div.style.display = "none";
+                Obj.parentNode.appendChild(div);
+            }
+        },
+        set : function(y, m){
+            var u = '', week = '日一二三四五六'.split(''), N = this.N, Y = N.getFullYear(), M = N.getMonth(), D = N.getDate(), fn = function(a, b){
+                return '<b onclick="CL.set(' + a + ')">' + b + '</b>'
+            };
+            y && N.setYear(y), N.setMonth(m < 1 ? N.getMonth() - 1 : m), Y = N.getFullYear(), M = N.getMonth();
+            var W = new Date(Y, M, 1).getDay(), Da = new Date(Y, M + 1, 0).getDate();
+            u += fn((Y - 1) + ',' + M, '<<') + fn(Y + ',' + (M - 1), '<') + '<a class=tit><span onclick=CL.yms(' + M + ',' + Y + ')>' + Y + '</span>-<span onclick=CL.yms(' + M + ',0)>' + (M + 1) + '</span></a>' + fn(Y + ',' + (M + 1), '>') + fn((Y + 1) + ',' + M, '>>');
+            for(var i = 0; i < 7; i++)u += '<b>' + week[i] + '</b>';
+            for(i = 0; i < W; i++)u += '<a>&nbsp;</a>';
+            for(i = 0; i < Da; i++)u += '<a href="javascript:CL.clo(' + Y + ',' + (M + 1) + ',' + (i + 1) + ')"' + (i + 1 == D ? ' class="cur"' : '') + '>' + (i + 1) + '</a>';
+            $("rl").innerHTML = u;
+        },
+        clo : function(y, m, d){
+            if(y){
+                this.v.value = y + '-' + m + '-' + d;
+                rl.style.display = "none";
+            }
+        },
+        yms : function(m, y){
+            var u = '';
+            if(y == 0){
+                u += '<a class="cay">&nbsp;</a>' + '<a class=tit onclick=CL.set(0,' + m + ')>返回</a>' + '<a class="cay">&nbsp;</a>';
+                for(i = 0; i < 12; i++)u += '<a onclick=CL.set(0,' + i + ') class="cay">' + (i + 1) + '</a>';
+            } else {
+                u += '<a onclick=CL.yms(' + m + ',' + (y - 28) + ') class="cay"><<<</a>' + '<a class=tit onclick=CL.set(0,' + m + ')>返回</a>' + '<a onclick=CL.yms(' + m + ',' + (y + 28) + ') class="cay">>>></a>';
+                for(i = y - 16; i < y + 12; i++)u += '<a onclick=CL.set(' + i + ',' + m + ') class="cay">' + i + '</a>';
+            }
+            $("rl").innerHTML = u;
+        },
+        clt : function(){
+            rl.style.display = "none";
+        }
+    }
+</script>
+
+<body>
+<input name="str" type="text" onclick=CL.init(this)><input name="str1" type="text" onclick=CL.init(this)>
+</body>
+</html>
+
+</body></html>

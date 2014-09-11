@@ -7,12 +7,42 @@
     <script type="text/javascript" src="js/zepto-1.3.js"></script>
 </head>
 <body>
-<div class="a1">111</div>
-<div class="a">222</div>
-<div class="a">333</div>
+<div class="a" style="border: 1px solid #ccc;">
+    <i>111</i><i>222</i><i>333</i>
+</div>
+<style type="text/css">
+    img{vertical-align:top;}
+</style>
+<div id="a" class="a">1111</div>
+<div class="a">2222</div>
+<div class="a">3333</div>
+<div id="b">bbbb</div>
+<input id="btn" type="submit" value="btn"/>
 <script type="text/javascript">
     $('.a1').each(function(){
         console.log($(this).html());
+    });
+
+    $.extend(Zepto, {
+        init : function(){
+            console.log('init');
+        }
+    });
+
+    // [ 'after', 'prepend', 'before', 'append' ]
+//    $('.a').append('<p>ewerw</p>');
+//    $('.a').css({ width : '200px', height : '300px'});
+//    $('<p>ewerw</p>').appendTo('.a');
+
+//    var c = $('.a').children();
+//    var d = $('.a').eq(1).next();
+//    var d = $('#a').next();
+//    var d = $('#a').prepend($('#b'));
+//    var d = $('#a').width();
+//    console.log(d);
+
+    $('#btn').on('click', function(){
+        console.log('111');
     });
 </script>
 </body>

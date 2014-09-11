@@ -1,24 +1,208 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <title>test</title>
-    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
-    <style type="text/css"></style>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        .img{float:left;width:80px;height:80px;padding:5px}
+.brand-body .small-unit .img img{width:80px;height:80px}
+.brand-body .small-unit .right{float:left;overflow:hidden;margin-top:5px;width:129px}
+.brand-body .small-unit .right .title,.brand-body .small-unit .right .sub-title{font-size:12px;height:15px}
+.brand-body .brands{overflow:hidden;width:239px}
+.brand-body .brands a{width:119px;height:54px;float:left;border-right:1px solid #e8e7ec;border-bottom:1px solid #e8e7ec;display:block;overflow:hidden}
+.brand-body .brands a img{width:119px;height:54px}
+.brand-body .brands a.odd-row{height:55px}
+.brand-body .brands a.even-col{border-right:0}
+.promotions-wrapper{width:952px;margin:0 auto;padding-left:249px;position:relative}
+.promotions-wrapper .ui-menu{position:absolute;display:block;left:0;top:0}
+.promotions-wrapper .main-promo{width:711px;height:342px;position:relative;float:left}
+.promotions-wrapper .main-promo .switch-items{height:36px;position:absolute;left:0;bottom:0;width:711px;overflow:hidden;z-index:1}
+.main-promo .switch-item{width:157px;height:36px;padding:0 10px;text-align:center;line-height:36px;margin-left:1px;color:white;cursor:pointer;float:left;font-size:12px;overflow:hidden;background:black;background:rgba(0,0,0,0.7);filter:alpha(opacity=70);-ms-filter:"alpha(opacity=70)"}
+.main-promo .first-item{margin-left:0}
+.main-promo .active-switch-item{background:red;background:rgba(255,0,0,0.7);filter:alpha(opacity=70);-ms-filter:"alpha(opacity=70)"}
+.main-promo .main-item{position:absolute;left:0;top:0;width:711px;height:342px}
+.main-promo .main-item img{width:711px;height:342px}
+.right-banners{width:241px;height:342px;overflow:hidden;float:left}
+.right-banners .right-banner{width:239px;height:195px;overflow:hidden;display:block;border:1px solid #ececec}
+.right-banners .right-banner img{width:239px;height:195px}
+.right-banners .announce{width:209px;height:114px;border:1px solid #ececec;border-top:0;background-color:#f7f7f7;padding:15px}
+.right-banners .announce h2{font-size:14px;font-weight:bold;float:left;margin-bottom:10px}
+.right-banners .announce ul li{list-style:disc inside;margin-left:5px;font-size:12px;margin-bottom:10px;width:204px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.right-banners .announce .red-announce{color:#d3010a}
+.main-img{float:left;width:952px;height:252px;margin-top:8px}
+.main-img .left-img{width:199px;height:252px;display:block;float:left;overflow:hidden}
+.main-img .left-img img{width:199px;height:252px}
+.main-img .middle-img{width:512px;height:251px;float:left;border-bottom:1px solid #e8e7ec}
+.main-img .middle-img .middle-img-upper{display:block;float:left;width:256px;height:127px;overflow:hidden}
+.main-img .middle-img .middle-img-upper img{width:256px;height:127px}
+.main-img .middle-img .hot-item{float:left;width:150px;height:84px;padding:20px 10px;border-right:1px dashed #e8e7ec;position:relative}
+.main-img .middle-img .last-hot-item{border-right:0}
+.main-img .middle-img .hot-item .product-hot-tag,.main-img .middle-img .hot-item .product-sale-tag{width:48px;height:48px;position:absolute;top:6px;left:31px;background:url('http://bs.baidu.com/weigou-baidu-com/83363281c71075eee3b662677a16147c.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/83363281c71075eee3b662677a16147c.png')}
+.main-img .middle-img .hot-item .product-hot-tag{background:url('http://bs.baidu.com/weigou-baidu-com/cb1300f3f57b0a5e392ffafeeb06160a.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/cb1300f3f57b0a5e392ffafeeb06160a.png')}
+.main-img .middle-img .hot-item .hot-link{width:70px;height:70px;margin:5px 5px 0 0;float:left;display:block}
+.main-img .middle-img .hot-item .hot-link img{width:70px;height:70px}
+.main-img .middle-img .hot-item .hot-right{float:left;width:75px;margin-top:5px}
+.main-img .middle-img .hot-item .hot-right .title{font-size:12px;height:43px;overflow:hidden;margin-bottom:15px;display:block}
+.main-img .middle-img .hot-item .hot-right .price{color:#d3010a;font-size:12px}
+.main-img .right-img{width:241px;height:252px;display:block;float:left;overflow:hidden;position:relative;background:url('http://bs.baidu.com/weigou-baidu-com/bb88f3cb84bbbac0db5ef8dd3f2f6411.png') no-repeat}
+.main-img .right-img a.charge{position:absolute;left:11px;top:10px;display:block;color:#999;font-size:12px;text-align:center;width:90px;padding-left:15px;height:60px;line-height:60px}
+.main-img .right-img a.charge:hover{color:#d22636;text-decoration:none}
+.main-img .right-img a.charge-2{left:126px}
+.main-img .right-img a.charge-3{top:80px}
+.main-img .right-img a.charge-4{top:80px;left:126px}
+.main-img .img-link{display:block;width:220px;height:94px;position:absolute;top:150px;left:10px}
+.section-header .section-link{font-size:12px;color:#333;margin-top:17px;padding:0 15px;border-left:1px solid #333;float:right;display:block;text-align:center}
+.section-header .section-link-first{border-left:0}
+.section-header .section-link-last{padding-right:0}
+.food-section .section-logo{background-position:0 0}
+.cosmetic-section .section-logo{background-position:0 -36px}
+.baby-section .section-logo{background-position:0 -72px}
+.home-section .section-logo{background-position:0 -108px}
+.book-section .section-logo{background-position:0 -144px}
+.phone-section .section-logo{background-position:0 -180px}
+.computer-section .section-logo{background-position:0 -216px}
+.elec-section .section-logo{background-position:0 -252px}
+.adult-section .section-logo{background-position:0 -288px}
+.tuan-section .section-logo{background:url('http://bs.baidu.com/weigou-baidu-com/d8efc98149412fc4d23e46140ef2cad9.png') no-repeat;width:118px;height:35px;margin-bottom:5px}
+.tuan-link{color:#333}
+.tuan-big{display:block;float:left;width:478px;height:221px;border:1px solid #e8e7ec;overflow:hidden}
+.tuan-small-wrapper{width:239px;height:221px;border:1px solid #e8e7ec;border-left:0;float:left}
+.tuan-small{width:239px;height:110px;display:block;border-bottom:1px solid #e8e7ec;overflow:hidden}
+.last-tuan-small{border-bottom:0}
+.baby-section .middle-unit{padding:20px;width:199px;height:181px;position:relative;font-family:"Microsoft YaHei";font-size:14px}
+.baby-big-title{height:16px;width:199px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.baby-big-sub-title{height:16px;color:#a4a4a4;width:199px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;margin-top:7px}
+.baby-big-categories{position:absolute;width:120px;overflow:hidden;z-index:1;left:20px;bottom:10px;height:106px}
+.baby-big-categories .baby-big-category{margin-bottom:12px;width:120px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;display:block;font-size:12px}
+.baby-big-categories .baby-big-category-short{width:60px;float:left}
+.baby-big-img{position:absolute;right:0;bottom:0;width:153px;height:153px;display:block;z-index:0}
+.baby-big-img-link{position:absolute;right:0;bottom:0;width:99px;height:153px;display:block;z-index:2;background:#000;opacity:0;filter:alpha(opacity=0)}
+.baby-section .right a{display:block;overflow:hidden}
+.baby-section .unit .sub-title{margin-bottom:12px;margin-top:5px}
+.baby-section .baby-small-title{float:left;width:55px;margin-right:5px}
+.baby-section .middle-unit{position:relative}
+.baby-section .baby-logo{position:absolute;right:0;top:0;width:32px;height:32px}
+.middle-unit .middle-da{width:239px;height:221px}
+.big-unit .big-da{width:239px;height:332px}
+.main-section .section-body .brand-body .no-padding-middle-unit{padding:0;width:239px;height:221px}
+.main-section .section-body .brand-body .no-padding-middle-unit .product-hot-tag,.main-section .section-body .brand-body .no-padding-middle-unit .product-sale-tag{width:72px;height:72px;position:absolute;top:42px;right:12px;background:url('http://bs.baidu.com/weigou-baidu-com/f6b8ad3ec99153733ce02c792a82dbbd.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/f6b8ad3ec99153733ce02c792a82dbbd.png')}
+.main-section .section-body .brand-body .no-padding-middle-unit .product-hot-tag{background:url('http://bs.baidu.com/weigou-baidu-com/f0280a572e386165d791df10d8be910c.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/f0280a572e386165d791df10d8be910c.png')}
+.main-section .section-body .brand-body .no-padding-big-unit{padding:0;width:239px;height:332px}
+.main-section .section-body .brand-body .no-padding-big-unit .product-hot-tag,.main-section .section-body .brand-body .no-padding-big-unit .product-sale-tag{width:72px;height:72px;position:absolute;top:73px;right:12px;background:url('http://bs.baidu.com/weigou-baidu-com/f6b8ad3ec99153733ce02c792a82dbbd.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/f6b8ad3ec99153733ce02c792a82dbbd.png')}
+.main-section .section-body .brand-body .no-padding-big-unit .product-hot-tag{background:url('http://bs.baidu.com/weigou-baidu-com/f0280a572e386165d791df10d8be910c.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/f0280a572e386165d791df10d8be910c.png')}
+.navigator{height:40px;background:#d22636;font-size:14px;min-width:1200px}
+.navigator-inner{width:1200px;margin:0 auto}
+.navigator-items{height:40px;font-weight:bold}
+.navigator-items .navigator-item{color:#fff;line-height:40px}
+.navigator-items a.navigator-item{text-decoration:none}
+.navigator-items .nav-img{float:right;width:200px;height:40px}
+.all-cate{height:40px;font-weight:bold;background:#c2202f;position:relative;z-index:121}
+.all-cate .navigator-item{position:absolute}
+.all-cate .all-cate-arrow{background:url('http://bs.baidu.com/weigou-baidu-com/37f8b716d552113655cfd19665bb2830.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/37f8b716d552113655cfd19665bb2830.png');width:11px;height:6px;position:absolute;top:17px;right:20px;-webkit-transition:all 200ms ease-in-out 0s;-moz-transition:all 200ms ease-in-out 0s;-o-transition:all 200ms ease-in-out 0s;-ms-transition:all 200ms ease-in-out 0s}
+.all-cate:hover .all-cate-arrow{-webkit-transform:rotate(180deg);-moz-transform:rotate(180deg);-o-transform:rotate(180deg);-ms-transform:rotate(180deg);*display:none}
+.navigator-item{position:relative;z-index:1000;text-align:center}
+.navigator-item .tag{width:31px;height:17px;position:absolute;top:-10px;left:76px}
+.navigator-item .new{background:url('http://bs.baidu.com/weigou-baidu-com/9d2e9765b02ce389efdb9a1ff6e6bfe5.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/9d2e9765b02ce389efdb9a1ff6e6bfe5.png')}
+.navigator-item .hot{background:url('http://bs.baidu.com/weigou-baidu-com/405cc170fc7bac28bcf5013d1bb8e50a.png') no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=noscale,src='http://bs.baidu.com/weigou-baidu-com/405cc170fc7bac28bcf5013d1bb8e50a.png')}
+.navigator .selected,.navigator-item:hover{background:#af1925;z-index:1}
+.ui-menu{position:absolute;font-size:12px;color:#333;top:40px;font-weight:normal;display:none}
+.topic_index .ui-menu{display:block}
+.widget-menu{z-index:2000}
+.ui-menu-main{background-color:#ebebeb;border-radius:0 0 10px 10px}
+.widget-menu .ui-menu-main{background-color:#fff}
+.ui-menu-body{padding:0 1px;line-height:23px}
+.ui-menu-body ul{border:2px solid #bb0f11;border-top:0;border-radius:0 0 10px 10px}
+.widget-menu .ui-menu-body ul{width:236px;margin-left:-1px;background-color:#fff;z-index:10}
+.ui-menu-item{display:block;zoom:1;height:60px;overflow:hidden;position:relative}
+.widget-menu .ui-menu-item{height:30px;padding:2px}
+.last-ui-menu-item{border-radius:0 0 10px 10px}
+.widget-menu .ui-menu-item-expand{height:52px;background-color:#fffdfe;padding:0;border:1px solid #dadada;margin:1px}
+.ui-menu-item-expand-entrance{background:url(http://bs.baidu.com/weigou-baidu-com/8558c5fc64976a754c5015a62527935a.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://bs.baidu.com/weigou-baidu-com/8558c5fc64976a754c5015a62527935a.png',sizingMethod='scale');position:absolute;right:10px;top:13px;height:12px;width:10px;overflow:hidden}
+.widget-menu .ui-menu-item-expand-entrance{background:url('http://bs.baidu.com/weigou-baidu-com/9c1df518a67d4f1d38a3f8beb6cb00b4.gif');width:7px;height:10px}
+.widget-menu .ui-menu-item-expand .ui-menu-item-expand-entrance{background:url('http://bs.baidu.com/weigou-baidu-com/9c9bee73bb3518898ee9ce06609e3faa.gif')}
+.ui-menu-item h3{color:#333;overflow:hidden;height:20px;line-height:20px;font-size:14px;padding-left:10px;margin-top:5px}
+.ui-menu-tinysub{margin:6px 10px 0}
+.widget-menu .ui-menu-tinysub{display:none}
+.widget-menu .ui-menu-item-expand .ui-menu-tinysub{display:block;margin:2px 10px 4px}
+.ui-menu-item b{float:left;width:16px;height:16px;background:#000;margin-top:2px}
+.ui-menu-item h3 span{float:left;line-height:20px;margin-left:10px;font-weight:bold;font-size:12px}
+.ui-menu-header-wrapper{position:relative;float:left}
+.ui-menu-header-text{margin-left:0!important}
+.ui-menu-tiny-a-wrapper{position:relative;margin-right:7px}
+.ui-menu-tiny-a{display:inline-block;color:#989898;line-height:23px}
+.ui-menu-tiny-a-bold{font-weight:bold}
+.ui-menu-header-wrapper a{color:#333}
+.ui-item-hover{background:#d22636;color:#fff;margin-left:-1px;margin-right:-1px;padding-left:1px;padding-right:1px}
+.widget-menu .ui-item-hover{background:inherit;color:#333;border:1px solid #d22636;border-right:0;box-shadow:-1px 2px #e3e3e3;z-index:11}
+.widget-menu .ui-item-hover a{color:#989898}
+.widget-menu .ui-item-hover h3,.widget-menu .ui-item-hover h3 a{color:#333}
+.ui-item-hover h3,.ui-item-hover a{color:#fff}
+.ui-item-hover .ui-menu-item-expand-entrance{display:none}
+.widget-menu .ui-item-hover .ui-menu-item-expand-entrance{display:block}
+.ui-menu-sub{overflow:hidden;width:0;position:absolute;top:0;left:236px;z-index:10;background:#fff}
+.ui-sub-item{display:none;border:1px solid #d22636;zoom:1}
+.sub-item-show{display:block}
+.sub-section{overflow:hidden;border-top:1px solid #eee;margin:0 30px;width:582px}
+.sub-section-first{border-top:0}
+.sub-section-title{float:left;font-weight:bold;width:82px;line-height:20px;margin:20px 0;position:relative;text-align:center}
+.sub-section-title a{color:#d22636}
+.sub-section-body-wrapper{overflow:hidden;float:left;width:500px;padding-top:20px;margin-bottom:15px}
+.sub-section-body{float:left;line-height:20px;margin:4px 0 0 -4px;_margin-top:2px}
+.sub-link-wrapper{margin-bottom:12px;*padding-bottom:12px;*margin-bottom:0;float:left;white-space:nowrap}
+.sub-link-a-wrapper{float:left;position:relative;margin:0 6px}
+.sub-seperator{float:left;width:1px;height:12px;_height:14px;overflow:hidden;background:#ccc}
+.sub-link{color:#000;float:left;height:12px;line-height:12px;*height:14px;*line-height:14px;white-space:nowrap}
+.menu-tag{position:absolute;right:-19px;top:-12px;z-index:2}
+.menu-tag-text{color:#fff;height:12px;line-height:12px;overflow:hidden;padding:0 1px;background:#d22535;font-family:simsun}
+.menu-tag-line{height:1px;overflow:hidden}
+.menu-tag-2px{width:2px;background:#d22535}
+.menu-tag-1px{width:1px;background:#d22535}
+.ui-menu-header b{background:url('http://bs.baidu.com/weigou-baidu-com/210491fd835ab78d626611b0621fbae7.png');width:17px;height:17px}
+.ui-menu-header-0 b{background-position:-1px 0}
+.widget-menu .ui-menu-item-expand .ui-menu-header-0 b{background-position:-20px 0}
+.ui-menu-header-1 b{background-position:-1px -17px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-1 b{background-position:-20px -17px}
+.ui-menu-header-2 b{background-position:-1px -34px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-2 b{background-position:-20px -34px}
+.ui-menu-header-3 b{background-position:-1px -51px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-3 b{background-position:-20px -51px}
+.ui-menu-header-4 b{background-position:-1px -68px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-4 b{background-position:-20px -68px}
+.ui-menu-header-5 b{background-position:-1px -85px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-5 b{background-position:-20px -85px}
+.ui-menu-header-6 b{background-position:-1px -102px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-6 b{background-position:-20px -102px}
+.ui-menu-header-7 b{background-position:-1px -119px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-7 b{background-position:-20px -119px}
+.ui-menu-header-8 b{background-position:-1px -136px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-8 b{background-position:-20px -136px}
+.ui-menu-header-9 b{background-position:-1px -153px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-9 b{background-position:-20px -153px}
+.ui-menu-header-10 b{background-position:-1px -170px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-10 b{background-position:-20px -170px}
+.ui-menu-header-11 b{background-position:-1px -187px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-11 b{background-position:-20px -187px}
+.ui-menu-header-12 b{background-position:-1px -204px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-12 b{background-position:-20px -204px}
+.ui-menu-header-13 b{background-position:-1px -221px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-13 b{background-position:-20px -221px}
+.ui-menu-header-14 b{background-position:-1px -238px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-14 b{background-position:-20px -238px}
+.ui-menu-header-15 b{background-position:-1px -255px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-15 b{background-position:-20px -255px}
+.ui-menu-header-16 b{background-position:-1px -272px}
+.widget-menu .ui-menu-item-expand .ui-menu-header-16 b{background-position:-20px -272px}
+.sub-section-title .menu-tag{top:-8px}
+.menu-tag-NEW .menu-tag-text{background:#71bd63}
+.menu-tag-NEW .menu-tag-2px{background:#71bd63}
+.menu-tag-NEW .menu-tag-1px{background:#71bd63}
+.ui-item-hover .menu-tag-text{background:#FFF;color:#d22636}
+.ui-item-hover .menu-tag-2px{background:#FFF}
+.ui-item-hover .menu-tag-1px{background:#FFF}
+.protection-logo{background:url('http://bs.baidu.com/weigou-baidu-com/protect_logo.jpg') no-repeat;width:102px;height:40px;display:block;color:transparent;float:right}
+    </style>
 </head>
 <body>
-<div id="sort">
-    <div id="0">0</div>
-    <div id="5">5</div>
-    <div id="4">4</div>
-    <div id="2">2</div>
-    <div id="3">3</div>
-    <div id="1">1</div>
-</div>
-
-<script type="text/javascript">
-    var d = 'adf '.trim();
-    alert(d);
-</script>
+    
 </body>
 </html>

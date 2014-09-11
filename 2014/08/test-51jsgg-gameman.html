@@ -1,0 +1,326 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title> 是男人就下一百层 </title>
+    <meta charset="utf-8"/>
+    <base href="http://imgqun.qq.com/cgi-bin/">
+    <style>
+        body, html{ margin:0px; padding:10px; overflow:hidden; font-size:12px; background:#000 url(img?uuid=203a49821f32c400c232fcf417b894ff0f); color:#999; font-family:tahoma; }
+        #mWin{
+            width:630px; height:430px;
+            background:#111 url(img?uuid=2063d43bc338fe709dc8535e97044a8fb3); border:4px solid #666;
+            position:absolute;
+            left:50%; margin-left:-315px;
+            top:50%; margin-top:-215px;
+        }
+        #gWin{ position:absolute; width:416px; background:#000; left:15px; bottom:15px; border:4px solid #666; overflow:hidden; }
+        #gmsg{
+            width:250px; height:40px; line-height:40px;
+            text-align:center; color:#FFCC99; font-size:20px; font-weight:bold;
+            background:#000 url(img?uuid=203a49821f32c400c232fcf417b894ff0f); border:2px outset #FF9900;
+            position:absolute;
+            left:100px; top:200px;
+        }
+        #gShell{ height:340px; overflow:hidden; }
+        #stage{ background:url(img?uuid=20a929a4670e6ce10356ac3d1b8e525851) repeat-y; _height:800px; min-height:800px }
+        #stage div{ height:48px; background-repeat:no-repeat; margin:0px 15px; }
+        #stab{ background:url(img?uuid=209d542be3f75dab06c3b24a520839a234) repeat-x; height:15px; position:absolute; top:0; left:0; width:386px; margin:0 14px }
+        #life{ position:absolute; top:15px; left:15px; font-size:20px; font-family:Arial; font-style:italic; color:#ddd; }
+        .lifeShell{ background:#999; border:1px solid #000; width:200px; font-size:1px; height:10px; }
+        #lifeVal{ background:#CC3300; border:0px solid #000; width:200px; font-size:1px; height:10px; }
+        #showLay{ position:absolute; left:210px; top:0px; font-family:黑 体; font-size:36px; font-weight:bold; width:400px }
+        #layNum{ color:#0099FF; font-size:48px; }
+        #gInfo{ position:absolute; border:0px solid red; width:160px; height:380px; right:10px; bottom:0; font-size:18px; }
+        #gInfo li{ color:#fff; font-size:20px; font-family:黑 体; line-height:180%; }
+        #boy{ background:url(img?uuid=202f12fdd585c2535768c9fa30cb4aec72) no-repeat; width:30px; height:30px; position:absolute; top:50px; left:100px }
+        fieldset{ font-size:12px; padding:10px; height:200px; line-height:40px; color:#aaa; font-size:16px; }
+    </style>
+</head>
+
+<body>
+<div id="mWin">
+    <div id="life">LIFE
+        <div class="lifeShell">
+            <div id="lifeVal"></div>
+        </div>
+        <div id="showLay">地下<strong id="layNum">000</strong>层</div>
+    </div>
+    <div id="gWin">
+        <div id="gShell">
+            <div id="stage"></div>
+            <div id="boy"></div>
+        </div>
+        <div id="stab"></div>
+    </div>
+    <div id="gInfo">
+        <div style="font-size:32px;text-align:right">NS-SHAFT</div>
+        <div style="text-align:right">JYL/SOFT</div>
+        <fieldset>
+            <legend>游戏方法</legend>
+            回车暂停与启动<br/>左右键移动
+        </fieldset>
+    </div>
+    <div id="gmsg">正在连接地图服务器...</div>
+</div>
+</body>
+<script>
+
+    var $ = function(x){
+        return document.getElementById(x);
+    }
+    var stage = $('stage');
+    var boy = $('boy');
+    var gShell = $('gShell');
+    var lifeVal = $('lifeVal');
+    var gmsg = $('gmsg');
+    var gWin = $('gWin');
+    var layNum = $('layNum');
+
+    var D100 = {
+        pause : true, /* 暂停 */
+        dir : false, /* 角色移动方向 */
+        gameState : 0, /* 游戏状态 0 未开始或者已结束, 1 等待, 2游戏中, -1 结束 */
+        speed : 2, /* 电梯上升速度 */
+        boySpeed : 4, /* 角色移动速度 */
+        downSpeed : 4, /* 角色下落速度 */
+        floors : [], /* 地板集 */
+        down : true, /* 是否下落 */
+        inertia : null, /* 惯性保持器 */
+        hurt : false, /* 伤害保护期 */
+        hurtTimer : null, /* 保护计时 */
+        uping : false, /* 上弹中 */
+        life : 100
+    };
+
+    D100.skin = [
+        'url(img?uuid=20e2865861269c03c8ac0bb31728e77ff0)', 'url(img?uuid=209cd3577f863fdb4a5db801ee4a78fd41)', 'url(img?uuid=2006b2279148a520e5a33a25e80f4370a9)', 'url(img?uuid=20f35f3e9b312e3e9be27eebfb80663870)', 'url(img?uuid=20ee51615f7dea41396c1447bff830db66)', 'url(img?uuid=20561e6648669638785d7dc98a94f6ace8)', 'url(img?uuid=205d39e52a610e66a749c14dc913a6b461)',//legs2-6
+        'url(img?uuid=2076944a7acff49459af557393f7975817)',//legs3
+        'url(img?uuid=20dadc56de5143e75cdfec148430e95de5)',//hurtBoy8
+        'url(img?uuid=2046a8ddec54dc7fc014e872a31fa93a51)',//leftBoy9
+        'url(img?uuid=200c1a5a844692e0e1d0d78c13ce86d998)',//rightBoy10
+        'url(img?uuid=202f12fdd585c2535768c9fa30cb4aec72)',//stand11
+        'url(img?uuid=20c431f0b2cd74d50734730f88f4b71084)'//up12
+    ];
+
+    D100.alert = function(text, time){/* 消息窗口 */
+        gmsg.style.display = ""
+        gmsg.innerHTML = text;
+        if(time)setTimeout(D100.alert.hide, time);
+    };
+    D100.alert.hide = function(){/* 关闭消息 */
+        gmsg.style.display = "none";
+    }
+    D100.addLife = function(n){/* 伤害与补偿 */
+        this.life += 10 * (n || 1);
+        this.life = Math.min(100, Math.max(0, this.life))
+        lifeVal.style.width = this.life * 2 + 'px';
+        var color = "#009900";
+        if(this.life < 50){
+            color = "#FF0000";
+        } else if(this.life < 80){
+            color = "#FFCC00";
+        }
+        lifeVal.style.backgroundColor = color;
+    }
+    D100.msg = {/* 事件管理器 */
+        onLoadMap : function(){
+            gShell.scrollTop = 0;
+            /* 复位地图原点 */
+            boy.style.top = '50px';
+            /* 复位角色位置 */
+            boy.style.left = '180px';
+            D100.addLife(10);
+            while(stage.firstChild)stage.removeChild(stage.firstChild);
+            /* 清除场景 */
+            D100.alert('正在加载游戏地图...');
+            setTimeout(D100.createMap, 10);
+            /* 构造地图 */
+        },
+        onMapDone : function(){
+            D100.alert('恭喜, 地图载入成功', 2500);
+            D100.xDrive || D100.begin();
+            /*场景驱动*/
+            D100.gameState = 1;
+            setTimeout(D100.ctrl, 2500);
+        },
+        onScrollMap : function(outY){
+            var boyY = parseInt(boy.style.top) + 30, boyX = parseInt(boy.style.left), up = 0, move = 0, offb = 0;
+            var idx = Math.floor((outY + boyY) / 48);
+            /* 当前路过坐标 */
+            var hit = D100.floors[idx];
+            /* 踩到的地板 */
+            var kind = hit.getAttribute('kind');
+            var floorX = 1 * hit.getAttribute('bgLeft');
+            /* 地板x */
+            var floorY = hit.offsetTop - outY;
+            /*  */
+            if(kind == 2)offb = 15;
+            if(boyY < (45 - offb)){/* 头部刺伤 */
+                var hurt = true;
+                /* 当前伤害 */
+                if(!D100.hurt){
+                    clearTimeout(D100.hurtTimer);
+                    D100.addLife(-1);
+                    /* 生命力受损 */
+                    D100.hurt = true;
+                    D100.hurtTimer = setTimeout(function(){
+                        D100.hurt = false
+                    }, 100);
+                    /* 1000秒延迟伤害保护 */
+                }
+            }
+            ;
+            var onFloor = boyX > floorX && boyX < (floorX + 105) && boyY < (floorY + 12 + offb);
+            /* 站在地板上 */
+            if(onFloor)
+                switch(1 * kind){
+                    case 0:/* 弹板每0.5秒弹一下 */
+                        if(!D100.uping){
+                            up = 30;
+                            D100.uping = true;
+                        }
+                        if(D100.uping)
+                            setTimeout(function(){
+                                D100.uping = false
+                            }, 1000);
+                        break;
+                    case 2:/* 脚部被刺中 */
+                        clearTimeout(D100.hurtTimer);
+                        if(!D100.hurt)D100.addLife(-1);
+                        /* 生命力受损 */
+                        D100.hurt = true;
+                        D100.hurtTimer = setTimeout(function(){
+                            D100.hurt = false
+                        }, 500);
+                        break;
+                    case 4:
+                        boy.style.left = Math.max(boyX - 2, 0) + 'px';
+                        break;/*履带向左*/
+                    case 5:
+                        boy.style.left = Math.min(boyX + 2, 370) + 'px';
+                        break;/*履带向右*/
+                    case 3:/* 翻板0.2秒后翻动 */
+                        setTimeout(function(){
+                            hit.setAttribute('kind', -1);
+                            hit.style.backgroundImage = D100.skin[6];
+                            setTimeout(function(){
+                                hit.style.backgroundImage = D100.skin[7];
+                                setTimeout(function(){
+                                    hit.style.backgroundImage = D100.skin[3];
+                                }, 100);
+                            }, 100);
+                        }, 200);
+                }
+            ;
+            D100.down = (!onFloor) || hurt;
+            /* 是否自由落体(没有站在地板上或者被刺中)*/
+            if((!D100.down) && kind != -1){/* 随支板向上移动 */
+                boy.style.top = floorY - 30 - up + offb + 'px';
+            }
+            var lay = Math.floor(outY / 48 / 7);
+            /* 7块板算一层 */
+            if(lay > parseInt(layNum.innerHTML))D100.addLife();
+            /*每一层添加一格生命;*/
+            layNum.innerHTML = ('0000' + lay).slice(-3);
+            ;
+            /* 计算并显示层数 */
+        }
+    };
+    D100.begin = function(){/* 场景推动器 */
+        D100.xDrive = setInterval(function(){
+            if(D100.pause)return;
+            gShell.scrollTop += D100.speed;
+            /* 滚动地图 */
+            D100.msg.onScrollMap(gShell.scrollTop);
+        }, 10);
+    };
+    D100.createMap = function(){/* 创建随机地图 */
+        D100.floors = [];
+        var maxLay = 100 * 8;
+        /* 最大层数 */
+        //var pic=['th','bar','stab_bar','legs','sL','sR'];
+        var pic = D100.skin;
+        for(var i = 0; i < maxLay; i++){
+            var node = document.createElement('DIV');
+            var kind = Math.round(Math.random() * 5);
+            /* 地板类型 */
+            var img = pic[kind];
+            var left = parseInt(Math.random() * 10) * 39;
+            left = Math.min(290, Math.max(left, 0));
+            node.setAttribute('kind', -1);
+            /* 空 */
+            if(i > 3){/* 前三个留空 */
+                node.setAttribute('bgLeft', left);
+                /* 记录自身的背景X坐标 */
+                node.setAttribute('bgImg', img);
+                /* 记录自身的背景图片名 */
+                node.setAttribute('kind', kind);
+                node.style.cssText = 'background-image:' + img + ';background-position:' + left + 'px 0';
+            }
+            ;
+            D100.floors.push(stage.appendChild(node));
+        }
+        ;
+        D100.msg.onMapDone();
+    };
+    D100.ctrl = function(){/* 控制按钮 */
+        switch(D100.gameState){
+            case -1:
+            case 0:
+                D100.msg.onLoadMap();
+                break;/* 游戏重载 */
+            case 1:
+            case 2:
+                D100.pause = !D100.pause;
+                /* 暂停与开始 */
+                D100.pause ? D100.alert('游戏暂停中...') : D100.alert.hide();
+        }
+    };
+    var mDrive = setInterval(function(){/* 角色运动控制器 */
+        if(D100.pause)return;
+        if(D100.move){
+            boy.style.backgroundImage = D100.move == 1 ? D100.skin[10] : D100.skin[9];
+            /* 跑姿 */
+            var to = parseInt(boy.style.left) + D100.boySpeed * D100.move;
+            /* 移动到 */
+            boy.style.left = Math.min(370, Math.max(to, 15)) + 'px';
+        }
+        if(D100.down){
+            boy.style.top = parseInt(boy.style.top) + D100.downSpeed + 'px';
+            /* 角色下落 */
+            if((!/down/.test(boy.style.backgroundImage)) && (!D100.move))
+                boy.style.backgroundImage = D100.skin[12];
+            /* 下落姿式 */
+        } else {
+            if(!D100.move){
+                boy.style.backgroundImage = D100.hurt ? D100.skin[8] : D100.skin[11];
+            }
+            /* 站姿 */
+        }
+        if(boy.offsetTop + 15 > gWin.clientHeight){/* 游戏结束 */
+            D100.alert('GAME OVER');
+            D100.gameState = -1;
+            D100.pause = true;
+            D100.addLife(-10);
+        }
+    }, 10);
+
+    document.onkeydown = function(e){
+        clearTimeout(D100.inertia);
+        /* 清除惯性 */
+        D100.move = {'37' : -1, '39' : 1}[(e || event).keyCode];
+    }
+    document.onkeyup = function(e){
+        if((e || event).keyCode == 13)return D100.ctrl();
+        if(D100.move == {'37' : -1, '39' : 1}[(e || event).keyCode])
+            D100.inertia = setTimeout(function(){
+                D100.move = false;
+            }, 100);
+        /* 惯性100秒 */
+    };
+    window.onload = D100.msg.onLoadMap;
+    if(window.ActiveXObject)document.execCommand("BackgroundImageCache", false, true);
+</script>
+</html>
+
+

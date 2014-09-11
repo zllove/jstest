@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<div id="div"></div>
+<ul id="ul">
+    <li>111</li>
+    <li>222</li>
+    <li>333</li>
+    <li>444</li>
+</ul>
+<script type="text/javascript">
+    var div = document.getElementById('div')
+    var ul = document.getElementById('ul')
+    var li = ul.getElementsByTagName('li')
+    for(var i = 0; i < li.length; i++){
+        li[i].onmouseover = function(){
+            div.innerHTML = this.innerHTML
+        }
+    }
+</script>
+</body>
+</html>

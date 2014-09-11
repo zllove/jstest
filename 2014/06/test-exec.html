@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    /*
+    var a = /\d/.exec('abcd4fg');
+    console.log(a);
+    var b = 'abcd4gf'.match(/\d/);
+    console.log(b);
+    */
+    var c = /c(at)\d/.exec('cat2,hat8');
+    console.log(c);
+    var d = 'cat2,hat8'.match(/c(at)\d/);
+    console.log(d);
+    var someText= "web2.0 .net2.0" ;
+    var pattern=/(\w+)(\d)\.(\d)/g;
+    var outCome_exec=pattern.exec(someText);
+    var outCome_matc=someText.match(pattern);
+    console.log(outCome_exec);
+    console.log(outCome_matc);
+</script>
+</body>
+</html>

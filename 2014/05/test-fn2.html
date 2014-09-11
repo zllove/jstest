@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    (function(){
+        if ( Function.prototype.bind ) { //function(){}.bind
+            Function.prototype.bind = function ( o /*参数列表*/ ) {
+                var self = this,
+                        boundArgs = arguments;
+
+                return function(){
+                    var args = [], i;
+                    for ( i = 1; i < boundArgs.length; i++ ) args.push(boundArgs[i]);
+                    for ( i = 0; i < arguments.length; i++ ) args.push(arguments[i]);
+                    return self.apply(o, args);
+                }
+            }
+        }
+    })();
+
+    function f1(y, z){ return this.x + y + z;}
+    //调用 1
+    var g1 = f1.bind({x:1}, 2); //this.x = 1; y = 2;
+    g1(3);
+    g1(3);
+    console.log(  ); //this.x + y + 3 = 6;
+    console.log(  ); //this.x + y + 3 = 6;
+</script>
+</body>
+</html>

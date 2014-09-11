@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
+</head>
+<body>
+<div id="div">11</div>
+<script type="text/javascript">
+    ;(function($){
+        $.fn.box=function(options){
+            var defaults={
+                move:5,        //表示一次滚动的图片数量
+                speed:500,     //表示图片滚动的速度，数值越小，速度越快，反之越慢
+                display:5,     //表示显示图片的数量，即li标签显示的数量
+                margin:10,     //表示图片（li标签）之间的间距
+                auto:true,     //表示图片是否自动滚动，true表示自动，反之为不自动
+                show:true,     //表示点击上一页下一页的按钮是否显示，true显示，反之为不显示
+                time:3000,     //表示每隔多少秒滚动一次，1000表示1秒，以此类推
+                prev:".prev",  //表示点击上一页的按钮
+                next:".next"   //表示点击下一页的按钮
+            };
+            var options=$.extend(defaults,options);
+            return this.each(function(){
+                var $this=$(this);
+                var mo=options.move;
+                var s=options.speed;
+                var d=options.display;
+                var mr=options.margin;
+                var n=$this.find("li").length;
+                var $li=$this.find('li');
+                var sw=($li.width()+mr)*d-mr;
+                var w=($li.width()+mr)*mo;
+                var t=options.time;
+                var auto=options.auto;
+                var next=options.next;
+                var prev=options.prev;
+
+                $li.css({"float":"left","list-style":"none","margin-right":mr+"px"});
+                $this.wrap("<div class='xg_box' style='width:" + sw +";margin:0 auto;'><div class='xg_container' style='height:100%;overflow:hidden;'></div></div>").css({width: 999999,"position":"relative","left":"0"});
+//                $this.parent(".xg_container").wrap("<div class='xg_box'></div>").css({"width":sw+"px"});
+//                $this.parent().parent().width(sw).css({"margin":"0 auto"});
+
+                //这里定义一个定时器并判断客户要求是否需要自动滚动(这里默认为自动滚动)
+                if(auto){
+                    var timer=setInterval(imgLeft,t);
+                }
+                //定义图片向左滚动的方法
+                function  imgLeft() {
+                    if(n>d&&!$this.is(":animated")){
+                        $this.animate({
+                            left:-w
+                        },s,function(){
+                            var oli=$this.children("li:lt("+mo+")");
+                            $this.append(oli);
+                            $(this).css("left","0")
+
+                        });
+                    }
+                };
+                //定义图片向右滚动的方法
+                function imgRight() {
+                    if(n>d&&!$this.is(":animated")){
+                        var lastLi=$this.children("li:gt("+(n-mo-1)+")");
+                        $this.prepend(lastLi).css({"left":-w}).animate({
+                            left:0
+                        },s)
+                    }
+                };
+                //绑定单击按钮上一页事件
+                $(document).on("click",prev,function(){
+                    if(n>d&&!$this.is(":animated")){
+                        clearInterval(timer); //清除定时器
+                        imgRight();
+                    }
+                });
+                //绑定单击按钮上一页事件
+                $(document).on("click",prev,function(){
+                    if(n>d&&!$this.is(":animated")){
+                        clearInterval(timer); //清除定时器
+                        imgRight();
+                    }
+
+                });
+                //绑定单击按钮下一页事件
+                $(document).on("click",next,function(){
+                    if(n>d&&!$this.is(":animated")){
+                        clearInterval(timer);  //清除定时器
+                        imgLeft();
+                    }
+
+                });
+                //当鼠标经过时清除定时器，移开鼠标定时器开始计时
+                $(".xg_container").hover(function(){
+                    clearInterval(timer)
+                },function(){
+                    timer=setInterval(imgLeft, t)
+                });
+            })
+        }
+    })(jQuery)
+
+    $('#div').box();
+</script>
+</body>
+</html>
