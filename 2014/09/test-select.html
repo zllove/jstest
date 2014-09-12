@@ -1,0 +1,254 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="http://www.wujianghr.com/css/base.css" media="all"/>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="http://www.wujianghr.com/js/drag.js"></script>
+</head>
+<body>
+<input id="hid_CurrentTrade" type="hidden" name="hid_CurrentTrade" />
+<input name="txtCurrentTrade" id="txtCurrentTrade" class="SelectLong" type="text"  value="请选择行业">
+
+
+<input id="hid_WishTrade" type="hidden" name="hid_WishTrade" />
+<input name="txtIndustry" id="txtIndustry" class="SelectLong" type="text" value="请选择行业">
+
+<!-- alpha div -->
+<div id="maskLayer" style="display: none">
+    <iframe id="maskLayer_iframe" style="filter:alpha(opacity=50)" src="about:blank" frameborder="0" scrolling="no"></iframe>
+    <div id="alphadiv" style="filter: alpha(opacity=50); moz-opacity: 0.5; opacity: 0.5"></div>
+    <div id="drag">
+        <h3 id="drag_h"></h3>
+        <div id="drag_con"></div>
+        <!-- drag_con end -->
+    </div>
+</div>
+<!-- maskLayer end -->
+<div></div>
+<!-- alpha div end -->
+<div id="sublist" style="display: none"></div >
+
+
+<script type="text/javascript">
+    function getindustry_arr(){
+        var industry_arr = [];
+        industry_arr['1001'] = '互联网&#183;电子商务';
+        industry_arr['1002'] = '计算机软件';
+        industry_arr['1003'] = '计算机硬件·网络设备';
+        industry_arr['1035'] = 'IT服务·系统集成';
+        industry_arr['1004'] = '电子·微电子';
+        industry_arr['1005'] = '通信(设备·运营·增值服务)';
+        industry_arr['1006'] = '家电业';
+        industry_arr['1007'] = '批发·零售';
+        industry_arr['1008'] = '贸易·商务·进出口';
+        industry_arr['1009'] = '仪器·仪表·工业自动化·电气';
+        industry_arr['1010'] = '能源(电力·石油)·水利';
+        industry_arr['1011'] = '石化·化工·采掘·冶炼·矿产';
+        industry_arr['1012'] = '制药·生物工程';
+        industry_arr['1036'] = '环保';
+        industry_arr['1013'] = '机械制造·机电·重工';
+        industry_arr['1014'] = '汽车·摩托车(制造·维护·配件·销售·服务)';
+        industry_arr['1016'] = '广告·会展·公关';
+        industry_arr['1017'] = '媒体·出版·影视制作';
+        industry_arr['1018'] = '艺术·文化传播';
+        industry_arr['1019'] = '快速消费品(食品·饮料·粮油·日化·烟酒…)';
+        industry_arr['1020'] = '耐用消费品(服饰·纺织·家具…)';
+        industry_arr['1021'] = '专业服务(顾问·咨询·财会·法律·审计)';
+        industry_arr['1022'] = '金融业(银行·保险·证券·基金·期货·投资)';
+        industry_arr['1023'] = '房地产开发·建筑与工程·服务(中介·物业·监理·设计)';
+        industry_arr['1037'] = '家居·室内设计·装潢';
+        industry_arr['1024'] = '旅游·酒店·餐饮服务';
+        industry_arr['1025'] = '交通·运输·物流';
+        industry_arr['1026'] = '娱乐·运动·休闲';
+        industry_arr['1027'] = '办公设备·用品';
+        industry_arr['1028'] = '印刷·包装·造纸';
+        industry_arr['1029'] = '生产·制造·加工(金属·建材·塑胶·玻璃·陶瓷…)';
+        industry_arr['1030'] = '教育·培训·科研·院校';
+        industry_arr['1031'] = '医卫·保健·美容';
+        industry_arr['1032'] = '中介服务(人才·商标·专利·留学)';
+        industry_arr['1033'] = '政府·非营利机构';
+        industry_arr['1034'] = '农·林·牧·副·渔业';
+        industry_arr['1038'] = '其他';
+
+        return industry_arr;
+    }
+
+    //    var industry_flag_arr = new Array(); // 已选中数组
+    //    var txtIndustry;
+    //    var idIndustry;
+    //var industry_flag_arr = new Array('21','31','37');
+
+    var Industry = {
+        // 行业列表
+        init: function(idIndustry, txtIndustry, industry_arr, callback) {
+            var _str = '',
+                    _id = '';
+            this.idIndustry = idIndustry;
+            this.txtIndustry = txtIndustry;
+            var industry_flag_arr = this.industry_flag_arr = [];
+            this.industry_arr = industry_arr;
+            if (industry_flag_arr.length > 0) {
+                for (var i in industry_flag_arr) {
+                    _str += ',' + industry_arr[industry_flag_arr[i]];
+                    _id += ',' + industry_flag_arr[i];
+                    $('#' + idIndustry).data('flag', industry_flag_arr);
+                }
+                $('#' + txtIndustry).val(_str.substring(1));
+                //$('#ss').html(_str.substring(1));
+                //$('#'+txtIndustry).append(_str.substring(1));
+                $('#' + idIndustry).val(_id.substring(1));
+            }
+            callback && callback(industry_flag_arr);
+        },
+        Show: function() {
+            //alert(industry_flag_arr.length);
+            var output = '',
+                    flag, output2 = '';
+            var industry_flag_arr = $('#' + this.idIndustry).data('flag');
+            var industry_arr = this.industry_arr;
+            for (var i in industry_arr) {
+                flag = in_array(i, industry_flag_arr) ? ' chkON' : '';
+                output += '<li class="Industry' + i + flag + '" onclick="Industry.Chk(\'' + i + '\')">' + industry_arr[i] + '</li>';
+            }
+            for (var i in industry_flag_arr) {
+                output2 += '<li class="Industry' + industry_flag_arr[i] + ' chkON" onclick="Industry.Chk(\'' + industry_flag_arr[i] + '\')">' + industry_arr[industry_flag_arr[i]] + '</li>';
+            }
+            $('#drag').width('670px');
+            $('#IndustryList').html('<ul>' + output + '</ul>');
+            $('#IndustrySelected dd').html(output2);
+
+            // 鼠标悬停变色
+            $('#IndustryAlpha li').hover(function() {
+                $(this).addClass('over')
+            }, function() {
+                $(this).removeClass('over')
+            });
+        },
+        Chk: function(id) {
+            var industry_flag_arr = $('#' + this.idIndustry).data('flag') || [];
+            var industry_arr = this.industry_arr;
+            if (!in_array(id, industry_flag_arr)) {
+                if (industry_flag_arr.length < 5) {
+                    industry_flag_arr[industry_flag_arr.length] = id;
+                    var html = '<li class="Industry' + id + '" onclick="Industry.Chk(\'' + id + '\')">' + industry_arr[id] + '</li>';
+                    $('#IndustrySelected dd').append(html);
+                    $('.Industry' + id).addClass('chkON');
+                    $('#IndustrySelected li').hover(function() {
+                        $(this).addClass('over')
+                    }, function() {
+                        $(this).removeClass('over')
+                    });
+                    $('#' + this.idIndustry).data('flag', industry_flag_arr);
+                } else {
+                    alert('您最多能选择5项');
+                    return false;
+                }
+            } else {
+                for (var i in industry_flag_arr) {
+                    if (industry_flag_arr[i] == id) industry_flag_arr.splice(i, 1);;
+                }
+                $('#IndustrySelected .Industry' + id).remove();
+                $('.Industry' + id).removeClass('chkON');
+            }
+        },
+        // 确定
+        confirm: function() {
+            var indStr = '';
+            var industry_flag_arr = $('#' + this.idIndustry).data('flag');
+            var industry_arr = this.industry_arr;
+            var txtIndustry = this.txtIndustry;
+            var idIndustry = this.idIndustry;
+            for (var i in industry_flag_arr) {
+                indStr += ',' + industry_arr[industry_flag_arr[i]];
+            }
+            indStr = indStr.substring(1) ? indStr.substring(1) : '请选择行业';
+            $('#' + txtIndustry).val(indStr);
+            //$('#'+txtIndustry).after('<div>'+indStr+'</div>');
+            $('#' + idIndustry).val(industry_flag_arr);
+            boxAlpha();
+
+        },
+
+        /* ****************************** 单选 ********************************* */
+        // 单选输出
+        Show2: function() {
+            var output = '',
+                    flag, output2 = '',
+                    flag;
+            var industry_flag_arr = this.industry_flag_arr;
+            var industry_arr = this.industry_arr;
+            for (var i in industry_arr) {
+                flag = in_array(i, industry_flag_arr) ? ' chkON' : '';
+                output += '<li class="Industry' + i + flag + '" onclick="Industry.Chk2(\'' + i + '\')">' + industry_arr[i] + '</li>';
+            }
+            $('#drag').width('670px');
+            $('#IndustryList').html('<ul>' + output + '</ul>');
+            // 鼠标悬停变色
+            $('#IndustryAlpha li').hover(function() {
+                $(this).addClass('over')
+            }, function() {
+                $(this).removeClass('over')
+            });
+        },
+        Chk2: function(id) {
+            var industry_flag_arr = this.industry_flag_arr;
+            var industry_arr = this.industry_arr;
+            var txtIndustry = this.txtIndustry;
+            var idIndustry = this.idIndustry;
+            industry_flag_arr[0] = id;
+            $('#' + txtIndustry).val(industry_arr[id]);
+            $('#' + idIndustry).val(id);
+            boxAlpha();
+        }
+    }
+
+
+    // 多选
+
+    function IndustrySelect(id, inputid, industry_flag_arr) {
+        var txtIndustry = id;
+        var idIndustry = inputid;
+        if (industry_flag_arr.length == 0) {
+            if ($('#' + idIndustry).val().length > 0) {
+                industry_flag_arr = $('#' + idIndustry).val().split(",")
+            }
+        };
+        Drag.clickobj = $('#' + txtIndustry);
+        var dragHtml = '<div id="IndustryAlpha">'; //行业
+        dragHtml += ' <dl id="IndustrySelected"><dt>已选行业：</dt><dd></dd></dl>';
+        dragHtml += ' <div id="IndustryList"></div>'; //行业列表
+        dragHtml += '</div>';
+        $('#drag_h').html('<b>请选择行业（您最多能选择5项）</b><span onclick="Industry.confirm()">确定</span>');
+        $('#drag_con').html(dragHtml);
+
+        Industry.Show();
+        boxAlpha();
+        draglayer();
+    }
+    // idIndustry, txtIndustry, industry_flag_arr, industry_arr
+
+    // onclick="IndustrySelect(this,'hid_CurrentTrade')"
+    $('#txtCurrentTrade').click(function(){
+        Industry.init('txtCurrentTrade', 'hid_CurrentTrade', getindustry_arr(), function(selectArr){
+            IndustrySelect('txtCurrentTrade', 'hid_CurrentTrade', selectArr);
+        });
+
+    });
+
+    //  onclick="IndustrySelect(this,'hid_WishTrade')"
+    $('#txtIndustry').click(function(){
+        Industry.init('txtIndustry', 'hid_WishTrade', getindustry_arr(), function(selectArr){
+            IndustrySelect('txtIndustry', 'hid_WishTrade', selectArr);
+        });
+    });
+    // 单选
+
+    function industry_flag_arr(){
+        //        return new Array('21','31','37');
+        return new Array();
+    }
+</script>
+</body>
+</html>

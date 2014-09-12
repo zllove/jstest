@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+<table id="tab" width="500" border="1">
+    <tr>
+        <th>序号</th>
+        <th>姓名</th>
+        <td>操作</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>111</td>
+        <td><a class="del" href="#">Del</a></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>22</td>
+        <td><a class="del" href="#">Del</a></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>333</td>
+        <td><a class="del" href="#">Del</a></td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>444</td>
+        <td><a class="del" href="#">Del</a></td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>555</td>
+        <td><a class="del" href="#">Del</a></td>
+    </tr>
+</table>
+<script>
+$('.del').click(function (){
+    var tr = $(this).closest('tr');
+    tr.remove();
+
+    var tab = $('#tab');
+    var old = tab.find('tr:gt(0)');
+    old.each(function(i){
+        $(this).find('td').eq(0).html(i+1);
+    });
+    tab.append(old);
+});
+</script>
+</body>
+</html>
