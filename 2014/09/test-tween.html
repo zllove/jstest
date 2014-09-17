@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        #div{ position:absolute; width:200px; height:200px;background: #f00;}
+    </style>
+    <script type="text/javascript" src="tween.js"></script>
+</head>
+<body>
+<a href="http://www.cnblogs.com/cloudgamer/archive/2009/01/06/Tween.html">tween</a>
+<input id="btn" type="button" value="clickMe"/>
+<div id="div"></div>
+
+<script>
+    var b = 0, c = 200, d = 50, t = 5;
+    // 'b初始值，c变化量，d步长，t时间变量'
+    var div = document.getElementById('div');
+    var btn = document.getElementById('btn');
+    btn.onclick = function(){
+        var timer = setInterval(function(){
+            if(t < d){
+                t++;
+                div.style.left = Math.ceil(Tween.Quad.easeOut(t,b,c,d)) + 'px';
+            } else {
+                clearInterval(timer);
+            }
+        }, 10);
+    }
+    function run(){
+        div.style.left = Math.ceil(Tween.Quad.easeOut(t, b, c, d)) + 'px';
+        if(t < d) {
+            t++;
+            setTimeout(run, 10);
+        }
+    }
+//    run();
+
+
+
+</script>
+</body>
+</html>

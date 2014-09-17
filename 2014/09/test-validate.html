@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+用户名: <input type="text" name="" id="user"/> <br/>
+密码: <input type="text" name="" id="pwd"/><br/>
+<input id="btn" type="submit" value="submit"/>
+<script>
+    (function(){
+        var user = $('#user');
+        var pwd = $('#pwd');
+        var btn = $('#btn');
+        var correct = function(){
+
+        }
+        user.focus(function(){
+
+        }).blur(function(){
+            checkUser($(this));
+        });
+        pwd.blur(function(){
+            checkPwd($(this));
+        });
+        btn.click(function(){
+            var user_v = checkUser($('#user'));
+            if(!user_v){ return ; }
+            var pwd_v = checkPwd($('#pwd'));
+            if(!pwd_v){ return ; }
+            var data = {
+                user : user_v,
+                pwd : pwd_v
+            }
+            // ajax(data);
+        });
+
+        function checkUser(obj){
+            var v = $.trim(obj.val());
+            if(!v){
+                alert('用户名不能为空');
+                return;
+            }
+            return v;
+        }
+        function checkPwd(obj){
+            var v = obj.val();
+            if(/\s+/.test(v)){
+                alert('密码不能包含空格');
+                return;
+            }
+            if(!$.trim(v)){
+                alert('密码不能为空');
+                return;
+            }
+            return v;
+        }
+    }());
+</script>
+</body>
+</html>
