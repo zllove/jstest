@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>test</title>
     <style type="text/css">
-        #div{ position:absolute; width:200px; height:200px;background: #f00;}
+        #div{ position:absolute; width:200px; height:200px; background:#f00; }
     </style>
     <script type="text/javascript" src="tween.js"></script>
 </head>
@@ -15,24 +15,31 @@
 <div id="test2" style="position:absolute;width:5px;height:5px;background:#F00; font-size:0;"></div>
 <script>
     var Round = {
-        X: function(t,b,r){ return r*Math.cos(t/20)+b; },
-        Y: function(t,b,r){ return r*Math.sin(t/20)+b; }
+        X : function(t, b, r){
+            return r * Math.cos(t / 20) + b;
+        },
+        Y : function(t, b, r){
+            return r * Math.sin(t / 20) + b;
+        }
     }
 
-    var t=x=y=0;
+    var t = x = y = 0;
 
     document.getElementById("idClick").onclick = function(e){
         document.onmousemove = function(e){
-            e=e||event;
-            x=e.clientX+document.documentElement.scrollLeft;
-            y=e.clientY+document.documentElement.scrollTop;
+            e = e || event;
+            x = e.clientX + document.documentElement.scrollLeft;
+            y = e.clientY + document.documentElement.scrollTop;
         };
-        document.onmousemove(e);
         setInterval(function(){
-            var iX = Math.ceil(Round.X(t,x,100)), iY = Math.ceil(Round.Y(t,y,50));
-            with(document.getElementById("test1").style){ left = iX + "px"; top = iY + "px"; }
+            var iX = Math.ceil(Round.X(t, x, 100)), iY = Math.ceil(Round.Y(t, y, 50));
+            with(document.getElementById("test1").style){
+                left = iX + "px";
+                top = iY + "px";
+            }
             with(document.getElementById("test2").style){
-                left = Math.ceil(Round.X(t*5,iX,25)) + "px"; top = Math.ceil(Round.Y(t*5,iY,25)) + "px";
+                left = Math.ceil(Round.X(t * 5, iX, 25)) + "px";
+                top = Math.ceil(Round.Y(t * 5, iY, 25)) + "px";
             }
             t++;
         }, 10);
