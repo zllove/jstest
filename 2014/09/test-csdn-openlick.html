@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
+</head>
+<body>
+<div id="div2"></div>
+<div id="div3"></div>
+<div id="div">
+    <script>
+        document.write('<a target="_blank" href="http://jd.com?ts=1410529911790"><img src="http://xxxx.com/images/1410529911790.jpg"></a>');
+        $('#div2,#div3').html('<a href="http://jd.com?ts=1410529911790"><img src="http://xxxx.com/images/1410529911790.jpg"></a>');
+    </script>
+</div>
+<script>
+    var div = $('#div a');
+    var div2 = $('#div2 a');
+    div2.click(function(){
+        location.href = this.href;
+    });
+    div2.click();
+//    clickObj(div2[0])
+
+    // http://www.jb51.net/article/21711.htm
+    function clickObj(o){
+//        var o = document.getElementById(o);
+        if(document.all && typeof( document.all ) == "object"){  //IE
+            o.fireEvent("onclick");
+        } else {
+            var e = document.createEvent('MouseEvent');
+            e.initEvent('click', false, false);
+            o.dispatchEvent(e);
+        }
+    }
+
+</script>
+</body>
+</html>

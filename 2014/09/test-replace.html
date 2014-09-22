@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+<div>
+    <!--<div>-->
+    <!--...-->
+    <!--</div>-->
+    <div>
+        <span>开始时间</span>
+        <!--<input type="text" id="startTime" class="textbox" data-replace="{$开始时间}" value="">-->
+        <input type="text" id="startTime" class="textbox" data-replace="开始时间" value="">
+    </div>
+    <div>
+        <span>结束时间</span>
+        <input type="text" id="endTime" class="textbox" data-replace="结束时间" value="">
+    </div>
+    <!--<div>-->
+    <!--...-->
+    <!--</div>-->
+</div>
+<div>
+    <input type="button" id="saveInputParams" value="保存参数">
+</div>
+<div id="content">
+    卡梅伦当天在苏格兰港口城市阿伯丁发表演讲。
+    这一周可能永远改变{$开始时间}英国，国家的未来处于危险之中，
+    {$结束时间}周五时人们就可能生活在不同的国家，
+    这是一个一旦作出就无法更改的决定
+    卡梅伦{$结束时间}再次承诺，
+    如果公投的结果是苏格兰继续留在英国，
+    苏格兰议会将获得{$开始时间}更多权力，
+    苏格兰在税收、开支、福利方面会有更多的自治权
+</div>
+<h5>替换后：</h5>
+<div id="out"></div>
+<script>
+    $('#saveInputParams').click(function(){
+        var s = $('#startTime').val();
+        var sData = $('#startTime').data('replace');
+        var e = $('#endTime').val();
+        var eData = $('#endTime').data('replace');
+        $('#out').html($('#content').html().replace(new RegExp('\\{\\$' + sData + '\\}', 'gm'), s).replace(new RegExp('\\{\\$' + eData + '\\}', 'gm'), e));
+    });
+</script>
+</body>
+</html>

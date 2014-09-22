@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>可拖拽的照片墙</title>
+    <style type="text/css">
+        html body{margin:0}
+        #wrap{list-style:none;padding:0;margin:30px auto;width:670px;position:relative;zoom:1}
+        .clearfix:after{content:'';height:0;clear:both;display:block;visibility:hidden}
+        #wrap div{float:left;margin:10px;z-index:1;border:1px solid #fff}
+        #wrap div img{width:200px;height:150px;vertical-align:bottom}
+        #wrap div.active{border:1px dashed red}
+    </style>
+</head>
+<body>
+<div id="wrap" class='clearfix'>
+    <div><img src="http://pingfan1990.sinaapp.com/javacript/dargimg/1.jpg" /></div>
+    <div><img src="http://pingfan1990.sinaapp.com/javacript/dargimg/2.jpg" /></div>
+    <div><img src="http://pingfan1990.sinaapp.com/javacript/dargimg/3.jpg" /></div>
+    <div><img src="http://pingfan1990.sinaapp.com/javacript/dargimg/4.jpg" /></div>
+    <div><img src="http://pingfan1990.sinaapp.com/javacript/dargimg/5.jpg" /></div>
+    <div><img src="http://pingfan1990.sinaapp.com/javacript/dargimg/6.jpg" /></div>
+    <div><img src="http://pingfan1990.sinaapp.com/javacript/dargimg/7.jpg" /></div>
+    <div><img src="http://pingfan1990.sinaapp.com/javacript/dargimg/8.jpg" /></div>
+    <div><img src="http://pingfan1990.sinaapp.com/javacript/dargimg/9.jpg" /></div>
+</div>
+<script type="text/javascript">
+    var o=document.getElementById("wrap");
+    var arr=o.getElementsByTagName("div");
+    var ind=2;
+    for(var i=arr.length;i--;i>=0){
+        arr[i].style.left=arr[i].offsetLeft+"px";
+        arr[i].style.top=arr[i].offsetTop+"px";
+        arr[i].style.position="absolute";
+        arr[i].style.margin=0;
+        m(arr[i])
+    }
+
+    //拖动和各种判断
+    function m(obj){
+        var mind=999999;
+        var num=-1;
+        obj.onmousedown=function(e){
+            var e=e||event;
+            ind++;
+            var aa=[obj.offsetLeft,obj.offsetTop];
+            var disX=e.clientX-obj.offsetLeft;
+            var disY=e.clientY-obj.offsetTop;
+            this.style.zIndex=ind;
+
+            document.onmousemove=function(e){
+                var e=e||event;
+                obj.style.left=e.clientX-disX+"px";
+                obj.style.top=e.clientY-disY+"px";
+
+                var s=siblings(obj);
+                for(var i=0;i<s.length;i++){
+                    if(c(obj,s[i])){
+
+                        var dis=distance(obj,s[i]);
+                        if(mind>dis){
+                            mind=dis;
+                            num=i;
+                        }
+                        s[num].className="active";
+                    }else{
+                        s[i].className="";
+                    }
+                }
+
+
+            }
+
+            document.onmouseup=function(){
+                siblings(obj)[num].className='';
+                exchangePosition(obj,siblings(obj)[num],aa);
+                document.onmousemove=null;
+                document.onmouseup=null;
+            }
+
+            return false;
+        }
+    }
+
+
+    function exchangePosition(a,b,x){
+        if(b){
+            a.style.left=b.offsetLeft+"px";
+            a.style.top=b.offsetTop+"px";
+            b.style.left=x[0]+"px";
+            b.style.top=x[1]+"px";
+        }else{
+            a.style.left=x[0]+"px";
+            a.style.top=x[1]+"px";
+        }
+    }
+
+    //求两个Div之间的距离
+    function distance(x,y){
+        var l=x.offsetLeft+x.offsetWidth/2;
+        var t=x.offsetTop+x.offsetHeight/2;
+        var ll=y.offsetLeft+y.offsetWidth/2;
+        var tt=y.offsetTop+y.offsetHeight/2;
+
+        var dis=Math.sqrt((l-ll)*(l-ll)+(t-tt)*(t-tt));
+        return dis
+
+    }
+
+    //碰撞检测方法
+    function c(x,y){
+        var l=x.offsetLeft;
+        var r=l+x.offsetWidth;
+        var t=x.offsetTop;
+        var b=t+x.offsetHeight;
+
+        var ll=y.offsetLeft;
+        var rr=ll+y.offsetWidth;
+        var tt=y.offsetTop;
+        var bb=tt+y.offsetHeight;
+
+        if(r<ll || b<tt || l>rr || t>bb){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    function siblings(obj){
+        return preall(obj).concat(nextall(obj))
+    }
+
+    function preall(obj){
+        var arr=[];
+        var o=obj.previousSibling;
+        while(o){
+            if(o.nodeType==1){
+                arr.unshift(o);
+            }
+            o=o.previousSibling;
+        }
+        return arr;
+    }
+
+    function nextall(obj){
+        var arr=[];
+        var o=obj.nextSibling;
+        while(o){
+            if(o.nodeType==1){
+                arr.push(o);
+            }
+            o=o.nextSibling;
+        }
+        return arr;
+
+    }
+</script>

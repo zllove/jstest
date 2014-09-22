@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<table id="tab">
+    <tr>
+        <td align="center"  valign="middle">品名</td>
+        <td align="center"  valign="middle">价格(元)</td>
+        <td align="center"  valign="middle">数量</td>
+        <td align="center"  valign="middle">总价(元)</td>
+    </tr>
+    <tr>
+        <td >青菜</td>
+        <td  align="center"  class="unit" valign="middle">2</td>
+        <td ><input type="text" class="num" id="input_{$goods.id}"  style="width:58px;"/></td>
+        <td><input id="unitprice_{$goods_id}" class="price"  name="unitprice" type="text" readonly="1" style="width:62px;"></td>
+    </tr>
+    <tr>
+        <td >青菜2</td>
+        <td align="center"  valign="middle" class="unit">2</td>
+        <td ><input type="text" class="num" id="input_{$goods.id}"  style="width:58px;"/></td>
+        <td><input id="unitprice_{$goods_id}" class="price"  name="unitprice" type="text" readonly="1" style="width:62px;"></td>
+    </tr>
+    <tr>
+        <td >青菜3</td>
+        <td  align="center"  valign="middle" class="unit">2</td>
+        <td ><input type="text" class="num" id="input_{$goods.id}"  style="width:58px;"/></td>
+        <td><input id="unitprice_{$goods_id}" class="price"  name="unitprice" type="text" readonly="1" style="width:62px;"></td>
+    </tr>
+    <tr>
+        <td colspan="3">合计：</td>
+        <td><input name="totalprices" id="totalprices" type="text" readonly="1" style="width: 60px;"></td>
+    </tr>
+</table>
+<script>
+    var tab = document.getElementById('tab');
+    var total = document.getElementById('totalprices');
+    var unit = getByClass('unit', tab);
+    var num = getByClass('num', tab);
+    var price = getByClass('price', tab);
+
+    for(var i = 0; i < num.length; i++){
+        num[i].index = i;
+        num[i].onblur = function(){
+            var n_val = parseFloat(this.value);
+            if(isNaN(n_val)){
+                alert('请输入正确的数字!');
+            }
+            price[this.index].value = parseFloat(this.value) * parseFloat(unit[this.index].innerHTML);
+            total.value = getPrice(price);
+        }
+    }
+
+    function getPrice(obj){
+        var res = 0;
+        for(var i = 0; i < obj.length; i++){
+            if(obj[i].value.length > 0){
+                res += parseFloat(obj[i].value);
+            }
+        }
+        return Math.round(res);
+    }
+
+    function getByClass(cls, parent){
+        var res = [], parent = parent || document;
+        if(document.getElementsByClassName){
+            res = parent.getElementsByClassName(cls);
+        } else {
+            var all = parent.all;
+            var reg = new RegExp('(\\s+|^)' + cls + '(\\s+|$)');
+            for(var i = 0; i < all.length; i++){
+                if(reg.test(all[i].className)){
+                    res.push(all[i]);
+                }
+            }
+        }
+        return res;
+    }
+</script>
+</body>
+</html>
