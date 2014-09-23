@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input id="btn" type="button" value="11111"/> <input id="btn22" type="button" value="11111"/>
+<input id="btn2" type="button" value="11111"/> <input id="btn4" type="button" value="11111"/>
+<input id="btn3" type="button" value="11111"/>
+<script>
+    function addImageHandlers(){
+        var imageElements = document.getElementsByTagName("input");
+        for(var i = 0; i < imageElements.length; i++){
+            handler(imageElements[i], i);
+        }
+    }
+
+    function handler(obj, n){
+        obj.onclick = function(){
+            alert(n);
+        }
+    }
+    addImageHandlers();
+
+</script>
+</body>
+</html>
