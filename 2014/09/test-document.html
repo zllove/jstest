@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding:0;}
+        ul,li{list-style:none;}
+        body{font:14px/1.5 "微软雅黑",arial,sans-serif;height:2000px;}
+        .log-window{position:fixed;right:0;top:0;text-align:right;}
+        #box{width:200px;height:80px;background:#eee;border:1px solid #ccc;padding:10px;margin:50px 100px;}
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<div class="log-window">
+    <ul id="logText">
+        <li>滚动高度(页面被隐藏高度):<span></span></li>
+        <li>浏览器显示区大小:<span></span></li>
+        <li>屏幕大小:<span></span></li>
+        <li>元素宽高:<span></span></li>
+        <li>元素位置:<span></span></li>
+        <li>元素是否可见:<span></span></li>
+        <li>元素被剪切大小:<span></span></li>
+    </ul>
+    <div id="scroll">
+        <h2>滚动差异</h2>
+        <p></p>
+    </div>
+</div>
+<div id="window">
+    <h2>窗口大小</h2>
+    <p></p>
+</div>
+<div id="view">
+    <h2>显示区大小</h2>
+    <p></p>
+</div>
+<p>判断一个物体是否在可见区域 滚动隐藏高度(也是显示区相对于文档的高度)+显示区高度>元素的位置高度 并且 元素的高度+元素的位置>滚动隐藏的高度</p>
+<script>
+    function clip(ele){
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        var view = document.documentElement.clientHeight;
+        var val = 0;
+        if(isView(ele)){
+            if(scrollTop + view > ele.offsetTop && scrollTop + view < ele.offsetHeight + ele.offsetTop){
+                val = scrollTop + view - ele.offsetTop
+            } else if(scrollTop > ele.offsetTop){
+                val = ele.offsetHeight - (scrollTop - ele.offsetTop);
+            }
+            val > view && (val = view)
+        }
+        return val;
+    }
+    function isView(ele){
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        var view = document.documentElement.clientHeight;
+        if(scrollTop + view > ele.offsetTop && ele.offsetHeight + ele.offsetTop > scrollTop){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function log(){
+        var e = document.getElementById('logText');
+        var t = document.getElementById('box')
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        var viewBoolean = isView(t);
+        var arr = [scrollTop, document.documentElement.clientWidth + '*' + document.documentElement.clientHeight, window.screen.availWidth + '*' + window.screen.availHeight, t.offsetWidth + '*' + t.offsetHeight, 'X:' + t.offsetLeft + ',Y:' + t.offsetTop, viewBoolean, clip(t) + 'px'];
+        for(var i = 0; i < e.children.length; i++){
+            e.children[i].children[0].innerHTML = arr[i]
+        }
+        ;
+    }
+    function windowInfo(){
+        var wPara = document.getElementById('window').getElementsByTagName('p')[0]
+        var str = 'window.innerWidth : ' + window.innerWidth + '<br>';
+        str += 'window.innerHeight : ' + window.innerHeight + '<br>';
+        str += 'window.outerWidth : ' + window.outerWidth + '<br>';
+        str += 'window.outerHeight : ' + window.outerHeight + '<br>';
+        wPara.innerHTML = str;
+    }
+    function viewInfo(){
+        var vPara = document.getElementById('view').getElementsByTagName('p')[0];
+        var str = 'document.documentElement.clientWidth : ' + document.documentElement.clientWidth + '<br>';
+        str += 'document.documentElement.clientHeight : ' + document.documentElement.clientHeight + '<br>';
+        str += 'document.body.clientWidth : ' + document.body.clientWidth + '<br>';
+        str += 'document.body.clientHeight : ' + document.body.clientHeight + '<br>';
+        vPara.innerHTML = str;
+    }
+    function scrollInfo(){
+        var sPara = document.getElementById('scroll').getElementsByTagName('p')[0];
+        var str = 'document.documentElement.scrollTop : ' + document.documentElement.scrollTop + '<br>';
+        str += 'document.body.scrollTop : ' + document.body.scrollTop + '<br>';
+        str += 'document.documentElement.scrollLeft : ' + document.documentElement.scrollLeft + '<br>';
+        str += 'document.body.scrollLeft : ' + document.body.scrollLeft + '<br>';
+        str += 'document.documentElement.scrollWidth : ' + document.documentElement.scrollWidth + '<br>';
+        str += 'document.body.scrollWidth : ' + document.body.scrollWidth + '<br>';
+        str += 'document.documentElement.scrollHeight : ' + document.documentElement.scrollHeight + '<br>';
+        str += 'document.body.scrollHeight : ' + document.body.scrollHeight + '<br>';
+        sPara.innerHTML = str;
+    }
+    window.onload = function(){
+        windowInfo();
+        viewInfo();
+        scrollInfo();
+        log()
+        window.onscroll = function(){
+            scrollInfo();
+            log()
+        }
+        window.onresize = function(){
+            log()
+            windowInfo();
+            viewInfo();
+        }
+    }
+</script>
+</body>
+</html>

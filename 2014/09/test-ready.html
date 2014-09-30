@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
+</head>
+<body>
+<button id="btn">Click Me</button>
+<script>
+    $(function() {
+        var iframe = $('<iframe id="test" height="100" width="400"></iframe>')
+                .appendTo('body')
+                .ready(function() {
+                    setTimeout(function() {
+                        $('#test').contents().find('body').html('<div>Hello!</div>');
+                    },50);
+                })
+    });
+</script>
+</body>
+</html>

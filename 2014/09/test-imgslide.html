@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>简洁js控制多图左右滚动切换效果</title>
+    <link href="css/lanrenzhijia.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript">
+        window.onload = function () {
+            var oBtnLeft = document.getElementById("goleft");
+            var oBtnRight = document.getElementById("goright");
+            var oDiv = document.getElementById("indexmaindiv");
+            var oDiv1 = document.getElementById("maindiv1");
+            var oUl = oDiv.getElementsByTagName("ul")[0];
+            var aLi = oUl.getElementsByTagName("li");
+//            var now = -3 * (aLi[0].offsetWidth + 0);
+            var now = 0;
+            oUl.style.width = aLi.length * (aLi[0].offsetWidth + 0) + 'px';
+            oBtnRight.onclick = function () {
+                var n = Math.floor((aLi.length * (aLi[0].offsetWidth + 0) + oUl.offsetLeft) / aLi[0].offsetWidth);
+
+                if (n <= 3) {
+                    move(oUl, 'left', 0);
+                }
+                else {
+                    move(oUl, 'left', oUl.offsetLeft + now);
+                }
+            }
+            oBtnLeft.onclick = function () {
+                var now1 = -Math.floor((aLi.length / 3)) * 2 * (aLi[0].offsetWidth + 0);
+
+                if (oUl.offsetLeft >= 0) {
+                    move(oUl, 'left', now1);
+                }
+                else {
+                    move(oUl, 'left', oUl.offsetLeft - now);
+                }
+            }
+
+            var timer = setInterval(oBtnRight.onclick, 5000);
+            oDiv.onmouseover = function () {
+                clearInterval(timer);
+            }
+            oDiv.onmouseout = function () {
+                timer = setInterval(oBtnRight.onclick, 5000);
+            }
+
+        };
+
+        function getStyle(obj, name) {
+            if (obj.currentStyle) {
+                return obj.currentStyle[name];
+            }
+            else {
+                return getComputedStyle(obj, false)[name];
+            }
+        }
+
+        function move(obj, attr, iTarget) {
+            clearInterval(obj.timer)
+            obj.timer = setInterval(function () {
+                var cur = 0;
+                if (attr == 'opacity') {
+                    cur = Math.round(parseFloat(getStyle(obj, attr)) * 100);
+                }
+                else {
+                    cur = parseInt(getStyle(obj, attr));
+                }
+                var speed = (iTarget - cur) / 6;
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                if (iTarget == cur) {
+                    clearInterval(obj.timer);
+                }
+                else if (attr == 'opacity') {
+                    obj.style.filter = 'alpha(opacity:' + (cur + speed) + ')';
+                    obj.style.opacity = (cur + speed) / 100;
+                }
+                else {
+                    obj.style[attr] = cur + speed + 'px';
+                }
+            }, 30);
+        }
+    </script>
+</head>
+<body style="background:#CCC;">
+
+<div class="indexmaindiv" id="indexmaindiv">
+    <div class="indexmaindiv1 clearfix" >
+        <div class="stylesgoleft" id="goleft"></div>
+        <div class="maindiv1 " id="maindiv1">
+            <ul id="count1">
+                <li>
+                    <div class="playerdetail">
+                        <img src="images/zy_b (1).jpg" width="100%" />
+                        <div class="person"><img src="images/zy_p (1).jpg" width="100%" /></div>
+                        <div class="detail">追求青春美丽，是所有女人一生之志，但在寻求外在青春美貌的同时，别忘了内在年轻也不能忽略。年轻是一种修行，而雅姿恒时紧致系列护肤品搭配纽崔莱润妍饮品，则是我内外兼修的法宝，外保养内调理双管齐下相辅相成，皮肤里外都紧致充盈才是真年轻！</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="playerdetail">
+                        <img src="images/zy_b (2).jpg" width="100%" />
+                        <div class="person"><img src="images/zy_p (2).jpg" width="100%" /></div>
+                        <div class="detail">国际最新抗老趋势是营养与护肤的跨界养肤美学,内调加外养才能青春冻龄,内服要喝鱼类水解胶原蛋白,外抹要擦含挪威纯净海域红鱼子精华的护肤品, 凝集双倍生命力量，年轻由此升华！</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="playerdetail">
+                        <img src="images/zy_b (3).jpg" width="100%" />
+                        <div class="person"><img src="images/zy_p (3).jpg" width="100%" /></div>
+                        <div class="detail">将美丽作为事业，不仅需要从外在塑造更好的自己，更需要大量的阅读来充实内在，我坚信内外兼修是提升自我的最好方法。护肤也不例外，就像这段时间一直在用的雅姿恒时紧致系列X纽崔莱润妍饮品的组合，内在充盈，外在紧致，肌肤更紧致弹滑的同时，身体也充满活力！</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="playerdetail">
+                        <img src="images/zy_b (1).jpg" width="100%" />
+                        <div class="person"><img src="images/zy_p (1).jpg" width="100%" /></div>
+                        <div class="detail">追求青春美丽，是所有女人一生之志，但在寻求外在青春美貌的同时，别忘了内在年轻也不能忽略。年轻是一种修行，而雅姿恒时紧致系列护肤品搭配纽崔莱润妍饮品，则是我内外兼修的法宝，外保养内调理双管齐下相辅相成，皮肤里外都紧致充盈才是真年轻！</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="playerdetail">
+                        <img src="images/zy_b (2).jpg" width="100%" />
+                        <div class="person"><img src="images/zy_p (2).jpg" width="100%" /></div>
+                        <div class="detail">国际最新抗老趋势是营养与护肤的跨界养肤美学,内调加外养才能青春冻龄,内服要喝鱼类水解胶原蛋白,外抹要擦含挪威纯净海域红鱼子精华的护肤品, 凝集双倍生命力量，年轻由此升华！</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="playerdetail">
+                        <img src="images/zy_b (3).jpg" width="100%" />
+                        <div class="person"><img src="images/zy_p (3).jpg" width="100%" /></div>
+                        <div class="detail">将美丽作为事业，不仅需要从外在塑造更好的自己，更需要大量的阅读来充实内在，我坚信内外兼修是提升自我的最好方法。护肤也不例外，就像这段时间一直在用的雅姿恒时紧致系列X纽崔莱润妍饮品的组合，内在充盈，外在紧致，肌肤更紧致弹滑的同时，身体也充满活力！</div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+        <div class="stylesgoright" id="goright"></div>
+    </div>
+</div>
+</body>
+</html> 
