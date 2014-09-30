@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Array对象</title>
+    <script>
+function checkdate(year, month, date){
+    year = Number(year);
+    month = Number(month);
+    date = Number(date);
+    if(isNaN(year))
+        throw 1;
+    if(isNaN(month))
+        throw 2;
+    if(isNaN(date))
+        throw 3;
+}
+
+        function outwin(){
+            var year = document.myform.year.value;
+            var month = document.myform.month.value;
+            var date = document.myform.date.value;
+            try{
+                checkdate(year, month, date);
+                alert("你的生日为：" + year + "年" + month + "月" + date + "日");
+            } catch (ex){
+            ==
+            1
+        )
+            {
+                alert("输入的不是年");
+            }
+        catch
+            (ex
+            if ex == 2){
+                alert("输入的不是年");
+            }
+        catch
+            (ex
+            if ex == 3){
+                alert("输入的不是年");
+            }
+        catch
+            (ex)
+            {
+                alert("输入的不是年");
+            }
+
+
+        }
+
+
+    </script>
+</head>
+<body>
+<form name="myform">
+    请输入你的生日 <input type="text" name="year" size="4">年 <input type="text" name="month" size="2">月
+    <input type="text" name="date" size="2">日 <input type="button" value="确定" onclick="outwin()">
+</form>
+</body>
+</html>
