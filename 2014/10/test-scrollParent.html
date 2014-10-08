@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .a{ height:200px; border:1px solid #ccc; overflow-y:scroll;}
+        #b{ position:fixed;height:1000px; border:1px solid blue;}
+    </style>
+    <script type="text/javascript" src="../../jquery-1.8.3.min.js"></script>
+    <!--<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>-->
+</head>
+<body>
+<div class="a">
+    <div id="b">asddf</div>
+</div>
+<script>
+    $.fn.extend({
+        scrollParent: function( includeHidden ) {
+            var position = this.css( "position" ),
+                excludeStaticParent = position === "absolute",
+                overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/,
+                scrollParent = this.parents().filter( function() {
+                    var parent = $( this );
+                    if ( excludeStaticParent && parent.css( "position" ) === "static" ) {
+                        return false;
+                    }
+                    console.log(parent.css( "overflow" ) + parent.css( "overflow-y" ) + parent.css( "overflow-x" ));
+                    return overflowRegex.test( parent.css( "overflow" ) + parent.css( "overflow-y" ) + parent.css( "overflow-x" ) );
+                }).eq( 0 );
+
+            // '当然当前元素的定位是fixed则直接返回 $( this[ 0 ].ownerDocument || document )'
+            // '否则根据!scrollParent.length来判断'
+            // '$( this[ 0 ].ownerDocument || document ) '
+            // '如果当前元素有ownerDocument直接返回，否则返回document，一般是iframe才会有ownerDocument'
+            return (position === "fixed" || !scrollParent.length) ? $( this[ 0 ].ownerDocument || document ) : scrollParent;
+        }
+    });
+    var d = $('#b').scrollParent();
+    console.log(d);
+</script>
+</body>
+</html>
