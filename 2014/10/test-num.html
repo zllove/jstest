@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script>
+    var num = 3.201;
+    num = Math.ceil(num * 100)
+    var g = num % 10;
+    num += g > 5 ? (10 - g) : g > 0 ? (5 - g) : 0;
+    num = (num / 100).toFixed(2);
+    console.log(num);
+</script>
+</body>
+</html>

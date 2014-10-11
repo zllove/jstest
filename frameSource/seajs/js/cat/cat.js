@@ -3,7 +3,8 @@
         define(['jquery', 'exports'], function($, exports){
             root.cat = factory(root, exports, $);
         });
-    } else if(typeof exports !== 'undefined') {
+//    } else if(typeof exports !== 'undefined') {
+    } else if (typeof define === "function" && define.cmd) {
         var $ = require('jquery');
         factory(root, exports, $);
     } else {
