@@ -1,6 +1,6 @@
 (function(root, factory){
     if(typeof define === 'function' && define.amd){
-        define(['jquery', 'define'], function($, exports){
+        define(['jquery', 'exports'], function($, exports){
             root.cat = factory(root, exports, $);
         });
     } else if(typeof exports !== 'undefined') {
