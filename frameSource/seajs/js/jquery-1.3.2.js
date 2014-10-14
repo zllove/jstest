@@ -4374,6 +4374,7 @@ jQuery.each([ "Height", "Width" ], function(i, name){
 
 });
 
+    /*
     if ( typeof module === "object" && module && typeof module.exports === "object" ) {
         // Expose jQuery as module.exports in loaders that implement the Node
         // module pattern (including browserify). Do not create the global, since
@@ -4395,12 +4396,11 @@ jQuery.each([ "Height", "Width" ], function(i, name){
             define( "jquery", [], function () { return jQuery; } );
         }
     }
+    */
 
 })();
 
-/*
 define(function () {
     return $.noConflict();
 });
-*/
 

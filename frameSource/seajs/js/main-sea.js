@@ -9,8 +9,8 @@ seajs.config({
 
 define('team', function(require){
 //    require('plugins')();
-    var $ = require('jquery');
-    console.log($);
+    var $ = require('jquery-1.3.2');
+//    console.log($);
     var cat = require('cat');
 
     var home = {
@@ -20,7 +20,10 @@ define('team', function(require){
         }
     }
     home.init();
+    return home;
 
 });
-seajs.use('team');
+seajs.use('team', function(t){
+//    t.init();
+});
 
