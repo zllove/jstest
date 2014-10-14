@@ -8,9 +8,6 @@ seajs.config({
 });
 
 define('team', function(require){
-//    require('plugins')();
-    var $ = require('jquery-1.3.2');
-//    console.log($);
     var cat = require('cat');
 
     var home = {
