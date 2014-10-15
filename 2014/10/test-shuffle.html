@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script>
+    function shuffle(o){ //v1.0
+        for(var j, x, i = o.length; i; ){
+            j = Math.floor(Math.random() * (--i));
+            x = o[i];
+            o[i] = o[j];
+            o[j] = x;
+        };
+        return o;
+    };
+
+    var shuffle2 = function(v){
+        for(var j, x, i = v.length; i; j = parseInt(Math.random() * i), x = v[--i], v[i] = v[j], v[j] = x);
+        return v;
+    };
+//    http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+    function shuffle3(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex ;
+
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            // And swap it with the current element.
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+
+        return array;
+    }
+
+    var myArray = ['1','2','3','4','5','6','7','8','9'];
+    var newArray = shuffle(myArray);
+    console.log(newArray);
+</script>
+</body>
+</html>

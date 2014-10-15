@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+    <style type="text/css">
+        #div{ width:100px; height:100px;background: #f00; position:fixed; right:100px; bottom:200px; display:none;}
+    </style>
+</head>
+<body style="height: 3000px;">
+<div id="div"></div>
+<!--当浏览器滚动不显示 当浏览器停止显示-->
+<script>
+    var t;
+    var div = $('#div');
+    window.onscroll = function(){
+        clearTimeout(t);
+        div.hide();
+        t = setTimeout(function(){
+            div.fadeIn();
+        },100);
+    }
+</script>
+</body>
+</html>

@@ -24,7 +24,7 @@ function startMove(obj, json, fn){
 				iCur = parseInt(getStyle(obj, attr));
 			}
 				
-			iSpeed = (end - iCur) / 8;
+			var iSpeed = (end - iCur) / 8;
 			iSpeed = (iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed));
 
 			if(iCur != end){ // 开始设为false,然后判断为true，会少执行一次
