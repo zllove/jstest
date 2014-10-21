@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <style type="text/css">
+        dd{ height:35px; border:1px dashed #ccc;cursor: pointer;}
+        dd:hover{background: #f1f1f1;}
+        #cnblogs_post_body p,.postBody p, .postCon p,#cnblogs_post_body div,#cnblogs_post_body{line-height:2!important;}
+    </style>
+</head>
+<body>
+<dl id="dl"><dd>a</dd><dd>b</dd><dd>c</dd><dd>d</dd></dl>
+<script>
+    var dl = document.getElementById('dl');
+    var dd = dl.getElementsByTagName('dd');
+    for(var i = 0; i < dd.length; i++){
+        dd[i].index = i;
+        dl.onclick = function(e){
+            e = e || window.event;
+            var target = e.target || e.srcElement;
+            if(target.tagName.toLowerCase() == 'dd'){
+                alert(target.index);
+            }
+        }
+    }
+</script>
+</body>
+</html>
