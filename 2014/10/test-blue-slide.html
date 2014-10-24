@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>无标题文档</title>
+    <style>
+        * {margin: 0;outline: 0;padding: 0;font-size: 100%;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);}
+        .divbox {padding: 10px;	border-radius:5px;	background:#fbfafa;	display: block;	border:1px solid #e0e0e0;margin-bottom:10px;width:400px;}
+        .divbox p {text-align:left;	color:#5a5959;	line-height:25px;	font-size:12px;	word-break: break-all;}
+        .divbox a {	color:#82ab25;	text-align:right;text-decoration: none;}
+        .height0{height:auto!important}
+        .minheight{height:50px;overflow:hidden;}
+        .maxheight{height:auto!important;}
+        .fold_arrow{border-top: 1px solid #eaeaea;box-shadow: 0 1px 0 #fdfdfd inset;height: auto;text-align: center;margin-bottom: 10px;}
+        .fold_arrow .handle {position: relative;display: inline-block;min-width: 30px;padding: 3px 10px;height: 20px;top: -1px;border-width: 1px;border-style: solid;border-color: #f6f6f6 #eaeaea #eaeaea;box-shadow: 0 1px 0 #f6f6f6 inset,1px 1px 0 #fdfdfd;cursor: pointer;}
+        .con{ width:400px;margin: 0 auto;}
+    </style>
+</head>
+<body>
+<div class="con">
+    <ul>
+        <li>
+            <div class="divbox"><a href="#"><p>山西胜联科技有限公司</p></a>
+                <p>行业客户代表2名</p>
+                <div class="zkdiv">
+                    <div class="minheight" id="txt"><p>要求：能吃苦耐劳，性格开朗，有良好的和沟通能力，有工作经验者优先能吃苦耐劳，性格开朗，有良好的和沟通能力，有工作经验者优先能吃苦耐劳，性格开朗，有良好的和沟通能力，有工作经验者优先能吃苦耐劳，性格开朗，有良好的和沟通能力，有工作经验者优先能吃苦耐劳，性格开朗，有良好的和沟通能力，有工作经验者优先能吃苦耐劳，性格开朗，有良好的和沟通能力，有工作经验者优先能吃苦耐劳，性格开朗，有良好的和沟通能力，有工作经验者优先能吃苦耐劳，性格开朗，有良好的和沟通能力，有工作经验者优先能吃苦耐劳，性格开朗，有良好的和沟通能力，有工作经验者优先能吃苦耐劳，性格开朗，有良好的和沟通能力，有工作经验者优先</p>
+                    </div>
+                    <div class="fold_arrow">
+                        <div id="btn" class="handle">展开</div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<script>
+(function(){
+    var btn = document.getElementById('btn');
+    var txt = document.getElementById('txt');
+    var isShow = true;
+    btn.onclick = function(){
+        if(isShow){
+            act(txt, 'height', 200);
+            this.innerHTML = '收缩';
+            isShow = false;
+        } else {
+            act(txt, 'height', 50);
+            this.innerHTML = '收起';
+            isShow = true;
+        }
+    }
+    function css(obj, attr){
+        if(obj.currentStyle){
+            return obj.currentStyle[attr];
+        } else {
+            return getComputedStyle(obj, false)[attr];
+        }
+    }
+    function act(obj, attr, target, fn){
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function(){
+            var stop = true;
+            var cur = parseInt(css(obj, attr));
+            var speed = (target - cur) / 8;
+            speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+            if(cur != target){
+                stop = false;
+                obj.style[attr] = cur + speed + 'px';
+            }
+            if(stop){
+                clearInterval(obj.timer);
+                obj.timer = null;
+                fn && fn();
+            }
+        }, 30);
+    }
+}());
+</script>
+</body>
+</html>
