@@ -11,6 +11,7 @@
     } else {
         root.cat = factory(root, {}, (root.jQuery || root.$));
     }
+
 }(this, function(root, cat, $){
     $.extend(cat, {
        init : function(){

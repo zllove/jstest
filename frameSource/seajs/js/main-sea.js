@@ -2,12 +2,13 @@ seajs.config({
     base : './js/',
     alias : {
         'jquery' : 'jquery-1.3.2',
+//        'jquery' : 'cat/jquery-1.10.2.min',
         'cat': 'cat/cat'
 //        'plugins' : 'plugins'
     }
 });
 
-define('team', function(require){
+define('team', function(require, exports, module){
     var cat = require('cat');
 
     var home = {
@@ -21,6 +22,6 @@ define('team', function(require){
 
 });
 seajs.use('team', function(t){
-//    t.init();
+//    t.home.init();
 });
 
