@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<button id="btn">clickme</button>
+<div style="height: 1000px;"></div>
+<div style="height: 1000px;" id="div1">div1</div>
+<div style="height: 1000px;" id="div2">div2</div>
+<script>
+    var btn = document.getElementById('btn');
+    btn.onclick = function(){
+        location.hash = '';
+        location.hash = 'div2';
+    }
+</script>
+</body>
+</html>
