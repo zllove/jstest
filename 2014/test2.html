@@ -24,6 +24,16 @@
 </form>
 
 <p>如果表单周围没有边框，说明您的浏览器太老了。</p>
-
+<script>
+function getExpress(keyword, callback){
+    $.get('',{}, callback(r));
+}
+var data = {
+    name : ''
+}
+var a = getExpress(keyword, function(r){
+    data.name = r;
+});
+</script>
 </body>
 </html>
