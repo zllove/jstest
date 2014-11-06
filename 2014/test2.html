@@ -1,14 +1,39 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <style>
+        .a{ border:none; border-top:1px solid #ccc;}
+        .a legend{text-align:center;
+            width:90%\9;    /* 兼容IE浏览器 */
+            margin:0 auto; /* 兼容Firefox , Opera */
+            font-size:20px;
+            color:#4e4a4c;
+            font-weight:bold;}
+    </style>
 </head>
 <body>
+
+<form>
+<fieldset>
+    <legend style="margin-left:-50px;padding:0 30px;background: #fff;position: relative;left:50%;">testpage4</legend>
+    <p>asdfasdfasd
+        asdfasdfasdf
+        asdfasdfas;ldfkja;sldkjfa;sldkfjas;ldkjf;asldk</p>
+</fieldset>
+</form>
+
+<p>如果表单周围没有边框，说明您的浏览器太老了。</p>
 <script>
-    for(var i = 0; i < 5; i++){
-        console.log(i);
-    }
+function getExpress(keyword, callback){
+    $.get('',{}, callback(r));
+}
+var data = {
+    name : ''
+}
+var a = getExpress(keyword, function(r){
+    data.name = r;
+});
 </script>
 </body>
 </html>
