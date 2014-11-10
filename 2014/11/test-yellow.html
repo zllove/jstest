@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function Person(){
+        this.name = arguments[0];
+        this.age = arguments[1];
+    }
+
+    var gg = {
+        constructor : Person,
+        friends : ["Court", "Greg", "Nicholas"],
+        Color : "yellow"
+    };
+
+    Person.prototype = gg;
+
+    var pe = new Person("H&G", 29);
+    pe.friends.push("gg");
+    pe.Color = "red";
+    alert(pe.Color); // 弹出的是 red
+    alert(gg.Color); //弹出的是yellow
+</script>
+</body>
+</html>
