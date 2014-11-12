@@ -7,7 +7,7 @@
 </head>
 <body>
 <script type="text/javascript">
-    var callbacks = $.Callbacks('memory');
+    var callbacks = $.Callbacks('once');
 
     function fn1( value ){
         console.log( value );
@@ -18,12 +18,14 @@
         return false;
     }
 
+    callbacks.add(fn1);
     callbacks.add(fn2);
+    callbacks.fire('我是一个兵');
     callbacks.fire('我是一个兵');
 
     var to2 = function (v) { return (v < 10 ? "0" : "") + v; }
-    console.log(to2(3));
-    console.log(to2(13));
+//    console.log(to2(3));
+//    console.log(to2(13));
 
 </script>
 </body>
