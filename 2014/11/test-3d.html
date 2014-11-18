@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        .kuang{
+            height:300px;
+            width:200px;
+            border:2px solid black;
+            position:absolute;
+            left:600px;
+            top:200px;
+        }
+        .frontdiv{
+            height:300px;
+            width:200px;
+            background-color:#00ffff;
+            position:absolute;
+            left:0px;
+            top:0px;
+            -webkit-transition:all 1s linear;
+            -webkit-transform-style:preserve-3d;
+            -webkit-backface-visibility:hidden;
+        }
+    </style>
+    <title></title>
+</head>
+<body>
+<div class="kuang" onclick="addd()" id="father">
+    <div class="frontdiv" id="frontdiv"></div>
+</div>
+</body>
+<script type="text/javascript">
+    var n = 1;
+    function addd(){
+        var fathd = document.getElementById('father');
+        var childd = document.createElement('div');
+        childd.className = "frontdiv";
+        childd.style.backgroundColor = "#c0c0c0";
+        childd.style.WebkitTransformStyle = "preserve-3d";
+        childd.style.WebkitTransform = "rotateY(-180deg)";
+        father.appendChild(childd);
+        var frontdiv = document.getElementById('frontdiv');
+        setTimeout(function(){
+            frontdiv.style.WebkitTransform = "perspective(700) rotateY(-180deg)";
+            childd.style.WebkitTransform = "perspective(700) rotateY(-0deg)";
+        }, 0);
+    }
+</script>
+</html>

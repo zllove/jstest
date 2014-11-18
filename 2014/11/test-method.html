@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<a herf="#" class=""  onClick="b1();b2();"> 点击查看效果 </a>
+<script>
+    $(function(){
+        var obj=$("a").attr("onclick");
+        $("a").attr('onclick',obj.replace(/.*/,'a1();'+obj));
+    })
+    function b1(){
+        alert('b1')
+    }
+    function b2(){
+        alert('b2')
+    }
+    function a1(){
+        alert('a1');
+    }
+</script>
+</div>
+</body>
+</html>
