@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>无缝滚动test</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="" rel="stylesheet">
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        li{
+            list-style-type: none;
+        }
+        img{
+            border:0 none;
+        }
+        #img-scroll{
+            width:825px;
+            height:185px;
+            border:1px solid #d4d4d4;
+            margin:40px auto;
+            overflow:hidden;
+            position: relative;
+        }
+        #img-scroll ul{
+            clear:both;overflow:hidden; width:5000px;
+        }
+        #img-scroll li{
+            width:268px;
+            height:175px;
+            float:left;
+            margin:5px 0;
+            margin-left:5px;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var oImgScroll = document.getElementById("img-scroll");
+            var oUl = oImgScroll.getElementsByTagName("ul")[0];
+            var aLis = oUl.getElementsByTagName("li");
+            var isSpeed = 5;
+            oUl.innerHTML += oUl.innerHTML;
+            oUl.style.width = aLis[0].style.offsetWidth*aLis.length + "px";
+            function Marquee(){
+                //oUl.style.left = oUl.offsetLeft + isSpeed + "px";
+                // offsetLeft:获取对象相对于版面或由 offsetParent 属性指定的父坐标的计算左侧位置 offsetLeft 获取的是相对于父对象的左边距，返回的是数字，不带单位。
+                // left: 获取或设置相对于 具有定位属性(position定义为relative)的父对象 的左边距 返回的是字符串，即带单位“px”
+                // offsetWidth:自身的绝对宽度
+                var l = oImgScroll.offsetLeft;
+                console.log(oUl.offsetWidth/2 <= oImgScroll.scrollLeft);
+                if(oUl.offsetWidth/2 <= oImgScroll.scrollLeft){
+                    oImgScroll.scrollLeft -= oUl.offsetWidth / 2;
+                }else {
+                    oImgScroll.scrollLeft += isSpeed;
+                }
+            }
+            var timer = setInterval(Marquee,30);
+            for (var i = aLis.length - 1; i >= 0; i--) {
+                aLis[i].onmouseover = function(){
+                    clearInterval(timer);
+                }
+                aLis[i].onmouseout = function(){
+                    timer = setInterval(Marquee,30);
+                }
+            };
+        }
+    </script>
+</head>
+<body>
+<div id="img-scroll">
+    <ul>
+        <li><a href="#"><img src="http://dummyimage.com/268x175/"  alt="">aaa</a></li>
+        <li><a href="#"><img src="http://dummyimage.com/268x175/"  alt="">aaa</a></li>
+        <li><a href="#"><img src="http://dummyimage.com/268x175/"  alt="">aaa</a></li>
+        <li><a href="#"><img src="http://dummyimage.com/268x175/"  alt="">aaa</a></li>
+        <li><a href="#"><img src="http://dummyimage.com/268x175/"  alt="">aaa</a></li>
+        <li><a href="#"><img src="http://dummyimage.com/268x175/"  alt="">aaa</a></li>
+        <li><a href="#"><img src="http://dummyimage.com/268x175/"  alt="">aaa</a></li>
+    </ul>
+</div>
+</body>
+</html>
