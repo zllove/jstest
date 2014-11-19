@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        body{ margin:0; padding:0; }
+        body{ color:#fff; font:16px/1.5 \5fae\8f6f\96c5\9ed1  }
+        #show{ width:300px; padding:20px 0; background:#1a1a1a; margin:10px auto; text-align:center; }
+        span{ color:#000; width:80px; line-height:2; background:#fbfbfb; border:2px solid #b4b4b4; margin:0 10px; padding:0 10px; }
+        input{ display:block; width:283px; height:50px; background:#ccc; margin:23px auto; border:0; cursor:pointer; }
+        input.cancel{ background:#333; }
+    </style>
+</head>
+<body>
+<div id="show">
+    <span>00</span>分钟<span>5</span>秒 <input type="button"/>
+</div>
+<script type="text/javascript">
+    var btn = document.getElementsByTagName("input")[0];
+    var span = document.getElementsByTagName("span");
+    var time = [span[0].innerHTML, span[1].innerHTML];
+    var flag = true;
+    span.timer = null;
+
+    btn.onclick = function(){
+        if(flag){
+            this.className = '';
+            clearInterval(span.timer);
+            span.timer = setInterval(function(){
+                time[1] = parseInt(time[1]) - 1;
+                if(time[1] < 0){
+                    time[1] = 59;
+                    time[0] = parseInt(time[0]) - 1;
+                }
+                span[1].innerHTML = format(time[1]);
+                span[0].innerHTML = format(time[0]);
+                if(time[0] == 0 && time[1] == 0) clearInterval(span.timer);
+            }, 1000);
+            flag = false;
+        } else {
+            clearInterval(span.timer);
+            this.className = "cancel";
+            flag = true;
+        }
+    }
+
+    function format(a){
+        return a.toString().replace(/^(\d)$/, "0$1");
+    }
+</script>
+</body>
+</html>
