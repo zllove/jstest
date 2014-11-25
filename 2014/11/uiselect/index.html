@@ -1,0 +1,40 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<title>jQuery实现select搜索表单样式美化</title>
+<LINK href="css/index.css" type=text/css rel=stylesheet>
+<SCRIPT src="js/jquery.js" type=text/javascript></SCRIPT>
+<META content="MSHTML 6.00.6000.16981" name=GENERATOR>
+</HEAD>
+<BODY>
+<br />
+<h3 style="text-align:center; width:100%;">此代码由<a href="http://www.163css.com">广州网聚信息传播有限公司</a>提供。</h3>
+<br />
+	<DIV class=searchBar>
+		<span><a href="http://www.163css.com">广州网页制作</a><a href="http://www.51xuediannao.com">懒人建站</a><a href="http://www.51xuediannao.com/js/texiao">网页特效</a></span>
+		<DIV class=select><SELECT id=c style="DISPLAY: none" name=c> <OPTION value=1 
+		  selected>生活信息</OPTION> <OPTION value=2>店铺商家</OPTION> <OPTION 
+		  value=3>新闻资讯</OPTION> <OPTION value=4>团购活动</OPTION> <OPTION 
+		  value=5>招聘信息</OPTION></SELECT> </DIV>
+		<DIV class=text><INPUT class=s_t 
+		onblur="if(this.value==''){this.value='163css.com';this.style.color='#aaa'}" 
+		onfocus="if(this.value=='163css.com'){this.value='';this.style.color='#666'}" 
+		value=163css.com name=keyword>
+		 </DIV>
+		 <a href="#" class="btn"><img src="images/btn.gif" /></a>
+	</DIV>
+
+	<SCRIPT src="js/jQselect.js" type=text/javascript></SCRIPT>
+	
+	<SCRIPT type=text/javascript>
+	$(document).ready(function() {
+		$("#c").selectbox();
+	});
+	</SCRIPT>
+
+
+
+
+</BODY>
+</HTML>
