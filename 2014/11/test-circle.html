@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        div{
+            width: 240px;
+            height: 240px;
+            border:1px solid #888;
+            position: relative;
+            border-radius:50%;
+            box-shadow:2px 2px 4px #111;
+            background:-webkit-gradient(radial,120 120,0,120 120,120,from(#ffe),to(#eee));
+            background:-moz-radial-gradient(circle closest-side,#ffe 0%,#eee 100%);
+        }
+    </style>
+</head>
+<body>
+<div></div>
+<script>
+    var div=document.getElementsByTagName("div")[0];
+    drawMark(div);
+    function drawMark(parentNode){
+        var y = 120;
+        var x = 120;
+        var angle = 0;
+        var speed = 0.1;
+
+        for(var i=0;i<60;i++){
+            angle += speed;
+            var div=document.createElement("div");
+            div.style.cssText="width:3px;height:8px;background:#111;position:absolute;top:0;left:120px;";
+            setCss3(div,{top: y + Math.cos(angle) * y + 'px', left: x + Math.sin(angle) * x + 'px',transform:"rotate("+i*6+"deg)","transform-origin":"0 120px"});
+            parentNode.appendChild(div);
+        }
+    }
+    function setCss3(obj,attr){
+        for(var i in attr){
+            var j=i;
+            if(j.indexOf("-")>0){
+                var num=j.indexOf("-");
+                j=j.replace(j.substr(j,2),j.substr(j+1,1).toUpperCase())
+            }
+            obj.style[j]=attr[i];
+            j=j.replace(j.charAt(0),j.charAt(0).toUpperCase());
+            obj.style["webkit"+j]=attr[i];
+            obj.style["ms"+j]=attr[i];
+            obj.style["o"+j]=attr[i];
+            obj.style["moz"+j]=attr[i];
+        }
+    }
+</script>
+</body>
+</html>
