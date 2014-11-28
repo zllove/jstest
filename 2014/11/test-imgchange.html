@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        *{ margin:0px; padding:0px; }
+        li{ list-style:none; }
+        #brand .bd-box li{ float:left; width:282px; height:283px; overflow:hidden; position:relative; margin:10px 10px 0px 10px; }
+        #brand .bd-box li img{ width:282px; height:283px; position:absolute; left:0px; top:0px; z-index:2; overflow:hidden; }
+        #brand .bd-box li span{ width:282px; height:283px; position:absolute; left:0px; top:0px; z-index:1; overflow:hidden; display:none; }
+        #brand .bd-box li a{ width:282px; height:283px; position:absolute; left:0px; top:0px; z-index:3; }
+    </style>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var aLi = $('#brand .bd-box li');
+            aLi.each(function(index){
+                var aImg = $(this).find('img').eq(0);
+                var aSpan = $(this).find('span');
+                $(this).mouseover(function(){
+                    aSpan.stop();
+                    aImg.stop();
+                    console.log(aImg);
+                    aImg.css({zIndex : 1}).animate({
+                        left : 141,
+                        width : 0
+                    }, 230, function(){
+                        $(this).hide();
+                        aSpan.show().css({zIndex : 2}).animate({
+                            left : 0,
+                            width : 283
+                        }, 130)
+                    })
+                })
+
+                $(this).mouseout(function(){
+                    aSpan.stop();
+                    aImg.stop();
+                    aSpan.css({zIndex : 1}).animate({
+                        left : 0,
+                        width : 283
+                    }, 130, function(){
+                        $(this).hide();
+                        aImg.show().css({zIndex : 2}).animate({
+                            left : 0,
+                            width : 283
+                        }, 230)
+                    })
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+
+<div id="brand">
+    <ul class='bd-box'>
+        <li>
+            <a href="#"> </a> <img src="http://www.chla.com.cn/images/kn201411080.jpg"/>
+            <span><img src="http://www.chla.com.cn/templates/default/special/special_henri/touxiang.jpg"></span>
+        </li>
+
+        <li>
+            <a href="#"> </a> <img src="http://www.chla.com.cn/images/kn201411080.jpg"/>
+            <span><img src="http://www.chla.com.cn/templates/default/special/special_henri/touxiang.jpg"></span>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
+
+
+
