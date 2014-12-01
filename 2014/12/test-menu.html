@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{font:14px/1.5 '微软雅黑';background: #fff;}
+        .menu{ position:fixed; top:50%;right: 0;}
+        .sub{ list-style: none;}
+        .sub li{position:relative;width:80px;right:0; margin-bottom:5px;height:60px; line-height:60px;}
+        .menu a{position:absolute;top: 0; right:0;width:80px; display:block;  background: #000;border-radius:10px 0 0 10px;color: #fff; text-align:center; text-decoration:none;}
+        .menu a.on{ background: #4487cd;color: #fff;}
+        /*.menu a:hover{ width:135px; background: #4487cd;color: #fff;}*/
+    </style>
+</head>
+<body>
+<div class="menu">
+    <ul class="sub">
+        <li><a href="#">A</a></li>
+        <li><a href="#">B</a></li>
+        <li><a href="#">C</a></li>
+        <li><a href="#">D</a></li>
+    </ul>
+</div>
+<script>
+    $('.sub a').hover(function(){
+        $(this).addClass('on').stop().animate({ width : 135})
+    }, function(){
+        $(this).removeClass('on').stop().animate({ width : 80})
+    });
+</script>
+</body>
+</html>
