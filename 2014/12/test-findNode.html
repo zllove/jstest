@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script type="text/javascript" src="jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<div>
+    <h1>My First Heading</h1>
+    <p>My first paragraph.</p>
+</div>
+
+<div id="1">
+    <p id="2">Paragraph First
+    <ol id="3">
+        <li id="4">alice
+            <ul id="31">
+                <li id="41">bob</li>
+                <li id="51">foo</li>
+                <li id="61">grow</li>
+            </ul>
+        </li>
+        <li id="5">coding</li>
+        <li id="6">fun</li>
+    </ol>
+    </p>
+</div>
+
+<div>
+    <p>Paragraph Second</p>
+</div>
+<textarea name="" id="txt" cols="30" rows="10"></textarea>
+<script>
+    var res = [];
+    var a = $('body').find('*').contents().filter(function () { return this.nodeType === 3 && $.trim(this.nodeValue).length > 0; });
+    a.each(function(){
+        console.log(this.textContent);
+        res.push($.trim(this.textContent || this.innerText))
+    });
+    $('#txt').val(res);
+    //    console.log(res);
+</script>
+</body>
+</html>
