@@ -12,10 +12,9 @@
         var arr = [[1]];
         for(var i=1;i<depth;i++){
             arr[i] = [];
-                console.log(arr[0]);
             for(var j=0;j<=i;j++){
                 arr[i][j] = (arr[i-1][j] || 0) + (arr[i-1][j-1] || 0);
-//                console.log(arr[j]);
+                console.log(arr);
             }
         }
         document.getElementById('div').innerHTML = arr.join(' | ');
