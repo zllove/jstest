@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script>
+    //2014年5月9日 星期六--班级总分为:81
+    var scoreStr = "小明:87;小花:81;小红:97;小天:76;小张:74;小小:94;小西:90;小伍:76;小迪:64;小曼:76";
+    var score = scoreStr.match(/\d+/g);
+    var sum = 0;
+    for(var i = 0; i < score.length; i++){
+        sum += parseInt(score[i]);
+    }
+    var d = new Date();
+    var s = d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日  星期' + '日一二三四五六'.charAt(d.getDay()) +
+            '--班级总分为:' + sum;
+    document.write(s);
+//    console.log(s);
+</script>
+</body>
+</html>
