@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
+</head>
+<body>
+<table class="tab" border="1" width="500">
+    <tr>
+        <td>id</td>
+        <td><input type="text" name="username" id=""/></td>
+        <td>
+            <select name="country" id="">
+                <option value="1">中国人</option>
+            </select>
+        </td>
+        <td>
+            <button class="btn">编辑</button>
+        </td>
+    </tr>
+    <tr>
+        <td>id</td>
+        <td><input type="text" name="username" id=""/></td>
+        <td>
+            <select name="country" id="">
+                <option value="2">china</option>
+            </select>
+        </td>
+        <td>
+            <button class="btn">编辑</button>
+        </td>
+    </tr>
+    <tr>
+        <td>id</td>
+        <td><input type="text" name="username" id=""/></td>
+        <td>
+            <select name="country" id="">
+                <option value="3">shanghai</option>
+            </select>
+        </td>
+        <td>
+            <button class="btn">编辑</button>
+        </td>
+    </tr>
+</table>
+<script>
+    $('.btn').click(function(){
+        var res = [];
+        $(this).closest('tr').find("input,select").each(function(){
+            var v = $.trim(this.value);
+            if(v.length > 0){
+                res.push({ key: this.name, value : v });
+            }
+        });
+        console.log(res);
+//        edit(res);
+    });
+
+    function edit(d){
+        $.ajax({
+            url : 'url',
+            data : d,
+            success : function(){
+
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
