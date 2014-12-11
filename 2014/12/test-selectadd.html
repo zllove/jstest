@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script>
+</head>
+<body>
+<table>
+    <tr>
+        <td>
+            <select name="selectBox1" id="selectBox1" class="wgtmsr">
+                <option value="option1">option1</option> <option value="option2">option2</option>
+                <option value="option3">option3</option> <option value="option4">option4</option>
+                <option value="option5">option5</option> <option value="option6">option6</option>
+                <option value="option7">option7</option>
+            </select>
+        </td>
+        <td>
+            <input type="text" name="select1">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <select name="selectBox2" id="selectBox2" class="wgtmsr">
+                <option value="option1">option1</option> <option value="option2">option2</option>
+                <option value="option3">option3</option> <option value="option4">option4</option>
+                <option value="option5">option5</option> <option value="option6">option6</option>
+                <option value="option7">option7</option>
+            </select>
+        </td>
+        <td>
+            <input type="text" name="select2">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <select name="selectBox3" id="selectBox3" class="wgtmsr">
+                <option value="option1">option1</option> <option value="option2">option2</option>
+                <option value="option3">option3</option> <option value="option4">option4</option>
+                <option value="option5">option5</option> <option value="option6">option6</option>
+                <option value="option7">option7</option>
+            </select>
+        </td>
+        <td>
+            <input type="text" name="select3">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <select name="selectBox4" id="selectBox4" class="wgtmsr">
+                <option value="option1">option1</option> <option value="option2">option2</option>
+                <option value="option3">option3</option> <option value="option4">option4</option>
+                <option value="option5">option5</option> <option value="option6">option6</option>
+                <option value="option7">option7</option>
+            </select>
+        </td>
+        <td>
+            <input type="text" name="select4">
+        </td>
+    </tr>
+</table>
+<script>
+    $(document).ready(function(){
+        $.fn.showOption = function(){
+            this.each(function(){
+                if(this.tagName == "OPTION"){
+                    var opt = this;
+                    if($(this).parent().get(0).tagName == "SPAN"){
+                        var span = $(this).parent().get(0);
+                        $(span).replaceWith(opt);
+                        $(span).remove();
+                    }
+                    opt.disabled = false;
+                    $(opt).show();
+                }
+            });
+            return this;
+        }
+        $.fn.hideOption = function(){
+            this.each(function(){
+                if(this.tagName == "OPTION"){
+                    var opt = this;
+                    if($(this).parent().get(0).tagName == "SPAN"){
+                        var span = $(this).parent().get(0);
+                        $(span).hide();
+                    } else {
+                        $(opt).wrap("span").hide();
+                    }
+                    opt.disabled = true;
+                }
+            });
+            return this;
+        }
+
+
+        $('select').on('change', function(event){
+            //restore previously selected value
+            var prevValue = $(this).data('previous');
+            $('select').not(this).find('option[value="' + prevValue + '"]').showOption();
+
+            //hide option selected now
+            var value = $(this).val();
+            //update previously selected data
+            $(this).data('previous', value);
+            $('select').not(this).find('option[value="' + value + '"]').hideOption();
+            console.log($('select').not(this).find('option[value="' + value + '"]'));
+        });
+    });
+</script>
+</body>
+</html>
