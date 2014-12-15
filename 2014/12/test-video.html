@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+http://www.99wuxian.com/pages/zh/product.brief.html
+
+<script>
+    function video_play(e){
+        var video_obj = document.getElementById('video_'),
+            browser = navigator.appName,
+            b_version = navigator.appVersion,
+            trim_Version = b_version.indexOf(";") < 0 ? "Macintosh" : b_version.split(";")[1].replace(/[ ]/g, ''),
+            ie_attr = "Microsoft Internet Explorer";
+
+        video_obj.style.display = 'block';
+        e.style.display = 'none';
+
+        if(browser == ie_attr && (trim_Version == "MSIE5.0" || trim_Version == "MSIE6.0" || trim_Version == "MSIE7.0" || trim_Version == "MSIE8.0")){ //是ie5 6 7 8
+            $("#video_").html("<embed src=\"../../images/TapitDemo1-Tickets.swf\" width=\"998\" height=\"561\" allowScriptAccess=\"always\" type=\"application/x-shockwave-flash\" play=\"auto\" id=\"the_swf\"/>");
+        } else {
+            video_obj.play();
+        }
+    }
+</script>
+</body>
+</html>
