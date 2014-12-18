@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <style>
+        *{ margin:0; padding:0; /*transition: all 0.4s;*/
+        }
+        .fl{ float:left; display:inline; }
+        .fr{ float:right !important; display:inline; }
+        .clearfloat{ height:0; font-size:0px; clear:both; line-height:0; }
+        .cf:before, .cf:after{ content:"."; display:block; height:0; visibility:hidden; }
+        .cf:after{ clear:both; }
+        .cf{ zoom:1; }
+        ul{ overflow:hidden; }
+        li{ list-style-type:none; }
+        .A1{ float:left; *display:inline; height:200px; margin-right:10px; position:relative; overflow:hidden; width:30px; }
+        .A1 a.A2{ display:block; width:30px; word-wrap:break-word; color:#fff; text-align:center; position:absolute; background:#000; padding:61px 0; z-index:9; }
+        .A1 div.oo{ width:264px; position:absolute; right:0; top:0; }
+        div.oo ul li{ height:32px; line-height:31px; }
+        .wd{ width:300px; }
+    </style>
+    <script>
+        // var timer=null;
+        /***获取Class元素********************/
+        function getByClass(oparent, oclass){
+            try{
+                return oparent.querySelectorAll("." + oclass);
+            } catch (ex) {
+                var reset = [];
+                var reg = new RegExp("\\b" + oclass + "\\b");
+                var oCur = oparent.all;
+                for(var i = 0; i < oCur.length; i++){
+                    if(reg.test(oCur[i].className)){
+                        reset.push(oCur[i]);
+                    }
+                }
+                return reset;
+            }
+        }
+        /*****获取样式表样式****/
+        function getStyle(obj, name){
+            if(obj.currentStyle){
+                return obj.currentStyle[name]//IE
+            } else {
+                return getComputedStyle(obj, false)[name]//IE
+            }
+        }
+        /****缓冲运动*****/
+        function Stratmove(obj, json, funEnd){
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function(){
+                for(var attr in json){
+                    var bStop = true, cuur = parseFloat(getStyle(obj, attr)), speed = 0;
+                    if(attr == "opacity"){
+                        cuur = Math.round(parseFloat(getStyle(obj, attr)) * 100);
+                    } else {
+                        cuur = parseFloat(getStyle(obj, attr));
+                    }
+                    speed = (json[attr] - cuur) / 8;
+                    speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                    if(cuur != json[attr]){
+                        bStop = false;
+                    }
+
+                    if(attr == "opacity"){
+                        obj.style["opacity"] = (cuur + speed) / 100;
+                        obj.style["filter"] = "alpha(opacity=" + cuur + speed + ")";
+                    } else {
+                        obj.style[attr] = cuur + speed + "px";
+                    }
+                    if(bStop){
+                        clearInterval(obj.timer);
+                    }
+                    if(funEnd)funEnd();
+                }
+            }, 30)
+        }
+        window.onload = function(){
+            var a1 = getByClass(document.body, "A1"),
+                    a2 = getByClass(document.body, "A2"),
+                    oo = getByClass(document.body, "oo");
+
+            for(var i = 0; i < a2.length; i++){
+                a2[i].index = i;
+                a2[i].onclick = function(){
+                    for(i = 0; i < a2.length; i++){
+                        clearInterval(a1[i].timer);
+                        a1[i].style.width = "30px";
+                    }
+                    //  a1[this.index].style.width="300px";
+                    Stratmove(a1[this.index], {"width" : 300});
+                    return false;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="A1">
+    <a href="###" title="" class="A2">大众大的</a>
+    <div class="oo">
+        <ul>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<div class="A1">
+    <a href="###" title="" class="A2">专家学者</a>
+    <div class="oo">
+        <ul>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="A1">
+    <a href="###" title="" class="A2">学习社区</a>
+    <div class="oo">
+        <ul>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="A1">
+    <a href="###" title="" class="A2">学习社区</a>
+    <div class="oo">
+        <ul>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="A1">
+    <a href="###" title="" class="A2">会议预告</a>
+    <div class="oo">
+        <ul>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+            <li>
+                <p><a href="###" title="11111">的回答好得很多撒谎级导航方法哈</a></p>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

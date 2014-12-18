@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+
+    </style>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<div id="div" style="width:100px;height: 100px;background: #f1f1f1;"></div>
+<script>
+    $.fn.elseon = function(event, cb) {
+        var $this = $(this);
+        $(document).on(event, function(e) {
+            if (e.target != $this[0]) {
+                cb.apply($this);
+            }
+        });
+    }
+    $("#div").elseon('click', function() {
+        alert('1');
+    });
+
+</script>
+</body>
+</html>
