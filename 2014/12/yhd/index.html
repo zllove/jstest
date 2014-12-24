@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>1号店</title>  
+<link rel='stylesheet' href='./style/index.css'>
+</head>
+<body>
+<div class='tab' id='tab'>
+	<ul class='tab-bd'>
+		<li class='iCur'><a href='javascript:'><img src='img/1.jpg' width='770' height='300' /></a></li>
+		<li><a href='javascript:'><img src='img/2.jpg' width='770' height='300' /></a></li>
+		<li><a href='javascript:'><img src='img/3.jpg' width='770' height='300' /></a></li>
+		<li><a href='javascript:'><img src='img/4.jpg' width='770' height='300' /></a></li>
+		<li><a href='javascript:'><img src='img/5.jpg' width='770' height='300' /></a></li>
+		<li><a href='javascript:'><img src='img/6.jpg' width='770' height='300' /></a></li>
+	</ul>
+	<ol class='tab-hd'>
+	    <li class='selected'><span></span></li>
+		<li><span></span></li>
+		<li><span></span></li>
+		<li><span></span></li>
+		<li><span></span></li>
+		<li><span></span></li>
+	</ol>
+	<p class='prev'></p>
+	<p class='next'></p>
+</div>
+<p class='clearp'><span>1号店</span></p>
+<script type='text/javascript' src='./js/startMove.js'></script>
+<script type='text/javascript' src='./js/index.js'></script>
+<script type='text/javascript'>
+window.onload = function(){ 
+	fnSlide({
+		id:"tab",  
+		mainCeil:"tab-bd",
+		titCeil:"tab-hd",
+		aBtnclassName:"selected",
+		effect:"leftLoop",
+		trigger:"click",
+		offset:770,
+		vis:1,
+		prevCeil:"prev",
+		NextCeil:"next",
+		Progress:true,
+		autoPlay:true
+	});
+	function TabMouseover(){
+	    var oBox = document.getElementById('tab');
+   		var oPrev = getClass(oBox,'prev')[0]; 
+		var oNext = getClass(oBox,'next')[0]; 
+		fnbind(oBox,'mouseover',function(){
+		    oPrev.style.display = 'block';
+			oNext.style.display = 'block';
+			startMove(oPrev,{left:0},300,'easeBoth');   
+			startMove(oNext,{right:0},300,'easeBoth');   
+		});
+		fnbind(oBox,'mouseout',function(){
+		    oPrev.style.display = 'block';
+			oNext.style.display = 'block';
+			startMove(oPrev,{left:-45},300,'easeBoth',function(){
+			    this.style.display = 'none';  
+			});   
+			startMove(oNext,{right:-45},300,'easeBoth',function(){
+			    this.style.display = 'none'; 
+			});   
+		});
+	};
+	TabMouseover();
+};
+
+</script>
+</body>
+</html>

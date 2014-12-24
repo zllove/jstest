@@ -1,0 +1,31 @@
+html,body,pre,hr,div,p,ul,ol,li,dl,dt,dd,img,a,span,em,h1,h2,h3,h4,h5,h6{
+  margin:0px; padding:0px;
+}
+body{font-size:12px;font-family:"Microsoft YaHei";}
+img{border:0;}
+li{list-style:none;}
+.tab{
+    width:770px;height:300px;position:relative; overflow:hidden; margin:50px 0 0 200px;	
+}
+.tab-bd{width:770px;height:300px; position:relative;top:0px;left:0px;}
+.tab-bd li{display:none;width:770px;height:300px;vertical-align:middle;}
+.tab-bd li.iCur{display:block;}
+
+.tab-hd{width:210px; height:5px; position:absolute; bottom:10px; left:50%; margin-left:-105px;}
+.tab-hd li{
+    width:30px;height:5px; background:#ccc; float:left;display:inline; margin-left:5px;
+	cursor:pointer; position:relative;
+}
+.tab-hd li span{display:none;width:0px;height:0px;}
+.tab-hd li.selected span{
+    background:#f40; display:block; width:30px; height:100%; position:absolute;z-index:4;
+}
+p.prev{
+    width:45px;height:99px; background:url(../img/index.png) no-repeat; position:absolute;
+	top:100px; left:-45px; z-index:10; opacity:0.5;filter:alpha(opacity=50); cursor:pointer; overflow:hidden;
+}
+p.next{
+    width:45px;height:99px; background:url(../img/index.png) -46px 0 no-repeat; position:absolute;
+	top:100px; right:-45px; z-index:10; opacity:0.5;filter:alpha(opacity=50); cursor:pointer; overflow:hidden;
+}
+p.clearp{clear:both; margin:20px 0 0 200px; color:#f40;}
