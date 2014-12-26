@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<!--http://www.zhihu.com/question/21861899-->
+<script>
+    var s = 'ProductInfo/BA/Index?count={count}&category={category}';
+    var obj = { count : 40, category : 'china'};
+    function r(txt, unescape){
+        var encode = unescape ? function(s){ return s;} : function(s){ return encodeURIComponent(s) };
+        return txt.replace(/{(\w+)}/g, function(a, b, c){
+            return obj[b] == undefined ? '' : encode(obj[b]);
+        });
+    }
+    console.log(r(s));
+
+    var param = "http://www.cnblogs.com/season-huang/"; //param为参数
+    var param1 = escape(param);
+    param = encodeURI(param);
+    var url1 = "http://www.cnblogs.com?next=" + param1;
+    var url = "http://www.cnblogs.com?next=" + param;
+    console.log(url1);
+    console.log(url) //"http://www.cnblogs.com?next=http%3A%2F%2Fwww.cnblogs.com%2Fseason-huang%2F"
+</script>
+</body>
+</html>
