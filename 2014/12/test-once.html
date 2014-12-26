@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script>
+    var o = {
+        once:function(func){
+            var ran = false, memo;
+            return function() {
+                if (ran) return memo;
+                ran = true;
+                memo = func.apply(this, arguments);
+                func = null;
+                return memo;
+            };
+        }
+    }
+    var a = o.once(function(){
+        var tpl = '<div id="jym-loading" class="ui-loading">';
+        tpl += '<span class="ui-loading-icon"></span>';
+        tpl += '<h3>正在加载....</h3></div>';
+        $("body").append(tpl);
+        return tpl;
+    });
+    function fn(){
+        //        alert(111);
+        var tpl = '<div id="jym-loading" class="ui-loading">';
+        tpl += '<span class="ui-loading-icon"></span>';
+        tpl += '<h3>正在加载....</h3></div>';
+        $("body").append(tpl);
+        return tpl;
+    }
+    a();
+    document.getElementById('btn').onclick = function(){
+        a();
+    }
+</script>
+</body>
+</html>
