@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body>
+<script>
+    var jymBanks = [
+        {"name" : "工商银行", "code" : "bank-c01", "limit" : [5, 5], "defaults" : "上海|上海"},
+        {"name" : "工商银行2", "code" : "bank-c01", "limit" : [5, 5], "defaults" : "上海|上海"},
+        {"name" : "招商银行", "code" : "bank-c02", "limit" : [100, 100], "defaults" : "上海|上海"},
+        {"name" : "广发银行", "code" : "bank-c03", "limit" : [100, 100], "defaults" : "上海|上海"},
+        {"name" : "华夏银行", "code" : "bank-c04", "limit" : [100, 100], "defaults" : "上海|上海"},
+        {"name" : "海南农信社", "code" : "bank-c05", "limit" : [100, 100], "defaults" : "上海|上海"},
+        {"name" : "广州银行", "code" : "bank-c06", "limit" : [100, 100], "defaults" : "广东|广州"},
+        {"name" : "中信银行", "code" : "bank-c07", "limit" : [100, 100], "defaults" : "上海|上海"},
+        {"name" : "兴业银行", "code" : "bank-c08", "limit" : [50, 50], "defaults" : "上海|上海"},
+        {"name" : "浦发银行", "code" : "bank-c09", "limit" : [2, 5], "defaults" : "上海|上海"},
+        {"name" : "深发银行", "code" : "bank-c10", "limit" : [100, 100], "defaults" : "上海|上海"},
+        {"name" : "建设银行", "code" : "bank-c11", "limit" : [100, 100], "defaults" : "上海|上海"},
+        {"name" : "广州农商行", "code" : "bank-c12", "limit" : [100, 100], "defaults" : "上海|上海"},
+        {"name" : "农业银行", "code" : "bank-c13", "limit" : [100, 100], "defaults" : "上海|上海"},
+        {"name" : "邮储银行", "code" : "bank-c14", "limit" : [1, 100], "defaults" : "上海|上海"},
+        {"name" : "光大银行", "code" : "bank-c15", "limit" : [100, 100], "defaults" : "上海|上海"},
+        {"name" : "平安银行", "code" : "bank-c16", "limit" : [100, 100], "defaults" : "广东|深圳"},
+        {"name" : "民生银行", "code" : "bank-c17", "limit" : [100, 100], "defaults" : "上海|上海"},
+        {"name" : "中国银行", "code" : "bank-c18", "limit" : [100, 100], "defaults" : "上海|上海"},
+        {"name" : "富滇银行", "code" : "bank-c19", "limit" : [0.0999, 0.0999], "defaults" : "上海|上海"}
+    ];
+    var fmtEach = function(d, callback){
+        var i = 0, l = d.length;
+        if(l !== undefined){
+            for(;i<l;i++){
+                if(false === callback.call(d[i],i,d[i])){break;}
+            }
+        } else {
+            for(i in d){
+                if(false === callback.call(d[i],i,d[i])){break;}
+            }
+        }
+    };
+    var fmtBanks = function(){
+        var o = {}, t, s = '<table border="1"><thead><tr><th>银行</th><th>限额</th></tr></thead><tbody>';
+        fmtEach(jymBanks, function(i, v){
+            t = v.limit.join(',');
+            if(!o[t]){o[t] = [v];}else{
+                o[t].push(v);
+            }
+        });
+        fmtEach(o, function(k, v){
+            fmtEach(v, function(i, b){
+                s += '<tr><td>'+b.name+'</td>';
+                if(i == 0){s += '<th rowspan="'+v.length+'">单笔'+b.limit[0]+'万，单日'+b.limit[1]+'万</th>';}
+                s += '</tr>';
+            });
+        });
+        s += '</tbody></table>';
+        document.write(s);
+    };
+    fmtBanks();
+</script>
+</body>
+</html>
