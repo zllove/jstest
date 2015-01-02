@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+</head>
+<body onload="init()">
+<!--http://bbs.csdn.net/topics/20479944-->
+<script>
+    var h = "tra";
+    function init(){
+        if(h){
+            document.all(h).bgColor = "red";
+        }
+    }
+    function ove(obj){
+        if(!h){
+            obj.bgColor = 'black';
+            return;
+        }
+        if(obj.id == h)return; else{ obj.bgColor = 'black'; }
+    }
+    function ou(obj){
+        if(obj.id == h)return; else{ obj.bgColor = 'white';}
+    }
+    function hit(obj){
+        if(!h)h = obj.id;
+//        lock = false;
+        document.all(h).bgColor = 'white';
+        h = obj.id;
+        obj.bgColor = 'red';
+    }
+</script>
+<table border="1" width="100">
+    <tr>
+        <td width="100%" id="trb" onclick="hit(this)" onmouseover="ove(this)" onmouseout="ou(this)">b　</td>
+    </tr>
+    <tr>
+        <td width="100%" id="tra" onmouseover="ove(this)" onmouseout="ou(this)" onclick="hit(this)">a　</td>
+    </tr>
+    <tr>
+        <td width="100%" id="trc" onmouseover="ove(this)" onmouseout="ou(this)" onclick="hit(this)">c　</td>
+    </tr>
+    <tr>
+        <td width="100%" id="trd" onmouseover="ove(this)" onmouseout="ou(this)" onclick="hit(this)">d　</td>
+    </tr>
+</table>
+</body>
+</html>
