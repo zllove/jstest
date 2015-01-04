@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>elementFromPoint example</title>
+
+    <script>
+        function changeColor(newColor){
+            var elem = document.elementFromPoint(2, 2);
+            console.log(elem);
+            elem.style.color = newColor;
+        }
+    </script>
+</head>
+
+<body>
+<p id="para1">Some text here</p>
+<button onclick="changeColor('blue');">blue</button>
+<button onclick="changeColor('red');">red</button>
+<button id="btn">test</button>
+<script>
+    var btn = document.getElementById('btn');
+    btn.onclick = function(e){
+        var el = document.elementFromPoint(e.clientX, e.clientY);
+        console.log(el);
+    }
+</script>
+</body>
+</html>
