@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        #div{ border:1px solid #ccc; width:200px; height:300px;background: #f1f1f1; display:none;}
+    </style>
+</head>
+<body>
+<div id="div"></div>
+<script>
+    var div = document.getElementById('div');
+    function css(obj, attr){
+        if(obj.currentStyle){
+            return obj.currentStyle[attr];
+        } else {
+            return getComputedStyle(obj, false)[attr];
+        }
+    }
+    function getDivSize(obj){
+        var div = document.createElement('div');
+        div.appendChild(obj);
+        div.style.position = 'absloute';
+        div.style.top = '-9999em';
+        div.style.left = '-9999em';
+        document.body.appendChild(div);
+        var sub = div.children[0];
+        return {
+            width : css(sub, 'width'),
+            height : css(sub, 'height')
+        };
+    }
+    console.log(getDivSize(div));
+</script>
+</body>
+</html>
