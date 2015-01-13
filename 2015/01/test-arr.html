@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="div"></div>
+<script>
+    var a = [[1,2,3],[4,5,6],[7,8,9]];
+    var b = [];
+    var c = 0;
+    while(c<3){
+        for(var i = 0; i < a.length; i++){
+            b.push(a[i][c]);
+        }
+        b.push('<br>');
+        c++;
+    }
+    document.getElementById('div').innerHTML = b.join('');
+</script>
+</body>
+</html>
