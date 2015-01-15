@@ -21,6 +21,9 @@
                 }
             }
             return false;
+        },
+        isArray : function(obj){
+            return ({}).toString.call(obj) == '[object Array]';
         }
     }
     var _path_name = location.pathname.toLowerCase();
@@ -41,7 +44,7 @@
         return 1;
     }
     var b = jym.fire(foo, ['jikey', 'tang']);
-    console.log(b);
+    console.log(jym.isArray({}));
 </script>
 </body>
 </html>
