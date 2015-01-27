@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+    <!--<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.js"></script>-->
+</head>
+<body>
+<div id="someElem" style="width:100px; height:100px; background-color:#000"></div>
+<script>
+    $("#someElem").click(function(e){
+        console.log(e.which);
+        if(e.which){
+            //Actually clicked
+            console.log("Click");
+        } else {
+            //Triggered by code
+            console.log("Trigger");
+        }
+    });
+    $("#someElem").click();
+</script>
+</body>
+</html>
