@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{ padding:0; margin:0; }
+        ul{ list-style:none; }
+        body{ background-color:#f7f7f7; }
+        .template{ width:400px; background-color:#fff; box-shadow:0 0 5px #ccc; margin:200px auto; padding:30px; display:none; }
+        li{ line-height:40px; }
+    </style>
+</head>
+<body>
+<div id="J-template" class="template">
+    <ul>
+        <li>头像：<img src="${photo}" alt="${name}的头像"></li>
+        <li>姓名：${name}</li>
+        <li>年龄：${age}</li>
+        <li>工作：${job}</li>
+        <li>女朋友：${girlFriend}</li>
+        <li>${aaa}</li>
+    </ul>
+</div>
+<script>
+    (function(){
+        var data = {
+            name : '波波',
+            photo : 'touxiang.jpg',
+            age : '25',
+            job : '码农',
+            girlFriend : '没有'
+        };
+        //	/\$ \{ (\w+) \} /g
+        //	\w===[a-z0-9_]
+        var oTem = document.getElementById('J-template');
+        oTem.innerHTML = oTem.innerHTML.replace(/\$\{(\w+)(\})/g, function(str, $1, aaa){
+            console.log($1);
+            return data[$1] ? data[$1] : '没有数据';
+        })
+        oTem.style.display = 'block';
+    })()
+</script>
+</body>
+</html>
