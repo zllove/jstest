@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        .line-item-wrap{}
+        .line-item-wrap:after,
+        .line-item-wrap:before{
+            position:absolute;
+            display: block;width:0;height:0;content:'';
+            border-width:16px;
+            border-style:dotted solid dotted dotted;
+            border-color:transparent #000 transparent transparent;
+        }
+        .line-item-wrap:before{
+            margin-top:1px;
+            margin-right:1px;
+            border-right:15px solid red;
+        }
+        .item i{
+            position:absolute;
+            display: block;width:0;height:0;content:'';
+            border-width:16px;
+            border-style:dotted solid dotted dotted;
+            border-color:transparent #000 transparent transparent;
+        }
+        .item i{
+            margin-top:1px;
+            margin-right:1px;
+            border-right:15px solid #ccc;
+        }
+    </style>
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+    <!--<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.js"></script>-->
+</head>
+<body>
+
+<div class="line-item-wrap"></div>
+<!--<div class="item"><i></i></div>-->
+<script>
+
+</script>
+</body>
+</html>
