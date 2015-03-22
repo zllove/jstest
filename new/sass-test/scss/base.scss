@@ -1,0 +1,23 @@
+$blue:#3bbfce;
+$margin:16px;
+.container{
+  border-color:$blue; width:20px; height:23px;
+}
+.border {
+  padding: $margin / 2;
+  margin: $margin / 2;
+}
+section {
+  margin: 10px;
+  nav {
+    height: 25px;
+    a {
+      color: #0982c1;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+

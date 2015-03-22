@@ -3,49 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <!--<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>-->
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
 </head>
 <body>
+<div id="div1">1123123</div>
 <script>
-    var obj = {
-        animate : function(el, opts, callback, aniFn){
-            var _easeInOutCubic = function(pos){
-                if((pos /= 0.5) < 1) return 0.5 * Math.pow(pos, 3);
-                return 0.5 * (Math.pow((pos - 2), 3) + 2);
-            };
-            opts = opts || {};
-            var _this = this;
-            var deStyle = {}, D = Date, d = new D, e, T = 500, o, F = function(x){
-                return (aniFn || _easeInOutCubic)(x)
-            };
-            for(var i in opts){
-                if(i == 'opacity') deStyle[i] = this.css(el, i); else deStyle[i] = parseInt(this.css(el, i));
-            }
-            return e = setInterval(function(){
-                var z = Math.min(1, (new Date() - d) / 500);
-                var z = Math.min(1, (new D - d) / T);
-                for(var i in opts){
-                    o = deStyle[i] - 0 + (opts[i] - deStyle[i]) * F(z);
-                    _this.css(el, i, o);
+    $(function () {
+        $.fn.extend({
+            checkbr:function () {
+                alert(123);
+                var self=this;
+                console.log(this);
+                self.nextone=function () {
+                    alert(007);
                 }
-                if(z === 1){
-                    clearInterval(e);
-                    if(callback && typeof callback == 'function') callback();
-                }
-            }, 16);
-        }
-    }
-    function foo(){
-        var d = new Date();
-        var timer = setInterval(function(){
-            var z = Math.min(1, (new Date() - d) / 500);
-            console.log(new Date() - d);
-            console.log('aa',z);
-            if(z === 1){
-                clearInterval(timer);
             }
-        }, 16);
+        });
+        $('#div1').checkbr()
+        $('#div1').nextone();
+    });
+    function abc(){
+
     }
-    foo();
 </script>
 </body>
 </html>

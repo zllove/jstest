@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+        ul{list-style: none;}
+        .content{width: 450px; height: 600px; margin: 0 auto;}
+        .content li{float: left; width: 30%; height: 30%; margin: 1%; border: 1px solid green;}
+        .ringRotate{-webkit-animation: ringRotate 1s;}
+        @-webkit-keyframes ringRotate{
+            0%{-webkit-transform:rotate(0);}
+            100%{-webkit-transform:rotate(360deg);}
+        }
+    </style>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        window.onload=function(){
+            setInterval(function(){
+                ringRotate ();
+                $(".ring").removeClass('ringRotate');
+            },2000);
+            //随机环旋转
+            function ringRotate () {
+                var l = $('.content li').length;
+                var randNum = mathRand(4, l);
+                console.log(randNum);
+
+                $.each(randNum, function (i, el) {
+                    $(".ring").eq(el).removeClass('ringRotate').addClass("ringRotate");
+                });
+            }
+        }
+
+        /**
+         * create Random number
+         * @param bit: number
+         * @param max: max number
+         * @return {Array}
+         */
+        function mathRand(bit, max){
+            var num = 0,
+                arr = [],
+                ret = [];
+            for(var i=0; i<bit; i++){
+                num = Math.floor(Math.random() * max);
+                if($.inArray(num, ret) == -1){
+                    ret.push(num);
+                } else {
+                    i--;
+                    continue;
+                }
+            }
+            return ret;
+        }
+    </script>
+</head>
+<body>
+<ul class="content">
+    <li class="ring"></li>
+    <li class="ring"></li>
+    <li class="ring"></li>
+    <li class="ring"></li>
+    <li class="ring"></li>
+    <li class="ring"></li>
+    <li class="ring"></li>
+    <li class="ring"></li>
+    <li class="ring"></li>
+    <li class="ring"></li>
+    <li class="ring"></li>
+    <li class="ring"></li>
+</ul>
+</body>
+</html>

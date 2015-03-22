@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>index</title>
+    <meta name="author" content="XXYY"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <style type="text/css">
+        *{
+            margin:0;
+            padding:0;
+        }
+        .nav{
+            width:500px;
+            height:50px;
+            margin:100px auto;
+            background-color:#977c00;
+        }
+        .nav > ul{
+            list-style:none;
+        }
+        .nav > ul > li{
+            width:99px;
+            height:49px;
+            float:left;
+            text-align:center;
+            line-height:50px;
+            color:#000;
+            border-right:1px solid #ffe4ca;
+            border-bottom:1px solid #ffe4ca;
+        }
+        .nav > ul > li:last-child{
+            width:100px;
+            border-right:none;
+        }
+    </style>
+    <!-- Date: 2015-01-26 -->
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+    <script id="jqueryplugins7_jquery_colorbox_132" type="text/javascript" class="library" src="/js/sandbox/jquery-plugins/jquery.colorbox-min.js"></script>
+</head>
+<body>
+<nav class="nav" id="nav">
+    <ul>
+        <li>我是A</li>
+        <li>我是B</li>
+        <li>我是C</li>
+        <li>我是D</li>
+        <li>我是E</li>
+    </ul>
+</nav>
+<script>
+$(function(){
+    $.fn.NavChangeColor = function(){
+        var $Obj = $(this).find('li'), T = 1000;
+        $Obj.hover(function(){
+            var that = $(this);
+            $(this).animate({opacity : 0}, T);
+            setTimeout(function(){
+                //为什么这样写不管用呢？
+                that.css({color : '#fff'});
+            }, T);
+
+            $(this).animate({opacity : 1}, T);
+        }, function(){
+            $(this).animate({opacity : 1}, T);
+        });
+    }
+    $("#nav").NavChangeColor();
+});
+var that = $(this);
+$(this).animate({opacity : 0}, T);
+setTimeout(function(){
+    //为什么这样写不管用呢？
+    that.css({color : '#fff'});
+}, T);
+</script>
+</body>
+</html>
