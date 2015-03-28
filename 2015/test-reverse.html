@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>-->
+    <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<script>
+    var a = [1, [2, [3,[4,[5]]]]];
+    var b = [].concat.apply([],a);
+//    console.log(b);
+
+//    var x=[1,2,[3,4]];
+    var x=[1, [2, [3,[4,[5]]]]];
+//    var x=[1, [2,[3,[4]]]];
+    var xx = [[[[[5],4],3],2],1];
+//    console.log(x.toString().split(',').reverse());
+//    console.log(x.join("|"));
+//    console.log([].concat(x).join("|"));
+//    var c = x.concat.apply([],x);
+//    var d = c.reverse();
+    var e = [];
+//    for(var i =0; i < d.length; i++){
+//        e.push([d[i]]);
+//    }
+//    console.log(d);
+//    console.log(e);
+    var i=0;
+    var s='[0]';
+    function plan(arr){
+        if(arr[1]){
+                console.log(s);
+//                console.log('e',e[0]);
+            s+='[0]';
+            if(e[s]){
+                e[s].unshift([arr[0]]);
+            } else {
+                e.unshift([arr[0]]);
+            }
+//            console.log(e);
+//            console.log('e',e);
+            plan(arr[1]);
+        } else {
+            e.unshift([arr[0]]);
+        }
+    }
+    plan(x);
+//    console.log(e);
+    function reverseList(list) {
+//        if(list == null) {
+//            return list;
+//        }
+        var arrList = list.toString().split(',');
+        console.log(arrList);
+        var ret = [1];
+        for(var i=0; i<arrList.length; i++) {
+            if(i==0) continue;
+//            var arr = [+arrList[i], ret];
+            ret = [+arrList[i], ret];
+        }
+        return ret;
+    }
+    console.log(reverseList(x));
+//    console.log(x.concat.apply([],x));
+
+    function quickSort(arr){
+        if(arr.length<=1){
+            return arr;//如果数组只有一个数，就直接返回；
+        }
+
+        var num = Math.floor(arr.length/2);//找到中间数的索引值，如果是浮点数，则向下取整
+        var numValue = arr.splice(num,1);//找到中间数的值
+        var left = [];
+        var right = [];
+
+        for(var i=0;i<arr.length;i++){
+            if(arr[i]<numValue){
+                left.push(arr[i]);//基准点的左边的数传到左边数组
+            }
+            else{
+                right.push(arr[i]);//基准点的右边的数传到右边数组
+            }
+        }
+        return quickSort(left).concat([numValue],quickSort(right));//递归不断重复比较
+    }
+//    console.log(quickSort(a));
+</script>
+</body>
+</html>

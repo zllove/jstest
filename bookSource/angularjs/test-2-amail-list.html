@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="Amail">
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script src="js/angular-1.2.js"></script>
+    <script src="js/amail-controller.js"></script>
+</head>
+<body>
+<table>
+    <tr>
+        <td><strong>Sender</strong></td>
+        <td><strong>Subject</strong></td>
+        <td><strong>Date</strong></td>
+    </tr>
+    <tr ng-repeat="message in messages">
+        <td>{{message.sender}}</td>
+        <td><a href="#/view{{message.id}}">{{message.subject}}</a></td>
+        <td>{{message.sender}}</td>
+    </tr>
+</table>
+</body>
+</html>

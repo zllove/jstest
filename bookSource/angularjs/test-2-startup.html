@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script src="js/angular-1.2.js"></script>
+</head>
+<body>
+<form ng-controller="StartUpController">
+    Starting: <input ng-change="computeNeeded()" ng-model="funding.startingEstimate">
+    Recommendation: {{funding.needed}}
+    <button>Fun my startup</button>
+    <button type="button" ng-click="reset()">Reset</button>
+</form>
+<script>
+    function StartUpController($scope){
+        $scope.funding = { startingEstimate: 0}
+        $scope.computeNeeded = function(){
+            $scope.funding.needed = $scope.funding.startingEstimate * 10;
+        }
+        $scope.requestFunding = function(){
+            window.alert('Sorry, please get more custormers first.');
+        }
+        $scope.reset = function(){
+            $scope.funding.startingEstimate = 0;
+        }
+    }
+</script>
+<div ng-controller="DeathrayMenuController">
+    <p>
+        <button ng-click="toggleMenu()">Toggle Menu</button>
+    </p>
+    <ul ng-show="menuState.show">
+        <li ng-click="stun()">Stun</li>
+        <li>Disintegrate</li>
+        <li>Erase</li>
+    </ul>
+</div>
+<script>
+    function DeathrayMenuController($scope){
+        $scope.menuState.show = false;
+        $scope.toggleMenu = function(){
+            $scope.menuState.show = !$scope.menuState.show;
+        }
+    }
+</script>
+</body>
+</html>

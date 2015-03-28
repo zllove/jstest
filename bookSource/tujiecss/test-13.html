@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        @-webkit-keyframes wobble{
+            0%{
+                margin-left:100px;background:green;
+            }
+            40%{
+                margin-left:150px;background:orange;
+            }
+            60%{
+                margin-left:75px;background:blue;
+            }
+            100%{
+                margin-left:100px;background:red;
+            }
+        }
+        .demo{ width:300px; height:200px; margin-left:100px;background:blue;-webkit-animation:wobble 2s ease-in;animation:wobble 2s ease-in;}
+    </style>
+</head>
+<body>
+<div class="demo">
+</div>
+</body>
+</html>

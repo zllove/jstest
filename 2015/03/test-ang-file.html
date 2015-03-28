@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <meta charset="utf-8">
+    <title>JS Bin</title>
+</head>
+<body ng-controller="BodyCtrl">
+<dp_file file-type="jpg|png|gif" file-size="0.5m" quantity=3 files="files"></dp_file>
+<ul class="img_list">
+    <li ng-repeat="img in imgs"><img ng-src="{{img}}" alt=""><i ng-click="remove($index)">删除</i></li>
+</ul>
+<script>
+    var myApp = angular.module('myApp', []);
+
+    myApp.controller('BodyCtrl', ['$scope', '$timeout', function($scope, $timeout){
+        $scope.imgs = [];
+        $scope.files = [];
+
+        $scope.remove = function(index){
+            $scope.files.splice(index, 1);
+            $scope.imgs.splice(index, 1);
+        };
+
+        $scope.$watchCollection('files', function(files){
+            files.forEach(function(file, index){
+                var reader = new FileReader();
+                reader.onload = function(evt){
+                    $scope.imgs[index] = evt.target.result;
+                    $scope.$apply();
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+    }]).directive('dpFile', [function(){
+        return {
+            restrict : 'E',
+            scope : {
+                files : '='
+            },
+            template : '<div class="file-simulation" ng-class="{\'disabled\': beDisabled }"><input type="file" class="input_file" ng-disabled="beDisabled"></div>',
+            link : function($scope, $element, $attrs){
+                //支持多种格式用|分隔即可
+                var fileTypeReg = new RegExp('\\.(' + $attrs['fileType'].toLowerCase().replace(/\s+/g, '') + ')$'),
+                    quantity = $attrs['quantity'],
+                    size = $attrs['fileSize'],
+                    fileSize = parseFloat(size) * 1024 * (/[mM]$/.test(size) ? 1024 : 1) || 1 * 1024 * 1024,
+                    $fileInput = $element.find('input');
+
+                $scope.files = $scope.files || [];
+
+                $scope.$watchCollection('files', function(files){
+                    $scope.beDisabled = files.length >= quantity;
+                });
+
+                $fileInput.on('change', function(){
+                    var file = this.files[0];
+                    if(this.value === '') return;
+                    //如果文件格式不对，或者文件大小超出限制
+                    if(!fileTypeReg.test(file.name) || file.size > fileSize){
+                        this.value = '';
+                        file = this.files[0];
+                        throw new Error('文件格式不对，或文件大小超出限制');
+                        return;
+                    }
+
+                    $scope.files.push(file);
+                    $scope.$apply();
+                });
+            }
+        };
+    }]);
+</script>
+</body>
+</html>

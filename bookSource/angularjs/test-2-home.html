@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <script src="js/angular-1.2.js"></script>
+</head>
+<body ng-app="HomeModule" ng-controller="HomeController">
+<h1>{{pageHeading|titleCase}}</h1>
+<script>
+    function HomeController($scope){
+        $scope.pageHeading = 'behold the majesty of you page title.';
+    }
+</script>
+</body>
+</html>
