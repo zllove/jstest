@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        #status{ width:500px; height:20px;background: #f00;}
+    </style>
+</head>
+<body>
+<div id="div"></div>
+<div style="width: 500px;">
+    <div id="status" style="width: 0;"></div>
+</div>
+<script>
+    (function(){
+        var msg = "新的广告新的广告新的广告新的广告新的广告新的广告新的广告新的广告新的广告新的广告新的广告新的广告",
+            len = 25,
+            pos = 0,
+            padding = msg.replace(/./g, " ").substr(0,len),
+            finalMsg = padding + msg;
+        console.log(padding);
+        function updateText(){
+            var curMsg = finalMsg.substr(pos++, len);
+            document.getElementById('div').innerHTML = curMsg;
+            if (pos == finalMsg.length){ pos = 0; }
+            setTimeout(updateText, 100);
+        }
+        setTimeout(updateText, 100);
+    })();
+
+    (function(){
+        function updateProgress(){
+            var div = document.getElementById("status");
+            div.style.width = (parseInt(div.style.width, 10) + 5) + "%";
+            if (div.style.width != "100%"){ setTimeout(updateProgress, 20); }
+        }
+        setTimeout(updateProgress, 20);
+    })();
+</script>
+</body>
+</html>

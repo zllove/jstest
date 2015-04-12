@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        body{background: #000;color: #fff;}
+        h1{ font-size:14px; font-family:'Microsoft YaHei'; text-align:center;}
+        .change{ display:block; width:400px; height:400px;
+            background:url(http://p3.qhimg.com/t0134c65e59012a1257.png) center center no-repeat;
+            background-size:cover;border:1em solid rgba(255,255,255, .8); margin:50px auto;
+        }
+        .change img{ display:block; width:300px; height:284px; opacity:0;
+            -webkit-transform:translate(-100px,-100px);
+            transform:translate(-100px,-100px);
+            -webkit-transition:opacity 1s ease-in-out 5s,-webkit-transform 1s ease-in-out;
+            transition:opacity 1s ease-in-out 0.5s, transform 1s ease-in-out;
+        }
+        .change:hover img{
+            -webkit-transform:translate(0,0);
+            transform:translate(0,0);
+            opacity:1;
+            -webkit-transition:opacity 1s ease-in-out,-webkit-transform 1s ease-in-out .1s;
+            transition:opacity 1s ease-in-out 0.5s, transform 1s ease-in-out .1s;
+        }
+    </style>
+</head>
+<body>
+<h1>请使用webkit内核标准浏览器查看效果</h1>
+<a class="change" href="#"><img src="http://p4.qhimg.com/t0160e6a92121691e22.png" alt=""/></a>
+</body>
+</html>
