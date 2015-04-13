@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        @-webkit-keyframes wobble{
+            0%{ margin-left:100px;background:green;}
+            40%{ margin-left:150px;background:orange;}
+            60%{ margin-left:75px;background:blue;}
+            100%{ margin-left:100px;background:red;}
+        }
+        .demo1{
+            width:50px; height:50px;background:blue;-webkit-animation-name:'wobble';
+            -webkit-animation-duration:10s;-webkit-animation-timing-function:ease-in-out;
+            -webkit-animation-delay:2s;
+            -webkit-animation-iteration-count:10;
+            -webkit-animation-direction:alternate;
+        }
+    </style>
+</head>
+<body>
+<!--http://www.w3cplus.com/content/css3-animation-->
+<div class="demo1"></div>
+</body>
+</html>
