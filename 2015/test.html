@@ -7,25 +7,46 @@
     <script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
 </head>
 <body>
-<div id="div1">1123123</div>
 <script>
-    $(function () {
-        $.fn.extend({
-            checkbr:function () {
-                alert(123);
-                var self=this;
-                console.log(this);
-                self.nextone=function () {
-                    alert(007);
-                }
-            }
-        });
-        $('#div1').checkbr()
-        $('#div1').nextone();
-    });
-    function abc(){
+    var testobj = {
+        member1 : function(){
+            alert('这里调用了成员1');
+        },
 
+        member2 : function(){
+            alert('这里是成员2，下一步调用成员1，这里使用this.member1()的方法');
+            this.member1();//这里用this.member()，就可以不用testobj.member1()
+        },
+
+        member3 : function(){
+            alert('这里是成员3，成员3有两个内部方法，下一步将调用内部方法1和2');
+
+            fun1();
+            fun2();
+
+            function fun1(){
+                alert('这里是成员3的内部方法1');
+            }
+
+            function fun2(){
+                alert('这里是成员3的内部方法2');
+                alert('我希望能不用书写对象的名称testobj就执行成员3的内部方法1');
+                fun1();
+                alert('用fun1()，这样不用书写testobj，就匿名执行了成员3的内部方法1');
+            }
+        },
+
+member4 : function(){
+    var that = this;
+    function funb(){
+        that.member1();
     }
+}
+    }
+//    testobj.member1();
+//    testobj.member2();
+//    testobj.member3();
+    testobj.member4();
 </script>
 </body>
 </html>
