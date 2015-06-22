@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        body{background:rgba(100,145,250,0.3);}
+        #canvas{ margin-left:20px; margin-right:0; margin-bottom:20px;border-bottom:thin solid #aaa;cursor:crosshair; padding:0;}
+        #controls{ margin:20px 0 20px 20px;}
+        #rubberbandDiv{ position:absolute; border:3px solid blue; cursor:crosshair; display:none;}
+    </style>
+</head>
+<body>
+<div id="controls">
+    <input id="resetButton" type="button" value="Reset"/>
+</div>
+<div id="rubberbandDiv"></div>
+<canvas id="canvas" width="800" height="520"></canvas>
+<script>
+    (function(){
+        var canvas = document.getElementById('canvas'),
+            context = canvas.getContext('2d'),
+            rubberbandDiv = document.getElementById('rubberbandDiv'),
+            resetButton = document.getElementById('resetButton'),
+            image = new Image(),
+            mousedonw = {},
+            rubberbandRectangle = {},
+            dragging = false;
+
+
+    }());
+</script>
+</body>
+</html>

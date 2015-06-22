@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>test</title>
+    <style type="text/css">
+        body{background: #ddd;}
+        #canvas{ margin:10px; padding:10px;background: #fff;border:thin inset #aaa;}
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="600" height="300"></canvas>
+<script>
+    var canvas = document.getElementById('canvas'),
+        context = canvas.getContext('2d');
+    context.font = '38pt Arial';
+    context.fillStyle = 'cornflowerblue';
+    context.strokeStyle = 'blue';
+    context.fillText('Hello Canvas', canvas.width/2 - 150, canvas.height/2 + 15);
+    context.strokeText('Hello Canvas', canvas.width/2 - 150, canvas.height/2 + 15);
+</script>
+</body>
+</html>
