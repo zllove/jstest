@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var obj = {
+        tab : function(options){
+            var defaults = {
+                        box       : '',
+                        tag       : 'li', // tab 标签名
+                        sub       : '.utilTabSub', // sub class name
+                        current   : 'on',    // 当前的className
+                        eventType : 'click', // 触发的事件类型
+                        callback : null,
+                        showType  : 'show' // 触发的效果类型
+                    },
+                    opts = $.extend({}, defaults, options),
+                    container = $(opts.box);
+            /*
+             that.find(opts.tag).on(opts.eventType, opts.subName, function() {
+             var idx = $(this).index();
+             $(this).addClass(opts.current).siblings().removeClass(opts.current);
+             that.find(opts.subName).eq(idx)[opts.showType]().siblings(opts.subName).hide();
+             });
+             */
+            container.on(opts.eventType, opts.tag, function() {
+                var idx = $(this).index();
+                $(this).addClass(opts.current).siblings().removeClass(opts.current);
+                $(opts.sub).eq(idx)[opts.showType]().siblings(opts.sub).hide();
+                opts.callback(idx);
+            });
+        }
+    }
+    ims.tab({
+        box : 'body',
+        tag : '.ticket-bar-list li',
+        sub : '.ticket-items',
+        callback : function(d){
+            static.index = d;
+        }
+    });
+</script>
+</body>
+</html>
