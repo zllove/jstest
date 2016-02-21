@@ -1,81 +1,81 @@
 var Drag={
     "obj":null,
-	"init":function(handle, dragBody, e){
-		if (e == null) {
-			handle.onmousedown=Drag.start;
-		}
-		handle.root = dragBody;
-		
-		if(isNaN(parseInt(handle.root.style.left)))handle.root.style.left="0px";
-		if(isNaN(parseInt(handle.root.style.top)))handle.root.style.top="0px";//È·±£ºóÀ´ÄÜ¹»È¡µÃtopÖµ
-		handle.root.onDragStart=new Function();
-		handle.root.onDragEnd=new Function();
-		handle.root.onDrag=new Function();
-		if (e !=null) {
-			var handle=Drag.obj=handle;
-			e=Drag.fixe(e);
-			var top=parseInt(handle.root.style.top);
-			var left=parseInt(handle.root.style.left);
-			handle.root.onDragStart(left,top,e.pageX,e.pageY);
-			handle.lastMouseX=e.pageX;
-			handle.lastMouseY=e.pageY;
-			document.onmousemove=Drag.drag;
-			document.onmouseup=Drag.end;
-		}
-	},
-	"start":function(e){
-		var handle=Drag.obj=this;
-		e=Drag.fixEvent(e);
-		var top=parseInt(handle.root.style.top);
-		var left=parseInt(handle.root.style.left);
-		//alert(left)
-		//Ò»°ãÇé¿öÏÂ left top ÔÚ³õÊ¼µÄÊ±ºò¶¼Îª0
-		handle.root.onDragStart(left,top,e.pageX,e.pageY);
-		handle.lastMouseX=e.pageX;
-		handle.lastMouseY=e.pageY;
-		document.onmousemove=Drag.drag;
-		document.onmouseup=Drag.end;
-		return false;
-	},	
-	"drag":function(e){//ÕâÀïµÄthisÎªdocument ËùÒÔÍÏ¶¯¶ÔÏóÖ»ÄÜ±£´æÔÚDrag.objÀï
-		e=Drag.fixEvent(e);
-		var handle=Drag.obj;
-		var mouseY=e.pageY;
-		var mouseX=e.pageX;
-		var top=parseInt(handle.root.style.top);
-		var left=parseInt(handle.root.style.left);//ÕâÀïµÄtopºÍleftÊÇhandle.root¾àÀëä¯ÀÀÆ÷±ß¿òµÄÉÏ±ß¾àºÍ×ó±ß¾à
-		
-		var currentLeft,currentTop;
-		currentLeft=left+mouseX-handle.lastMouseX;
-		currentTop=top+(mouseY-handle.lastMouseY);
-		
-		//ÉÏÒ»Ë²¼äµÄÉÏ±ß¾à¼ÓÉÏÊó±êÔÚÁ½¸öË²¼äÒÆ¶¯µÄ¾àÀë µÃµ½ÏÖÔÚµÄÉÏ±ß¾à
-		
-		handle.root.style.left=currentLeft +"px";
-		handle.root.style.top=currentTop+"px";
-		
-		//¸üĞÂµ±Ç°µÄÎ»ÖÃ
-		
-		handle.lastMouseX=mouseX;
-		handle.lastMouseY=mouseY;
-		
-		//±£´æÕâÒ»Ë²¼äµÄÊó±êÖµ ÓÃÓÚÏÂÒ»´Î¼ÆËãÎ»ÒÆ
-		
-		handle.root.onDrag(currentLeft,currentTop,e.pageX,e.pageY);//µ÷ÓÃÍâÃæ¶ÔÓ¦µÄº¯Êı
-		return false;
-	},
-	"end":function(){
-		document.onmousemove=null;
-		document.onmouseup=null;
-		Drag.obj.root.onDragEnd(parseInt(Drag.obj.root.style.left),parseInt(Drag.obj.root.style.top));
-		Drag.obj=null;
-	},
-	"fixEvent":function(e){//¸ñÊ½»¯ÊÂ¼ş²ÎÊı¶ÔÏó
-		if(typeof e=="undefined")e=window.event;
-		if(typeof e.layerX=="undefined")e.layerX=e.offsetX;
-		if(typeof e.layerY=="undefined")e.layerY=e.offsetY;
-		if(typeof e.pageX == "undefined")e.pageX = e.clientX + document.body.scrollLeft - document.body.clientLeft;
-		if(typeof e.pageY == "undefined")e.pageY = e.clientY + document.body.scrollTop - document.body.clientTop;
-		return e;
-	}
+    "init":function(handle, dragBody, e){
+        if (e == null) {
+            handle.onmousedown=Drag.start;
+        }
+        handle.root = dragBody;
+
+        if(isNaN(parseInt(handle.root.style.left)))handle.root.style.left="0px";
+        if(isNaN(parseInt(handle.root.style.top)))handle.root.style.top="0px";//ç¡®ä¿åæ¥èƒ½å¤Ÿå–å¾—topå€¼
+        handle.root.onDragStart=new Function();
+        handle.root.onDragEnd=new Function();
+        handle.root.onDrag=new Function();
+        if (e !=null) {
+            var handle=Drag.obj=handle;
+            e=Drag.fixe(e);
+            var top=parseInt(handle.root.style.top);
+            var left=parseInt(handle.root.style.left);
+            handle.root.onDragStart(left,top,e.pageX,e.pageY);
+            handle.lastMouseX=e.pageX;
+            handle.lastMouseY=e.pageY;
+            document.onmousemove=Drag.drag;
+            document.onmouseup=Drag.end;
+        }
+    },
+    "start":function(e){
+        var handle=Drag.obj=this;
+        e=Drag.fixEvent(e);
+        var top=parseInt(handle.root.style.top);
+        var left=parseInt(handle.root.style.left);
+        //alert(left)
+        //ä¸€èˆ¬æƒ…å†µä¸‹ left top åœ¨åˆå§‹çš„æ—¶å€™éƒ½ä¸º0
+        handle.root.onDragStart(left,top,e.pageX,e.pageY);
+        handle.lastMouseX=e.pageX;
+        handle.lastMouseY=e.pageY;
+        document.onmousemove=Drag.drag;
+        document.onmouseup=Drag.end;
+        return false;
+    },
+    "drag":function(e){//è¿™é‡Œçš„thisä¸ºdocument æ‰€ä»¥æ‹–åŠ¨å¯¹è±¡åªèƒ½ä¿å­˜åœ¨Drag.objé‡Œ
+        e=Drag.fixEvent(e);
+        var handle=Drag.obj;
+        var mouseY=e.pageY;
+        var mouseX=e.pageX;
+        var top=parseInt(handle.root.style.top);
+        var left=parseInt(handle.root.style.left);//è¿™é‡Œçš„topå’Œleftæ˜¯handle.rootè·ç¦»æµè§ˆå™¨è¾¹æ¡†çš„ä¸Šè¾¹è·å’Œå·¦è¾¹è·
+
+        var currentLeft,currentTop;
+        currentLeft=left+mouseX-handle.lastMouseX;
+        currentTop=top+(mouseY-handle.lastMouseY);
+
+        //ä¸Šä¸€ç¬é—´çš„ä¸Šè¾¹è·åŠ ä¸Šé¼ æ ‡åœ¨ä¸¤ä¸ªç¬é—´ç§»åŠ¨çš„è·ç¦» å¾—åˆ°ç°åœ¨çš„ä¸Šè¾¹è·
+
+        handle.root.style.left=currentLeft +"px";
+        handle.root.style.top=currentTop+"px";
+
+        //æ›´æ–°å½“å‰çš„ä½ç½®
+
+        handle.lastMouseX=mouseX;
+        handle.lastMouseY=mouseY;
+
+        //ä¿å­˜è¿™ä¸€ç¬é—´çš„é¼ æ ‡å€¼ ç”¨äºä¸‹ä¸€æ¬¡è®¡ç®—ä½ç§»
+
+        handle.root.onDrag(currentLeft,currentTop,e.pageX,e.pageY);//è°ƒç”¨å¤–é¢å¯¹åº”çš„å‡½æ•°
+        return false;
+    },
+    "end":function(){
+        document.onmousemove=null;
+        document.onmouseup=null;
+        Drag.obj.root.onDragEnd(parseInt(Drag.obj.root.style.left),parseInt(Drag.obj.root.style.top));
+        Drag.obj=null;
+    },
+    "fixEvent":function(e){//æ ¼å¼åŒ–äº‹ä»¶å‚æ•°å¯¹è±¡
+        if(typeof e=="undefined")e=window.event;
+        if(typeof e.layerX=="undefined")e.layerX=e.offsetX;
+        if(typeof e.layerY=="undefined")e.layerY=e.offsetY;
+        if(typeof e.pageX == "undefined")e.pageX = e.clientX + document.body.scrollLeft - document.body.clientLeft;
+        if(typeof e.pageY == "undefined")e.pageY = e.clientY + document.body.scrollTop - document.body.clientTop;
+        return e;
+    }
 };
